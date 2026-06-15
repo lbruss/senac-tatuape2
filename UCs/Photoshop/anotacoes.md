@@ -23,8 +23,7 @@ Cada elemento do projeto pode ficar em uma camada separada, como:
 
 Isso facilita muito a edição, porque eu consigo alterar uma parte do projeto sem mexer nas outras.
 
-> Analogia
-
+> Analogia:
 Posso imaginar as camadas como várias folhas de acetato uma em cima da outra.
 
 Por exemplo:
@@ -154,8 +153,7 @@ Um desenho vetorial pode ser usado pequeno em um cartão ou gigante em um outdoo
 
 Isso acontece porque o computador recalcula o desenho de acordo com o tamanho.
 
-> Analogia
-
+> Analogia:
 Uma imagem rasterizada é como uma parede feita de bloquinhos.
 Se eu aumentar muito, começo a ver os blocos.
 
@@ -344,7 +342,7 @@ O fundo quadriculado cinza e branco representa **transparência**.
 
 Isso significa que não existe cor naquela parte da imagem.
 
-### Exemplo
+**Exemplo**
 
 Se eu apago o fundo branco de uma imagem e aparece o quadriculado, significa que o fundo foi removido.
 
@@ -352,17 +350,15 @@ Quando eu exportar essa imagem como PNG, essa área pode continuar transparente.
 
 ---
 
-## 1️⃣6️⃣ Atalho para tirar seleção
+**Atalho para tirar seleção**
 
 Depois de selecionar uma parte da imagem, posso remover a seleção usando:
 
-```text
-Ctrl + D
-```
+`Ctrl + D`
 
 Esse atalho desfaz a seleção ativa.
 
-### Por que isso é importante?
+**Por que isso é importante?**
 
 Porque, enquanto uma seleção está ativa, o Photoshop só permite editar aquela área selecionada.
 
@@ -370,21 +366,19 @@ Se eu tentar pintar ou apagar outra parte da imagem, pode parecer que a ferramen
 
 Por isso, quando terminar de editar uma seleção, é bom usar:
 
-```text
-Ctrl + D
-```
+`Ctrl + D`
 
 ---
 
 # Trabalhando com pintura e camadas
 
-## 1️⃣7️⃣ Como criar uma nova camada
+**Como criar uma nova camada**
 
 Para criar uma nova camada, eu clico no ícone de **+** no canto inferior direito, dentro do painel de camadas.
 
 A nova camada aparece acima da camada selecionada.
 
-### Por que criar uma nova camada?
+**Por que criar uma nova camada?**
 
 Porque pintar em uma camada separada deixa o projeto mais organizado e seguro.
 
@@ -393,11 +387,11 @@ Mas, se eu pintar em uma nova camada, consigo apagar, mover ou modificar essa pi
 
 ---
 
-## 1️⃣8️⃣ Pintando uma parte selecionada
+**Pintando uma parte selecionada**
 
 Um processo básico para colorir uma imagem é:
 
-```text
+```
 Selecionar uma área com a Varinha Mágica
 Criar uma nova camada
 Escolher uma cor
@@ -407,7 +401,7 @@ Clicar na área selecionada
 
 Esse processo permite colorir partes específicas da imagem.
 
-### O que está acontecendo?
+**O que está acontecendo?**
 
 Primeiro, eu uso a Varinha Mágica para dizer ao Photoshop qual área quero editar.
 
@@ -417,11 +411,11 @@ Em seguida, escolho uma cor e uso o Balde de Tinta para preencher aquela área.
 
 ---
 
-## 1️⃣9️⃣ Fluxo correto para colorir um desenho
+## Fluxo correto para colorir um desenho
 
 O fluxo mais organizado é:
 
-```text
+```
 Selecionar a parte desejada
 Criar uma nova camada
 Escolher a cor
@@ -431,13 +425,13 @@ Repetir o processo para outras partes
 
 Ou seja:
 
-```text
+```
 Selecionar → Criar camada → Escolher cor → Pintar
 ```
 
 Esse método ajuda a manter cada cor separada.
 
-### Exemplo
+**Exemplo**
 
 Se eu estiver colorindo um personagem, posso separar assim:
 
@@ -452,15 +446,13 @@ Assim, se eu quiser mudar só a cor da roupa, não preciso mexer no resto.
 
 ---
 
-# Ferramenta Borracha
-
-## 2️⃣0️⃣ Como apagar algo com a Borracha
+## Como apagar algo com a Borracha
 
 Para apagar manualmente uma parte da imagem, uso a ferramenta **Borracha**, localizada na barra de ferramentas do lado esquerdo.
 
 A Borracha remove pixels da camada selecionada.
 
-### Atenção
+**Atenção**
 
 A Borracha só apaga a camada que estiver selecionada.
 
@@ -468,42 +460,42 @@ Se eu tentar apagar e nada acontecer, provavelmente estou na camada errada.
 
 ---
 
-## 2️⃣1️⃣ Como aumentar ou diminuir o tamanho da Borracha
+**Como aumentar ou diminuir o tamanho da Borracha**
 
 Para mudar o tamanho da Borracha, uso os colchetes do teclado:
 
-```text
+```
 [  diminui o tamanho da borracha
 ]  aumenta o tamanho da borracha
 ```
 
 Esse atalho também funciona com outras ferramentas de pincel.
 
-### Por que isso ajuda?
+**Por que isso ajuda?**
 
 Porque eu consigo apagar áreas grandes com uma borracha maior e detalhes pequenos com uma borracha menor.
 
 ---
 
-# Degradê
+## Degradê
 
-## 2️⃣2️⃣ O que é degradê?
+**O que é degradê?**
 
 O **degradê** é uma transição suave entre duas ou mais cores.
 
 Em vez de preencher uma área com uma cor sólida, o degradê cria uma passagem gradual de uma cor para outra.
 
-### Exemplo
+- **Exemplo**
 
 Um fundo que começa azul e termina roxo é um degradê.
 
 ---
 
-## 2️⃣3️⃣ Como usar o Degradê
+**Como usar o Degradê**
 
 Para usar o degradê:
 
-```text
+```
 Ir até a ferramenta Balde de Tinta
 Clicar e segurar sobre ela
 Selecionar a ferramenta Degradê
@@ -517,13 +509,13 @@ Ao clicar e segurar, aparecem outras ferramentas disponíveis no mesmo grupo.
 
 ---
 
-## 2️⃣4️⃣ Escolhendo as cores do degradê
+**Escolhendo as cores do degradê**
 
 Na parte de cores, posso escolher uma cor para o início e outra para o final do degradê.
 
 Por exemplo:
 
-```text
+```
 Cor inicial: azul
 Cor final: roxo
 ```
@@ -532,7 +524,7 @@ Depois, aplico o degradê arrastando na imagem.
 
 A direção do arrasto influencia o resultado.
 
-### Exemplo
+- **Exemplo**
 
 Se eu arrastar de cima para baixo, o degradê será aplicado verticalmente.
 
@@ -542,13 +534,13 @@ Se eu arrastar da esquerda para a direita, o degradê será aplicado horizontalm
 
 # Texturas e filtros
 
-## 2️⃣5️⃣ Como aplicar textura usando filtros
+**Como aplicar textura usando filtros**
 
 Para aplicar uma textura, posso usar a Galeria de Filtros.
 
 O caminho é:
 
-```text
+```
 Selecionar a camada
 Ir em Filtro
 Clicar em Galeria de Filtros
@@ -570,7 +562,7 @@ Eles podem criar efeitos como:
 
 ---
 
-## 2️⃣6️⃣ Por que selecionar a camada antes do filtro?
+**Por que selecionar a camada antes do filtro?**
 
 Porque o Photoshop aplica o filtro apenas na camada selecionada.
 
@@ -582,13 +574,13 @@ Por isso, antes de usar qualquer filtro, é importante olhar no painel de camada
 
 # Inserindo outra imagem no projeto
 
-## 2️⃣7️⃣ Como colocar outra imagem dentro do Photoshop
+**Como colocar outra imagem dentro do Photoshop**
 
 Para adicionar outra imagem no projeto, posso arrastar a imagem diretamente para dentro do Photoshop.
 
 O processo é:
 
-```text
+```
 Pegar a imagem no computador
 Arrastar para dentro do Photoshop
 Ajustar o tamanho e a posição
@@ -599,7 +591,7 @@ Depois disso, a imagem aparece como uma nova camada.
 
 ---
 
-## 2️⃣8️⃣ Por que às vezes não consigo editar a imagem colocada?
+**Por que às vezes não consigo editar a imagem colocada?**
 
 Quando arrasto uma imagem para dentro do Photoshop, ela pode entrar como um **Objeto Inteligente**.
 
@@ -611,7 +603,7 @@ Por isso, se eu quiser editar diretamente essa imagem, preciso rasterizar a cama
 
 ---
 
-## 2️⃣9️⃣ O que é rasterizar uma camada?
+**O que é rasterizar uma camada?**
 
 Rasterizar significa transformar aquela camada em uma imagem comum de pixels.
 
@@ -626,7 +618,7 @@ Depois de rasterizar, eu consigo editar diretamente com ferramentas como:
 
 O processo é:
 
-```text
+```
 Selecionar a camada da imagem
 Clicar com o botão direito
 Escolher Rasterizar Camada
@@ -634,7 +626,7 @@ Escolher Rasterizar Camada
 
 Depois disso, a imagem pode ser editada como uma camada comum.
 
-### Atenção
+**Atenção**
 
 Depois que rasterizo, perco parte da flexibilidade do Objeto Inteligente.
 
@@ -642,13 +634,13 @@ Por isso, só devo rasterizar quando realmente precisar editar os pixels diretam
 
 ---
 
-# Salvando o projeto
+## Salvando o projeto
 
-## 3️⃣0️⃣ Como salvar o arquivo no formato Photoshop
+**Como salvar o arquivo no formato Photoshop**
 
 Para salvar o projeto, sigo o caminho:
 
-```text
+```
 Arquivo
 Salvar como
 Escolher o formato Photoshop
@@ -657,7 +649,7 @@ Salvar
 
 O formato do Photoshop é:
 
-```text
+```
 .psd
 ```
 
@@ -665,7 +657,7 @@ Esse formato mantém as camadas do projeto.
 
 ---
 
-## 3️⃣1️⃣ Por que salvar em PSD?
+**Por que salvar em PSD?**
 
 O arquivo PSD é importante porque preserva a estrutura do projeto.
 
@@ -680,7 +672,7 @@ Ele mantém:
 
 Se eu salvar apenas como JPG, por exemplo, posso perder as camadas e o projeto vira uma imagem única.
 
-### Exemplo
+- **Exemplo**
 
 Se eu fiz um projeto com fundo, texto e imagem em camadas separadas, salvando em PSD eu consigo abrir depois e continuar editando cada parte.
 
@@ -688,11 +680,11 @@ Se eu salvar só em JPG, tudo vira uma imagem achatada.
 
 ---
 
-# 🧩 Passo a passo geral da aula
+# Passo a passo geral
 
-## Criando e editando uma imagem no Photoshop
+**Criando e editando uma imagem no Photoshop**
 
-### 1. Abrir o Photoshop e adicionar uma imagem
+**1. Abrir o Photoshop e adicionar uma imagem**
 
 Primeiro, adiciono uma imagem ao Photoshop para começar a edição.
 
@@ -700,17 +692,17 @@ Essa imagem será a base do projeto.
 
 ---
 
-### 2. Organizar os painéis
+**2. Organizar os painéis**
 
 Depois, vou na aba:
 
-```text
+```
 Janela
 ```
 
 E deixo visível o painel de:
 
-```text
+```
 Camadas
 ```
 
@@ -718,11 +710,11 @@ Isso ajuda a acompanhar tudo que está sendo criado no projeto.
 
 ---
 
-### 3. Usar o zoom para ajustar a visualização
+**3. Usar o zoom para ajustar a visualização**
 
 Uso:
 
-```text
+```
 Ctrl + 0
 ```
 
@@ -730,7 +722,7 @@ Para ajustar a imagem na tela.
 
 Uso:
 
-```text
+```
 Ctrl + +
 ```
 
@@ -738,7 +730,7 @@ Para aproximar.
 
 Uso:
 
-```text
+```
 Ctrl + -
 ```
 
@@ -748,7 +740,7 @@ Isso facilita tanto a visualização geral quanto a edição de detalhes.
 
 ---
 
-### 4. Selecionar áreas com a Varinha Mágica
+**4. Selecionar áreas com a Varinha Mágica**
 
 Uso a Varinha Mágica para selecionar áreas de cor parecida.
 
@@ -756,11 +748,11 @@ Ela é útil principalmente para fundos brancos, áreas sólidas e desenhos com 
 
 ---
 
-### 5. Apagar áreas selecionadas
+**5. Apagar áreas selecionadas**
 
 Depois de selecionar uma área, posso pressionar:
 
-```text
+```
 Delete
 ```
 
@@ -770,11 +762,11 @@ Se aparecer o fundo quadriculado, significa que aquela área ficou transparente.
 
 ---
 
-### 6. Remover a seleção
+**6. Remover a seleção**
 
 Depois de terminar a edição, uso:
 
-```text
+```
 Ctrl + D
 ```
 
@@ -782,11 +774,11 @@ Isso tira a seleção e libera a imagem para novas edições.
 
 ---
 
-### 7. Criar uma nova camada
+**7. Criar uma nova camada**
 
 Clico no botão de:
 
-```text
+```
 +
 ```
 
@@ -796,7 +788,7 @@ Isso cria uma nova camada para trabalhar de forma separada.
 
 ---
 
-### 8. Pintar com o Balde de Tinta
+**8. Pintar com o Balde de Tinta**
 
 Depois de selecionar uma área e criar uma camada, escolho uma cor e uso o Balde de Tinta para preencher.
 
@@ -804,13 +796,13 @@ Esse processo ajuda a colorir sem alterar a camada original.
 
 ---
 
-### 9. Usar Borracha quando necessário
+**9. Usar Borracha quando necessário**
 
 Seleciono a Borracha para apagar manualmente partes da camada.
 
 Uso:
 
-```text
+```
 [  para diminuir
 ]  para aumentar
 ```
@@ -819,17 +811,17 @@ Assim consigo trabalhar com áreas grandes ou pequenos detalhes.
 
 ---
 
-### 10. Aplicar degradê ou textura
+**10. Aplicar degradê ou textura**
 
 Se quiser um efeito mais elaborado, posso usar:
 
-```text
+```
 Degradê
 ```
 
 Ou ir em:
 
-```text
+```
 Filtro → Galeria de Filtros
 ```
 
@@ -837,7 +829,7 @@ Isso deixa o projeto com mais estilo visual.
 
 ---
 
-### 11. Adicionar outra imagem
+**11. Adicionar outra imagem**
 
 Posso arrastar outra imagem para dentro do Photoshop.
 
@@ -845,11 +837,11 @@ Se precisar editar diretamente essa imagem, posso rasterizar a camada.
 
 ---
 
-### 12. Salvar o projeto
+**12. Salvar o projeto**
 
 Por fim, salvo como:
 
-```text
+```
 Arquivo Photoshop (.psd)
 ```
 
@@ -857,13 +849,13 @@ Assim mantenho as camadas e consigo editar depois.
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
-Nesta aula, eu aprendi que o Photoshop trabalha principalmente com imagens formadas por pixels e que as camadas são essenciais para organizar a edição. Também entendi a diferença entre imagem rasterizada e vetor, além da diferença entre RGB e CMYK. Usei ferramentas básicas como Varinha Mágica, Balde de Tinta, Borracha, Degradê e Galeria de Filtros. Também aprendi que, ao adicionar uma nova imagem, talvez seja necessário rasterizar a camada para editar diretamente os pixels. No final, o ideal é salvar o projeto em formato PSD para manter as camadas editáveis.
+O Photoshop trabalha principalmente com imagens formadas por pixels e que as camadas são essenciais para organizar a edição. Também entendi a diferença entre imagem rasterizada e vetor, além da diferença entre RGB e CMYK. Usei ferramentas básicas como Varinha Mágica, Balde de Tinta, Borracha, Degradê e Galeria de Filtros. Também aprendi que, ao adicionar uma nova imagem, talvez seja necessário rasterizar a camada para editar diretamente os pixels. No final, o ideal é salvar o projeto em formato PSD para manter as camadas editáveis.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago — 10 linhas**
 
 1. O Photoshop trabalha principalmente com imagens formadas por pixels.
 2. Camadas funcionam como folhas transparentes empilhadas no projeto.
