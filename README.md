@@ -9,7 +9,9 @@ Os materiais estão organizados por temas, com atualizações contínuas conform
 
 ## 📚 Conteúdos Estudados
 
+- Photoshop
 -
+
 ---
 
 ## 🎯 Objetivo do Repositório
