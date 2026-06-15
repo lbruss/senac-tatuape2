@@ -115,7 +115,7 @@ No Photoshop, é importante entender a diferença entre **imagem rasterizada** e
 
 ---
 
-**O que é uma imagem rasterizada??*
+**O que é uma imagem rasterizada??**
 
 Uma imagem rasterizada é uma imagem formada por pixels.
 
@@ -139,7 +139,7 @@ Isso acontece porque o Photoshop precisa “esticar” os pixels que já existem
 
 ---
 
-##O que é vetor?##
+**O que é vetor?**
 
 O **vetor** é diferente da imagem comum.
 
