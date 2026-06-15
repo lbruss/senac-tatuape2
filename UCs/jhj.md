@@ -24,6 +24,7 @@ Cada elemento do projeto pode ficar em uma camada separada, como:
 Isso facilita muito a edição, porque eu consigo alterar uma parte do projeto sem mexer nas outras.
 
 > Analogia
+
 Posso imaginar as camadas como várias folhas de acetato uma em cima da outra.
 
 Por exemplo:
@@ -154,6 +155,7 @@ Um desenho vetorial pode ser usado pequeno em um cartão ou gigante em um outdoo
 Isso acontece porque o computador recalcula o desenho de acordo com o tamanho.
 
 > Analogia
+
 Uma imagem rasterizada é como uma parede feita de bloquinhos.
 Se eu aumentar muito, começo a ver os blocos.
 
@@ -162,7 +164,7 @@ O programa não guarda apenas os bloquinhos, ele guarda as instruções para red
 
 ---
 
-## 8️⃣ RGB e CMYK
+## RGB e CMYK
 
 No Photoshop, também é importante entender os modos de cor.
 
@@ -173,13 +175,13 @@ Os principais são:
 
 ---
 
-## 9️⃣ RGB — usado para telas
+**RGB — usado para telas**
 
 O modo **RGB** é usado para imagens que serão exibidas em telas.
 
 RGB significa:
 
-```text
+```
 R = Red / Vermelho
 G = Green / Verde
 B = Blue / Azul
@@ -199,20 +201,20 @@ Exemplos de uso do RGB:
 * posts para Instagram;
 * thumbnails.
 
-### Por que RGB é usado em telas?
+**Por que RGB é usado em telas?**
 
 Porque telas emitem luz.
 A combinação de vermelho, verde e azul cria as outras cores que aparecem na tela.
 
 ---
 
-## 🔟 CMYK — usado para impressão
+**CMYK — usado para impressão**
 
 O modo **CMYK** é usado para materiais impressos.
 
 CMYK significa:
 
-```text
+```
 C = Cyan / Ciano
 M = Magenta
 Y = Yellow / Amarelo
@@ -231,18 +233,18 @@ Exemplos de uso do CMYK:
 * embalagens;
 * documentos gráficos para impressão.
 
-### Por que CMYK é usado para impressão?
+**Por que CMYK é usado para impressão?**
 
 Porque impressoras usam tinta.
 Enquanto a tela forma cores com luz, a impressão forma cores misturando pigmentos.
 
 ---
 
-## 1️⃣1️⃣ Polegadas e centímetros
+## Polegadas e centímetros
 
 Uma medida importante usada em design é a polegada.
 
-```text
+```
 1 polegada = 2,54 cm
 ```
 
@@ -255,11 +257,11 @@ Essa medida aparece bastante quando se fala de:
 * DPI;
 * configuração de documentos.
 
-### Exemplo
+- **Exemplo**
 
 Se um documento tem uma largura de 10 polegadas, isso significa:
 
-```text
+```
 10 x 2,54 = 25,4 cm
 ```
 
@@ -267,13 +269,13 @@ Ou seja, 10 polegadas equivalem a 25,4 centímetros.
 
 ---
 
-## 1️⃣2️⃣ Banco de imagens gratuitos
+## Banco de imagens gratuitos
 
 Para pegar imagens para projetos, posso usar bancos de imagens gratuitos.
 
 Um exemplo é:
 
-```text
+```
 Pexels
 ```
 
@@ -281,15 +283,15 @@ Esses sites oferecem imagens que podem ser usadas em projetos, dependendo da lic
 
 Mesmo quando a licença permite uso gratuito, é um bom hábito dar crédito ao fotógrafo ou ao dono da imagem.
 
-### Exemplo de crédito
+- **Exemplo de crédito**
 
-```text
+```
 Imagem: Nome do fotógrafo / Pexels
 ```
 
 No caso dos projetos feitos em aula, também pode ser colocado no final:
 
-```text
+```
 Fins educativos
 ```
 
@@ -299,9 +301,9 @@ Mesmo assim, é importante lembrar que “fins educativos” não significa que 
 
 ---
 
-# Ferramentas básicas usadas na aula
+# Ferramentas básicas usadas
 
-## 1️⃣3️⃣ Varinha mágica
+**Varinha mágica**
 
 A **Varinha Mágica** é uma ferramenta de seleção.
 
@@ -309,7 +311,7 @@ Ela serve para selecionar áreas com cores parecidas.
 
 Normalmente, ela funciona melhor em regiões com cores sólidas ou com pouca variação de cor.
 
-### Exemplo
+- **Exemplo**
 
 Se eu tenho um desenho com fundo branco, posso usar a Varinha Mágica para selecionar esse fundo branco de forma rápida.
 
@@ -317,11 +319,11 @@ Depois de selecionar, posso apagar, pintar ou modificar aquela área.
 
 ---
 
-## 1️⃣4️⃣ Como apagar uma área com a Varinha Mágica
+**Como apagar uma área com a Varinha Mágica**
 
 Para apagar uma área com cor sólida, o processo é:
 
-```text
+```
 Selecionar a Varinha Mágica
 Clicar na área desejada
 Pressionar Delete
@@ -336,7 +338,7 @@ Ele apenas indica que aquela região está transparente.
 
 ---
 
-## 1️⃣5️⃣ O que significa o fundo quadriculado?
+**O que significa o fundo quadriculado?**
 
 O fundo quadriculado cinza e branco representa **transparência**.
 
