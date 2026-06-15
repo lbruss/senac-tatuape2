@@ -20,7 +20,7 @@ Este espaço funciona como:
 ---
 
 ## 📌 Observação
-Este resitório será excluído após a conclusão do curso e o conteudo deste repsitório será implementado [aqui](https://github.com/lbruss/senac-tatuape1).
+Este resitório será excluído após a conclusão do curso e o conteúdo deste será implementado [aqui](https://github.com/lbruss/senac-tatuape1).
 
 ## Autor
 Bruss Loza
