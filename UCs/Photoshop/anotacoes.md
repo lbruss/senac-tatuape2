@@ -312,7 +312,7 @@ Exemplo:
 
 Pode ser entendido assim:
 
-```text
+```
 2 centenas + 3 dezenas + 5 unidades
 ```
 
@@ -326,19 +326,19 @@ Ou seja:
 
 Resultado:
 
-```text
+```
 200 + 30 + 5 = 235
 ```
 
 ---
 
-# 7️⃣ Sistema Binário
+# Sistema Binário
 
 O computador não trabalha diretamente como nós, usando a base decimal.
 
 O computador trabalha com o **sistema binário**, que usa apenas dois símbolos:
 
-```text
+```
 0 e 1
 ```
 
@@ -346,13 +346,13 @@ Esses valores são chamados de **bits**.
 
 ---
 
-## 7.1 O que é bit?
+## Bit
 
 **Bit** é a menor unidade de informação do computador.
 
 Um bit pode ter apenas dois valores:
 
-```text
+```
 0 ou 1
 ```
 
@@ -365,17 +365,17 @@ Esses valores podem representar estados físicos, como:
 
 ---
 
-## 7.2 O que é byte?
+## Byte
 
 Um **byte** é um conjunto de **8 bits**.
 
-```text
+```
 1 byte = 8 bits
 ```
 
 Exemplo:
 
-```text
+```
 01010101
 ```
 
@@ -385,7 +385,7 @@ Bytes são usados para representar dados maiores, como letras, números, imagens
 
 ---
 
-# 8️⃣ Convertendo Decimal para Binário
+# Convertendo Decimal para Binário
 
 Para converter um número decimal para binário, eu divido o número por 2 repetidamente.
 
@@ -401,17 +401,17 @@ O resto sempre será `0` ou `1`, porque o sistema binário só trabalha com esse
 
 ---
 
-## Exemplo: converter 20 para binário
+**Exemplo: converter 20 para binário**
 
 Vamos converter:
 
-```text
+```
 20
 ```
 
 Divisões:
 
-```text
+```
 20 ÷ 2 = 10, resto 0
 10 ÷ 2 = 5,  resto 0
 5 ÷ 2  = 2,  resto 1
@@ -421,39 +421,39 @@ Divisões:
 
 Agora eu pego os restos de baixo para cima:
 
-```text
+```
 1 0 1 0 0
 ```
 
 Então:
 
-```text
+```
 20 em decimal = 10100 em binário
 ```
 
 ---
 
-## Por que leio de baixo para cima?
+**Por que leio de baixo para cima?**
 
 Porque os primeiros restos representam as posições de menor valor.
 
 No binário, as posições são organizadas por potências de 2:
 
-```text
+```
 2⁴  2³  2²  2¹  2⁰
 16   8   4   2   1
 ```
 
 No número `10100`, fica assim:
 
-```text
+```
 1  0  1  0  0
 16 8  4  2  1
 ```
 
 Calculando:
 
-```text
+```
 1 × 16 = 16
 0 × 8  = 0
 1 × 4  = 4
@@ -463,19 +463,19 @@ Calculando:
 
 Somando:
 
-```text
+```
 16 + 0 + 4 + 0 + 0 = 20
 ```
 
 Por isso:
 
-```text
+```
 10100₂ = 20₁₀
 ```
 
 ---
 
-# 9️⃣ Convertendo Binário para Decimal
+# Convertendo Binário para Decimal
 
 Também existe o processo inverso: transformar um número binário em decimal.
 
@@ -483,17 +483,17 @@ Para isso, eu uso as potências de 2.
 
 ---
 
-## Exemplo: converter 10110 para decimal
+**Exemplo: converter 10110 para decimal**
 
 Número binário:
 
-```text
+```
 10110
 ```
 
 Primeiro, alinho cada dígito com uma potência de 2:
 
-```text
+```
 1    0    1    1    0
 2⁴   2³   2²   2¹   2⁰
 16   8    4    2    1
@@ -501,7 +501,7 @@ Primeiro, alinho cada dígito com uma potência de 2:
 
 Agora multiplico cada número binário pelo valor da posição:
 
-```text
+```
 1 × 16 = 16
 0 × 8  = 0
 1 × 4  = 4
@@ -511,13 +511,13 @@ Agora multiplico cada número binário pelo valor da posição:
 
 Depois somo tudo:
 
-```text
+```
 16 + 0 + 4 + 2 + 0 = 22
 ```
 
 Então:
 
-```text
+```
 10110 em binário = 22 em decimal
 ```
 
@@ -525,7 +525,7 @@ Então:
 
 ## Forma resumida
 
-```text
+```
 10110₂ = 22₁₀
 ```
 
@@ -536,13 +536,13 @@ O número pequeno embaixo indica a base:
 
 ---
 
-# 🔟 Ordem das Operações — PEMDAS
+## Ordem das Operações — PEMDAS
 
 Na matemática e na programação, existe uma ordem correta para resolver expressões.
 
 Essa ordem é conhecida como **PEMDAS**.
 
-```text
+```
 P - Parênteses
 E - Expoentes
 M - Multiplicação
@@ -553,7 +553,7 @@ S - Subtração
 
 ---
 
-## O que isso significa?
+**O que isso significa?**
 
 Significa que eu não resolvo uma expressão simplesmente da esquerda para a direita em qualquer situação.
 
@@ -561,13 +561,13 @@ Existe uma prioridade.
 
 Exemplo:
 
-```text
+```
 2 + 3 × 4
 ```
 
 Se eu somar primeiro:
 
-```text
+```
 2 + 3 = 5
 5 × 4 = 20
 ```
@@ -576,24 +576,24 @@ Mas esse resultado está errado pela ordem das operações.
 
 O correto é resolver a multiplicação primeiro:
 
-```text
+```
 3 × 4 = 12
 2 + 12 = 14
 ```
 
 Então:
 
-```text
+```
 2 + 3 × 4 = 14
 ```
 
 ---
 
-## Com parênteses
+**Com parênteses**
 
 Agora veja:
 
-```text
+```
 (2 + 3) × 4
 ```
 
@@ -601,14 +601,14 @@ Aqui os parênteses têm prioridade.
 
 Então:
 
-```text
+```
 2 + 3 = 5
 5 × 4 = 20
 ```
 
 Resultado:
 
-```text
+```
 (2 + 3) × 4 = 20
 ```
 
@@ -616,7 +616,7 @@ Os parênteses mudam a ordem da conta.
 
 ---
 
-# 1️⃣1️⃣ Relação entre Matemática e Programação
+# Relação entre Matemática e Programação
 
 Programação usa muita lógica matemática.
 
@@ -624,7 +624,7 @@ Mesmo quando eu não estou fazendo contas grandes, o computador está sempre com
 
 Exemplos:
 
-```text
+```
 Se idade >= 18, a pessoa é maior de idade.
 Se senha == senha_cadastrada, o usuário pode entrar.
 Se nota >= 6, o aluno foi aprovado.
@@ -634,7 +634,7 @@ Essas decisões dependem de lógica, comparação e operações.
 
 ---
 
-# 1️⃣2️⃣ Algoritmo como Receita de Bolo
+# Algoritmo como Receita de Bolo
 
 A comparação do algoritmo com uma receita de bolo é muito boa.
 
@@ -650,9 +650,9 @@ Um algoritmo também funciona assim.
 
 ---
 
-## Exemplo com receita
+**Exemplo com receita**
 
-```text
+```
 Entrada:
 Farinha, ovos, leite, açúcar e fermento.
 
@@ -665,7 +665,7 @@ Bolo pronto.
 
 Na programação:
 
-```text
+```
 Entrada:
 Dois números.
 
@@ -680,7 +680,7 @@ A lógica é a mesma.
 
 ---
 
-# 1️⃣3️⃣ Conceito Fundamental
+## Conceito Fundamental
 
 O conceito mais importante desta aula é entender que o computador trabalha com instruções claras e dados representados em binário.
 
@@ -690,9 +690,7 @@ A programação serve para criar algoritmos, ou seja, sequências de passos que 
 
 ---
 
-# ✅ Em resumo
-
-Nesta aula, comecei a entender a base da lógica de programação.
+# Em resumo
 
 Vi que a computação evoluiu desde ferramentas antigas, como o ábaco, até computadores eletrônicos como o ENIAC.
 
@@ -706,7 +704,7 @@ Por fim, vi que algoritmos são como receitas: uma sequência organizada de pass
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. Lógica de programação é organizar o pensamento para resolver problemas.
 2. Algoritmo é uma sequência de passos, como uma receita de bolo.
