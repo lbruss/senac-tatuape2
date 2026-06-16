@@ -1,8 +1,6 @@
-# Lógica de Programação — Desenvolvimento de Algoritmos
+# Desenvolvimento de Algoritmos
 
-## 🎯 Ideia Principal
-
-Nesta aula, comecei a estudar **Lógica de Programação**, que é a base para aprender qualquer linguagem de programação.
+## Ideia Principal
 
 Antes de escrever código, preciso entender como o computador “pensa”, como ele representa informações e como eu posso montar instruções organizadas para resolver problemas.
 
@@ -10,7 +8,7 @@ A ideia central é: **programar é ensinar o computador a resolver problemas por
 
 ---
 
-# 1️⃣ O que é Lógica de Programação?
+**O que é Lógica de Programação?**
 
 **Lógica de Programação** é a forma de organizar o pensamento para resolver problemas usando uma sequência de instruções.
 
@@ -26,13 +24,12 @@ Programar não é apenas “decorar comandos”. Programar é aprender a **pensa
 
 ---
 
-## 🧠 Analogia simples
-
+> Analogia simples:
 A lógica de programação é como explicar uma tarefa para alguém que não sabe nada.
 
 Por exemplo, se eu disser:
 
-> “Faça um café.”
+- “Faça um café.”
 
 Uma pessoa entende porque já sabe o contexto.
 Mas um computador não entende “contexto”. Eu teria que explicar passo a passo:
@@ -48,7 +45,7 @@ Ou seja, o computador precisa de instruções **claras, ordenadas e sem ambiguid
 
 ---
 
-# 2️⃣ Desenvolvimento de Algoritmos
+# Desenvolvimento de Algoritmos
 
 Um **algoritmo** é uma sequência de passos usados para resolver um problema.
 
@@ -64,11 +61,11 @@ Assim como uma receita tem ingredientes e modo de preparo, um algoritmo também 
 
 ---
 
-## Exemplo simples de algoritmo
+- **Exemplo simples de algoritmo**
 
 Problema: somar dois números.
 
-```text
+```
 1. Ler o primeiro número
 2. Ler o segundo número
 3. Somar os dois números
@@ -83,7 +80,7 @@ Explicando:
 
 ---
 
-# 3️⃣ História do Computador
+## História do Computador
 
 Antes dos computadores modernos, o ser humano já criava ferramentas para ajudar nos cálculos.
 
@@ -91,7 +88,7 @@ A evolução da computação não começou diretamente com notebooks ou computad
 
 ---
 
-## 3.1 Ábaco
+- **Ábaco**
 
 O **ábaco** foi uma das primeiras ferramentas usadas pelo ser humano para fazer cálculos.
 
@@ -103,7 +100,7 @@ O ábaco não era um computador como conhecemos hoje, mas foi importante porque 
 
 ---
 
-## 3.2 John Napier e os Bastões de Napier
+- **John Napier e os Bastões de Napier**
 
 **John Napier** criou os chamados **Bastões de Napier**.
 
@@ -115,7 +112,7 @@ Isso é parecido com a lógica de programação, porque um problema grande pode 
 
 ---
 
-## 3.3 George Boole e a lógica binária
+- **George Boole e a lógica binária**
 
 Em **1847**, o matemático inglês **George Boole** estabeleceu a base da chamada **lógica booleana**.
 
@@ -131,9 +128,9 @@ Na computação, essa ideia se conecta diretamente ao sistema binário:
 
 A lógica booleana é muito importante para programação, porque os programas tomam decisões o tempo todo.
 
-Exemplo:
+**Exemplo:**
 
-```text
+```
 Se a senha estiver correta, entrar no sistema.
 Senão, mostrar mensagem de erro.
 ```
@@ -142,7 +139,7 @@ Por trás disso, o computador está avaliando se uma condição é **verdadeira*
 
 ---
 
-## 3.4 Hermann Hollerith e o computador mecânico
+- **Hermann Hollerith e o computador mecânico**
 
 Em **1890**, **Hermann Hollerith** desenvolveu uma máquina eletromecânica usada para processar dados do censo dos Estados Unidos.
 
@@ -152,7 +149,7 @@ Esse foi um avanço importante porque mostrou que dados poderiam ser armazenados
 
 ---
 
-## 3.5 Konrad Zuse e os primeiros computadores elétricos
+- **Konrad Zuse e os primeiros computadores elétricos**
 
 Em **1938**, **Konrad Zuse** desenvolveu uma das primeiras máquinas computacionais eletromecânicas.
 
@@ -160,7 +157,7 @@ Essas máquinas já estavam mais próximas do conceito de computador, pois conse
 
 ---
 
-## 3.6 ENIAC
+- **ENIAC**
 
 Em **1946**, surgiu o **ENIAC**, considerado um dos primeiros computadores eletrônicos digitais de uso geral.
 
@@ -170,7 +167,7 @@ Mesmo sendo muito limitado em comparação com os computadores atuais, o ENIAC f
 
 ---
 
-# 4️⃣ Arquitetura de Von Neumann
+# Arquitetura de Von Neumann
 
 A **Arquitetura de Von Neumann** é um modelo clássico de funcionamento dos computadores.
 
@@ -190,7 +187,7 @@ Ou seja, o computador não guarda apenas informações, mas também os comandos 
 
 ## Modelo básico
 
-```text
+```
 Entrada → Processamento → Saída
 ```
 
@@ -198,19 +195,19 @@ Esse é o princípio fundamental da informática.
 
 ---
 
-# 5️⃣ Entrada, Processamento e Saída
+## Entrada, Processamento e Saída
 
 Esse é um dos conceitos mais importantes da computação.
 
 Todo sistema computacional funciona, de forma geral, com três etapas:
 
-```text
+```
 Entrada → Processamento → Saída
 ```
 
 ---
 
-## 5.1 Entrada
+- **Entrada**
 
 A **entrada** é tudo aquilo que o sistema recebe.
 
@@ -227,7 +224,7 @@ Em programação, entrada pode ser um número, um texto, uma opção escolhida o
 
 ---
 
-## 5.2 Processamento
+- **Processamento**
 
 O **processamento** é o momento em que o computador trabalha com os dados recebidos.
 
@@ -241,7 +238,7 @@ Ele pode:
 
 Exemplo:
 
-```text
+```
 Número 1 = 10
 Número 2 = 20
 Processamento = 10 + 20
@@ -249,7 +246,7 @@ Processamento = 10 + 20
 
 ---
 
-## 5.3 Saída
+- **Saída**
 
 A **saída** é o resultado final depois do processamento.
 
@@ -264,15 +261,15 @@ Exemplos:
 
 Exemplo:
 
-```text
+```
 Resultado = 30
 ```
 
 ---
 
-## Exemplo completo
+**Exemplo completo**
 
-```text
+```
 Entrada:
 10 e 20
 
@@ -287,13 +284,13 @@ Esse modelo aparece em praticamente tudo na informática.
 
 ---
 
-# 6️⃣ Base Decimal
+# Base Decimal
 
 A **base decimal** é o sistema numérico que nós, humanos, usamos no dia a dia.
 
 Ela usa 10 símbolos:
 
-```text
+```
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 ```
 
@@ -301,7 +298,7 @@ Por isso é chamada de base 10.
 
 Quando contamos normalmente, usamos a base decimal:
 
-```text
+```
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12...
 ```
 
@@ -309,7 +306,7 @@ Na base decimal, cada posição do número tem um valor baseado em potências de
 
 Exemplo:
 
-```text
+```
 235
 ```
 
