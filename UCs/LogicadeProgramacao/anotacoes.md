@@ -1357,7 +1357,7 @@ Resultado:
 
 ---
 
-## Observação importante
+**Observação importante**
 
 Esse algoritmo não calcula a média de três valores, porque para calcular a média de três valores seria necessário dividir por 3.
 
@@ -1365,13 +1365,13 @@ Neste caso, como a divisão é por 2, o algoritmo está apenas somando três val
 
 ---
 
-# 2️⃣2️⃣ Primeiro exemplo no VisualG — Leitor de nome e idade
+# Primeiro exemplo no VisualG — Leitor de nome e idade
 
 Agora, no VisualG, foi criado um algoritmo para ler o nome e a idade do usuário.
 
 ---
 
-## Código completo
+**Código completo**
 
 ```portugol
 algoritmo "Leitor de nome e idade"
@@ -1394,7 +1394,7 @@ fimalgoritmo
 
 ---
 
-## Explicando linha por linha
+**Explicando linha por linha**
 
 ```portugol
 algoritmo "Leitor de nome e idade"
@@ -1502,7 +1502,7 @@ Essa linha indica o fim do algoritmo.
 
 ---
 
-## Como executar
+**Como executar**
 
 Para executar no VisualG, posso pressionar:
 
@@ -1514,13 +1514,13 @@ Se o código estiver correto, o programa será executado e pedirá o nome e a id
 
 ---
 
-# 2️⃣3️⃣ Concatenação
+# Concatenação
 
 **Concatenar** significa juntar informações.
 
 Na programação, normalmente significa juntar textos com variáveis.
 
-Exemplo:
+- **Exemplo:**
 
 ```portugol
 escreval("Olá, ", nome)
@@ -1536,11 +1536,11 @@ A concatenação é muito usada para montar mensagens personalizadas.
 
 ---
 
-# 2️⃣4️⃣ Segundo exemplo no VisualG — Somar dois valores
+# Segundo exemplo no VisualG — Somar dois valores
 
 ---
 
-## Código completo
+**Código completo**
 
 ```portugol
 algoritmo "Somar dois valores"
@@ -1564,7 +1564,7 @@ fimalgoritmo
 
 ---
 
-## Explicando linha por linha
+**Explicando linha por linha**
 
 ```portugol
 algoritmo "Somar dois valores"
@@ -1652,7 +1652,7 @@ O símbolo `<-` significa “recebe”.
 
 Então posso ler assim:
 
-```text
+```
 resultado recebe valor1 + valor2
 ```
 
@@ -1676,18 +1676,18 @@ Finaliza o algoritmo.
 
 ---
 
-## Exemplo de execução
+**Exemplo de execução**
 
 Se eu digitar:
 
-```text
+```
 valor1 = 10
 valor2 = 20
 ```
 
 O processamento será:
 
-```text
+```
 resultado = 10 + 20
 resultado = 30
 ```
@@ -1700,11 +1700,11 @@ O resultado da soma dos valores é 30
 
 ---
 
-# 2️⃣5️⃣ Terceiro exemplo no VisualG — Média de quatro valores
+# Terceiro exemplo no VisualG — Média de quatro valores
 
 ---
 
-## Código completo
+**Código completo**
 
 ```portugol
 algoritmo "Média de quatro valores"
@@ -1734,7 +1734,7 @@ fimalgoritmo
 
 ---
 
-## Explicando linha por linha
+**Explicando linha por linha**
 
 ```portugol
 algoritmo "Média de quatro valores"
@@ -1764,7 +1764,7 @@ Uso `real` porque a média pode ter casas decimais.
 
 Exemplo:
 
-```text
+```
 7.5
 8.25
 9.75
@@ -1890,7 +1890,7 @@ Finaliza o algoritmo.
 
 ---
 
-## Exemplo de execução
+**Exemplo de execução**
 
 Se eu digitar:
 
@@ -1917,7 +1917,7 @@ O resultado da média dos valores é 7.5
 
 ---
 
-# 2️⃣6️⃣ Conceito Fundamental
+# Conceito Fundamental
 
 O conceito mais importante desta aula é entender que um programa trabalha com dados armazenados em variáveis.
 
@@ -1931,7 +1931,7 @@ No VisualG, começo a transformar esses passos em código, usando comandos como 
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula, aprendi que um programa de computador é uma sequência de instruções organizadas.
 
@@ -1949,7 +1949,7 @@ No VisualG, comecei a escrever algoritmos reais, lendo dados, armazenando em var
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. Programa de computador é um conjunto de instruções para resolver uma tarefa.
 2. Linguagem de baixo nível é mais próxima da máquina, como Assembly.
