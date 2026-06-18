@@ -1243,9 +1243,9 @@ Por isso, uso a variável `resultado`.
 
 ---
 
-## Passo 8 — Exibir o resultado
+**Passo 8 — Exibir o resultado**
 
-```text
+```
 8. Exibir o resultado
 ```
 
@@ -1253,7 +1253,7 @@ Depois do processamento, o resultado precisa aparecer para o usuário.
 
 ---
 
-# 1️⃣9️⃣ Teste de Mesa
+# Teste de Mesa
 
 O **teste de mesa** é uma forma de testar manualmente um algoritmo.
 
@@ -1267,7 +1267,7 @@ Isso ajuda a descobrir se a lógica está correta.
 
 Algoritmo:
 
-```text
+```
 valor1 = 10
 valor2 = 5
 resultado = valor1 + valor2
@@ -1283,7 +1283,7 @@ Teste:
 
 Resultado final:
 
-```text
+```
 15
 ```
 
@@ -1291,7 +1291,7 @@ O teste de mesa é útil porque permite encontrar erros antes mesmo de usar um p
 
 ---
 
-# 2️⃣0️⃣ VisualG
+# VisualG
 
 O **VisualG** é um software usado para escrever e testar algoritmos em Portugol.
 
@@ -1301,9 +1301,9 @@ Com ele, posso criar variáveis, ler dados, fazer cálculos e mostrar resultados
 
 ---
 
-# 2️⃣1️⃣ Algoritmo — Somar 3 valores e dividir por 2
+## Algoritmo — Somar 3 valores e dividir por 2
 
-```text
+```
 Algoritmo "Somar 3 valores e dividir por 2"
 
 Início
@@ -1325,13 +1325,13 @@ Fim
 
 ---
 
-## Explicando esse algoritmo
+**Explicando esse algoritmo**
 
 Esse algoritmo recebe três valores, soma todos eles e divide o resultado por 2.
 
 Exemplo:
 
-```text
+```
 valor1 = 10
 valor2 = 20
 valor3 = 30
