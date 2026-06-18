@@ -760,13 +760,13 @@ total = total - 5
 
 ---
 
-# 1️⃣2️⃣ Operadores de Comparação
+## Operadores de Comparação
 
 Os **operadores de comparação** são usados para comparar valores.
 
 O resultado de uma comparação sempre será um teste lógico:
 
-```text
+```
 verdadeiro ou falso
 ```
 
@@ -789,9 +789,9 @@ verdadeiro ou falso
 
 O operador `==` verifica se dois valores são iguais.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 idade == 18
 ```
 
@@ -806,7 +806,7 @@ O operador `!=` verifica se dois valores são diferentes.
 
 Exemplo:
 
-```text
+```
 senha != senhaCorreta
 ```
 
@@ -816,7 +816,7 @@ Se a senha digitada for diferente da senha correta, o resultado será verdadeiro
 
 ## Maior que `>`
 
-```text
+```
 idade > 18
 ```
 
@@ -826,7 +826,7 @@ Verifica se a idade é maior que 18.
 
 ## Menor que `<`
 
-```text
+```
 idade < 18
 ```
 
@@ -836,7 +836,7 @@ Verifica se a idade é menor que 18.
 
 ## Maior ou igual `>=`
 
-```text
+```
 idade >= 18
 ```
 
@@ -846,7 +846,7 @@ Verifica se a idade é maior ou igual a 18.
 
 ## Menor ou igual `<=`
 
-```text
+```
 idade <= 18
 ```
 
@@ -854,13 +854,13 @@ Verifica se a idade é menor ou igual a 18.
 
 ---
 
-# 1️⃣3️⃣ Operadores Lógicos
+# Operadores Lógicos
 
 Os **operadores lógicos** servem para combinar testes lógicos.
 
 Eles trabalham com valores como:
 
-```text
+```
 verdadeiro
 falso
 ```
@@ -877,9 +877,9 @@ Os principais operadores são:
 
 O operador **E** exige que todas as condições sejam verdadeiras.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 idade >= 18 E possuiDocumento = verdadeiro
 ```
 
@@ -896,9 +896,9 @@ Se uma das condições for falsa, o resultado geral será falso.
 
 O operador **OU** exige que pelo menos uma condição seja verdadeira.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 pagamento = dinheiro OU pagamento = cartão
 ```
 
@@ -910,9 +910,9 @@ Se uma das opções for verdadeira, o teste passa.
 
 O operador **NÃO** inverte o resultado lógico.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 NÃO aprovado
 ```
 
@@ -921,29 +921,29 @@ Se `aprovado` for falso, vira verdadeiro.
 
 ---
 
-# 1️⃣4️⃣ Teste Lógico
+# Teste Lógico
 
 Um **teste lógico** é uma verificação que retorna apenas dois resultados:
 
-```text
+```
 verdadeiro ou falso
 ```
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 10 > 5
 ```
 
 Resultado:
 
-```text
+```
 verdadeiro
 ```
 
 Outro exemplo:
 
-```text
+```
 3 == 8
 ```
 
@@ -955,16 +955,16 @@ falso
 
 Na programação, esses testes são muito usados para decisões.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Se a nota for maior ou igual a 6, o aluno está aprovado.
 Caso contrário, está reprovado.
 ```
 
 ---
 
-# 1️⃣5️⃣ Algoritmo
+# Algoritmo
 
 Um **algoritmo** é uma sequência de passos para resolver um problema.
 
@@ -984,7 +984,7 @@ A função do algoritmo é resolver um problema.
 
 Ao escrever um algoritmo, é comum cada etapa começar com um verbo de ação.
 
-Exemplos:
+- **Exemplos:**
 
 * Pegar
 * Posicionar
@@ -1000,9 +1000,9 @@ Isso deixa o passo mais direto e facilita entender o que deve ser feito.
 
 ---
 
-# 1️⃣6️⃣ Primeiro exemplo de algoritmo — Trocar a lâmpada
+# Primeiro exemplo de algoritmo — Trocar a lâmpada
 
-```text
+```
 Algoritmo "Trocar a Lâmpada"
 
 Início
@@ -1027,7 +1027,7 @@ Esse é um algoritmo simples, feito em linguagem natural.
 
 O problema é:
 
-```text
+```
 Trocar uma lâmpada.
 ```
 
@@ -1035,9 +1035,9 @@ A solução foi dividida em passos.
 
 ---
 
-## Passo 1 — Pegar uma escada
+**Passo 1 — Pegar uma escada**
 
-```text
+```
 1. Pegar uma escada
 ```
 
@@ -1047,9 +1047,9 @@ A escada é necessária porque a lâmpada geralmente fica em um ponto alto.
 
 ---
 
-## Passo 2 — Posicionar a escada
+**Passo 2 — Posicionar a escada**
 
-```text
+```
 2. Posicionar a escada
 ```
 
@@ -1058,9 +1058,9 @@ Ela precisa estar bem posicionada para evitar queda e permitir acesso à lâmpad
 
 ---
 
-## Passo 3 — Subir na escada
+**Passo 3 — Subir na escada**
 
-```text
+```
 3. Subir na escada
 ```
 
@@ -1068,9 +1068,9 @@ Agora que a escada está posicionada, posso subir para alcançar a lâmpada.
 
 ---
 
-## Passo 4 — Tirar a lâmpada velha
+**Passo 4 — Tirar a lâmpada velha**
 
-```text
+```
 4. Tirar a lâmpada velha
 ```
 
@@ -1078,9 +1078,9 @@ A lâmpada antiga precisa ser removida para abrir espaço para a nova.
 
 ---
 
-## Passo 5 — Colocar a lâmpada nova
+**Passo 5 — Colocar a lâmpada nova**
 
-```text
+```
 5. Colocar a lâmpada nova
 ```
 
@@ -1088,9 +1088,9 @@ Depois de retirar a lâmpada velha, coloco a nova no lugar.
 
 ---
 
-## Passo 6 — Descer da escada
+**Passo 6 — Descer da escada**
 
-```text
+```
 6. Descer da escada
 ```
 
@@ -1098,9 +1098,9 @@ Depois de instalar a lâmpada, preciso descer com segurança.
 
 ---
 
-## Passo 7 — Acender a lâmpada nova
+**Passo 7 — Acender a lâmpada nova**
 
-```text
+```
 7. Acender a lâmpada nova
 ```
 
@@ -1108,9 +1108,9 @@ Esse passo serve para testar se a troca funcionou.
 
 ---
 
-## Passo 8 — Guardar a escada
+**Passo 8 — Guardar a escada(*
 
-```text
+```
 8. Guardar a escada
 ```
 
@@ -1118,7 +1118,7 @@ Depois que o problema foi resolvido, guardo o objeto usado.
 
 ---
 
-## Observação importante
+**Observação importante**
 
 Esse exemplo mostra que um algoritmo não precisa começar com código.
 
@@ -1128,7 +1128,7 @@ Isso ajuda a organizar o pensamento.
 
 ---
 
-# 1️⃣7️⃣ Boas práticas para criar algoritmos
+# Boas práticas para criar algoritmos
 
 Quando eu for criar um algoritmo, é melhor fazer ele de forma curta e objetiva.
 
@@ -1144,9 +1144,9 @@ O ideal é:
 
 ---
 
-# 1️⃣8️⃣ Algoritmo para cálculo — Somar dois valores
+# Algoritmo para cálculo — Somar dois valores
 
-```text
+```
 Algoritmo "Somar dois valores"
 
 Início
@@ -1171,9 +1171,9 @@ Esse algoritmo resolve o problema de somar dois números.
 
 ---
 
-## Passo 1 — Criar a variável valor1
+**Passo 1 — Criar a variável valor1**
 
-```text
+```
 1. Criar a variável valor1
 ```
 
@@ -1181,9 +1181,9 @@ Essa variável vai guardar o primeiro número digitado.
 
 ---
 
-## Passo 2 — Criar a variável valor2
+**Passo 2 — Criar a variável valor2**
 
-```text
+```
 2. Criar a variável valor2
 ```
 
@@ -1191,9 +1191,9 @@ Essa variável vai guardar o segundo número digitado.
 
 ---
 
-## Passo 3 — Criar a variável resultado
+**Passo 3 — Criar a variável resultado**
 
-```text
+```
 3. Criar a variável resultado
 ```
 
@@ -1201,9 +1201,9 @@ Essa variável vai guardar o resultado da soma.
 
 ---
 
-## Passo 4 — Inserir o primeiro valor
+**Passo 4 — Inserir o primeiro valor**
 
-```text
+```
 4. Inserir o primeiro valor
 ```
 
@@ -1211,9 +1211,9 @@ Aqui o usuário informa o primeiro número.
 
 ---
 
-## Passo 5 — Inserir o segundo valor
+**Passo 5 — Inserir o segundo valor**
 
-```text
+```
 5. Inserir o segundo valor
 ```
 
@@ -1221,9 +1221,9 @@ Aqui o usuário informa o segundo número.
 
 ---
 
-## Passo 6 — Somar os valores das variáveis
+**Passo 6 — Somar os valores das variáveis**
 
-```text
+```
 6. Somar os valores das variáveis
 ```
 
@@ -1231,9 +1231,9 @@ O algoritmo pega o valor de `valor1` e soma com `valor2`.
 
 ---
 
-## Passo 7 — Armazenar o resultado
+**Passo 7 — Armazenar o resultado**
 
-```text
+```
 7. Armazenar o valor da soma na variável resultado
 ```
 
