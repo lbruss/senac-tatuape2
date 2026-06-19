@@ -1,8 +1,8 @@
-# Lógica de Programação — Exercícios Práticos no VisualG
+# Exercícios Práticos no VisualG
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula, pratiquei a criação de algoritmos no VisualG utilizando os conceitos fundamentais de programação:
+Pratiquei a criação de algoritmos no VisualG utilizando os conceitos fundamentais de programação:
 
 * Entrada de dados (`leia`)
 * Saída de dados (`escreval`)
@@ -15,9 +15,9 @@ O objetivo desses exercícios foi transformar problemas do cotidiano em algoritm
 
 ---
 
-# 1️⃣ Calculadora Simples
+# Calculadora Simples
 
-## Objetivo
+**Objetivo**
 
 Criar uma calculadora capaz de realizar as quatro operações matemáticas básicas:
 
@@ -28,7 +28,7 @@ Criar uma calculadora capaz de realizar as quatro operações matemáticas bási
 
 ---
 
-## Código Completo
+- Código Completo
 
 ```portugol
 algoritmo "Calculadora"
@@ -66,9 +66,9 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-### Declaração das Variáveis
+- **Declaração das Variáveis**
 
 ```portugol
 num1, num2, resSoma, resSub, resMult, resDiv: real
@@ -87,9 +87,9 @@ Cria seis variáveis do tipo real.
 
 Foi utilizado o tipo `real` porque o usuário pode digitar números com casas decimais.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 10,5
 7,8
 3,14
@@ -97,7 +97,7 @@ Exemplo:
 
 ---
 
-### Entrada de Dados
+**Entrada de Dados**
 
 ```portugol
 escreval("Digite o primeiro número")
@@ -119,7 +119,7 @@ Repete o mesmo processo para a segunda variável.
 
 ---
 
-### Processamento
+**Processamento**
 
 ```portugol
 resSoma <- num1 + num2
@@ -153,7 +153,7 @@ Divide o primeiro valor pelo segundo.
 
 ---
 
-### Saída de Dados
+**Saída de Dados**
 
 ```portugol
 escreval("A soma dos dois valores é: ", resSoma)
@@ -187,11 +187,11 @@ Mostra o resultado da divisão.
 
 ---
 
-## Estrutura Utilizada
+- Estrutura Utilizada
 
 Este programa já segue a estrutura clássica de qualquer sistema:
 
-```text
+```
 Entrada → Processamento → Saída
 ```
 
@@ -199,15 +199,15 @@ Essa é uma das estruturas mais importantes da informática.
 
 ---
 
-# 2️⃣ Expressão Numérica
+# Expressão Numérica
 
-## Objetivo
+**Objetivo**
 
 Resolver uma expressão matemática utilizando variáveis.
 
 ---
 
-## Código Completo
+**Código Completo**
 
 ```portugol
 algoritmo "Expressao Numerica"
@@ -235,7 +235,7 @@ fimalgoritmo
 
 ---
 
-## O que mudou?
+**O que mudou?**
 
 Neste algoritmo não existe entrada de dados.
 
@@ -254,48 +254,48 @@ O operador `<-` significa "recebe".
 
 Podemos ler assim:
 
-```text
+```
 num1 recebe 2
 num2 recebe 3
 ```
 
 ---
 
-## Resolvendo a Expressão
+**Resolvendo a Expressão**
 
 A expressão é:
 
-```text
+```
 ((a+b)*(a-b))/4
 ```
 
 Substituindo pelos valores:
 
-```text
+```
 ((2+3)*(2-3))/4
 ```
 
 Primeiro:
 
-```text
+```
 (5 * -1)/4
 ```
 
 Depois:
 
-```text
+```
 -5/4
 ```
 
 Resultado:
 
-```text
+```
 -1,25
 ```
 
 ---
 
-## Importância do Uso dos Parênteses
+- Importância do Uso dos Parênteses
 
 Os parênteses controlam a ordem das operações.
 
@@ -303,7 +303,7 @@ Sem eles o resultado poderia ser diferente.
 
 Lembrando da regra:
 
-### PEMDAS
+- **PEMDAS**
 
 | Letra | Operação      |
 | ----- | ------------- |
@@ -316,15 +316,15 @@ Lembrando da regra:
 
 ---
 
-# 3️⃣ Cálculo da Altura de um Prédio
+@ Cálculo da Altura de um Prédio
 
-## Objetivo
+**Objetivo**
 
 Criar um programa capaz de calcular a altura de um prédio utilizando a sombra como referência.
 
 ---
 
-## Código Informado
+**Código Informado**
 
 ```portugol
 algoritmo "Altura do Predio"
@@ -350,7 +350,7 @@ fimalgoritmo
 
 ---
 
-## Observação Importante
+**Observação Importante**
 
 Da forma como está escrito:
 
@@ -384,7 +384,7 @@ O resultado será sempre igual à altura de referência.
 
 ---
 
-## Como normalmente esse problema é resolvido
+**Como normalmente esse problema é resolvido**
 
 Em matemática usamos semelhança de triângulos.
 
@@ -396,7 +396,7 @@ Seriam necessárias informações como:
 
 Então:
 
-```text
+```
 Altura do prédio =
 (Altura da referência × Sombra do prédio)
 / Sombra da referência
@@ -406,31 +406,31 @@ Isso gera um resultado proporcional.
 
 ---
 
-# 4️⃣ Área de um Quadrado
+# Área de um Quadrado
 
-## Objetivo
+**Objetivo**
 
 Calcular a área de um quadrado.
 
 ---
 
-## Conceito Matemático
+**Conceito Matemático**
 
 A fórmula da área do quadrado é:
 
-```text
+```
 Área = lado × lado
 ```
 
 ou
 
-```text
+```
 Área = lado²
 ```
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Area do Quadrado"
@@ -455,52 +455,52 @@ fimalgoritmo
 
 ---
 
-## Exemplo
+- **Exemplo**
 
 Se:
 
-```text
+```
 lado = 5
 ```
 
 Então:
 
-```text
+```
 área = 5 × 5
 área = 25
 ```
 
 Resultado:
 
-```text
+```
 25 m²
 ```
 
 ---
 
-# 5️⃣ Área do Retângulo (Exercício Feito por Mim)
+# Área do Retângulo (Exercício Feito por Mim)
 
-## Objetivo
+**Objetivo**
 
 Calcular a área de um retângulo.
 
 ---
 
-## Fórmula
+**Fórmula**
 
-```text
+```
 Área = Base × Altura
 ```
 
 ou
 
-```text
+```
 Área = lado maior × lado menor
 ```
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Area do Retangulo"
@@ -528,46 +528,46 @@ fimalgoritmo
 
 ---
 
-## Exemplo
+**Exemplo**
 
 Se:
 
-```text
+```
 ladoMaior = 8
 ladoMenor = 4
 ```
 
 Então:
 
-```text
+```
 8 × 4 = 32
 ```
 
 Resultado:
 
-```text
+```
 32 m²
 ```
 
 ---
 
-# 6️⃣ Comissão sobre Vendas (Exercício Feito por Mim)
+# Comissão sobre Vendas (Exercício Feito por Mim)
 
-## Objetivo
+**Objetivo**
 
 Calcular a comissão de um vendedor.
 
 ---
 
-## Comissão Definida
+**Comissão Definida**
 
-```text
+```
 12%
 ```
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Comissao"
@@ -597,7 +597,7 @@ fimalgoritmo
 
 ---
 
-## Explicando o Cálculo
+**Explicando o Cálculo**
 
 ```portugol
 comissao <- 12/100
@@ -605,13 +605,13 @@ comissao <- 12/100
 
 Transforma:
 
-```text
+```
 12%
 ```
 
 em:
 
-```text
+```
 0,12
 ```
 
@@ -619,33 +619,33 @@ em:
 
 Se o vendedor vendeu:
 
-```text
+```
 R$ 5.000
 ```
 
 Então:
 
-```text
+```
 5000 × 0,12
 ```
 
 Resultado:
 
-```text
+```
 R$ 600
 ```
 
 ---
 
-# 7️⃣ Desconto para Cliente (Exercício Feito por Mim)
+# Desconto para Cliente (Exercício Feito por Mim)
 
-## Objetivo
+**Objetivo**
 
 Aplicar desconto de 15% em uma compra.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Desconto Cliente"
@@ -677,9 +677,9 @@ fimalgoritmo
 
 ---
 
-## Como o cálculo funciona
+**Como o cálculo funciona**
 
-### Primeiro
+- Primeiro
 
 Calcula o desconto:
 
@@ -689,7 +689,7 @@ desconto <- valCompra * 15/100
 
 ---
 
-### Depois
+- Depois
 
 Subtrai o desconto:
 
@@ -699,39 +699,39 @@ valFinal <- valCompra - desconto
 
 ---
 
-## Exemplo
+- **Exemplo**
 
 Compra:
 
-```text
+```
 R$ 1.000
 ```
 
 Desconto:
 
-```text
+```t
 15% de 1000 = 150
 ```
 
 Valor final:
 
-```text
+```
 1000 - 150 = 850
 ```
 
 Resultado:
 
-```text
+```
 Valor final = R$ 850
 ```
 
 ---
 
-# 🧠 Conceito Fundamental
+## Conceito Fundamental
 
 Todos os exercícios desta aula seguem a mesma lógica:
 
-```text
+```
 1. Criar variáveis
 2. Receber dados
 3. Processar informações
@@ -744,11 +744,11 @@ Independentemente da linguagem utilizada futuramente (Python, Java, C#, PHP ou J
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula pratiquei a criação de algoritmos no VisualG utilizando operações matemáticas, variáveis, entrada e saída de dados. Desenvolvi uma calculadora simples, resolvi uma expressão numérica, calculei áreas geométricas, comissão de vendas e desconto para clientes. Também observei que um algoritmo precisa ser analisado cuidadosamente para verificar se a fórmula utilizada realmente resolve o problema proposto. Além disso, comecei a criar algoritmos próprios, exercitando o raciocínio lógico e a capacidade de transformar problemas do mundo real em soluções computacionais.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+**Resumo Relâmpago**
 
 1. Todo programa segue a lógica Entrada → Processamento → Saída.
 2. Variáveis armazenam informações temporariamente na memória.
