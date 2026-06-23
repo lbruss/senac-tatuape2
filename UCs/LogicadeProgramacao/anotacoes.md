@@ -609,7 +609,7 @@ Calculando:
 
 Novo salário:
 
-```text
+```
 1800 + 450
 
 2250
@@ -617,13 +617,13 @@ Novo salário:
 
 Resultado:
 
-```text
+```
 R$ 2.250
 ```
 
 ---
 
-# 🧠 Conceito Fundamental
+**Conceito Fundamental**
 
 As estruturas condicionais são responsáveis por dar inteligência aos programas.
 
@@ -638,7 +638,7 @@ Com elas, o programa consegue:
 
 Praticamente todos os sistemas modernos utilizam estruturas condicionais.
 
-Exemplos:
+- Exemplos:
 
 * Login de usuário.
 * Sistemas bancários.
@@ -651,11 +651,11 @@ Tudo depende de decisões lógicas.
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula aprendi a criar algoritmos envolvendo cálculos de combustível, consumo de veículos, hospedagem em hotel e reajuste salarial. Também comecei a utilizar estruturas condicionais através dos comandos `SE`, `SENÃO` e `FIMSE`, permitindo que os programas tomem decisões com base em determinadas condições. Com isso, os algoritmos deixam de apenas executar operações e passam a reagir a diferentes situações, tornando-se mais próximos dos sistemas reais utilizados no mercado.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+# Resumo Relâmpago
 
 1. Estruturas condicionais permitem que o programa tome decisões.
 2. O comando `SE` testa uma condição lógica.
