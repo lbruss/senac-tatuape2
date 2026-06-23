@@ -1,12 +1,12 @@
-# Lógica de Programação — Estruturas Condicionais (SE / SENÃO)
+# Estruturas Condicionais (SE / SENÃO)
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula comecei a trabalhar com um dos conceitos mais importantes da programação: **tomada de decisão**.
+Trabalhar com um dos conceitos mais importantes da programação: **tomada de decisão**.
 
 Até agora os algoritmos apenas executavam instruções em sequência:
 
-```text
+```
 Início
 ↓
 Executa passo 1
@@ -20,7 +20,7 @@ Fim
 
 Agora os programas começam a pensar de forma diferente:
 
-```text
+```
 SE acontecer uma condição
     faça uma coisa
 SENÃO
@@ -29,7 +29,7 @@ SENÃO
 
 É exatamente assim que sistemas reais funcionam.
 
-Exemplos:
+- **Exemplos:**
 
 * Se a senha estiver correta → permitir acesso.
 * Se o saldo for suficiente → realizar compra.
@@ -38,15 +38,15 @@ Exemplos:
 
 ---
 
-# 1️⃣ Cálculo de Combustível
+# Cálculo de Combustível
 
-## Objetivo
+**Objetivo**
 
 Calcular quanto será pago para abastecer um automóvel.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Calculo Combustivel"
@@ -74,9 +74,9 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-### Entrada de Dados
+- Entrada de Dados
 
 ```portugol
 leia(valorCombustivel)
@@ -84,9 +84,9 @@ leia(valorCombustivel)
 
 Recebe o preço de cada litro.
 
-Exemplo:
+**Exemplo:**
 
-```text
+```
 R$ 5,89
 ```
 
@@ -98,15 +98,15 @@ leia(litrosCombustivel)
 
 Recebe a quantidade de litros abastecida.
 
-Exemplo:
+- Exemplo:
 
-```text
+```
 40 litros
 ```
 
 ---
 
-### Processamento
+**Processamento**
 
 ```portugol
 resultado <- valorCombustivel * litrosCombustivel
@@ -114,16 +114,16 @@ resultado <- valorCombustivel * litrosCombustivel
 
 Multiplica o preço do litro pela quantidade de litros.
 
-Exemplo:
+- Exemplo:
 
-```text
+```
 5,89 × 40
 = 235,60
 ```
 
 ---
 
-### Saída
+**Saída**
 
 ```portugol
 escreval("O valor a ser pago será de R$ ", resultado)
@@ -133,15 +133,15 @@ Exibe o valor final do abastecimento.
 
 ---
 
-# 2️⃣ Cálculo de Combustível + Consumo do Veículo
+# Cálculo de Combustível + Consumo do Veículo
 
-## Objetivo
+**Objetivo**
 
 Além de calcular o valor pago pelo combustível, calcular também o consumo médio do veículo.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Consumo do Veiculo"
@@ -177,24 +177,24 @@ fimalgoritmo
 
 ---
 
-## Entendendo o Consumo
+**Entendendo o Consumo**
 
 A fórmula utilizada foi:
 
-```text
+```
 Consumo = Km Percorrido ÷ Litros Gastos
 ```
 
-Exemplo:
+- Exemplo:
 
-```text
+```
 300 km percorridos
 25 litros consumidos
 ```
 
 Resultado:
 
-```text
+```
 300 ÷ 25 = 12 Km/L
 ```
 
@@ -202,7 +202,7 @@ Isso significa que o carro percorre 12 quilômetros para cada litro consumido.
 
 ---
 
-## Observação
+**Observação**
 
 A variável:
 
@@ -222,15 +222,15 @@ Portanto essa variável acaba ficando desnecessária nesse algoritmo.
 
 ---
 
-# 3️⃣ Hospedagem em Hotel (Exercício Feito por Mim)
+# Hospedagem em Hotel (Exercício Feito por Mim)
 
-## Objetivo
+**Objetivo**
 
 Calcular o valor total de uma hospedagem.
 
 ---
 
-## Situação
+**Situação**
 
 * Diária por pessoa: R$ 180
 * Quantidade de pessoas: 4
@@ -238,7 +238,7 @@ Calcular o valor total de uma hospedagem.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Hospedagem"
@@ -266,7 +266,7 @@ fimalgoritmo
 
 ---
 
-## Explicando a Fórmula
+**Explicando a Fórmula**
 
 ```portugol
 resultado <- quantidadePessoas * valorDiaria * dias
@@ -274,7 +274,7 @@ resultado <- quantidadePessoas * valorDiaria * dias
 
 O programa calcula:
 
-```text
+```
 Quantidade de Pessoas
 ×
 Valor da Diária
@@ -284,9 +284,9 @@ Quantidade de Dias
 
 ---
 
-### Exemplo
+**Exemplo**
 
-```text
+```
 4 pessoas
 R$ 180 por diária
 6 dias
@@ -296,7 +296,7 @@ R$ 180 por diária
 
 Resultado:
 
-```text
+```
 4 × 180 × 6
 
 720 × 6
@@ -306,15 +306,15 @@ Resultado:
 
 Valor final:
 
-```text
+```
 R$ 4.320
 ```
 
 ---
 
-# 4️⃣ Estrutura Condicional
+# Estrutura Condicional
 
-## O que é?
+**O que é?**
 
 Uma estrutura condicional permite que o programa tome decisões.
 
@@ -334,11 +334,11 @@ fimse
 
 ---
 
-## Analogia
+> Analogia
 
 Imagine uma catraca de metrô.
 
-```text
+```
 SE possuir bilhete
     entrar
 SENÃO
@@ -349,15 +349,15 @@ SENÃO
 
 ---
 
-# 5️⃣ Média Final com Condicional
+# Média Final com Condicional
 
-## Objetivo
+**Objetivo**
 
 Verificar se um aluno foi aprovado ou reprovado.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Media Final"
@@ -400,11 +400,11 @@ fimalgoritmo
 
 ---
 
-## Como o Computador Decide
+**Como o Computador Decide**
 
 Exemplo:
 
-```text
+```
 7
 8
 5
@@ -413,7 +413,7 @@ Exemplo:
 
 Média:
 
-```text
+```
 (7+8+5+6)/4
 
 26/4
@@ -423,33 +423,33 @@ Média:
 
 Teste:
 
-```text
+```
 6,5 >= 5
 ```
 
 Resultado:
 
-```text
+```
 Verdadeiro
 ```
 
 Mensagem:
 
-```text
+```
 Aluno aprovado
 ```
 
 ---
 
-# 6️⃣ Hospedagem com Desconto
+# Hospedagem com Desconto
 
-## Objetivo
+**Objetivo**
 
 Conceder desconto para clientes que ficarem mais de 8 dias hospedados.
 
 ---
 
-## Regra
+**Regra**
 
 ```text
 Se ficar mais de 8 dias
@@ -458,7 +458,7 @@ Se ficar mais de 8 dias
 
 ---
 
-## Código Corrigido
+**Código Corrigido**
 
 ```portugol
 algoritmo "Hotel com Desconto"
@@ -499,23 +499,23 @@ fimalgoritmo
 
 ---
 
-## Entendendo o Cálculo
+**Entendendo o Cálculo**
 
-Exemplo:
+- Exemplo:
 
-```text
+```
 Resultado = R$ 5.000
 ```
 
 Desconto:
 
-```text
+```
 15% = 0,15
 ```
 
 Valor descontado:
 
-```text
+```
 5000 × 0,15
 
 750
@@ -523,7 +523,7 @@ Valor descontado:
 
 Valor final:
 
-```text
+```
 5000 - 750
 
 4250
@@ -531,15 +531,15 @@ Valor final:
 
 ---
 
-# 7️⃣ Reajuste Salarial (Exercício Feito por Mim)
+# Reajuste Salarial (Exercício Feito por Mim)
 
-## Objetivo
+**Objetivo**
 
 Conceder aumento de 25% apenas para funcionários com salário inferior a R$ 2.000.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Reajuste Salarial"
@@ -579,29 +579,29 @@ fimalgoritmo
 
 ---
 
-## Como o Cálculo Funciona
+**Como o Cálculo Funciona**
 
 Salário:
 
-```text
+```
 R$ 1.800
 ```
 
 Aumento:
 
-```text
+```
 25%
 ```
 
 Convertendo:
 
-```text
+```
 25 ÷ 100 = 0,25
 ```
 
 Calculando:
 
-```text
+```
 1800 × 0,25
 
 450
