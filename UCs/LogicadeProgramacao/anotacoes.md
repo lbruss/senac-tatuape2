@@ -110,13 +110,13 @@ se (media >= 6)
 
 Pergunta:
 
-```text
+```
 A média é maior ou igual a 6?
 ```
 
 Se sim:
 
-```text
+```
 Aluno Aprovado
 ```
 
@@ -124,7 +124,7 @@ O algoritmo termina a decisão.
 
 ---
 
-### Segunda verificação
+**Segunda verificação**
 
 Caso a primeira condição seja falsa:
 
@@ -134,33 +134,33 @@ se (media >= 5)
 
 Agora ele pergunta:
 
-```text
+```
 A média é maior ou igual a 5?
 ```
 
 Se sim:
 
-```text
+```
 Aluno em Recuperação
 ```
 
 ---
 
-### Última possibilidade
+**Última possibilidade**
 
 Se nenhuma condição anterior for verdadeira:
 
-```text
+```
 Aluno Reprovado
 ```
 
 ---
 
-## Exemplo 1
+- **Exemplo 1**
 
 Notas:
 
-```text
+```
 8
 7
 6
@@ -169,7 +169,7 @@ Notas:
 
 Média:
 
-```text
+```
 (8+7+6+9)/4
 
 30/4
@@ -179,17 +179,17 @@ Média:
 
 Resultado:
 
-```text
+```
 Aluno Aprovado
 ```
 
 ---
 
-## Exemplo 2
+- **Exemplo 2**
 
 Notas:
 
-```text
+```
 5
 5
 6
@@ -198,7 +198,7 @@ Notas:
 
 Média:
 
-```text
+```
 20/4
 
 5
@@ -206,17 +206,17 @@ Média:
 
 Resultado:
 
-```text
+```
 Aluno em Recuperação
 ```
 
 ---
 
-## Exemplo 3
+- **Exemplo 3**
 
 Notas:
 
-```text
+```
 4
 3
 5
@@ -225,7 +225,7 @@ Notas:
 
 Média:
 
-```text
+```
 16/4
 
 4
@@ -233,21 +233,21 @@ Média:
 
 Resultado:
 
-```text
+```
 Aluno Reprovado
 ```
 
 ---
 
-# 2️⃣ Sistema de Frete
+# Sistema de Frete
 
-## Objetivo
+**Objetivo**
 
 Calcular o valor do frete de acordo com o valor da compra.
 
 ---
 
-## Regras
+**Regras**
 
 | Valor da Compra      | Frete    |
 | -------------------- | -------- |
@@ -258,7 +258,7 @@ Calcular o valor do frete de acordo com o valor da compra.
 
 ---
 
-## Código Organizado
+**Código Organizado**
 
 ```portugol
 algoritmo "Frete"
@@ -312,59 +312,59 @@ fimalgoritmo
 
 ---
 
-## Entendendo a Lógica
+**Entendendo a Lógica**
 
 Imagine uma loja virtual.
 
 Primeiro ela verifica:
 
-```text
+```
 Compra acima de R$ 300?
 ```
 
 Se sim:
 
-```text
+```
 Frete grátis
 ```
 
 Caso contrário:
 
-```text
+```
 Compra acima de R$ 200?
 ```
 
 Se sim:
 
-```text
+```
 Frete de R$ 15,50
 ```
 
 Caso contrário:
 
-```text
+```
 Compra acima de R$ 150?
 ```
 
 Se sim:
 
-```text
+```
 Frete de R$ 25,50
 ```
 
 Caso contrário:
 
-```text
+```
 Frete de R$ 37,50
 ```
 
 ---
 
-## Analogia
+> Analogia
 
 Pense como uma escada de decisões:
 
-```text
+```
 Compra >= 300 ?
         ↓
       Sim → Frete Grátis
@@ -391,15 +391,15 @@ Frete 37,50
 
 ---
 
-# 3️⃣ Reajuste Salarial por Faixa (Exercício Feito por Mim)
+# Reajuste Salarial por Faixa (Exercício Feito por Mim)
 
-## Objetivo
+**Objetivo**
 
 Aplicar diferentes reajustes salariais conforme a faixa salarial.
 
 ---
 
-## Regras
+**Regras**
 
 | Salário                      | Reajuste |
 | ---------------------------- | -------- |
@@ -409,7 +409,7 @@ Aplicar diferentes reajustes salariais conforme a faixa salarial.
 
 ---
 
-## Código Organizado
+**Código Organizado**
 
 ```portugol
 algoritmo "Reajuste Salarial"
@@ -467,11 +467,11 @@ fimalgoritmo
 
 ---
 
-## Explicação da Lógica
+**Explicação da Lógica**
 
 O algoritmo verifica primeiro o maior salário.
 
-### Faixa 1
+**Faixa 1**
 
 ```portugol
 se (salario >= 3000)
@@ -479,13 +479,13 @@ se (salario >= 3000)
 
 Recebe:
 
-```text
+```
 5%
 ```
 
 ---
 
-### Faixa 2
+**Faixa 2**
 
 ```portugol
 se (salario >= 2000)
@@ -499,7 +499,7 @@ Recebe:
 
 ---
 
-### Faixa 3
+**Faixa 3**
 
 Todos os demais recebem:
 
@@ -513,13 +513,13 @@ Todos os demais recebem:
 
 Salário:
 
-```text
+```
 R$ 2.500
 ```
 
 O algoritmo verifica:
 
-```text
+```
 2500 >= 3000 ?
 ```
 
@@ -527,7 +527,7 @@ Falso.
 
 Depois:
 
-```text
+```
 2500 >= 2000 ?
 ```
 
@@ -535,13 +535,13 @@ Verdadeiro.
 
 Aplica:
 
-```text
+```
 10%
 ```
 
 Cálculo:
 
-```text
+```
 2500 × 0,10
 
 250
@@ -549,7 +549,7 @@ Cálculo:
 
 Novo salário:
 
-```text
+```
 2500 + 250
 
 2750
@@ -557,19 +557,19 @@ Novo salário:
 
 Resultado:
 
-```text
+```
 R$ 2.750
 ```
 
 ---
 
-# 🧠 Conceito Fundamental
+**Conceito Fundamental**
 
 As estruturas condicionais encadeadas permitem criar programas capazes de analisar diversas situações antes de tomar uma decisão.
 
 O fluxo normalmente funciona assim:
 
-```text
+```
 Condição 1
 ↓
 Condição 2
@@ -585,11 +585,11 @@ Praticamente qualquer sistema empresarial utiliza esse conceito diariamente.
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula aprendi a utilizar estruturas condicionais encadeadas para resolver problemas com múltiplas possibilidades. Criei um sistema de aprovação escolar com recuperação, um cálculo de frete baseado em faixas de valor da compra e um sistema de reajuste salarial baseado em faixas salariais. Também compreendi que o computador analisa as condições de cima para baixo e executa apenas o bloco correspondente à primeira condição verdadeira encontrada.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+**Resumo Relâmpago**
 
 1. Estruturas condicionais encadeadas permitem várias decisões no mesmo algoritmo.
 2. O computador verifica as condições de cima para baixo.
