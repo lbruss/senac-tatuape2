@@ -1,12 +1,12 @@
-# Lógica de Programação — Estruturas Condicionais Encadeadas (SE, SENÃO SE e SENÃO)
+# Estruturas Condicionais Encadeadas (SE, SENÃO SE e SENÃO)
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula aprofundei o uso das estruturas condicionais, permitindo que um algoritmo tome decisões mais complexas.
+Aqui aprofundei o uso das estruturas condicionais, permitindo que um algoritmo tome decisões mais complexas.
 
 Até agora eu utilizava apenas:
 
-```text
+```
 SE condição
     faça algo
 SENÃO
@@ -16,7 +16,7 @@ FIMSE
 
 Agora comecei a utilizar condições encadeadas:
 
-```text
+```
 SE condição 1
     faça algo
 SENÃO
@@ -30,7 +30,7 @@ FIMSE
 
 Esse tipo de estrutura é extremamente comum em sistemas reais porque normalmente existem várias possibilidades para uma mesma situação.
 
-Exemplos:
+**Exemplos:**
 
 * Aprovar, recuperar ou reprovar um aluno.
 * Calcular diferentes valores de frete.
@@ -40,9 +40,9 @@ Exemplos:
 
 ---
 
-# 1️⃣ Média Escolar com Recuperação
+# Média Escolar com Recuperação
 
-## Objetivo
+**Objetivo**
 
 Classificar um aluno em:
 
@@ -52,7 +52,7 @@ Classificar um aluno em:
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Media Escolar"
@@ -100,9 +100,9 @@ fimalgoritmo
 
 ---
 
-## Como o algoritmo pensa
+**Como o algoritmo pensa**
 
-### Primeira verificação
+- **Primeira verificação**
 
 ```portugol
 se (media >= 6)
