@@ -1,12 +1,12 @@
-# Lógica de Programação — Operadores Lógicos (`E` e `OU`)
+# Operadores Lógicos (`E` e `OU`)
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula aprendi a utilizar **operadores lógicos**, que permitem combinar duas ou mais condições dentro de uma estrutura `SE`.
+Utilizar **operadores lógicos**, que permitem combinar duas ou mais condições dentro de uma estrutura `SE`.
 
 Até agora eu verificava apenas uma condição:
 
-```text
+```
 SE média >= 6
 ```
 
@@ -14,13 +14,13 @@ Agora posso verificar várias condições ao mesmo tempo.
 
 Exemplo:
 
-```text
+```
 SE média >= 6 E faltas <= 4
 ```
 
 ou
 
-```text
+```
 SE possui crachá OU é visitante autorizado
 ```
 
@@ -28,7 +28,7 @@ Esses operadores tornam os algoritmos muito mais inteligentes e próximos de sit
 
 ---
 
-# O que são Operadores Lógicos?
+**O que são Operadores Lógicos**
 
 Os operadores lógicos servem para **combinar condições**.
 
@@ -45,13 +45,13 @@ Esses operadores são utilizados em praticamente todas as linguagens de programa
 
 # Entendendo o Operador `E`
 
-## Como funciona?
+**Como funciona?**
 
 O operador `E` exige que **todas** as condições sejam verdadeiras.
 
 Se apenas uma delas for falsa, toda a expressão será falsa.
 
-### Analogia
+> Analogia
 
 Imagine entrar em um avião.
 
@@ -62,21 +62,21 @@ Você só pode embarcar se:
 
 Se faltar qualquer um dos dois, o embarque será negado.
 
-```text
-Passagem ✅
-Documento ✅
+```
+Passagem 
+Documento 
 → Embarca
 
-Passagem ✅
-Documento ❌
+Passagem 
+Documento 
 → Não embarca
 ```
 
 ---
 
-# 1️⃣ Exemplo — Verificação de Manifesto de Carga
+## Exemplo — Verificação de Manifesto de Carga
 
-## Objetivo
+**Objetivo**
 
 Verificar se um caminhão pode ser liberado.
 
@@ -89,7 +89,7 @@ As duas condições precisam ser verdadeiras.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Liberacao de Carga"
@@ -122,9 +122,9 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-### Variável lógica
+- **Variável lógica**
 
 ```portugol
 documento: logico
@@ -132,14 +132,14 @@ documento: logico
 
 O tipo `logico` armazena apenas dois valores:
 
-```text
+```
 Verdadeiro
 Falso
 ```
 
 É muito utilizado para perguntas que só possuem duas respostas possíveis.
 
-Exemplos:
+- **Exemplos:**
 
 * Sim ou Não
 * Ligado ou Desligado
@@ -147,7 +147,7 @@ Exemplos:
 
 ---
 
-### Primeira condição
+- **Primeira condição**
 
 ```portugol
 documento = verdadeiro
@@ -157,7 +157,7 @@ Verifica se o caminhão possui o manifesto de carga.
 
 ---
 
-### Segunda condição
+- **Segunda condição**
 
 ```portugol
 peso <= 15000
@@ -167,7 +167,7 @@ Verifica se o peso não ultrapassa o limite permitido.
 
 ---
 
-### Operador `E`
+- **Operador `E`**
 
 ```portugol
 (documento = verdadeiro) e (peso <= 15000)
@@ -175,7 +175,7 @@ Verifica se o peso não ultrapassa o limite permitido.
 
 Significa:
 
-```text
+```
 O caminhão somente será liberado
 SE possuir documento
 E
@@ -184,48 +184,48 @@ o peso for menor ou igual a 15.000 kg.
 
 ---
 
-## Exemplos
+- **Exemplos**
 
-### Caso 1
+**Caso 1**
 
-```text
+```
 Documento = Verdadeiro
 Peso = 12.000
 ```
 
 Resultado:
 
-```text
+```
 STATUS: LIBERADO
 ```
 
 ---
 
-### Caso 2
+**Caso 2**
 
-```text
+```
 Documento = Falso
 Peso = 12.000
 ```
 
 Resultado:
 
-```text
+```
 STATUS: RETIDO
 ```
 
 ---
 
-### Caso 3
+- **Caso 3**
 
-```text
+```
 Documento = Verdadeiro
 Peso = 18.000
 ```
 
 Resultado:
 
-```text
+```
 STATUS: RETIDO
 ```
 
@@ -233,13 +233,13 @@ STATUS: RETIDO
 
 # Entendendo o Operador `OU`
 
-## Como funciona?
+**Como funciona?**
 
 O operador `OU` é mais flexível.
 
 Basta uma condição ser verdadeira para que toda a expressão seja verdadeira.
 
-### Analogia
+> Analogia
 
 Imagine uma portaria.
 
@@ -252,15 +252,15 @@ Não é necessário possuir os dois.
 
 ---
 
-# 2️⃣ Exemplo — Controle de Acesso
+## Exemplo — Controle de Acesso
 
-## Objetivo
+**Objetivo**
 
 Permitir a entrada de funcionários ou visitantes autorizados.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Controle de Acesso"
@@ -292,29 +292,29 @@ fimalgoritmo
 
 ---
 
-## Como funciona?
+**Como funciona?**
 
 O algoritmo pergunta:
 
-```text
+```
 Possui crachá?
 ```
 
 Se sim:
 
-```text
+```
 Acesso permitido.
 ```
 
 Caso contrário, pergunta:
 
-```text
+```
 É visitante autorizado?
 ```
 
 Se for:
 
-```text
+```
 Acesso permitido.
 ```
 
@@ -322,56 +322,56 @@ Somente quando as duas respostas forem falsas o acesso será negado.
 
 ---
 
-## Exemplos
+- **Exemplos**
 
-### Funcionário
+- Funcionário
 
-```text
+```
 Crachá = Verdadeiro
 Visitante = Falso
 ```
 
 Resultado:
 
-```text
-ACESSO PERMITIDO
+```
+ACESSO PERMITIDO0po
 ```
 
 ---
 
-### Visitante
+**Visitante**
 
-```text
+```
 Crachá = Falso
 Visitante = Verdadeiro
 ```
 
 Resultado:
 
-```text
+```
 ACESSO PERMITIDO
 ```
 
 ---
 
-### Pessoa não autorizada
+**Pessoa não autorizada**
 
-```text
+```
 Crachá = Falso
 Visitante = Falso
 ```
 
 Resultado:
 
-```text
+```
 ACESSO NEGADO
 ```
 
 ---
 
-# 3️⃣ Exemplo — Utilizando `E` e `OU` Juntos
+## Exemplo — Utilizando `E` e `OU` Juntos
 
-## Objetivo
+**Objetivo**
 
 Aprovar uma pessoa caso:
 
@@ -383,7 +383,7 @@ Aprovar uma pessoa caso:
 
 ---
 
-## Código
+- **$ Código**
 
 ```portugol
 algoritmo "Selecao"
@@ -422,7 +422,7 @@ fimalgoritmo
 
 ---
 
-## Entendendo a Condição
+- Entendendo a Condição
 
 A condição é:
 
@@ -434,7 +434,7 @@ Ela pode ser dividida em duas partes:
 
 ### Primeira parte
 
-```text
+```
 Idade maior ou igual a 30
 E
 Formação em TI
@@ -444,9 +444,9 @@ As duas precisam ser verdadeiras.
 
 ---
 
-### Segunda parte
+**Segunda parte**
 
-```text
+```
 É cliente VIP?
 ```
 
@@ -454,11 +454,11 @@ Se for VIP, já será aprovado, mesmo sem atender à primeira condição.
 
 ---
 
-## Exemplos
+> Exemplos
 
-### Caso 1
+Caso 1
 
-```text
+```
 35 anos
 Formação TI
 VIP = Falso
@@ -472,7 +472,7 @@ APROVADO
 
 ---
 
-### Caso 2
+Caso 2
 
 ```text
 22 anos
@@ -498,15 +498,15 @@ VIP = Falso
 
 Resultado:
 
-```text
+```
 NÃO APROVADO
 ```
 
 ---
 
-# 4️⃣ Aprovação por Média e Faltas (Exercício Feito por Mim)
+# Aprovação por Média e Faltas (Exercício Feito por Mim)
 
-## Objetivo
+**bjetivo>>
 
 Verificar se um aluno foi aprovado considerando:
 
@@ -514,8 +514,6 @@ Verificar se um aluno foi aprovado considerando:
 * quantidade de faltas.
 
 ---
-
-## Regras
 
 O aluno será aprovado quando:
 
@@ -527,7 +525,7 @@ Todas essas condições precisam ser verdadeiras.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Aprovacao"
@@ -560,7 +558,7 @@ fimalgoritmo
 
 ---
 
-## Explicação da Condição
+**Explicação da Condição**
 
 ```portugol
 (media >= 5)
@@ -592,28 +590,28 @@ Como as três condições estão ligadas pelo operador `E`, todas precisam ser v
 
 ---
 
-## Exemplo
+- **Exemplo**
 
 Aluno:
 
-```text
+```t
 Média = 7,5
 Faltas = 3
 ```
 
 Verificações:
 
-```text
-7,5 >= 5 ✅
+```textp
+7,5 >= 5 
 
-7,5 <= 10 ✅
+7,5 <= 10 
 
-3 <= 4 ✅
+3 <= 4 
 ```
 
 Resultado:
 
-```text
+```
 Aluno APROVADO
 ```
 
@@ -621,7 +619,7 @@ Aluno APROVADO
 
 Outro exemplo:
 
-```text
+```
 Média = 8
 
 Faltas = 7
@@ -643,7 +641,7 @@ Isso demonstra que basta uma das condições ligadas pelo operador `E` ser falsa
 
 ---
 
-# 🧠 Conceito Fundamental
+# Conceito Fundamental
 
 Os operadores lógicos permitem criar regras mais completas e próximas das situações do mundo real.
 
@@ -664,11 +662,11 @@ Sem operadores lógicos, seria impossível criar programas capazes de tomar deci
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula aprendi a utilizar os operadores lógicos `E` e `OU` para combinar múltiplas condições em uma mesma estrutura `SE`. Desenvolvi algoritmos para liberação de cargas, controle de acesso, seleção de candidatos e aprovação de alunos, compreendendo como diferentes condições podem ser avaliadas simultaneamente. Também percebi que a combinação correta dos operadores lógicos é essencial para representar regras de negócio com precisão.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+# Resumo Relâmpago
 
 1. Operadores lógicos combinam duas ou mais condições em um algoritmo.
 2. O operador `E` exige que todas as condições sejam verdadeiras.
