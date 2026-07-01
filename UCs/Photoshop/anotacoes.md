@@ -1,22 +1,22 @@
-# Photoshop 2026 — Máscara de Recorte, Ferramentas de Seleção e Desfoque Gaussiano
+# Máscara de Recorte, Ferramentas de Seleção e Desfoque Gaussiano
 
-## 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula, eu aprendi a utilizar a **Máscara de Recorte (Clipping Mask)** para encaixar imagens dentro de formas, conheci novas ferramentas de seleção, como a **Seleção Rápida** e o **Laço Poligonal**, e aprendi a aplicar o **Desfoque Gaussiano** para desfocar apenas áreas específicas da imagem.
+Utilizar a **Máscara de Recorte (Clipping Mask)** para encaixar imagens dentro de formas, conheci novas ferramentas de seleção, como a **Seleção Rápida** e o **Laço Poligonal**, e aprendi a aplicar o **Desfoque Gaussiano** para desfocar apenas áreas específicas da imagem.
 
 Esses recursos são muito utilizados em design gráfico, publicidade e edição profissional, pois permitem criar composições mais organizadas e destacar os elementos mais importantes da arte.
 
 ---
 
-# 1️⃣ Máscara de Recorte (Clipping Mask)
+## Máscara de Recorte (Clipping Mask)
 
-## O que é uma Máscara de Recorte?
+**O que é uma Máscara de Recorte?**
 
 A **Máscara de Recorte** é um recurso que faz uma imagem aparecer **somente dentro dos limites de outra camada**, normalmente uma forma.
 
 Na prática, a forma funciona como uma "janela", exibindo apenas a parte da imagem que está dentro dela.
 
-### Analogia
+> Analogia
 
 Imagine uma fotografia colocada atrás de um molde de papel.
 
@@ -28,11 +28,11 @@ A forma funciona como o molde, e a imagem aparece apenas dentro dela.
 
 ---
 
-# 2️⃣ Como colocar uma imagem dentro de uma forma
+## Colocar uma imagem dentro de uma forma
 
 Primeiro, é necessário criar uma forma.
 
-Exemplo:
+- **Exemplo:**
 
 * retângulo;
 * círculo;
@@ -41,7 +41,7 @@ Exemplo:
 
 Depois:
 
-```text
+```
 Colocar a imagem em uma camada acima da forma
 Selecionar a camada da imagem
 Pressionar Ctrl + Alt + G
@@ -49,11 +49,11 @@ Pressionar Ctrl + Alt + G
 
 ---
 
-## O que acontece?
+**O que acontece?**
 
 Depois do atalho:
 
-```text
+```
 Ctrl + Alt + G
 ```
 
@@ -63,7 +63,7 @@ Ela não desaparece.
 
 Apenas deixa de aparecer fora dos limites da forma.
 
-### Exemplo
+- **Exemplo**
 
 Se a forma for um círculo:
 
@@ -74,7 +74,7 @@ O restante ficará oculto.
 
 ---
 
-## Por que usar Máscara de Recorte?
+**Por que usar Máscara de Recorte?**
 
 Ela é muito utilizada para criar:
 
@@ -89,11 +89,11 @@ Além disso, como a imagem original não é apagada, posso mover ou redimensiona
 
 ---
 
-# 3️⃣ Organização das camadas
+**Organização das camadas**
 
 Para que a Máscara de Recorte funcione corretamente:
 
-```text
+```
 Imagem
 ⬇
 Forma
@@ -105,13 +105,13 @@ Se estiver invertido, o efeito não será aplicado corretamente.
 
 ---
 
-# 4️⃣ Ferramenta Seleção Rápida
+## Ferramenta Seleção Rápida
 
 A **Ferramenta Seleção Rápida** fica no mesmo grupo da Varinha Mágica.
 
 Ela permite selecionar áreas da imagem de forma muito mais inteligente.
 
-### Como acessar
+**Como acessar**
 
 ```text
 Varinha Mágica
@@ -123,7 +123,7 @@ Ferramenta Seleção Rápida
 
 ---
 
-## Como funciona?
+**Como funciona?**
 
 Em vez de selecionar apenas uma cor, como faz a Varinha Mágica, a Seleção Rápida analisa:
 
@@ -136,13 +136,13 @@ Isso permite selecionar objetos com muito mais facilidade.
 
 ---
 
-## O que significa o contorno pontilhado?
+**O que significa o contorno pontilhado?**
 
 Depois da seleção, aparece uma linha pontilhada em movimento.
 
 Essa linha é conhecida como:
 
-```text
+```
 Seleção ativa
 ```
 
@@ -152,9 +152,9 @@ Enquanto essa seleção existir, qualquer edição afetará apenas essa área.
 
 ---
 
-# 5️⃣ Desfoque Gaussiano
+# Desfoque Gaussiano
 
-## O que é?
+**O que é?**
 
 O **Desfoque Gaussiano (Gaussian Blur)** é um filtro utilizado para desfocar uma imagem ou parte dela.
 
@@ -162,17 +162,17 @@ Ele cria uma transição suave entre os pixels, deixando a região menos nítida
 
 ---
 
-## Como aplicar
+**Como aplicar**
 
 Primeiro:
 
-```text
+```
 Selecionar a área desejada
 ```
 
 Depois seguir o caminho:
 
-```text
+```
 Filtro
 Desfoque
 Desfoque Gaussiano
@@ -182,7 +182,7 @@ Em seguida, ajustar a intensidade do desfoque.
 
 ---
 
-## O que acontece?
+**O que acontece?**
 
 O Photoshop desfoca apenas a área que estava selecionada.
 
@@ -190,7 +190,7 @@ O restante da imagem permanece inalterado.
 
 ---
 
-## Para que serve?
+**Para que serve?**
 
 O Desfoque Gaussiano pode ser utilizado para:
 
@@ -200,7 +200,7 @@ O Desfoque Gaussiano pode ser utilizado para:
 * suavizar imperfeições;
 * criar profundidade.
 
-### Exemplo
+- **Exemplo**
 
 Imagine uma foto de uma pessoa.
 
@@ -215,7 +215,7 @@ Esse efeito é muito comum em fotografias profissionais.
 
 ---
 
-# 6️⃣ Ferramenta Laço Poligonal
+## Ferramenta Laço Poligonal
 
 A **Ferramenta Laço Poligonal** é utilizada para criar seleções utilizando apenas linhas retas.
 
@@ -223,15 +223,15 @@ Ela é ideal para selecionar objetos com cantos retos.
 
 ---
 
-## Como funciona?
+**Como funciona?**
 
 Cada clique cria um novo ponto de ancoragem.
 
 O Photoshop liga automaticamente esses pontos com linhas retas.
 
-### Exemplo
+- **Exemplo**
 
-```text
+```
 Clique
 ↓
 Clique
@@ -245,7 +245,7 @@ Cada clique cria um novo segmento.
 
 ---
 
-## Quando usar?
+**Quando usar?**
 
 Ela é indicada para selecionar objetos como:
 
@@ -261,11 +261,11 @@ Objetos com muitos lados retos ficam muito mais fáceis de selecionar com essa f
 
 ---
 
-## Como corrigir um erro?
+**Como corrigir um erro?**
 
 Se um ponto for colocado no lugar errado, basta pressionar:
 
-```text
+```
 Delete
 ```
 
@@ -275,7 +275,7 @@ Assim, não é necessário começar toda a seleção novamente.
 
 ---
 
-# Comparando as ferramentas de seleção
+**Comparando as ferramentas de seleção**
 
 | Ferramenta        | Melhor utilização                                                             |
 | ----------------- | ----------------------------------------------------------------------------- |
@@ -286,55 +286,55 @@ Assim, não é necessário começar toda a seleção novamente.
 
 ---
 
-# 🧩 Passo a passo da atividade
+# Passo a passo da atividade
 
-## Colocando uma imagem dentro de uma forma
+Colocando uma imagem dentro de uma forma
 
-### 1.
+**1.**
 
 Criar uma forma.
 
-### 2.
+**2.**
 
 Adicionar uma imagem ao projeto.
 
-### 3.
+**3.**
 
 Mover a camada da imagem para cima da forma.
 
-### 4.
+**4.**
 
 Selecionar a camada da imagem.
 
-### 5.
+**5.**
 
 Pressionar:
 
-```text
+```
 Ctrl + Alt + G
 ```
 
-### 6.
+**6.**
 
 A imagem ficará visível apenas dentro da forma.
 
 ---
 
-## Aplicando Desfoque Gaussiano
+**Aplicando Desfoque Gaussiano**
 
-### 1.
+**1.**
 
 Selecionar a Ferramenta Seleção Rápida.
 
-### 2.
+**2.**
 
 Selecionar a área desejada.
 
-### 3.
+***3.**
 
 Verificar se apareceu a linha pontilhada.
 
-### 4.
+**4.**
 
 Ir em:
 
@@ -344,39 +344,39 @@ Desfoque
 Desfoque Gaussiano
 ```
 
-### 5.
+**5.**
 
 Ajustar a intensidade do desfoque.
 
-### 6.
+**6.**
 
 Confirmar.
 
 ---
 
-## Utilizando o Laço Poligonal
+**Utilizando o Laço Poligonal**
 
-### 1.
+**1.**
 
 Selecionar a ferramenta.
 
-### 2.
+**2.**
 
 Criar pontos clicando sobre a imagem.
 
-### 3.
+**3.**
 
 Cada clique gera uma linha reta.
 
-### 4.
+**4.**
 
 Fechar a seleção no ponto inicial.
 
-### 5.
+**5.**
 
 Caso erre um ponto, pressionar:
 
-```text
+```
 Delete
 ```
 
@@ -384,7 +384,7 @@ para remover apenas o último ponto.
 
 ---
 
-# 💡 Dicas importantes
+**Dicas importantes**
 
 * A Máscara de Recorte **não apaga** a imagem; ela apenas oculta as partes que ficam fora da forma.
 * A camada da imagem deve estar **acima** da forma para que `Ctrl + Alt + G` funcione corretamente.
@@ -394,13 +394,12 @@ para remover apenas o último ponto.
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula aprendi a utilizar a Máscara de Recorte para encaixar imagens dentro de formas, organizando corretamente as camadas e utilizando o atalho `Ctrl + Alt + G`. Também conheci a Ferramenta Seleção Rápida, que seleciona objetos analisando bordas e texturas, e aprendi a aplicar o filtro Desfoque Gaussiano para desfocar apenas regiões específicas da imagem. Além disso, utilizei o Laço Poligonal para criar seleções com linhas retas, entendendo quando essa ferramenta é mais indicada e como corrigir erros durante a seleção.
 
 ---
-
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. A Máscara de Recorte faz a imagem aparecer apenas dentro de uma forma.
 2. A imagem deve ficar acima da forma na ordem das camadas.
