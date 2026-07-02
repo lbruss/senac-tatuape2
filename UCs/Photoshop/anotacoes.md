@@ -260,7 +260,7 @@ Nesta aula aprendi a utilizar a Ferramenta Caneta para criar caminhos vetoriais 
 
 ---
 
-**Resumo Relâmpago **
+**Resumo Relâmpago**
 
 1. A Ferramenta Caneta cria caminhos vetoriais, não seleções diretamente.
 2. Cada clique adiciona um ponto de ancoragem ao caminho.
