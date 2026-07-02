@@ -1,14 +1,14 @@
-# Photoshop 2026 — Ferramenta Caneta para Recortes Precisos e Conversão em Seleção
+# Ferramenta Caneta para Recortes Precisos e Conversão em Seleção
 
-## 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula, aprofundei o uso da **Ferramenta Caneta (Pen Tool)**, aprendendo como criar **caminhos vetoriais precisos**, convertê-los em seleções e utilizá-los para remover ou editar apenas o fundo de uma imagem.
+Aprofundando o uso da **Ferramenta Caneta (Pen Tool)**, aprendendo como criar **caminhos vetoriais precisos**, convertê-los em seleções e utilizá-los para remover ou editar apenas o fundo de uma imagem.
 
 Essa é uma das técnicas mais utilizadas por designers gráficos e fotógrafos profissionais, pois oferece um nível de precisão muito superior às ferramentas automáticas de seleção.
 
 ---
 
-# 1️⃣ A Ferramenta Caneta
+## A Ferramenta Caneta
 
 A Ferramenta Caneta não seleciona diretamente uma imagem.
 
@@ -16,7 +16,7 @@ Ela cria um **caminho vetorial**, que funciona como um contorno desenhado ao red
 
 Depois, esse caminho pode ser transformado em uma seleção.
 
-## Por que usar a Caneta?
+**Por que usar a Caneta?**
 
 Embora seja mais lenta que ferramentas como a Seleção de Objeto ou a Seleção Rápida, ela oferece muito mais precisão.
 
@@ -29,7 +29,7 @@ Embora seja mais lenta que ferramentas como a Seleção de Objeto ou a Seleção
 * embalagens;
 * objetos com muitos detalhes.
 
-### Analogia
+> Analogia
 
 Imagine que você está recortando uma figura com uma tesoura.
 
@@ -41,11 +41,11 @@ Por isso, o resultado costuma ser muito mais limpo.
 
 ---
 
-# 2️⃣ Criando um caminho
+**Criando um caminho**
 
 Com a Ferramenta Caneta selecionada e configurada no modo:
 
-```text
+```
 Caminho
 ```
 
@@ -57,7 +57,7 @@ O Photoshop liga esses pontos formando um caminho.
 
 Quando necessário, posso clicar e arrastar para criar curvas suaves.
 
-## Dica importante
+**Dica importante**
 
 Quanto melhor for o contorno criado, melhor será a seleção final.
 
@@ -67,26 +67,26 @@ Na prática profissional, a precisão é mais importante do que a velocidade.
 
 ---
 
-# 3️⃣ Transformando o caminho em seleção
+## Transformando o caminho em seleção
 
 Depois de finalizar todo o contorno do objeto:
 
 1. Clicar com o botão direito do mouse sobre o caminho.
 2. Selecionar:
 
-```text
+```
 Criar Seleção...
 ```
 
 3. Confirmar clicando em:
 
-```text
+```
 OK
 ```
 
 ---
 
-## O que acontece?
+**O que acontece?**
 
 O caminho vetorial deixa de ser apenas um desenho.
 
@@ -96,31 +96,31 @@ O Photoshop exibe a conhecida linha pontilhada ("formigas marchando"), indicando
 
 ---
 
-# 4️⃣ Invertendo a seleção
+## Invertendo a seleção
 
 Após criar a seleção, normalmente o objeto estará selecionado.
 
 Para editar apenas o fundo, utiliza-se o atalho:
 
-```text
+```
 Ctrl + Shift + I
 ```
 
 ---
 
-## O que esse atalho faz?
+**O que esse atalho faz?**
 
 Ele inverte completamente a seleção.
 
-### Antes
+- **Antes**
 
-```text
+```
 Objeto selecionado
 ```
 
-### Depois
+- **Depois**
 
-```text
+```
 Fundo selecionado
 ```
 
@@ -128,7 +128,7 @@ Assim, qualquer alteração será aplicada apenas ao fundo, enquanto o objeto pe
 
 ---
 
-# 5️⃣ Personalizando o fundo
+## Personalizando o fundo
 
 Depois de inverter a seleção, posso modificar apenas o fundo da imagem.
 
@@ -147,20 +147,20 @@ Como o objeto continua fora da seleção, ele permanece intacto durante toda a e
 
 ---
 
-# Conceito Fundamental
+**Conceito Fundamental**
 
-## Caminho × Seleção
+**Caminho × Seleção**
 
 É comum confundir esses dois conceitos, mas eles têm funções diferentes.
 
-### Caminho
+**Caminho**
 
 * É um contorno vetorial.
 * Pode ser editado a qualquer momento.
 * Não altera a imagem.
 * Serve como base para criar uma seleção.
 
-### Seleção
+**Seleção**
 
 * Define exatamente qual parte da imagem será editada.
 * Qualquer ferramenta utilizada afetará apenas a área selecionada.
@@ -171,7 +171,7 @@ Em outras palavras:
 
 ---
 
-# Quando utilizar a Ferramenta Caneta?
+**Quando utilizar a Ferramenta Caneta?**
 
 Ela é recomendada quando:
 
@@ -184,67 +184,67 @@ Embora exija mais prática, ela costuma produzir os melhores resultados em recor
 
 ---
 
-# 🧩 Passo a passo da atividade
+# Passo a passo da atividade
 
-## Recortando um objeto com a Caneta
+**Recortando um objeto com a Caneta**
 
-### 1.
+**1.**
 
 Selecionar a Ferramenta Caneta.
 
-### 2.
+**2.**
 
 Verificar se o modo está configurado como:
 
-```text
+```
 Caminho
 ```
 
-### 3.
+**3.**
 
 Contornar cuidadosamente todo o objeto utilizando pontos de ancoragem.
 
-### 4.
+**4.**
 
 Quando necessário, clicar e arrastar para criar curvas suaves.
 
-### 5.
+**5.**
 
 Após finalizar o contorno, clicar com o botão direito sobre o caminho.
 
-### 6.
+**6.**
 
 Selecionar:
 
-```text
+```
 Criar Seleção...
 ```
 
-### 7.
+**7.**
 
 Confirmar clicando em:
 
-```text
+```
 OK
 ```
 
-### 8.
+**8.**
 
 Pressionar:
 
-```text
+```
 Ctrl + Shift + I
 ```
 
 para inverter a seleção.
 
-### 9.
+**9.**
 
 Editar apenas o fundo da imagem da maneira desejada.
 
 ---
 
-# 💡 Dicas importantes
+# Dicas importantes
 
 * Trabalhe com bastante zoom para posicionar os pontos com precisão.
 * Utilize poucos pontos em curvas suaves; muitos pontos dificultam a edição.
@@ -254,13 +254,13 @@ Editar apenas o fundo da imagem da maneira desejada.
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula aprendi a utilizar a Ferramenta Caneta para criar caminhos vetoriais precisos ao redor de um objeto. Depois, converti esse caminho em uma seleção utilizando a opção **Criar Seleção**, inverti a seleção com `Ctrl + Shift + I` para selecionar apenas o fundo e compreendi que, a partir desse momento, posso personalizar somente essa região, preservando completamente o objeto principal.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago **
 
 1. A Ferramenta Caneta cria caminhos vetoriais, não seleções diretamente.
 2. Cada clique adiciona um ponto de ancoragem ao caminho.
