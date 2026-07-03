@@ -1,8 +1,8 @@
-# Photoshop 2026 — Máscara de Camada e Modo Máscara Rápida
+# Máscara de Camada e Modo Máscara Rápida
 
-# 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula, aprendi duas ferramentas extremamente importantes do Photoshop: a **Máscara de Camada (Layer Mask)** e o **Modo Máscara Rápida (Quick Mask)**.
+Duas ferramentas extremamente importantes do Photoshop: a **Máscara de Camada (Layer Mask)** e o **Modo Máscara Rápida (Quick Mask)**.
 
 Essas ferramentas permitem esconder ou mostrar partes de uma imagem **sem apagá-las definitivamente**, tornando a edição muito mais segura e profissional.
 
@@ -10,7 +10,7 @@ Essas ferramentas permitem esconder ou mostrar partes de uma imagem **sem apagá
 
 ---
 
-# 1️⃣ O que é uma Máscara de Camada?
+# Máscara de Camada
 
 A Máscara de Camada é um recurso que controla **quais partes de uma camada ficam visíveis e quais ficam ocultas**.
 
@@ -18,7 +18,7 @@ Ela não remove os pixels da imagem.
 
 Ela apenas controla sua visualização.
 
-## Analogia
+> Analogia
 
 Imagine uma folha de papel com uma fotografia.
 
@@ -33,7 +33,7 @@ Ela controla o que aparece e o que fica escondido.
 
 ---
 
-# 2️⃣ Como adicionar uma Máscara de Camada?
+**Como adicionar uma Máscara de Camada?**
 
 Primeiro:
 
@@ -49,11 +49,11 @@ Essa miniatura representa a máscara.
 
 ---
 
-# 3️⃣ Pintando na máscara
+## Pintando na máscara
 
 Depois de selecionar a miniatura da máscara, utilizo a ferramenta:
 
-```text
+```
 Pincel
 ```
 
@@ -61,11 +61,11 @@ Mas, diferente do que acontece normalmente, **a cor do pincel controla a visibil
 
 ---
 
-# 4️⃣ Cor preta → Esconde a imagem
+**Cor preta → Esconde a imagem**
 
 Quando o pincel está configurado com a cor:
 
-```text
+```
 Preto
 ```
 
@@ -77,7 +77,7 @@ Eles apenas deixam de aparecer.
 
 ---
 
-## O que acontece?
+**O que acontece?**
 
 A imagem não é apagada.
 
@@ -87,11 +87,11 @@ Isso significa que posso recuperá-la a qualquer momento.
 
 ---
 
-# 5️⃣ Cor branca → Mostra novamente
+**Cor branca → Mostra novamente**
 
 Se eu alterar a cor do pincel para:
 
-```text
+```
 Branco
 ```
 
@@ -101,7 +101,7 @@ e pintar sobre a máscara, a parte escondida reaparece.
 
 ---
 
-# 6️⃣ O segredo da Máscara de Camada
+**O segredo da Máscara de Camada**
 
 Existe uma regra muito importante para lembrar:
 
@@ -113,7 +113,7 @@ Existe uma regra muito importante para lembrar:
 
 ---
 
-## Tons de cinza
+**Tons de cinza**
 
 Além do branco e do preto, também posso utilizar tons de cinza.
 
@@ -129,11 +129,11 @@ Isso permite criar transições muito suaves entre duas imagens.
 
 ---
 
-# 7️⃣ Por que usar Máscara de Camada?
+**Por que usar Máscara de Camada?**
 
 Ela é considerada uma edição **não destrutiva**.
 
-## O que significa edição não destrutiva?
+**O que significa edição não destrutiva?**
 
 Significa que nenhuma informação da imagem é perdida.
 
@@ -143,7 +143,7 @@ Por esse motivo, a Máscara de Camada é amplamente utilizada em trabalhos profi
 
 ---
 
-# Vantagens
+**Vantagens**
 
 * Não apaga pixels definitivamente.
 * Permite corrigir erros facilmente.
@@ -153,11 +153,11 @@ Por esse motivo, a Máscara de Camada é amplamente utilizada em trabalhos profi
 
 ---
 
-# 8️⃣ Modo Máscara Rápida (Quick Mask)
+# Modo Máscara Rápida (Quick Mask)
 
 Outra ferramenta apresentada foi o:
 
-```text
+```
 Modo Máscara Rápida
 ```
 
@@ -165,7 +165,7 @@ Essa ferramenta serve para criar seleções de forma muito mais precisa utilizan
 
 ---
 
-## Como funciona?
+**Como funciona?**
 
 Ao ativar o Modo Máscara Rápida, o Photoshop transforma a seleção em uma área pintável.
 
@@ -173,7 +173,7 @@ Em vez de utilizar ferramentas de seleção tradicionais, posso simplesmente pin
 
 ---
 
-## O que acontece na tela?
+**O que acontece na tela?**
 
 Normalmente aparece uma sobreposição vermelha.
 
@@ -185,7 +185,7 @@ A imagem original não é alterada.
 
 ---
 
-# 9️⃣ Utilizando o pincel na Máscara Rápida
+**Utilizando o pincel na Máscara Rápida**
 
 Com a ferramenta ativa:
 
@@ -199,7 +199,7 @@ O Photoshop transforma automaticamente a pintura em uma seleção.
 
 ---
 
-# 🔟 Quando utilizar a Máscara Rápida?
+**Quando utilizar a Máscara Rápida?**
 
 Ela é muito útil para selecionar:
 
@@ -214,7 +214,7 @@ Em situações onde as ferramentas automáticas apresentam dificuldades, a Másc
 
 ---
 
-# Comparação entre as ferramentas
+**Comparação entre as ferramentas**
 
 | Ferramenta        | Principal função                                               |
 | ----------------- | -------------------------------------------------------------- |
@@ -224,45 +224,45 @@ Em situações onde as ferramentas automáticas apresentam dificuldades, a Másc
 
 ---
 
-# 🧩 Passo a passo da atividade
+# Passo a passo da atividade
 
-## Utilizando a Máscara de Camada
+**Utilizando a Máscara de Camada**
 
-### 1.
+**1.**
 
 Selecionar a camada desejada.
 
-### 2.
+**2.**
 
 Adicionar uma Máscara de Camada.
 
-### 3.
+**3.**
 
 Selecionar a miniatura da máscara.
 
-### 4.
+**4.**
 
 Escolher a ferramenta:
 
-```text
+```
 Pincel
 ```
 
-### 5.
+**5.**
 
 Pintar com:
 
-```text
+```
 Preto
 ```
 
 para esconder partes da imagem.
 
-### 6.
+**6.**
 
 Trocar para:
 
-```text
+```
 Branco
 ```
 
@@ -270,31 +270,31 @@ para revelar novamente as áreas escondidas.
 
 ---
 
-## Utilizando o Modo Máscara Rápida
+**Utilizando o Modo Máscara Rápida**
 
-### 1.
+**1.**
 
 Ativar o **Modo Máscara Rápida**.
 
-### 2.
+**2.**
 
 Utilizar o Pincel para pintar a região desejada.
 
-### 3.
+**3.**
 
 Ajustar a seleção com precisão.
 
-### 4.
+**4.**
 
 Desativar o Modo Máscara Rápida.
 
-### 5.
+**5.**
 
 O Photoshop converterá automaticamente a pintura em uma seleção.
 
 ---
 
-# 💡 Dicas importantes
+# Dicas importantes
 
 * Sempre prefira a **Máscara de Camada** à Borracha quando quiser esconder partes de uma imagem, pois ela permite recuperar qualquer área posteriormente.
 * Trabalhe com um pincel de **dureza baixa** para criar transições mais suaves.
@@ -303,13 +303,13 @@ O Photoshop converterá automaticamente a pintura em uma seleção.
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula aprendi a utilizar a Máscara de Camada para esconder ou revelar partes de uma imagem sem apagar os pixels originais. Também compreendi que o pincel preto oculta a imagem, o pincel branco a revela novamente e os tons de cinza criam diferentes níveis de transparência. Além disso, conheci o Modo Máscara Rápida, que transforma a criação de seleções em um processo de pintura, oferecendo muito mais precisão em áreas complexas.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. A Máscara de Camada permite esconder partes da imagem sem apagá-las.
 2. Ela é uma técnica de edição **não destrutiva**, preservando os pixels originais.
