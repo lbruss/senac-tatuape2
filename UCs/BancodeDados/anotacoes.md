@@ -1,22 +1,22 @@
-# Banco de Dados (MySQL) — Introdução, XAMPP, MySQL Workbench e Primeiras Tabelas
+# Banco de Dados (MySQL)
 
-# 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula comecei a aprender **Banco de Dados**, entendendo como armazenar informações de forma organizada utilizando o **MySQL**.
+Comecei a aprender **Banco de Dados**, entendendo como armazenar informações de forma organizada utilizando o **MySQL**.
 
-Também aprendi a utilizar o **XAMPP**, que simula um servidor local, e o **MySQL Workbench**, que facilita a escrita e execução dos comandos SQL.
+Utilizar o **XAMPP**, que simula um servidor local, e o **MySQL Workbench**, que facilita a escrita e execução dos comandos SQL.
 
-Além disso, aprendi a criar bancos de dados, tabelas, inserir registros e compreendi por que uma **Chave Primária (Primary Key)** é indispensável para identificar cada registro de forma única.
+Criar bancos de dados, tabelas, inserir registros e compreendi por que uma **Chave Primária (Primary Key)** é indispensável para identificar cada registro de forma única.
 
 ---
 
-# O que é um Banco de Dados?
+**O que é um Banco de Dados?**
 
 Um **Banco de Dados (Database)** é um sistema utilizado para armazenar informações de forma organizada.
 
 Essas informações normalmente vêm de formulários, sistemas, aplicativos ou sites.
 
-### Exemplo
+- **Exemplo**
 
 Imagine um cadastro de uma escola.
 
@@ -35,25 +35,25 @@ Esse lugar é o **Banco de Dados**.
 
 ---
 
-# Analogia
+> Analogia
 
 Imagine um grande arquivo de escritório.
 
-📁 O armário inteiro seria o **Banco de Dados**.
+- O armário inteiro seria o **Banco de Dados**.
 
-📂 Cada gaveta seria uma **Tabela**.
+- Cada gaveta seria uma **Tabela**.
 
-📄 Cada folha seria um **Registro**.
+- Cada folha seria um **Registro**.
 
 Cada informação escrita na folha corresponde aos **campos** da tabela.
 
 ---
 
-# Estrutura de um Banco de Dados
+## Estrutura de um Banco de Dados
 
 A organização normalmente segue esta estrutura:
 
-```text
+```
 Banco de Dados
 │
 ├── Tabela Pessoas
@@ -74,11 +74,11 @@ Ou seja:
 
 ---
 
-# O que é um Registro?
+**O que é um Registro?**
 
 Um registro representa uma única informação cadastrada.
 
-### Exemplo
+- **Exemplo**
 
 | Nome  | Nascimento | Sexo |
 | ----- | ---------- | ---- |
@@ -88,11 +88,11 @@ Toda essa linha é um registro.
 
 ---
 
-# O que é uma Tabela?
+**O que é uma Tabela?**
 
 A tabela organiza informações do mesmo tipo.
 
-Exemplo:
+- **Exemplo:**
 
 Tabela **Pessoas**
 
@@ -105,7 +105,7 @@ Cada coluna possui um tipo específico de dado.
 
 # XAMPP
 
-## O que é?
+**O que é?**
 
 O **XAMPP** é um pacote de programas que permite criar um **servidor local**.
 
@@ -115,7 +115,7 @@ Ele é muito utilizado durante o desenvolvimento de projetos.
 
 ---
 
-## Por que usar um servidor local?
+**Por que usar um servidor local?**
 
 Antes de colocar um sistema na internet, é importante testá-lo.
 
@@ -125,11 +125,11 @@ O XAMPP permite fazer isso sem precisar contratar uma hospedagem.
 
 ---
 
-# Componentes utilizados
+**Componentes utilizados**
 
-Na aula foram utilizados dois serviços:
+Foram utilizados dois serviços:
 
-## Apache
+**Apache**
 
 Responsável pelo servidor web.
 
@@ -137,7 +137,7 @@ Ele interpreta páginas PHP e disponibiliza o sistema.
 
 ---
 
-## MySQL
+**MySQL**
 
 Responsável pelo Banco de Dados.
 
@@ -145,19 +145,19 @@ Responsável pelo Banco de Dados.
 
 ---
 
-# Iniciando o XAMPP
+## Iniciando o XAMPP
 
 Abrir o XAMPP.
 
 Depois clicar em:
 
-```text
+```
 Start → Apache
 ```
 
 Em seguida:
 
-```text
+```
 Start → MySQL
 ```
 
@@ -165,11 +165,11 @@ Quando ambos estiverem em verde, significa que estão funcionando corretamente.
 
 ---
 
-# Abrindo o phpMyAdmin
+**Abrindo o phpMyAdmin**
 
 Depois de iniciar o MySQL:
 
-```text
+```
 Admin
 ```
 
@@ -177,13 +177,13 @@ Será aberto automaticamente o navegador.
 
 O sistema aberto chama-se:
 
-```text
+```
 phpMyAdmin
 ```
 
 ---
 
-# O que é o phpMyAdmin?
+**O que é o phpMyAdmin?**
 
 É uma interface gráfica para administrar bancos de dados.
 
@@ -203,7 +203,7 @@ Tudo isso utilizando uma interface visual.
 
 No menu esquerdo:
 
-```text
+```
 Novo
 ```
 
@@ -218,7 +218,7 @@ Automaticamente o phpMyAdmin abrirá a tela para criação da primeira tabela.
 
 # MySQL Workbench
 
-## O que é?
+**O que é?**
 
 O **MySQL Workbench** é um programa utilizado para escrever comandos SQL.
 
@@ -233,41 +233,41 @@ Na prática, ele funciona como um editor especializado em SQL.
 
 ---
 
-# Criando a conexão
+**Criando a conexão**
 
 Ao abrir o Workbench:
 
 Clicar em:
 
-```text
+```
 +
 ```
 
 Preencher:
 
-### Connection Name
+**Connection Name**
 
 Pode ser qualquer nome.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Servidor Local
 ```
 
 ---
 
-### Hostname
+**Hostname**
 
 Normalmente permanece:
 
-```text
+```
 localhost
 ```
 
 ou
 
-```text
+```
 127.0.0.1
 ```
 
@@ -275,7 +275,7 @@ Ambos representam o próprio computador.
 
 ---
 
-### Porta
+**Porta**
 
 A porta padrão do MySQL é:
 
@@ -287,7 +287,7 @@ Ela também pode ser consultada no XAMPP.
 
 ---
 
-### Usuário
+**Usuário**
 
 ```text
 root
@@ -299,7 +299,7 @@ Por padrão, o usuário administrador criado pelo XAMPP é o **root**.
 
 Depois basta clicar em:
 
-```text
+```
 OK
 ```
 
@@ -307,17 +307,17 @@ E abrir a conexão criada.
 
 ---
 
-# Área do Workbench
+## Área do Workbench
 
 No Workbench existem três áreas principais.
 
-## Editor SQL
+**Editor SQL**
 
 Onde escrevemos os comandos.
 
 ---
 
-## Resultado
+**Resultado**
 
 Na parte inferior aparece:
 
@@ -329,11 +329,11 @@ Isso facilita identificar problemas nos comandos.
 
 ---
 
-## Schemas
+**Schemas**
 
 No canto esquerdo inferior existe a área:
 
-```text
+```
 Schemas
 ```
 
@@ -347,13 +347,13 @@ Também é possível criar um banco diretamente pelo Workbench.
 
 Clicar com o botão direito em:
 
-```text
+```
 Schemas
 ```
 
 Depois:
 
-```text
+```
 Create Schema...
 ```
 
@@ -361,7 +361,7 @@ Escolher um nome.
 
 Depois:
 
-```text
+```
 Apply
 Apply
 Finish
@@ -373,27 +373,27 @@ O banco será criado.
 
 # Conceito importante
 
-## Banco → Tabelas → Registros
+**Banco → Tabelas → Registros**
 
 Essa é uma relação muito importante.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Banco:
 Navio
 ```
 
 Dentro dele:
 
-```text
+```
 Tabela:
 Container
 ```
 
 Dentro da tabela:
 
-```text
+```
 Registro:
 Pessoa cadastrada
 ```
@@ -414,11 +414,11 @@ CREATE DATABASE cadastro;
 
 Depois executar utilizando:
 
-```text
+```
 Ctrl + Enter
 ```
 
-ou o botão do raio ⚡.
+ou o botão do raio.
 
 ---
 
@@ -437,21 +437,21 @@ CREATE TABLE pessoas (
 );
 ```
 
-## Explicação linha por linha
+**Explicação linha por linha**
 
-### CREATE TABLE
+**CREATE TABLE**
 
 Cria uma nova tabela.
 
 ---
 
-### pessoas
+**pessoas**
 
 Nome da tabela.
 
 ---
 
-### nome VARCHAR(30)
+**nome VARCHAR(30)**
 
 Cria um campo chamado **nome**.
 
@@ -459,7 +459,7 @@ Pode armazenar até 30 caracteres.
 
 ---
 
-### idade INT
+**idade INT**
 
 Armazena números inteiros.
 
@@ -467,13 +467,13 @@ Armazena números inteiros.
 
 ---
 
-### sexo CHAR(1)
+**sexo CHAR(1)**
 
 Armazena apenas um caractere.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 M
 F
 O
@@ -481,25 +481,25 @@ O
 
 ---
 
-### peso FLOAT
+**peso FLOAT**
 
 Armazena números com casas decimais.
 
 ---
 
-### altura FLOAT
+**altura FLOAT**
 
 Também armazena números decimais.
 
 ---
 
-### nacionalidade VARCHAR(30)
+**nacionalidade VARCHAR(30)**
 
 Texto com até 30 caracteres.
 
 ---
 
-# Por que ocorreu erro?
+**Por que ocorreu erro?**
 
 Ao executar o comando, apareceu um erro.
 
@@ -509,9 +509,9 @@ Antes de criar a tabela é necessário selecionar o banco.
 
 ---
 
-# Selecionando o banco
+## Selecionando o banco
 
-```sql
+```
 USE cadastro;
 ```
 
@@ -541,13 +541,13 @@ A tabela aparecerá no banco selecionado.
 
 # Tipos de dados
 
-## VARCHAR
+**VARCHAR**
 
 Armazena textos de tamanho variável.
 
 Exemplo:
 
-```text
+```
 João
 Maria
 Alexandre
@@ -557,7 +557,7 @@ Cada registro ocupa apenas o espaço necessário.
 
 ---
 
-## CHAR
+**CHAR**
 
 Armazena textos com tamanho fixo.
 
@@ -569,13 +569,13 @@ Muito utilizado para:
 
 ---
 
-## INT
+**INT**
 
 Armazena números inteiros.
 
 Exemplo:
 
-```text
+```
 10
 250
 5000
@@ -583,20 +583,20 @@ Exemplo:
 
 ---
 
-## FLOAT
+**FLOAT**
 
 Armazena números decimais.
 
 Exemplo:
 
-```text
+```
 72.5
 1.80
 ```
 
 ---
 
-## DECIMAL
+**DECIMAL**
 
 Também armazena números decimais, porém com maior precisão.
 
@@ -608,25 +608,25 @@ Também armazena números decimais, porém com maior precisão.
 
 ---
 
-## DATE
+**DATE**
 
 Armazena datas.
 
 Formato:
 
-```text
+```
 AAAA-MM-DD
 ```
 
 Exemplo:
 
-```text
+```
 2007-05-29
 ```
 
 ---
 
-# Visualizando a estrutura da tabela
+## Visualizando a estrutura da tabela
 
 ```sql
 DESCRIBE pessoas;
@@ -651,7 +651,7 @@ O MySQL exibirá:
 
 Durante a aula foi feita uma observação muito importante.
 
-## Idade não é um bom campo
+**Idade não é um bom campo**
 
 A idade muda todos os anos.
 
@@ -661,7 +661,7 @@ Isso obrigaria atualizar todos os registros constantemente.
 
 Por isso o correto é armazenar:
 
-```text
+```
 Data de nascimento
 ```
 
@@ -681,7 +681,7 @@ A solução é utilizar uma **Chave Primária**.
 
 ---
 
-## O que é?
+**O que é?**
 
 É um campo que identifica cada registro de forma única.
 
@@ -689,7 +689,7 @@ Nenhum valor pode se repetir.
 
 ---
 
-## Exemplos
+- **Exemplos**
 
 * CPF
 * RG
@@ -707,7 +707,7 @@ com incremento automático.
 
 ---
 
-# Excluindo uma tabela
+### Excluindo uma tabela
 
 ```sql
 DROP TABLE pessoas;
@@ -723,7 +723,7 @@ A tabela será removida permanentemente.
 
 ---
 
-# Excluindo um banco
+### Excluindo um banco
 
 ```sql
 DROP DATABASE cadastro;
@@ -731,7 +731,7 @@ DROP DATABASE cadastro;
 
 Também remove todas as tabelas existentes dentro dele.
 
-⚠️ Esse comando deve ser usado com cuidado, pois apaga todo o banco de dados.
+**Esse comando deve ser usado com cuidado, pois apaga todo o banco de dados.**
 
 ---
 
@@ -743,9 +743,9 @@ DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 ```
 
-## Explicação
+- **Explicação**
 
-### DEFAULT CHARACTER SET utf8
+**DEFAULT CHARACTER SET utf8**
 
 Define a codificação padrão.
 
@@ -757,13 +757,13 @@ Permite armazenar corretamente:
 
 ---
 
-### DEFAULT COLLATE utf8_general_ci
+**DEFAULT COLLATE utf8_general_ci**
 
 Define as regras de comparação dos textos.
 
 `ci` significa:
 
-```text
+```
 Case Insensitive
 ```
 
@@ -794,7 +794,7 @@ CREATE TABLE pessoas (
 ) DEFAULT CHARSET=utf8;
 ```
 
-## Melhorias
+**Melhorias**
 
 * `NOT NULL` impede que o nome fique vazio.
 * `DATE` substitui idade.
@@ -804,7 +804,7 @@ CREATE TABLE pessoas (
 
 ---
 
-# Inserindo um registro
+## Inserindo um registro
 
 ```sql
 INSERT INTO pessoas
@@ -813,7 +813,7 @@ VALUES
 ('Bruss','2007-05-29','m',70.00,1.65,'Brasileiro');
 ```
 
-## O que faz?
+**O que faz?**
 
 Adiciona uma nova linha na tabela `pessoas`.
 
@@ -827,7 +827,7 @@ Cada valor corresponde à coluna indicada.
 SELECT * FROM pessoas;
 ```
 
-## Explicação
+- **Explicação**
 
 * `SELECT` → selecionar dados.
 * `*` → todas as colunas.
@@ -837,7 +837,7 @@ O resultado será uma lista com todos os registros cadastrados.
 
 ---
 
-# Problema encontrado
+**Problema encontrado**
 
 Mesmo após inserir um registro, ainda existe um problema.
 
@@ -849,7 +849,7 @@ Por esse motivo, o banco foi apagado para, na próxima etapa, recriar a estrutur
 
 ---
 
-# 💡 Dicas importantes
+**Dicas importantes**
 
 * Sempre execute `USE nome_do_banco;` antes de criar tabelas.
 * Prefira `DATE` em vez de armazenar idade.
@@ -859,13 +859,13 @@ Por esse motivo, o banco foi apagado para, na próxima etapa, recriar a estrutur
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula aprendi os conceitos fundamentais de Banco de Dados utilizando MySQL. Configurei um servidor local com o XAMPP, acessei o phpMyAdmin e conectei o MySQL Workbench ao banco de dados. Criei bancos e tabelas, conheci os principais tipos de dados, inseri meu primeiro registro utilizando `INSERT INTO` e consultei as informações com `SELECT`. Também compreendi a importância de utilizar uma Chave Primária para impedir registros duplicados e por que armazenar a data de nascimento é uma solução melhor do que armazenar a idade.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. Um Banco de Dados armazena informações organizadas em tabelas.
 2. O XAMPP cria um servidor local para testes, utilizando Apache e MySQL.
