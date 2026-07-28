@@ -541,7 +541,7 @@ Por isso, quando existem muitas opções fixas, `ESCOLHA...CASO` costuma ser a m
 
 ---
 
-# 🧠 Conceito Fundamental
+# Conceito Fundamental
 
 A estrutura `ESCOLHA...CASO` é utilizada quando uma única variável pode assumir vários valores possíveis, e cada valor corresponde a uma ação diferente.
 
@@ -549,11 +549,11 @@ Ela substitui longas sequências de `SE...SENÃO`, deixando o algoritmo mais lim
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula aprendi a utilizar a estrutura `ESCOLHA...CASO` (`switch case`) para criar algoritmos com múltiplas opções de forma organizada. Desenvolvi exemplos para identificar o dia da semana, construir uma calculadora, criar um menu de doações e calcular o frete conforme a região de entrega. Também compreendi que essa estrutura é ideal quando uma única variável determina qual bloco de código será executado.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+**Resumo Relâmpago**
 
 1. `ESCOLHA...CASO` é usado quando uma variável possui várias opções possíveis.
 2. É equivalente ao `switch case` de outras linguagens de programação.
