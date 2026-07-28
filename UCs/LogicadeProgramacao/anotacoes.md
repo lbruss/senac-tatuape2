@@ -1,8 +1,8 @@
-# Lógica de Programação — Estrutura de Controle `ESCOLHA...CASO` (Switch Case)
+# Estrutura de Controle `ESCOLHA...CASO` (Switch Case)
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula aprendi uma nova estrutura de decisão chamada **`ESCOLHA...CASO`** (equivalente ao `switch case` em diversas linguagens de programação).
+Uma nova estrutura de decisão chamada **`ESCOLHA...CASO`** (equivalente ao `switch case` em diversas linguagens de programação).
 
 Até agora, todas as decisões eram feitas utilizando vários comandos `SE`, `SENÃO` e `SENÃO SE`. Porém, quando existem muitas opções possíveis para um mesmo valor, escrever vários `SE` deixa o código mais longo e difícil de ler.
 
@@ -10,7 +10,7 @@ Para esses casos existe o comando **`ESCOLHA...CASO`**, que torna o algoritmo ma
 
 ---
 
-# O que é o `ESCOLHA...CASO`?
+**O que é o `ESCOLHA...CASO`?**
 
 A estrutura `ESCOLHA...CASO` é utilizada quando uma variável pode assumir **vários valores diferentes**, e cada valor executa uma ação específica.
 
@@ -36,7 +36,7 @@ fimescolha
 
 ---
 
-## Quando utilizar?
+**Quando utilizar?**
 
 O `ESCOLHA...CASO` é indicado quando há diversas possibilidades para **uma mesma variável**.
 
@@ -55,7 +55,7 @@ Em vez de fazer várias comparações com `SE`, basta verificar o valor da vari�
 
 ---
 
-## Analogia
+> Analogia
 
 Imagine um elevador.
 
@@ -63,7 +63,7 @@ Você aperta um botão.
 
 Dependendo do número escolhido, ele leva para um andar diferente.
 
-```text
+```
 Botão 1 → Térreo
 
 Botão 2 → Primeiro andar
@@ -77,15 +77,15 @@ Botão 4 → Terceiro andar
 
 ---
 
-# 1️⃣ Exemplo — Descobrir o Dia da Semana
+## Exemplo — Descobrir o Dia da Semana
 
-## Objetivo
+**Objetivo**
 
 Mostrar o dia da semana correspondente ao número digitado.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Escolha-Caso"
@@ -133,9 +133,9 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-### Leitura da variável
+**Leitura da variável**
 
 ```portugol
 leia(diaDaSemana)
@@ -145,13 +145,13 @@ Recebe um número digitado pelo usuário.
 
 Exemplo:
 
-```text
+```
 4
 ```
 
 ---
 
-### Estrutura `ESCOLHA`
+**Estrutura `ESCOLHA`**
 
 ```portugol
 escolha diaDaSemana
@@ -161,25 +161,25 @@ O computador analisa o valor armazenado na variável.
 
 No exemplo:
 
-```text
+```
 diaDaSemana = 4
 ```
 
 Então ele procura:
 
-```text
+```
 caso 4
 ```
 
 Resultado:
 
-```text
+```
 Quarta-feira
 ```
 
 ---
 
-### `outrocaso`
+- `outrocaso`
 
 ```portugol
 outrocaso
@@ -187,9 +187,9 @@ outrocaso
 
 É executado quando nenhum dos casos corresponde ao valor informado.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Usuário digitou:
 
 15
@@ -197,15 +197,15 @@ Usuário digitou:
 
 Resultado:
 
-```text
+```
 Você digitou um valor inválido.
 ```
 
 ---
 
-# 2️⃣ Calculadora Utilizando `ESCOLHA`
+# Calculadora Utilizando `ESCOLHA`
 
-## Objetivo
+**Objetivo**
 
 Criar uma calculadora simples.
 
@@ -213,7 +213,7 @@ O usuário escolhe qual operação deseja realizar.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Calculadora"
@@ -267,15 +267,15 @@ fimalgoritmo
 
 ---
 
-## Como o algoritmo funciona
+**Como o algoritmo funciona**
 
 Primeiro o usuário informa dois números.
 
 Depois escolhe a operação.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Valor 1 = 20
 
 Valor 2 = 10
@@ -285,25 +285,25 @@ Operação = 3
 
 O computador encontra:
 
-```text
+```
 caso 3
 ```
 
 Executa:
 
-```text
+```
 20 × 10
 ```
 
 Resultado:
 
-```text
+```
 200
 ```
 
 ---
 
-## Observação
+- **Observação**
 
 Perceba que **somente um dos casos será executado**.
 
@@ -313,15 +313,15 @@ Isso torna o algoritmo muito eficiente.
 
 ---
 
-# 3️⃣ Sistema de Doação
+# Sistema de Doação
 
-## Objetivo
+**Objetivo**
 
 Criar um menu de doações.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Doacao"
@@ -374,13 +374,13 @@ fimalgoritmo
 
 ---
 
-## Explicação
+- **Explicação**
 
 Esse algoritmo simula um menu.
 
 Cada número representa uma opção.
 
-```text
+```
 1 → Doação de R$ 10,00
 
 2 → Doação de R$ 25,00
@@ -396,15 +396,15 @@ Cada número representa uma opção.
 
 ---
 
-# 4️⃣ Cálculo de Frete por Região
+# Cálculo de Frete por Região
 
-## Objetivo
+**Objetivo**
 
 Calcular o valor final de uma compra de acordo com a região de entrega.
 
 ---
 
-## Regras
+**Regras**
 
 | Região       |    Frete |
 | ------------ | -------: |
@@ -416,7 +416,7 @@ Calcular o valor final de uma compra de acordo com a região de entrega.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Frete por Regiao"
@@ -490,7 +490,7 @@ fimalgoritmo
 
 ---
 
-## Como o algoritmo funciona
+**Como o algoritmo funciona**
 
 Primeiro o usuário informa o valor da compra.
 
@@ -498,9 +498,9 @@ Depois escolhe a região.
 
 Dependendo da região, o programa adiciona um valor diferente ao frete.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Compra = R$ 200,00
 
 Região = Norte
@@ -508,25 +508,25 @@ Região = Norte
 
 O algoritmo encontra:
 
-```text
+```
 caso 4
 ```
 
 Executa:
 
-```text
+```
 200 + 50
 ```
 
 Resultado:
 
-```text
+```
 Valor final = R$ 250,00
 ```
 
 ---
 
-## Por que utilizar `ESCOLHA`?
+# Utilizar `ESCOLHA`?
 
 Se esse algoritmo fosse desenvolvido utilizando apenas `SE`, seria necessário comparar a mesma variável diversas vezes.
 
