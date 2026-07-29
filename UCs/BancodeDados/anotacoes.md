@@ -1,22 +1,22 @@
-# Banco de Dados (MySQL) — Chave Primária, AUTO_INCREMENT e Inserção de Registros
+# Chave Primária, AUTO_INCREMENT e Inserção de Registros
 
-# 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula corrigi um problema importante da tabela **pessoas**: a ausência de uma **Chave Primária (Primary Key)**.
+Corrigido um problema importante da tabela **pessoas**: a ausência de uma **Chave Primária (Primary Key)**.
 
-Aprendi a criar um campo identificador chamado **id**, configurá-lo como **AUTO_INCREMENT**, inserir registros automaticamente e cadastrar vários dados utilizando um único comando `INSERT`.
+Criar um campo identificador chamado **id**, configurá-lo como **AUTO_INCREMENT**, inserir registros automaticamente e cadastrar vários dados utilizando um único comando `INSERT`.
 
 Também criei um novo banco de dados chamado **vendas**, contendo uma tabela de produtos.
 
 ---
 
-# Revisando o problema da tabela anterior
+**Revisando o problema da tabela anterior**
 
 Na tabela criada anteriormente existia um problema:
 
 Duas pessoas poderiam ser cadastradas várias vezes sem nenhuma forma de diferenciá-las.
 
-Exemplo:
+- **Exemplo:**
 
 | Nome  | Nascimento |
 | ----- | ---------- |
@@ -31,7 +31,7 @@ Por isso existe a **Chave Primária**.
 
 ---
 
-# O que é uma Chave Primária?
+**O que é uma Chave Primária?**
 
 A **Primary Key (PK)** é um campo que identifica cada registro de forma única.
 
@@ -44,7 +44,7 @@ Cada linha da tabela terá um identificador exclusivo.
 
 ---
 
-## Analogia
+> Analogia
 
 Imagine uma sala de aula.
 
@@ -58,7 +58,7 @@ O identificador nunca.
 
 ---
 
-# Apagando a tabela antiga
+**Apagando a tabela antiga**
 
 Como a tabela foi criada sem uma Chave Primária, o primeiro passo é removê-la.
 
@@ -66,19 +66,19 @@ Como a tabela foi criada sem uma Chave Primária, o primeiro passo é removê-la
 DROP TABLE pessoas;
 ```
 
-## Explicação
+- **Explicação**
 
-### DROP TABLE
+**DROP TABLE**
 
 Remove completamente uma tabela do banco de dados.
 
-⚠️ Todos os registros armazenados nela serão apagados.
+Todos os registros armazenados nela serão apagados.
 
 Por isso esse comando deve ser utilizado com cuidado.
 
 ---
 
-# Criando uma tabela corretamente
+## Criando uma tabela corretamente
 
 Agora a tabela será recriada com um identificador único.
 
@@ -97,9 +97,9 @@ CREATE TABLE pessoas (
 
 ---
 
-# Explicação linha por linha
+**Explicação linha por linha**
 
-## id INT
+**id INT**
 
 Cria uma coluna chamada **id**.
 
@@ -107,7 +107,7 @@ Ela armazenará apenas números inteiros.
 
 ---
 
-## NOT NULL
+**NOT NULL**
 
 Impede que o campo fique vazio.
 
@@ -115,27 +115,27 @@ Todo registro obrigatoriamente terá um valor.
 
 ---
 
-## AUTO_INCREMENT
+**AUTO_INCREMENT**
 
 Esse recurso faz com que o MySQL gere automaticamente um novo número para cada registro inserido.
 
-### Exemplo
+- **Exemplo**
 
 Primeira pessoa:
 
-```text
+```
 id = 1
 ```
 
 Segunda:
 
-```text
+```
 id = 2
 ```
 
 Terceira:
 
-```text
+```
 id = 3
 ```
 
@@ -145,7 +145,7 @@ O desenvolvedor não precisa controlar essa numeração manualmente.
 
 ---
 
-## PRIMARY KEY (id)
+**PRIMARY KEY (id)**
 
 Define que o campo **id** será a Chave Primária da tabela.
 
@@ -156,7 +156,7 @@ Isso garante que:
 
 ---
 
-# Verificando a estrutura
+**Verificando a estrutura**
 
 Depois de criar a tabela:
 
@@ -182,7 +182,7 @@ Esse comando mostra:
 
 ---
 
-# Inserindo um registro informando o ID
+**Inserindo um registro informando o ID**
 
 Primeiro exemplo:
 
@@ -203,7 +203,7 @@ O MySQL exibirá todos os registros da tabela.
 
 ---
 
-# Por que informar o ID manualmente não é o ideal?
+**Por que informar o ID manualmente não é o ideal?**
 
 Mesmo utilizando `AUTO_INCREMENT`, ainda é possível informar um número manualmente.
 
@@ -217,7 +217,7 @@ Além disso, o objetivo do `AUTO_INCREMENT` é justamente gerar esse número aut
 
 ---
 
-# Utilizando DEFAULT
+**Utilizando DEFAULT**
 
 O correto é utilizar:
 
@@ -228,7 +228,7 @@ VALUES
 (DEFAULT, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
 ```
 
-## O que significa DEFAULT?
+## DEFAULT
 
 Quando utilizo `DEFAULT` na coluna `id`, estou dizendo ao MySQL:
 
@@ -240,7 +240,7 @@ Essa é a forma mais utilizada em sistemas profissionais.
 
 ---
 
-# Consultando os registros
+**Consultando os registros**
 
 Depois da inserção:
 
@@ -256,13 +256,13 @@ O resultado será semelhante a:
 
 Caso eu insira outra pessoa utilizando `DEFAULT`, o próximo ID será:
 
-```text
+```
 2
 ```
 
 Depois:
 
-```text
+```
 3
 ```
 
@@ -290,19 +290,9 @@ VALUES
 (DEFAULT, 'Lucas',   '2006-02-20', 'm', 86.00, 1.95, 'Estadunidense');
 ```
 
-### Correções importantes
-
-Na anotação original havia alguns erros de sintaxe, como:
-
-* aspas não fechadas;
-* `DEFAULT` escrito entre aspas (`'default'`);
-* valores textuais sem aspas de fechamento.
-
-O código acima representa a forma correta de inserção.
-
 ---
 
-# Consultando os dados
+**Consultando os dados**
 
 Após inserir os registros:
 
@@ -316,7 +306,7 @@ O banco exibirá todos os cadastros armazenados.
 
 # Fluxo completo de criação do banco
 
-## 1. Criar o banco
+**1. Criar o banco**
 
 ```sql
 CREATE DATABASE cadastro
@@ -326,7 +316,7 @@ DEFAULT COLLATE utf8_general_ci;
 
 ---
 
-## 2. Selecionar o banco
+**2. Selecionar o banco**
 
 ```sql
 USE cadastro;
@@ -334,7 +324,7 @@ USE cadastro;
 
 ---
 
-## 3. Criar a tabela
+**3. Criar a tabela**
 
 ```sql
 CREATE TABLE pessoas (
@@ -351,7 +341,7 @@ CREATE TABLE pessoas (
 
 ---
 
-## 4. Conferir a estrutura
+**4. Conferir a estrutura**
 
 ```sql
 DESCRIBE pessoas;
@@ -359,7 +349,7 @@ DESCRIBE pessoas;
 
 ---
 
-## 5. Inserir registros
+**5. Inserir registros**
 
 ```sql
 INSERT INTO pessoas
@@ -370,7 +360,7 @@ VALUES
 
 ---
 
-## 6. Consultar os dados
+**6. Consultar os dados**
 
 ```sql
 SELECT * FROM pessoas;
@@ -384,7 +374,7 @@ Depois dos exercícios anteriores, foi criado um novo banco de dados para armaze
 
 ---
 
-# Criando o banco
+**Criando o banco**
 
 ```sql
 CREATE DATABASE vendas
@@ -400,7 +390,7 @@ USE vendas;
 
 ---
 
-# Criando a tabela de produtos
+**Criando a tabela de produtos**
 
 ```sql
 CREATE TABLE produtos (
@@ -411,27 +401,27 @@ CREATE TABLE produtos (
 ) DEFAULT CHARSET=utf8;
 ```
 
-## Explicação
+- **Explicação**
 
-### codigoProduto
+**codigoProduto**
 
 Identificador único do produto.
 
 ---
 
-### AUTO_INCREMENT
+**AUTO_INCREMENT**
 
 Cada novo produto recebe automaticamente um código exclusivo.
 
 ---
 
-### nomeProduto
+**nomeProduto**
 
 Armazena o nome do produto.
 
 ---
 
-### precoProduto
+**precoProduto**
 
 Armazena o preço do produto com duas casas decimais.
 
@@ -439,7 +429,7 @@ Foi utilizado `DECIMAL(10,2)` porque é o tipo mais indicado para valores monet�
 
 ---
 
-# Conferindo a estrutura
+**Conferindo a estrutura*
 
 ```sql
 DESCRIBE produtos;
@@ -447,7 +437,7 @@ DESCRIBE produtos;
 
 ---
 
-# Inserindo produtos
+**Inserindo produtos**
 
 ```sql
 INSERT INTO produtos
@@ -469,7 +459,7 @@ VALUES
 
 ---
 
-# Consultando os produtos
+**Consultando os produtos**
 
 ```sql
 SELECT * FROM produtos;
@@ -479,7 +469,7 @@ Esse comando exibirá todos os produtos cadastrados juntamente com seus códigos
 
 ---
 
-# 💡 Dicas importantes
+**Dicas importantes**
 
 * Toda tabela deve possuir uma **Chave Primária**.
 * Sempre utilize `AUTO_INCREMENT` quando precisar gerar identificadores automaticamente.
@@ -489,13 +479,13 @@ Esse comando exibirá todos os produtos cadastrados juntamente com seus códigos
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula aprendi a criar tabelas utilizando uma **Chave Primária** com `AUTO_INCREMENT`, garantindo que cada registro tenha um identificador único. Também compreendi a diferença entre informar o ID manualmente e utilizar `DEFAULT`, que permite ao MySQL gerar o próximo valor automaticamente. Além disso, aprendi a inserir vários registros em um único comando `INSERT`, consultar os dados com `SELECT` e desenvolvi um segundo projeto criando um banco de dados de vendas para armazenar produtos.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. A Chave Primária identifica cada registro de forma única.
 2. `AUTO_INCREMENT` gera automaticamente um novo ID para cada registro.
