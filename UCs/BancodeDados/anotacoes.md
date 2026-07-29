@@ -1,632 +1,164 @@
-# Banco de Dados (MySQL)
+# Banco de Dados (MySQL) — Chave Primária, AUTO_INCREMENT e Inserção de Registros
 
-**Ideia principal**
+# 🎯 Ideia principal
 
-Comecei a aprender **Banco de Dados**, entendendo como armazenar informações de forma organizada utilizando o **MySQL**.
+Nesta aula corrigi um problema importante da tabela **pessoas**: a ausência de uma **Chave Primária (Primary Key)**.
 
-Utilizar o **XAMPP**, que simula um servidor local, e o **MySQL Workbench**, que facilita a escrita e execução dos comandos SQL.
+Aprendi a criar um campo identificador chamado **id**, configurá-lo como **AUTO_INCREMENT**, inserir registros automaticamente e cadastrar vários dados utilizando um único comando `INSERT`.
 
-Criar bancos de dados, tabelas, inserir registros e compreendi por que uma **Chave Primária (Primary Key)** é indispensável para identificar cada registro de forma única.
-
----
-
-**O que é um Banco de Dados?**
-
-Um **Banco de Dados (Database)** é um sistema utilizado para armazenar informações de forma organizada.
-
-Essas informações normalmente vêm de formulários, sistemas, aplicativos ou sites.
-
-- **Exemplo**
-
-Imagine um cadastro de uma escola.
-
-Cada aluno preenche um formulário contendo:
-
-* nome;
-* data de nascimento;
-* sexo;
-* altura;
-* peso;
-* nacionalidade.
-
-Esses dados precisam ser guardados em algum lugar.
-
-Esse lugar é o **Banco de Dados**.
+Também criei um novo banco de dados chamado **vendas**, contendo uma tabela de produtos.
 
 ---
 
-> Analogia
+# Revisando o problema da tabela anterior
 
-Imagine um grande arquivo de escritório.
+Na tabela criada anteriormente existia um problema:
 
-- O armário inteiro seria o **Banco de Dados**.
+Duas pessoas poderiam ser cadastradas várias vezes sem nenhuma forma de diferenciá-las.
 
-- Cada gaveta seria uma **Tabela**.
+Exemplo:
 
-- Cada folha seria um **Registro**.
+| Nome  | Nascimento |
+| ----- | ---------- |
+| Bruss | 29/05/2007 |
+| Bruss | 29/05/2007 |
 
-Cada informação escrita na folha corresponde aos **campos** da tabela.
+Como os dados são iguais, o banco não sabe qual registro é qual.
 
----
+Em sistemas reais isso gera diversos problemas.
 
-## Estrutura de um Banco de Dados
-
-A organização normalmente segue esta estrutura:
-
-```
-Banco de Dados
-│
-├── Tabela Pessoas
-│      ├── Registro 1
-│      ├── Registro 2
-│      └── Registro 3
-│
-├── Tabela Produtos
-│
-└── Tabela Funcionários
-```
-
-Ou seja:
-
-* Um banco possui várias tabelas.
-* Cada tabela possui vários registros.
-* Cada registro possui vários campos.
+Por isso existe a **Chave Primária**.
 
 ---
 
-**O que é um Registro?**
+# O que é uma Chave Primária?
 
-Um registro representa uma única informação cadastrada.
+A **Primary Key (PK)** é um campo que identifica cada registro de forma única.
 
-- **Exemplo**
+Ela possui duas características principais:
 
-| Nome  | Nascimento | Sexo |
-| ----- | ---------- | ---- |
-| Bruss | 29/05/2007 | M    |
+* não pode possuir valores repetidos;
+* não pode possuir valores nulos (`NULL`).
 
-Toda essa linha é um registro.
-
----
-
-**O que é uma Tabela?**
-
-A tabela organiza informações do mesmo tipo.
-
-- **Exemplo:**
-
-Tabela **Pessoas**
-
-| Nome | Nascimento | Sexo | Peso |
-| ---- | ---------- | ---- | ---- |
-
-Cada coluna possui um tipo específico de dado.
+Cada linha da tabela terá um identificador exclusivo.
 
 ---
 
-# XAMPP
+## Analogia
 
-**O que é?**
+Imagine uma sala de aula.
 
-O **XAMPP** é um pacote de programas que permite criar um **servidor local**.
+Mesmo que existam dois alunos chamados João, cada um possui um **RA (Registro Acadêmico)** diferente.
 
-Servidor local significa que tudo funciona apenas no próprio computador.
+O banco de dados funciona da mesma forma.
 
-Ele é muito utilizado durante o desenvolvimento de projetos.
+O nome pode repetir.
 
----
-
-**Por que usar um servidor local?**
-
-Antes de colocar um sistema na internet, é importante testá-lo.
-
-O XAMPP permite fazer isso sem precisar contratar uma hospedagem.
-
-É como montar uma "internet particular" dentro do computador.
+O identificador nunca.
 
 ---
 
-**Componentes utilizados**
+# Apagando a tabela antiga
 
-Foram utilizados dois serviços:
-
-**Apache**
-
-Responsável pelo servidor web.
-
-Ele interpreta páginas PHP e disponibiliza o sistema.
-
----
-
-**MySQL**
-
-Responsável pelo Banco de Dados.
-
-É ele quem armazena todas as informações.
-
----
-
-## Iniciando o XAMPP
-
-Abrir o XAMPP.
-
-Depois clicar em:
-
-```
-Start → Apache
-```
-
-Em seguida:
-
-```
-Start → MySQL
-```
-
-Quando ambos estiverem em verde, significa que estão funcionando corretamente.
-
----
-
-**Abrindo o phpMyAdmin**
-
-Depois de iniciar o MySQL:
-
-```
-Admin
-```
-
-Será aberto automaticamente o navegador.
-
-O sistema aberto chama-se:
-
-```
-phpMyAdmin
-```
-
----
-
-**O que é o phpMyAdmin?**
-
-É uma interface gráfica para administrar bancos de dados.
-
-Com ela é possível:
-
-* criar bancos;
-* criar tabelas;
-* inserir dados;
-* excluir informações;
-* alterar estruturas.
-
-Tudo isso utilizando uma interface visual.
-
----
-
-# Criando um Banco de Dados pelo phpMyAdmin
-
-No menu esquerdo:
-
-```
-Novo
-```
-
-Depois:
-
-* escolher um nome;
-* clicar em **Criar**.
-
-Automaticamente o phpMyAdmin abrirá a tela para criação da primeira tabela.
-
----
-
-# MySQL Workbench
-
-**O que é?**
-
-O **MySQL Workbench** é um programa utilizado para escrever comandos SQL.
-
-Ele facilita muito o desenvolvimento porque possui:
-
-* destaque de sintaxe;
-* organização dos comandos;
-* execução rápida;
-* visualização de erros.
-
-Na prática, ele funciona como um editor especializado em SQL.
-
----
-
-**Criando a conexão**
-
-Ao abrir o Workbench:
-
-Clicar em:
-
-```
-+
-```
-
-Preencher:
-
-**Connection Name**
-
-Pode ser qualquer nome.
-
-- **Exemplo:**
-
-```
-Servidor Local
-```
-
----
-
-**Hostname**
-
-Normalmente permanece:
-
-```
-localhost
-```
-
-ou
-
-```
-127.0.0.1
-```
-
-Ambos representam o próprio computador.
-
----
-
-**Porta**
-
-A porta padrão do MySQL é:
-
-```text
-3306
-```
-
-Ela também pode ser consultada no XAMPP.
-
----
-
-**Usuário**
-
-```text
-root
-```
-
-Por padrão, o usuário administrador criado pelo XAMPP é o **root**.
-
----
-
-Depois basta clicar em:
-
-```
-OK
-```
-
-E abrir a conexão criada.
-
----
-
-## Área do Workbench
-
-No Workbench existem três áreas principais.
-
-**Editor SQL**
-
-Onde escrevemos os comandos.
-
----
-
-**Resultado**
-
-Na parte inferior aparece:
-
-* erros;
-* mensagens;
-* resultado das consultas.
-
-Isso facilita identificar problemas nos comandos.
-
----
-
-**Schemas**
-
-No canto esquerdo inferior existe a área:
-
-```
-Schemas
-```
-
-Ela mostra todos os bancos existentes.
-
----
-
-# Criando um Banco pelo Workbench
-
-Também é possível criar um banco diretamente pelo Workbench.
-
-Clicar com o botão direito em:
-
-```
-Schemas
-```
-
-Depois:
-
-```
-Create Schema...
-```
-
-Escolher um nome.
-
-Depois:
-
-```
-Apply
-Apply
-Finish
-```
-
-O banco será criado.
-
----
-
-# Conceito importante
-
-**Banco → Tabelas → Registros**
-
-Essa é uma relação muito importante.
-
-- **Exemplo:**
-
-```
-Banco:
-Navio
-```
-
-Dentro dele:
-
-```
-Tabela:
-Container
-```
-
-Dentro da tabela:
-
-```
-Registro:
-Pessoa cadastrada
-```
-
-Ou seja:
-
-Um banco contém várias tabelas.
-
-Cada tabela contém vários registros.
-
----
-
-# Criando um Banco via SQL
+Como a tabela foi criada sem uma Chave Primária, o primeiro passo é removê-la.
 
 ```sql
-CREATE DATABASE cadastro;
+DROP TABLE pessoas;
 ```
 
-Depois executar utilizando:
+## Explicação
 
-```
-Ctrl + Enter
-```
+### DROP TABLE
 
-ou o botão do raio.
+Remove completamente uma tabela do banco de dados.
+
+⚠️ Todos os registros armazenados nela serão apagados.
+
+Por isso esse comando deve ser utilizado com cuidado.
 
 ---
 
-# Criando uma tabela
+# Criando uma tabela corretamente
 
-Na anotação original aparece `create tables`, mas o comando correto é:
+Agora a tabela será recriada com um identificador único.
 
 ```sql
 CREATE TABLE pessoas (
-    nome VARCHAR(30),
-    idade INT,
-    sexo CHAR(1),
-    peso FLOAT,
-    altura FLOAT,
-    nacionalidade VARCHAR(30)
-);
-```
-
-**Explicação linha por linha**
-
-**CREATE TABLE**
-
-Cria uma nova tabela.
-
----
-
-**pessoas**
-
-Nome da tabela.
-
----
-
-**nome VARCHAR(30)**
-
-Cria um campo chamado **nome**.
-
-Pode armazenar até 30 caracteres.
-
----
-
-**idade INT**
-
-Armazena números inteiros.
-
-> **Observação:** Na anotação original foi usado `Idade(11)`, mas a sintaxe correta é `INT`. O número entre parênteses não define a quantidade máxima de dígitos armazenados.
-
----
-
-**sexo CHAR(1)**
-
-Armazena apenas um caractere.
-
-- **Exemplo:**
-
-```
-M
-F
-O
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    nascimento DATE,
+    sexo ENUM('f','m','o'),
+    peso DECIMAL(5,2),
+    altura DECIMAL(3,2),
+    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro',
+    PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8;
 ```
 
 ---
 
-**peso FLOAT**
+# Explicação linha por linha
 
-Armazena números com casas decimais.
+## id INT
 
----
+Cria uma coluna chamada **id**.
 
-**altura FLOAT**
-
-Também armazena números decimais.
+Ela armazenará apenas números inteiros.
 
 ---
 
-**nacionalidade VARCHAR(30)**
+## NOT NULL
 
-Texto com até 30 caracteres.
+Impede que o campo fique vazio.
 
----
-
-**Por que ocorreu erro?**
-
-Ao executar o comando, apareceu um erro.
-
-Isso aconteceu porque o MySQL não sabia em qual banco deveria criar a tabela.
-
-Antes de criar a tabela é necessário selecionar o banco.
+Todo registro obrigatoriamente terá um valor.
 
 ---
 
-## Selecionando o banco
+## AUTO_INCREMENT
 
-```
-USE cadastro;
-```
+Esse recurso faz com que o MySQL gere automaticamente um novo número para cada registro inserido.
 
-Esse comando informa:
+### Exemplo
 
-> "Todos os próximos comandos serão executados dentro do banco chamado **cadastro**."
+Primeira pessoa:
 
-Depois disso:
-
-```sql
-CREATE TABLE pessoas (...);
+```text
+id = 1
 ```
 
-funcionará normalmente.
+Segunda:
+
+```text
+id = 2
+```
+
+Terceira:
+
+```text
+id = 3
+```
+
+E assim sucessivamente.
+
+O desenvolvedor não precisa controlar essa numeração manualmente.
 
 ---
 
-# Atualizando o painel
+## PRIMARY KEY (id)
 
-Após criar a tabela:
+Define que o campo **id** será a Chave Primária da tabela.
 
-Atualizar a lista de **Schemas**.
+Isso garante que:
 
-A tabela aparecerá no banco selecionado.
-
----
-
-# Tipos de dados
-
-**VARCHAR**
-
-Armazena textos de tamanho variável.
-
-Exemplo:
-
-```
-João
-Maria
-Alexandre
-```
-
-Cada registro ocupa apenas o espaço necessário.
+* nenhum ID será repetido;
+* cada registro poderá ser identificado individualmente.
 
 ---
 
-**CHAR**
+# Verificando a estrutura
 
-Armazena textos com tamanho fixo.
-
-Muito utilizado para:
-
-* sexo;
-* UF;
-* siglas.
-
----
-
-**INT**
-
-Armazena números inteiros.
-
-Exemplo:
-
-```
-10
-250
-5000
-```
-
----
-
-**FLOAT**
-
-Armazena números decimais.
-
-Exemplo:
-
-```
-72.5
-1.80
-```
-
----
-
-**DECIMAL**
-
-Também armazena números decimais, porém com maior precisão.
-
-É o tipo recomendado para:
-
-* dinheiro;
-* peso;
-* medidas.
-
----
-
-**DATE**
-
-Armazena datas.
-
-Formato:
-
-```
-AAAA-MM-DD
-```
-
-Exemplo:
-
-```
-2007-05-29
-```
-
----
-
-## Visualizando a estrutura da tabela
+Depois de criar a tabela:
 
 ```sql
 DESCRIBE pessoas;
@@ -638,104 +170,153 @@ ou
 DESC pessoas;
 ```
 
-O MySQL exibirá:
+Esse comando mostra:
 
-* nomes dos campos;
-* tipos;
-* restrições;
-* chaves.
+* nome das colunas;
+* tipo dos dados;
+* se aceitam valores nulos;
+* qual é a Chave Primária;
+* outras características da tabela.
 
----
-
-# Melhorando a modelagem
-
-Durante a aula foi feita uma observação muito importante.
-
-**Idade não é um bom campo**
-
-A idade muda todos os anos.
-
-Se hoje uma pessoa possui 18 anos, no próximo ano terá 19.
-
-Isso obrigaria atualizar todos os registros constantemente.
-
-Por isso o correto é armazenar:
-
-```
-Data de nascimento
-```
-
-A idade pode ser calculada automaticamente quando necessário.
-
-Essa é uma prática utilizada em sistemas profissionais.
+É muito útil para conferir se a estrutura foi criada corretamente.
 
 ---
 
-# Chave Primária (Primary Key)
+# Inserindo um registro informando o ID
 
-Outro problema identificado foi que duas pessoas poderiam ser cadastradas várias vezes.
-
-Como diferenciá-las?
-
-A solução é utilizar uma **Chave Primária**.
-
----
-
-**O que é?**
-
-É um campo que identifica cada registro de forma única.
-
-Nenhum valor pode se repetir.
-
----
-
-- **Exemplos**
-
-* CPF
-* RG
-* Matrícula
-* Código do funcionário
-* ID gerado automaticamente
-
-Na maioria dos sistemas utiliza-se um campo chamado:
+Primeiro exemplo:
 
 ```sql
-id
+INSERT INTO pessoas
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES
+(1, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
 ```
 
-com incremento automático.
+Depois:
+
+```sql
+SELECT * FROM pessoas;
+```
+
+O MySQL exibirá todos os registros da tabela.
 
 ---
 
-### Excluindo uma tabela
+# Por que informar o ID manualmente não é o ideal?
+
+Mesmo utilizando `AUTO_INCREMENT`, ainda é possível informar um número manualmente.
+
+Porém isso não é recomendado.
+
+Imagine que eu escolha um número já existente.
+
+O banco retornará um erro informando que a Chave Primária está duplicada.
+
+Além disso, o objetivo do `AUTO_INCREMENT` é justamente gerar esse número automaticamente.
+
+---
+
+# Utilizando DEFAULT
+
+O correto é utilizar:
 
 ```sql
-DROP TABLE pessoas;
+INSERT INTO pessoas
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES
+(DEFAULT, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
 ```
 
-Executar:
+## O que significa DEFAULT?
+
+Quando utilizo `DEFAULT` na coluna `id`, estou dizendo ao MySQL:
+
+> "Utilize o valor padrão definido para essa coluna."
+
+Como ela possui `AUTO_INCREMENT`, o próprio banco gera o próximo número disponível.
+
+Essa é a forma mais utilizada em sistemas profissionais.
+
+---
+
+# Consultando os registros
+
+Depois da inserção:
+
+```sql
+SELECT * FROM pessoas;
+```
+
+O resultado será semelhante a:
+
+| id | nome  | nascimento |
+| -: | ----- | ---------- |
+|  1 | Bruss | 2007-05-29 |
+
+Caso eu insira outra pessoa utilizando `DEFAULT`, o próximo ID será:
 
 ```text
-Ctrl + Enter
+2
 ```
 
-A tabela será removida permanentemente.
+Depois:
+
+```text
+3
+```
+
+E assim por diante.
+
+> **Observação:** Na anotação original aparece que o ID seria um "número aleatório". Na verdade, com `AUTO_INCREMENT`, o MySQL gera um número **sequencial**, normalmente 1, 2, 3, 4... (salvo situações específicas, como exclusões ou alterações da sequência).
 
 ---
 
-### Excluindo um banco
+# Inserindo vários registros ao mesmo tempo
+
+Uma grande vantagem do SQL é permitir inserir diversos registros utilizando apenas um comando.
+
+A sintaxe correta é:
 
 ```sql
-DROP DATABASE cadastro;
+INSERT INTO pessoas
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES
+(DEFAULT, 'Bruss',   '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro'),
+(DEFAULT, 'João',    '2007-07-10', 'm', 78.00, 1.73, DEFAULT),
+(DEFAULT, 'Douglas', '2003-09-17', 'm', 70.00, 1.35, DEFAULT),
+(DEFAULT, 'Cleiton', '2001-05-13', 'm', 64.00, 1.85, DEFAULT),
+(DEFAULT, 'Jones',   '2009-02-19', 'm', 69.00, 1.76, 'Espanhol'),
+(DEFAULT, 'Lucas',   '2006-02-20', 'm', 86.00, 1.95, 'Estadunidense');
 ```
 
-Também remove todas as tabelas existentes dentro dele.
+### Correções importantes
 
-**Esse comando deve ser usado com cuidado, pois apaga todo o banco de dados.**
+Na anotação original havia alguns erros de sintaxe, como:
+
+* aspas não fechadas;
+* `DEFAULT` escrito entre aspas (`'default'`);
+* valores textuais sem aspas de fechamento.
+
+O código acima representa a forma correta de inserção.
 
 ---
 
-# Criando um banco configurado para UTF-8
+# Consultando os dados
+
+Após inserir os registros:
+
+```sql
+SELECT * FROM pessoas;
+```
+
+O banco exibirá todos os cadastros armazenados.
+
+---
+
+# Fluxo completo de criação do banco
+
+## 1. Criar o banco
 
 ```sql
 CREATE DATABASE cadastro
@@ -743,137 +324,186 @@ DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 ```
 
-- **Explicação**
-
-**DEFAULT CHARACTER SET utf8**
-
-Define a codificação padrão.
-
-Permite armazenar corretamente:
-
-* acentos;
-* cedilha;
-* caracteres especiais.
-
 ---
 
-**DEFAULT COLLATE utf8_general_ci**
-
-Define as regras de comparação dos textos.
-
-`ci` significa:
-
-```
-Case Insensitive
-```
-
-Ou seja:
-
-```text
-Bruss
-BRUSS
-bruss
-```
-
-são considerados equivalentes em muitas comparações.
-
----
-
-# Criando a tabela (versão melhorada)
+## 2. Selecionar o banco
 
 ```sql
 USE cadastro;
+```
 
+---
+
+## 3. Criar a tabela
+
+```sql
 CREATE TABLE pessoas (
+    id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     nascimento DATE,
     sexo ENUM('f','m','o'),
     peso DECIMAL(5,2),
     altura DECIMAL(3,2),
-    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro'
+    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro',
+    PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
 ```
 
-**Melhorias**
+---
 
-* `NOT NULL` impede que o nome fique vazio.
-* `DATE` substitui idade.
-* `ENUM` limita os valores permitidos para o sexo.
-* `DECIMAL` é mais preciso que `FLOAT`.
-* `DEFAULT` define um valor padrão caso nenhum seja informado.
+## 4. Conferir a estrutura
+
+```sql
+DESCRIBE pessoas;
+```
 
 ---
 
-## Inserindo um registro
+## 5. Inserir registros
 
 ```sql
 INSERT INTO pessoas
-(nome, nascimento, sexo, peso, altura, nacionalidade)
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
 VALUES
-('Bruss','2007-05-29','m',70.00,1.65,'Brasileiro');
+(DEFAULT, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
 ```
-
-**O que faz?**
-
-Adiciona uma nova linha na tabela `pessoas`.
-
-Cada valor corresponde à coluna indicada.
 
 ---
 
-# Consultando os dados
+## 6. Consultar os dados
 
 ```sql
 SELECT * FROM pessoas;
 ```
 
-- **Explicação**
+---
 
-* `SELECT` → selecionar dados.
-* `*` → todas as colunas.
-* `FROM pessoas` → da tabela `pessoas`.
+# Projeto Prático — Banco de Dados de Vendas
 
-O resultado será uma lista com todos os registros cadastrados.
+Depois dos exercícios anteriores, foi criado um novo banco de dados para armazenar produtos.
 
 ---
 
-**Problema encontrado**
+# Criando o banco
 
-Mesmo após inserir um registro, ainda existe um problema.
+```sql
+CREATE DATABASE vendas
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+```
 
-Nada impede que a mesma pessoa seja cadastrada várias vezes.
+Depois:
 
-Isso acontece porque **a tabela ainda não possui uma Chave Primária**.
-
-Por esse motivo, o banco foi apagado para, na próxima etapa, recriar a estrutura corretamente utilizando uma chave primária.
-
----
-
-**Dicas importantes**
-
-* Sempre execute `USE nome_do_banco;` antes de criar tabelas.
-* Prefira `DATE` em vez de armazenar idade.
-* Utilize `DECIMAL` para valores que exigem precisão, como peso, altura e dinheiro.
-* Todo banco de dados deve possuir uma **Chave Primária**, pois ela garante que cada registro seja único.
-* Use `SELECT * FROM tabela;` para conferir se os dados foram gravados corretamente.
+```sql
+USE vendas;
+```
 
 ---
 
-# Em resumo
+# Criando a tabela de produtos
 
-Nesta aula aprendi os conceitos fundamentais de Banco de Dados utilizando MySQL. Configurei um servidor local com o XAMPP, acessei o phpMyAdmin e conectei o MySQL Workbench ao banco de dados. Criei bancos e tabelas, conheci os principais tipos de dados, inseri meu primeiro registro utilizando `INSERT INTO` e consultei as informações com `SELECT`. Também compreendi a importância de utilizar uma Chave Primária para impedir registros duplicados e por que armazenar a data de nascimento é uma solução melhor do que armazenar a idade.
+```sql
+CREATE TABLE produtos (
+    codigoProduto INT NOT NULL AUTO_INCREMENT,
+    nomeProduto VARCHAR(50) NOT NULL,
+    precoProduto DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (codigoProduto)
+) DEFAULT CHARSET=utf8;
+```
+
+## Explicação
+
+### codigoProduto
+
+Identificador único do produto.
 
 ---
 
-**Resumo Relâmpago**
+### AUTO_INCREMENT
 
-1. Um Banco de Dados armazena informações organizadas em tabelas.
-2. O XAMPP cria um servidor local para testes, utilizando Apache e MySQL.
-3. O phpMyAdmin permite administrar bancos de dados por uma interface gráfica.
-4. O MySQL Workbench facilita a escrita e execução de comandos SQL.
-5. `CREATE DATABASE` cria um novo banco de dados.
-6. `USE cadastro;` seleciona o banco onde os próximos comandos serão executados.
-7. `CREATE TABLE` cria tabelas com diferentes tipos de dados.
-8. `INSERT INTO` adiciona novos registros e `SELECT *` exibe todos os dados.
-9. A data de nascimento é melhor que a idade, pois não muda com o tempo.
-10. Toda tabela deve possuir uma **Chave Primária**, garantindo que cada registro seja único.
+Cada novo produto recebe automaticamente um código exclusivo.
+
+---
+
+### nomeProduto
+
+Armazena o nome do produto.
+
+---
+
+### precoProduto
+
+Armazena o preço do produto com duas casas decimais.
+
+Foi utilizado `DECIMAL(10,2)` porque é o tipo mais indicado para valores monetários, evitando problemas de precisão que podem ocorrer com `FLOAT`.
+
+---
+
+# Conferindo a estrutura
+
+```sql
+DESCRIBE produtos;
+```
+
+---
+
+# Inserindo produtos
+
+```sql
+INSERT INTO produtos
+(codigoProduto, nomeProduto, precoProduto)
+VALUES
+(DEFAULT, 'Arroz', 23.50),
+(DEFAULT, 'Feijão', 50.00),
+(DEFAULT, 'Salgadinho', 12.00),
+(DEFAULT, 'Café', 70.00),
+(DEFAULT, 'Chocolate', 40.00),
+(DEFAULT, 'Picanha', 100.99),
+(DEFAULT, 'Frango', 32.40),
+(DEFAULT, 'Chiclete', 10.50),
+(DEFAULT, 'Sorvete', 49.99),
+(DEFAULT, 'Refrigerante', 20.78);
+```
+
+> **Observação:** Os valores numéricos não precisam estar entre aspas. O MySQL até pode convertê-los automaticamente, mas a prática recomendada é armazená-los como números.
+
+---
+
+# Consultando os produtos
+
+```sql
+SELECT * FROM produtos;
+```
+
+Esse comando exibirá todos os produtos cadastrados juntamente com seus códigos e preços.
+
+---
+
+# 💡 Dicas importantes
+
+* Toda tabela deve possuir uma **Chave Primária**.
+* Sempre utilize `AUTO_INCREMENT` quando precisar gerar identificadores automaticamente.
+* Prefira `DEFAULT` em vez de informar manualmente o valor da chave primária.
+* Utilize `DECIMAL` para armazenar preços e outros valores monetários.
+* Antes de inserir grandes quantidades de dados, confira a estrutura da tabela com `DESCRIBE`.
+
+---
+
+# ✅ Em resumo
+
+Nesta aula aprendi a criar tabelas utilizando uma **Chave Primária** com `AUTO_INCREMENT`, garantindo que cada registro tenha um identificador único. Também compreendi a diferença entre informar o ID manualmente e utilizar `DEFAULT`, que permite ao MySQL gerar o próximo valor automaticamente. Além disso, aprendi a inserir vários registros em um único comando `INSERT`, consultar os dados com `SELECT` e desenvolvi um segundo projeto criando um banco de dados de vendas para armazenar produtos.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. A Chave Primária identifica cada registro de forma única.
+2. `AUTO_INCREMENT` gera automaticamente um novo ID para cada registro.
+3. `PRIMARY KEY (id)` impede IDs duplicados.
+4. `DESCRIBE` mostra a estrutura da tabela.
+5. `DEFAULT` permite que o MySQL gere automaticamente o valor do ID.
+6. `INSERT INTO` pode inserir um ou vários registros de uma só vez.
+7. `SELECT * FROM` exibe todos os registros da tabela.
+8. `DECIMAL` é o tipo ideal para armazenar preços.
+9. O banco **vendas** foi criado para armazenar produtos com código, nome e preço.
+10. Utilizar uma estrutura correta desde o início evita erros e facilita o desenvolvimento de sistemas maiores.
