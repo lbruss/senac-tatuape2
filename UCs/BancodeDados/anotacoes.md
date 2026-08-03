@@ -1,86 +1,62 @@
-# Chave Primária, AUTO_INCREMENT e Inserção de Registros
+# Banco de Dados (MySQL) — Alterando a Estrutura das Tabelas (ALTER TABLE)
 
-**Ideia principal**
+# 🎯 Ideia principal
 
-Corrigido um problema importante da tabela **pessoas**: a ausência de uma **Chave Primária (Primary Key)**.
+Nesta aula aprendi a utilizar o comando **`ALTER TABLE`**, responsável por modificar a estrutura de uma tabela já existente.
 
-Criar um campo identificador chamado **id**, configurá-lo como **AUTO_INCREMENT**, inserir registros automaticamente e cadastrar vários dados utilizando um único comando `INSERT`.
+Com ele é possível:
 
-Também criei um novo banco de dados chamado **vendas**, contendo uma tabela de produtos.
+* adicionar colunas;
+* remover colunas;
+* alterar o tipo de um campo;
+* modificar restrições (*constraints*);
+* renomear colunas;
+* renomear tabelas;
+* alterar a posição das colunas;
+* adicionar Chaves Primárias.
 
----
-
-**Revisando o problema da tabela anterior**
-
-Na tabela criada anteriormente existia um problema:
-
-Duas pessoas poderiam ser cadastradas várias vezes sem nenhuma forma de diferenciá-las.
-
-- **Exemplo:**
-
-| Nome  | Nascimento |
-| ----- | ---------- |
-| Bruss | 29/05/2007 |
-| Bruss | 29/05/2007 |
-
-Como os dados são iguais, o banco não sabe qual registro é qual.
-
-Em sistemas reais isso gera diversos problemas.
-
-Por isso existe a **Chave Primária**.
+Esse comando é um dos mais importantes do SQL, pois permite evoluir um banco de dados sem precisar recriá-lo do zero.
 
 ---
 
-**O que é uma Chave Primária?**
+# O que é ALTER TABLE?
 
-A **Primary Key (PK)** é um campo que identifica cada registro de forma única.
-
-Ela possui duas características principais:
-
-* não pode possuir valores repetidos;
-* não pode possuir valores nulos (`NULL`).
-
-Cada linha da tabela terá um identificador exclusivo.
-
----
-
-> Analogia
-
-Imagine uma sala de aula.
-
-Mesmo que existam dois alunos chamados João, cada um possui um **RA (Registro Acadêmico)** diferente.
-
-O banco de dados funciona da mesma forma.
-
-O nome pode repetir.
-
-O identificador nunca.
-
----
-
-**Apagando a tabela antiga**
-
-Como a tabela foi criada sem uma Chave Primária, o primeiro passo é removê-la.
+O comando:
 
 ```sql
-DROP TABLE pessoas;
+ALTER TABLE
 ```
 
-- **Explicação**
+serve para modificar uma tabela que já existe.
 
-**DROP TABLE**
+Enquanto o `CREATE TABLE` cria uma tabela nova, o `ALTER TABLE` faz alterações em uma tabela já criada.
 
-Remove completamente uma tabela do banco de dados.
+## Analogia
 
-Todos os registros armazenados nela serão apagados.
+Imagine que uma tabela seja uma casa.
 
-Por isso esse comando deve ser utilizado com cuidado.
+* `CREATE TABLE` → construir a casa.
+* `ALTER TABLE` → reformar a casa.
+
+Você pode adicionar quartos, remover paredes ou trocar portas, sem precisar demolir tudo.
 
 ---
 
-## Criando uma tabela corretamente
+# Selecionando o banco
 
-Agora a tabela será recriada com um identificador único.
+Antes de qualquer alteração, é necessário informar ao MySQL qual banco será utilizado.
+
+```sql
+USE cadastro;
+```
+
+A partir desse momento, todos os comandos serão executados dentro do banco **cadastro**.
+
+---
+
+# Estrutura inicial da tabela
+
+A tabela utilizada na aula foi:
 
 ```sql
 CREATE TABLE pessoas (
@@ -97,68 +73,55 @@ CREATE TABLE pessoas (
 
 ---
 
-**Explicação linha por linha**
+# Adicionando uma nova coluna
 
-**id INT**
+Para adicionar uma coluna chamada **profissao**:
 
-Cria uma coluna chamada **id**.
+```sql
+ALTER TABLE pessoas
+ADD COLUMN profissao VARCHAR(20);
+```
 
-Ela armazenará apenas números inteiros.
+## Explicação
+
+### ALTER TABLE pessoas
+
+Indica qual tabela será modificada.
+
+### ADD COLUMN
+
+Adiciona uma nova coluna.
+
+### profissao
+
+Nome da nova coluna.
+
+### VARCHAR(20)
+
+Permite armazenar até 20 caracteres.
 
 ---
 
-**NOT NULL**
+# Onde a coluna será criada?
 
-Impede que o campo fique vazio.
+Quando nenhuma posição é informada, o MySQL adiciona a coluna **no final da tabela**.
 
-Todo registro obrigatoriamente terá um valor.
+Exemplo:
 
----
+Antes:
 
-**AUTO_INCREMENT**
+| id | nome | nascimento | sexo |
+| -- | ---- | ---------- | ---- |
 
-Esse recurso faz com que o MySQL gere automaticamente um novo número para cada registro inserido.
+Depois:
 
-- **Exemplo**
-
-Primeira pessoa:
-
-```
-id = 1
-```
-
-Segunda:
-
-```
-id = 2
-```
-
-Terceira:
-
-```
-id = 3
-```
-
-E assim sucessivamente.
-
-O desenvolvedor não precisa controlar essa numeração manualmente.
+| id | nome | nascimento | sexo | profissão |
 
 ---
 
-**PRIMARY KEY (id)**
+# Verificando a estrutura
 
-Define que o campo **id** será a Chave Primária da tabela.
-
-Isso garante que:
-
-* nenhum ID será repetido;
-* cada registro poderá ser identificado individualmente.
-
----
-
-**Verificando a estrutura**
-
-Depois de criar a tabela:
+Após qualquer alteração, é recomendado executar:
 
 ```sql
 DESCRIBE pessoas;
@@ -170,330 +133,518 @@ ou
 DESC pessoas;
 ```
 
-Esse comando mostra:
-
-* nome das colunas;
-* tipo dos dados;
-* se aceitam valores nulos;
-* qual é a Chave Primária;
-* outras características da tabela.
-
-É muito útil para conferir se a estrutura foi criada corretamente.
+Assim é possível conferir se a alteração foi aplicada corretamente.
 
 ---
 
-**Inserindo um registro informando o ID**
+# Mudando a posição da coluna
 
-Primeiro exemplo:
+Caso a coluna tenha sido criada no lugar errado, posso removê-la e criá-la novamente na posição desejada.
 
 ```sql
-INSERT INTO pessoas
-(id, nome, nascimento, sexo, peso, altura, nacionalidade)
-VALUES
-(1, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
+ALTER TABLE pessoas
+DROP COLUMN profissao;
 ```
 
 Depois:
 
 ```sql
-SELECT * FROM pessoas;
+ALTER TABLE pessoas
+ADD COLUMN profissao VARCHAR(20) AFTER nome;
 ```
 
-O MySQL exibirá todos os registros da tabela.
-
 ---
 
-**Por que informar o ID manualmente não é o ideal?**
+# O que significa AFTER?
 
-Mesmo utilizando `AUTO_INCREMENT`, ainda é possível informar um número manualmente.
-
-Porém isso não é recomendado.
-
-Imagine que eu escolha um número já existente.
-
-O banco retornará um erro informando que a Chave Primária está duplicada.
-
-Além disso, o objetivo do `AUTO_INCREMENT` é justamente gerar esse número automaticamente.
-
----
-
-**Utilizando DEFAULT**
-
-O correto é utilizar:
+O comando:
 
 ```sql
-INSERT INTO pessoas
-(id, nome, nascimento, sexo, peso, altura, nacionalidade)
-VALUES
-(DEFAULT, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
+AFTER nome
 ```
 
-## DEFAULT
+faz com que a nova coluna seja criada **logo após a coluna `nome`**.
 
-Quando utilizo `DEFAULT` na coluna `id`, estou dizendo ao MySQL:
+Resultado:
 
-> "Utilize o valor padrão definido para essa coluna."
-
-Como ela possui `AUTO_INCREMENT`, o próprio banco gera o próximo número disponível.
-
-Essa é a forma mais utilizada em sistemas profissionais.
+| id | nome | profissão | nascimento |
 
 ---
 
-**Consultando os registros**
+## Observação importante
 
-Depois da inserção:
+No MySQL existe apenas o comando:
 
 ```sql
-SELECT * FROM pessoas;
+AFTER
 ```
 
-O resultado será semelhante a:
+Não existe um comando chamado `BEFORE` para posicionar colunas antes de outra.
 
-| id | nome  | nascimento |
-| -: | ----- | ---------- |
-|  1 | Bruss | 2007-05-29 |
-
-Caso eu insira outra pessoa utilizando `DEFAULT`, o próximo ID será:
-
-```
-2
-```
-
-Depois:
-
-```
-3
-```
-
-E assim por diante.
-
-> **Observação:** Na anotação original aparece que o ID seria um "número aleatório". Na verdade, com `AUTO_INCREMENT`, o MySQL gera um número **sequencial**, normalmente 1, 2, 3, 4... (salvo situações específicas, como exclusões ou alterações da sequência).
+Para colocar uma coluna no início da tabela utiliza-se outro comando, visto a seguir.
 
 ---
 
-# Inserindo vários registros ao mesmo tempo
-
-Uma grande vantagem do SQL é permitir inserir diversos registros utilizando apenas um comando.
-
-A sintaxe correta é:
+# Adicionando uma coluna no início
 
 ```sql
-INSERT INTO pessoas
-(id, nome, nascimento, sexo, peso, altura, nacionalidade)
-VALUES
-(DEFAULT, 'Bruss',   '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro'),
-(DEFAULT, 'João',    '2007-07-10', 'm', 78.00, 1.73, DEFAULT),
-(DEFAULT, 'Douglas', '2003-09-17', 'm', 70.00, 1.35, DEFAULT),
-(DEFAULT, 'Cleiton', '2001-05-13', 'm', 64.00, 1.85, DEFAULT),
-(DEFAULT, 'Jones',   '2009-02-19', 'm', 69.00, 1.76, 'Espanhol'),
-(DEFAULT, 'Lucas',   '2006-02-20', 'm', 86.00, 1.95, 'Estadunidense');
+ALTER TABLE pessoas
+ADD COLUMN codigo INT FIRST;
 ```
 
----
+## O que faz?
 
-**Consultando os dados**
-
-Após inserir os registros:
+A palavra:
 
 ```sql
-SELECT * FROM pessoas;
+FIRST
 ```
 
-O banco exibirá todos os cadastros armazenados.
+coloca a nova coluna como a primeira da tabela.
+
+Resultado:
+
+| codigo | id | nome | profissão | nascimento |
 
 ---
 
-# Fluxo completo de criação do banco
+# Removendo uma coluna
 
-**1. Criar o banco**
+Se ela não for mais necessária:
 
 ```sql
-CREATE DATABASE cadastro
-DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
+ALTER TABLE pessoas
+DROP COLUMN codigo;
 ```
+
+A coluna será removida da estrutura da tabela.
+
+> ⚠️ **Atenção:** Ao remover uma coluna, todos os dados armazenados nela também são apagados.
 
 ---
 
-**2. Selecionar o banco**
+# Alterando o tipo de uma coluna
+
+Também é possível alterar o tipo de um campo já existente.
+
+Exemplo:
 
 ```sql
-USE cadastro;
+ALTER TABLE pessoas
+MODIFY COLUMN profissao VARCHAR(30) NOT NULL;
 ```
+
+## O que aconteceu?
+
+* o tamanho passou de 20 para 30 caracteres;
+* o campo passou a ser obrigatório (`NOT NULL`).
 
 ---
 
-**3. Criar a tabela**
+# Por que apareceu um aviso?
+
+Na aula apareceu um símbolo de alerta (⚠️).
+
+Isso aconteceu porque já existiam registros cadastrados.
+
+Esses registros não possuíam valor na coluna **profissao**.
+
+Como a coluna passou a ser obrigatória (`NOT NULL`), o MySQL encontrou valores vazios e gerou um aviso.
+
+Esse aviso é conhecido como **truncation warning** ou aviso de conversão/truncamento de dados, dependendo da situação.
+
+---
+
+# Corrigindo o problema
+
+Para evitar esse aviso, pode-se definir um valor padrão.
 
 ```sql
-CREATE TABLE pessoas (
-    id INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
-    nascimento DATE,
-    sexo ENUM('f','m','o'),
-    peso DECIMAL(5,2),
-    altura DECIMAL(3,2),
-    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro',
-    PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8;
+ALTER TABLE pessoas
+MODIFY COLUMN profissao VARCHAR(30) NOT NULL DEFAULT '';
+```
+
+## O que significa?
+
+Sempre que um novo registro não informar a profissão, o MySQL armazenará uma string vazia (`''`) como valor padrão.
+
+Isso impede que o campo fique nulo.
+
+---
+
+# Renomeando uma coluna
+
+Também posso alterar o nome de uma coluna.
+
+```sql
+ALTER TABLE pessoas
+CHANGE COLUMN profissao prof VARCHAR(30) NOT NULL DEFAULT '';
+```
+
+## Explicação
+
+Ao utilizar `CHANGE COLUMN`, é obrigatório informar novamente:
+
+* o novo nome;
+* o tipo de dado;
+* as restrições (*constraints*).
+
+### Antes
+
+```text
+profissao
+```
+
+### Depois
+
+```text
+prof
 ```
 
 ---
 
-**4. Conferir a estrutura**
+# Verificando a alteração
 
 ```sql
 DESCRIBE pessoas;
 ```
 
+Assim é possível conferir se o novo nome foi aplicado corretamente.
+
 ---
 
-**5. Inserir registros**
+# Renomeando uma tabela
+
+Também é possível alterar o nome da tabela.
 
 ```sql
-INSERT INTO pessoas
-(id, nome, nascimento, sexo, peso, altura, nacionalidade)
-VALUES
-(DEFAULT, 'Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
+ALTER TABLE pessoas
+RENAME TO estudantes;
+```
+
+Agora a tabela deixa de se chamar **pessoas** e passa a se chamar **estudantes**.
+
+---
+
+# Conferindo
+
+```sql
+DESCRIBE estudantes;
+```
+
+Se o comando funcionar, significa que a tabela foi renomeada corretamente.
+
+---
+
+# Criando uma nova tabela — cursos
+
+Foi criada uma nova tabela chamada **cursos**.
+
+```sql
+CREATE TABLE IF NOT EXISTS cursos (
+    nome VARCHAR(50) NOT NULL UNIQUE,
+    descricao TEXT,
+    carga INT UNSIGNED,
+    totalaulas INT,
+    ano YEAR DEFAULT 2026
+) DEFAULT CHARSET=utf8;
 ```
 
 ---
 
-**6. Consultar os dados**
+# Explicando cada campo
+
+## IF NOT EXISTS
+
+Evita erro caso a tabela já exista.
+
+O MySQL simplesmente ignora a criação.
+
+---
+
+## nome
 
 ```sql
-SELECT * FROM pessoas;
+VARCHAR(50)
+```
+
+Nome do curso.
+
+---
+
+## UNIQUE
+
+Impede nomes repetidos.
+
+Exemplo:
+
+```
+Informática
+Informática
+```
+
+O segundo cadastro será recusado.
+
+---
+
+## descricao
+
+```sql
+TEXT
+```
+
+Utilizado para textos longos.
+
+É ideal para descrições completas.
+
+---
+
+## carga
+
+```sql
+INT UNSIGNED
+```
+
+Armazena apenas números positivos.
+
+Como carga horária nunca será negativa, `UNSIGNED` é uma escolha adequada.
+
+---
+
+## totalaulas
+
+Quantidade de aulas do curso.
+
+---
+
+## ano
+
+```sql
+YEAR
+```
+
+Armazena apenas o ano.
+
+Caso nenhum valor seja informado, será utilizado:
+
+```text
+2026
 ```
 
 ---
 
-# Projeto Prático — Banco de Dados de Vendas
+# Adicionando um ID
 
-Depois dos exercícios anteriores, foi criado um novo banco de dados para armazenar produtos.
+Depois foi adicionada uma coluna identificadora.
+
+```sql
+ALTER TABLE cursos
+ADD COLUMN idcurso INT FIRST;
+```
+
+Ela será criada na primeira posição da tabela.
 
 ---
 
-**Criando o banco**
+# Criando a Chave Primária
+
+Na anotação original havia um pequeno erro de sintaxe (`alter tables`).
+
+O comando correto é:
 
 ```sql
-CREATE DATABASE vendas
-DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
+ALTER TABLE cursos
+ADD PRIMARY KEY (idcurso);
 ```
+
+Agora `idcurso` passa a identificar cada curso de forma única.
+
+---
+
+# Transformando em AUTO_INCREMENT
 
 Depois:
 
 ```sql
-USE vendas;
+ALTER TABLE cursos
+MODIFY COLUMN idcurso INT NOT NULL AUTO_INCREMENT;
 ```
+
+Agora o próprio MySQL gera automaticamente o código de cada curso.
 
 ---
 
-**Criando a tabela de produtos**
+# Conferindo a estrutura
 
 ```sql
-CREATE TABLE produtos (
-    codigoProduto INT NOT NULL AUTO_INCREMENT,
-    nomeProduto VARCHAR(50) NOT NULL,
-    precoProduto DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (codigoProduto)
-) DEFAULT CHARSET=utf8;
+DESC cursos;
 ```
 
-- **Explicação**
+Esse comando exibirá toda a estrutura da tabela, incluindo:
 
-**codigoProduto**
-
-Identificador único do produto.
-
----
-
-**AUTO_INCREMENT**
-
-Cada novo produto recebe automaticamente um código exclusivo.
+* tipos de dados;
+* chave primária;
+* valores padrão;
+* restrições.
 
 ---
 
-**nomeProduto**
+# Conceito importante — Tuplas
 
-Armazena o nome do produto.
+Durante os estudos pode aparecer o termo:
+
+```text
+Tupla
+```
+
+## O que é uma tupla?
+
+No contexto de Banco de Dados, **tupla** é simplesmente um **registro**, ou seja, uma linha da tabela.
+
+Exemplo:
+
+| id | nome  |
+| -- | ----- |
+| 1  | Bruss |
+
+Toda essa linha corresponde a uma tupla.
+
+Hoje em dia é muito mais comum utilizar o termo **registro**, mas ambos possuem o mesmo significado.
 
 ---
 
-**precoProduto**
+# Resumo dos principais comandos ALTER TABLE
 
-Armazena o preço do produto com duas casas decimais.
-
-Foi utilizado `DECIMAL(10,2)` porque é o tipo mais indicado para valores monetários, evitando problemas de precisão que podem ocorrer com `FLOAT`.
+| Comando           | Função                                                       |
+| ----------------- | ------------------------------------------------------------ |
+| `ADD COLUMN`      | Adiciona uma nova coluna.                                    |
+| `DROP COLUMN`     | Remove uma coluna.                                           |
+| `MODIFY COLUMN`   | Altera o tipo de dado ou as restrições de uma coluna.        |
+| `CHANGE COLUMN`   | Renomeia uma coluna e permite alterar seu tipo e restrições. |
+| `RENAME TO`       | Renomeia a tabela.                                           |
+| `FIRST`           | Coloca uma coluna como a primeira da tabela.                 |
+| `AFTER coluna`    | Posiciona uma nova coluna após outra coluna específica.      |
+| `ADD PRIMARY KEY` | Define uma Chave Primária para a tabela.                     |
 
 ---
 
-**Conferindo a estrutura*
+# 🧩 Passo a passo da aula
+
+### 1.
+
+Selecionar o banco.
 
 ```sql
-DESCRIBE produtos;
+USE cadastro;
 ```
 
----
+### 2.
 
-**Inserindo produtos**
+Adicionar uma coluna.
 
 ```sql
-INSERT INTO produtos
-(codigoProduto, nomeProduto, precoProduto)
-VALUES
-(DEFAULT, 'Arroz', 23.50),
-(DEFAULT, 'Feijão', 50.00),
-(DEFAULT, 'Salgadinho', 12.00),
-(DEFAULT, 'Café', 70.00),
-(DEFAULT, 'Chocolate', 40.00),
-(DEFAULT, 'Picanha', 100.99),
-(DEFAULT, 'Frango', 32.40),
-(DEFAULT, 'Chiclete', 10.50),
-(DEFAULT, 'Sorvete', 49.99),
-(DEFAULT, 'Refrigerante', 20.78);
+ALTER TABLE pessoas
+ADD COLUMN profissao VARCHAR(20);
 ```
 
-> **Observação:** Os valores numéricos não precisam estar entre aspas. O MySQL até pode convertê-los automaticamente, mas a prática recomendada é armazená-los como números.
+### 3.
 
----
-
-**Consultando os produtos**
+Conferir.
 
 ```sql
-SELECT * FROM produtos;
+DESCRIBE pessoas;
 ```
 
-Esse comando exibirá todos os produtos cadastrados juntamente com seus códigos e preços.
+### 4.
+
+Remover a coluna.
+
+```sql
+ALTER TABLE pessoas
+DROP COLUMN profissao;
+```
+
+### 5.
+
+Criá-la novamente após `nome`.
+
+```sql
+ALTER TABLE pessoas
+ADD COLUMN profissao VARCHAR(20) AFTER nome;
+```
+
+### 6.
+
+Adicionar uma coluna no início.
+
+```sql
+ALTER TABLE pessoas
+ADD COLUMN codigo INT FIRST;
+```
+
+### 7.
+
+Remover essa coluna.
+
+```sql
+ALTER TABLE pessoas
+DROP COLUMN codigo;
+```
+
+### 8.
+
+Alterar o tipo da coluna.
+
+```sql
+ALTER TABLE pessoas
+MODIFY COLUMN profissao VARCHAR(30) NOT NULL DEFAULT '';
+```
+
+### 9.
+
+Renomear a coluna.
+
+```sql
+ALTER TABLE pessoas
+CHANGE COLUMN profissao prof VARCHAR(30) NOT NULL DEFAULT '';
+```
+
+### 10.
+
+Renomear a tabela.
+
+```sql
+ALTER TABLE pessoas
+RENAME TO estudantes;
+```
 
 ---
 
-**Dicas importantes**
+# 💡 Dicas importantes
 
-* Toda tabela deve possuir uma **Chave Primária**.
-* Sempre utilize `AUTO_INCREMENT` quando precisar gerar identificadores automaticamente.
-* Prefira `DEFAULT` em vez de informar manualmente o valor da chave primária.
-* Utilize `DECIMAL` para armazenar preços e outros valores monetários.
-* Antes de inserir grandes quantidades de dados, confira a estrutura da tabela com `DESCRIBE`.
-
----
-
-# Em resumo
-
-Nesta aula aprendi a criar tabelas utilizando uma **Chave Primária** com `AUTO_INCREMENT`, garantindo que cada registro tenha um identificador único. Também compreendi a diferença entre informar o ID manualmente e utilizar `DEFAULT`, que permite ao MySQL gerar o próximo valor automaticamente. Além disso, aprendi a inserir vários registros em um único comando `INSERT`, consultar os dados com `SELECT` e desenvolvi um segundo projeto criando um banco de dados de vendas para armazenar produtos.
+* Sempre utilize `DESCRIBE` ou `DESC` após alterar a estrutura de uma tabela para verificar se tudo foi aplicado corretamente.
+* Evite remover colunas (`DROP COLUMN`) sem necessidade, pois todos os dados armazenados nelas serão perdidos.
+* Utilize `DEFAULT` quando transformar um campo em `NOT NULL`, principalmente se já existirem registros na tabela.
+* `CHANGE COLUMN` exige que o tipo de dado e as restrições sejam informados novamente.
+* `ALTER TABLE` modifica apenas a **estrutura** da tabela; os registros permanecem, exceto quando uma coluna é removida.
 
 ---
 
-**Resumo Relâmpago**
+# ✅ Em resumo
 
-1. A Chave Primária identifica cada registro de forma única.
-2. `AUTO_INCREMENT` gera automaticamente um novo ID para cada registro.
-3. `PRIMARY KEY (id)` impede IDs duplicados.
-4. `DESCRIBE` mostra a estrutura da tabela.
-5. `DEFAULT` permite que o MySQL gere automaticamente o valor do ID.
-6. `INSERT INTO` pode inserir um ou vários registros de uma só vez.
-7. `SELECT * FROM` exibe todos os registros da tabela.
-8. `DECIMAL` é o tipo ideal para armazenar preços.
-9. O banco **vendas** foi criado para armazenar produtos com código, nome e preço.
-10. Utilizar uma estrutura correta desde o início evita erros e facilita o desenvolvimento de sistemas maiores.
+Nesta aula aprendi a utilizar o comando `ALTER TABLE` para modificar tabelas existentes. Adicionei, removi e reposicionei colunas, alterei tipos de dados e restrições, renomeei colunas e tabelas e compreendi como adicionar uma Chave Primária em uma tabela já criada. Também criei a tabela **cursos**, utilizando recursos como `UNIQUE`, `UNSIGNED`, `YEAR`, `AUTO_INCREMENT` e `IF NOT EXISTS`, entendendo como essas configurações tornam a estrutura do banco mais organizada e segura.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. `ALTER TABLE` modifica a estrutura de tabelas já existentes.
+2. `ADD COLUMN` adiciona uma nova coluna.
+3. `DROP COLUMN` remove uma coluna e seus dados.
+4. `AFTER` posiciona uma coluna após outra, e `FIRST` a coloca no início da tabela.
+5. `MODIFY COLUMN` altera o tipo de dado ou as restrições de uma coluna.
+6. `CHANGE COLUMN` renomeia uma coluna e exige informar novamente seu tipo e restrições.
+7. `RENAME TO` altera o nome da tabela.
+8. `ADD PRIMARY KEY` define a chave primária de uma tabela.
+9. `AUTO_INCREMENT` gera automaticamente identificadores únicos para novos registros.
+10. O termo **tupla** é sinônimo de **registro**, representando uma linha da tabela.
