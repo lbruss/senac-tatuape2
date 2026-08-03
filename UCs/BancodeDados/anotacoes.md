@@ -1,8 +1,8 @@
-# Banco de Dados (MySQL) — Alterando a Estrutura das Tabelas (ALTER TABLE)
+# Alterando a Estrutura das Tabelas (ALTER TABLE)
 
-# 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula aprendi a utilizar o comando **`ALTER TABLE`**, responsável por modificar a estrutura de uma tabela já existente.
+Utilizando o comando **`ALTER TABLE`**, responsável por modificar a estrutura de uma tabela já existente.
 
 Com ele é possível:
 
@@ -19,7 +19,7 @@ Esse comando é um dos mais importantes do SQL, pois permite evoluir um banco de
 
 ---
 
-# O que é ALTER TABLE?
+**O que é ALTER TABLE?**
 
 O comando:
 
@@ -31,7 +31,7 @@ serve para modificar uma tabela que já existe.
 
 Enquanto o `CREATE TABLE` cria uma tabela nova, o `ALTER TABLE` faz alterações em uma tabela já criada.
 
-## Analogia
+> Analogia
 
 Imagine que uma tabela seja uma casa.
 
@@ -54,7 +54,7 @@ A partir desse momento, todos os comandos serão executados dentro do banco **ca
 
 ---
 
-# Estrutura inicial da tabela
+**Estrutura inicial da tabela**
 
 A tabela utilizada na aula foi:
 
@@ -73,7 +73,7 @@ CREATE TABLE pessoas (
 
 ---
 
-# Adicionando uma nova coluna
+## Adicionando uma nova coluna
 
 Para adicionar uma coluna chamada **profissao**:
 
@@ -82,31 +82,31 @@ ALTER TABLE pessoas
 ADD COLUMN profissao VARCHAR(20);
 ```
 
-## Explicação
+- **Explicação**
 
-### ALTER TABLE pessoas
+**ALTER TABLE pessoas**
 
 Indica qual tabela será modificada.
 
-### ADD COLUMN
+**ADD COLUMN**
 
 Adiciona uma nova coluna.
 
-### profissao
+**profissao**
 
 Nome da nova coluna.
 
-### VARCHAR(20)
+**VARCHAR(20)**
 
 Permite armazenar até 20 caracteres.
 
 ---
 
-# Onde a coluna será criada?
+**Onde a coluna será criada?**
 
 Quando nenhuma posição é informada, o MySQL adiciona a coluna **no final da tabela**.
 
-Exemplo:
+- **Exemplo:**
 
 Antes:
 
@@ -119,7 +119,7 @@ Depois:
 
 ---
 
-# Verificando a estrutura
+**Verificando a estrutura**
 
 Após qualquer alteração, é recomendado executar:
 
@@ -155,7 +155,7 @@ ADD COLUMN profissao VARCHAR(20) AFTER nome;
 
 ---
 
-# O que significa AFTER?
+**O que significa AFTER?**
 
 O comando:
 
@@ -171,7 +171,7 @@ Resultado:
 
 ---
 
-## Observação importante
+**Observação importante**
 
 No MySQL existe apenas o comando:
 
@@ -185,14 +185,14 @@ Para colocar uma coluna no início da tabela utiliza-se outro comando, visto a s
 
 ---
 
-# Adicionando uma coluna no início
+## Adicionando uma coluna no início
 
 ```sql
 ALTER TABLE pessoas
 ADD COLUMN codigo INT FIRST;
 ```
 
-## O que faz?
+**O que faz?**
 
 A palavra:
 
@@ -219,7 +219,7 @@ DROP COLUMN codigo;
 
 A coluna será removida da estrutura da tabela.
 
-> ⚠️ **Atenção:** Ao remover uma coluna, todos os dados armazenados nela também são apagados.
+> **Atenção:** Ao remover uma coluna, todos os dados armazenados nela também são apagados.
 
 ---
 
@@ -227,23 +227,23 @@ A coluna será removida da estrutura da tabela.
 
 Também é possível alterar o tipo de um campo já existente.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 ALTER TABLE pessoas
 MODIFY COLUMN profissao VARCHAR(30) NOT NULL;
 ```
 
-## O que aconteceu?
+**O que aconteceu?**
 
 * o tamanho passou de 20 para 30 caracteres;
 * o campo passou a ser obrigatório (`NOT NULL`).
 
 ---
 
-# Por que apareceu um aviso?
+**Por que apareceu um aviso??*
 
-Na aula apareceu um símbolo de alerta (⚠️).
+Apareceu um símbolo de alerta (⚠️).
 
 Isso aconteceu porque já existiam registros cadastrados.
 
@@ -255,7 +255,7 @@ Esse aviso é conhecido como **truncation warning** ou aviso de conversão/trunc
 
 ---
 
-# Corrigindo o problema
+## Corrigindo o problema
 
 Para evitar esse aviso, pode-se definir um valor padrão.
 
@@ -264,7 +264,7 @@ ALTER TABLE pessoas
 MODIFY COLUMN profissao VARCHAR(30) NOT NULL DEFAULT '';
 ```
 
-## O que significa?
+**O que significa?**
 
 Sempre que um novo registro não informar a profissão, o MySQL armazenará uma string vazia (`''`) como valor padrão.
 
@@ -281,7 +281,7 @@ ALTER TABLE pessoas
 CHANGE COLUMN profissao prof VARCHAR(30) NOT NULL DEFAULT '';
 ```
 
-## Explicação
+- **Explicação**
 
 Ao utilizar `CHANGE COLUMN`, é obrigatório informar novamente:
 
@@ -289,13 +289,13 @@ Ao utilizar `CHANGE COLUMN`, é obrigatório informar novamente:
 * o tipo de dado;
 * as restrições (*constraints*).
 
-### Antes
+**Antes**
 
 ```text
 profissao
 ```
 
-### Depois
+**Depois**
 
 ```text
 prof
@@ -303,7 +303,7 @@ prof
 
 ---
 
-# Verificando a alteração
+**Verificando a alteração**
 
 ```sql
 DESCRIBE pessoas;
@@ -326,7 +326,7 @@ Agora a tabela deixa de se chamar **pessoas** e passa a se chamar **estudantes**
 
 ---
 
-# Conferindo
+**Conferindo**
 
 ```sql
 DESCRIBE estudantes;
@@ -352,9 +352,9 @@ CREATE TABLE IF NOT EXISTS cursos (
 
 ---
 
-# Explicando cada campo
+**Explicando cada campo**
 
-## IF NOT EXISTS
+- IF NOT EXISTS
 
 Evita erro caso a tabela já exista.
 
@@ -362,7 +362,7 @@ O MySQL simplesmente ignora a criação.
 
 ---
 
-## nome
+- nome
 
 ```sql
 VARCHAR(50)
@@ -372,11 +372,11 @@ Nome do curso.
 
 ---
 
-## UNIQUE
+- UNIQUE
 
 Impede nomes repetidos.
 
-Exemplo:
+- **Exemplo:**
 
 ```
 Informática
@@ -387,7 +387,7 @@ O segundo cadastro será recusado.
 
 ---
 
-## descricao
+- descricao
 
 ```sql
 TEXT
@@ -399,7 +399,7 @@ Utilizado para textos longos.
 
 ---
 
-## carga
+- carga
 
 ```sql
 INT UNSIGNED
@@ -411,13 +411,13 @@ Como carga horária nunca será negativa, `UNSIGNED` é uma escolha adequada.
 
 ---
 
-## totalaulas
+- totalaulas
 
 Quantidade de aulas do curso.
 
 ---
 
-## ano
+- ano
 
 ```sql
 YEAR
@@ -427,13 +427,13 @@ Armazena apenas o ano.
 
 Caso nenhum valor seja informado, será utilizado:
 
-```text
+```
 2026
 ```
 
 ---
 
-# Adicionando um ID
+## Adicionando um ID
 
 Depois foi adicionada uma coluna identificadora.
 
@@ -446,11 +446,9 @@ Ela será criada na primeira posição da tabela.
 
 ---
 
-# Criando a Chave Primária
+## Criando a Chave Primária
 
-Na anotação original havia um pequeno erro de sintaxe (`alter tables`).
-
-O comando correto é:
+O comando:
 
 ```sql
 ALTER TABLE cursos
@@ -461,7 +459,7 @@ Agora `idcurso` passa a identificar cada curso de forma única.
 
 ---
 
-# Transformando em AUTO_INCREMENT
+## Transformando em AUTO_INCREMENT
 
 Depois:
 
@@ -474,7 +472,7 @@ Agora o próprio MySQL gera automaticamente o código de cada curso.
 
 ---
 
-# Conferindo a estrutura
+## Conferindo a estrutura
 
 ```sql
 DESC cursos;
@@ -489,19 +487,19 @@ Esse comando exibirá toda a estrutura da tabela, incluindo:
 
 ---
 
-# Conceito importante — Tuplas
+# Tuplas
 
 Durante os estudos pode aparecer o termo:
 
-```text
+```
 Tupla
 ```
 
-## O que é uma tupla?
+**O que é uma tupla**
 
 No contexto de Banco de Dados, **tupla** é simplesmente um **registro**, ou seja, uma linha da tabela.
 
-Exemplo:
+- **Exemplo:**
 
 | id | nome  |
 | -- | ----- |
@@ -528,9 +526,9 @@ Hoje em dia é muito mais comum utilizar o termo **registro**, mas ambos possuem
 
 ---
 
-# 🧩 Passo a passo da aula
+# Passo a passo
 
-### 1.
+**1.**
 
 Selecionar o banco.
 
@@ -538,7 +536,7 @@ Selecionar o banco.
 USE cadastro;
 ```
 
-### 2.
+**2.**
 
 Adicionar uma coluna.
 
@@ -547,7 +545,7 @@ ALTER TABLE pessoas
 ADD COLUMN profissao VARCHAR(20);
 ```
 
-### 3.
+**3.**
 
 Conferir.
 
@@ -555,7 +553,7 @@ Conferir.
 DESCRIBE pessoas;
 ```
 
-### 4.
+**4.**
 
 Remover a coluna.
 
@@ -564,7 +562,7 @@ ALTER TABLE pessoas
 DROP COLUMN profissao;
 ```
 
-### 5.
+**5.**
 
 Criá-la novamente após `nome`.
 
@@ -573,7 +571,7 @@ ALTER TABLE pessoas
 ADD COLUMN profissao VARCHAR(20) AFTER nome;
 ```
 
-### 6.
+**6.**
 
 Adicionar uma coluna no início.
 
@@ -582,7 +580,7 @@ ALTER TABLE pessoas
 ADD COLUMN codigo INT FIRST;
 ```
 
-### 7.
+**7.**
 
 Remover essa coluna.
 
@@ -591,7 +589,7 @@ ALTER TABLE pessoas
 DROP COLUMN codigo;
 ```
 
-### 8.
+**8.**
 
 Alterar o tipo da coluna.
 
@@ -600,7 +598,7 @@ ALTER TABLE pessoas
 MODIFY COLUMN profissao VARCHAR(30) NOT NULL DEFAULT '';
 ```
 
-### 9.
+**9.**
 
 Renomear a coluna.
 
@@ -609,7 +607,7 @@ ALTER TABLE pessoas
 CHANGE COLUMN profissao prof VARCHAR(30) NOT NULL DEFAULT '';
 ```
 
-### 10.
+**10.**
 
 Renomear a tabela.
 
@@ -620,7 +618,7 @@ RENAME TO estudantes;
 
 ---
 
-# 💡 Dicas importantes
+**Dicas importantes**
 
 * Sempre utilize `DESCRIBE` ou `DESC` após alterar a estrutura de uma tabela para verificar se tudo foi aplicado corretamente.
 * Evite remover colunas (`DROP COLUMN`) sem necessidade, pois todos os dados armazenados nelas serão perdidos.
@@ -630,13 +628,13 @@ RENAME TO estudantes;
 
 ---
 
-# ✅ Em resumo
+# Em resumo
 
 Nesta aula aprendi a utilizar o comando `ALTER TABLE` para modificar tabelas existentes. Adicionei, removi e reposicionei colunas, alterei tipos de dados e restrições, renomeei colunas e tabelas e compreendi como adicionar uma Chave Primária em uma tabela já criada. Também criei a tabela **cursos**, utilizando recursos como `UNIQUE`, `UNSIGNED`, `YEAR`, `AUTO_INCREMENT` e `IF NOT EXISTS`, entendendo como essas configurações tornam a estrutura do banco mais organizada e segura.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. `ALTER TABLE` modifica a estrutura de tabelas já existentes.
 2. `ADD COLUMN` adiciona uma nova coluna.
