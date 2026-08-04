@@ -1,567 +1,681 @@
-# Estrutura de Controle `ESCOLHA...CASO` (Switch Case)
+# Lógica de Programação — Estruturas de Controle de Repetição (Laços de Repetição)
 
-**Ideia Principal**
+# 🎯 Ideia Principal
 
-Uma nova estrutura de decisão chamada **`ESCOLHA...CASO`** (equivalente ao `switch case` em diversas linguagens de programação).
+Nesta aula comecei a estudar as **estruturas de repetição**, também chamadas de **laços de repetição** ou **loops**.
 
-Até agora, todas as decisões eram feitas utilizando vários comandos `SE`, `SENÃO` e `SENÃO SE`. Porém, quando existem muitas opções possíveis para um mesmo valor, escrever vários `SE` deixa o código mais longo e difícil de ler.
+Essas estruturas permitem que um mesmo bloco de código seja executado várias vezes, sem que seja necessário escrever as mesmas instruções repetidamente.
 
-Para esses casos existe o comando **`ESCOLHA...CASO`**, que torna o algoritmo mais organizado e fácil de entender.
+Imagine que seja necessário imprimir uma mensagem **100 vezes**.
 
----
+Sem uma estrutura de repetição, seria preciso escrever:
 
-**O que é o `ESCOLHA...CASO`?**
-
-A estrutura `ESCOLHA...CASO` é utilizada quando uma variável pode assumir **vários valores diferentes**, e cada valor executa uma ação específica.
-
-Sua estrutura geral é:
-
-```portugol
-escolha variavel
-
-   caso valor1
-      comandos
-
-   caso valor2
-      comandos
-
-   caso valor3
-      comandos
-
-   outrocaso
-      comandos
-
-fimescolha
+```text
+escreval("Olá")
+escreval("Olá")
+escreval("Olá")
+...
+100 vezes
 ```
 
+Isso seria trabalhoso e pouco eficiente.
+
+Com um laço de repetição basta escrever:
+
+```text
+Repita 100 vezes
+    escreval("Olá")
+```
+
+O computador faz o restante automaticamente.
+
 ---
 
-**Quando utilizar?**
+# O que são Estruturas de Repetição?
 
-O `ESCOLHA...CASO` é indicado quando há diversas possibilidades para **uma mesma variável**.
+São estruturas utilizadas quando uma determinada tarefa precisa ser executada diversas vezes.
 
-Exemplos:
+O programa continuará repetindo as instruções **até que uma condição de parada seja satisfeita**.
 
-* Dias da semana.
-* Meses do ano.
-* Menu de opções.
-* Calculadoras.
-* Sistemas bancários.
-* Caixas eletrônicos.
+Essas estruturas são muito utilizadas em situações como:
+
+* Cadastro de vários clientes.
+* Leitura de notas de alunos.
+* Impressão de listas.
+* Tabuadas.
 * Jogos.
-* Sistemas de cadastro.
+* Sistemas bancários.
+* Inteligência Artificial.
+* Processamento de grandes quantidades de dados.
 
-Em vez de fazer várias comparações com `SE`, basta verificar o valor da variável uma única vez.
-
----
-
-> Analogia
-
-Imagine um elevador.
-
-Você aperta um botão.
-
-Dependendo do número escolhido, ele leva para um andar diferente.
-
-```
-Botão 1 → Térreo
-
-Botão 2 → Primeiro andar
-
-Botão 3 → Segundo andar
-
-Botão 4 → Terceiro andar
-```
-
-É exatamente esse comportamento que o comando `ESCOLHA` possui.
+Sem os laços de repetição, praticamente qualquer programa moderno seria muito mais complexo.
 
 ---
 
-## Exemplo — Descobrir o Dia da Semana
+# Variável Contador
 
-**Objetivo**
+Durante uma repetição, normalmente é necessário saber **quantas vezes o laço já foi executado**.
 
-Mostrar o dia da semana correspondente ao número digitado.
+Para isso utiliza-se uma **variável contador**.
 
----
+Os nomes mais utilizados são:
 
-**Código**
+```text
+i
 
-```portugol
-algoritmo "Escolha-Caso"
+ou
 
-var
-
-diaDaSemana: inteiro
-
-inicio
-
-escreval("Digite um número entre 1 e 7 para saber o dia da semana")
-leia(diaDaSemana)
-
-escolha diaDaSemana
-
-   caso 1
-      escreval("Domingo")
-
-   caso 2
-      escreval("Segunda-feira")
-
-   caso 3
-      escreval("Terça-feira")
-
-   caso 4
-      escreval("Quarta-feira")
-
-   caso 5
-      escreval("Quinta-feira")
-
-   caso 6
-      escreval("Sexta-feira")
-
-   caso 7
-      escreval("Sábado")
-
-   outrocaso
-
-      escreval("Você digitou um valor inválido")
-
-fimescolha
-
-fimalgoritmo
+j
 ```
 
----
+Esses nomes são uma convenção entre programadores.
 
-**Explicação Linha por Linha**
-
-**Leitura da variável**
-
-```portugol
-leia(diaDaSemana)
-```
-
-Recebe um número digitado pelo usuário.
+Nada impede utilizar outro nome, mas `i` e `j` são os mais comuns por serem curtos e amplamente reconhecidos.
 
 Exemplo:
 
+```portugol
+i <- 1
 ```
+
+A cada repetição:
+
+```portugol
+i <- i + 1
+```
+
+Assim o contador vai aumentando:
+
+```text
+1
+
+2
+
+3
+
 4
+
+5
 ```
 
 ---
 
-**Estrutura `ESCOLHA`**
+# Principais Estruturas de Repetição
+
+No VisualG existem três estruturas principais:
+
+## `PARA...FAÇA` (`for`)
+
+Utilizada quando já sabemos quantas vezes a repetição ocorrerá.
+
+---
+
+## `ENQUANTO...FAÇA` (`while`)
+
+Utilizada quando a repetição depende de uma condição.
+
+Primeiro verifica a condição.
+
+Depois executa o código.
+
+---
+
+## `REPITA...ATÉ` (`do...while`)
+
+Executa o código primeiro.
+
+Depois verifica a condição de parada.
+
+Isso garante que o bloco será executado pelo menos uma vez.
+
+---
+
+# 1️⃣ Estrutura `PARA...FAÇA` (`for`)
+
+## Quando utilizar?
+
+Quando já sabemos exatamente quantas vezes uma ação será repetida.
+
+Exemplos:
+
+* Mostrar os números de 1 até 100.
+* Ler as notas de 30 alunos.
+* Imprimir uma mensagem 10 vezes.
+
+---
+
+## Código
 
 ```portugol
-escolha diaDaSemana
-```
+algoritmo "Para"
 
-O computador analisa o valor armazenado na variável.
+var
 
-No exemplo:
+x, z, i: inteiro
 
-```
-diaDaSemana = 4
-```
+inicio
 
-Então ele procura:
+escreval("Algoritmo para repetir uma ação 5 vezes")
+escreval("Para cada ação, digite um número inteiro")
+escreval("")
+escreval("Digite um valor inteiro")
 
-```
-caso 4
-```
+para i de 1 ate 5 faca
 
-Resultado:
+   leia(x)
 
-```
-Quarta-feira
+   z <- x * 3
+
+   escreval("O valor digitado ", x,
+             " multiplicado por 3 é: ", z)
+
+fimpara
+
+fimalgoritmo
 ```
 
 ---
 
-- `outrocaso`
+## Explicação Linha por Linha
+
+### O contador
 
 ```portugol
-outrocaso
+para i de 1 ate 5 faca
 ```
 
-É executado quando nenhum dos casos corresponde ao valor informado.
+Significa:
 
-- **Exemplo:**
+```text
+Comece com i = 1
 
+Execute o código
+
+Depois aumente automaticamente para:
+
+2
+
+3
+
+4
+
+5
+
+Quando passar de 5, o laço termina.
 ```
-Usuário digitou:
+
+Não é necessário escrever:
+
+```portugol
+i <- i + 1
+```
+
+O próprio comando `PARA` faz isso automaticamente.
+
+---
+
+### Leitura
+
+```portugol
+leia(x)
+```
+
+A cada repetição o usuário informa um novo número.
+
+---
+
+### Processamento
+
+```portugol
+z <- x * 3
+```
+
+Multiplica o número informado por 3.
+
+---
+
+### Saída
+
+```portugol
+escreval(...)
+```
+
+Mostra o resultado da multiplicação.
+
+---
+
+## Exemplo
+
+Entradas:
+
+```text
+2
+
+5
+
+8
+
+10
+
+12
+```
+
+Saídas:
+
+```text
+6
 
 15
-```
 
-Resultado:
+24
 
-```
-Você digitou um valor inválido.
+30
+
+36
 ```
 
 ---
 
-# Calculadora Utilizando `ESCOLHA`
+# 2️⃣ Estrutura `ENQUANTO...FAÇA` (`while`)
 
-**Objetivo**
+## Como funciona?
 
-Criar uma calculadora simples.
+O `ENQUANTO` verifica a condição **antes** de executar o bloco.
 
-O usuário escolhe qual operação deseja realizar.
+Se a condição for falsa logo no início, o laço não será executado nenhuma vez.
 
 ---
 
-**Código**
+## Código
 
 ```portugol
-algoritmo "Calculadora"
+algoritmo "Enquanto"
 
 var
 
-calculo: inteiro
-valor1, valor2, result: real
+x, z, i: inteiro
 
 inicio
 
-escreval("Digite o primeiro valor:")
-leia(valor1)
-
-escreval("Digite o segundo valor:")
-leia(valor2)
-
-escreval("Escolha a operação matemática")
-escreval("1 - Adição")
-escreval("2 - Subtração")
-escreval("3 - Multiplicação")
-escreval("4 - Divisão")
-
-leia(calculo)
-
-escolha calculo
-
-   caso 1
-      result <- valor1 + valor2
-      escreval("O resultado é ", result)
-
-   caso 2
-      result <- valor1 - valor2
-      escreval("O resultado é ", result)
-
-   caso 3
-      result <- valor1 * valor2
-      escreval("O resultado é ", result)
-
-   caso 4
-      result <- valor1 / valor2
-      escreval("O resultado é ", result)
-
-   outrocaso
-      escreval("Você digitou um valor inválido.")
-
-fimescolha
-
-fimalgoritmo
-```
-
----
-
-**Como o algoritmo funciona**
-
-Primeiro o usuário informa dois números.
-
-Depois escolhe a operação.
-
-- **Exemplo:**
-
-```
-Valor 1 = 20
-
-Valor 2 = 10
-
-Operação = 3
-```
-
-O computador encontra:
-
-```
-caso 3
-```
-
-Executa:
-
-```
-20 × 10
-```
-
-Resultado:
-
-```
-200
-```
-
----
-
-- **Observação**
-
-Perceba que **somente um dos casos será executado**.
-
-Os demais são ignorados.
-
-Isso torna o algoritmo muito eficiente.
-
----
-
-# Sistema de Doação
-
-**Objetivo**
-
-Criar um menu de doações.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Doacao"
-
-var
-
-valor: real
-doacao: inteiro
-
-inicio
-
-escreval("Doação para uma pessoa bem humilde (Eu)")
+escreval("Algoritmo para repetir uma ação 5 vezes")
+escreval("Para cada ação, digite um número inteiro")
 escreval("")
-escreval("Digite o número de acordo com a sua escolha")
-escreval("")
-escreval("1 - Doar R$ 10,00")
-escreval("2 - Doar R$ 25,00")
-escreval("3 - Doar R$ 50,00")
-escreval("4 - Doar outro valor")
-escreval("5 - Cancelar a doação")
+escreval("Digite um valor inteiro")
 
-leia(doacao)
+leia(x)
 
-escolha doacao
+i <- 1
 
-   caso 1
-      escreval("Você doou R$ 10,00")
+enquanto (i <= 5) faca
 
-   caso 2
-      escreval("Você doou R$ 25,00")
+   z <- x * 3
 
-   caso 3
-      escreval("Você doou R$ 50,00")
+   escreval(z)
 
-   caso 4
-      escreval("Digite o valor desejado")
-      leia(valor)
-      escreval("Você doou R$ ", valor)
+   i <- i + 1
 
-   caso 5
-      escreval("Você doou o total de R$ 0,00")
-
-   outrocaso
-      escreval("Valor inválido")
-
-fimescolha
+fimenquanto
 
 fimalgoritmo
 ```
 
 ---
 
-- **Explicação**
+## O que acontece?
 
-Esse algoritmo simula um menu.
+O número é digitado apenas uma vez.
 
-Cada número representa uma opção.
+Exemplo:
 
-```
-1 → Doação de R$ 10,00
-
-2 → Doação de R$ 25,00
-
-3 → Doação de R$ 50,00
-
-4 → Valor personalizado
-
-5 → Cancelar
+```text
+x = 8
 ```
 
-É exatamente a mesma lógica utilizada em caixas eletrônicos, aplicativos e menus de sistemas.
+Depois o algoritmo faz:
 
----
-
-# Cálculo de Frete por Região
-
-**Objetivo**
-
-Calcular o valor final de uma compra de acordo com a região de entrega.
-
----
-
-**Regras**
-
-| Região       |    Frete |
-| ------------ | -------: |
-| Sudeste      |   Grátis |
-| Sul          | R$ 10,00 |
-| Centro-Oeste | R$ 25,00 |
-| Norte        | R$ 50,00 |
-| Nordeste     | R$ 40,00 |
-
----
-
-**Código**
-
-```portugol
-algoritmo "Frete por Regiao"
-
-var
-
-valorF, valorC: real
-frete: inteiro
-
-inicio
-
-escreval("Digite o valor da compra")
-leia(valorC)
-
-escreval("Digite o número da região")
-escreval("1 - Sudeste")
-escreval("2 - Sul")
-escreval("3 - Centro-Oeste")
-escreval("4 - Norte")
-escreval("5 - Nordeste")
-
-leia(frete)
-
-escolha frete
-
-   caso 1
-
-      escreval("O valor da sua compra é de R$ ", valorC)
-      escreval("O seu frete é grátis")
-
-   caso 2
-
-      valorF <- valorC + 10
-
-      escreval("O valor da sua compra é de R$ ", valorC)
-      escreval("O valor do frete é de R$ 10,00")
-      escreval("O valor final a ser pago é de R$ ", valorF)
-
-   caso 3
-
-      valorF <- valorC + 25
-
-      escreval("O valor da sua compra é de R$ ", valorC)
-      escreval("O valor do frete é de R$ 25,00")
-      escreval("O valor final a ser pago é de R$ ", valorF)
-
-   caso 4
-
-      valorF <- valorC + 50
-
-      escreval("O valor da sua compra é de R$ ", valorC)
-      escreval("O valor do frete é de R$ 50,00")
-      escreval("O valor final a ser pago é de R$ ", valorF)
-
-   caso 5
-
-      valorF <- valorC + 40
-
-      escreval("O valor da sua compra é de R$ ", valorC)
-      escreval("O valor do frete é de R$ 40,00")
-      escreval("O valor final a ser pago é de R$ ", valorF)
-
-   outrocaso
-
-      escreval("Número inválido")
-
-fimescolha
-
-fimalgoritmo
+```text
+8 × 3 = 24
 ```
 
----
-
-**Como o algoritmo funciona**
-
-Primeiro o usuário informa o valor da compra.
-
-Depois escolhe a região.
-
-Dependendo da região, o programa adiciona um valor diferente ao frete.
-
-- **Exemplo:**
-
-```
-Compra = R$ 200,00
-
-Região = Norte
-```
-
-O algoritmo encontra:
-
-```
-caso 4
-```
-
-Executa:
-
-```
-200 + 50
-```
+Cinco vezes.
 
 Resultado:
 
+```text
+24
+
+24
+
+24
+
+24
+
+24
 ```
-Valor final = R$ 250,00
+
+---
+
+## O contador
+
+Aqui o contador precisa ser atualizado manualmente.
+
+```portugol
+i <- i + 1
+```
+
+Se essa linha fosse esquecida, a condição:
+
+```text
+i <= 5
+```
+
+Nunca deixaria de ser verdadeira.
+
+O programa entraria em um **laço infinito**, executando o mesmo bloco sem parar.
+
+---
+
+# 3️⃣ Outro Exemplo com `ENQUANTO`
+
+Agora a leitura do número foi colocada **dentro do laço**.
+
+## Código
+
+```portugol
+algoritmo "Enquanto"
+
+var
+
+x, z, i: inteiro
+
+inicio
+
+i <- 1
+
+enquanto (i <= 5) faca
+
+   leia(x)
+
+   z <- x * 3
+
+   escreval(z)
+
+   i <- i + 1
+
+fimenquanto
+
+fimalgoritmo
 ```
 
 ---
 
-# Utilizar `ESCOLHA`?
+## Diferença para o exemplo anterior
 
-Se esse algoritmo fosse desenvolvido utilizando apenas `SE`, seria necessário comparar a mesma variável diversas vezes.
+No primeiro exemplo:
 
-Com `ESCOLHA`, o código fica:
+```text
+O número é digitado apenas uma vez.
+```
 
-* Mais organizado.
-* Mais fácil de ler.
-* Mais simples de manter.
-* Mais intuitivo.
+No segundo:
 
-Por isso, quando existem muitas opções fixas, `ESCOLHA...CASO` costuma ser a melhor escolha.
+```text
+O usuário informa um número diferente a cada repetição.
+```
+
+Exemplo:
+
+```text
+2
+
+4
+
+6
+
+8
+
+10
+```
+
+Resultados:
+
+```text
+6
+
+12
+
+18
+
+24
+
+30
+```
+
+Essa pequena mudança altera completamente o comportamento do algoritmo.
 
 ---
 
-# Conceito Fundamental
+# 4️⃣ Estrutura `REPITA...ATÉ` (`do...while`)
 
-A estrutura `ESCOLHA...CASO` é utilizada quando uma única variável pode assumir vários valores possíveis, e cada valor corresponde a uma ação diferente.
+## Como funciona?
 
-Ela substitui longas sequências de `SE...SENÃO`, deixando o algoritmo mais limpo e organizado. Esse recurso é amplamente utilizado em menus de sistemas, calculadoras, caixas eletrônicos, aplicativos, jogos e diversos programas que precisam oferecer várias opções ao usuário.
+Diferentemente do `ENQUANTO`, o `REPITA` executa o bloco primeiro.
+
+Somente depois verifica a condição de parada.
+
+Por isso ele sempre executa pelo menos uma vez.
 
 ---
 
-# Em Resumo
+## Código
 
-Nesta aula aprendi a utilizar a estrutura `ESCOLHA...CASO` (`switch case`) para criar algoritmos com múltiplas opções de forma organizada. Desenvolvi exemplos para identificar o dia da semana, construir uma calculadora, criar um menu de doações e calcular o frete conforme a região de entrega. Também compreendi que essa estrutura é ideal quando uma única variável determina qual bloco de código será executado.
+```portugol
+algoritmo "Repita"
 
-**Resumo Relâmpago**
+var
 
-1. `ESCOLHA...CASO` é usado quando uma variável possui várias opções possíveis.
-2. É equivalente ao `switch case` de outras linguagens de programação.
-3. Apenas um `caso` é executado por vez.
-4. O `outrocaso` trata valores que não correspondem a nenhuma opção válida.
-5. Essa estrutura deixa o código mais organizado que vários `SE`.
-6. É muito utilizada em menus e sistemas com opções fixas.
-7. Pode ser aplicada em calculadoras, cadastros e controles de acesso.
-8. Cada `caso` representa uma ação específica para um determinado valor.
-9. O algoritmo compara a variável apenas uma vez, tornando a lógica mais clara.
-10. `ESCOLHA...CASO` é uma das principais estruturas de controle da programação.
+x, z, i: inteiro
+
+inicio
+
+i <- 1
+
+repita
+
+   leia(x)
+
+   z <- x * 3
+
+   escreval(z)
+
+   i <- i + 1
+
+ate (i > 5)
+
+fimalgoritmo
+```
+
+---
+
+## Explicação
+
+O algoritmo executa:
+
+```text
+1ª repetição
+
+↓
+
+Verifica
+
+↓
+
+2ª repetição
+
+↓
+
+Verifica
+
+↓
+
+...
+
+↓
+
+Quando i for maior que 5
+
+↓
+
+Encerra
+```
+
+A condição no `REPITA` representa **o momento de parar**, e não de continuar.
+
+---
+
+# Comparando `ENQUANTO` e `REPITA`
+
+| ENQUANTO (`while`)                                    | REPITA (`do...while`)                                     |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| Verifica a condição antes de executar                 | Executa primeiro e verifica depois                        |
+| Pode não executar nenhuma vez                         | Executa pelo menos uma vez                                |
+| Muito usado quando a condição deve ser validada antes | Muito usado quando é necessário executar ao menos uma vez |
+
+---
+
+# 5️⃣ Tabuada Utilizando `REPITA`
+
+## Objetivo
+
+Mostrar a tabuada de um número de 1 até 10.
+
+---
+
+## Código
+
+```portugol
+algoritmo "Tabuada"
+
+var
+
+numero, contagem: inteiro
+
+inicio
+
+contagem <- 1
+
+escreva("Mostra a tabuada do número: ")
+leia(numero)
+
+repita
+
+   escreval(numero, " x ", contagem,
+            " = ", numero * contagem)
+
+   contagem <- contagem + 1
+
+ate (contagem > 10)
+
+fimalgoritmo
+```
+
+---
+
+## Explicação Linha por Linha
+
+### Contador
+
+```portugol
+contagem <- 1
+```
+
+A tabuada sempre começa no número 1.
+
+---
+
+### `escreva`
+
+```portugol
+escreva(...)
+```
+
+Diferente de:
+
+```portugol
+escreval(...)
+```
+
+O comando `escreva` **não pula para a próxima linha**, permitindo que o usuário digite o valor na mesma linha da mensagem.
+
+Exemplo:
+
+```text
+Mostra a tabuada do número: 7
+```
+
+Já `escreval` faria:
+
+```text
+Mostra a tabuada do número:
+
+7
+```
+
+---
+
+### Impressão
+
+```portugol
+numero * contagem
+```
+
+Se o usuário informar:
+
+```text
+7
+```
+
+O algoritmo gera:
+
+```text
+7 x 1 = 7
+
+7 x 2 = 14
+
+7 x 3 = 21
+
+...
+
+7 x 10 = 70
+```
+
+---
+
+# 🧠 Conceito Fundamental
+
+As estruturas de repetição permitem que um bloco de código seja executado várias vezes de forma automática, eliminando a necessidade de escrever instruções repetidas. Cada tipo de laço possui uma finalidade específica:
+
+* **`PARA` (`for`)**: ideal quando a quantidade de repetições é conhecida.
+* **`ENQUANTO` (`while`)**: ideal quando a repetição depende de uma condição avaliada antes da execução.
+* **`REPITA...ATÉ` (`do...while`)**: ideal quando o bloco precisa ser executado pelo menos uma vez.
+
+Escolher a estrutura correta torna o algoritmo mais eficiente, organizado e fácil de manter.
+
+---
+
+# ✅ Em Resumo
+
+Nesta aula aprendi as três principais estruturas de repetição do VisualG: `PARA`, `ENQUANTO` e `REPITA...ATÉ`. Também compreendi a importância da variável contador (`i` ou `j`) para controlar quantas vezes um laço será executado. Desenvolvi exemplos de multiplicação repetitiva e uma tabuada, entendendo as diferenças entre cada estrutura e quando utilizar cada uma delas.
+
+# ⚡ Resumo Relâmpago (10 linhas)
+
+1. Estruturas de repetição executam um mesmo bloco de código várias vezes.
+2. A variável contador controla quantas vezes o laço será executado.
+3. `PARA` (`for`) é usado quando o número de repetições é conhecido.
+4. `ENQUANTO` (`while`) verifica a condição antes de executar o bloco.
+5. `REPITA...ATÉ` (`do...while`) executa o bloco antes de verificar a condição.
+6. O contador deve ser atualizado manualmente no `ENQUANTO` e no `REPITA`.
+7. Esquecer de atualizar o contador pode causar um laço infinito.
+8. `escreva` não quebra linha; `escreval` quebra a linha após a mensagem.
+9. A tabuada é um exemplo clássico de uso de estruturas de repetição.
+10. Os laços de repetição são fundamentais para automatizar tarefas repetitivas em qualquer linguagem de programação.
