@@ -1,8 +1,8 @@
-# Lógica de Programação — Estruturas de Controle de Repetição (Laços de Repetição)
+# Estruturas de Controle de Repetição (Laços de Repetição)
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula comecei a estudar as **estruturas de repetição**, também chamadas de **laços de repetição** ou **loops**.
+**Estruturas de repetição**, também chamadas de **laços de repetição** ou **loops**.
 
 Essas estruturas permitem que um mesmo bloco de código seja executado várias vezes, sem que seja necessário escrever as mesmas instruções repetidamente.
 
@@ -10,7 +10,7 @@ Imagine que seja necessário imprimir uma mensagem **100 vezes**.
 
 Sem uma estrutura de repetição, seria preciso escrever:
 
-```text
+```
 escreval("Olá")
 escreval("Olá")
 escreval("Olá")
@@ -22,7 +22,7 @@ Isso seria trabalhoso e pouco eficiente.
 
 Com um laço de repetição basta escrever:
 
-```text
+```
 Repita 100 vezes
     escreval("Olá")
 ```
@@ -31,7 +31,7 @@ O computador faz o restante automaticamente.
 
 ---
 
-# O que são Estruturas de Repetição?
+**O que são Estruturas de Repetição?**
 
 São estruturas utilizadas quando uma determinada tarefa precisa ser executada diversas vezes.
 
@@ -52,7 +52,7 @@ Sem os laços de repetição, praticamente qualquer programa moderno seria muito
 
 ---
 
-# Variável Contador
+## Variável Contador
 
 Durante uma repetição, normalmente é necessário saber **quantas vezes o laço já foi executado**.
 
@@ -60,7 +60,7 @@ Para isso utiliza-se uma **variável contador**.
 
 Os nomes mais utilizados são:
 
-```text
+```
 i
 
 ou
@@ -72,7 +72,7 @@ Esses nomes são uma convenção entre programadores.
 
 Nada impede utilizar outro nome, mas `i` e `j` são os mais comuns por serem curtos e amplamente reconhecidos.
 
-Exemplo:
+- **Exemplo:**
 
 ```portugol
 i <- 1
@@ -86,7 +86,7 @@ i <- i + 1
 
 Assim o contador vai aumentando:
 
-```text
+```
 1
 
 2
@@ -104,13 +104,13 @@ Assim o contador vai aumentando:
 
 No VisualG existem três estruturas principais:
 
-## `PARA...FAÇA` (`for`)
+**`PARA...FAÇA` (`for`)**
 
 Utilizada quando já sabemos quantas vezes a repetição ocorrerá.
 
 ---
 
-## `ENQUANTO...FAÇA` (`while`)
+**`ENQUANTO...FAÇA` (`while`)**
 
 Utilizada quando a repetição depende de uma condição.
 
@@ -120,7 +120,7 @@ Depois executa o código.
 
 ---
 
-## `REPITA...ATÉ` (`do...while`)
+**`REPITA...ATÉ` (`do...while`)**
 
 Executa o código primeiro.
 
@@ -130,9 +130,9 @@ Isso garante que o bloco será executado pelo menos uma vez.
 
 ---
 
-# 1️⃣ Estrutura `PARA...FAÇA` (`for`)
+## Estrutura `PARA...FAÇA` (`for`)
 
-## Quando utilizar?
+**Quando utilizar?**
 
 Quando já sabemos exatamente quantas vezes uma ação será repetida.
 
@@ -144,7 +144,7 @@ Exemplos:
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Para"
@@ -176,9 +176,9 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-### O contador
+**O contador**
 
 ```portugol
 para i de 1 ate 5 faca
@@ -186,7 +186,7 @@ para i de 1 ate 5 faca
 
 Significa:
 
-```text
+```
 Comece com i = 1
 
 Execute o código
@@ -214,7 +214,7 @@ O próprio comando `PARA` faz isso automaticamente.
 
 ---
 
-### Leitura
+**Leitura**
 
 ```portugol
 leia(x)
@@ -224,7 +224,7 @@ A cada repetição o usuário informa um novo número.
 
 ---
 
-### Processamento
+**Processamento**
 
 ```portugol
 z <- x * 3
@@ -234,7 +234,7 @@ Multiplica o número informado por 3.
 
 ---
 
-### Saída
+**Saída**
 
 ```portugol
 escreval(...)
@@ -244,11 +244,11 @@ Mostra o resultado da multiplicação.
 
 ---
 
-## Exemplo
+- **Exemplo**
 
 Entradas:
 
-```text
+```
 2
 
 5
@@ -262,7 +262,7 @@ Entradas:
 
 Saídas:
 
-```text
+```
 6
 
 15
@@ -276,9 +276,9 @@ Saídas:
 
 ---
 
-# 2️⃣ Estrutura `ENQUANTO...FAÇA` (`while`)
+## Estrutura `ENQUANTO...FAÇA` (`while`)
 
-## Como funciona?
+**Como funciona?**
 
 O `ENQUANTO` verifica a condição **antes** de executar o bloco.
 
@@ -286,7 +286,7 @@ Se a condição for falsa logo no início, o laço não será executado nenhuma 
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Enquanto"
@@ -321,19 +321,19 @@ fimalgoritmo
 
 ---
 
-## O que acontece?
+**O que acontece?**
 
 O número é digitado apenas uma vez.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 x = 8
 ```
 
 Depois o algoritmo faz:
 
-```text
+```
 8 × 3 = 24
 ```
 
@@ -341,7 +341,7 @@ Cinco vezes.
 
 Resultado:
 
-```text
+```
 24
 
 24
@@ -355,7 +355,7 @@ Resultado:
 
 ---
 
-## O contador
+**O contador**
 
 Aqui o contador precisa ser atualizado manualmente.
 
@@ -365,7 +365,7 @@ i <- i + 1
 
 Se essa linha fosse esquecida, a condição:
 
-```text
+```
 i <= 5
 ```
 
@@ -375,11 +375,11 @@ O programa entraria em um **laço infinito**, executando o mesmo bloco sem parar
 
 ---
 
-# 3️⃣ Outro Exemplo com `ENQUANTO`
+## Outro Exemplo com `ENQUANTO`
 
 Agora a leitura do número foi colocada **dentro do laço**.
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Enquanto"
@@ -409,23 +409,23 @@ fimalgoritmo
 
 ---
 
-## Diferença para o exemplo anterior
+### Diferença para o exemplo anterior
 
 No primeiro exemplo:
 
-```text
+```
 O número é digitado apenas uma vez.
 ```
 
 No segundo:
 
-```text
+```
 O usuário informa um número diferente a cada repetição.
 ```
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 2
 
 4
@@ -439,7 +439,7 @@ Exemplo:
 
 Resultados:
 
-```text
+```
 6
 
 12
@@ -455,9 +455,9 @@ Essa pequena mudança altera completamente o comportamento do algoritmo.
 
 ---
 
-# 4️⃣ Estrutura `REPITA...ATÉ` (`do...while`)
+## Estrutura `REPITA...ATÉ` (`do...while`)
 
-## Como funciona?
+**Como funciona?**
 
 Diferentemente do `ENQUANTO`, o `REPITA` executa o bloco primeiro.
 
@@ -467,7 +467,7 @@ Por isso ele sempre executa pelo menos uma vez.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Repita"
@@ -497,11 +497,11 @@ fimalgoritmo
 
 ---
 
-## Explicação
+- **Explicação**
 
 O algoritmo executa:
 
-```text
+```
 1ª repetição
 
 ↓
@@ -533,7 +533,7 @@ A condição no `REPITA` representa **o momento de parar**, e não de continuar.
 
 ---
 
-# Comparando `ENQUANTO` e `REPITA`
+## Comparando `ENQUANTO` e `REPITA`
 
 | ENQUANTO (`while`)                                    | REPITA (`do...while`)                                     |
 | ----------------------------------------------------- | --------------------------------------------------------- |
@@ -543,15 +543,15 @@ A condição no `REPITA` representa **o momento de parar**, e não de continuar.
 
 ---
 
-# 5️⃣ Tabuada Utilizando `REPITA`
+# Tabuada Utilizando `REPITA`
 
-## Objetivo
+**Objetivo**
 
 Mostrar a tabuada de um número de 1 até 10.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Tabuada"
@@ -581,9 +581,9 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-### Contador
+**Contador**
 
 ```portugol
 contagem <- 1
@@ -593,7 +593,7 @@ A tabuada sempre começa no número 1.
 
 ---
 
-### `escreva`
+`escreva`
 
 ```portugol
 escreva(...)
@@ -607,15 +607,15 @@ escreval(...)
 
 O comando `escreva` **não pula para a próxima linha**, permitindo que o usuário digite o valor na mesma linha da mensagem.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Mostra a tabuada do número: 7
 ```
 
 Já `escreval` faria:
 
-```text
+```
 Mostra a tabuada do número:
 
 7
@@ -623,7 +623,7 @@ Mostra a tabuada do número:
 
 ---
 
-### Impressão
+**Impressão**
 
 ```portugol
 numero * contagem
@@ -631,13 +631,13 @@ numero * contagem
 
 Se o usuário informar:
 
-```text
+```
 7
 ```
 
 O algoritmo gera:
 
-```text
+```
 7 x 1 = 7
 
 7 x 2 = 14
@@ -651,7 +651,7 @@ O algoritmo gera:
 
 ---
 
-# 🧠 Conceito Fundamental
+**Conceito Fundamental**
 
 As estruturas de repetição permitem que um bloco de código seja executado várias vezes de forma automática, eliminando a necessidade de escrever instruções repetidas. Cada tipo de laço possui uma finalidade específica:
 
@@ -663,11 +663,11 @@ Escolher a estrutura correta torna o algoritmo mais eficiente, organizado e fác
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula aprendi as três principais estruturas de repetição do VisualG: `PARA`, `ENQUANTO` e `REPITA...ATÉ`. Também compreendi a importância da variável contador (`i` ou `j`) para controlar quantas vezes um laço será executado. Desenvolvi exemplos de multiplicação repetitiva e uma tabuada, entendendo as diferenças entre cada estrutura e quando utilizar cada uma delas.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+**Resumo Relâmpago**
 
 1. Estruturas de repetição executam um mesmo bloco de código várias vezes.
 2. A variável contador controla quantas vezes o laço será executado.
