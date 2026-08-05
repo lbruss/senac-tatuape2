@@ -1,173 +1,317 @@
-# Estruturas de Controle de Repetição (Laços de Repetição)
+# Lógica de Programação — Estruturas de Dados: Vetores e Matrizes
 
-**Ideia Principal**
+# 🎯 Ideia Principal
 
-**Estruturas de repetição**, também chamadas de **laços de repetição** ou **loops**.
+Nesta aula comecei a estudar **Estruturas de Dados**, mais especificamente **Vetores** e uma introdução às **Matrizes**.
 
-Essas estruturas permitem que um mesmo bloco de código seja executado várias vezes, sem que seja necessário escrever as mesmas instruções repetidamente.
+Até agora, sempre que era necessário armazenar vários valores, eu criava várias variáveis diferentes.
 
-Imagine que seja necessário imprimir uma mensagem **100 vezes**.
+Exemplo:
 
-Sem uma estrutura de repetição, seria preciso escrever:
-
-```
-escreval("Olá")
-escreval("Olá")
-escreval("Olá")
+```text
+media1
+media2
+media3
+media4
+media5
 ...
-100 vezes
 ```
 
-Isso seria trabalhoso e pouco eficiente.
+Esse método funciona, mas rapidamente deixa o algoritmo grande e difícil de manter.
 
-Com um laço de repetição basta escrever:
-
-```
-Repita 100 vezes
-    escreval("Olá")
-```
-
-O computador faz o restante automaticamente.
+Para resolver esse problema existem os **vetores**, que permitem armazenar vários valores do mesmo tipo utilizando apenas um único nome de variável.
 
 ---
 
-**O que são Estruturas de Repetição?**
+# O que são Estruturas de Dados?
 
-São estruturas utilizadas quando uma determinada tarefa precisa ser executada diversas vezes.
+Estruturas de dados são formas organizadas de armazenar informações na memória do computador.
 
-O programa continuará repetindo as instruções **até que uma condição de parada seja satisfeita**.
+Elas facilitam:
 
-Essas estruturas são muito utilizadas em situações como:
+* organizar dados;
+* acessar informações rapidamente;
+* reduzir a quantidade de variáveis;
+* tornar os algoritmos mais simples e organizados.
 
-* Cadastro de vários clientes.
-* Leitura de notas de alunos.
-* Impressão de listas.
-* Tabuadas.
-* Jogos.
-* Sistemas bancários.
-* Inteligência Artificial.
-* Processamento de grandes quantidades de dados.
+Existem diversos tipos de estruturas de dados, sendo as primeiras estudadas:
 
-Sem os laços de repetição, praticamente qualquer programa moderno seria muito mais complexo.
+* Vetores (uma dimensão);
+* Matrizes (duas dimensões).
 
 ---
 
-## Variável Contador
+# O que é um Vetor?
 
-Durante uma repetição, normalmente é necessário saber **quantas vezes o laço já foi executado**.
+Um **vetor** é uma variável capaz de armazenar **vários valores do mesmo tipo**.
 
-Para isso utiliza-se uma **variável contador**.
+Ao invés de criar várias variáveis diferentes:
 
-Os nomes mais utilizados são:
-
-```
-i
-
-ou
-
-j
+```text
+nota1
+nota2
+nota3
+nota4
 ```
 
-Esses nomes são uma convenção entre programadores.
+podemos criar apenas:
 
-Nada impede utilizar outro nome, mas `i` e `j` são os mais comuns por serem curtos e amplamente reconhecidos.
+```text
+nota[]
+```
 
-- **Exemplo:**
+Cada posição desse vetor armazenará um valor diferente.
+
+---
+
+## Analogia
+
+Imagine um armário com várias gavetas.
+
+O armário inteiro possui apenas um nome:
+
+```text
+ARMÁRIO
+```
+
+Mas cada gaveta possui um número.
+
+```text
+ARMÁRIO[0]
+
+ARMÁRIO[1]
+
+ARMÁRIO[2]
+
+ARMÁRIO[3]
+```
+
+Cada gaveta guarda uma informação diferente.
+
+É exatamente assim que um vetor funciona.
+
+---
+
+# Índices do Vetor
+
+Uma característica muito importante do VisualG é que o índice do vetor **começa em 0**.
+
+Exemplo:
+
+```text
+vetor[0]
+
+vetor[1]
+
+vetor[2]
+
+vetor[3]
+```
+
+Embora existam quatro posições, elas são numeradas de **0 até 3**.
+
+Isso acontece porque o índice representa o deslocamento da primeira posição da memória.
+
+Essa característica também está presente em linguagens como:
+
+* C
+* C++
+* Java
+* JavaScript
+* Python
+* C#
+
+Por isso é importante se acostumar desde o início.
+
+---
+
+# Declarando um Vetor
+
+Exemplo:
 
 ```portugol
-i <- 1
+vet: vetor[0..2] de inteiro
 ```
 
-A cada repetição:
+Vamos entender essa declaração.
+
+```text
+vet
+```
+
+É o nome do vetor.
+
+---
+
+```text
+vetor
+```
+
+Indica que essa variável será um vetor.
+
+---
+
+```text
+[0..2]
+```
+
+Define os índices.
+
+Nesse caso teremos:
+
+```text
+vet[0]
+
+vet[1]
+
+vet[2]
+```
+
+Ou seja, três posições.
+
+---
+
+```text
+de inteiro
+```
+
+Todos os elementos armazenados serão do tipo inteiro.
+
+---
+
+# 1️⃣ Exemplo — Vetor Simples
+
+## Objetivo
+
+Ler três números e mostrá-los na tela.
+
+---
+
+## Código
 
 ```portugol
-i <- i + 1
-```
-
-Assim o contador vai aumentando:
-
-```
-1
-
-2
-
-3
-
-4
-
-5
-```
-
----
-
-# Principais Estruturas de Repetição
-
-No VisualG existem três estruturas principais:
-
-**`PARA...FAÇA` (`for`)**
-
-Utilizada quando já sabemos quantas vezes a repetição ocorrerá.
-
----
-
-**`ENQUANTO...FAÇA` (`while`)**
-
-Utilizada quando a repetição depende de uma condição.
-
-Primeiro verifica a condição.
-
-Depois executa o código.
-
----
-
-**`REPITA...ATÉ` (`do...while`)**
-
-Executa o código primeiro.
-
-Depois verifica a condição de parada.
-
-Isso garante que o bloco será executado pelo menos uma vez.
-
----
-
-## Estrutura `PARA...FAÇA` (`for`)
-
-**Quando utilizar?**
-
-Quando já sabemos exatamente quantas vezes uma ação será repetida.
-
-Exemplos:
-
-* Mostrar os números de 1 até 100.
-* Ler as notas de 30 alunos.
-* Imprimir uma mensagem 10 vezes.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Para"
+algoritmo "Vetor"
 
 var
 
-x, z, i: inteiro
+vet: vetor[0..2] de inteiro
 
 inicio
 
-escreval("Algoritmo para repetir uma ação 5 vezes")
-escreval("Para cada ação, digite um número inteiro")
+escreva("Digite um número: ")
+leia(vet[0])
+
+escreva("Digite um número: ")
+leia(vet[1])
+
+escreva("Digite um número: ")
+leia(vet[2])
+
 escreval("")
-escreval("Digite um valor inteiro")
+escreval("Os números digitados foram: ",
+          vet[0], " ",
+          vet[1], " ",
+          vet[2])
 
-para i de 1 ate 5 faca
+fimalgoritmo
+```
 
-   leia(x)
+---
 
-   z <- x * 3
+## Explicação Linha por Linha
 
-   escreval("O valor digitado ", x,
-             " multiplicado por 3 é: ", z)
+Primeira leitura:
+
+```portugol
+leia(vet[0])
+```
+
+O primeiro número será armazenado na posição 0.
+
+---
+
+Depois:
+
+```portugol
+leia(vet[1])
+```
+
+Vai para a segunda posição.
+
+---
+
+Depois:
+
+```portugol
+leia(vet[2])
+```
+
+Vai para a terceira posição.
+
+---
+
+Na impressão:
+
+```portugol
+vet[0]
+
+vet[1]
+
+vet[2]
+```
+
+Cada posição do vetor é exibida.
+
+---
+
+# Problema desse algoritmo
+
+Embora utilize vetor, ainda estamos acessando cada posição manualmente.
+
+Quando o vetor possuir:
+
+```text
+100 posições
+```
+
+isso se torna inviável.
+
+Por isso utilizamos estruturas de repetição.
+
+---
+
+# 2️⃣ Vetor Utilizando `PARA`
+
+## Objetivo
+
+Cadastrar cinco colaboradores.
+
+---
+
+## Código
+
+```portugol
+algoritmo "Colaboradores"
+
+var
+
+nome: vetor[0..4] de caractere
+i: inteiro
+
+inicio
+
+para i de 0 ate 4 faca
+
+   escreva("Digite o nome do colaborador: ")
+   leia(nome[i])
+
+fimpara
+
+escreval("")
+
+para i de 0 ate 4 faca
+
+   escreval("O nome dos nossos novos colaboradores é: ", nome[i])
 
 fimpara
 
@@ -176,506 +320,376 @@ fimalgoritmo
 
 ---
 
-**Explicação Linha por Linha**
+## Como funciona?
 
-**O contador**
+Na primeira repetição:
+
+```text
+i = 0
+```
+
+O programa lê:
+
+```text
+nome[0]
+```
+
+Depois:
+
+```text
+i = 1
+```
+
+Lê:
+
+```text
+nome[1]
+```
+
+E assim sucessivamente até:
+
+```text
+nome[4]
+```
+
+O mesmo acontece na impressão.
+
+Isso elimina a necessidade de escrever:
+
+```text
+nome1
+
+nome2
+
+nome3
+
+nome4
+
+nome5
+```
+
+---
+
+# Exemplo Sem Vetor
+
+Imagine calcular a média de oito alunos.
+
+Seria necessário criar:
+
+```text
+media1
+
+media2
+
+media3
+
+media4
+
+media5
+
+media6
+
+media7
+
+media8
+```
+
+Depois ler uma por uma.
+
+Depois somar uma por uma.
+
+O algoritmo fica muito grande e difícil de manter.
+
+---
+
+# 3️⃣ Média da Turma Utilizando Vetor
+
+## Objetivo
+
+Calcular a média de oito alunos utilizando apenas um vetor.
+
+---
+
+## Código
 
 ```portugol
-para i de 1 ate 5 faca
+algoritmo "Media da Turma"
+
+var
+
+md: vetor[0..7] de real
+soma, media: real
+i: inteiro
+
+inicio
+
+escreval("Digite a média da turma:")
+escreval("")
+
+soma <- 0
+
+para i de 0 ate 7 faca
+
+   leia(md[i])
+
+   soma <- soma + md[i]
+
+fimpara
+
+media <- soma / 8
+
+escreval("")
+escreval("A média da turma é de: ", media)
+
+fimalgoritmo
+```
+
+---
+
+## Explicação
+
+### Inicialização
+
+```portugol
+soma <- 0
+```
+
+A variável `soma` começa com zero para acumular todas as notas.
+
+---
+
+### Leitura
+
+```portugol
+leia(md[i])
+```
+
+Cada nota é armazenada em uma posição diferente do vetor.
+
+---
+
+### Acumulador
+
+```portugol
+soma <- soma + md[i]
+```
+
+Essa linha adiciona a nota atual ao total acumulado.
+
+Exemplo:
+
+```text
+Primeira nota = 8
+
+soma = 0 + 8 = 8
+
+Segunda nota = 7
+
+soma = 8 + 7 = 15
+
+Terceira nota = 9
+
+soma = 15 + 9 = 24
+```
+
+Esse tipo de variável é chamado de **acumulador**, pois vai acumulando os valores ao longo do laço.
+
+---
+
+### Média
+
+Depois que todas as notas forem somadas:
+
+```portugol
+media <- soma / 8
+```
+
+Obtém-se a média da turma.
+
+---
+
+# 4️⃣ Exercício Feito por Mim — Somar Cinco Números
+
+## Objetivo
+
+Ler cinco números, exibi-los e mostrar a soma.
+
+---
+
+## Código
+
+```portugol
+algoritmo "Soma"
+
+var
+
+numero: vetor[0..4] de real
+i: inteiro
+soma: real
+
+inicio
+
+soma <- 0
+
+para i de 0 ate 4 faca
+
+   escreva("Digite o número ", i, ": ")
+   leia(numero[i])
+
+   soma <- soma + numero[i]
+
+fimpara
+
+escreval("")
+escreval("Números digitados:")
+
+para i de 0 ate 4 faca
+
+   escreval(numero[i])
+
+fimpara
+
+escreval("")
+escreval("Soma dos números = ", soma)
+
+fimalgoritmo
+```
+
+---
+
+## Explicação
+
+O primeiro `PARA` serve para:
+
+* ler os números;
+* armazená-los;
+* somá-los.
+
+O segundo `PARA` apenas percorre novamente o vetor para exibir os valores digitados.
+
+É comum utilizar vários laços sobre o mesmo vetor, cada um com um objetivo diferente.
+
+---
+
+# 5️⃣ Exercício Feito por Mim — Cadastro de Países
+
+## Objetivo
+
+Cadastrar cinco países e depois exibir todos os nomes.
+
+---
+
+## Código
+
+```portugol
+algoritmo "Paises"
+
+var
+
+nomePais: vetor[0..4] de caractere
+i: inteiro
+
+inicio
+
+para i de 0 ate 4 faca
+
+   escreval("Digite o nome de um país:")
+   leia(nomePais[i])
+
+fimpara
+
+escreval("")
+
+para i de 0 ate 4 faca
+
+   escreval("O nome dos países é: ", nomePais[i])
+
+fimpara
+
+fimalgoritmo
+```
+
+---
+
+## Como funciona?
+
+Primeiro laço:
+
+```text
+Ler os cinco países.
+```
+
+Segundo laço:
+
+```text
+Mostrar todos os países armazenados.
+```
+
+Os dados permanecem armazenados no vetor até o fim da execução do algoritmo.
+
+---
+
+# Introdução às Matrizes
+
+Além dos vetores, existe outra estrutura muito utilizada: a **matriz**.
+
+Enquanto um vetor possui apenas **uma dimensão**, a matriz possui **duas dimensões**: linhas e colunas.
+
+Visualmente:
+
+```text
+      Colunas
+
+       0     1     2
+
+0    [ ]   [ ]   [ ]
+
+1    [ ]   [ ]   [ ]
+
+2    [ ]   [ ]   [ ]
+
+↑
+Linhas
+```
+
+Uma matriz pode ser imaginada como uma planilha do Excel, onde cada célula é identificada por uma linha e uma coluna.
+
+Exemplo:
+
+```text
+matriz[2][1]
 ```
 
 Significa:
 
-```
-Comece com i = 1
+* linha 2;
+* coluna 1.
 
-Execute o código
+As matrizes são muito utilizadas para representar tabelas, calendários, mapas, jogos, imagens e planilhas.
 
-Depois aumente automaticamente para:
-
-2
-
-3
-
-4
-
-5
-
-Quando passar de 5, o laço termina.
-```
-
-Não é necessário escrever:
-
-```portugol
-i <- i + 1
-```
-
-O próprio comando `PARA` faz isso automaticamente.
+Nesta aula, o foco principal foi compreender o funcionamento dos vetores, que servem como base para entender matrizes posteriormente.
 
 ---
 
-**Leitura**
+# 🧠 Conceito Fundamental
 
-```portugol
-leia(x)
-```
-
-A cada repetição o usuário informa um novo número.
+Vetores são estruturas de dados que permitem armazenar diversos valores do mesmo tipo utilizando uma única variável indexada. Eles tornam os algoritmos menores, mais organizados e mais fáceis de manter. Quando combinados com estruturas de repetição, permitem processar grandes quantidades de dados com poucas linhas de código, sendo fundamentais em praticamente todas as linguagens de programação.
 
 ---
 
-**Processamento**
-
-```portugol
-z <- x * 3
-```
-
-Multiplica o número informado por 3.
-
----
-
-**Saída**
-
-```portugol
-escreval(...)
-```
-
-Mostra o resultado da multiplicação.
-
----
-
-- **Exemplo**
-
-Entradas:
-
-```
-2
-
-5
-
-8
-
-10
-
-12
-```
-
-Saídas:
-
-```
-6
-
-15
-
-24
-
-30
-
-36
-```
-
----
-
-## Estrutura `ENQUANTO...FAÇA` (`while`)
-
-**Como funciona?**
-
-O `ENQUANTO` verifica a condição **antes** de executar o bloco.
-
-Se a condição for falsa logo no início, o laço não será executado nenhuma vez.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Enquanto"
-
-var
-
-x, z, i: inteiro
-
-inicio
-
-escreval("Algoritmo para repetir uma ação 5 vezes")
-escreval("Para cada ação, digite um número inteiro")
-escreval("")
-escreval("Digite um valor inteiro")
-
-leia(x)
-
-i <- 1
-
-enquanto (i <= 5) faca
-
-   z <- x * 3
-
-   escreval(z)
-
-   i <- i + 1
-
-fimenquanto
-
-fimalgoritmo
-```
-
----
-
-**O que acontece?**
-
-O número é digitado apenas uma vez.
-
-- **Exemplo:**
-
-```
-x = 8
-```
-
-Depois o algoritmo faz:
-
-```
-8 × 3 = 24
-```
-
-Cinco vezes.
-
-Resultado:
-
-```
-24
-
-24
-
-24
-
-24
-
-24
-```
-
----
-
-**O contador**
-
-Aqui o contador precisa ser atualizado manualmente.
-
-```portugol
-i <- i + 1
-```
-
-Se essa linha fosse esquecida, a condição:
-
-```
-i <= 5
-```
-
-Nunca deixaria de ser verdadeira.
-
-O programa entraria em um **laço infinito**, executando o mesmo bloco sem parar.
-
----
-
-## Outro Exemplo com `ENQUANTO`
-
-Agora a leitura do número foi colocada **dentro do laço**.
-
-**Código**
-
-```portugol
-algoritmo "Enquanto"
-
-var
-
-x, z, i: inteiro
-
-inicio
-
-i <- 1
-
-enquanto (i <= 5) faca
-
-   leia(x)
-
-   z <- x * 3
-
-   escreval(z)
-
-   i <- i + 1
-
-fimenquanto
-
-fimalgoritmo
-```
-
----
-
-### Diferença para o exemplo anterior
-
-No primeiro exemplo:
-
-```
-O número é digitado apenas uma vez.
-```
-
-No segundo:
-
-```
-O usuário informa um número diferente a cada repetição.
-```
-
-- **Exemplo:**
-
-```
-2
-
-4
-
-6
-
-8
-
-10
-```
-
-Resultados:
-
-```
-6
-
-12
-
-18
-
-24
-
-30
-```
-
-Essa pequena mudança altera completamente o comportamento do algoritmo.
-
----
-
-## Estrutura `REPITA...ATÉ` (`do...while`)
-
-**Como funciona?**
-
-Diferentemente do `ENQUANTO`, o `REPITA` executa o bloco primeiro.
-
-Somente depois verifica a condição de parada.
-
-Por isso ele sempre executa pelo menos uma vez.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Repita"
-
-var
-
-x, z, i: inteiro
-
-inicio
-
-i <- 1
-
-repita
-
-   leia(x)
-
-   z <- x * 3
-
-   escreval(z)
-
-   i <- i + 1
-
-ate (i > 5)
-
-fimalgoritmo
-```
-
----
-
-- **Explicação**
-
-O algoritmo executa:
-
-```
-1ª repetição
-
-↓
-
-Verifica
-
-↓
-
-2ª repetição
-
-↓
-
-Verifica
-
-↓
-
-...
-
-↓
-
-Quando i for maior que 5
-
-↓
-
-Encerra
-```
-
-A condição no `REPITA` representa **o momento de parar**, e não de continuar.
-
----
-
-## Comparando `ENQUANTO` e `REPITA`
-
-| ENQUANTO (`while`)                                    | REPITA (`do...while`)                                     |
-| ----------------------------------------------------- | --------------------------------------------------------- |
-| Verifica a condição antes de executar                 | Executa primeiro e verifica depois                        |
-| Pode não executar nenhuma vez                         | Executa pelo menos uma vez                                |
-| Muito usado quando a condição deve ser validada antes | Muito usado quando é necessário executar ao menos uma vez |
-
----
-
-# Tabuada Utilizando `REPITA`
-
-**Objetivo**
-
-Mostrar a tabuada de um número de 1 até 10.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Tabuada"
-
-var
-
-numero, contagem: inteiro
-
-inicio
-
-contagem <- 1
-
-escreva("Mostra a tabuada do número: ")
-leia(numero)
-
-repita
-
-   escreval(numero, " x ", contagem,
-            " = ", numero * contagem)
-
-   contagem <- contagem + 1
-
-ate (contagem > 10)
-
-fimalgoritmo
-```
-
----
-
-**Explicação Linha por Linha**
-
-**Contador**
-
-```portugol
-contagem <- 1
-```
-
-A tabuada sempre começa no número 1.
-
----
-
-`escreva`
-
-```portugol
-escreva(...)
-```
-
-Diferente de:
-
-```portugol
-escreval(...)
-```
-
-O comando `escreva` **não pula para a próxima linha**, permitindo que o usuário digite o valor na mesma linha da mensagem.
-
-- **Exemplo:**
-
-```
-Mostra a tabuada do número: 7
-```
-
-Já `escreval` faria:
-
-```
-Mostra a tabuada do número:
-
-7
-```
-
----
-
-**Impressão**
-
-```portugol
-numero * contagem
-```
-
-Se o usuário informar:
-
-```
-7
-```
-
-O algoritmo gera:
-
-```
-7 x 1 = 7
-
-7 x 2 = 14
-
-7 x 3 = 21
-
-...
-
-7 x 10 = 70
-```
-
----
-
-**Conceito Fundamental**
-
-As estruturas de repetição permitem que um bloco de código seja executado várias vezes de forma automática, eliminando a necessidade de escrever instruções repetidas. Cada tipo de laço possui uma finalidade específica:
-
-* **`PARA` (`for`)**: ideal quando a quantidade de repetições é conhecida.
-* **`ENQUANTO` (`while`)**: ideal quando a repetição depende de uma condição avaliada antes da execução.
-* **`REPITA...ATÉ` (`do...while`)**: ideal quando o bloco precisa ser executado pelo menos uma vez.
-
-Escolher a estrutura correta torna o algoritmo mais eficiente, organizado e fácil de manter.
-
----
-
-# Em Resumo
-
-Nesta aula aprendi as três principais estruturas de repetição do VisualG: `PARA`, `ENQUANTO` e `REPITA...ATÉ`. Também compreendi a importância da variável contador (`i` ou `j`) para controlar quantas vezes um laço será executado. Desenvolvi exemplos de multiplicação repetitiva e uma tabuada, entendendo as diferenças entre cada estrutura e quando utilizar cada uma delas.
-
-**Resumo Relâmpago**
-
-1. Estruturas de repetição executam um mesmo bloco de código várias vezes.
-2. A variável contador controla quantas vezes o laço será executado.
-3. `PARA` (`for`) é usado quando o número de repetições é conhecido.
-4. `ENQUANTO` (`while`) verifica a condição antes de executar o bloco.
-5. `REPITA...ATÉ` (`do...while`) executa o bloco antes de verificar a condição.
-6. O contador deve ser atualizado manualmente no `ENQUANTO` e no `REPITA`.
-7. Esquecer de atualizar o contador pode causar um laço infinito.
-8. `escreva` não quebra linha; `escreval` quebra a linha após a mensagem.
-9. A tabuada é um exemplo clássico de uso de estruturas de repetição.
-10. Os laços de repetição são fundamentais para automatizar tarefas repetitivas em qualquer linguagem de programação.
+# ✅ Em Resumo
+
+Nesta aula aprendi o conceito de vetores, entendendo que eles permitem armazenar vários valores utilizando uma única variável indexada. Também aprendi que, no VisualG, a indexação começa em zero e que os vetores normalmente são percorridos utilizando estruturas de repetição, como o `PARA`. Desenvolvi algoritmos para armazenar números, nomes, notas e países, percebendo como essa estrutura reduz a quantidade de código e facilita a manipulação de grandes conjuntos de dados. Além disso, tive uma introdução ao conceito de matrizes, que expandem a ideia dos vetores para duas dimensões.
+
+# ⚡ Resumo Relâmpago (10 linhas)
+
+1. Estruturas de dados organizam informações na memória do computador.
+2. Um vetor armazena vários valores do mesmo tipo em uma única variável.
+3. No VisualG, a indexação do vetor normalmente começa em `0`.
+4. Cada posição do vetor é acessada pelo índice, como `vet[0]` e `vet[1]`.
+5. Vetores reduzem a quantidade de variáveis e deixam o código mais organizado.
+6. O comando `PARA` é a forma mais comum de percorrer um vetor.
+7. Um acumulador, como `soma <- soma + vetor[i]`, permite somar todos os elementos.
+8. É possível armazenar números, textos e outros tipos de dados em vetores.
+9. Matrizes são estruturas bidimensionais, organizadas em linhas e colunas.
+10. Vetores e matrizes são fundamentais para desenvolver programas eficientes e escaláveis.
