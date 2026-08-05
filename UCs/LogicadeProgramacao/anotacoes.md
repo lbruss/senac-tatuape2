@@ -1,14 +1,14 @@
-# Lógica de Programação — Estruturas de Dados: Vetores e Matrizes
+# Estruturas de Dados: Vetores e Matrizes
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula comecei a estudar **Estruturas de Dados**, mais especificamente **Vetores** e uma introdução às **Matrizes**.
+**Estruturas de Dados**, mais especificamente **Vetores** e uma introdução às **Matrizes**.
 
 Até agora, sempre que era necessário armazenar vários valores, eu criava várias variáveis diferentes.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 media1
 media2
 media3
@@ -23,7 +23,7 @@ Para resolver esse problema existem os **vetores**, que permitem armazenar vári
 
 ---
 
-# O que são Estruturas de Dados?
+**O que são Estruturas de Dados?**
 
 Estruturas de dados são formas organizadas de armazenar informações na memória do computador.
 
@@ -41,13 +41,13 @@ Existem diversos tipos de estruturas de dados, sendo as primeiras estudadas:
 
 ---
 
-# O que é um Vetor?
+# Vetor
 
 Um **vetor** é uma variável capaz de armazenar **vários valores do mesmo tipo**.
 
 Ao invés de criar várias variáveis diferentes:
 
-```text
+```
 nota1
 nota2
 nota3
@@ -56,7 +56,7 @@ nota4
 
 podemos criar apenas:
 
-```text
+```
 nota[]
 ```
 
@@ -64,19 +64,19 @@ Cada posição desse vetor armazenará um valor diferente.
 
 ---
 
-## Analogia
+> Analogia
 
 Imagine um armário com várias gavetas.
 
 O armário inteiro possui apenas um nome:
 
-```text
+```
 ARMÁRIO
 ```
 
 Mas cada gaveta possui um número.
 
-```text
+```
 ARMÁRIO[0]
 
 ARMÁRIO[1]
@@ -92,13 +92,13 @@ Cada gaveta guarda uma informação diferente.
 
 ---
 
-# Índices do Vetor
+**Índices do Vetor**
 
 Uma característica muito importante do VisualG é que o índice do vetor **começa em 0**.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 vetor[0]
 
 vetor[1]
@@ -125,9 +125,9 @@ Por isso é importante se acostumar desde o início.
 
 ---
 
-# Declarando um Vetor
+## Declarando um Vetor
 
-Exemplo:
+- **Exemplo:**
 
 ```portugol
 vet: vetor[0..2] de inteiro
@@ -135,7 +135,7 @@ vet: vetor[0..2] de inteiro
 
 Vamos entender essa declaração.
 
-```text
+```
 vet
 ```
 
@@ -143,7 +143,7 @@ vet
 
 ---
 
-```text
+```
 vetor
 ```
 
@@ -151,7 +151,7 @@ Indica que essa variável será um vetor.
 
 ---
 
-```text
+```
 [0..2]
 ```
 
@@ -159,7 +159,7 @@ Define os índices.
 
 Nesse caso teremos:
 
-```text
+```
 vet[0]
 
 vet[1]
@@ -171,7 +171,7 @@ Ou seja, três posições.
 
 ---
 
-```text
+```
 de inteiro
 ```
 
@@ -179,15 +179,15 @@ Todos os elementos armazenados serão do tipo inteiro.
 
 ---
 
-# 1️⃣ Exemplo — Vetor Simples
+# Exemplo — Vetor Simples
 
-## Objetivo
+**Objetivo**
 
 Ler três números e mostrá-los na tela.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Vetor"
@@ -218,7 +218,7 @@ fimalgoritmo
 
 ---
 
-## Explicação Linha por Linha
+**Explicação Linha por Linha**
 
 Primeira leitura:
 
@@ -264,13 +264,13 @@ Cada posição do vetor é exibida.
 
 ---
 
-# Problema desse algoritmo
+**Problema desse algoritmo**
 
 Embora utilize vetor, ainda estamos acessando cada posição manualmente.
 
 Quando o vetor possuir:
 
-```text
+```
 100 posições
 ```
 
@@ -280,15 +280,15 @@ Por isso utilizamos estruturas de repetição.
 
 ---
 
-# 2️⃣ Vetor Utilizando `PARA`
+# Vetor Utilizando `PARA`
 
-## Objetivo
+**Objetivo**
 
 Cadastrar cinco colaboradores.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Colaboradores"
@@ -320,35 +320,35 @@ fimalgoritmo
 
 ---
 
-## Como funciona?
+**Como funciona?**
 
 Na primeira repetição:
 
-```text
+```
 i = 0
 ```
 
 O programa lê:
 
-```text
+```
 nome[0]
 ```
 
 Depois:
 
-```text
+```
 i = 1
 ```
 
 Lê:
 
-```text
+```
 nome[1]
 ```
 
 E assim sucessivamente até:
 
-```text
+```
 nome[4]
 ```
 
@@ -356,7 +356,7 @@ O mesmo acontece na impressão.
 
 Isso elimina a necessidade de escrever:
 
-```text
+```
 nome1
 
 nome2
@@ -402,15 +402,15 @@ O algoritmo fica muito grande e difícil de manter.
 
 ---
 
-# 3️⃣ Média da Turma Utilizando Vetor
+# Média da Turma Utilizando Vetor
 
-## Objetivo
+**Objetivo**
 
 Calcular a média de oito alunos utilizando apenas um vetor.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Media da Turma"
@@ -446,9 +446,9 @@ fimalgoritmo
 
 ---
 
-## Explicação
+- **Explicação**
 
-### Inicialização
+**Inicialização**
 
 ```portugol
 soma <- 0
@@ -458,7 +458,7 @@ A variável `soma` começa com zero para acumular todas as notas.
 
 ---
 
-### Leitura
+**Leitura**
 
 ```portugol
 leia(md[i])
@@ -468,7 +468,7 @@ Cada nota é armazenada em uma posição diferente do vetor.
 
 ---
 
-### Acumulador
+**Acumulador**
 
 ```portugol
 soma <- soma + md[i]
@@ -476,9 +476,9 @@ soma <- soma + md[i]
 
 Essa linha adiciona a nota atual ao total acumulado.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 Primeira nota = 8
 
 soma = 0 + 8 = 8
@@ -496,7 +496,7 @@ Esse tipo de variável é chamado de **acumulador**, pois vai acumulando os valo
 
 ---
 
-### Média
+**Média**
 
 Depois que todas as notas forem somadas:
 
@@ -508,15 +508,15 @@ Obtém-se a média da turma.
 
 ---
 
-# 4️⃣ Exercício Feito por Mim — Somar Cinco Números
+# Somar Cinco Números - Feito por mim
 
-## Objetivo
+**Objetivo**
 
 Ler cinco números, exibi-los e mostrar a soma.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Soma"
@@ -557,7 +557,7 @@ fimalgoritmo
 
 ---
 
-## Explicação
+- **Explicação**
 
 O primeiro `PARA` serve para:
 
@@ -571,15 +571,15 @@ O segundo `PARA` apenas percorre novamente o vetor para exibir os valores digita
 
 ---
 
-# 5️⃣ Exercício Feito por Mim — Cadastro de Países
+# Cadastro de Países - Feito por mim
 
-## Objetivo
+**Objetivo**
 
 Cadastrar cinco países e depois exibir todos os nomes.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Paises"
@@ -611,17 +611,17 @@ fimalgoritmo
 
 ---
 
-## Como funciona?
+**Como funciona?**
 
 Primeiro laço:
 
-```text
+```
 Ler os cinco países.
 ```
 
 Segundo laço:
 
-```text
+```
 Mostrar todos os países armazenados.
 ```
 
@@ -629,7 +629,7 @@ Os dados permanecem armazenados no vetor até o fim da execução do algoritmo.
 
 ---
 
-# Introdução às Matrizes
+# Matrizes
 
 Além dos vetores, existe outra estrutura muito utilizada: a **matriz**.
 
@@ -637,7 +637,7 @@ Enquanto um vetor possui apenas **uma dimensão**, a matriz possui **duas dimens
 
 Visualmente:
 
-```text
+```
       Colunas
 
        0     1     2
@@ -654,9 +654,9 @@ Linhas
 
 Uma matriz pode ser imaginada como uma planilha do Excel, onde cada célula é identificada por uma linha e uma coluna.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 matriz[2][1]
 ```
 
@@ -671,17 +671,17 @@ Nesta aula, o foco principal foi compreender o funcionamento dos vetores, que se
 
 ---
 
-# 🧠 Conceito Fundamental
+**Conceito Fundamental**
 
 Vetores são estruturas de dados que permitem armazenar diversos valores do mesmo tipo utilizando uma única variável indexada. Eles tornam os algoritmos menores, mais organizados e mais fáceis de manter. Quando combinados com estruturas de repetição, permitem processar grandes quantidades de dados com poucas linhas de código, sendo fundamentais em praticamente todas as linguagens de programação.
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula aprendi o conceito de vetores, entendendo que eles permitem armazenar vários valores utilizando uma única variável indexada. Também aprendi que, no VisualG, a indexação começa em zero e que os vetores normalmente são percorridos utilizando estruturas de repetição, como o `PARA`. Desenvolvi algoritmos para armazenar números, nomes, notas e países, percebendo como essa estrutura reduz a quantidade de código e facilita a manipulação de grandes conjuntos de dados. Além disso, tive uma introdução ao conceito de matrizes, que expandem a ideia dos vetores para duas dimensões.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+**Resumo Relâmpago**
 
 1. Estruturas de dados organizam informações na memória do computador.
 2. Um vetor armazena vários valores do mesmo tipo em uma única variável.
