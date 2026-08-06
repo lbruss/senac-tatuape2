@@ -1,8 +1,8 @@
-# Lógica de Programação — Exercícios Práticos com Estruturas Condicionais, Vetores e Laços de Repetição
+# Exercícios Práticos com Estruturas Condicionais, Vetores e Laços de Repetição
 
-# 🎯 Ideia Principal
+**Ideia Principal**
 
-Nesta aula foram desenvolvidos algoritmos que unem praticamente todos os conceitos estudados até agora:
+Foram desenvolvidos algoritmos que unem praticamente todos os conceitos estudados até agora:
 
 * Entrada e saída de dados;
 * Variáveis;
@@ -16,13 +16,13 @@ O objetivo foi resolver problemas reais, mostrando que um algoritmo normalmente 
 
 ---
 
-# 1️⃣ Resolver uma Equação do 2º Grau (Fórmula de Bhaskara)
+# Resolver uma Equação do 2º Grau (Fórmula de Bhaskara)
 
-## O que é uma Equação do 2º Grau?
+**O que é uma Equação do 2º Grau?**
 
 Uma equação do segundo grau possui a seguinte forma:
 
-```text
+```
 ax² + bx + c = 0
 ```
 
@@ -34,23 +34,23 @@ Onde:
 
 Exemplo:
 
-```text
+```
 2x² + 5x - 3 = 0
 ```
 
 ---
 
-## Importante
+**Importante**
 
 Para ser realmente uma equação do segundo grau:
 
-```text
+```
 a ≠ 0
 ```
 
 Se:
 
-```text
+```
 a = 0
 ```
 
@@ -60,13 +60,13 @@ Por isso o algoritmo faz essa validação antes de qualquer cálculo.
 
 ---
 
-# O que é Delta (Δ)?
+**O que é Delta (Δ)**
 
 Antes de calcular as raízes, precisamos descobrir o valor de **Delta (Δ)**.
 
 A fórmula é:
 
-```text
+```
 Δ = b² - 4ac
 ```
 
@@ -74,27 +74,27 @@ O valor de Delta determina quantas raízes reais a equação possui.
 
 ---
 
-## Situações possíveis
+**Situações possíveis**
 
-### Δ < 0
+**Δ < 0**
 
 Não existem raízes reais.
 
 ---
 
-### Δ = 0
+**Δ = 0**
 
 Existe apenas uma raiz real.
 
 ---
 
-### Δ > 0
+**Δ > 0**
 
 Existem duas raízes reais diferentes.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Equacao do 2 Grau"
@@ -164,9 +164,9 @@ fimalgoritmo
 
 ---
 
-# Explicação Linha por Linha
+**Explicação Linha por Linha**
 
-## Entrada
+**Entrada**
 
 ```portugol
 leia(a)
@@ -178,7 +178,7 @@ Recebe os três coeficientes da equação.
 
 ---
 
-## Verificação
+**Verificação**
 
 ```portugol
 se (a = 0)
@@ -188,7 +188,7 @@ Verifica se realmente é uma equação do segundo grau.
 
 ---
 
-## Cálculo de Delta
+**Cálculo de Delta**
 
 ```portugol
 delta <- (b * b) - (4 * a * c)
@@ -198,7 +198,7 @@ delta <- (b * b) - (4 * a * c)
 
 ---
 
-## Raiz Quadrada
+**Raiz Quadrada**
 
 ```portugol
 raizq(delta)
@@ -206,9 +206,9 @@ raizq(delta)
 
 A função `raizq()` calcula a raiz quadrada de um número.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 raizq(25)
 
 Resultado:
@@ -218,7 +218,7 @@ Resultado:
 
 ---
 
-## Formatação
+**Formatação**
 
 ```portugol
 delta:0:2
@@ -228,25 +228,25 @@ Significa:
 
 Mostrar duas casas decimais.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 5,33
 ```
 
 ---
 
-# Exemplo
+- **Exemplo**
 
 Equação:
 
-```text
+```
 x² - 5x + 6 = 0
 ```
 
 Delta:
 
-```text
+```
 25 - 24
 
 =
@@ -256,7 +256,7 @@ Delta:
 
 Raízes:
 
-```text
+```
 x1 = 3
 
 x2 = 2
@@ -264,15 +264,15 @@ x2 = 2
 
 ---
 
-# 2️⃣ Verificar se um Número é Par ou Ímpar
+# Verificar se um Número é Par ou Ímpar
 
-## Conceito
+**Conceito**
 
 Um número é considerado par quando sua divisão por 2 possui resto igual a zero.
 
 Para isso utiliza-se o operador:
 
-```text
+```
 %
 ```
 
@@ -280,9 +280,9 @@ No VisualG também pode ser escrito como `mod`.
 
 Ele retorna o resto da divisão inteira.
 
-Exemplos:
+- **Exemplos:**
 
-```text
+```
 10 % 2 = 0
 
 11 % 2 = 1
@@ -294,7 +294,7 @@ Exemplos:
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Par ou Impar"
@@ -323,15 +323,9 @@ fimalgoritmo
 
 ---
 
-## Observação
+# Encontrar o Maior e o Menor Valor de um Vetor
 
-Nas anotações originais, a mensagem do bloco `senao` estava escrita como **"é par"**. O correto é **"é ímpar"**, pois o bloco `senao` é executado quando o resto da divisão por 2 é diferente de zero.
-
----
-
-# 3️⃣ Encontrar o Maior e o Menor Valor de um Vetor
-
-## Objetivo
+**Objetivo**
 
 Ler dez números e mostrar:
 
@@ -343,7 +337,7 @@ Ler dez números e mostrar:
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Maior e Menor"
@@ -411,13 +405,13 @@ fimalgoritmo
 
 ---
 
-# Como o algoritmo funciona?
+**Como o algoritmo funciona?**
 
 Primeiro, todos os valores são armazenados no vetor.
 
 Depois, considera-se inicialmente que:
 
-```text
+```
 Primeiro número = Maior
 
 Primeiro número = Menor
@@ -427,13 +421,13 @@ Em seguida, o algoritmo percorre novamente o vetor comparando cada elemento.
 
 Sempre que encontra um número maior:
 
-```text
+```
 Atualiza o maior.
 ```
 
 Sempre que encontra um número menor:
 
-```text
+```
 Atualiza o menor.
 ```
 
@@ -443,29 +437,29 @@ Essa técnica é muito utilizada em processamento de listas, estatísticas e ban
 
 ---
 
-# 4️⃣ Cálculo do Fatorial
+# Cálculo do Fatorial
 
-## O que é Fatorial?
+**O que é Fatorial?**
 
 O fatorial de um número é o produto dele por todos os seus antecessores positivos até 1.
 
 Representação:
 
-```text
+```
 5!
 ```
 
 Lê-se:
 
-```text
+```
 Cinco fatorial.
 ```
 
 ---
 
-## Exemplo
+- **Exemplo**
 
-```text
+```
 5!
 
 =
@@ -477,9 +471,9 @@ Cinco fatorial.
 120
 ```
 
-Outro exemplo:
+- **Outro exemplo:**
 
-```text
+```
 4!
 
 =
@@ -493,7 +487,7 @@ Outro exemplo:
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Fatorial"
@@ -532,9 +526,9 @@ fimalgoritmo
 
 ---
 
-## Explicação
+- **Explicação**
 
-### Inicialização
+**Inicialização**
 
 ```portugol
 fatorial <- 1
@@ -544,7 +538,7 @@ Começamos com 1 porque ele é o elemento neutro da multiplicação.
 
 Se começássemos com zero:
 
-```text
+```
 0 × qualquer número = 0
 ```
 
@@ -552,21 +546,21 @@ Todo o resultado seria incorreto.
 
 ---
 
-### Multiplicação acumulativa
+**Multiplicação acumulativa**
 
 ```portugol
 fatorial <- fatorial * i
 ```
 
-Exemplo para:
+- **Exemplo para:**
 
-```text
+```
 5!
 ```
 
 Passo a passo:
 
-```text
+```
 1 × 1 = 1
 
 1 × 2 = 2
@@ -580,17 +574,17 @@ Passo a passo:
 
 Resultado final:
 
-```text
+```
 120
 ```
 
 ---
 
-## Curiosidade
+**Curiosidade**
 
 Matematicamente:
 
-```text
+```
 0! = 1
 ```
 
@@ -598,17 +592,17 @@ Por isso, a validação ideal é impedir apenas números **negativos** (`num < 0
 
 ---
 
-# 🧠 Conceito Fundamental
+**Conceito Fundamental**
 
-Nesta aula foi possível integrar diversos conceitos da lógica de programação em algoritmos mais completos. Foram utilizadas estruturas condicionais para validar dados e tomar decisões, laços de repetição para automatizar cálculos e vetores para armazenar conjuntos de informações. Também foram aplicados conceitos matemáticos importantes, como a Fórmula de Bhaskara, o operador módulo (`%`) e o cálculo de fatorial, mostrando como a programação pode resolver problemas matemáticos e do cotidiano de forma eficiente.
+Foi possível integrar diversos conceitos da lógica de programação em algoritmos mais completos. Foram utilizadas estruturas condicionais para validar dados e tomar decisões, laços de repetição para automatizar cálculos e vetores para armazenar conjuntos de informações. Também foram aplicados conceitos matemáticos importantes, como a Fórmula de Bhaskara, o operador módulo (`%`) e o cálculo de fatorial, mostrando como a programação pode resolver problemas matemáticos e do cotidiano de forma eficiente.
 
 ---
 
-# ✅ Em Resumo
+# Em Resumo
 
 Nesta aula desenvolvi algoritmos para resolver equações do segundo grau, identificar números pares e ímpares, localizar o maior e o menor elemento de um vetor e calcular o fatorial de um número. Esses exercícios consolidaram o uso conjunto de estruturas condicionais, vetores, laços de repetição e operações matemáticas, tornando os algoritmos mais completos e próximos de aplicações reais.
 
-# ⚡ Resumo Relâmpago (10 linhas)
+**Resumo Relâmpago**
 
 1. A equação do 2º grau possui a forma `ax² + bx + c = 0`, com `a ≠ 0`.
 2. O valor de Delta (`Δ = b² - 4ac`) determina a quantidade de raízes reais.
