@@ -1,695 +1,622 @@
-# Estruturas de Dados: Vetores e Matrizes
+# Lógica de Programação — Exercícios Práticos com Estruturas Condicionais, Vetores e Laços de Repetição
 
-**Ideia Principal**
+# 🎯 Ideia Principal
 
-**Estruturas de Dados**, mais especificamente **Vetores** e uma introdução às **Matrizes**.
+Nesta aula foram desenvolvidos algoritmos que unem praticamente todos os conceitos estudados até agora:
 
-Até agora, sempre que era necessário armazenar vários valores, eu criava várias variáveis diferentes.
+* Entrada e saída de dados;
+* Variáveis;
+* Operadores aritméticos;
+* Operadores relacionais;
+* Estruturas condicionais (`SE...SENÃO`);
+* Estruturas de repetição (`PARA`);
+* Vetores.
 
-- **Exemplo:**
-
-```
-media1
-media2
-media3
-media4
-media5
-...
-```
-
-Esse método funciona, mas rapidamente deixa o algoritmo grande e difícil de manter.
-
-Para resolver esse problema existem os **vetores**, que permitem armazenar vários valores do mesmo tipo utilizando apenas um único nome de variável.
+O objetivo foi resolver problemas reais, mostrando que um algoritmo normalmente utiliza vários conceitos ao mesmo tempo.
 
 ---
 
-**O que são Estruturas de Dados?**
+# 1️⃣ Resolver uma Equação do 2º Grau (Fórmula de Bhaskara)
 
-Estruturas de dados são formas organizadas de armazenar informações na memória do computador.
+## O que é uma Equação do 2º Grau?
 
-Elas facilitam:
-
-* organizar dados;
-* acessar informações rapidamente;
-* reduzir a quantidade de variáveis;
-* tornar os algoritmos mais simples e organizados.
-
-Existem diversos tipos de estruturas de dados, sendo as primeiras estudadas:
-
-* Vetores (uma dimensão);
-* Matrizes (duas dimensões).
-
----
-
-# Vetor
-
-Um **vetor** é uma variável capaz de armazenar **vários valores do mesmo tipo**.
-
-Ao invés de criar várias variáveis diferentes:
-
-```
-nota1
-nota2
-nota3
-nota4
-```
-
-podemos criar apenas:
-
-```
-nota[]
-```
-
-Cada posição desse vetor armazenará um valor diferente.
-
----
-
-> Analogia
-
-Imagine um armário com várias gavetas.
-
-O armário inteiro possui apenas um nome:
-
-```
-ARMÁRIO
-```
-
-Mas cada gaveta possui um número.
-
-```
-ARMÁRIO[0]
-
-ARMÁRIO[1]
-
-ARMÁRIO[2]
-
-ARMÁRIO[3]
-```
-
-Cada gaveta guarda uma informação diferente.
-
-É exatamente assim que um vetor funciona.
-
----
-
-**Índices do Vetor**
-
-Uma característica muito importante do VisualG é que o índice do vetor **começa em 0**.
-
-- **Exemplo:**
-
-```
-vetor[0]
-
-vetor[1]
-
-vetor[2]
-
-vetor[3]
-```
-
-Embora existam quatro posições, elas são numeradas de **0 até 3**.
-
-Isso acontece porque o índice representa o deslocamento da primeira posição da memória.
-
-Essa característica também está presente em linguagens como:
-
-* C
-* C++
-* Java
-* JavaScript
-* Python
-* C#
-
-Por isso é importante se acostumar desde o início.
-
----
-
-## Declarando um Vetor
-
-- **Exemplo:**
-
-```portugol
-vet: vetor[0..2] de inteiro
-```
-
-Vamos entender essa declaração.
-
-```
-vet
-```
-
-É o nome do vetor.
-
----
-
-```
-vetor
-```
-
-Indica que essa variável será um vetor.
-
----
-
-```
-[0..2]
-```
-
-Define os índices.
-
-Nesse caso teremos:
-
-```
-vet[0]
-
-vet[1]
-
-vet[2]
-```
-
-Ou seja, três posições.
-
----
-
-```
-de inteiro
-```
-
-Todos os elementos armazenados serão do tipo inteiro.
-
----
-
-# Exemplo — Vetor Simples
-
-**Objetivo**
-
-Ler três números e mostrá-los na tela.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Vetor"
-
-var
-
-vet: vetor[0..2] de inteiro
-
-inicio
-
-escreva("Digite um número: ")
-leia(vet[0])
-
-escreva("Digite um número: ")
-leia(vet[1])
-
-escreva("Digite um número: ")
-leia(vet[2])
-
-escreval("")
-escreval("Os números digitados foram: ",
-          vet[0], " ",
-          vet[1], " ",
-          vet[2])
-
-fimalgoritmo
-```
-
----
-
-**Explicação Linha por Linha**
-
-Primeira leitura:
-
-```portugol
-leia(vet[0])
-```
-
-O primeiro número será armazenado na posição 0.
-
----
-
-Depois:
-
-```portugol
-leia(vet[1])
-```
-
-Vai para a segunda posição.
-
----
-
-Depois:
-
-```portugol
-leia(vet[2])
-```
-
-Vai para a terceira posição.
-
----
-
-Na impressão:
-
-```portugol
-vet[0]
-
-vet[1]
-
-vet[2]
-```
-
-Cada posição do vetor é exibida.
-
----
-
-**Problema desse algoritmo**
-
-Embora utilize vetor, ainda estamos acessando cada posição manualmente.
-
-Quando o vetor possuir:
-
-```
-100 posições
-```
-
-isso se torna inviável.
-
-Por isso utilizamos estruturas de repetição.
-
----
-
-# Vetor Utilizando `PARA`
-
-**Objetivo**
-
-Cadastrar cinco colaboradores.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Colaboradores"
-
-var
-
-nome: vetor[0..4] de caractere
-i: inteiro
-
-inicio
-
-para i de 0 ate 4 faca
-
-   escreva("Digite o nome do colaborador: ")
-   leia(nome[i])
-
-fimpara
-
-escreval("")
-
-para i de 0 ate 4 faca
-
-   escreval("O nome dos nossos novos colaboradores é: ", nome[i])
-
-fimpara
-
-fimalgoritmo
-```
-
----
-
-**Como funciona?**
-
-Na primeira repetição:
-
-```
-i = 0
-```
-
-O programa lê:
-
-```
-nome[0]
-```
-
-Depois:
-
-```
-i = 1
-```
-
-Lê:
-
-```
-nome[1]
-```
-
-E assim sucessivamente até:
-
-```
-nome[4]
-```
-
-O mesmo acontece na impressão.
-
-Isso elimina a necessidade de escrever:
-
-```
-nome1
-
-nome2
-
-nome3
-
-nome4
-
-nome5
-```
-
----
-
-# Exemplo Sem Vetor
-
-Imagine calcular a média de oito alunos.
-
-Seria necessário criar:
+Uma equação do segundo grau possui a seguinte forma:
 
 ```text
-media1
-
-media2
-
-media3
-
-media4
-
-media5
-
-media6
-
-media7
-
-media8
+ax² + bx + c = 0
 ```
 
-Depois ler uma por uma.
+Onde:
 
-Depois somar uma por uma.
+* **a** → coeficiente do termo quadrático.
+* **b** → coeficiente do termo linear.
+* **c** → termo independente (constante).
 
-O algoritmo fica muito grande e difícil de manter.
+Exemplo:
 
----
-
-# Média da Turma Utilizando Vetor
-
-**Objetivo**
-
-Calcular a média de oito alunos utilizando apenas um vetor.
+```text
+2x² + 5x - 3 = 0
+```
 
 ---
 
-**Código**
+## Importante
+
+Para ser realmente uma equação do segundo grau:
+
+```text
+a ≠ 0
+```
+
+Se:
+
+```text
+a = 0
+```
+
+a equação deixa de ser de segundo grau e passa a ser uma equação de primeiro grau.
+
+Por isso o algoritmo faz essa validação antes de qualquer cálculo.
+
+---
+
+# O que é Delta (Δ)?
+
+Antes de calcular as raízes, precisamos descobrir o valor de **Delta (Δ)**.
+
+A fórmula é:
+
+```text
+Δ = b² - 4ac
+```
+
+O valor de Delta determina quantas raízes reais a equação possui.
+
+---
+
+## Situações possíveis
+
+### Δ < 0
+
+Não existem raízes reais.
+
+---
+
+### Δ = 0
+
+Existe apenas uma raiz real.
+
+---
+
+### Δ > 0
+
+Existem duas raízes reais diferentes.
+
+---
+
+## Código
 
 ```portugol
-algoritmo "Media da Turma"
+algoritmo "Equacao do 2 Grau"
 
 var
 
-md: vetor[0..7] de real
-soma, media: real
-i: inteiro
+a, b, c, delta, x1, x2: real
 
 inicio
 
-escreval("Digite a média da turma:")
+// Entrada de dados
+
+escreval("Algoritmo para Calcular a Equação do 2º Grau")
+escreval("ax² + bx + c = 0")
 escreval("")
 
-soma <- 0
+escreval("Digite o valor de a:")
+leia(a)
 
-para i de 0 ate 7 faca
+escreval("Digite o valor de b:")
+leia(b)
 
-   leia(md[i])
+escreval("Digite o valor de c:")
+leia(c)
 
-   soma <- soma + md[i]
+// Verifica se realmente é uma equação do 2º grau
 
-fimpara
+se (a = 0) entao
 
-media <- soma / 8
+   escreval("O valor de 'a' não pode ser zero.")
 
-escreval("")
-escreval("A média da turma é de: ", media)
+senao
+
+   delta <- (b * b) - (4 * a * c)
+
+   se (delta < 0) entao
+
+      escreval("Delta = ", delta:0:2)
+      escreval("Não existem raízes reais.")
+
+   senao
+
+      se (delta = 0) entao
+
+         x1 <- (-b) / (2 * a)
+
+         escreval("Delta = 0")
+         escreval("Raiz única: ", x1:0:2)
+
+      senao
+
+         x1 <- (-b + raizq(delta)) / (2 * a)
+         x2 <- (-b - raizq(delta)) / (2 * a)
+
+         escreval("Delta = ", delta:0:2)
+         escreval("x1 = ", x1:0:2)
+         escreval("x2 = ", x2:0:2)
+
+      fimse
+
+   fimse
+
+fimse
 
 fimalgoritmo
 ```
 
 ---
 
-- **Explicação**
+# Explicação Linha por Linha
 
-**Inicialização**
-
-```portugol
-soma <- 0
-```
-
-A variável `soma` começa com zero para acumular todas as notas.
-
----
-
-**Leitura**
+## Entrada
 
 ```portugol
-leia(md[i])
+leia(a)
+leia(b)
+leia(c)
 ```
 
-Cada nota é armazenada em uma posição diferente do vetor.
+Recebe os três coeficientes da equação.
 
 ---
 
-**Acumulador**
+## Verificação
 
 ```portugol
-soma <- soma + md[i]
+se (a = 0)
 ```
 
-Essa linha adiciona a nota atual ao total acumulado.
-
-- **Exemplo:**
-
-```
-Primeira nota = 8
-
-soma = 0 + 8 = 8
-
-Segunda nota = 7
-
-soma = 8 + 7 = 15
-
-Terceira nota = 9
-
-soma = 15 + 9 = 24
-```
-
-Esse tipo de variável é chamado de **acumulador**, pois vai acumulando os valores ao longo do laço.
+Verifica se realmente é uma equação do segundo grau.
 
 ---
 
-**Média**
-
-Depois que todas as notas forem somadas:
+## Cálculo de Delta
 
 ```portugol
-media <- soma / 8
+delta <- (b * b) - (4 * a * c)
 ```
 
-Obtém-se a média da turma.
+É aplicada exatamente a fórmula matemática de Bhaskara.
 
 ---
 
-# Somar Cinco Números - Feito por mim
-
-**Objetivo**
-
-Ler cinco números, exibi-los e mostrar a soma.
-
----
-
-**Código**
+## Raiz Quadrada
 
 ```portugol
-algoritmo "Soma"
+raizq(delta)
+```
 
-var
+A função `raizq()` calcula a raiz quadrada de um número.
 
-numero: vetor[0..4] de real
-i: inteiro
-soma: real
+Exemplo:
 
-inicio
+```text
+raizq(25)
 
-soma <- 0
+Resultado:
 
-para i de 0 ate 4 faca
-
-   escreva("Digite o número ", i, ": ")
-   leia(numero[i])
-
-   soma <- soma + numero[i]
-
-fimpara
-
-escreval("")
-escreval("Números digitados:")
-
-para i de 0 ate 4 faca
-
-   escreval(numero[i])
-
-fimpara
-
-escreval("")
-escreval("Soma dos números = ", soma)
-
-fimalgoritmo
+5
 ```
 
 ---
 
-- **Explicação**
-
-O primeiro `PARA` serve para:
-
-* ler os números;
-* armazená-los;
-* somá-los.
-
-O segundo `PARA` apenas percorre novamente o vetor para exibir os valores digitados.
-
-É comum utilizar vários laços sobre o mesmo vetor, cada um com um objetivo diferente.
-
----
-
-# Cadastro de Países - Feito por mim
-
-**Objetivo**
-
-Cadastrar cinco países e depois exibir todos os nomes.
-
----
-
-**Código**
+## Formatação
 
 ```portugol
-algoritmo "Paises"
-
-var
-
-nomePais: vetor[0..4] de caractere
-i: inteiro
-
-inicio
-
-para i de 0 ate 4 faca
-
-   escreval("Digite o nome de um país:")
-   leia(nomePais[i])
-
-fimpara
-
-escreval("")
-
-para i de 0 ate 4 faca
-
-   escreval("O nome dos países é: ", nomePais[i])
-
-fimpara
-
-fimalgoritmo
-```
-
----
-
-**Como funciona?**
-
-Primeiro laço:
-
-```
-Ler os cinco países.
-```
-
-Segundo laço:
-
-```
-Mostrar todos os países armazenados.
-```
-
-Os dados permanecem armazenados no vetor até o fim da execução do algoritmo.
-
----
-
-# Matrizes
-
-Além dos vetores, existe outra estrutura muito utilizada: a **matriz**.
-
-Enquanto um vetor possui apenas **uma dimensão**, a matriz possui **duas dimensões**: linhas e colunas.
-
-Visualmente:
-
-```
-      Colunas
-
-       0     1     2
-
-0    [ ]   [ ]   [ ]
-
-1    [ ]   [ ]   [ ]
-
-2    [ ]   [ ]   [ ]
-
-↑
-Linhas
-```
-
-Uma matriz pode ser imaginada como uma planilha do Excel, onde cada célula é identificada por uma linha e uma coluna.
-
-- **Exemplo:**
-
-```
-matriz[2][1]
+delta:0:2
 ```
 
 Significa:
 
-* linha 2;
-* coluna 1.
+Mostrar duas casas decimais.
 
-As matrizes são muito utilizadas para representar tabelas, calendários, mapas, jogos, imagens e planilhas.
+Exemplo:
 
-Nesta aula, o foco principal foi compreender o funcionamento dos vetores, que servem como base para entender matrizes posteriormente.
-
----
-
-**Conceito Fundamental**
-
-Vetores são estruturas de dados que permitem armazenar diversos valores do mesmo tipo utilizando uma única variável indexada. Eles tornam os algoritmos menores, mais organizados e mais fáceis de manter. Quando combinados com estruturas de repetição, permitem processar grandes quantidades de dados com poucas linhas de código, sendo fundamentais em praticamente todas as linguagens de programação.
+```text
+5,33
+```
 
 ---
 
-# Em Resumo
+# Exemplo
 
-Nesta aula aprendi o conceito de vetores, entendendo que eles permitem armazenar vários valores utilizando uma única variável indexada. Também aprendi que, no VisualG, a indexação começa em zero e que os vetores normalmente são percorridos utilizando estruturas de repetição, como o `PARA`. Desenvolvi algoritmos para armazenar números, nomes, notas e países, percebendo como essa estrutura reduz a quantidade de código e facilita a manipulação de grandes conjuntos de dados. Além disso, tive uma introdução ao conceito de matrizes, que expandem a ideia dos vetores para duas dimensões.
+Equação:
 
-**Resumo Relâmpago**
+```text
+x² - 5x + 6 = 0
+```
 
-1. Estruturas de dados organizam informações na memória do computador.
-2. Um vetor armazena vários valores do mesmo tipo em uma única variável.
-3. No VisualG, a indexação do vetor normalmente começa em `0`.
-4. Cada posição do vetor é acessada pelo índice, como `vet[0]` e `vet[1]`.
-5. Vetores reduzem a quantidade de variáveis e deixam o código mais organizado.
-6. O comando `PARA` é a forma mais comum de percorrer um vetor.
-7. Um acumulador, como `soma <- soma + vetor[i]`, permite somar todos os elementos.
-8. É possível armazenar números, textos e outros tipos de dados em vetores.
-9. Matrizes são estruturas bidimensionais, organizadas em linhas e colunas.
-10. Vetores e matrizes são fundamentais para desenvolver programas eficientes e escaláveis.
+Delta:
+
+```text
+25 - 24
+
+=
+
+1
+```
+
+Raízes:
+
+```text
+x1 = 3
+
+x2 = 2
+```
+
+---
+
+# 2️⃣ Verificar se um Número é Par ou Ímpar
+
+## Conceito
+
+Um número é considerado par quando sua divisão por 2 possui resto igual a zero.
+
+Para isso utiliza-se o operador:
+
+```text
+%
+```
+
+No VisualG também pode ser escrito como `mod`.
+
+Ele retorna o resto da divisão inteira.
+
+Exemplos:
+
+```text
+10 % 2 = 0
+
+11 % 2 = 1
+
+18 % 2 = 0
+
+25 % 2 = 1
+```
+
+---
+
+## Código
+
+```portugol
+algoritmo "Par ou Impar"
+
+var
+
+numero: inteiro
+
+inicio
+
+escreval("Digite um número:")
+leia(numero)
+
+se (numero % 2 = 0) entao
+
+   escreval("O número ", numero, " é PAR")
+
+senao
+
+   escreval("O número ", numero, " é ÍMPAR")
+
+fimse
+
+fimalgoritmo
+```
+
+---
+
+## Observação
+
+Nas anotações originais, a mensagem do bloco `senao` estava escrita como **"é par"**. O correto é **"é ímpar"**, pois o bloco `senao` é executado quando o resto da divisão por 2 é diferente de zero.
+
+---
+
+# 3️⃣ Encontrar o Maior e o Menor Valor de um Vetor
+
+## Objetivo
+
+Ler dez números e mostrar:
+
+* todos os números digitados;
+* maior valor;
+* menor valor;
+* posição do maior;
+* posição do menor.
+
+---
+
+## Código
+
+```portugol
+algoritmo "Maior e Menor"
+
+var
+
+valores: vetor[1..10] de inteiro
+i, maior, menor, posMaior, posMenor: inteiro
+
+inicio
+
+// Leitura dos valores
+
+para i de 1 ate 10 faca
+
+   escreval("Digite o ", i, "º número")
+   leia(valores[i])
+
+fimpara
+
+// Inicialização
+
+maior <- valores[1]
+menor <- valores[1]
+
+posMaior <- 1
+posMenor <- 1
+
+// Procura maior e menor
+
+para i de 1 ate 10 faca
+
+   se (valores[i] > maior) entao
+
+      maior <- valores[i]
+      posMaior <- i
+
+   fimse
+
+   se (valores[i] < menor) entao
+
+      menor <- valores[i]
+      posMenor <- i
+
+   fimse
+
+fimpara
+
+// Exibe todos os elementos
+
+escreval("Elementos do vetor:")
+
+para i de 1 ate 10 faca
+
+   escreval(valores[i])
+
+fimpara
+
+escreval("")
+escreval("Maior valor: ", maior, " na posição ", posMaior)
+escreval("Menor valor: ", menor, " na posição ", posMenor)
+
+fimalgoritmo
+```
+
+---
+
+# Como o algoritmo funciona?
+
+Primeiro, todos os valores são armazenados no vetor.
+
+Depois, considera-se inicialmente que:
+
+```text
+Primeiro número = Maior
+
+Primeiro número = Menor
+```
+
+Em seguida, o algoritmo percorre novamente o vetor comparando cada elemento.
+
+Sempre que encontra um número maior:
+
+```text
+Atualiza o maior.
+```
+
+Sempre que encontra um número menor:
+
+```text
+Atualiza o menor.
+```
+
+No final teremos os extremos do vetor.
+
+Essa técnica é muito utilizada em processamento de listas, estatísticas e bancos de dados.
+
+---
+
+# 4️⃣ Cálculo do Fatorial
+
+## O que é Fatorial?
+
+O fatorial de um número é o produto dele por todos os seus antecessores positivos até 1.
+
+Representação:
+
+```text
+5!
+```
+
+Lê-se:
+
+```text
+Cinco fatorial.
+```
+
+---
+
+## Exemplo
+
+```text
+5!
+
+=
+
+5 × 4 × 3 × 2 × 1
+
+=
+
+120
+```
+
+Outro exemplo:
+
+```text
+4!
+
+=
+
+4 × 3 × 2 × 1
+
+=
+
+24
+```
+
+---
+
+## Código
+
+```portugol
+algoritmo "Fatorial"
+
+var
+
+num, i, fatorial: inteiro
+
+inicio
+
+escreval("Digite um número inteiro positivo:")
+leia(num)
+
+// Validação
+
+se (num < 0) entao
+
+   escreval("Erro: não existe fatorial de número negativo.")
+
+senao
+
+   fatorial <- 1
+
+   para i de 1 ate num faca
+
+      fatorial <- fatorial * i
+
+   fimpara
+
+   escreval("O fatorial de ", num, " é: ", fatorial)
+
+fimse
+
+fimalgoritmo
+```
+
+---
+
+## Explicação
+
+### Inicialização
+
+```portugol
+fatorial <- 1
+```
+
+Começamos com 1 porque ele é o elemento neutro da multiplicação.
+
+Se começássemos com zero:
+
+```text
+0 × qualquer número = 0
+```
+
+Todo o resultado seria incorreto.
+
+---
+
+### Multiplicação acumulativa
+
+```portugol
+fatorial <- fatorial * i
+```
+
+Exemplo para:
+
+```text
+5!
+```
+
+Passo a passo:
+
+```text
+1 × 1 = 1
+
+1 × 2 = 2
+
+2 × 3 = 6
+
+6 × 4 = 24
+
+24 × 5 = 120
+```
+
+Resultado final:
+
+```text
+120
+```
+
+---
+
+## Curiosidade
+
+Matematicamente:
+
+```text
+0! = 1
+```
+
+Por isso, a validação ideal é impedir apenas números **negativos** (`num < 0`). O valor **0** possui fatorial definido e igual a **1**.
+
+---
+
+# 🧠 Conceito Fundamental
+
+Nesta aula foi possível integrar diversos conceitos da lógica de programação em algoritmos mais completos. Foram utilizadas estruturas condicionais para validar dados e tomar decisões, laços de repetição para automatizar cálculos e vetores para armazenar conjuntos de informações. Também foram aplicados conceitos matemáticos importantes, como a Fórmula de Bhaskara, o operador módulo (`%`) e o cálculo de fatorial, mostrando como a programação pode resolver problemas matemáticos e do cotidiano de forma eficiente.
+
+---
+
+# ✅ Em Resumo
+
+Nesta aula desenvolvi algoritmos para resolver equações do segundo grau, identificar números pares e ímpares, localizar o maior e o menor elemento de um vetor e calcular o fatorial de um número. Esses exercícios consolidaram o uso conjunto de estruturas condicionais, vetores, laços de repetição e operações matemáticas, tornando os algoritmos mais completos e próximos de aplicações reais.
+
+# ⚡ Resumo Relâmpago (10 linhas)
+
+1. A equação do 2º grau possui a forma `ax² + bx + c = 0`, com `a ≠ 0`.
+2. O valor de Delta (`Δ = b² - 4ac`) determina a quantidade de raízes reais.
+3. A função `raizq()` calcula a raiz quadrada no VisualG.
+4. O operador `%` (ou `mod`) retorna o resto da divisão inteira.
+5. Um número é par quando `numero % 2 = 0`; caso contrário, é ímpar.
+6. Vetores permitem armazenar vários valores e percorrê-los com laços de repetição.
+7. Para encontrar o maior e o menor valor, compara-se cada elemento do vetor com os valores atuais.
+8. O fatorial é a multiplicação do número por todos os inteiros positivos até 1.
+9. O valor de `0!` é igual a `1`, enquanto números negativos não possuem fatorial definido.
+10. Esses exercícios demonstram como combinar matemática e programação para resolver problemas de forma estruturada.
