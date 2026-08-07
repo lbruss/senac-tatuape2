@@ -2,10 +2,10 @@ Algoritmo "Mercado"
 
 Var
 produtos: vetor[1..10] de caractere
-precos: vetor[1..10] de real
+preco: vetor[1..10] de real
 escolhidos: vetor[1..3] de caractere
 nome: caractere
-opcao, i: inteiro
+opcao,i: inteiro
 total: real
 
 Inicio
@@ -13,40 +13,40 @@ escreva("Digite o nome do comprador: ")
 leia(nome)
 // Cadastro dos produtos
 produtos[1] <- "Arroz"
-precos[1] <- 25.00
+preco[1] <- 25.00
 
-produtos[2] <- "Feijão"
-precos[2] <- 9.00
+produtos[2] <- "FeijÃ£o"
+preco[2] <- 9.00
 
-produtos[3] <- "Macarrão"
-precos[3] <- 6.00
+produtos[3] <- "MacarrÃ£o"
+preco[3] <- 6.00
 
 produtos[4] <- "Leite"
-precos[4] <- 6.00
+preco[4] <- 6.00
 
-produtos[5] <- "Cafá"
-precos[5] <- 19.00
+produtos[5] <- "CafÃ©"
+preco[5] <- 19.00
 
-produtos[6] <- "Açucar"
-precos[6] <- 5.00
+produtos[6] <- "AÃ§ucar"
+preco[6] <- 5.00
 
-produtos[7] <- "Óleo"
-precos[7] <- 8.00
+produtos[7] <- "Ã“leo"
+preco[7] <- 8.00
 
-produtos[8] <- "Sabão"
-precos[8] <- 4.00
+produtos[8] <- "Sabonete"
+preco[8] <- 4.00
 
 produtos[9] <- "Refrigerante"
-precos[9] <- 10.00
+preco[9] <- 10.00
 
 produtos[10] <- "Chocolate"
-precos[10] <- 7.00
+preco[10] <- 7.00
 
 escreval()
-escreval("===== LISTA DE PRODUTOS =====")
+escreval("LISTA DE PRODUTOS")
 
 para i de 1 ate 10 faca
-escreval(i," - ",produtos[i]," - R$ ",precos[i]:0:2)
+escreval(i," - ",produtos[i]," - R$ ",preco[i]:0:2)
 fimpara
 
 total <- 0
@@ -59,12 +59,11 @@ escreva("Escolha o produto ",i," (1 a 10): ")
 leia(opcao)
 
 escolhidos[i] <- produtos[opcao]
-total <- total + precos[opcao]
+total <- total + preco[opcao]
 
 fimpara
 
-escreval()
-escreval("===== RESUMO DA COMPRA =====")
+escreval()
 escreval("Comprador: ",nome)
 escreval()
 
