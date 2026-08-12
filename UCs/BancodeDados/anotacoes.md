@@ -1,11 +1,7 @@
 
-# Banco de Dados (MySQL) — UPDATE, DELETE, TRUNCATE e Backup
+# UPDATE, DELETE, TRUNCATE e Backup
 
-# 🎯 Ideia principal
-
-Nesta parte aprendi a **alterar, excluir e limpar dados** de uma tabela já existente.
-
-Também aprendi a diferença entre:
+**Ideia principal**
 
 * `UPDATE` → altera dados;
 * `DELETE` → remove registros específicos;
@@ -17,7 +13,7 @@ Além disso, criei novamente o banco `cadastro`, com as tabelas `estudantes` e `
 
 ---
 
-# 1. Inserindo dados na tabela `cursos`
+## 1. Inserindo dados na tabela `cursos`
 
 A tabela `cursos` já estava criada.
 
@@ -32,13 +28,13 @@ VALUES
 
 Nesse exemplo, foi cometido um erro de digitação:
 
-```text
+```
 Algorritmoss
 ```
 
 O correto seria:
 
-```text
+```
 Algoritmos
 ```
 
@@ -46,7 +42,7 @@ Para corrigir um dado que já foi inserido, utilizamos o comando `UPDATE`.
 
 ---
 
-# 2. UPDATE — Alterando dados
+## 2. UPDATE — Alterando dados
 
 ```sql
 UPDATE cursos
@@ -56,29 +52,29 @@ WHERE idcurso = 1;
 
 Depois:
 
-```text
+```
 Ctrl + Enter
 ```
 
-## O que aconteceu?
+**O que aconteceu?**
 
 O comando procurou o curso cujo:
 
-```text
+```
 idcurso = 1
 ```
 
 e alterou o valor da coluna `nome`.
 
-### Antes
+**Antes**
 
-```text
+```
 Algorritmoss
 ```
 
-### Depois
+**Depois**
 
-```text
+```
 Algoritmos
 ```
 
@@ -94,15 +90,15 @@ SET coluna = novo_valor
 WHERE condição;
 ```
 
-### `UPDATE cursos`
+**`UPDATE cursos`**
 
 Informa qual tabela será alterada.
 
-### `SET`
+**`SET`**
 
 Define o que será modificado.
 
-### `WHERE`
+**`WHERE`**
 
 Define **qual registro** será alterado.
 
@@ -112,7 +108,7 @@ Sem o `WHERE`, podemos alterar todos os registros da tabela.
 
 ---
 
-# ⚠️ Cuidado com o WHERE
+# Cuidado com o WHERE
 
 Imagine:
 
@@ -135,7 +131,7 @@ A Chave Primária torna a identificação do registro muito mais precisa.
 
 ---
 
-# 3. Alterando vários campos ao mesmo tempo
+## 3. Alterando vários campos ao mesmo tempo
 
 Também é possível modificar várias colunas utilizando um único `UPDATE`.
 
@@ -157,7 +153,7 @@ Nesse caso, o registro de `idcurso = 1` terá três campos modificados:
 
 ---
 
-# 4. Safe Update Mode do MySQL Workbench
+## 4. Safe Update Mode do MySQL Workbench
 
 O MySQL Workbench possui um mecanismo de proteção chamado **Safe Updates**.
 
@@ -180,11 +176,11 @@ sem perceber que estamos afetando a tabela inteira.
 
 ---
 
-# Desativando o Safe Updates
+## Desativando o Safe Updates
 
 No MySQL Workbench:
 
-```text
+```
 Edit
 ↓
 Preferences
@@ -194,7 +190,7 @@ SQL Editor
 
 No final da tela, desmarque:
 
-```text
+```
 Safe Updates (reject UPDATEs and DELETEs with no restrictions)
 ```
 
@@ -208,7 +204,7 @@ Para a alteração entrar em funcionamento, é necessário **reconectar ao servi
 
 ---
 
-## ⚠️ Importante
+**Importante**
 
 Não é recomendado desativar essa proteção sem necessidade.
 
@@ -220,7 +216,7 @@ Se for necessário realizar uma operação em toda a tabela, é melhor ter certe
 
 ---
 
-# 5. Alterando dados diretamente pela tabela
+## 5. Alterando dados diretamente pela tabela
 
 Existe outra maneira de corrigir vários dados utilizando a interface do Workbench.
 
@@ -232,7 +228,7 @@ SELECT * FROM cursos;
 
 Depois:
 
-```text
+```
 Ctrl + Enter
 ```
 
@@ -242,7 +238,7 @@ O Workbench mostrará os registros em formato de tabela.
 
 Depois de fazer as alterações:
 
-```text
+```
 Apply
 ```
 
@@ -250,7 +246,7 @@ O Workbench mostrará o SQL que será executado.
 
 Depois clique novamente em:
 
-```text
+```
 Apply
 ```
 
@@ -260,7 +256,7 @@ Essa opção é bastante útil quando precisamos corrigir visualmente vários re
 
 ---
 
-# 6. DELETE — Excluindo registros
+## 6. DELETE — Excluindo registros
 
 Para excluir um registro específico:
 
@@ -271,7 +267,7 @@ WHERE idcurso = 1;
 
 Depois:
 
-```text
+```
 Ctrl + Enter
 ```
 
@@ -279,7 +275,7 @@ O registro cujo `idcurso` é `1` será removido.
 
 ---
 
-# DELETE não apaga a tabela
+**DELETE não apaga a tabela**
 
 Isso é importante.
 
@@ -294,9 +290,9 @@ A tabela continua existindo.
 
 Sua estrutura também continua existindo.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Tabela cursos
 ├── idcurso
 ├── nome
@@ -310,7 +306,7 @@ Apenas uma das linhas será removida.
 
 ---
 
-# ⚠️ DELETE sem WHERE
+# DELETE sem WHERE
 
 Também é possível escrever:
 
@@ -326,7 +322,7 @@ Por isso, `DELETE` sem `WHERE` deve ser utilizado com extremo cuidado.
 
 ---
 
-# 7. TRUNCATE TABLE
+## 7. TRUNCATE TABLE
 
 Outro comando é:
 
@@ -353,7 +349,7 @@ Essa diferença é fundamental.
 
 ---
 
-## `DELETE`
+**`DELETE`**
 
 ```sql
 DELETE FROM cursos
@@ -364,7 +360,7 @@ Remove apenas o registro indicado.
 
 ---
 
-## `TRUNCATE`
+**`TRUNCATE`**
 
 ```sql
 TRUNCATE TABLE cursos;
@@ -374,7 +370,7 @@ Remove todas as linhas.
 
 A estrutura continua:
 
-```text
+```
 cursos
 ├── idcurso
 ├── nome
@@ -388,7 +384,7 @@ Mas não existem mais registros.
 
 ---
 
-## `DROP`
+**`DROP`**
 
 ```sql
 DROP TABLE cursos;
@@ -400,19 +396,19 @@ Não sobra nem a estrutura.
 
 ---
 
-# 🧠 Analogia
+> Analogia
 
 Imagine um caderno.
 
-### DELETE
+**DELETE**
 
 Você apaga algumas linhas.
 
-### TRUNCATE
+**TRUNCATE**
 
 Você apaga todas as anotações, mas continua com o caderno.
 
-### DROP
+**DROP**
 
 Você joga o caderno fora.
 
@@ -420,7 +416,7 @@ Essa diferença ajuda a memorizar os três comandos.
 
 ---
 
-# 8. Criando novamente o banco `cadastro`
+## 8. Criando novamente o banco `cadastro`
 
 Agora foi criado novamente um banco para praticar com duas tabelas:
 
@@ -441,7 +437,7 @@ USE cadastro;
 
 ---
 
-# 9. Criando a tabela `estudantes`
+## 9. Criando a tabela `estudantes`
 
 ```sql
 CREATE TABLE estudantes (
@@ -467,7 +463,7 @@ A coluna ficará logo depois de `nome`.
 
 ---
 
-# 10. Adicionando a Chave Primária
+## 10. Adicionando a Chave Primária
 
 ```sql
 ALTER TABLE estudantes
@@ -476,25 +472,25 @@ ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY FIRST;
 
 Esse comando faz três coisas ao mesmo tempo:
 
-### `ADD COLUMN`
+**`ADD COLUMN`**
 
 Adiciona a coluna `id`.
 
-### `AUTO_INCREMENT`
+**`AUTO_INCREMENT`**
 
 Gera automaticamente os números.
 
-### `PRIMARY KEY`
+**`PRIMARY KEY`**
 
 Transforma `id` na Chave Primária.
 
-### `FIRST`
+**`FIRST`**
 
 Coloca a coluna no início da tabela.
 
 A estrutura fica aproximadamente:
 
-```text
+```
 id
 nome
 profissao
@@ -507,7 +503,7 @@ nacionalidade
 
 ---
 
-# 11. Criando a tabela `cursos`
+## 11. Criando a tabela `cursos`
 
 ```sql
 CREATE TABLE IF NOT EXISTS cursos (
@@ -528,7 +524,7 @@ ADD COLUMN idcurso INT AUTO_INCREMENT PRIMARY KEY FIRST;
 
 Agora temos duas tabelas independentes:
 
-```text
+```
 cadastro
 │
 ├── estudantes
@@ -538,7 +534,7 @@ cadastro
 
 ---
 
-# 12. Inserindo vários cursos
+## 12. Inserindo vários cursos
 
 ```sql
 INSERT INTO cursos
@@ -567,7 +563,7 @@ O MySQL gera automaticamente os IDs.
 
 ---
 
-# 13. Inserindo vários estudantes
+## 13. Inserindo vários estudantes
 
 ```sql
 INSERT INTO estudantes
@@ -597,7 +593,7 @@ Novamente, o `id` não foi informado porque o `AUTO_INCREMENT` cuida dele.
 
 ---
 
-# 14. Conferindo as tabelas
+## 14. Conferindo as tabelas
 
 Para verificar a estrutura:
 
@@ -625,7 +621,7 @@ SELECT * FROM cursos;
 
 ---
 
-# 💾 15. Backup do banco de dados
+# Backup do banco de dados
 
 Depois de criar e preencher o banco, aprendi a fazer um **backup**.
 
@@ -635,11 +631,11 @@ Isso é fundamental porque bancos de dados podem conter informações muito impo
 
 ---
 
-# Exportando o banco pelo MySQL Workbench
+## Exportando o banco pelo MySQL Workbench
 
 No Workbench:
 
-```text
+```
 Server
 ↓
 Data Export
@@ -659,13 +655,13 @@ Depois:
 
 ---
 
-# O que significa "Dump Structure and Data"?
+**O que significa "Dump Structure and Data"?**
 
 Essa opção é muito importante.
 
 Ela salva:
 
-### Structure
+**Structure**
 
 A estrutura do banco:
 
@@ -675,25 +671,25 @@ A estrutura do banco:
 * chaves;
 * configurações.
 
-### Data
+**Data**
 
 Os registros armazenados nas tabelas.
 
 Ou seja, o backup contém tanto:
 
-```text
+```
 Como o banco deve ser criado
 ```
 
 quanto:
 
-```text
+```
 Quais dados estavam dentro dele
 ```
 
 ---
 
-# O que é Self-Contained File?
+**O que é Self-Contained File?**
 
 Significa que o backup será armazenado em **um único arquivo**.
 
@@ -703,11 +699,11 @@ Esse arquivo pode posteriormente ser utilizado para restaurar o banco.
 
 ---
 
-# 16. Importando o banco novamente
+# Importando o banco novamente
 
 Para restaurar/importar o backup:
 
-```text
+```
 Server
 ↓
 Data Import
@@ -726,11 +722,11 @@ Depois disso, o banco poderá ser restaurado no MySQL.
 
 ---
 
-# 🧠 Backup na prática
+# Backup na prática
 
 Podemos imaginar:
 
-```text
+```
 Banco original
       ↓
    EXPORT
@@ -748,7 +744,7 @@ O **Import** utiliza essa cópia para reconstruir o banco.
 
 ---
 
-# ⚠️ Por que backup é importante?
+# Importância do Backup 
 
 Imagine que eu tenha um banco com:
 
@@ -770,7 +766,7 @@ Por isso, em ambientes profissionais, backup é uma parte essencial da administr
 
 ---
 
-# 🧩 Comandos fundamentais desta aula
+# Comandos fundamentais desta aula
 
 | Comando             | Função                                |
 | ------------------- | ------------------------------------- |
@@ -786,9 +782,9 @@ Por isso, em ambientes profissionais, backup é uma parte essencial da administr
 
 ---
 
-# 🔥 Diferença fundamental: UPDATE, DELETE, TRUNCATE e DROP
+# Diferença fundamental: UPDATE, DELETE, TRUNCATE e DROP
 
-```text
+```
 UPDATE
    ↓
 Altera dados
@@ -812,7 +808,7 @@ Essa diferença precisa estar muito bem entendida, porque esses comandos possuem
 
 ---
 
-# 💡 Dicas importantes
+**Dicas importantes**
 
 * Sempre confira o `WHERE` antes de executar um `UPDATE` ou `DELETE`.
 * Utilize a **Chave Primária** no `WHERE` quando quiser atingir um registro específico.
@@ -827,13 +823,13 @@ Essa diferença precisa estar muito bem entendida, porque esses comandos possuem
 
 ---
 
-# ✅ Resumo final
+# Resumo final
 
 Nesta aula aprendi a trabalhar diretamente com os **dados** das tabelas. Utilizei `UPDATE` para corrigir e alterar registros, `DELETE` para remover registros específicos e `TRUNCATE TABLE` para limpar completamente uma tabela sem apagar sua estrutura. Também compreendi a diferença entre essas operações e `DROP`, que remove a própria tabela. Depois recriei o banco `cadastro`, com as tabelas `estudantes` e `cursos`, inseri diversos registros e utilizei `SELECT` e `DESC` para verificar os resultados. Por fim, aprendi a realizar **backup e restauração** pelo MySQL Workbench usando Data Export e Data Import.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. `INSERT INTO` insere novos registros no banco.
 2. `UPDATE` altera registros existentes.
