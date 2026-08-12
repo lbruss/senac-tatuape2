@@ -1,344 +1,513 @@
-# Alterando a Estrutura das Tabelas (ALTER TABLE)
 
-**Ideia principal**
+# Banco de Dados (MySQL) — UPDATE, DELETE, TRUNCATE e Backup
 
-Utilizando o comando **`ALTER TABLE`**, responsável por modificar a estrutura de uma tabela já existente.
+# 🎯 Ideia principal
 
-Com ele é possível:
+Nesta parte aprendi a **alterar, excluir e limpar dados** de uma tabela já existente.
 
-* adicionar colunas;
-* remover colunas;
-* alterar o tipo de um campo;
-* modificar restrições (*constraints*);
-* renomear colunas;
-* renomear tabelas;
-* alterar a posição das colunas;
-* adicionar Chaves Primárias.
+Também aprendi a diferença entre:
 
-Esse comando é um dos mais importantes do SQL, pois permite evoluir um banco de dados sem precisar recriá-lo do zero.
+* `UPDATE` → altera dados;
+* `DELETE` → remove registros específicos;
+* `TRUNCATE` → remove todos os registros, mantendo a tabela;
+* `DROP` → remove a própria tabela ou banco;
+* **Backup/Export** → salva uma cópia do banco para poder restaurá-lo posteriormente.
+
+Além disso, criei novamente o banco `cadastro`, com as tabelas `estudantes` e `cursos`, inseri vários registros e aprendi a exportar e importar o banco pelo MySQL Workbench.
 
 ---
 
-**O que é ALTER TABLE?**
+# 1. Inserindo dados na tabela `cursos`
 
-O comando:
+A tabela `cursos` já estava criada.
+
+Para inserir um curso:
 
 ```sql
-ALTER TABLE
+INSERT INTO cursos
+(idcurso, nome, descricao, carga, totalaulas, ano)
+VALUES
+(DEFAULT, 'Algorritmoss', 'Lógica de programação. Você aprenderá sobre o desenvolvimento de soluções com aplicações da lógica...', 40, 10, 2026);
 ```
 
-serve para modificar uma tabela que já existe.
+Nesse exemplo, foi cometido um erro de digitação:
 
-Enquanto o `CREATE TABLE` cria uma tabela nova, o `ALTER TABLE` faz alterações em uma tabela já criada.
+```text
+Algorritmoss
+```
 
-> Analogia
+O correto seria:
 
-Imagine que uma tabela seja uma casa.
+```text
+Algoritmos
+```
 
-* `CREATE TABLE` → construir a casa.
-* `ALTER TABLE` → reformar a casa.
-
-Você pode adicionar quartos, remover paredes ou trocar portas, sem precisar demolir tudo.
+Para corrigir um dado que já foi inserido, utilizamos o comando `UPDATE`.
 
 ---
 
-# Selecionando o banco
+# 2. UPDATE — Alterando dados
 
-Antes de qualquer alteração, é necessário informar ao MySQL qual banco será utilizado.
+```sql
+UPDATE cursos
+SET nome = 'Algoritmos'
+WHERE idcurso = 1;
+```
+
+Depois:
+
+```text
+Ctrl + Enter
+```
+
+## O que aconteceu?
+
+O comando procurou o curso cujo:
+
+```text
+idcurso = 1
+```
+
+e alterou o valor da coluna `nome`.
+
+### Antes
+
+```text
+Algorritmoss
+```
+
+### Depois
+
+```text
+Algoritmos
+```
+
+---
+
+# Entendendo o UPDATE
+
+A estrutura básica é:
+
+```sql
+UPDATE tabela
+SET coluna = novo_valor
+WHERE condição;
+```
+
+### `UPDATE cursos`
+
+Informa qual tabela será alterada.
+
+### `SET`
+
+Define o que será modificado.
+
+### `WHERE`
+
+Define **qual registro** será alterado.
+
+Isso é extremamente importante.
+
+Sem o `WHERE`, podemos alterar todos os registros da tabela.
+
+---
+
+# ⚠️ Cuidado com o WHERE
+
+Imagine:
+
+```sql
+UPDATE cursos
+SET nome = 'Algoritmos';
+```
+
+Nesse caso, não existe `WHERE`.
+
+Consequentemente, **todos os cursos terão o nome alterado para `Algoritmos`**.
+
+Por isso, quando queremos alterar apenas um registro, normalmente utilizamos a Chave Primária:
+
+```sql
+WHERE idcurso = 1;
+```
+
+A Chave Primária torna a identificação do registro muito mais precisa.
+
+---
+
+# 3. Alterando vários campos ao mesmo tempo
+
+Também é possível modificar várias colunas utilizando um único `UPDATE`.
+
+```sql
+UPDATE cursos
+SET nome = 'Algoritmos',
+    carga = 24,
+    totalaulas = 6
+WHERE idcurso = 1;
+```
+
+As alterações são separadas por vírgulas.
+
+Nesse caso, o registro de `idcurso = 1` terá três campos modificados:
+
+* `nome`;
+* `carga`;
+* `totalaulas`.
+
+---
+
+# 4. Safe Update Mode do MySQL Workbench
+
+O MySQL Workbench possui um mecanismo de proteção chamado **Safe Updates**.
+
+Ele evita comandos perigosos de `UPDATE` e `DELETE` que não possuem uma condição suficientemente restritiva.
+
+Isso ajuda a evitar situações como:
+
+```sql
+UPDATE cursos
+SET nome = 'Algoritmos';
+```
+
+ou:
+
+```sql
+DELETE FROM cursos;
+```
+
+sem perceber que estamos afetando a tabela inteira.
+
+---
+
+# Desativando o Safe Updates
+
+No MySQL Workbench:
+
+```text
+Edit
+↓
+Preferences
+↓
+SQL Editor
+```
+
+No final da tela, desmarque:
+
+```text
+Safe Updates (reject UPDATEs and DELETEs with no restrictions)
+```
+
+Depois clique em:
+
+```text
+OK
+```
+
+Para a alteração entrar em funcionamento, é necessário **reconectar ao servidor**.
+
+---
+
+## ⚠️ Importante
+
+Não é recomendado desativar essa proteção sem necessidade.
+
+O Safe Updates existe justamente para evitar acidentes.
+
+Um comando errado pode modificar ou excluir **milhares de registros de uma vez**.
+
+Se for necessário realizar uma operação em toda a tabela, é melhor ter certeza absoluta do que está sendo feito antes de desativar a proteção.
+
+---
+
+# 5. Alterando dados diretamente pela tabela
+
+Existe outra maneira de corrigir vários dados utilizando a interface do Workbench.
+
+Primeiro:
+
+```sql
+SELECT * FROM cursos;
+```
+
+Depois:
+
+```text
+Ctrl + Enter
+```
+
+O Workbench mostrará os registros em formato de tabela.
+
+É possível editar os valores diretamente na grade.
+
+Depois de fazer as alterações:
+
+```text
+Apply
+```
+
+O Workbench mostrará o SQL que será executado.
+
+Depois clique novamente em:
+
+```text
+Apply
+```
+
+para confirmar.
+
+Essa opção é bastante útil quando precisamos corrigir visualmente vários registros.
+
+---
+
+# 6. DELETE — Excluindo registros
+
+Para excluir um registro específico:
+
+```sql
+DELETE FROM cursos
+WHERE idcurso = 1;
+```
+
+Depois:
+
+```text
+Ctrl + Enter
+```
+
+O registro cujo `idcurso` é `1` será removido.
+
+---
+
+# DELETE não apaga a tabela
+
+Isso é importante.
+
+```sql
+DELETE FROM cursos
+WHERE idcurso = 1;
+```
+
+remove apenas o **registro selecionado**.
+
+A tabela continua existindo.
+
+Sua estrutura também continua existindo.
+
+Por exemplo:
+
+```text
+Tabela cursos
+├── idcurso
+├── nome
+├── descricao
+├── carga
+├── totalaulas
+└── ano
+```
+
+Apenas uma das linhas será removida.
+
+---
+
+# ⚠️ DELETE sem WHERE
+
+Também é possível escrever:
+
+```sql
+DELETE FROM cursos;
+```
+
+Porém isso remove **todos os registros da tabela**.
+
+A tabela continua existindo, mas ficará sem nenhuma linha.
+
+Por isso, `DELETE` sem `WHERE` deve ser utilizado com extremo cuidado.
+
+---
+
+# 7. TRUNCATE TABLE
+
+Outro comando é:
+
+```sql
+TRUNCATE TABLE cursos;
+```
+
+Esse comando remove **todos os registros da tabela**.
+
+Porém, diferentemente de `DROP TABLE`, a tabela continua existindo.
+
+---
+
+# DELETE x TRUNCATE x DROP
+
+Essa diferença é fundamental.
+
+| Comando          | O que acontece                                     |
+| ---------------- | -------------------------------------------------- |
+| `DELETE`         | Remove registros específicos ou todos os registros |
+| `TRUNCATE TABLE` | Remove todos os registros rapidamente              |
+| `DROP TABLE`     | Remove a tabela inteira                            |
+| `DROP DATABASE`  | Remove o banco de dados inteiro                    |
+
+---
+
+## `DELETE`
+
+```sql
+DELETE FROM cursos
+WHERE idcurso = 1;
+```
+
+Remove apenas o registro indicado.
+
+---
+
+## `TRUNCATE`
+
+```sql
+TRUNCATE TABLE cursos;
+```
+
+Remove todas as linhas.
+
+A estrutura continua:
+
+```text
+cursos
+├── idcurso
+├── nome
+├── descricao
+├── carga
+├── totalaulas
+└── ano
+```
+
+Mas não existem mais registros.
+
+---
+
+## `DROP`
+
+```sql
+DROP TABLE cursos;
+```
+
+Aqui a própria tabela deixa de existir.
+
+Não sobra nem a estrutura.
+
+---
+
+# 🧠 Analogia
+
+Imagine um caderno.
+
+### DELETE
+
+Você apaga algumas linhas.
+
+### TRUNCATE
+
+Você apaga todas as anotações, mas continua com o caderno.
+
+### DROP
+
+Você joga o caderno fora.
+
+Essa diferença ajuda a memorizar os três comandos.
+
+---
+
+# 8. Criando novamente o banco `cadastro`
+
+Agora foi criado novamente um banco para praticar com duas tabelas:
+
+* `estudantes`;
+* `cursos`.
+
+```sql
+CREATE DATABASE cadastro
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+```
+
+Depois:
 
 ```sql
 USE cadastro;
 ```
 
-A partir desse momento, todos os comandos serão executados dentro do banco **cadastro**.
-
 ---
 
-**Estrutura inicial da tabela**
-
-A tabela utilizada na aula foi:
+# 9. Criando a tabela `estudantes`
 
 ```sql
-CREATE TABLE pessoas (
-    id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE estudantes (
     nome VARCHAR(50) NOT NULL,
     nascimento DATE,
     sexo ENUM('f','m','o'),
     peso DECIMAL(5,2),
     altura DECIMAL(3,2),
-    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro',
-    PRIMARY KEY (id)
+    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro'
 ) DEFAULT CHARSET=utf8;
 ```
 
----
+Nesse momento a tabela ainda não possui um identificador.
 
-## Adicionando uma nova coluna
-
-Para adicionar uma coluna chamada **profissao**:
+Então adicionamos `profissao`:
 
 ```sql
-ALTER TABLE pessoas
-ADD COLUMN profissao VARCHAR(20);
+ALTER TABLE estudantes
+ADD COLUMN profissao VARCHAR(50) AFTER nome;
 ```
 
-- **Explicação**
-
-**ALTER TABLE pessoas**
-
-Indica qual tabela será modificada.
-
-**ADD COLUMN**
-
-Adiciona uma nova coluna.
-
-**profissao**
-
-Nome da nova coluna.
-
-**VARCHAR(20)**
-
-Permite armazenar até 20 caracteres.
+A coluna ficará logo depois de `nome`.
 
 ---
 
-**Onde a coluna será criada?**
-
-Quando nenhuma posição é informada, o MySQL adiciona a coluna **no final da tabela**.
-
-- **Exemplo:**
-
-Antes:
-
-| id | nome | nascimento | sexo |
-| -- | ---- | ---------- | ---- |
-
-Depois:
-
-| id | nome | nascimento | sexo | profissão |
-
----
-
-**Verificando a estrutura**
-
-Após qualquer alteração, é recomendado executar:
+# 10. Adicionando a Chave Primária
 
 ```sql
-DESCRIBE pessoas;
+ALTER TABLE estudantes
+ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY FIRST;
 ```
 
-ou
+Esse comando faz três coisas ao mesmo tempo:
 
-```sql
-DESC pessoas;
-```
+### `ADD COLUMN`
 
-Assim é possível conferir se a alteração foi aplicada corretamente.
+Adiciona a coluna `id`.
 
----
+### `AUTO_INCREMENT`
 
-# Mudando a posição da coluna
+Gera automaticamente os números.
 
-Caso a coluna tenha sido criada no lugar errado, posso removê-la e criá-la novamente na posição desejada.
+### `PRIMARY KEY`
 
-```sql
-ALTER TABLE pessoas
-DROP COLUMN profissao;
-```
+Transforma `id` na Chave Primária.
 
-Depois:
+### `FIRST`
 
-```sql
-ALTER TABLE pessoas
-ADD COLUMN profissao VARCHAR(20) AFTER nome;
-```
+Coloca a coluna no início da tabela.
 
----
-
-**O que significa AFTER?**
-
-O comando:
-
-```sql
-AFTER nome
-```
-
-faz com que a nova coluna seja criada **logo após a coluna `nome`**.
-
-Resultado:
-
-| id | nome | profissão | nascimento |
-
----
-
-**Observação importante**
-
-No MySQL existe apenas o comando:
-
-```sql
-AFTER
-```
-
-Não existe um comando chamado `BEFORE` para posicionar colunas antes de outra.
-
-Para colocar uma coluna no início da tabela utiliza-se outro comando, visto a seguir.
-
----
-
-## Adicionando uma coluna no início
-
-```sql
-ALTER TABLE pessoas
-ADD COLUMN codigo INT FIRST;
-```
-
-**O que faz?**
-
-A palavra:
-
-```sql
-FIRST
-```
-
-coloca a nova coluna como a primeira da tabela.
-
-Resultado:
-
-| codigo | id | nome | profissão | nascimento |
-
----
-
-# Removendo uma coluna
-
-Se ela não for mais necessária:
-
-```sql
-ALTER TABLE pessoas
-DROP COLUMN codigo;
-```
-
-A coluna será removida da estrutura da tabela.
-
-> **Atenção:** Ao remover uma coluna, todos os dados armazenados nela também são apagados.
-
----
-
-# Alterando o tipo de uma coluna
-
-Também é possível alterar o tipo de um campo já existente.
-
-- **Exemplo:**
-
-```sql
-ALTER TABLE pessoas
-MODIFY COLUMN profissao VARCHAR(30) NOT NULL;
-```
-
-**O que aconteceu?**
-
-* o tamanho passou de 20 para 30 caracteres;
-* o campo passou a ser obrigatório (`NOT NULL`).
-
----
-
-**Por que apareceu um aviso??*
-
-Apareceu um símbolo de alerta (⚠️).
-
-Isso aconteceu porque já existiam registros cadastrados.
-
-Esses registros não possuíam valor na coluna **profissao**.
-
-Como a coluna passou a ser obrigatória (`NOT NULL`), o MySQL encontrou valores vazios e gerou um aviso.
-
-Esse aviso é conhecido como **truncation warning** ou aviso de conversão/truncamento de dados, dependendo da situação.
-
----
-
-## Corrigindo o problema
-
-Para evitar esse aviso, pode-se definir um valor padrão.
-
-```sql
-ALTER TABLE pessoas
-MODIFY COLUMN profissao VARCHAR(30) NOT NULL DEFAULT '';
-```
-
-**O que significa?**
-
-Sempre que um novo registro não informar a profissão, o MySQL armazenará uma string vazia (`''`) como valor padrão.
-
-Isso impede que o campo fique nulo.
-
----
-
-# Renomeando uma coluna
-
-Também posso alterar o nome de uma coluna.
-
-```sql
-ALTER TABLE pessoas
-CHANGE COLUMN profissao prof VARCHAR(30) NOT NULL DEFAULT '';
-```
-
-- **Explicação**
-
-Ao utilizar `CHANGE COLUMN`, é obrigatório informar novamente:
-
-* o novo nome;
-* o tipo de dado;
-* as restrições (*constraints*).
-
-**Antes**
+A estrutura fica aproximadamente:
 
 ```text
+id
+nome
 profissao
-```
-
-**Depois**
-
-```text
-prof
+nascimento
+sexo
+peso
+altura
+nacionalidade
 ```
 
 ---
 
-**Verificando a alteração**
-
-```sql
-DESCRIBE pessoas;
-```
-
-Assim é possível conferir se o novo nome foi aplicado corretamente.
-
----
-
-# Renomeando uma tabela
-
-Também é possível alterar o nome da tabela.
-
-```sql
-ALTER TABLE pessoas
-RENAME TO estudantes;
-```
-
-Agora a tabela deixa de se chamar **pessoas** e passa a se chamar **estudantes**.
-
----
-
-**Conferindo**
-
-```sql
-DESCRIBE estudantes;
-```
-
-Se o comando funcionar, significa que a tabela foi renomeada corretamente.
-
----
-
-# Criando uma nova tabela — cursos
-
-Foi criada uma nova tabela chamada **cursos**.
+# 11. Criando a tabela `cursos`
 
 ```sql
 CREATE TABLE IF NOT EXISTS cursos (
@@ -350,299 +519,329 @@ CREATE TABLE IF NOT EXISTS cursos (
 ) DEFAULT CHARSET=utf8;
 ```
 
----
-
-**Explicando cada campo**
-
-- IF NOT EXISTS
-
-Evita erro caso a tabela já exista.
-
-O MySQL simplesmente ignora a criação.
-
----
-
-- nome
-
-```sql
-VARCHAR(50)
-```
-
-Nome do curso.
-
----
-
-- UNIQUE
-
-Impede nomes repetidos.
-
-- **Exemplo:**
-
-```
-Informática
-Informática
-```
-
-O segundo cadastro será recusado.
-
----
-
-- descricao
-
-```sql
-TEXT
-```
-
-Utilizado para textos longos.
-
-É ideal para descrições completas.
-
----
-
-- carga
-
-```sql
-INT UNSIGNED
-```
-
-Armazena apenas números positivos.
-
-Como carga horária nunca será negativa, `UNSIGNED` é uma escolha adequada.
-
----
-
-- totalaulas
-
-Quantidade de aulas do curso.
-
----
-
-- ano
-
-```sql
-YEAR
-```
-
-Armazena apenas o ano.
-
-Caso nenhum valor seja informado, será utilizado:
-
-```
-2026
-```
-
----
-
-## Adicionando um ID
-
-Depois foi adicionada uma coluna identificadora.
+Depois adicionamos o identificador:
 
 ```sql
 ALTER TABLE cursos
-ADD COLUMN idcurso INT FIRST;
+ADD COLUMN idcurso INT AUTO_INCREMENT PRIMARY KEY FIRST;
 ```
 
-Ela será criada na primeira posição da tabela.
+Agora temos duas tabelas independentes:
+
+```text
+cadastro
+│
+├── estudantes
+│
+└── cursos
+```
 
 ---
 
-## Criando a Chave Primária
-
-O comando:
+# 12. Inserindo vários cursos
 
 ```sql
-ALTER TABLE cursos
-ADD PRIMARY KEY (idcurso);
+INSERT INTO cursos
+(nome, descricao, carga, totalaulas, ano)
+VALUES
+('Algoritmos', 'Lógica de programação para desenvolvimento de algoritmos e soluções computacionais.', 40, 10, 2026),
+('Excel Essencial', 'Criação de planilhas, gráficos, fórmulas, funções e armazenamento em nuvem.', 40, 10, 2027),
+('Excel Avançado I', 'Funções avançadas para cálculos, relatórios, gráficos e banco de dados.', 24, 6, 2028),
+('Excel Avançado II', 'Recursos avançados do Excel para automação e análise de dados.', 24, 6, 2025),
+('Formação Excel do Básico ao Avançado', 'Curso completo de Excel 365 do nível básico ao avançado.', 72, 18, 2026),
+('Desenvolvedor Web Front-end I', 'Desenvolvimento de sites responsivos utilizando HTML e CSS.', 60, 15, 2027),
+('Desenvolvedor Web Front-end II JavaScript', 'Desenvolvimento de interatividade em páginas web utilizando JavaScript.', 40, 12, 2028),
+('PHP com MySQL', 'Desenvolvimento de sistemas web utilizando PHP e banco de dados MySQL.', 40, 12, 2025),
+('Lógica de Programação com PHP', 'Desenvolvimento de algoritmos utilizando a linguagem PHP.', 40, 12, 2026);
 ```
 
-Agora `idcurso` passa a identificar cada curso de forma única.
+O `idcurso` não precisa ser informado.
 
----
-
-## Transformando em AUTO_INCREMENT
-
-Depois:
+Isso acontece porque ele possui:
 
 ```sql
-ALTER TABLE cursos
-MODIFY COLUMN idcurso INT NOT NULL AUTO_INCREMENT;
+AUTO_INCREMENT
 ```
 
-Agora o próprio MySQL gera automaticamente o código de cada curso.
+O MySQL gera automaticamente os IDs.
 
 ---
 
-## Conferindo a estrutura
+# 13. Inserindo vários estudantes
+
+```sql
+INSERT INTO estudantes
+(nome, profissao, nascimento, sexo, peso, altura, nacionalidade)
+VALUES
+('Ana Beatriz Almeida Souza', 'Enfermeira', '1998-03-15', 'f', 58, 1.65, 'Brasileira'),
+('Carlos Eduardo Pereira Lima', 'Engenheiro', '1995-07-22', 'm', 82, 1.78, 'Português'),
+('Mariana Oliveira Santos', 'Professora', '2001-11-09', 'f', 64, 1.70, 'Brasileira'),
+('João Victor Rodrigues Costa', 'Analista de Sistemas', '1997-01-30', 'm', 85, 1.80, 'Angolano'),
+('Fernanda Martins Ribeiro', 'Enfermeira', '1999-05-18', 'f', 55, 1.62, 'Brasileira'),
+('Lucas Henrique Alves Rocha', 'Advogado', '1996-12-03', 'm', 76, 1.75, 'Argentino'),
+('Juliana Ferreira Gomes', 'Médica', '2000-08-27', 'f', 60, 1.68, 'Brasileira'),
+('Pedro Henrique Barbosa Silva', 'Contador', '1994-04-14', 'm', 88, 1.82, 'Chileno'),
+('Camila Dias Carvalho', 'Designer', '2002-09-06', 'f', 52, 1.60, 'Colombiana'),
+('Rafael Moreira Araújo', 'Administrador', '1993-02-25', 'm', 79, 1.77, 'Brasileiro'),
+('Bruna Cardoso Monteiro', 'Psicóloga', '1998-10-12', 'f', 59, 1.66, 'Portuguesa'),
+('Felipe Nascimento Teixeira', 'Desenvolvedor', '1997-06-19', 'm', 90, 1.83, 'Brasileiro'),
+('Larissa Batista Correia', 'Arquiteta', '2001-03-08', 'f', 63, 1.69, 'Mexicana'),
+('Gabriel Mendes Lopes', 'Técnico em Informática', '1995-11-21', 'm', 74, 1.74, 'Brasileiro'),
+('Isabela Ramos Fernandes', 'Nutricionista', '1999-07-02', 'f', 57, 1.63, 'Espanhola'),
+('Thiago Gonçalves Vieira', 'Policial', '1996-01-17', 'm', 84, 1.79, 'Brasileiro'),
+('Amanda Castro Moura', 'Farmacêutica', '2000-12-29', 'f', 61, 1.67, 'Italiana'),
+('Daniel Freitas Andrade', 'Empresário', '1994-05-10', 'm', 87, 1.81, 'Brasileiro');
+```
+
+Novamente, o `id` não foi informado porque o `AUTO_INCREMENT` cuida dele.
+
+---
+
+# 14. Conferindo as tabelas
+
+Para verificar a estrutura:
+
+```sql
+DESC estudantes;
+```
+
+e:
 
 ```sql
 DESC cursos;
 ```
 
-Esse comando exibirá toda a estrutura da tabela, incluindo:
-
-* tipos de dados;
-* chave primária;
-* valores padrão;
-* restrições.
-
----
-
-# Tuplas
-
-Durante os estudos pode aparecer o termo:
-
-```
-Tupla
-```
-
-**O que é uma tupla**
-
-No contexto de Banco de Dados, **tupla** é simplesmente um **registro**, ou seja, uma linha da tabela.
-
-- **Exemplo:**
-
-| id | nome  |
-| -- | ----- |
-| 1  | Bruss |
-
-Toda essa linha corresponde a uma tupla.
-
-Hoje em dia é muito mais comum utilizar o termo **registro**, mas ambos possuem o mesmo significado.
-
----
-
-# Resumo dos principais comandos ALTER TABLE
-
-| Comando           | Função                                                       |
-| ----------------- | ------------------------------------------------------------ |
-| `ADD COLUMN`      | Adiciona uma nova coluna.                                    |
-| `DROP COLUMN`     | Remove uma coluna.                                           |
-| `MODIFY COLUMN`   | Altera o tipo de dado ou as restrições de uma coluna.        |
-| `CHANGE COLUMN`   | Renomeia uma coluna e permite alterar seu tipo e restrições. |
-| `RENAME TO`       | Renomeia a tabela.                                           |
-| `FIRST`           | Coloca uma coluna como a primeira da tabela.                 |
-| `AFTER coluna`    | Posiciona uma nova coluna após outra coluna específica.      |
-| `ADD PRIMARY KEY` | Define uma Chave Primária para a tabela.                     |
-
----
-
-# Passo a passo
-
-**1.**
-
-Selecionar o banco.
+Para visualizar os dados:
 
 ```sql
-USE cadastro;
+SELECT * FROM estudantes;
 ```
 
-**2.**
-
-Adicionar uma coluna.
+e:
 
 ```sql
-ALTER TABLE pessoas
-ADD COLUMN profissao VARCHAR(20);
-```
-
-**3.**
-
-Conferir.
-
-```sql
-DESCRIBE pessoas;
-```
-
-**4.**
-
-Remover a coluna.
-
-```sql
-ALTER TABLE pessoas
-DROP COLUMN profissao;
-```
-
-**5.**
-
-Criá-la novamente após `nome`.
-
-```sql
-ALTER TABLE pessoas
-ADD COLUMN profissao VARCHAR(20) AFTER nome;
-```
-
-**6.**
-
-Adicionar uma coluna no início.
-
-```sql
-ALTER TABLE pessoas
-ADD COLUMN codigo INT FIRST;
-```
-
-**7.**
-
-Remover essa coluna.
-
-```sql
-ALTER TABLE pessoas
-DROP COLUMN codigo;
-```
-
-**8.**
-
-Alterar o tipo da coluna.
-
-```sql
-ALTER TABLE pessoas
-MODIFY COLUMN profissao VARCHAR(30) NOT NULL DEFAULT '';
-```
-
-**9.**
-
-Renomear a coluna.
-
-```sql
-ALTER TABLE pessoas
-CHANGE COLUMN profissao prof VARCHAR(30) NOT NULL DEFAULT '';
-```
-
-**10.**
-
-Renomear a tabela.
-
-```sql
-ALTER TABLE pessoas
-RENAME TO estudantes;
+SELECT * FROM cursos;
 ```
 
 ---
 
-**Dicas importantes**
+# 💾 15. Backup do banco de dados
 
-* Sempre utilize `DESCRIBE` ou `DESC` após alterar a estrutura de uma tabela para verificar se tudo foi aplicado corretamente.
-* Evite remover colunas (`DROP COLUMN`) sem necessidade, pois todos os dados armazenados nelas serão perdidos.
-* Utilize `DEFAULT` quando transformar um campo em `NOT NULL`, principalmente se já existirem registros na tabela.
-* `CHANGE COLUMN` exige que o tipo de dado e as restrições sejam informados novamente.
-* `ALTER TABLE` modifica apenas a **estrutura** da tabela; os registros permanecem, exceto quando uma coluna é removida.
+Depois de criar e preencher o banco, aprendi a fazer um **backup**.
 
----
+Backup é uma cópia dos dados que pode ser utilizada posteriormente para recuperar o banco.
 
-# Em resumo
-
-Nesta aula aprendi a utilizar o comando `ALTER TABLE` para modificar tabelas existentes. Adicionei, removi e reposicionei colunas, alterei tipos de dados e restrições, renomeei colunas e tabelas e compreendi como adicionar uma Chave Primária em uma tabela já criada. Também criei a tabela **cursos**, utilizando recursos como `UNIQUE`, `UNSIGNED`, `YEAR`, `AUTO_INCREMENT` e `IF NOT EXISTS`, entendendo como essas configurações tornam a estrutura do banco mais organizada e segura.
+Isso é fundamental porque bancos de dados podem conter informações muito importantes.
 
 ---
 
-**Resumo Relâmpago**
+# Exportando o banco pelo MySQL Workbench
 
-1. `ALTER TABLE` modifica a estrutura de tabelas já existentes.
-2. `ADD COLUMN` adiciona uma nova coluna.
-3. `DROP COLUMN` remove uma coluna e seus dados.
-4. `AFTER` posiciona uma coluna após outra, e `FIRST` a coloca no início da tabela.
-5. `MODIFY COLUMN` altera o tipo de dado ou as restrições de uma coluna.
-6. `CHANGE COLUMN` renomeia uma coluna e exige informar novamente seu tipo e restrições.
-7. `RENAME TO` altera o nome da tabela.
-8. `ADD PRIMARY KEY` define a chave primária de uma tabela.
-9. `AUTO_INCREMENT` gera automaticamente identificadores únicos para novos registros.
-10. O termo **tupla** é sinônimo de **registro**, representando uma linha da tabela.
+No Workbench:
+
+```text
+Server
+↓
+Data Export
+```
+
+Depois:
+
+1. Selecionar o banco de dados.
+2. Selecionar **Dump Structure and Data**.
+3. Manter a primeira opção selecionada.
+4. Selecionar **Export to Self-Contained File**.
+5. Marcar **Include Create Schema**.
+6. Escolher o local onde o arquivo será salvo.
+7. Clicar em **Start Export**.
+8. Continuar a operação quando solicitado.
+9. Informar a senha, caso seja solicitada.
+
+---
+
+# O que significa "Dump Structure and Data"?
+
+Essa opção é muito importante.
+
+Ela salva:
+
+### Structure
+
+A estrutura do banco:
+
+* tabelas;
+* colunas;
+* tipos;
+* chaves;
+* configurações.
+
+### Data
+
+Os registros armazenados nas tabelas.
+
+Ou seja, o backup contém tanto:
+
+```text
+Como o banco deve ser criado
+```
+
+quanto:
+
+```text
+Quais dados estavam dentro dele
+```
+
+---
+
+# O que é Self-Contained File?
+
+Significa que o backup será armazenado em **um único arquivo**.
+
+Esse arquivo pode posteriormente ser utilizado para restaurar o banco.
+
+É muito mais conveniente do que depender de vários arquivos separados.
+
+---
+
+# 16. Importando o banco novamente
+
+Para restaurar/importar o backup:
+
+```text
+Server
+↓
+Data Import
+```
+
+Depois:
+
+1. Selecionar **Import from Self-Contained File**.
+2. Clicar nos três pontos `...`.
+3. Localizar o arquivo de backup.
+4. Selecionar o arquivo.
+5. Clicar em **Start Import**.
+6. Aguardar a conclusão.
+
+Depois disso, o banco poderá ser restaurado no MySQL.
+
+---
+
+# 🧠 Backup na prática
+
+Podemos imaginar:
+
+```text
+Banco original
+      ↓
+   EXPORT
+      ↓
+Arquivo de backup
+      ↓
+    IMPORT
+      ↓
+Banco restaurado
+```
+
+O **Export** tira uma cópia do banco.
+
+O **Import** utiliza essa cópia para reconstruir o banco.
+
+---
+
+# ⚠️ Por que backup é importante?
+
+Imagine que eu tenha um banco com:
+
+* 10.000 clientes;
+* 5.000 produtos;
+* milhares de vendas.
+
+Se eu executar acidentalmente:
+
+```sql
+DROP DATABASE cadastro;
+```
+
+todos esses dados poderão ser perdidos.
+
+Se existir um backup, posso restaurar o banco.
+
+Por isso, em ambientes profissionais, backup é uma parte essencial da administração de bancos de dados.
+
+---
+
+# 🧩 Comandos fundamentais desta aula
+
+| Comando             | Função                                |
+| ------------------- | ------------------------------------- |
+| `INSERT INTO`       | Insere registros                      |
+| `UPDATE`            | Altera registros                      |
+| `SET`               | Define os novos valores               |
+| `WHERE`             | Define quais registros serão afetados |
+| `DELETE`            | Exclui registros                      |
+| `TRUNCATE TABLE`    | Remove todos os registros             |
+| `DROP TABLE`        | Remove a tabela                       |
+| `SELECT`            | Consulta dados                        |
+| `DESC` / `DESCRIBE` | Mostra a estrutura da tabela          |
+
+---
+
+# 🔥 Diferença fundamental: UPDATE, DELETE, TRUNCATE e DROP
+
+```text
+UPDATE
+   ↓
+Altera dados
+
+DELETE
+   ↓
+Remove registros
+
+TRUNCATE
+   ↓
+Remove todos os registros
+   ↓
+Mantém a tabela
+
+DROP
+   ↓
+Remove a própria tabela
+```
+
+Essa diferença precisa estar muito bem entendida, porque esses comandos possuem consequências completamente diferentes.
+
+---
+
+# 💡 Dicas importantes
+
+* Sempre confira o `WHERE` antes de executar um `UPDATE` ou `DELETE`.
+* Utilize a **Chave Primária** no `WHERE` quando quiser atingir um registro específico.
+* Não desative o **Safe Updates** sem necessidade.
+* `TRUNCATE` remove todos os registros, mas mantém a estrutura.
+* `DROP TABLE` remove a tabela inteira.
+* `DROP DATABASE` remove o banco inteiro.
+* Faça backups antes de operações importantes.
+* `AUTO_INCREMENT` permite que o MySQL controle automaticamente os identificadores.
+* `INSERT` permite cadastrar vários registros de uma vez.
+* O `SELECT` é útil para conferir se uma alteração realmente funcionou.
+
+---
+
+# ✅ Resumo final
+
+Nesta aula aprendi a trabalhar diretamente com os **dados** das tabelas. Utilizei `UPDATE` para corrigir e alterar registros, `DELETE` para remover registros específicos e `TRUNCATE TABLE` para limpar completamente uma tabela sem apagar sua estrutura. Também compreendi a diferença entre essas operações e `DROP`, que remove a própria tabela. Depois recriei o banco `cadastro`, com as tabelas `estudantes` e `cursos`, inseri diversos registros e utilizei `SELECT` e `DESC` para verificar os resultados. Por fim, aprendi a realizar **backup e restauração** pelo MySQL Workbench usando Data Export e Data Import.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. `INSERT INTO` insere novos registros no banco.
+2. `UPDATE` altera registros existentes.
+3. `SET` define quais valores serão modificados.
+4. `WHERE` determina exatamente quais registros serão afetados.
+5. `DELETE` remove registros específicos ou todos os registros.
+6. `TRUNCATE TABLE` remove todas as linhas, mas mantém a estrutura da tabela.
+7. `DROP TABLE` remove a tabela inteira.
+8. `AUTO_INCREMENT` gera automaticamente os IDs das novas linhas.
+9. Backup salva uma cópia da estrutura e dos dados para recuperação futura.
+10. No Workbench, **Data Export** cria o backup e **Data Import** permite restaurá-lo.
