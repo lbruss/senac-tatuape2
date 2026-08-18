@@ -1,616 +1,631 @@
-# Exercícios Práticos com Estruturas Condicionais, Vetores e Laços de Repetição
+Lógica de Programação — Matrizes
 
-**Ideia Principal**
+🎯 Ideia Principal
 
-Foram desenvolvidos algoritmos que unem praticamente todos os conceitos estudados até agora:
+Depois de estudar vetores, agora comecei a trabalhar com matrizes.
 
-* Entrada e saída de dados;
-* Variáveis;
-* Operadores aritméticos;
-* Operadores relacionais;
-* Estruturas condicionais (`SE...SENÃO`);
-* Estruturas de repetição (`PARA`);
-* Vetores.
+A principal diferença é:
 
-O objetivo foi resolver problemas reais, mostrando que um algoritmo normalmente utiliza vários conceitos ao mesmo tempo.
+Vetor: possui uma dimensão → trabalha com posições em sequência.
 
----
+Matriz: possui duas dimensões → trabalha com linhas e colunas.
 
-# Resolver uma Equação do 2º Grau (Fórmula de Bhaskara)
 
-**O que é uma Equação do 2º Grau?**
+Uma boa forma de imaginar uma matriz é como uma tabela.
 
-Uma equação do segundo grau possui a seguinte forma:
+Colunas
+        1    2    3
+      ┌────┬────┬────┐
+Linha 1│    │    │    │
+      ├────┼────┼────┤
+Linha 2│    │    │    │
+      ├────┼────┼────┤
+Linha 3│    │    │    │
+      └────┴────┴────┘
 
-```
-ax² + bx + c = 0
-```
+Uma matriz 3 × 3 possui:
 
-Onde:
+3 linhas × 3 colunas = 9 posições
 
-* **a** → coeficiente do termo quadrático.
-* **b** → coeficiente do termo linear.
-* **c** → termo independente (constante).
-
-Exemplo:
-
-```
-2x² + 5x - 3 = 0
-```
 
 ---
 
-**Importante**
+1. O que é uma Matriz?
 
-Para ser realmente uma equação do segundo grau:
+Uma matriz é uma estrutura de dados capaz de armazenar vários valores organizados em linhas e colunas.
 
-```
-a ≠ 0
-```
+Por exemplo:
 
-Se:
+matriz[1,2]
 
-```
-a = 0
-```
+significa:
 
-a equação deixa de ser de segundo grau e passa a ser uma equação de primeiro grau.
+linha 1;
 
-Por isso o algoritmo faz essa validação antes de qualquer cálculo.
+coluna 2.
 
----
 
-**O que é Delta (Δ)**
+Enquanto no vetor tínhamos:
 
-Antes de calcular as raízes, precisamos descobrir o valor de **Delta (Δ)**.
+vetor[3]
 
-A fórmula é:
+na matriz temos:
 
-```
-Δ = b² - 4ac
-```
+matriz[3,2]
 
-O valor de Delta determina quantas raízes reais a equação possui.
+Ou seja, precisamos informar duas posições.
+
 
 ---
 
-**Situações possíveis**
+🧠 Analogia
 
-**Δ < 0**
+Imagine uma sala de aula.
 
-Não existem raízes reais.
+Cada aluno possui uma posição formada por:
+
+Linha + Coluna
+
+Por exemplo:
+
+[2,3]
+
+poderia significar:
+
+> Linha 2, coluna 3.
+
+
+
+Uma matriz funciona dessa maneira: cada elemento possui uma localização determinada pela combinação de linha e coluna.
+
 
 ---
 
-**Δ = 0**
+2. Declaração de uma Matriz no VisualG
 
-Existe apenas uma raiz real.
+A estrutura é:
+
+nome: vetor[1..3, 1..3] de caractere
+
+Vamos separar:
+
+nome
+
+É o nome da matriz.
+
+[1..3, 1..3]
+
+Define:
+
+linhas de 1 até 3;
+
+colunas de 1 até 3.
+
+
+Portanto:
+
+3 × 3 = 9 posições
+
+E:
+
+de caractere
+
+determina o tipo de dado que será armazenado.
+
 
 ---
 
-**Δ > 0**
+3. Matriz 3 × 3
 
-Existem duas raízes reais diferentes.
+Uma matriz:
+
+nome: vetor[1..3, 1..3] de caractere
+
+pode ser visualizada assim:
+
+Colunas
+          1     2     3
+
+Linha 1  [ ]   [ ]   [ ]
+
+Linha 2  [ ]   [ ]   [ ]
+
+Linha 3  [ ]   [ ]   [ ]
+
+Cada célula pode armazenar uma informação.
+
 
 ---
 
-**Código**
+4. Percorrendo uma Matriz
 
-```portugol
-algoritmo "Equacao do 2 Grau"
+Aqui aparece um conceito muito importante:
+
+> Para percorrer uma matriz, normalmente utilizamos dois laços PARA, um dentro do outro.
+
+
+
+Por exemplo:
+
+para i de 1 ate 3 faca
+
+    para j de 1 ate 3 faca
+
+        ...
+
+    fimpara
+
+fimpara
+
+O primeiro contador:
+
+i
+
+representa as linhas.
+
+O segundo:
+
+j
+
+representa as colunas.
+
+Podemos pensar assim:
+
+i → linha
+j → coluna
+
+
+---
+
+5. Exemplo — Preenchendo e Exibindo uma Matriz
+
+Código
+
+algoritmo "Matriz"
 
 var
 
-a, b, c, delta, x1, x2: real
+nome: vetor[1..3, 1..3] de caractere
+i, j: inteiro
 
 inicio
 
-// Entrada de dados
+// Leitura dos dados da matriz
 
-escreval("Algoritmo para Calcular a Equação do 2º Grau")
-escreval("ax² + bx + c = 0")
+para i de 1 ate 3 faca
+
+    para j de 1 ate 3 faca
+
+        escreval("Digite o dado para a posição [", i, ",", j, "]: ")
+        leia(nome[i,j])
+
+    fimpara
+
+fimpara
+
 escreval("")
+escreval("Matriz digitada:")
 
-escreval("Digite o valor de a:")
-leia(a)
+// Exibição dos dados
 
-escreval("Digite o valor de b:")
-leia(b)
+para i de 1 ate 3 faca
 
-escreval("Digite o valor de c:")
-leia(c)
+    para j de 1 ate 3 faca
 
-// Verifica se realmente é uma equação do 2º grau
+        escreva(nome[i,j], " ")
 
-se (a = 0) entao
+    fimpara
 
-   escreval("O valor de 'a' não pode ser zero.")
+    escreval()
 
-senao
-
-   delta <- (b * b) - (4 * a * c)
-
-   se (delta < 0) entao
-
-      escreval("Delta = ", delta:0:2)
-      escreval("Não existem raízes reais.")
-
-   senao
-
-      se (delta = 0) entao
-
-         x1 <- (-b) / (2 * a)
-
-         escreval("Delta = 0")
-         escreval("Raiz única: ", x1:0:2)
-
-      senao
-
-         x1 <- (-b + raizq(delta)) / (2 * a)
-         x2 <- (-b - raizq(delta)) / (2 * a)
-
-         escreval("Delta = ", delta:0:2)
-         escreval("x1 = ", x1:0:2)
-         escreval("x2 = ", x2:0:2)
-
-      fimse
-
-   fimse
-
-fimse
+fimpara
 
 fimalgoritmo
-```
+
 
 ---
 
-**Explicação Linha por Linha**
+🔍 Entendendo os dois PARA
 
-**Entrada**
+Primeiro:
 
-```portugol
-leia(a)
-leia(b)
-leia(c)
-```
+para i de 1 ate 3 faca
 
-Recebe os três coeficientes da equação.
+O i controla as linhas.
+
+Dentro dele temos:
+
+para j de 1 ate 3 faca
+
+O j controla as colunas.
+
+Isso faz com que todas as posições sejam percorridas.
+
+A sequência será:
+
+[1,1]
+[1,2]
+[1,3]
+
+[2,1]
+[2,2]
+[2,3]
+
+[3,1]
+[3,2]
+[3,3]
+
+São exatamente as 9 posições da matriz.
+
 
 ---
 
-**Verificação**
+⚠️ Por que existe um escreval() depois do segundo PARA?
 
-```portugol
-se (a = 0)
-```
+Na parte de exibição temos:
 
-Verifica se realmente é uma equação do segundo grau.
+para i de 1 ate 3 faca
+
+    para j de 1 ate 3 faca
+
+        escreva(nome[i,j], " ")
+
+    fimpara
+
+    escreval()
+
+fimpara
+
+O comando:
+
+escreva()
+
+não quebra a linha.
+
+Então os elementos de uma mesma linha ficam juntos.
+
+Depois que todas as colunas daquela linha foram exibidas:
+
+escreval()
+
+faz a quebra de linha.
+
+Assim conseguimos visualizar a matriz como uma tabela.
+
 
 ---
 
-**Cálculo de Delta**
+6. Matriz para Somar Todos os Valores
 
-```portugol
-delta <- (b * b) - (4 * a * c)
-```
+Agora a matriz será utilizada para realizar um cálculo.
 
-É aplicada exatamente a fórmula matemática de Bhaskara.
+Objetivo
+
+Criar uma matriz 3 × 3, armazenar números inteiros e calcular a soma de todos os elementos.
+
 
 ---
 
-**Raiz Quadrada**
+Código
 
-```portugol
-raizq(delta)
-```
+algoritmo "Soma da Matriz"
 
-A função `raizq()` calcula a raiz quadrada de um número.
+var
 
-- **Exemplo:**
+valor: vetor[1..3, 1..3] de inteiro
+i, j, soma: inteiro
 
-```
-raizq(25)
+inicio
+
+soma <- 0
+
+// Leitura da matriz
+
+para i de 1 ate 3 faca
+
+    para j de 1 ate 3 faca
+
+        escreval("Digite o valor [", i, ",", j, "]: ")
+        leia(valor[i,j])
+
+        // Soma o valor atual
+        soma <- soma + valor[i,j]
+
+    fimpara
+
+fimpara
+
+escreval("")
+
+// Exibição do resultado
+
+escreval("A soma dos valores da matriz = ", soma)
+
+fimalgoritmo
+
+
+---
+
+🔍 Como a soma funciona?
+
+Antes de começar:
+
+soma <- 0
+
+A variável soma funciona como um acumulador.
+
+Cada número digitado é acrescentado a ela:
+
+soma <- soma + valor[i,j]
+
+Imagine que sejam digitados:
+
+1  2  3
+4  5  6
+7  8  9
+
+O algoritmo fará:
+
+soma = 0
+
+0 + 1 = 1
+1 + 2 = 3
+3 + 3 = 6
+6 + 4 = 10
+...
+36 + 9 = 45
 
 Resultado:
 
-5
-```
+45
+
 
 ---
 
-**Formatação**
+7. Matriz com Multiplicação
 
-```portugol
-delta:0:2
-```
+Agora o objetivo será:
 
-Significa:
+1. preencher uma matriz;
 
-Mostrar duas casas decimais.
 
-- **Exemplo:**
+2. percorrer a matriz;
 
-```
-5,33
-```
 
----
+3. multiplicar cada elemento por 2;
 
-- **Exemplo**
 
-Equação:
+4. exibir a nova matriz.
 
-```
-x² - 5x + 6 = 0
-```
 
-Delta:
 
-```
-25 - 24
-
-=
-
-1
-```
-
-Raízes:
-
-```
-x1 = 3
-
-x2 = 2
-```
 
 ---
 
-# Verificar se um Número é Par ou Ímpar
+Código
 
-**Conceito**
-
-Um número é considerado par quando sua divisão por 2 possui resto igual a zero.
-
-Para isso utiliza-se o operador:
-
-```
-%
-```
-
-No VisualG também pode ser escrito como `mod`.
-
-Ele retorna o resto da divisão inteira.
-
-- **Exemplos:**
-
-```
-10 % 2 = 0
-
-11 % 2 = 1
-
-18 % 2 = 0
-
-25 % 2 = 1
-```
-
----
-
-**Código**
-
-```portugol
-algoritmo "Par ou Impar"
+algoritmo "Matriz Multiplicada"
 
 var
 
-numero: inteiro
+valor: vetor[1..3, 1..3] de inteiro
+i, j: inteiro
 
 inicio
 
-escreval("Digite um número:")
-leia(numero)
+// Entrada dos dados
 
-se (numero % 2 = 0) entao
+para i de 1 ate 3 faca
 
-   escreval("O número ", numero, " é PAR")
+    para j de 1 ate 3 faca
 
-senao
+        escreval("Digite um número inteiro:")
+        leia(valor[i,j])
 
-   escreval("O número ", numero, " é ÍMPAR")
-
-fimse
-
-fimalgoritmo
-```
-
----
-
-# Encontrar o Maior e o Menor Valor de um Vetor
-
-**Objetivo**
-
-Ler dez números e mostrar:
-
-* todos os números digitados;
-* maior valor;
-* menor valor;
-* posição do maior;
-* posição do menor.
-
----
-
-**Código**
-
-```portugol
-algoritmo "Maior e Menor"
-
-var
-
-valores: vetor[1..10] de inteiro
-i, maior, menor, posMaior, posMenor: inteiro
-
-inicio
-
-// Leitura dos valores
-
-para i de 1 ate 10 faca
-
-   escreval("Digite o ", i, "º número")
-   leia(valores[i])
+    fimpara
 
 fimpara
 
-// Inicialização
+// Multiplicação por 2
 
-maior <- valores[1]
-menor <- valores[1]
+para i de 1 ate 3 faca
 
-posMaior <- 1
-posMenor <- 1
+    para j de 1 ate 3 faca
 
-// Procura maior e menor
+        valor[i,j] <- valor[i,j] * 2
 
-para i de 1 ate 10 faca
-
-   se (valores[i] > maior) entao
-
-      maior <- valores[i]
-      posMaior <- i
-
-   fimse
-
-   se (valores[i] < menor) entao
-
-      menor <- valores[i]
-      posMenor <- i
-
-   fimse
+    fimpara
 
 fimpara
 
-// Exibe todos os elementos
+// Exibição do resultado
 
-escreval("Elementos do vetor:")
+escreval("Matriz multiplicada:")
 
-para i de 1 ate 10 faca
+para i de 1 ate 3 faca
 
-   escreval(valores[i])
+    para j de 1 ate 3 faca
+
+        escreva(valor[i,j], " ")
+
+    fimpara
+
+    escreval()
 
 fimpara
 
-escreval("")
-escreval("Maior valor: ", maior, " na posição ", posMaior)
-escreval("Menor valor: ", menor, " na posição ", posMenor)
-
 fimalgoritmo
-```
+
 
 ---
 
-**Como o algoritmo funciona?**
+🔍 O que acontece na multiplicação?
 
-Primeiro, todos os valores são armazenados no vetor.
+Suponha que a matriz inicialmente seja:
 
-Depois, considera-se inicialmente que:
+1  2  3
+4  5  6
+7  8  9
 
-```
-Primeiro número = Maior
+A instrução:
 
-Primeiro número = Menor
-```
+valor[i,j] <- valor[i,j] * 2
 
-Em seguida, o algoritmo percorre novamente o vetor comparando cada elemento.
+é aplicada a cada posição.
 
-Sempre que encontra um número maior:
+Resultado:
 
-```
-Atualiza o maior.
-```
+2   4   6
+8  10  12
+14 16  18
 
-Sempre que encontra um número menor:
+O algoritmo não cria outra matriz. Ele modifica os valores que já estavam armazenados.
 
-```
-Atualiza o menor.
-```
-
-No final teremos os extremos do vetor.
-
-Essa técnica é muito utilizada em processamento de listas, estatísticas e bancos de dados.
 
 ---
 
-# Cálculo do Fatorial
+🧩 Entrada → Processamento → Saída
 
-**O que é Fatorial?**
+Esse exercício também reforça o princípio fundamental da informática:
 
-O fatorial de um número é o produto dele por todos os seus antecessores positivos até 1.
+ENTRADA
+   ↓
+PROCESSAMENTO
+   ↓
+SAÍDA
 
-Representação:
+Entrada
 
-```
-5!
-```
+O usuário fornece os valores:
 
-Lê-se:
+leia(valor[i,j])
 
-```
-Cinco fatorial.
-```
+Processamento
 
----
+O algoritmo modifica os valores:
 
-- **Exemplo**
+valor[i,j] <- valor[i,j] * 2
 
-```
-5!
+Saída
 
-=
+O programa mostra o resultado:
 
-5 × 4 × 3 × 2 × 1
+escreva(valor[i,j], " ")
 
-=
+Esse modelo aparece constantemente em programas reais.
 
-120
-```
-
-- **Outro exemplo:**
-
-```
-4!
-
-=
-
-4 × 3 × 2 × 1
-
-=
-
-24
-```
 
 ---
 
-**Código**
+🔄 Vetor × Matriz
 
-```portugol
-algoritmo "Fatorial"
+Estrutura	Dimensões	Exemplo
 
-var
+Variável comum	0	idade
+Vetor	1	vetor[3]
+Matriz	2	matriz[3,3]
 
-num, i, fatorial: inteiro
 
-inicio
+Podemos visualizar:
 
-escreval("Digite um número inteiro positivo:")
-leia(num)
+Variável:
 
-// Validação
+idade
 
-se (num < 0) entao
 
-   escreval("Erro: não existe fatorial de número negativo.")
+Vetor:
 
-senao
+[10] [20] [30]
 
-   fatorial <- 1
 
-   para i de 1 ate num faca
+Matriz:
 
-      fatorial <- fatorial * i
+[10] [20] [30]
+[40] [50] [60]
+[70] [80] [90]
 
-   fimpara
+A matriz é, portanto, uma extensão da ideia do vetor para duas dimensões.
 
-   escreval("O fatorial de ", num, " é: ", fatorial)
-
-fimse
-
-fimalgoritmo
-```
 
 ---
 
-- **Explicação**
+🧠 Conceito Fundamental
 
-**Inicialização**
+O ponto mais importante desta aula é entender que uma matriz é uma estrutura de dados bidimensional, organizada por linhas e colunas. Para percorrê-la completamente, utilizamos normalmente dois laços de repetição aninhados: um controla as linhas e outro controla as colunas. Isso permite realizar operações em cada elemento individualmente, como leitura, soma, multiplicação, comparação ou alteração de valores.
 
-```portugol
-fatorial <- 1
-```
-
-Começamos com 1 porque ele é o elemento neutro da multiplicação.
-
-Se começássemos com zero:
-
-```
-0 × qualquer número = 0
-```
-
-Todo o resultado seria incorreto.
 
 ---
 
-**Multiplicação acumulativa**
+💡 Um detalhe importante
 
-```portugol
-fatorial <- fatorial * i
-```
+Nas anotações aparece a ideia de que a matriz é "melhor que o vetor".
 
-- **Exemplo para:**
+Tecnicamente, não é correto dizer que uma estrutura é simplesmente melhor que a outra.
 
-```
-5!
-```
+A escolha depende do problema.
 
-Passo a passo:
+Vetor
 
-```
-1 × 1 = 1
+É adequado quando os dados estão organizados em uma única sequência:
 
-1 × 2 = 2
+Notas de alunos:
 
-2 × 3 = 6
+[7, 8, 6, 9, 10]
 
-6 × 4 = 24
+Matriz
 
-24 × 5 = 120
-```
+É adequada quando existe uma relação de linha e coluna:
 
-Resultado final:
+Tabela de notas:
 
-```
-120
-```
+        P1  P2  P3
+Aluno1   7   8   9
+Aluno2   6   7   8
+Aluno3   9   9  10
 
----
+Portanto:
 
-**Curiosidade**
+> Vetor → uma dimensão.
+Matriz → duas dimensões.
 
-Matematicamente:
 
-```
-0! = 1
-```
 
-Por isso, a validação ideal é impedir apenas números **negativos** (`num < 0`). O valor **0** possui fatorial definido e igual a **1**.
 
 ---
 
-**Conceito Fundamental**
+✅ Em Resumo
 
-Foi possível integrar diversos conceitos da lógica de programação em algoritmos mais completos. Foram utilizadas estruturas condicionais para validar dados e tomar decisões, laços de repetição para automatizar cálculos e vetores para armazenar conjuntos de informações. Também foram aplicados conceitos matemáticos importantes, como a Fórmula de Bhaskara, o operador módulo (`%`) e o cálculo de fatorial, mostrando como a programação pode resolver problemas matemáticos e do cotidiano de forma eficiente.
+Aprendi que uma matriz permite armazenar diversos valores organizados em linhas e colunas. Uma matriz 3 × 3 possui nove posições e cada elemento pode ser acessado informando sua linha e sua coluna. Para percorrer todos os elementos, utilizo dois laços PARA, sendo um responsável pelas linhas e outro pelas colunas. Também aprendi a preencher, exibir, somar e modificar os valores de uma matriz. A mesma lógica pode ser aplicada a diversos problemas que envolvem tabelas e conjuntos de dados bidimensionais.
 
----
+⚡ Resumo Relâmpago — 10 linhas
 
-# Em Resumo
+1. Matriz é uma estrutura de dados organizada em linhas e colunas.
 
-Nesta aula desenvolvi algoritmos para resolver equações do segundo grau, identificar números pares e ímpares, localizar o maior e o menor elemento de um vetor e calcular o fatorial de um número. Esses exercícios consolidaram o uso conjunto de estruturas condicionais, vetores, laços de repetição e operações matemáticas, tornando os algoritmos mais completos e próximos de aplicações reais.
 
-**Resumo Relâmpago**
+2. Uma matriz 3 × 3 possui 9 posições.
 
-1. A equação do 2º grau possui a forma `ax² + bx + c = 0`, com `a ≠ 0`.
-2. O valor de Delta (`Δ = b² - 4ac`) determina a quantidade de raízes reais.
-3. A função `raizq()` calcula a raiz quadrada no VisualG.
-4. O operador `%` (ou `mod`) retorna o resto da divisão inteira.
-5. Um número é par quando `numero % 2 = 0`; caso contrário, é ímpar.
-6. Vetores permitem armazenar vários valores e percorrê-los com laços de repetição.
-7. Para encontrar o maior e o menor valor, compara-se cada elemento do vetor com os valores atuais.
-8. O fatorial é a multiplicação do número por todos os inteiros positivos até 1.
-9. O valor de `0!` é igual a `1`, enquanto números negativos não possuem fatorial definido.
-10. Esses exercícios demonstram como combinar matemática e programação para resolver problemas de forma estruturada.
+
+3. Cada posição é acessada por dois índices: matriz[linha,coluna].
+
+
+4. No VisualG, uma matriz pode ser declarada como vetor[1..3,1..3].
+
+
+5. O primeiro índice normalmente representa a linha.
+
+
+6. O segundo índice representa a coluna.
+
+
+7. Para percorrer uma matriz usamos dois PARA aninhados.
+
+
+8. O laço externo controla as linhas e o interno controla as colunas.
+
+
+9. Podemos realizar operações como soma e multiplicação em cada elemento.
+
+
+10. Vetor possui uma dimensão; matriz possui duas dimensões.
+
+
