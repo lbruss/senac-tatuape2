@@ -13,6 +13,7 @@ Matriz: possui duas dimensões → trabalha com linhas e colunas.
 
 Uma boa forma de imaginar uma matriz é como uma tabela.
 
+```
 Colunas
         1    2    3
       ┌────┬────┬────┐
@@ -22,7 +23,7 @@ Linha 2│    │    │    │
       ├────┼────┼────┤
 Linha 3│    │    │    │
       └────┴────┴────┘
-
+```
 Uma matriz 3 × 3 possui:
 
 3 linhas × 3 colunas = 9 posições
