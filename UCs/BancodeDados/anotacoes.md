@@ -1,843 +1,1075 @@
+# Banco de Dados (MySQL) — Filtrando e Ordenando Registros
 
-# UPDATE, DELETE, TRUNCATE e Backup
+# 🎯 Ideia principal
 
-**Ideia principal**
+Nesta aula aprendi a **consultar registros de uma tabela de forma mais específica**.
 
-* `UPDATE` → altera dados;
-* `DELETE` → remove registros específicos;
-* `TRUNCATE` → remove todos os registros, mantendo a tabela;
-* `DROP` → remove a própria tabela ou banco;
-* **Backup/Export** → salva uma cópia do banco para poder restaurá-lo posteriormente.
+Até agora, eu já conseguia fazer:
 
-Além disso, criei novamente o banco `cadastro`, com as tabelas `estudantes` e `cursos`, inseri vários registros e aprendi a exportar e importar o banco pelo MySQL Workbench.
+```sql
+SELECT * FROM cursos;
+```
+
+Isso mostra **todos os registros e todas as colunas**.
+
+Agora comecei a controlar melhor o resultado da consulta, podendo:
+
+* ordenar registros;
+* escolher quais colunas quero visualizar;
+* filtrar registros;
+* trabalhar com intervalos;
+* procurar valores específicos;
+* combinar condições;
+* procurar palavras ou partes de palavras;
+* utilizar operadores lógicos;
+* utilizar padrões com `LIKE`.
+
+Esse processo é chamado de **consulta** ou **Query**.
 
 ---
 
-## 1. Inserindo dados na tabela `cursos`
+# 1. O que é uma Query?
 
-A tabela `cursos` já estava criada.
+Uma **Query** é uma consulta feita ao banco de dados para pedir alguma informação.
 
-Para inserir um curso:
+É como fazer uma pergunta ao banco:
+
+> "Quais cursos existem?"
 
 ```sql
-INSERT INTO cursos
-(idcurso, nome, descricao, carga, totalaulas, ano)
-VALUES
-(DEFAULT, 'Algorritmoss', 'Lógica de programação. Você aprenderá sobre o desenvolvimento de soluções com aplicações da lógica...', 40, 10, 2026);
+SELECT * FROM cursos;
 ```
 
-Nesse exemplo, foi cometido um erro de digitação:
+Ou uma pergunta mais específica:
 
-```
-Algorritmoss
-```
+> "Quais cursos são de 2028?"
 
-O correto seria:
-
-```
-Algoritmos
+```sql
+SELECT * FROM cursos
+WHERE ano = 2028;
 ```
 
-Para corrigir um dado que já foi inserido, utilizamos o comando `UPDATE`.
+Ou ainda:
+
+> "Quais cursos de 2028 possuem quais cargas horárias?"
+
+```sql
+SELECT nome, carga
+FROM cursos
+WHERE ano = 2028;
+```
+
+Portanto, uma Query é basicamente uma forma de **pedir ao banco exatamente a informação que eu preciso**.
 
 ---
 
-## 2. UPDATE — Alterando dados
+# 2. Ordenando os registros com ORDER BY
+
+O comando:
 
 ```sql
-UPDATE cursos
-SET nome = 'Algoritmos'
-WHERE idcurso = 1;
+ORDER BY
 ```
 
-Depois:
+serve para **organizar os resultados da consulta**.
 
-```
-Ctrl + Enter
-```
+---
 
-**O que aconteceu?**
+## Ordem crescente
 
-O comando procurou o curso cujo:
-
-```
-idcurso = 1
+```sql
+SELECT * FROM cursos
+ORDER BY nome;
 ```
 
-e alterou o valor da coluna `nome`.
+Nesse caso, os cursos serão organizados pelo campo `nome`.
 
-**Antes**
+Por padrão, o MySQL utiliza a ordem **crescente**.
 
+Para textos, normalmente será:
+
+```text
+A
+B
+C
+D
+...
+Z
 ```
-Algorritmoss
-```
 
-**Depois**
+Para números:
 
-```
-Algoritmos
+```text
+1
+2
+3
+4
+5
+...
 ```
 
 ---
 
-# Entendendo o UPDATE
+# 3. Ordem decrescente
 
-A estrutura básica é:
+Para inverter a ordem:
 
 ```sql
-UPDATE tabela
-SET coluna = novo_valor
-WHERE condição;
+SELECT * FROM cursos
+ORDER BY nome DESC;
 ```
 
-**`UPDATE cursos`**
+`DESC` significa **descending**, ou seja, descendente/decrescente.
 
-Informa qual tabela será alterada.
+O resultado ficará aproximadamente:
 
-**`SET`**
-
-Define o que será modificado.
-
-**`WHERE`**
-
-Define **qual registro** será alterado.
-
-Isso é extremamente importante.
-
-Sem o `WHERE`, podemos alterar todos os registros da tabela.
+```text
+Z
+Y
+X
+...
+C
+B
+A
+```
 
 ---
 
-# Cuidado com o WHERE
+# ASC e DESC
 
-Imagine:
-
-```sql
-UPDATE cursos
-SET nome = 'Algoritmos';
-```
-
-Nesse caso, não existe `WHERE`.
-
-Consequentemente, **todos os cursos terão o nome alterado para `Algoritmos`**.
-
-Por isso, quando queremos alterar apenas um registro, normalmente utilizamos a Chave Primária:
+Também posso escrever explicitamente:
 
 ```sql
-WHERE idcurso = 1;
+ORDER BY nome ASC;
 ```
 
-A Chave Primária torna a identificação do registro muito mais precisa.
+`ASC` significa **ascending**, ou seja, crescente.
+
+Portanto:
+
+| Comando              | Ordem                |
+| -------------------- | -------------------- |
+| `ORDER BY nome ASC`  | Crescente            |
+| `ORDER BY nome DESC` | Decrescente          |
+| `ORDER BY nome`      | Crescente por padrão |
 
 ---
 
-## 3. Alterando vários campos ao mesmo tempo
+# 4. Escolhendo quais colunas visualizar
 
-Também é possível modificar várias colunas utilizando um único `UPDATE`.
+Eu não preciso mostrar todas as colunas.
+
+Por exemplo:
 
 ```sql
-UPDATE cursos
-SET nome = 'Algoritmos',
-    carga = 24,
-    totalaulas = 6
-WHERE idcurso = 1;
+SELECT nome, carga, ano
+FROM cursos
+ORDER BY nome;
 ```
 
-As alterações são separadas por vírgulas.
-
-Nesse caso, o registro de `idcurso = 1` terá três campos modificados:
+Aqui estou pedindo somente:
 
 * `nome`;
 * `carga`;
-* `totalaulas`.
+* `ano`.
+
+A coluna `idcurso`, por exemplo, não aparecerá no resultado.
 
 ---
 
-## 4. Safe Update Mode do MySQL Workbench
+## `SELECT *` x `SELECT coluna`
 
-O MySQL Workbench possui um mecanismo de proteção chamado **Safe Updates**.
-
-Ele evita comandos perigosos de `UPDATE` e `DELETE` que não possuem uma condição suficientemente restritiva.
-
-Isso ajuda a evitar situações como:
+### Todas as colunas
 
 ```sql
-UPDATE cursos
-SET nome = 'Algoritmos';
+SELECT * FROM cursos;
+```
+
+O `*` significa:
+
+> "Quero todas as colunas."
+
+### Apenas algumas colunas
+
+```sql
+SELECT nome, carga
+FROM cursos;
+```
+
+Significa:
+
+> "Quero somente `nome` e `carga`."
+
+---
+
+# 5. Filtrando com WHERE
+
+O comando:
+
+```sql
+WHERE
+```
+
+é utilizado para **filtrar os registros**.
+
+Por exemplo:
+
+```sql
+SELECT * FROM cursos
+WHERE ano = 2028
+ORDER BY nome;
+```
+
+Aqui estou dizendo:
+
+> "Mostre os cursos cujo ano seja 2028 e organize os resultados pelo nome."
+
+---
+
+# Entendendo a Query por partes
+
+```sql
+SELECT * FROM cursos
+WHERE ano = 2028
+ORDER BY nome;
+```
+
+### `SELECT *`
+
+Quero todas as colunas.
+
+### `FROM cursos`
+
+Os dados devem ser procurados na tabela `cursos`.
+
+### `WHERE ano = 2028`
+
+Quero somente registros cujo ano seja `2028`.
+
+### `ORDER BY nome`
+
+Depois de filtrar, organize o resultado pelo nome.
+
+---
+
+# 6. Filtrando e escolhendo colunas
+
+Também posso combinar `WHERE` com a seleção de colunas:
+
+```sql
+SELECT nome, carga
+FROM cursos
+WHERE ano = 2028
+ORDER BY nome;
+```
+
+Agora o resultado mostrará somente:
+
+```text
+nome
+carga
+```
+
+e somente os cursos de:
+
+```text
+2028
+```
+
+ordenados pelo nome.
+
+---
+
+# 7. Operadores de comparação
+
+No `WHERE`, posso utilizar vários operadores.
+
+| Operador | Significado    |
+| -------- | -------------- |
+| `=`      | Igual          |
+| `>`      | Maior que      |
+| `<`      | Menor que      |
+| `>=`     | Maior ou igual |
+| `<=`     | Menor ou igual |
+| `<>`     | Diferente de   |
+
+---
+
+## Exemplos
+
+### Igual
+
+```sql
+WHERE ano = 2028
+```
+
+Ano exatamente igual a 2028.
+
+### Maior que
+
+```sql
+WHERE carga > 24
+```
+
+Carga maior que 24.
+
+### Menor que
+
+```sql
+WHERE carga < 24
+```
+
+Carga menor que 24.
+
+### Maior ou igual
+
+```sql
+WHERE carga >= 24
+```
+
+Carga de 24 ou mais.
+
+### Menor ou igual
+
+```sql
+WHERE carga <= 24
+```
+
+Carga de 24 ou menos.
+
+### Diferente
+
+```sql
+WHERE ano <> 2028
+```
+
+Todos os registros cujo ano seja diferente de 2028.
+
+---
+
+# 8. BETWEEN — Trabalhando com intervalo
+
+Quando quero procurar valores dentro de um intervalo, posso utilizar:
+
+```sql
+BETWEEN
+```
+
+Exemplo:
+
+```sql
+SELECT * FROM cursos
+WHERE totalaulas BETWEEN 20 AND 30
+ORDER BY nome;
+```
+
+Isso significa:
+
+> "Mostre os cursos que possuem entre 20 e 30 aulas."
+
+O `BETWEEN` inclui os limites.
+
+Ou seja:
+
+```text
+20 ≤ totalaulas ≤ 30
+```
+
+Então tanto `20` quanto `30` podem aparecer.
+
+---
+
+# 9. IN — Procurando valores específicos
+
+Também posso procurar vários valores específicos utilizando:
+
+```sql
+IN
+```
+
+Exemplo:
+
+```sql
+SELECT nome, carga
+FROM cursos
+WHERE carga IN (16, 24)
+ORDER BY nome;
+```
+
+Isso significa:
+
+> "Mostre os cursos cuja carga seja 16 ou 24."
+
+É como fazer:
+
+```sql
+WHERE carga = 16 OR carga = 24
+```
+
+Porém `IN` deixa a consulta mais organizada quando existem vários valores.
+
+---
+
+# 10. Operadores lógicos
+
+Também posso combinar condições utilizando operadores lógicos.
+
+Os principais são:
+
+* `AND`
+* `OR`
+* `NOT`
+
+---
+
+# 11. AND
+
+`AND` significa **E**.
+
+As duas condições precisam ser verdadeiras.
+
+```sql
+SELECT nome, carga, totalaulas
+FROM cursos
+WHERE carga > 24
+AND totalaulas < 16
+ORDER BY nome;
+```
+
+Estou procurando cursos que:
+
+```text
+carga > 24
+```
+
+**E**
+
+```text
+totalaulas < 16
+```
+
+As duas condições precisam ser atendidas pelo mesmo registro.
+
+---
+
+# 12. OR
+
+`OR` significa **OU**.
+
+```sql
+SELECT nome, carga, totalaulas
+FROM cursos
+WHERE carga > 24
+OR totalaulas < 16
+ORDER BY nome;
+```
+
+Agora basta uma das condições ser verdadeira.
+
+O curso será mostrado se:
+
+```text
+carga > 24
+```
+
+**OU**
+
+```text
+totalaulas < 16
+```
+
+---
+
+# 🧠 AND x OR
+
+Uma forma simples de memorizar:
+
+### AND
+
+> "Precisa cumprir os dois requisitos."
+
+### OR
+
+> "Pode cumprir qualquer um dos requisitos."
+
+---
+
+# 13. Procurando um nome específico
+
+Posso procurar um valor exato:
+
+```sql
+SELECT * FROM cursos
+WHERE nome = 'Algoritmos';
+```
+
+Aqui o MySQL procurará um registro cujo nome seja exatamente:
+
+```text
+Algoritmos
+```
+
+---
+
+# 14. LIKE — Procurando padrões
+
+Quando não quero procurar um valor exatamente igual, posso utilizar:
+
+```sql
+LIKE
+```
+
+O `LIKE` é utilizado principalmente para **pesquisar textos através de padrões**.
+
+Ele fica ainda mais poderoso quando combinado com:
+
+```text
+%
+_
+```
+
+Esses são chamados de **caracteres curinga** (*wildcards*).
+
+---
+
+# 15. O símbolo `%`
+
+O símbolo:
+
+```text
+%
+```
+
+representa **zero ou mais caracteres**.
+
+Por exemplo:
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE 'E%';
+```
+
+Significa:
+
+> "O nome deve começar com `E`."
+
+Pode encontrar:
+
+```text
+Excel Essencial
+Excel Avançado I
+Excel Avançado II
+```
+
+porque todos começam com `E`.
+
+---
+
+# 16. Procurando pela última letra
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE '%E';
+```
+
+Agora o `%` está no começo.
+
+Isso significa:
+
+> "Pode existir qualquer quantidade de caracteres antes, mas o nome precisa terminar com `E`."
+
+Por exemplo:
+
+```text
+...E
+```
+
+---
+
+# 17. Procurando uma letra em qualquer posição
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE '%E%';
+```
+
+Agora o `E` pode aparecer em qualquer posição.
+
+O padrão significa:
+
+```text
+qualquer coisa + E + qualquer coisa
+```
+
+Então pode encontrar palavras como:
+
+```text
+Excel
+Desenvolvedor
+PHP
+```
+
+desde que tenham `E` no texto.
+
+---
+
+# 18. Procurando palavras que NÃO possuem determinada letra
+
+Podemos utilizar `NOT LIKE`:
+
+```sql
+SELECT * FROM cursos
+WHERE nome NOT LIKE '%E%';
+```
+
+Isso significa:
+
+> "Mostre os cursos cujo nome não contém a letra `E`."
+
+---
+
+# 19. Procurando duas letras em posições específicas
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE 'E%L%';
+```
+
+Aqui estou procurando um nome que:
+
+1. comece com `E`;
+2. depois tenha qualquer quantidade de caracteres;
+3. depois tenha `L`;
+4. depois possa ter qualquer quantidade de caracteres.
+
+Representação:
+
+```text
+E + qualquer coisa + L + qualquer coisa
+```
+
+---
+
+# 20. O símbolo `_`
+
+Além do `%`, existe:
+
+```text
+_
+```
+
+O sublinhado representa **exatamente um caractere**.
+
+Essa é uma diferença muito importante:
+
+| Símbolo | Significado             |
+| ------- | ----------------------- |
+| `%`     | Zero ou mais caracteres |
+| `_`     | Exatamente um caractere |
+
+---
+
+# 21. Combinando `%` e `_`
+
+Exemplo:
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE 'C%_';
+```
+
+Aqui:
+
+```text
+C
+```
+
+precisa estar no começo.
+
+Depois:
+
+```text
+%
+```
+
+permite qualquer quantidade de caracteres.
+
+E no final:
+
+```text
+_
+```
+
+exige pelo menos **um caractere** naquela posição.
+
+---
+
+# 22. Outro exemplo com `LIKE`
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE 'php%p_';
+```
+
+O padrão procura um nome que:
+
+* comece com `php`;
+* depois tenha zero ou mais caracteres;
+* depois tenha `p`;
+* depois tenha exatamente mais um caractere.
+
+É importante observar que o `LIKE` trabalha com **padrões**, e não com uma simples comparação.
+
+---
+
+# 23. Dois caracteres entre letras
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE 'P__T%';
+```
+
+Aqui temos:
+
+```text
+P __ T %
+```
+
+O primeiro caractere precisa ser:
+
+```text
+P
+```
+
+Depois temos:
+
+```text
+__
+```
+
+Cada `_` representa exatamente um caractere.
+
+Portanto, existem **dois caracteres entre `P` e `T`**.
+
+Depois do `T`:
+
+```text
+%
+```
+
+permite qualquer quantidade de caracteres.
+
+---
+
+# 24. Procurando uma palavra em qualquer posição
+
+```sql
+SELECT * FROM cursos
+WHERE nome LIKE '%silva%';
+```
+
+Aqui estou procurando `silva` em qualquer parte do texto.
+
+Pode ser:
+
+```text
+Silva
 ```
 
 ou:
 
-```sql
-DELETE FROM cursos;
+```text
+João Silva
 ```
 
-sem perceber que estamos afetando a tabela inteira.
-
----
-
-## Desativando o Safe Updates
-
-No MySQL Workbench:
-
-```
-Edit
-↓
-Preferences
-↓
-SQL Editor
-```
-
-No final da tela, desmarque:
-
-```
-Safe Updates (reject UPDATEs and DELETEs with no restrictions)
-```
-
-Depois clique em:
+ou:
 
 ```text
-OK
+Silva Desenvolvimento Web
 ```
 
-Para a alteração entrar em funcionamento, é necessário **reconectar ao servidor**.
+dependendo dos dados existentes.
 
----
+O padrão:
 
-**Importante**
-
-Não é recomendado desativar essa proteção sem necessidade.
-
-O Safe Updates existe justamente para evitar acidentes.
-
-Um comando errado pode modificar ou excluir **milhares de registros de uma vez**.
-
-Se for necessário realizar uma operação em toda a tabela, é melhor ter certeza absoluta do que está sendo feito antes de desativar a proteção.
-
----
-
-## 5. Alterando dados diretamente pela tabela
-
-Existe outra maneira de corrigir vários dados utilizando a interface do Workbench.
-
-Primeiro:
-
-```sql
-SELECT * FROM cursos;
+```text
+%silva%
 ```
 
-Depois:
+significa:
 
-```
-Ctrl + Enter
-```
-
-O Workbench mostrará os registros em formato de tabela.
-
-É possível editar os valores diretamente na grade.
-
-Depois de fazer as alterações:
-
-```
-Apply
-```
-
-O Workbench mostrará o SQL que será executado.
-
-Depois clique novamente em:
-
-```
-Apply
-```
-
-para confirmar.
-
-Essa opção é bastante útil quando precisamos corrigir visualmente vários registros.
-
----
-
-## 6. DELETE — Excluindo registros
-
-Para excluir um registro específico:
-
-```sql
-DELETE FROM cursos
-WHERE idcurso = 1;
-```
-
-Depois:
-
-```
-Ctrl + Enter
-```
-
-O registro cujo `idcurso` é `1` será removido.
-
----
-
-**DELETE não apaga a tabela**
-
-Isso é importante.
-
-```sql
-DELETE FROM cursos
-WHERE idcurso = 1;
-```
-
-remove apenas o **registro selecionado**.
-
-A tabela continua existindo.
-
-Sua estrutura também continua existindo.
-
-- **Por exemplo:**
-
-```
-Tabela cursos
-├── idcurso
-├── nome
-├── descricao
-├── carga
-├── totalaulas
-└── ano
-```
-
-Apenas uma das linhas será removida.
-
----
-
-# DELETE sem WHERE
-
-Também é possível escrever:
-
-```sql
-DELETE FROM cursos;
-```
-
-Porém isso remove **todos os registros da tabela**.
-
-A tabela continua existindo, mas ficará sem nenhuma linha.
-
-Por isso, `DELETE` sem `WHERE` deve ser utilizado com extremo cuidado.
-
----
-
-## 7. TRUNCATE TABLE
-
-Outro comando é:
-
-```sql
-TRUNCATE TABLE cursos;
-```
-
-Esse comando remove **todos os registros da tabela**.
-
-Porém, diferentemente de `DROP TABLE`, a tabela continua existindo.
-
----
-
-# DELETE x TRUNCATE x DROP
-
-Essa diferença é fundamental.
-
-| Comando          | O que acontece                                     |
-| ---------------- | -------------------------------------------------- |
-| `DELETE`         | Remove registros específicos ou todos os registros |
-| `TRUNCATE TABLE` | Remove todos os registros rapidamente              |
-| `DROP TABLE`     | Remove a tabela inteira                            |
-| `DROP DATABASE`  | Remove o banco de dados inteiro                    |
-
----
-
-**`DELETE`**
-
-```sql
-DELETE FROM cursos
-WHERE idcurso = 1;
-```
-
-Remove apenas o registro indicado.
-
----
-
-**`TRUNCATE`**
-
-```sql
-TRUNCATE TABLE cursos;
-```
-
-Remove todas as linhas.
-
-A estrutura continua:
-
-```
-cursos
-├── idcurso
-├── nome
-├── descricao
-├── carga
-├── totalaulas
-└── ano
-```
-
-Mas não existem mais registros.
-
----
-
-**`DROP`**
-
-```sql
-DROP TABLE cursos;
-```
-
-Aqui a própria tabela deixa de existir.
-
-Não sobra nem a estrutura.
-
----
-
-> Analogia
-
-Imagine um caderno.
-
-**DELETE**
-
-Você apaga algumas linhas.
-
-**TRUNCATE**
-
-Você apaga todas as anotações, mas continua com o caderno.
-
-**DROP**
-
-Você joga o caderno fora.
-
-Essa diferença ajuda a memorizar os três comandos.
-
----
-
-## 8. Criando novamente o banco `cadastro`
-
-Agora foi criado novamente um banco para praticar com duas tabelas:
-
-* `estudantes`;
-* `cursos`.
-
-```sql
-CREATE DATABASE cadastro
-DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
-```
-
-Depois:
-
-```sql
-USE cadastro;
+```text
+qualquer coisa + silva + qualquer coisa
 ```
 
 ---
 
-## 9. Criando a tabela `estudantes`
+# 🔍 Tabela de padrões do LIKE
 
-```sql
-CREATE TABLE estudantes (
-    nome VARCHAR(50) NOT NULL,
-    nascimento DATE,
-    sexo ENUM('f','m','o'),
-    peso DECIMAL(5,2),
-    altura DECIMAL(3,2),
-    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro'
-) DEFAULT CHARSET=utf8;
-```
-
-Nesse momento a tabela ainda não possui um identificador.
-
-Então adicionamos `profissao`:
-
-```sql
-ALTER TABLE estudantes
-ADD COLUMN profissao VARCHAR(50) AFTER nome;
-```
-
-A coluna ficará logo depois de `nome`.
+| Query            | O que procura                                               |
+| ---------------- | ----------------------------------------------------------- |
+| `LIKE 'E%'`      | Começa com E                                                |
+| `LIKE '%E'`      | Termina com E                                               |
+| `LIKE '%E%'`     | Contém E em qualquer posição                                |
+| `NOT LIKE '%E%'` | Não contém E                                                |
+| `LIKE 'E%L%'`    | Começa com E e possui L depois                              |
+| `LIKE 'C%_'`     | Começa com C e termina com exatamente um caractere após `%` |
+| `LIKE 'P__T%'`   | Começa com P, possui dois caracteres e depois T             |
+| `LIKE '%silva%'` | Contém "silva" em qualquer posição                          |
 
 ---
 
-## 10. Adicionando a Chave Primária
+# 🧠 `%` x `_`
 
-```sql
-ALTER TABLE estudantes
-ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY FIRST;
+Essa diferença é uma das coisas mais importantes desta aula.
+
+Imagine:
+
+```text
+%
 ```
 
-Esse comando faz três coisas ao mesmo tempo:
+como uma **caixa que pode receber qualquer quantidade de caracteres**.
 
-**`ADD COLUMN`**
+Já:
 
-Adiciona a coluna `id`.
-
-**`AUTO_INCREMENT`**
-
-Gera automaticamente os números.
-
-**`PRIMARY KEY`**
-
-Transforma `id` na Chave Primária.
-
-**`FIRST`**
-
-Coloca a coluna no início da tabela.
-
-A estrutura fica aproximadamente:
-
+```text
+_
 ```
-id
-nome
-profissao
-nascimento
-sexo
-peso
-altura
-nacionalidade
+
+é como um **espaço reservado para apenas um caractere**.
+
+### `%`
+
+```text
+%
 ```
+
+Pode representar:
+
+```text
+nada
+A
+ABC
+ABCDEFG
+```
+
+### `_`
+
+```text
+_
+```
+
+Representa somente:
+
+```text
+A
+```
+
+um único caractere.
 
 ---
 
-## 11. Criando a tabela `cursos`
+# 25. Estrutura geral de uma consulta
+
+Uma Query pode juntar várias dessas ferramentas:
 
 ```sql
-CREATE TABLE IF NOT EXISTS cursos (
-    nome VARCHAR(50) NOT NULL UNIQUE,
-    descricao TEXT,
-    carga INT UNSIGNED,
-    totalaulas INT,
-    ano YEAR DEFAULT 2026
-) DEFAULT CHARSET=utf8;
+SELECT colunas
+FROM tabela
+WHERE condição
+ORDER BY coluna;
 ```
 
-Depois adicionamos o identificador:
+Por exemplo:
 
 ```sql
-ALTER TABLE cursos
-ADD COLUMN idcurso INT AUTO_INCREMENT PRIMARY KEY FIRST;
+SELECT nome, carga
+FROM cursos
+WHERE ano = 2028
+ORDER BY nome;
 ```
 
-Agora temos duas tabelas independentes:
+Podemos interpretar como uma sequência:
 
-```
-cadastro
-│
-├── estudantes
-│
-└── cursos
-```
-
----
-
-## 12. Inserindo vários cursos
-
-```sql
-INSERT INTO cursos
-(nome, descricao, carga, totalaulas, ano)
-VALUES
-('Algoritmos', 'Lógica de programação para desenvolvimento de algoritmos e soluções computacionais.', 40, 10, 2026),
-('Excel Essencial', 'Criação de planilhas, gráficos, fórmulas, funções e armazenamento em nuvem.', 40, 10, 2027),
-('Excel Avançado I', 'Funções avançadas para cálculos, relatórios, gráficos e banco de dados.', 24, 6, 2028),
-('Excel Avançado II', 'Recursos avançados do Excel para automação e análise de dados.', 24, 6, 2025),
-('Formação Excel do Básico ao Avançado', 'Curso completo de Excel 365 do nível básico ao avançado.', 72, 18, 2026),
-('Desenvolvedor Web Front-end I', 'Desenvolvimento de sites responsivos utilizando HTML e CSS.', 60, 15, 2027),
-('Desenvolvedor Web Front-end II JavaScript', 'Desenvolvimento de interatividade em páginas web utilizando JavaScript.', 40, 12, 2028),
-('PHP com MySQL', 'Desenvolvimento de sistemas web utilizando PHP e banco de dados MySQL.', 40, 12, 2025),
-('Lógica de Programação com PHP', 'Desenvolvimento de algoritmos utilizando a linguagem PHP.', 40, 12, 2026);
-```
-
-O `idcurso` não precisa ser informado.
-
-Isso acontece porque ele possui:
-
-```sql
-AUTO_INCREMENT
-```
-
-O MySQL gera automaticamente os IDs.
-
----
-
-## 13. Inserindo vários estudantes
-
-```sql
-INSERT INTO estudantes
-(nome, profissao, nascimento, sexo, peso, altura, nacionalidade)
-VALUES
-('Ana Beatriz Almeida Souza', 'Enfermeira', '1998-03-15', 'f', 58, 1.65, 'Brasileira'),
-('Carlos Eduardo Pereira Lima', 'Engenheiro', '1995-07-22', 'm', 82, 1.78, 'Português'),
-('Mariana Oliveira Santos', 'Professora', '2001-11-09', 'f', 64, 1.70, 'Brasileira'),
-('João Victor Rodrigues Costa', 'Analista de Sistemas', '1997-01-30', 'm', 85, 1.80, 'Angolano'),
-('Fernanda Martins Ribeiro', 'Enfermeira', '1999-05-18', 'f', 55, 1.62, 'Brasileira'),
-('Lucas Henrique Alves Rocha', 'Advogado', '1996-12-03', 'm', 76, 1.75, 'Argentino'),
-('Juliana Ferreira Gomes', 'Médica', '2000-08-27', 'f', 60, 1.68, 'Brasileira'),
-('Pedro Henrique Barbosa Silva', 'Contador', '1994-04-14', 'm', 88, 1.82, 'Chileno'),
-('Camila Dias Carvalho', 'Designer', '2002-09-06', 'f', 52, 1.60, 'Colombiana'),
-('Rafael Moreira Araújo', 'Administrador', '1993-02-25', 'm', 79, 1.77, 'Brasileiro'),
-('Bruna Cardoso Monteiro', 'Psicóloga', '1998-10-12', 'f', 59, 1.66, 'Portuguesa'),
-('Felipe Nascimento Teixeira', 'Desenvolvedor', '1997-06-19', 'm', 90, 1.83, 'Brasileiro'),
-('Larissa Batista Correia', 'Arquiteta', '2001-03-08', 'f', 63, 1.69, 'Mexicana'),
-('Gabriel Mendes Lopes', 'Técnico em Informática', '1995-11-21', 'm', 74, 1.74, 'Brasileiro'),
-('Isabela Ramos Fernandes', 'Nutricionista', '1999-07-02', 'f', 57, 1.63, 'Espanhola'),
-('Thiago Gonçalves Vieira', 'Policial', '1996-01-17', 'm', 84, 1.79, 'Brasileiro'),
-('Amanda Castro Moura', 'Farmacêutica', '2000-12-29', 'f', 61, 1.67, 'Italiana'),
-('Daniel Freitas Andrade', 'Empresário', '1994-05-10', 'm', 87, 1.81, 'Brasileiro');
-```
-
-Novamente, o `id` não foi informado porque o `AUTO_INCREMENT` cuida dele.
-
----
-
-## 14. Conferindo as tabelas
-
-Para verificar a estrutura:
-
-```sql
-DESC estudantes;
-```
-
-e:
-
-```sql
-DESC cursos;
-```
-
-Para visualizar os dados:
-
-```sql
-SELECT * FROM estudantes;
-```
-
-e:
-
-```sql
-SELECT * FROM cursos;
-```
-
----
-
-# Backup do banco de dados
-
-Depois de criar e preencher o banco, aprendi a fazer um **backup**.
-
-Backup é uma cópia dos dados que pode ser utilizada posteriormente para recuperar o banco.
-
-Isso é fundamental porque bancos de dados podem conter informações muito importantes.
-
----
-
-## Exportando o banco pelo MySQL Workbench
-
-No Workbench:
-
-```
-Server
+```text
+SELECT
 ↓
-Data Export
-```
+O que quero ver?
 
-Depois:
-
-1. Selecionar o banco de dados.
-2. Selecionar **Dump Structure and Data**.
-3. Manter a primeira opção selecionada.
-4. Selecionar **Export to Self-Contained File**.
-5. Marcar **Include Create Schema**.
-6. Escolher o local onde o arquivo será salvo.
-7. Clicar em **Start Export**.
-8. Continuar a operação quando solicitado.
-9. Informar a senha, caso seja solicitada.
-
----
-
-**O que significa "Dump Structure and Data"?**
-
-Essa opção é muito importante.
-
-Ela salva:
-
-**Structure**
-
-A estrutura do banco:
-
-* tabelas;
-* colunas;
-* tipos;
-* chaves;
-* configurações.
-
-**Data**
-
-Os registros armazenados nas tabelas.
-
-Ou seja, o backup contém tanto:
-
-```
-Como o banco deve ser criado
-```
-
-quanto:
-
-```
-Quais dados estavam dentro dele
-```
-
----
-
-**O que é Self-Contained File?**
-
-Significa que o backup será armazenado em **um único arquivo**.
-
-Esse arquivo pode posteriormente ser utilizado para restaurar o banco.
-
-É muito mais conveniente do que depender de vários arquivos separados.
-
----
-
-# Importando o banco novamente
-
-Para restaurar/importar o backup:
-
-```
-Server
+FROM
 ↓
-Data Import
+De onde vou pegar?
+
+WHERE
+↓
+Quais registros quero?
+
+ORDER BY
+↓
+Como quero organizar o resultado?
 ```
 
-Depois:
-
-1. Selecionar **Import from Self-Contained File**.
-2. Clicar nos três pontos `...`.
-3. Localizar o arquivo de backup.
-4. Selecionar o arquivo.
-5. Clicar em **Start Import**.
-6. Aguardar a conclusão.
-
-Depois disso, o banco poderá ser restaurado no MySQL.
+Essa estrutura é extremamente importante para entender SQL.
 
 ---
 
-# Backup na prática
+# 🔥 Exemplo completo
 
-Podemos imaginar:
+Imagine que eu queira:
 
-```
-Banco original
-      ↓
-   EXPORT
-      ↓
-Arquivo de backup
-      ↓
-    IMPORT
-      ↓
-Banco restaurado
-```
+> "Mostrar o nome e a carga dos cursos de 2028, somente aqueles com carga maior que 24, organizados alfabeticamente."
 
-O **Export** tira uma cópia do banco.
-
-O **Import** utiliza essa cópia para reconstruir o banco.
-
----
-
-# Importância do Backup 
-
-Imagine que eu tenha um banco com:
-
-* 10.000 clientes;
-* 5.000 produtos;
-* milhares de vendas.
-
-Se eu executar acidentalmente:
+A Query seria:
 
 ```sql
-DROP DATABASE cadastro;
+SELECT nome, carga
+FROM cursos
+WHERE ano = 2028
+AND carga > 24
+ORDER BY nome;
 ```
 
-todos esses dados poderão ser perdidos.
+Aqui estou combinando:
 
-Se existir um backup, posso restaurar o banco.
-
-Por isso, em ambientes profissionais, backup é uma parte essencial da administração de bancos de dados.
-
----
-
-# Comandos fundamentais desta aula
-
-| Comando             | Função                                |
-| ------------------- | ------------------------------------- |
-| `INSERT INTO`       | Insere registros                      |
-| `UPDATE`            | Altera registros                      |
-| `SET`               | Define os novos valores               |
-| `WHERE`             | Define quais registros serão afetados |
-| `DELETE`            | Exclui registros                      |
-| `TRUNCATE TABLE`    | Remove todos os registros             |
-| `DROP TABLE`        | Remove a tabela                       |
-| `SELECT`            | Consulta dados                        |
-| `DESC` / `DESCRIBE` | Mostra a estrutura da tabela          |
+* `SELECT` → escolhe as colunas;
+* `FROM` → escolhe a tabela;
+* `WHERE` → filtra;
+* `AND` → adiciona outra condição;
+* `ORDER BY` → organiza o resultado.
 
 ---
 
-# Diferença fundamental: UPDATE, DELETE, TRUNCATE e DROP
+# 🧩 Ordem lógica de uma consulta
 
-```
-UPDATE
-   ↓
-Altera dados
+Uma forma de pensar em uma Query é:
 
-DELETE
-   ↓
-Remove registros
-
-TRUNCATE
-   ↓
-Remove todos os registros
-   ↓
-Mantém a tabela
-
-DROP
-   ↓
-Remove a própria tabela
+```text
+                 BANCO DE DADOS
+                       ↓
+                    TABELA
+                       ↓
+                     FROM
+                       ↓
+                  WHERE
+               ┌───────┴───────┐
+             FILTRO       CONDIÇÕES
+                       ↓
+                    SELECT
+                       ↓
+                 COLUNAS DESEJADAS
+                       ↓
+                  ORDER BY
+                       ↓
+                RESULTADO FINAL
 ```
 
-Essa diferença precisa estar muito bem entendida, porque esses comandos possuem consequências completamente diferentes.
+Na escrita da Query, normalmente usamos:
+
+```sql
+SELECT
+FROM
+WHERE
+ORDER BY
+```
+
+Mas conceitualmente estou dizendo:
+
+> **De onde pegar → quais registros considerar → quais informações mostrar → como organizar.**
 
 ---
 
-**Dicas importantes**
+# ⚠️ Uma observação importante sobre textos
 
-* Sempre confira o `WHERE` antes de executar um `UPDATE` ou `DELETE`.
-* Utilize a **Chave Primária** no `WHERE` quando quiser atingir um registro específico.
-* Não desative o **Safe Updates** sem necessidade.
-* `TRUNCATE` remove todos os registros, mas mantém a estrutura.
-* `DROP TABLE` remove a tabela inteira.
-* `DROP DATABASE` remove o banco inteiro.
-* Faça backups antes de operações importantes.
-* `AUTO_INCREMENT` permite que o MySQL controle automaticamente os identificadores.
-* `INSERT` permite cadastrar vários registros de uma vez.
-* O `SELECT` é útil para conferir se uma alteração realmente funcionou.
+Quando comparo um texto diretamente, utilizo aspas simples:
 
----
+```sql
+WHERE nome = 'Algoritmos';
+```
 
-# Resumo final
+Enquanto números normalmente são escritos sem aspas:
 
-Nesta aula aprendi a trabalhar diretamente com os **dados** das tabelas. Utilizei `UPDATE` para corrigir e alterar registros, `DELETE` para remover registros específicos e `TRUNCATE TABLE` para limpar completamente uma tabela sem apagar sua estrutura. Também compreendi a diferença entre essas operações e `DROP`, que remove a própria tabela. Depois recriei o banco `cadastro`, com as tabelas `estudantes` e `cursos`, inseri diversos registros e utilizei `SELECT` e `DESC` para verificar os resultados. Por fim, aprendi a realizar **backup e restauração** pelo MySQL Workbench usando Data Export e Data Import.
+```sql
+WHERE ano = 2028;
+```
+
+Embora o MySQL possa fazer algumas conversões automaticamente, é uma boa prática manter os tipos corretamente.
 
 ---
 
-**Resumo Relâmpago**
+# 📌 Principais comandos desta aula
 
-1. `INSERT INTO` insere novos registros no banco.
-2. `UPDATE` altera registros existentes.
-3. `SET` define quais valores serão modificados.
-4. `WHERE` determina exatamente quais registros serão afetados.
-5. `DELETE` remove registros específicos ou todos os registros.
-6. `TRUNCATE TABLE` remove todas as linhas, mas mantém a estrutura da tabela.
-7. `DROP TABLE` remove a tabela inteira.
-8. `AUTO_INCREMENT` gera automaticamente os IDs das novas linhas.
-9. Backup salva uma cópia da estrutura e dos dados para recuperação futura.
-10. No Workbench, **Data Export** cria o backup e **Data Import** permite restaurá-lo.
+| Comando/Operador | Função                                         |
+| ---------------- | ---------------------------------------------- |
+| `SELECT`         | Escolhe os dados que serão exibidos            |
+| `FROM`           | Indica a tabela consultada                     |
+| `WHERE`          | Filtra registros                               |
+| `ORDER BY`       | Ordena o resultado                             |
+| `ASC`            | Ordem crescente                                |
+| `DESC`           | Ordem decrescente                              |
+| `=`              | Igual                                          |
+| `>`              | Maior que                                      |
+| `<`              | Menor que                                      |
+| `>=`             | Maior ou igual                                 |
+| `<=`             | Menor ou igual                                 |
+| `<>`             | Diferente                                      |
+| `BETWEEN`        | Procura dentro de um intervalo                 |
+| `IN`             | Procura valores específicos                    |
+| `AND`            | Todas as condições precisam ser verdadeiras    |
+| `OR`             | Pelo menos uma condição precisa ser verdadeira |
+| `LIKE`           | Procura padrões em textos                      |
+| `NOT LIKE`       | Exclui textos que correspondem ao padrão       |
+| `%`              | Zero ou mais caracteres                        |
+| `_`              | Exatamente um caractere                        |
+
+---
+
+# 💡 O que eu preciso memorizar
+
+A estrutura:
+
+```sql
+SELECT ...
+FROM ...
+WHERE ...
+ORDER BY ...;
+```
+
+é uma das bases das consultas SQL.
+
+E preciso lembrar principalmente:
+
+```text
+SELECT → o que quero ver
+FROM → de onde vem
+WHERE → o que quero filtrar
+ORDER BY → como quero organizar
+```
+
+Além disso:
+
+```text
+% → qualquer quantidade de caracteres
+_ → exatamente um caractere
+```
+
+---
+
+# ✅ Resumo final
+
+Nesta aula aprendi a transformar consultas simples em consultas mais específicas. Utilizei `ORDER BY` para organizar registros em ordem crescente ou decrescente e aprendi que `SELECT` pode mostrar somente as colunas que realmente preciso. Com `WHERE`, consigo filtrar registros utilizando operadores como `=`, `>`, `<`, `>=`, `<=` e `<>`. Também aprendi `BETWEEN` para intervalos, `IN` para valores específicos e `AND`/`OR` para combinar condições. Por fim, conheci o `LIKE`, que permite pesquisar padrões em textos utilizando `%` e `_`, tornando as consultas muito mais flexíveis.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. **Query** é uma consulta feita ao banco de dados para obter informações.
+2. `SELECT` define quais colunas quero visualizar.
+3. `FROM` informa de qual tabela os dados serão retirados.
+4. `WHERE` filtra os registros de acordo com uma condição.
+5. `ORDER BY` organiza o resultado; `ASC` é crescente e `DESC` é decrescente.
+6. `BETWEEN` pesquisa valores dentro de um intervalo, incluindo os limites.
+7. `IN` permite procurar vários valores específicos.
+8. `AND` exige que todas as condições sejam verdadeiras; `OR` permite qualquer uma.
+9. `LIKE` pesquisa padrões em textos; `NOT LIKE` faz o contrário.
+10. No `LIKE`, `%` representa zero ou mais caracteres e `_` representa exatamente um caractere.
