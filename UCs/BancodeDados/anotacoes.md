@@ -1,8 +1,8 @@
-# Banco de Dados (MySQL) — Filtrando e Ordenando Registros
+# Filtrando e Ordenando Registros
 
-# 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula aprendi a **consultar registros de uma tabela de forma mais específica**.
+Aprendi a **consultar registros de uma tabela de forma mais específica**.
 
 Até agora, eu já conseguia fazer:
 
@@ -28,7 +28,7 @@ Esse processo é chamado de **consulta** ou **Query**.
 
 ---
 
-# 1. O que é uma Query?
+# Query
 
 Uma **Query** é uma consulta feita ao banco de dados para pedir alguma informação.
 
@@ -63,7 +63,7 @@ Portanto, uma Query é basicamente uma forma de **pedir ao banco exatamente a in
 
 ---
 
-# 2. Ordenando os registros com ORDER BY
+# Ordenando os registros com ORDER BY
 
 O comando:
 
@@ -88,7 +88,7 @@ Por padrão, o MySQL utiliza a ordem **crescente**.
 
 Para textos, normalmente será:
 
-```text
+```
 A
 B
 C
@@ -99,7 +99,7 @@ Z
 
 Para números:
 
-```text
+```
 1
 2
 3
@@ -110,7 +110,7 @@ Para números:
 
 ---
 
-# 3. Ordem decrescente
+## Ordem decrescente
 
 Para inverter a ordem:
 
@@ -123,7 +123,7 @@ ORDER BY nome DESC;
 
 O resultado ficará aproximadamente:
 
-```text
+```
 Z
 Y
 X
@@ -135,7 +135,7 @@ A
 
 ---
 
-# ASC e DESC
+## ASC e DESC
 
 Também posso escrever explicitamente:
 
@@ -155,11 +155,11 @@ Portanto:
 
 ---
 
-# 4. Escolhendo quais colunas visualizar
+## Escolhendo quais colunas visualizar
 
 Eu não preciso mostrar todas as colunas.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```sql
 SELECT nome, carga, ano
@@ -177,9 +177,9 @@ A coluna `idcurso`, por exemplo, não aparecerá no resultado.
 
 ---
 
-## `SELECT *` x `SELECT coluna`
+# `SELECT *` x `SELECT coluna`
 
-### Todas as colunas
+**Todas as colunas**
 
 ```sql
 SELECT * FROM cursos;
@@ -189,7 +189,7 @@ O `*` significa:
 
 > "Quero todas as colunas."
 
-### Apenas algumas colunas
+**Apenas algumas colunas**
 
 ```sql
 SELECT nome, carga
@@ -202,7 +202,7 @@ Significa:
 
 ---
 
-# 5. Filtrando com WHERE
+# Filtrando com WHERE
 
 O comando:
 
@@ -212,7 +212,7 @@ WHERE
 
 é utilizado para **filtrar os registros**.
 
-Por exemplo:
+> Por exemplo:
 
 ```sql
 SELECT * FROM cursos
@@ -226,7 +226,7 @@ Aqui estou dizendo:
 
 ---
 
-# Entendendo a Query por partes
+## Entendendo a Query por partes
 
 ```sql
 SELECT * FROM cursos
@@ -234,25 +234,25 @@ WHERE ano = 2028
 ORDER BY nome;
 ```
 
-### `SELECT *`
+**`SELECT *`**
 
 Quero todas as colunas.
 
-### `FROM cursos`
+**`FROM cursos`**
 
 Os dados devem ser procurados na tabela `cursos`.
 
-### `WHERE ano = 2028`
+**`WHERE ano = 2028`**
 
 Quero somente registros cujo ano seja `2028`.
 
-### `ORDER BY nome`
+**`ORDER BY nome`**
 
 Depois de filtrar, organize o resultado pelo nome.
 
 ---
 
-# 6. Filtrando e escolhendo colunas
+# Filtrando e escolhendo colunas
 
 Também posso combinar `WHERE` com a seleção de colunas:
 
@@ -265,14 +265,14 @@ ORDER BY nome;
 
 Agora o resultado mostrará somente:
 
-```text
+```
 nome
 carga
 ```
 
 e somente os cursos de:
 
-```text
+```
 2028
 ```
 
@@ -280,7 +280,7 @@ ordenados pelo nome.
 
 ---
 
-# 7. Operadores de comparação
+# Operadores de comparação
 
 No `WHERE`, posso utilizar vários operadores.
 
@@ -295,9 +295,9 @@ No `WHERE`, posso utilizar vários operadores.
 
 ---
 
-## Exemplos
+- **Exemplos**
 
-### Igual
+**Igual**
 
 ```sql
 WHERE ano = 2028
@@ -305,7 +305,7 @@ WHERE ano = 2028
 
 Ano exatamente igual a 2028.
 
-### Maior que
+**Maior que**
 
 ```sql
 WHERE carga > 24
@@ -313,7 +313,7 @@ WHERE carga > 24
 
 Carga maior que 24.
 
-### Menor que
+**Menor que**
 
 ```sql
 WHERE carga < 24
@@ -321,7 +321,7 @@ WHERE carga < 24
 
 Carga menor que 24.
 
-### Maior ou igual
+**Maior ou igual**
 
 ```sql
 WHERE carga >= 24
@@ -329,7 +329,7 @@ WHERE carga >= 24
 
 Carga de 24 ou mais.
 
-### Menor ou igual
+**Menor ou igual**
 
 ```sql
 WHERE carga <= 24
@@ -337,7 +337,7 @@ WHERE carga <= 24
 
 Carga de 24 ou menos.
 
-### Diferente
+**Diferente**
 
 ```sql
 WHERE ano <> 2028
@@ -347,7 +347,7 @@ Todos os registros cujo ano seja diferente de 2028.
 
 ---
 
-# 8. BETWEEN — Trabalhando com intervalo
+# BETWEEN — Trabalhando com intervalo
 
 Quando quero procurar valores dentro de um intervalo, posso utilizar:
 
@@ -355,7 +355,7 @@ Quando quero procurar valores dentro de um intervalo, posso utilizar:
 BETWEEN
 ```
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT * FROM cursos
@@ -371,7 +371,7 @@ O `BETWEEN` inclui os limites.
 
 Ou seja:
 
-```text
+```
 20 ≤ totalaulas ≤ 30
 ```
 
@@ -379,7 +379,7 @@ Então tanto `20` quanto `30` podem aparecer.
 
 ---
 
-# 9. IN — Procurando valores específicos
+# IN — Procurando valores específicos
 
 Também posso procurar vários valores específicos utilizando:
 
@@ -387,7 +387,7 @@ Também posso procurar vários valores específicos utilizando:
 IN
 ```
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT nome, carga
@@ -410,7 +410,7 @@ Porém `IN` deixa a consulta mais organizada quando existem vários valores.
 
 ---
 
-# 10. Operadores lógicos
+# Operadores lógicos
 
 Também posso combinar condições utilizando operadores lógicos.
 
@@ -422,7 +422,7 @@ Os principais são:
 
 ---
 
-# 11. AND
+**AND**
 
 `AND` significa **E**.
 
@@ -438,13 +438,13 @@ ORDER BY nome;
 
 Estou procurando cursos que:
 
-```text
+```
 carga > 24
 ```
 
 **E**
 
-```text
+```
 totalaulas < 16
 ```
 
@@ -452,7 +452,7 @@ As duas condições precisam ser atendidas pelo mesmo registro.
 
 ---
 
-# 12. OR
+**OR**
 
 `OR` significa **OU**.
 
@@ -468,33 +468,33 @@ Agora basta uma das condições ser verdadeira.
 
 O curso será mostrado se:
 
-```text
+```
 carga > 24
 ```
 
 **OU**
 
-```text
+```
 totalaulas < 16
 ```
 
 ---
 
-# 🧠 AND x OR
+**AND x OR**
 
 Uma forma simples de memorizar:
 
-### AND
+**AND**
 
 > "Precisa cumprir os dois requisitos."
 
-### OR
+**OR**
 
 > "Pode cumprir qualquer um dos requisitos."
 
 ---
 
-# 13. Procurando um nome específico
+# Procurando um nome específico
 
 Posso procurar um valor exato:
 
@@ -505,13 +505,13 @@ WHERE nome = 'Algoritmos';
 
 Aqui o MySQL procurará um registro cujo nome seja exatamente:
 
-```text
+```
 Algoritmos
 ```
 
 ---
 
-# 14. LIKE — Procurando padrões
+# LIKE — Procurando padrões
 
 Quando não quero procurar um valor exatamente igual, posso utilizar:
 
@@ -523,7 +523,7 @@ O `LIKE` é utilizado principalmente para **pesquisar textos através de padrõe
 
 Ele fica ainda mais poderoso quando combinado com:
 
-```text
+```
 %
 _
 ```
@@ -532,11 +532,11 @@ Esses são chamados de **caracteres curinga** (*wildcards*).
 
 ---
 
-# 15. O símbolo `%`
+# O símbolo `%`
 
 O símbolo:
 
-```text
+```
 %
 ```
 
@@ -555,7 +555,7 @@ Significa:
 
 Pode encontrar:
 
-```text
+```
 Excel Essencial
 Excel Avançado I
 Excel Avançado II
@@ -565,7 +565,7 @@ porque todos começam com `E`.
 
 ---
 
-# 16. Procurando pela última letra
+# Procurando pela última letra
 
 ```sql
 SELECT * FROM cursos
@@ -578,15 +578,15 @@ Isso significa:
 
 > "Pode existir qualquer quantidade de caracteres antes, mas o nome precisa terminar com `E`."
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 ...E
 ```
 
 ---
 
-# 17. Procurando uma letra em qualquer posição
+# Procurando uma letra em qualquer posição
 
 ```sql
 SELECT * FROM cursos
@@ -597,13 +597,13 @@ Agora o `E` pode aparecer em qualquer posição.
 
 O padrão significa:
 
-```text
+```
 qualquer coisa + E + qualquer coisa
 ```
 
 Então pode encontrar palavras como:
 
-```text
+```
 Excel
 Desenvolvedor
 PHP
@@ -613,7 +613,7 @@ desde que tenham `E` no texto.
 
 ---
 
-# 18. Procurando palavras que NÃO possuem determinada letra
+# Procurando palavras que NÃO possuem determinada letra
 
 Podemos utilizar `NOT LIKE`:
 
@@ -628,7 +628,7 @@ Isso significa:
 
 ---
 
-# 19. Procurando duas letras em posições específicas
+# Procurando duas letras em posições específicas
 
 ```sql
 SELECT * FROM cursos
@@ -644,17 +644,17 @@ Aqui estou procurando um nome que:
 
 Representação:
 
-```text
+```
 E + qualquer coisa + L + qualquer coisa
 ```
 
 ---
 
-# 20. O símbolo `_`
+# O símbolo `_`
 
 Além do `%`, existe:
 
-```text
+```
 _
 ```
 
@@ -669,9 +669,9 @@ Essa é uma diferença muito importante:
 
 ---
 
-# 21. Combinando `%` e `_`
+# Combinando `%` e `_`
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT * FROM cursos
@@ -680,7 +680,7 @@ WHERE nome LIKE 'C%_';
 
 Aqui:
 
-```text
+```
 C
 ```
 
@@ -688,7 +688,7 @@ precisa estar no começo.
 
 Depois:
 
-```text
+```
 %
 ```
 
@@ -696,7 +696,7 @@ permite qualquer quantidade de caracteres.
 
 E no final:
 
-```text
+```
 _
 ```
 
@@ -704,7 +704,7 @@ exige pelo menos **um caractere** naquela posição.
 
 ---
 
-# 22. Outro exemplo com `LIKE`
+# Outro exemplo com `LIKE`
 
 ```sql
 SELECT * FROM cursos
