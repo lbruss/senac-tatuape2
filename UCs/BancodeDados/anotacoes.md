@@ -722,7 +722,7 @@ O padrão procura um nome que:
 
 ---
 
-# 23. Dois caracteres entre letras
+# Dois caracteres entre letras
 
 ```sql
 SELECT * FROM cursos
@@ -731,19 +731,19 @@ WHERE nome LIKE 'P__T%';
 
 Aqui temos:
 
-```text
+```
 P __ T %
 ```
 
 O primeiro caractere precisa ser:
 
-```text
+```
 P
 ```
 
 Depois temos:
 
-```text
+```
 __
 ```
 
@@ -753,7 +753,7 @@ Portanto, existem **dois caracteres entre `P` e `T`**.
 
 Depois do `T`:
 
-```text
+```
 %
 ```
 
@@ -761,7 +761,7 @@ permite qualquer quantidade de caracteres.
 
 ---
 
-# 24. Procurando uma palavra em qualquer posição
+# Procurando uma palavra em qualquer posição
 
 ```sql
 SELECT * FROM cursos
@@ -772,19 +772,19 @@ Aqui estou procurando `silva` em qualquer parte do texto.
 
 Pode ser:
 
-```text
+```
 Silva
 ```
 
 ou:
 
-```text
+```
 João Silva
 ```
 
 ou:
 
-```text
+```
 Silva Desenvolvimento Web
 ```
 
@@ -792,19 +792,19 @@ dependendo dos dados existentes.
 
 O padrão:
 
-```text
+```
 %silva%
 ```
 
 significa:
 
-```text
+```
 qualquer coisa + silva + qualquer coisa
 ```
 
 ---
 
-# 🔍 Tabela de padrões do LIKE
+# Tabela de padrões do LIKE
 
 | Query            | O que procura                                               |
 | ---------------- | ----------------------------------------------------------- |
@@ -819,13 +819,13 @@ qualquer coisa + silva + qualquer coisa
 
 ---
 
-# 🧠 `%` x `_`
+# `%` x `_`
 
 Essa diferença é uma das coisas mais importantes desta aula.
 
 Imagine:
 
-```text
+```
 %
 ```
 
@@ -833,36 +833,36 @@ como uma **caixa que pode receber qualquer quantidade de caracteres**.
 
 Já:
 
-```text
+```
 _
 ```
 
 é como um **espaço reservado para apenas um caractere**.
 
-### `%`
+`%`
 
-```text
+```
 %
 ```
 
 Pode representar:
 
-```text
+```
 nada
 A
 ABC
 ABCDEFG
 ```
 
-### `_`
+`_`
 
-```text
+```
 _
 ```
 
 Representa somente:
 
-```text
+```
 A
 ```
 
@@ -870,7 +870,7 @@ um único caractere.
 
 ---
 
-# 25. Estrutura geral de uma consulta
+# Estrutura geral de uma consulta
 
 Uma Query pode juntar várias dessas ferramentas:
 
@@ -881,7 +881,7 @@ WHERE condição
 ORDER BY coluna;
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```sql
 SELECT nome, carga
@@ -892,7 +892,7 @@ ORDER BY nome;
 
 Podemos interpretar como uma sequência:
 
-```text
+```
 SELECT
 ↓
 O que quero ver?
@@ -914,7 +914,7 @@ Essa estrutura é extremamente importante para entender SQL.
 
 ---
 
-# 🔥 Exemplo completo
+# Exemplo completo
 
 Imagine que eu queira:
 
@@ -940,11 +940,11 @@ Aqui estou combinando:
 
 ---
 
-# 🧩 Ordem lógica de uma consulta
+## Ordem lógica de uma consulta
 
 Uma forma de pensar em uma Query é:
 
-```text
+```
                  BANCO DE DADOS
                        ↓
                     TABELA
@@ -979,7 +979,7 @@ Mas conceitualmente estou dizendo:
 
 ---
 
-# ⚠️ Uma observação importante sobre textos
+**Uma observação importante sobre textos**
 
 Quando comparo um texto diretamente, utilizo aspas simples:
 
@@ -997,7 +997,7 @@ Embora o MySQL possa fazer algumas conversões automaticamente, é uma boa prát
 
 ---
 
-# 📌 Principais comandos desta aula
+# Principais comandos desta aula
 
 | Comando/Operador | Função                                         |
 | ---------------- | ---------------------------------------------- |
@@ -1024,7 +1024,7 @@ Embora o MySQL possa fazer algumas conversões automaticamente, é uma boa prát
 
 ---
 
-# 💡 O que eu preciso memorizar
+# O que é preciso memorizar
 
 A estrutura:
 
@@ -1039,7 +1039,7 @@ ORDER BY ...;
 
 E preciso lembrar principalmente:
 
-```text
+```
 SELECT → o que quero ver
 FROM → de onde vem
 WHERE → o que quero filtrar
@@ -1048,20 +1048,20 @@ ORDER BY → como quero organizar
 
 Além disso:
 
-```text
+```
 % → qualquer quantidade de caracteres
 _ → exatamente um caractere
 ```
 
 ---
 
-# ✅ Resumo final
+# Resumo final
 
 Nesta aula aprendi a transformar consultas simples em consultas mais específicas. Utilizei `ORDER BY` para organizar registros em ordem crescente ou decrescente e aprendi que `SELECT` pode mostrar somente as colunas que realmente preciso. Com `WHERE`, consigo filtrar registros utilizando operadores como `=`, `>`, `<`, `>=`, `<=` e `<>`. Também aprendi `BETWEEN` para intervalos, `IN` para valores específicos e `AND`/`OR` para combinar condições. Por fim, conheci o `LIKE`, que permite pesquisar padrões em textos utilizando `%` e `_`, tornando as consultas muito mais flexíveis.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. **Query** é uma consulta feita ao banco de dados para obter informações.
 2. `SELECT` define quais colunas quero visualizar.
