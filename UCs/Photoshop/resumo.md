@@ -230,7 +230,7 @@ Assim, podemos editar o fundo sem afetar diretamente a xícara.
 
 ---
 
-# 6. 🗑️ Remoção de Fundo
+# 6. Remoção de Fundo
 
 Depois de inverter a seleção:
 
@@ -314,7 +314,7 @@ A dureza `0%` funciona de maneira semelhante à segunda opção.
 
 ---
 
-# 8. 🌫️ Opacidade da Borracha
+# 8. Opacidade da Borracha
 
 A opacidade controla a intensidade do apagamento.
 
@@ -386,7 +386,7 @@ poderia esconder os elementos que deveriam aparecer na frente.
 
 ---
 
-# 10. ✒️ Ferramenta Caneta
+# 10. Ferramenta Caneta
 
 A **Ferramenta Caneta (Pen Tool)** é uma das ferramentas mais importantes para criar recortes precisos.
 
