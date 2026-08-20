@@ -1,21 +1,21 @@
-# Lógica de Programação — Pesquisa, Números Aleatórios, Números Pares e Soma de Vetores
+# Pesquisa, Números Aleatórios, Números Pares e Soma de Vetores
 
-## 🎯 Ideia Principal
+**Ideia Principal**
 
 Nesta etapa, estou praticando **estruturas de dados junto com estruturas de repetição e condições**.
 
 Os algoritmos trabalham com quatro situações diferentes:
 
-1. 🔎 Pesquisar um nome dentro de um vetor.
-2. 🎲 Gerar números aleatórios e localizar um número específico.
-3. 🔢 Percorrer uma matriz, identificar números pares e armazená-los em outro vetor.
-4. ➕ Somar os elementos de dois vetores e verificar se ambas as somas são iguais a 30.
+1.  Pesquisar um nome dentro de um vetor.
+2. Gerar números aleatórios e localizar um número específico.
+3. Percorrer uma matriz, identificar números pares e armazená-los em outro vetor.
+4. Somar os elementos de dois vetores e verificar se ambas as somas são iguais a 30.
 
 Esses exercícios são importantes porque começam a mostrar uma característica essencial da programação: **não basta armazenar dados; preciso conseguir pesquisar, filtrar, contar, acumular e tomar decisões com eles.**
 
 ---
 
-# 1. 🔎 Algoritmo para Encontrar um Nome
+# Algoritmo para Encontrar um Nome
 
 ## Objetivo
 
@@ -30,7 +30,7 @@ Depois:
 * Se não encontrar, informa que o nome não foi localizado;
 * No final, pergunta se quero fazer outra pesquisa.
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Encontrar Nome"
@@ -79,7 +79,7 @@ fimalgoritmo
 
 ---
 
-## 🔍 Entendendo o vetor
+**Entendendo o vetor**
 
 ```portugol
 a: vetor[1..5] de caractere
@@ -87,7 +87,7 @@ a: vetor[1..5] de caractere
 
 Crio um vetor chamado `a`, que possui cinco posições:
 
-```text
+```
 a[1]
 a[2]
 a[3]
@@ -97,9 +97,9 @@ a[5]
 
 Cada posição armazenará um nome.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 a[1] = "João"
 a[2] = "Maria"
 a[3] = "Carlos"
@@ -109,7 +109,7 @@ a[5] = "Pedro"
 
 ---
 
-## 🔄 Cadastrando os nomes
+**Cadastrando os nomes**
 
 ```portugol
 para aux de 1 ate 5 passo 1 faca
@@ -117,7 +117,7 @@ para aux de 1 ate 5 passo 1 faca
 
 O `PARA` faz o contador `aux` percorrer:
 
-```text
+```
 1 → 2 → 3 → 4 → 5
 ```
 
@@ -145,7 +145,7 @@ E assim por diante.
 
 ---
 
-## 🔎 Procurando o nome
+**Procurando o nome**
 
 A pesquisa acontece dentro de:
 
@@ -165,7 +165,7 @@ achei <- 0
 
 Ela funciona como uma pequena "bandeira":
 
-```text
+```
 0 → nome ainda não encontrado
 1 → nome encontrado
 ```
@@ -192,7 +192,7 @@ Isso informa ao programa que a pesquisa encontrou o nome.
 
 ---
 
-## ❗ Operador `<>`
+**Operador `<>`**
 
 No final:
 
@@ -204,7 +204,7 @@ se (achei <> 1) entao
 
 Portanto:
 
-```text
+```
 achei <> 1
 ```
 
@@ -216,9 +216,9 @@ Se for verdadeiro, significa que o nome não foi encontrado.
 
 ---
 
-# 2. 🎲 Algoritmo para Sortear Números
+# Algoritmo para Sortear Números
 
-## Objetivo
+**Objetivo**
 
 Agora crio um vetor com **30 números aleatórios**.
 
@@ -229,7 +229,7 @@ O programa mostra:
 * As posições onde o número apareceu;
 * Quantas vezes ele apareceu.
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Pesquisar Números Sorteados"
@@ -274,7 +274,7 @@ fimalgoritmo
 
 ---
 
-## 🎰 `RandI(15) + 1`
+## `RandI(15) + 1`
 
 Essa parte:
 
@@ -288,9 +288,9 @@ O `RandI(15)` gera um número inteiro aleatório dentro do intervalo utilizado p
 
 Assim, cada uma das 30 posições recebe um número aleatório.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 4  12  7  4  15
 2  9   4  11 3
 ...
@@ -298,7 +298,7 @@ Por exemplo:
 
 ---
 
-## 🔑 Variável `chave`
+**Variável `chave`**
 
 ```portugol
 chave: inteiro
@@ -308,13 +308,13 @@ A `chave` representa o número que estou procurando.
 
 Se eu digitar:
 
-```text
+```
 4
 ```
 
 o programa procura:
 
-```text
+```
 numeros[i] = 4
 ```
 
@@ -322,7 +322,7 @@ em todas as 30 posições.
 
 ---
 
-## 🔢 Contando ocorrências
+**Contando ocorrências**
 
 Sempre que encontra o número:
 
@@ -332,27 +332,27 @@ vezes <- vezes + 1
 
 O contador aumenta.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 vezes = 0
 ```
 
 Primeiro `4` encontrado:
 
-```text
+```
 vezes = 1
 ```
 
 Segundo `4`:
 
-```text
+```
 vezes = 2
 ```
 
 Terceiro:
 
-```text
+```
 vezes = 3
 ```
 
@@ -360,9 +360,9 @@ No final, sei quantas vezes o número apareceu.
 
 ---
 
-# 3. 🔢 Algoritmo para Listar Números Pares
+# Algoritmo para Listar Números Pares
 
-## Objetivo
+**Objetivo**
 
 Agora utilizo uma **matriz 3 × 3** para receber 9 números.
 
@@ -372,7 +372,7 @@ Os números pares encontrados são armazenados em um segundo vetor.
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Listar Números Pares"
@@ -424,7 +424,7 @@ fimalgoritmo
 
 ---
 
-# 4. 🧮 Como funciona a matriz?
+## Como funciona a matriz
 
 ```portugol
 numero: vetor[1..3, 1..3] de inteiro
@@ -432,13 +432,13 @@ numero: vetor[1..3, 1..3] de inteiro
 
 Isso cria uma matriz de:
 
-```text
+```
 3 linhas × 3 colunas = 9 posições
 ```
 
 Visualmente:
 
-```text
+```
         Colunas
        1   2   3
 
@@ -449,13 +449,13 @@ Linha 3 [ ] [ ] [ ]
 
 Cada posição é identificada por dois índices:
 
-```text
+```
 numero[linha,coluna]
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 numero[1,1]
 numero[1,2]
 numero[1,3]
@@ -471,7 +471,7 @@ numero[3,3]
 
 ---
 
-# 5. 🔄 Dois `PARA` para percorrer a matriz
+**Dois `PARA` para percorrer a matriz**
 
 Aqui aparecem dois laços:
 
@@ -493,7 +493,7 @@ O `j` controla as **colunas**.
 
 É como percorrer uma tabela:
 
-```text
+```
 i = linha
 j = coluna
 ```
@@ -502,7 +502,7 @@ O programa passa por todas as 9 posições.
 
 ---
 
-# 6. 🟢 Como identificar números pares?
+**Como identificar números pares?**
 
 A condição é:
 
@@ -512,9 +512,9 @@ se (numero[i,j] % 2 = 0) entao
 
 O operador `%` calcula o **resto da divisão**.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 10 % 2 = 0 → par
 8 % 2 = 0  → par
 7 % 2 = 1  → ímpar
@@ -523,14 +523,14 @@ Exemplo:
 
 Portanto:
 
-```text
+```
 Resto 0 → PAR
 Resto diferente de 0 → ÍMPAR
 ```
 
 ---
 
-# 7. 📦 Armazenando somente os pares
+**Armazenando somente os pares**
 
 Quando encontro um número par:
 
@@ -557,58 +557,58 @@ par[vezes] <- numero[i,j]
 
 coloca o número par na próxima posição disponível do vetor.
 
-### Exemplo
+- **Exemplo**
 
 Se encontro:
 
-```text
+```
 8
 ```
 
 faço:
 
-```text
+```
 vezes = 1
 par[1] = 8
 ```
 
 Depois encontro:
 
-```text
+```
 4
 ```
 
 faço:
 
-```text
+```
 vezes = 2
 par[2] = 4
 ```
 
 Depois:
 
-```text
+```
 10
 ```
 
 resulta em:
 
-```text
+```
 vezes = 3
 par[3] = 10
 ```
 
 No final:
 
-```text
+```
 par = [8, 4, 10]
 ```
 
 ---
 
-# 8. ➕ Algoritmo para Somar Dois Vetores
+# Algoritmo para Somar Dois Vetores
 
-## Objetivo
+**Objetivo**
 
 Agora trabalho com dois vetores de cinco posições.
 
@@ -622,7 +622,7 @@ O programa:
 
 ---
 
-## Código
+**Código**
 
 ```portugol
 algoritmo "Soma dos Vetores"
@@ -681,7 +681,7 @@ fimalgoritmo
 
 ---
 
-# 9. 🧠 Acumuladores
+**Acumuladores**
 
 Aqui aparecem:
 
@@ -704,37 +704,37 @@ significa:
 
 Imagine:
 
-```text
+```
 soma1 = 0
 ```
 
 Primeiro valor:
 
-```text
+```
 5
 ```
 
 Então:
 
-```text
+```
 0 + 5 = 5
 ```
 
 Segundo valor:
 
-```text
+```
 10
 ```
 
 Agora:
 
-```text
+```
 5 + 10 = 15
 ```
 
 Terceiro:
 
-```text
+```
 15 + 3 = 18
 ```
 
@@ -742,7 +742,7 @@ E assim por diante.
 
 ---
 
-# 10. 🔗 Operador lógico `E`
+**Operador lógico `E`**
 
 A condição final é:
 
@@ -752,22 +752,22 @@ se (soma1 = 30) e (soma2 = 30) entao
 
 O `E` exige que **as duas condições sejam verdadeiras**.
 
-### Caso 1
+**Caso 1**
 
-```text
+```
 soma1 = 30
 soma2 = 30
 ```
 
 Resultado:
 
-```text
+```
 VERDADEIRO E VERDADEIRO
 ```
 
-✅ Os dois vetores possuem soma 30.
+Os dois vetores possuem soma 30.
 
-### Caso 2
+**Caso 2**
 
 ```text
 soma1 = 30
@@ -776,34 +776,34 @@ soma2 = 25
 
 Resultado:
 
-```text
+```
 VERDADEIRO E FALSO
 ```
 
-❌ A condição inteira é falsa.
+A condição inteira é falsa.
 
-### Caso 3
+**Caso 3**
 
-```text
+```
 soma1 = 20
 soma2 = 25
 ```
 
 Resultado:
 
-```text
+```
 FALSO E FALSO
 ```
 
-❌ Também é falsa.
+Também é falsa.
 
 ---
 
-# 🔗 Ligação entre os quatro exercícios
+# Ligação entre os quatro exercícios
 
 Esses algoritmos estão começando a juntar vários conceitos que aprendi anteriormente.
 
-```text
+```
                  ESTRUTURAS DE DADOS
                          │
               ┌──────────┴──────────┐
@@ -823,9 +823,9 @@ Esses algoritmos estão começando a juntar vários conceitos que aprendi anteri
 
 O ponto importante é que um algoritmo pode combinar várias estruturas.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Matriz
   ↓
 PARA
@@ -841,9 +841,9 @@ Vetor
 
 ---
 
-# 🧠 Conceitos que estou consolidando
+# Conceitos a ser consolidado
 
-## 1. Vetor
+**1. Vetor**
 
 Armazena vários valores do mesmo tipo em posições diferentes.
 
@@ -853,7 +853,7 @@ vetor[1..5] de inteiro
 
 ---
 
-## 2. Matriz
+**2. Matriz**
 
 É uma estrutura com mais de uma dimensão.
 
@@ -865,7 +865,7 @@ Posso pensar nela como uma **tabela**.
 
 ---
 
-## 3. Contador
+**3. Contador**
 
 É uma variável usada para contar ocorrências.
 
@@ -875,7 +875,7 @@ vezes <- vezes + 1
 
 ---
 
-## 4. Acumulador
+**4. Acumulador**
 
 É uma variável usada para acumular valores.
 
@@ -885,7 +885,7 @@ soma <- soma + valor
 
 ---
 
-## 5. Indicador
+**5. Indicador**
 
 É uma variável utilizada para representar um estado.
 
@@ -903,20 +903,20 @@ achei <- 1
 
 representam:
 
-```text
+```
 0 → não encontrou
 1 → encontrou
 ```
 
 ---
 
-## 6. Pesquisa sequencial
+**Pesquisa sequencial**
 
 O algoritmo de nomes realiza uma **pesquisa sequencial**.
 
 Ele começa na primeira posição e verifica uma por uma:
 
-```text
+```
 posição 1
    ↓
 posição 2
@@ -932,7 +932,7 @@ posição 5
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. Um vetor permite armazenar vários valores do mesmo tipo.
 2. Uma matriz permite organizar valores em linhas e colunas.
