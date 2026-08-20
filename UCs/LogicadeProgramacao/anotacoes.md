@@ -1,736 +1,946 @@
-# Matrizes
+# Lógica de Programação — Pesquisa, Números Aleatórios, Números Pares e Soma de Vetores
 
-**Ideia Principal**
+## 🎯 Ideia Principal
 
-Depois de estudar **vetores**, agora comecei a trabalhar com **matrizes**.
+Nesta etapa, estou praticando **estruturas de dados junto com estruturas de repetição e condições**.
 
-A principal diferença é:
+Os algoritmos trabalham com quatro situações diferentes:
 
-| Estrutura  |   Dimensões | Organização           |
-| ---------- | ----------: | --------------------- |
-| **Vetor**  |  1 dimensão | Posições em sequência |
-| **Matriz** | 2 dimensões | Linhas e colunas      |
+1. 🔎 Pesquisar um nome dentro de um vetor.
+2. 🎲 Gerar números aleatórios e localizar um número específico.
+3. 🔢 Percorrer uma matriz, identificar números pares e armazená-los em outro vetor.
+4. ➕ Somar os elementos de dois vetores e verificar se ambas as somas são iguais a 30.
 
-Uma boa forma de imaginar uma matriz é como uma **tabela**:
-
-```
-          Colunas
-          1    2    3
-       ┌────┬────┬────┐
-Linha 1│    │    │    │
-       ├────┼────┼────┤
-Linha 2│    │    │    │
-       ├────┼────┼────┤
-Linha 3│    │    │    │
-       └────┴────┴────┘
-```
-
-Uma matriz **3 × 3** possui:
-
-> **3 linhas × 3 colunas = 9 posições**
+Esses exercícios são importantes porque começam a mostrar uma característica essencial da programação: **não basta armazenar dados; preciso conseguir pesquisar, filtrar, contar, acumular e tomar decisões com eles.**
 
 ---
 
-**1. O que é uma Matriz?**
+# 1. 🔎 Algoritmo para Encontrar um Nome
 
-Uma **matriz** é uma estrutura de dados capaz de armazenar vários valores organizados em **linhas e colunas**.
+## Objetivo
 
-- **Por exemplo:**
+Neste algoritmo, crio um vetor capaz de armazenar **5 nomes**.
 
-```
-matriz[1,2]
-```
+Depois:
 
-Significa:
+* Digito os 5 nomes;
+* Escolho um nome para pesquisar;
+* O programa percorre o vetor;
+* Se encontrar o nome, mostra sua posição;
+* Se não encontrar, informa que o nome não foi localizado;
+* No final, pergunta se quero fazer outra pesquisa.
 
-* **Linha 1**
-* **Coluna 2**
+## Código
 
-Enquanto no vetor tínhamos:
-
-```
-vetor[3]
-```
-
-Na matriz temos:
-
-```
-matriz[3,2]
-```
-
-Ou seja, precisamos informar **duas posições**:
-
-```
-matriz[linha,coluna]
-```
-
----
-
-> Analogia
-
-Imagine uma sala de aula.
-
-Cada aluno possui uma posição formada por:
-
-> **Linha + Coluna**
-
-- **Por exemplo:**
-
-```
-[2,3]
-```
-
-poderia significar:
-
-> Linha 2, coluna 3.
-
-Uma matriz funciona dessa maneira: cada elemento possui uma localização determinada pela combinação de **linha e coluna**.
-
----
-
-**2. Declaração de uma Matriz no VisualG**
-
-A estrutura básica é:
-
-```visualg
-nome: vetor[1..3, 1..3] de caractere
-```
-
-Vamos separar cada parte:
-
-**`nome`**
-
-É o **nome da matriz**.
-
-**`[1..3, 1..3]`**
-
-Define o tamanho da matriz:
-
-* Linhas de **1 até 3**
-* Colunas de **1 até 3**
-
-Portanto:
-
-```
-3 × 3 = 9 posições
-```
-
-**`de caractere`**
-
-Determina o **tipo de dado** que será armazenado.
-
-Nesse caso, a matriz armazenará caracteres.
-
----
-
-**3. Matriz 3 × 3**
-
-Uma matriz:
-
-```visualg
-nome: vetor[1..3, 1..3] de caractere
-```
-
-pode ser visualizada assim:
-
-```
-          Colunas
-           1     2     3
-
-Linha 1   [ ]   [ ]   [ ]
-
-Linha 2   [ ]   [ ]   [ ]
-
-Linha 3   [ ]   [ ]   [ ]
-```
-
-Cada célula pode armazenar uma informação.
-
----
-
-**4. Percorrendo uma Matriz**
-
-Aqui aparece um conceito muito importante:
-
-> **Para percorrer uma matriz, normalmente utilizamos dois laços `PARA`, um dentro do outro.**
-
-- **Por exemplo:**
-
-```visualg
-para i de 1 ate 3 faca
-
-    para j de 1 ate 3 faca
-
-        ...
-
-    fimpara
-
-fimpara
-```
-
-O primeiro contador:
-
-```
-i
-```
-
-representa as **linhas**.
-
-O segundo:
-
-```
-j
-```
-
-representa as **colunas**.
-
-Podemos pensar assim:
-
-```
-i → linha
-j → coluna
-```
-
----
-
-# Exemplo — Preenchendo e Exibindo uma Matriz
-
-**Código**
-
-```visualg
-algoritmo "Matriz"
+```portugol
+algoritmo "Encontrar Nome"
 
 var
-
-nome: vetor[1..3, 1..3] de caractere
-i, j: inteiro
+   a: vetor[1..5] de caractere
+   nome, resp: caractere
+   aux, achei: inteiro
 
 inicio
 
-// Leitura dos dados da matriz
+   para aux de 1 ate 5 passo 1 faca
+      escreva(aux, " Informe um nome: ")
+      leia(a[aux])
+   fimpara
 
-para i de 1 ate 3 faca
+   repita
 
-    para j de 1 ate 3 faca
+      achei <- 0
 
-        escreval("Digite o dado para a posição [", i, ",", j, "]: ")
-        leia(nome[i,j])
+      escreval("Informe um nome para ser pesquisado")
+      leia(nome)
 
-    fimpara
+      para aux de 1 ate 5 passo 1 faca
 
-fimpara
+         se (a[aux] = nome) entao
 
-escreval("")
-escreval("Matriz digitada:")
+            escreva("Nome encontrado: ", a[aux], " na posição ", aux)
+            achei <- 1
 
-// Exibição dos dados
+         fimse
 
-para i de 1 ate 3 faca
+      fimpara
 
-    para j de 1 ate 3 faca
+      se (achei <> 1) entao
+         escreva("Não foi encontrado nenhum nome na pesquisa")
+      fimse
 
-        escreva(nome[i,j], " ")
+      escreval("Deseja fazer outra pesquisa? S/N")
+      leia(resp)
 
-    fimpara
-
-    escreval()
-
-fimpara
+   ate resp <> "s"
 
 fimalgoritmo
 ```
 
 ---
 
-**Entendendo os dois `PARA`**
+## 🔍 Entendendo o vetor
 
-Primeiro:
+```portugol
+a: vetor[1..5] de caractere
+```
 
-```visualg
+Crio um vetor chamado `a`, que possui cinco posições:
+
+```text
+a[1]
+a[2]
+a[3]
+a[4]
+a[5]
+```
+
+Cada posição armazenará um nome.
+
+Por exemplo:
+
+```text
+a[1] = "João"
+a[2] = "Maria"
+a[3] = "Carlos"
+a[4] = "Ana"
+a[5] = "Pedro"
+```
+
+---
+
+## 🔄 Cadastrando os nomes
+
+```portugol
+para aux de 1 ate 5 passo 1 faca
+```
+
+O `PARA` faz o contador `aux` percorrer:
+
+```text
+1 → 2 → 3 → 4 → 5
+```
+
+E:
+
+```portugol
+leia(a[aux])
+```
+
+significa que o nome digitado será armazenado na posição correspondente.
+
+Quando `aux = 1`:
+
+```portugol
+leia(a[1])
+```
+
+Quando `aux = 2`:
+
+```portugol
+leia(a[2])
+```
+
+E assim por diante.
+
+---
+
+## 🔎 Procurando o nome
+
+A pesquisa acontece dentro de:
+
+```portugol
+repita
+```
+
+Isso permite que eu faça várias pesquisas sem precisar reiniciar o programa.
+
+A variável:
+
+```portugol
+achei <- 0
+```
+
+é um **indicador**.
+
+Ela funciona como uma pequena "bandeira":
+
+```text
+0 → nome ainda não encontrado
+1 → nome encontrado
+```
+
+Depois o programa percorre novamente o vetor:
+
+```portugol
+para aux de 1 ate 5 passo 1 faca
+```
+
+E compara:
+
+```portugol
+se (a[aux] = nome) entao
+```
+
+Se encontrar:
+
+```portugol
+achei <- 1
+```
+
+Isso informa ao programa que a pesquisa encontrou o nome.
+
+---
+
+## ❗ Operador `<>`
+
+No final:
+
+```portugol
+se (achei <> 1) entao
+```
+
+`<>` significa **diferente de**.
+
+Portanto:
+
+```text
+achei <> 1
+```
+
+significa:
+
+> "achei é diferente de 1?"
+
+Se for verdadeiro, significa que o nome não foi encontrado.
+
+---
+
+# 2. 🎲 Algoritmo para Sortear Números
+
+## Objetivo
+
+Agora crio um vetor com **30 números aleatórios**.
+
+Depois o usuário informa um número que deseja pesquisar.
+
+O programa mostra:
+
+* As posições onde o número apareceu;
+* Quantas vezes ele apareceu.
+
+## Código
+
+```portugol
+algoritmo "Pesquisar Números Sorteados"
+
+var
+   numeros: vetor[1..30] de inteiro
+   i, chave, vezes: inteiro
+
+inicio
+
+   vezes <- 0
+
+   para i de 1 ate 30 faca
+      numeros[i] <- RandI(15) + 1
+   fimpara
+
+   escreva("Digite um número a ser localizado: ")
+   leia(chave)
+
+   escreva()
+   escreva("O número ", chave, " aparece nas seguintes posições:")
+   escreva()
+
+   para i de 1 ate 30 faca
+
+      se (numeros[i] = chave) entao
+
+         vezes <- vezes + 1
+
+         escreval("[", numeros[i], "] posição => ", i)
+
+      fimse
+
+   fimpara
+
+   escreva()
+   escreval("O número ", chave, " apareceu => ", vezes, " vez(es)")
+   escreva()
+
+fimalgoritmo
+```
+
+---
+
+## 🎰 `RandI(15) + 1`
+
+Essa parte:
+
+```portugol
+numeros[i] <- RandI(15) + 1
+```
+
+gera números aleatórios.
+
+O `RandI(15)` gera um número inteiro aleatório dentro do intervalo utilizado pelo Visualg, e o `+ 1` desloca o resultado para que os números utilizados fiquem entre **1 e 15**.
+
+Assim, cada uma das 30 posições recebe um número aleatório.
+
+Por exemplo:
+
+```text
+4  12  7  4  15
+2  9   4  11 3
+...
+```
+
+---
+
+## 🔑 Variável `chave`
+
+```portugol
+chave: inteiro
+```
+
+A `chave` representa o número que estou procurando.
+
+Se eu digitar:
+
+```text
+4
+```
+
+o programa procura:
+
+```text
+numeros[i] = 4
+```
+
+em todas as 30 posições.
+
+---
+
+## 🔢 Contando ocorrências
+
+Sempre que encontra o número:
+
+```portugol
+vezes <- vezes + 1
+```
+
+O contador aumenta.
+
+Por exemplo:
+
+```text
+vezes = 0
+```
+
+Primeiro `4` encontrado:
+
+```text
+vezes = 1
+```
+
+Segundo `4`:
+
+```text
+vezes = 2
+```
+
+Terceiro:
+
+```text
+vezes = 3
+```
+
+No final, sei quantas vezes o número apareceu.
+
+---
+
+# 3. 🔢 Algoritmo para Listar Números Pares
+
+## Objetivo
+
+Agora utilizo uma **matriz 3 × 3** para receber 9 números.
+
+Depois verifico quais deles são pares.
+
+Os números pares encontrados são armazenados em um segundo vetor.
+
+---
+
+## Código
+
+```portugol
+algoritmo "Listar Números Pares"
+
+var
+   numero: vetor[1..3, 1..3] de inteiro
+   par: vetor[1..9] de inteiro
+   i, j, vezes: inteiro
+
+inicio
+
+   vezes <- 0
+
+   para i de 1 ate 3 faca
+
+      para j de 1 ate 3 faca
+
+         escreval("Digite um número:")
+         leia(numero[i,j])
+
+      fimpara
+
+   fimpara
+
+   para i de 1 ate 3 faca
+
+      para j de 1 ate 3 faca
+
+         se (numero[i,j] % 2 = 0) entao
+
+            vezes <- vezes + 1
+            par[vezes] <- numero[i,j]
+
+         fimse
+
+      fimpara
+
+   fimpara
+
+   escreval("A quantidade de pares: ", vezes)
+   escreval("Pares digitados:")
+
+   para i de 1 ate vezes faca
+      escreval(par[i])
+   fimpara
+
+fimalgoritmo
+```
+
+---
+
+# 4. 🧮 Como funciona a matriz?
+
+```portugol
+numero: vetor[1..3, 1..3] de inteiro
+```
+
+Isso cria uma matriz de:
+
+```text
+3 linhas × 3 colunas = 9 posições
+```
+
+Visualmente:
+
+```text
+        Colunas
+       1   2   3
+
+Linha 1 [ ] [ ] [ ]
+Linha 2 [ ] [ ] [ ]
+Linha 3 [ ] [ ] [ ]
+```
+
+Cada posição é identificada por dois índices:
+
+```text
+numero[linha,coluna]
+```
+
+Por exemplo:
+
+```text
+numero[1,1]
+numero[1,2]
+numero[1,3]
+
+numero[2,1]
+numero[2,2]
+numero[2,3]
+
+numero[3,1]
+numero[3,2]
+numero[3,3]
+```
+
+---
+
+# 5. 🔄 Dois `PARA` para percorrer a matriz
+
+Aqui aparecem dois laços:
+
+```portugol
 para i de 1 ate 3 faca
+
+   para j de 1 ate 3 faca
+
+      ...
+
+   fimpara
+
+fimpara
 ```
 
 O `i` controla as **linhas**.
 
-Dentro dele temos:
-
-```visualg
-para j de 1 ate 3 faca
-```
-
 O `j` controla as **colunas**.
 
-Isso faz com que todas as posições sejam percorridas.
-
-A sequência será:
-
-```
-[1,1]
-[1,2]
-[1,3]
-
-[2,1]
-[2,2]
-[2,3]
-
-[3,1]
-[3,2]
-[3,3]
-```
-
-São exatamente as **9 posições** da matriz.
-
-**Como funciona a sequência?**
-
-O laço interno termina todas as colunas antes de o laço externo avançar para a próxima linha:
-
-```
-i = 1 → [1,1] [1,2] [1,3]
-
-i = 2 → [2,1] [2,2] [2,3]
-
-i = 3 → [3,1] [3,2] [3,3]
-```
-
----
-
-**Por que existe um `escreval()` depois do segundo `PARA`?**
-
-Na parte de exibição temos:
-
-```visualg
-para i de 1 ate 3 faca
-
-    para j de 1 ate 3 faca
-
-        escreva(nome[i,j], " ")
-
-    fimpara
-
-    escreval()
-
-fimpara
-```
-
-O comando:
-
-```visualg
-escreva()
-```
-
-**não quebra a linha**.
-
-Então os elementos de uma mesma linha ficam juntos.
-
-Depois que todas as colunas daquela linha foram exibidas:
-
-```visualg
-escreval()
-```
-
-faz a **quebra de linha**.
-
-Assim conseguimos visualizar a matriz como uma tabela:
-
-```
-A B C
-D E F
-G H I
-```
-
----
-
-# Matriz para Somar Todos os Valores
-
-Agora a matriz será utilizada para realizar um cálculo.
-
-**Objetivo**
-
-Criar uma matriz **3 × 3**, armazenar números inteiros e calcular a **soma de todos os elementos**.
-
----
-
-**Código**
-
-```visualg
-algoritmo "Soma da Matriz"
-
-var
-
-valor: vetor[1..3, 1..3] de inteiro
-i, j, soma: inteiro
-
-inicio
-
-soma <- 0
-
-// Leitura da matriz
-
-para i de 1 ate 3 faca
-
-    para j de 1 ate 3 faca
-
-        escreval("Digite o valor [", i, ",", j, "]: ")
-        leia(valor[i,j])
-
-        // Soma o valor atual
-        soma <- soma + valor[i,j]
-
-    fimpara
-
-fimpara
-
-escreval("")
-
-// Exibição do resultado
-
-escreval("A soma dos valores da matriz = ", soma)
-
-fimalgoritmo
-```
-
----
-
-**Como a soma funciona?**
-
-Antes de começar:
-
-```visualg
-soma <- 0
-```
-
-A variável `soma` funciona como um **acumulador**.
-
-Cada número digitado é acrescentado a ela:
-
-```visualg
-soma <- soma + valor[i,j]
-```
-
-Imagine que sejam digitados:
+É como percorrer uma tabela:
 
 ```text
-1  2  3
-4  5  6
-7  8  9
+i = linha
+j = coluna
 ```
 
-O algoritmo fará:
-
-```
-soma = 0
-
-0 + 1 = 1
-1 + 2 = 3
-3 + 3 = 6
-6 + 4 = 10
-...
-36 + 9 = 45
-```
-
-### Resultado:
-
-```
-45
-```
+O programa passa por todas as 9 posições.
 
 ---
 
-# Matriz com Multiplicação
+# 6. 🟢 Como identificar números pares?
 
-Agora o objetivo será:
+A condição é:
 
-1. Preencher uma matriz.
-2. Percorrer a matriz.
-3. Multiplicar cada elemento por `2`.
-4. Exibir a nova matriz.
-
----
-
-**Código**
-
-```visualg
-algoritmo "Matriz Multiplicada"
-
-var
-
-valor: vetor[1..3, 1..3] de inteiro
-i, j: inteiro
-
-inicio
-
-// Entrada dos dados
-
-para i de 1 ate 3 faca
-
-    para j de 1 ate 3 faca
-
-        escreval("Digite um número inteiro:")
-        leia(valor[i,j])
-
-    fimpara
-
-fimpara
-
-// Multiplicação por 2
-
-para i de 1 ate 3 faca
-
-    para j de 1 ate 3 faca
-
-        valor[i,j] <- valor[i,j] * 2
-
-    fimpara
-
-fimpara
-
-// Exibição do resultado
-
-escreval("Matriz multiplicada:")
-
-para i de 1 ate 3 faca
-
-    para j de 1 ate 3 faca
-
-        escreva(valor[i,j], " ")
-
-    fimpara
-
-    escreval()
-
-fimpara
-
-fimalgoritmo
+```portugol
+se (numero[i,j] % 2 = 0) entao
 ```
 
----
+O operador `%` calcula o **resto da divisão**.
 
-**O que acontece na multiplicação?**
-
-Suponha que a matriz inicialmente seja:
-
-```
-1  2  3
-4  5  6
-7  8  9
-```
-
-A instrução:
-
-```visualg
-valor[i,j] <- valor[i,j] * 2
-```
-
-é aplicada a cada posição.
-
-Resultado:
-
-```
-2   4   6
-8  10  12
-14 16  18
-```
-
-O algoritmo **não cria outra matriz**.
-
-Ele modifica os valores que já estavam armazenados.
-
----
-
-# Entrada → Processamento → Saída
-
-Esse exercício também reforça um princípio fundamental da informática:
-
-```
-ENTRADA
-   ↓
-PROCESSAMENTO
-   ↓
-SAÍDA
-```
-
-## Entrada
-
-O usuário fornece os valores:
-
-```visualg
-leia(valor[i,j])
-```
-
-## Processamento
-
-O algoritmo modifica os valores:
-
-```visualg
-valor[i,j] <- valor[i,j] * 2
-```
-
-## Saída
-
-O programa mostra o resultado:
-
-```visualg
-escreva(valor[i,j], " ")
-```
-
-Esse modelo aparece constantemente em programas reais.
-
----
-
-# Vetor × Matriz
-
-| Estrutura          | Dimensões | Exemplo       |
-| ------------------ | --------: | ------------- |
-| **Variável comum** |         0 | `idade`       |
-| **Vetor**          |         1 | `vetor[3]`    |
-| **Matriz**         |         2 | `matriz[3,3]` |
-
-Podemos visualizar:
-
-**Variável**
-
-```
-idade
-```
-
-**Vetor
-
-```text**
-[10] [20] [30]
-```
-
-**Matriz**
+Exemplo:
 
 ```text
-[10] [20] [30]
-[40] [50] [60]
-[70] [80] [90]
-```
-
-A matriz é, portanto, uma **extensão da ideia do vetor para duas dimensões**.
-
----
-
-# Conceito Fundamental
-
-O ponto mais importante desta aula é entender que uma **matriz é uma estrutura de dados bidimensional**, organizada por **linhas e colunas**.
-
-Para percorrê-la completamente, utilizamos normalmente **dois laços de repetição aninhados**:
-
-* um controla as **linhas**;
-* outro controla as **colunas**.
-
-Isso permite realizar operações em cada elemento individualmente, como:
-
-* leitura;
-* soma;
-* multiplicação;
-* comparação;
-* alteração de valores.
-
-A lógica geral é:
-
-```text
-             Matriz
-                ↓
-        ┌───────┴───────┐
-        ↓               ↓
-      Linha           Coluna
-        ↓               ↓
-        └───────┬───────┘
-                ↓
-          Elemento [i,j]
-```
-
----
-
-**Um detalhe importante**
-
-Nas anotações aparece a ideia de que a matriz é **"melhor que o vetor"**.
-
-Tecnicamente, não é correto dizer que uma estrutura é simplesmente melhor que a outra.
-
-A escolha depende do **problema que precisa ser resolvido**.
-
-**Vetor**
-
-É adequado quando os dados estão organizados em uma única sequência.
-
-- **Exemplo:**
-
-**Notas de alunos:**
-
-```
-[7, 8, 6, 9, 10]
-```
-
-## Matriz
-
-É adequada quando existe uma relação de **linha e coluna**.
-
-- **Exemplo:**
-
-**Tabela de notas:**
-
-```
-          P1  P2  P3
-Aluno 1    7   8   9
-Aluno 2    6   7   8
-Aluno 3    9   9  10
+10 % 2 = 0 → par
+8 % 2 = 0  → par
+7 % 2 = 1  → ímpar
+5 % 2 = 1  → ímpar
 ```
 
 Portanto:
 
-> **Vetor → uma dimensão.**
-> **Matriz → duas dimensões.**
+```text
+Resto 0 → PAR
+Resto diferente de 0 → ÍMPAR
+```
 
 ---
 
-**Quando utilizar cada um?**
+# 7. 📦 Armazenando somente os pares
 
-| Situação                          | Estrutura mais adequada |
-| --------------------------------- | ----------------------- |
-| Lista de nomes                    | Vetor                   |
-| Lista de preços                   | Vetor                   |
-| Notas em sequência                | Vetor                   |
-| Tabela de notas por aluno e prova | Matriz                  |
-| Tabuleiro de jogo                 | Matriz                  |
-| Tabela de dados                   | Matriz                  |
-| Mapa representado por células     | Matriz                  |
+Quando encontro um número par:
 
-A escolha da estrutura deve acompanhar a **forma como os dados estão organizados**.
+```portugol
+vezes <- vezes + 1
+par[vezes] <- numero[i,j]
+```
+
+Essas duas linhas trabalham juntas.
+
+Primeiro:
+
+```portugol
+vezes <- vezes + 1
+```
+
+aumenta a quantidade de pares encontrados.
+
+Depois:
+
+```portugol
+par[vezes] <- numero[i,j]
+```
+
+coloca o número par na próxima posição disponível do vetor.
+
+### Exemplo
+
+Se encontro:
+
+```text
+8
+```
+
+faço:
+
+```text
+vezes = 1
+par[1] = 8
+```
+
+Depois encontro:
+
+```text
+4
+```
+
+faço:
+
+```text
+vezes = 2
+par[2] = 4
+```
+
+Depois:
+
+```text
+10
+```
+
+resulta em:
+
+```text
+vezes = 3
+par[3] = 10
+```
+
+No final:
+
+```text
+par = [8, 4, 10]
+```
 
 ---
 
-# Em Resumo
+# 8. ➕ Algoritmo para Somar Dois Vetores
 
-Aprendi que uma **matriz** permite armazenar diversos valores organizados em **linhas e colunas**.
+## Objetivo
 
-Uma matriz `3 × 3` possui **9 posições**, e cada elemento pode ser acessado informando sua linha e sua coluna.
+Agora trabalho com dois vetores de cinco posições.
 
-Para percorrer todos os elementos, utilizo **dois laços `PARA`**, sendo um responsável pelas linhas e outro pelas colunas.
+O programa:
 
-Também aprendi a:
-
-* preencher uma matriz;
-* exibir seus elementos;
-* somar seus valores;
-* modificar seus elementos;
-* multiplicar seus valores.
-
-A mesma lógica pode ser aplicada a diversos problemas que envolvem **tabelas e conjuntos de dados bidimensionais**.
+1. Recebe os valores do primeiro vetor;
+2. Calcula sua soma;
+3. Recebe os valores do segundo vetor;
+4. Calcula sua soma;
+5. Verifica se **as duas somas são exatamente 30**.
 
 ---
 
-**Resumo Relâmpago**
+## Código
 
-1. **Matriz** é uma estrutura de dados organizada em linhas e colunas.
-2. Uma matriz `3 × 3` possui **9 posições**.
-3. Cada posição é acessada por dois índices: `matriz[linha,coluna]`.
-4. No VisualG, uma matriz pode ser declarada como `vetor[1..3,1..3]`.
-5. O primeiro índice normalmente representa a **linha**.
-6. O segundo índice representa a **coluna**.
-7. Para percorrer uma matriz usamos **dois `PARA` aninhados**.
-8. O laço externo controla as linhas e o interno controla as colunas.
-9. Podemos realizar operações como **soma, multiplicação, comparação e alteração** em cada elemento.
-10. **Vetor possui uma dimensão; matriz possui duas dimensões.**
+```portugol
+algoritmo "Soma dos Vetores"
+
+var
+   vetor1: vetor[1..5] de inteiro
+   vetor2: vetor[1..5] de inteiro
+   i, soma1, soma2: inteiro
+
+inicio
+
+   soma1 <- 0
+   soma2 <- 0
+
+   escreval("Digite os valores do primeiro vetor:")
+
+   para i de 1 ate 5 faca
+
+      escreva("Digite o ", i, "º valor: ")
+      leia(vetor1[i])
+
+      soma1 <- soma1 + vetor1[i]
+
+   fimpara
+
+   escreval()
+
+   escreval("Digite os valores do segundo vetor:")
+
+   para i de 1 ate 5 faca
+
+      escreva("Digite o ", i, "º valor: ")
+      leia(vetor2[i])
+
+      soma2 <- soma2 + vetor2[i]
+
+   fimpara
+
+   escreval()
+
+   escreval("Soma do primeiro vetor: ", soma1)
+   escreval("Soma do segundo vetor: ", soma2)
+
+   se (soma1 = 30) e (soma2 = 30) entao
+
+      escreval("Os dois vetores possuem soma igual a 30.")
+
+   senao
+
+      escreval("A soma de um ou dos dois vetores não é igual a 30.")
+
+   fimse
+
+fimalgoritmo
+```
+
+---
+
+# 9. 🧠 Acumuladores
+
+Aqui aparecem:
+
+```portugol
+soma1 <- 0
+soma2 <- 0
+```
+
+Essas variáveis são **acumuladores**.
+
+Depois:
+
+```portugol
+soma1 <- soma1 + vetor1[i]
+```
+
+significa:
+
+> Pegue o valor que já está em `soma1` e acrescente o novo elemento do vetor.
+
+Imagine:
+
+```text
+soma1 = 0
+```
+
+Primeiro valor:
+
+```text
+5
+```
+
+Então:
+
+```text
+0 + 5 = 5
+```
+
+Segundo valor:
+
+```text
+10
+```
+
+Agora:
+
+```text
+5 + 10 = 15
+```
+
+Terceiro:
+
+```text
+15 + 3 = 18
+```
+
+E assim por diante.
+
+---
+
+# 10. 🔗 Operador lógico `E`
+
+A condição final é:
+
+```portugol
+se (soma1 = 30) e (soma2 = 30) entao
+```
+
+O `E` exige que **as duas condições sejam verdadeiras**.
+
+### Caso 1
+
+```text
+soma1 = 30
+soma2 = 30
+```
+
+Resultado:
+
+```text
+VERDADEIRO E VERDADEIRO
+```
+
+✅ Os dois vetores possuem soma 30.
+
+### Caso 2
+
+```text
+soma1 = 30
+soma2 = 25
+```
+
+Resultado:
+
+```text
+VERDADEIRO E FALSO
+```
+
+❌ A condição inteira é falsa.
+
+### Caso 3
+
+```text
+soma1 = 20
+soma2 = 25
+```
+
+Resultado:
+
+```text
+FALSO E FALSO
+```
+
+❌ Também é falsa.
+
+---
+
+# 🔗 Ligação entre os quatro exercícios
+
+Esses algoritmos estão começando a juntar vários conceitos que aprendi anteriormente.
+
+```text
+                 ESTRUTURAS DE DADOS
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+            Vetor                 Matriz
+              │                     │
+       ┌──────┼──────┐              │
+       │      │      │              │
+    Pesquisa Contagem Soma       Filtragem
+       │      │      │              │
+       └──────┴──────┴──────────────┘
+                         │
+                    Condições
+                         │
+                  Tomada de decisão
+```
+
+O ponto importante é que um algoritmo pode combinar várias estruturas.
+
+Por exemplo:
+
+```text
+Matriz
+  ↓
+PARA
+  ↓
+SE
+  ↓
+Verificar par
+  ↓
+Contador
+  ↓
+Vetor
+```
+
+---
+
+# 🧠 Conceitos que estou consolidando
+
+## 1. Vetor
+
+Armazena vários valores do mesmo tipo em posições diferentes.
+
+```portugol
+vetor[1..5] de inteiro
+```
+
+---
+
+## 2. Matriz
+
+É uma estrutura com mais de uma dimensão.
+
+```portugol
+vetor[1..3,1..3] de inteiro
+```
+
+Posso pensar nela como uma **tabela**.
+
+---
+
+## 3. Contador
+
+É uma variável usada para contar ocorrências.
+
+```portugol
+vezes <- vezes + 1
+```
+
+---
+
+## 4. Acumulador
+
+É uma variável usada para acumular valores.
+
+```portugol
+soma <- soma + valor
+```
+
+---
+
+## 5. Indicador
+
+É uma variável utilizada para representar um estado.
+
+No algoritmo de pesquisa:
+
+```portugol
+achei <- 0
+```
+
+e:
+
+```portugol
+achei <- 1
+```
+
+representam:
+
+```text
+0 → não encontrou
+1 → encontrou
+```
+
+---
+
+## 6. Pesquisa sequencial
+
+O algoritmo de nomes realiza uma **pesquisa sequencial**.
+
+Ele começa na primeira posição e verifica uma por uma:
+
+```text
+posição 1
+   ↓
+posição 2
+   ↓
+posição 3
+   ↓
+posição 4
+   ↓
+posição 5
+```
+
+É uma das formas mais básicas de pesquisa em estruturas de dados.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. Um vetor permite armazenar vários valores do mesmo tipo.
+2. Uma matriz permite organizar valores em linhas e colunas.
+3. A pesquisa de nomes percorre o vetor procurando uma correspondência.
+4. A variável `achei` funciona como indicador de encontrado/não encontrado.
+5. `<>` significa **diferente de**.
+6. `RandI()` permite trabalhar com números inteiros aleatórios.
+7. O operador `%` retorna o resto de uma divisão.
+8. `vezes` funciona como contador de ocorrências.
+9. `soma1` e `soma2` são acumuladores.
+10. O operador `E` só produz verdadeiro quando **todas as condições** envolvidas são verdadeiras.
