@@ -1,8 +1,8 @@
-# Banco de Dados (MySQL) — DISTINCT e Funções de Agregação
+# DISTINCT e Funções de Agregação
 
-# 🎯 Ideia principal
+**Ideia principal**
 
-Nesta aula aprendi a **resumir informações do banco de dados** em vez de simplesmente mostrar todos os registros.
+Aprendi a **resumir informações do banco de dados** em vez de simplesmente mostrar todos os registros.
 
 Até agora, eu estava principalmente consultando registros individuais:
 
@@ -22,7 +22,7 @@ Agora aprendi a fazer perguntas mais gerais ao banco, como:
 
 Para isso, vou utilizar principalmente:
 
-```text
+```
 DISTINCT
 COUNT()
 MAX()
@@ -35,7 +35,7 @@ Essas funções são chamadas de **funções de agregação**, porque pegam vár
 
 ---
 
-# 1. DISTINCT — Removendo valores repetidos
+# DISTINCT — Removendo valores repetidos
 
 Para trazer valores sem repetição:
 
@@ -45,11 +45,9 @@ FROM cursos
 ORDER BY carga;
 ```
 
-> ⚠️ Na anotação original, `ORDER BY nacionalidade` não corresponde à coluna selecionada. Como estamos buscando as cargas sem repetição, o mais coerente é ordenar por `carga`.
-
 ---
 
-## O que o DISTINCT faz?
+**O que o DISTINCT faz?**
 
 Imagine que a tabela tenha:
 
@@ -69,7 +67,7 @@ SELECT carga FROM cursos;
 
 o resultado poderá ser:
 
-```text
+```
 40
 40
 24
@@ -88,7 +86,7 @@ FROM cursos;
 
 retorna:
 
-```text
+```
 24
 40
 60
@@ -98,11 +96,11 @@ O `DISTINCT` elimina as repetições do resultado.
 
 ---
 
-# 🧠 Analogia
+> Analogia
 
 Imagine que eu tenha uma lista de compras:
 
-```text
+```
 Arroz
 Feijão
 Arroz
@@ -115,7 +113,7 @@ Se eu quiser saber **quais produtos diferentes existem**, não preciso ver o arr
 
 O resultado seria:
 
-```text
+```
 Arroz
 Feijão
 Café
@@ -125,7 +123,7 @@ Café
 
 ---
 
-# 2. COUNT() — Contando registros
+# COUNT() — Contando registros
 
 Agora comecei a utilizar funções de agregação.
 
@@ -137,7 +135,7 @@ COUNT()
 
 Ela serve para **contar**.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT COUNT(*)
@@ -148,7 +146,7 @@ Isso retorna a quantidade de registros existentes na tabela `cursos`.
 
 ---
 
-# O que significa COUNT(*)?
+**O que significa COUNT(*)?**
 
 O `*` significa que quero considerar **todas as linhas**.
 
@@ -165,7 +163,7 @@ pode ser interpretado como:
 
 Se houver 9 cursos:
 
-```text
+```
 9
 ```
 
@@ -173,7 +171,7 @@ será o resultado.
 
 ---
 
-# 3. COUNT() com WHERE
+# COUNT() com WHERE
 
 Posso combinar `COUNT()` com filtros.
 
@@ -197,7 +195,7 @@ e depois conta os registros encontrados.
 
 ---
 
-# 🧩 Como o banco pensa nessa consulta?
+**Como o banco pensa nessa consulta?**
 
 ```sql
 SELECT COUNT(*)
@@ -207,7 +205,7 @@ WHERE carga > 40;
 
 Podemos imaginar:
 
-```text
+```
 Todos os cursos
       ↓
 Filtrar carga > 40
@@ -223,7 +221,7 @@ Essa lógica de **filtrar primeiro e agregar depois** é muito importante.
 
 ---
 
-# 4. COUNT(nome)
+# COUNT(nome)
 
 Também posso utilizar uma coluna dentro do `COUNT()`:
 
@@ -253,7 +251,7 @@ nesse caso, `COUNT(nome)` e `COUNT(*)` produzirão o mesmo resultado.
 
 Existe uma diferença importante.
 
-### `COUNT(*)`
+**`COUNT(*)`**
 
 Conta as linhas.
 
@@ -261,11 +259,11 @@ Conta as linhas.
 COUNT(*)
 ```
 
-### `COUNT(coluna)`
+**`COUNT(coluna)`**
 
 Conta os valores **não nulos** daquela coluna.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```sql
 SELECT COUNT(nome)
@@ -276,7 +274,7 @@ contará somente registros em que `nome` não seja `NULL`.
 
 ---
 
-# ⚠️ Uma diferença importante
+## Uma diferença importante
 
 Se uma tabela tivesse:
 
@@ -294,7 +292,7 @@ COUNT(*)
 
 retornaria:
 
-```text
+```
 3
 ```
 
@@ -306,7 +304,7 @@ COUNT(nome)
 
 retornaria:
 
-```text
+```
 2
 ```
 
@@ -314,7 +312,7 @@ porque o terceiro registro possui `nome = NULL`.
 
 ---
 
-# 5. Contando estudantes brasileiros
+## Contando estudantes brasileiros
 
 Também posso utilizar `COUNT()` em outra tabela:
 
@@ -330,7 +328,7 @@ Essa consulta responde:
 
 ---
 
-# 6. MAX() — Encontrando o maior valor
+# MAX() — Encontrando o maior valor
 
 Outra função de agregação é:
 
@@ -340,7 +338,7 @@ MAX()
 
 Ela retorna o **maior valor** encontrado.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT MAX(carga)
@@ -353,7 +351,7 @@ Isso responde:
 
 Se as cargas forem:
 
-```text
+```
 24
 40
 40
@@ -363,13 +361,13 @@ Se as cargas forem:
 
 o resultado será:
 
-```text
+```
 72
 ```
 
 ---
 
-# 7. MAX() com filtro
+# MAX() com filtro
 
 Também posso restringir a pesquisa:
 
@@ -389,7 +387,7 @@ Depois o `MAX()` procura o maior valor de `totalaulas`.
 
 ---
 
-# 8. Ver os cursos de 2026 ordenados pelas aulas
+## Ver os cursos de 2026 ordenados pelas aulas
 
 Também posso simplesmente visualizar os cursos:
 
@@ -423,7 +421,7 @@ ORDER BY totalaulas DESC;
 
 ---
 
-# 9. MIN() — Encontrando o menor valor
+# MIN() — Encontrando o menor valor
 
 Se `MAX()` encontra o maior, `MIN()` encontra o menor.
 
@@ -446,9 +444,9 @@ Essa consulta responde:
 | `MAX()` | Maior valor |
 | `MIN()` | Menor valor |
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 24
 40
 40
@@ -470,7 +468,7 @@ MIN(carga)
 
 ---
 
-# 10. SUM() — Somando valores
+# SUM() — Somando valores
 
 A função:
 
@@ -480,7 +478,7 @@ SUM()
 
 serve para **somar os valores de uma coluna**.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT SUM(carga)
@@ -491,7 +489,7 @@ Isso soma todas as cargas horárias dos cursos.
 
 Imagine:
 
-```text
+```
 40 + 40 + 24 + 24 + 72
 ```
 
@@ -499,7 +497,7 @@ O banco calcula automaticamente o resultado.
 
 ---
 
-# 11. SUM() com WHERE
+# SUM() com WHERE
 
 Também posso fazer uma soma específica:
 
@@ -515,7 +513,7 @@ Agora estou perguntando:
 
 O processo é:
 
-```text
+```
 Todos os cursos
       ↓
 Selecionar somente ano = 2027
@@ -529,7 +527,7 @@ Resultado
 
 ---
 
-# 12. AVG() — Calculando a média
+# AVG() — Calculando a média
 
 A função:
 
@@ -539,7 +537,7 @@ AVG()
 
 calcula a **média aritmética** dos valores.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT AVG(carga)
@@ -548,7 +546,7 @@ FROM cursos;
 
 Se tivermos:
 
-```text
+```
 40
 40
 24
@@ -557,13 +555,13 @@ Se tivermos:
 
 a média será:
 
-```text
+```
 (40 + 40 + 24 + 60) / 4
 ```
 
 Resultado:
 
-```text
+```
 41
 ```
 
@@ -571,7 +569,7 @@ O MySQL realiza esse cálculo automaticamente.
 
 ---
 
-# 13. AVG() com filtro
+# AVG() com filtro
 
 Também posso calcular uma média somente de determinados registros.
 
@@ -587,11 +585,11 @@ Essa consulta responde:
 
 ---
 
-# 🧠 As cinco principais funções de agregação
+# As cinco principais funções de agregação
 
-Nesta aula, as principais funções foram:
+As principais funções foram:
 
-```text
+```
 COUNT()
 MAX()
 MIN()
@@ -611,11 +609,11 @@ Uma forma simples de memorizar:
 
 ---
 
-# 14. DISTINCT x funções de agregação
+# DISTINCT x funções de agregação
 
 É importante não confundir os dois.
 
-## DISTINCT
+**DISTINCT**
 
 Remove valores repetidos do resultado:
 
@@ -626,7 +624,7 @@ FROM cursos;
 
 Resultado:
 
-```text
+```
 24
 40
 60
@@ -635,7 +633,7 @@ Resultado:
 
 ---
 
-## COUNT()
+**COUNT()**
 
 Conta:
 
@@ -646,7 +644,7 @@ FROM cursos;
 
 Resultado:
 
-```text
+```
 9
 ```
 
@@ -657,11 +655,11 @@ Ou seja:
 
 ---
 
-# 15. WHERE + funções de agregação
+# WHERE + funções de agregação
 
 Uma característica importante é que posso combinar filtros com praticamente todas essas funções.
 
-### COUNT
+**COUNT**
 
 ```sql
 SELECT COUNT(*)
@@ -669,7 +667,7 @@ FROM cursos
 WHERE carga > 40;
 ```
 
-### MAX
+**MAX**
 
 ```sql
 SELECT MAX(carga)
@@ -677,7 +675,7 @@ FROM cursos
 WHERE ano = 2026;
 ```
 
-### MIN
+**MIN**
 
 ```sql
 SELECT MIN(carga)
@@ -685,7 +683,7 @@ FROM cursos
 WHERE ano = 2026;
 ```
 
-### SUM
+**SUM**
 
 ```sql
 SELECT SUM(carga)
@@ -693,7 +691,7 @@ FROM cursos
 WHERE ano = 2027;
 ```
 
-### AVG
+**AVG**
 
 ```sql
 SELECT AVG(carga)
@@ -703,7 +701,7 @@ WHERE ano = 2028;
 
 A lógica é sempre parecida:
 
-```text
+```
 Tabela
  ↓
 WHERE
@@ -717,7 +715,7 @@ Resultado
 
 ---
 
-# 16. Uma diferença importante: resultado resumido x registros
+# Uma diferença importante: resultado resumido x registros
 
 Veja:
 
@@ -750,31 +748,31 @@ Se eu quiser descobrir **qual curso possui a maior quantidade de aulas**, `MAX()
 
 ---
 
-# 🧠 Analogia
+> Analogia
 
 Imagine uma sala com vários alunos.
 
-### `COUNT()`
+**`COUNT()`**
 
 > "Quantos alunos existem?"
 
-### `MAX()`
+**`MAX()`**
 
 > "Qual foi a maior nota?"
 
-### `MIN()`
+**`MIN()`**
 
 > "Qual foi a menor nota?"
 
-### `SUM()`
+**`SUM()`**
 
 > "Qual é a soma de todas as notas?"
 
-### `AVG()`
+**`AVG()`**
 
 > "Qual é a média das notas?"
 
-### `DISTINCT`
+**`DISTINCT`**
 
 > "Quais notas diferentes apareceram, sem repetir?"
 
@@ -782,9 +780,9 @@ Essa é exatamente a função dessas operações no banco.
 
 ---
 
-# 📌 Principais consultas da aula
+# Principais consultas
 
-## Valores sem repetição
+Valores sem repetição
 
 ```sql
 SELECT DISTINCT carga
@@ -792,14 +790,14 @@ FROM cursos
 ORDER BY carga;
 ```
 
-## Quantidade de cursos
+**Quantidade de cursos**
 
 ```sql
 SELECT COUNT(*)
 FROM cursos;
 ```
 
-## Quantidade com filtro
+**Quantidade com filtro**
 
 ```sql
 SELECT COUNT(*)
@@ -807,7 +805,7 @@ FROM cursos
 WHERE carga > 40;
 ```
 
-## Quantidade de estudantes brasileiros
+**Quantidade de estudantes brasileiros**
 
 ```sql
 SELECT COUNT(*)
@@ -815,14 +813,14 @@ FROM estudantes
 WHERE nacionalidade = 'Brasileiro';
 ```
 
-## Maior carga
+**Maior carga**
 
 ```sql
 SELECT MAX(carga)
 FROM cursos;
 ```
 
-## Maior quantidade de aulas em 2026
+**Maior quantidade de aulas em 2026**
 
 ```sql
 SELECT MAX(totalaulas)
@@ -830,7 +828,7 @@ FROM cursos
 WHERE ano = 2026;
 ```
 
-## Menor quantidade de aulas em 2026
+**Menor quantidade de aulas em 2026**
 
 ```sql
 SELECT MIN(totalaulas)
@@ -838,14 +836,14 @@ FROM cursos
 WHERE ano = 2026;
 ```
 
-## Soma das cargas
+**Soma das cargas**
 
 ```sql
 SELECT SUM(carga)
 FROM cursos;
 ```
 
-## Soma das cargas de 2027
+**Soma das cargas de 2027**
 
 ```sql
 SELECT SUM(carga)
@@ -853,14 +851,14 @@ FROM cursos
 WHERE ano = 2027;
 ```
 
-## Média das cargas
+**Média das cargas**
 
 ```sql
 SELECT AVG(carga)
 FROM cursos;
 ```
 
-## Média das aulas de 2028
+**Média das aulas de 2028**
 
 ```sql
 SELECT AVG(totalaulas)
@@ -870,13 +868,13 @@ WHERE ano = 2028;
 
 ---
 
-# 💡 Um detalhe importante sobre AVG()
+**Um detalhe importante sobre AVG()**
 
 Dependendo dos valores, o resultado de `AVG()` pode possuir casas decimais.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 20
 30
 40
@@ -884,13 +882,13 @@ Por exemplo:
 
 A média é:
 
-```text
+```
 30
 ```
 
 Mas:
 
-```text
+```
 20
 30
 41
@@ -898,7 +896,7 @@ Mas:
 
 resulta em:
 
-```text
+```
 30,333...
 ```
 
@@ -908,7 +906,7 @@ Se posteriormente eu quiser controlar a quantidade de casas decimais, posso util
 
 ---
 
-# 🔥 Resumo conceitual
+# Resumo Geral 
 
 Até aqui, as consultas começaram a ficar muito mais poderosas.
 
