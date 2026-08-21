@@ -1,1075 +1,968 @@
-# Filtrando e Ordenando Registros
+# Banco de Dados (MySQL) — DISTINCT e Funções de Agregação
 
-**Ideia principal**
+# 🎯 Ideia principal
 
-Aprendi a **consultar registros de uma tabela de forma mais específica**.
+Nesta aula aprendi a **resumir informações do banco de dados** em vez de simplesmente mostrar todos os registros.
 
-Até agora, eu já conseguia fazer:
+Até agora, eu estava principalmente consultando registros individuais:
 
 ```sql
 SELECT * FROM cursos;
 ```
 
-Isso mostra **todos os registros e todas as colunas**.
+Agora aprendi a fazer perguntas mais gerais ao banco, como:
 
-Agora comecei a controlar melhor o resultado da consulta, podendo:
+* Quais valores existem sem repetição?
+* Quantos cursos existem?
+* Quantos cursos possuem determinada característica?
+* Qual é a maior carga horária?
+* Qual é a menor quantidade de aulas?
+* Qual é a soma das cargas horárias?
+* Qual é a média?
 
-* ordenar registros;
-* escolher quais colunas quero visualizar;
-* filtrar registros;
-* trabalhar com intervalos;
-* procurar valores específicos;
-* combinar condições;
-* procurar palavras ou partes de palavras;
-* utilizar operadores lógicos;
-* utilizar padrões com `LIKE`.
+Para isso, vou utilizar principalmente:
 
-Esse processo é chamado de **consulta** ou **Query**.
+```text
+DISTINCT
+COUNT()
+MAX()
+MIN()
+SUM()
+AVG()
+```
+
+Essas funções são chamadas de **funções de agregação**, porque pegam vários registros e produzem um **resultado resumido**.
 
 ---
 
-# Query
+# 1. DISTINCT — Removendo valores repetidos
 
-Uma **Query** é uma consulta feita ao banco de dados para pedir alguma informação.
-
-É como fazer uma pergunta ao banco:
-
-> "Quais cursos existem?"
+Para trazer valores sem repetição:
 
 ```sql
-SELECT * FROM cursos;
-```
-
-Ou uma pergunta mais específica:
-
-> "Quais cursos são de 2028?"
-
-```sql
-SELECT * FROM cursos
-WHERE ano = 2028;
-```
-
-Ou ainda:
-
-> "Quais cursos de 2028 possuem quais cargas horárias?"
-
-```sql
-SELECT nome, carga
+SELECT DISTINCT carga
 FROM cursos
-WHERE ano = 2028;
+ORDER BY carga;
 ```
 
-Portanto, uma Query é basicamente uma forma de **pedir ao banco exatamente a informação que eu preciso**.
+> ⚠️ Na anotação original, `ORDER BY nacionalidade` não corresponde à coluna selecionada. Como estamos buscando as cargas sem repetição, o mais coerente é ordenar por `carga`.
 
 ---
 
-# Ordenando os registros com ORDER BY
+## O que o DISTINCT faz?
 
-O comando:
+Imagine que a tabela tenha:
 
-```sql
-ORDER BY
-```
+| nome             | carga |
+| ---------------- | ----: |
+| Algoritmos       |    40 |
+| Excel Essencial  |    40 |
+| Excel Avançado I |    24 |
+| PHP com MySQL    |    40 |
+| Front-end I      |    60 |
 
-serve para **organizar os resultados da consulta**.
-
----
-
-## Ordem crescente
-
-```sql
-SELECT * FROM cursos
-ORDER BY nome;
-```
-
-Nesse caso, os cursos serão organizados pelo campo `nome`.
-
-Por padrão, o MySQL utiliza a ordem **crescente**.
-
-Para textos, normalmente será:
-
-```
-A
-B
-C
-D
-...
-Z
-```
-
-Para números:
-
-```
-1
-2
-3
-4
-5
-...
-```
-
----
-
-## Ordem decrescente
-
-Para inverter a ordem:
+Se eu fizer:
 
 ```sql
-SELECT * FROM cursos
-ORDER BY nome DESC;
+SELECT carga FROM cursos;
 ```
 
-`DESC` significa **descending**, ou seja, descendente/decrescente.
+o resultado poderá ser:
 
-O resultado ficará aproximadamente:
-
-```
-Z
-Y
-X
-...
-C
-B
-A
+```text
+40
+40
+24
+40
+60
 ```
 
----
+Existem valores repetidos.
 
-## ASC e DESC
-
-Também posso escrever explicitamente:
+Agora:
 
 ```sql
-ORDER BY nome ASC;
-```
-
-`ASC` significa **ascending**, ou seja, crescente.
-
-Portanto:
-
-| Comando              | Ordem                |
-| -------------------- | -------------------- |
-| `ORDER BY nome ASC`  | Crescente            |
-| `ORDER BY nome DESC` | Decrescente          |
-| `ORDER BY nome`      | Crescente por padrão |
-
----
-
-## Escolhendo quais colunas visualizar
-
-Eu não preciso mostrar todas as colunas.
-
-- **Por exemplo:**
-
-```sql
-SELECT nome, carga, ano
-FROM cursos
-ORDER BY nome;
-```
-
-Aqui estou pedindo somente:
-
-* `nome`;
-* `carga`;
-* `ano`.
-
-A coluna `idcurso`, por exemplo, não aparecerá no resultado.
-
----
-
-# `SELECT *` x `SELECT coluna`
-
-**Todas as colunas**
-
-```sql
-SELECT * FROM cursos;
-```
-
-O `*` significa:
-
-> "Quero todas as colunas."
-
-**Apenas algumas colunas**
-
-```sql
-SELECT nome, carga
+SELECT DISTINCT carga
 FROM cursos;
 ```
 
-Significa:
+retorna:
 
-> "Quero somente `nome` e `carga`."
+```text
+24
+40
+60
+```
+
+O `DISTINCT` elimina as repetições do resultado.
 
 ---
 
-# Filtrando com WHERE
+# 🧠 Analogia
 
-O comando:
+Imagine que eu tenha uma lista de compras:
 
-```sql
-WHERE
+```text
+Arroz
+Feijão
+Arroz
+Café
+Café
+Café
 ```
 
-é utilizado para **filtrar os registros**.
+Se eu quiser saber **quais produtos diferentes existem**, não preciso ver o arroz três vezes e o café três vezes.
 
-> Por exemplo:
+O resultado seria:
 
-```sql
-SELECT * FROM cursos
-WHERE ano = 2028
-ORDER BY nome;
+```text
+Arroz
+Feijão
+Café
 ```
 
-Aqui estou dizendo:
-
-> "Mostre os cursos cujo ano seja 2028 e organize os resultados pelo nome."
+É exatamente essa ideia do `DISTINCT`.
 
 ---
 
-## Entendendo a Query por partes
+# 2. COUNT() — Contando registros
+
+Agora comecei a utilizar funções de agregação.
+
+A primeira é:
 
 ```sql
-SELECT * FROM cursos
-WHERE ano = 2028
-ORDER BY nome;
+COUNT()
 ```
 
-**`SELECT *`**
+Ela serve para **contar**.
 
-Quero todas as colunas.
+Exemplo:
 
-**`FROM cursos`**
+```sql
+SELECT COUNT(*)
+FROM cursos;
+```
 
-Os dados devem ser procurados na tabela `cursos`.
-
-**`WHERE ano = 2028`**
-
-Quero somente registros cujo ano seja `2028`.
-
-**`ORDER BY nome`**
-
-Depois de filtrar, organize o resultado pelo nome.
+Isso retorna a quantidade de registros existentes na tabela `cursos`.
 
 ---
 
-# Filtrando e escolhendo colunas
+# O que significa COUNT(*)?
 
-Também posso combinar `WHERE` com a seleção de colunas:
+O `*` significa que quero considerar **todas as linhas**.
+
+Então:
 
 ```sql
-SELECT nome, carga
+SELECT COUNT(*)
+FROM cursos;
+```
+
+pode ser interpretado como:
+
+> "Quantos registros existem na tabela `cursos`?"
+
+Se houver 9 cursos:
+
+```text
+9
+```
+
+será o resultado.
+
+---
+
+# 3. COUNT() com WHERE
+
+Posso combinar `COUNT()` com filtros.
+
+```sql
+SELECT COUNT(*)
 FROM cursos
-WHERE ano = 2028
-ORDER BY nome;
+WHERE carga > 40;
 ```
 
-Agora o resultado mostrará somente:
+Agora a pergunta é:
 
-```
-nome
-carga
-```
+> "Quantos cursos possuem carga maior que 40 horas?"
 
-e somente os cursos de:
+O banco primeiro aplica:
 
-```
-2028
+```sql
+WHERE carga > 40
 ```
 
-ordenados pelo nome.
+e depois conta os registros encontrados.
 
 ---
 
-# Operadores de comparação
-
-No `WHERE`, posso utilizar vários operadores.
-
-| Operador | Significado    |
-| -------- | -------------- |
-| `=`      | Igual          |
-| `>`      | Maior que      |
-| `<`      | Menor que      |
-| `>=`     | Maior ou igual |
-| `<=`     | Menor ou igual |
-| `<>`     | Diferente de   |
-
----
-
-- **Exemplos**
-
-**Igual**
+# 🧩 Como o banco pensa nessa consulta?
 
 ```sql
-WHERE ano = 2028
-```
-
-Ano exatamente igual a 2028.
-
-**Maior que**
-
-```sql
-WHERE carga > 24
-```
-
-Carga maior que 24.
-
-**Menor que**
-
-```sql
-WHERE carga < 24
-```
-
-Carga menor que 24.
-
-**Maior ou igual**
-
-```sql
-WHERE carga >= 24
-```
-
-Carga de 24 ou mais.
-
-**Menor ou igual**
-
-```sql
-WHERE carga <= 24
-```
-
-Carga de 24 ou menos.
-
-**Diferente**
-
-```sql
-WHERE ano <> 2028
-```
-
-Todos os registros cujo ano seja diferente de 2028.
-
----
-
-# BETWEEN — Trabalhando com intervalo
-
-Quando quero procurar valores dentro de um intervalo, posso utilizar:
-
-```sql
-BETWEEN
-```
-
-- **Exemplo:**
-
-```sql
-SELECT * FROM cursos
-WHERE totalaulas BETWEEN 20 AND 30
-ORDER BY nome;
-```
-
-Isso significa:
-
-> "Mostre os cursos que possuem entre 20 e 30 aulas."
-
-O `BETWEEN` inclui os limites.
-
-Ou seja:
-
-```
-20 ≤ totalaulas ≤ 30
-```
-
-Então tanto `20` quanto `30` podem aparecer.
-
----
-
-# IN — Procurando valores específicos
-
-Também posso procurar vários valores específicos utilizando:
-
-```sql
-IN
-```
-
-- **Exemplo:**
-
-```sql
-SELECT nome, carga
+SELECT COUNT(*)
 FROM cursos
-WHERE carga IN (16, 24)
-ORDER BY nome;
+WHERE carga > 40;
 ```
 
-Isso significa:
+Podemos imaginar:
 
-> "Mostre os cursos cuja carga seja 16 ou 24."
-
-É como fazer:
-
-```sql
-WHERE carga = 16 OR carga = 24
+```text
+Todos os cursos
+      ↓
+Filtrar carga > 40
+      ↓
+Cursos que sobraram
+      ↓
+COUNT(*)
+      ↓
+Quantidade
 ```
 
-Porém `IN` deixa a consulta mais organizada quando existem vários valores.
+Essa lógica de **filtrar primeiro e agregar depois** é muito importante.
 
 ---
 
-# Operadores lógicos
+# 4. COUNT(nome)
 
-Também posso combinar condições utilizando operadores lógicos.
-
-Os principais são:
-
-* `AND`
-* `OR`
-* `NOT`
-
----
-
-**AND**
-
-`AND` significa **E**.
-
-As duas condições precisam ser verdadeiras.
+Também posso utilizar uma coluna dentro do `COUNT()`:
 
 ```sql
-SELECT nome, carga, totalaulas
+SELECT COUNT(nome)
 FROM cursos
-WHERE carga > 24
-AND totalaulas < 16
-ORDER BY nome;
+WHERE carga >= 60;
 ```
 
-Estou procurando cursos que:
-
-```
-carga > 24
-```
-
-**E**
-
-```
-totalaulas < 16
-```
-
-As duas condições precisam ser atendidas pelo mesmo registro.
-
----
-
-**OR**
-
-`OR` significa **OU**.
+Isso conta quantos registros possuem `nome` preenchido dentro do conjunto que atende:
 
 ```sql
-SELECT nome, carga, totalaulas
-FROM cursos
-WHERE carga > 24
-OR totalaulas < 16
-ORDER BY nome;
+carga >= 60
 ```
 
-Agora basta uma das condições ser verdadeira.
-
-O curso será mostrado se:
-
-```
-carga > 24
-```
-
-**OU**
-
-```
-totalaulas < 16
-```
-
----
-
-**AND x OR**
-
-Uma forma simples de memorizar:
-
-**AND**
-
-> "Precisa cumprir os dois requisitos."
-
-**OR**
-
-> "Pode cumprir qualquer um dos requisitos."
-
----
-
-# Procurando um nome específico
-
-Posso procurar um valor exato:
+Como `nome` foi definido como:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome = 'Algoritmos';
+nome VARCHAR(50) NOT NULL
 ```
 
-Aqui o MySQL procurará um registro cujo nome seja exatamente:
-
-```
-Algoritmos
-```
+nesse caso, `COUNT(nome)` e `COUNT(*)` produzirão o mesmo resultado.
 
 ---
 
-# LIKE — Procurando padrões
+# COUNT(*) x COUNT(coluna)
 
-Quando não quero procurar um valor exatamente igual, posso utilizar:
+Existe uma diferença importante.
+
+### `COUNT(*)`
+
+Conta as linhas.
 
 ```sql
-LIKE
+COUNT(*)
 ```
 
-O `LIKE` é utilizado principalmente para **pesquisar textos através de padrões**.
+### `COUNT(coluna)`
 
-Ele fica ainda mais poderoso quando combinado com:
-
-```
-%
-_
-```
-
-Esses são chamados de **caracteres curinga** (*wildcards*).
-
----
-
-# O símbolo `%`
-
-O símbolo:
-
-```
-%
-```
-
-representa **zero ou mais caracteres**.
+Conta os valores **não nulos** daquela coluna.
 
 Por exemplo:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE 'E%';
+SELECT COUNT(nome)
+FROM cursos;
 ```
 
-Significa:
-
-> "O nome deve começar com `E`."
-
-Pode encontrar:
-
-```
-Excel Essencial
-Excel Avançado I
-Excel Avançado II
-```
-
-porque todos começam com `E`.
+contará somente registros em que `nome` não seja `NULL`.
 
 ---
 
-# Procurando pela última letra
+# ⚠️ Uma diferença importante
+
+Se uma tabela tivesse:
+
+| id | nome       |
+| -: | ---------- |
+|  1 | Algoritmos |
+|  2 | Excel      |
+|  3 | NULL       |
+
+Então:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE '%E';
+COUNT(*)
 ```
 
-Agora o `%` está no começo.
+retornaria:
 
-Isso significa:
-
-> "Pode existir qualquer quantidade de caracteres antes, mas o nome precisa terminar com `E`."
-
-- **Por exemplo:**
-
-```
-...E
+```text
+3
 ```
 
----
-
-# Procurando uma letra em qualquer posição
+Mas:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE '%E%';
+COUNT(nome)
 ```
 
-Agora o `E` pode aparecer em qualquer posição.
+retornaria:
 
-O padrão significa:
-
-```
-qualquer coisa + E + qualquer coisa
+```text
+2
 ```
 
-Então pode encontrar palavras como:
-
-```
-Excel
-Desenvolvedor
-PHP
-```
-
-desde que tenham `E` no texto.
+porque o terceiro registro possui `nome = NULL`.
 
 ---
 
-# Procurando palavras que NÃO possuem determinada letra
+# 5. Contando estudantes brasileiros
 
-Podemos utilizar `NOT LIKE`:
+Também posso utilizar `COUNT()` em outra tabela:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome NOT LIKE '%E%';
+SELECT COUNT(*)
+FROM estudantes
+WHERE nacionalidade = 'Brasileiro';
 ```
 
-Isso significa:
+Essa consulta responde:
 
-> "Mostre os cursos cujo nome não contém a letra `E`."
+> "Quantos estudantes possuem nacionalidade igual a Brasileiro?"
 
 ---
 
-# Procurando duas letras em posições específicas
+# 6. MAX() — Encontrando o maior valor
+
+Outra função de agregação é:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE 'E%L%';
+MAX()
 ```
 
-Aqui estou procurando um nome que:
+Ela retorna o **maior valor** encontrado.
 
-1. comece com `E`;
-2. depois tenha qualquer quantidade de caracteres;
-3. depois tenha `L`;
-4. depois possa ter qualquer quantidade de caracteres.
-
-Representação:
-
-```
-E + qualquer coisa + L + qualquer coisa
-```
-
----
-
-# O símbolo `_`
-
-Além do `%`, existe:
-
-```
-_
-```
-
-O sublinhado representa **exatamente um caractere**.
-
-Essa é uma diferença muito importante:
-
-| Símbolo | Significado             |
-| ------- | ----------------------- |
-| `%`     | Zero ou mais caracteres |
-| `_`     | Exatamente um caractere |
-
----
-
-# Combinando `%` e `_`
-
-- **Exemplo:**
+Exemplo:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE 'C%_';
+SELECT MAX(carga)
+FROM cursos;
 ```
 
-Aqui:
+Isso responde:
 
-```
-C
-```
+> "Qual é a maior carga horária entre os cursos?"
 
-precisa estar no começo.
+Se as cargas forem:
 
-Depois:
-
-```
-%
-```
-
-permite qualquer quantidade de caracteres.
-
-E no final:
-
-```
-_
+```text
+24
+40
+40
+60
+72
 ```
 
-exige pelo menos **um caractere** naquela posição.
+o resultado será:
+
+```text
+72
+```
 
 ---
 
-# Outro exemplo com `LIKE`
+# 7. MAX() com filtro
+
+Também posso restringir a pesquisa:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE 'php%p_';
+SELECT MAX(totalaulas)
+FROM cursos
+WHERE ano = 2026;
 ```
 
-O padrão procura um nome que:
+Agora estou perguntando:
 
-* comece com `php`;
-* depois tenha zero ou mais caracteres;
-* depois tenha `p`;
-* depois tenha exatamente mais um caractere.
+> "Entre os cursos de 2026, qual possui a maior quantidade de aulas?"
 
-É importante observar que o `LIKE` trabalha com **padrões**, e não com uma simples comparação.
+O `WHERE` limita os registros para 2026.
+
+Depois o `MAX()` procura o maior valor de `totalaulas`.
 
 ---
 
-# Dois caracteres entre letras
+# 8. Ver os cursos de 2026 ordenados pelas aulas
+
+Também posso simplesmente visualizar os cursos:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE 'P__T%';
+SELECT *
+FROM cursos
+WHERE ano = 2026
+ORDER BY totalaulas;
 ```
 
-Aqui temos:
+Nesse caso, não estou obtendo apenas o maior valor.
 
-```
-P __ T %
-```
+Estou vendo **todos os cursos de 2026**, organizados pela quantidade de aulas.
 
-O primeiro caractere precisa ser:
-
-```
-P
-```
-
-Depois temos:
-
-```
-__
-```
-
-Cada `_` representa exatamente um caractere.
-
-Portanto, existem **dois caracteres entre `P` e `T`**.
-
-Depois do `T`:
-
-```
-%
-```
-
-permite qualquer quantidade de caracteres.
-
----
-
-# Procurando uma palavra em qualquer posição
+Por padrão:
 
 ```sql
-SELECT * FROM cursos
-WHERE nome LIKE '%silva%';
+ORDER BY totalaulas
 ```
 
-Aqui estou procurando `silva` em qualquer parte do texto.
+é crescente.
 
-Pode ser:
+Se quiser do maior para o menor:
 
-```
-Silva
-```
-
-ou:
-
-```
-João Silva
-```
-
-ou:
-
-```
-Silva Desenvolvimento Web
-```
-
-dependendo dos dados existentes.
-
-O padrão:
-
-```
-%silva%
-```
-
-significa:
-
-```
-qualquer coisa + silva + qualquer coisa
+```sql
+SELECT *
+FROM cursos
+WHERE ano = 2026
+ORDER BY totalaulas DESC;
 ```
 
 ---
 
-# Tabela de padrões do LIKE
+# 9. MIN() — Encontrando o menor valor
 
-| Query            | O que procura                                               |
-| ---------------- | ----------------------------------------------------------- |
-| `LIKE 'E%'`      | Começa com E                                                |
-| `LIKE '%E'`      | Termina com E                                               |
-| `LIKE '%E%'`     | Contém E em qualquer posição                                |
-| `NOT LIKE '%E%'` | Não contém E                                                |
-| `LIKE 'E%L%'`    | Começa com E e possui L depois                              |
-| `LIKE 'C%_'`     | Começa com C e termina com exatamente um caractere após `%` |
-| `LIKE 'P__T%'`   | Começa com P, possui dois caracteres e depois T             |
-| `LIKE '%silva%'` | Contém "silva" em qualquer posição                          |
+Se `MAX()` encontra o maior, `MIN()` encontra o menor.
+
+```sql
+SELECT MIN(totalaulas)
+FROM cursos
+WHERE ano = 2026;
+```
+
+Essa consulta responde:
+
+> "Qual é a menor quantidade de aulas entre os cursos de 2026?"
 
 ---
 
-# `%` x `_`
+# MAX() x MIN()
 
-Essa diferença é uma das coisas mais importantes desta aula.
+| Função  | Retorna     |
+| ------- | ----------- |
+| `MAX()` | Maior valor |
+| `MIN()` | Menor valor |
+
+Exemplo:
+
+```text
+24
+40
+40
+60
+72
+```
+
+```sql
+MAX(carga)
+```
+
+→ `72`
+
+```sql
+MIN(carga)
+```
+
+→ `24`
+
+---
+
+# 10. SUM() — Somando valores
+
+A função:
+
+```sql
+SUM()
+```
+
+serve para **somar os valores de uma coluna**.
+
+Exemplo:
+
+```sql
+SELECT SUM(carga)
+FROM cursos;
+```
+
+Isso soma todas as cargas horárias dos cursos.
 
 Imagine:
 
-```
-%
-```
-
-como uma **caixa que pode receber qualquer quantidade de caracteres**.
-
-Já:
-
-```
-_
+```text
+40 + 40 + 24 + 24 + 72
 ```
 
-é como um **espaço reservado para apenas um caractere**.
-
-`%`
-
-```
-%
-```
-
-Pode representar:
-
-```
-nada
-A
-ABC
-ABCDEFG
-```
-
-`_`
-
-```
-_
-```
-
-Representa somente:
-
-```
-A
-```
-
-um único caractere.
+O banco calcula automaticamente o resultado.
 
 ---
 
-# Estrutura geral de uma consulta
+# 11. SUM() com WHERE
 
-Uma Query pode juntar várias dessas ferramentas:
-
-```sql
-SELECT colunas
-FROM tabela
-WHERE condição
-ORDER BY coluna;
-```
-
-- **Por exemplo:**
+Também posso fazer uma soma específica:
 
 ```sql
-SELECT nome, carga
+SELECT SUM(carga)
 FROM cursos
-WHERE ano = 2028
-ORDER BY nome;
+WHERE ano = 2027;
 ```
 
-Podemos interpretar como uma sequência:
+Agora estou perguntando:
 
+> "Qual é a soma das cargas horárias de todos os cursos de 2027?"
+
+O processo é:
+
+```text
+Todos os cursos
+      ↓
+Selecionar somente ano = 2027
+      ↓
+Pegar a coluna carga
+      ↓
+Somar os valores
+      ↓
+Resultado
 ```
-SELECT
-↓
-O que quero ver?
-
-FROM
-↓
-De onde vou pegar?
-
-WHERE
-↓
-Quais registros quero?
-
-ORDER BY
-↓
-Como quero organizar o resultado?
-```
-
-Essa estrutura é extremamente importante para entender SQL.
 
 ---
 
-# Exemplo completo
+# 12. AVG() — Calculando a média
 
-Imagine que eu queira:
-
-> "Mostrar o nome e a carga dos cursos de 2028, somente aqueles com carga maior que 24, organizados alfabeticamente."
-
-A Query seria:
+A função:
 
 ```sql
-SELECT nome, carga
+AVG()
+```
+
+calcula a **média aritmética** dos valores.
+
+Exemplo:
+
+```sql
+SELECT AVG(carga)
+FROM cursos;
+```
+
+Se tivermos:
+
+```text
+40
+40
+24
+60
+```
+
+a média será:
+
+```text
+(40 + 40 + 24 + 60) / 4
+```
+
+Resultado:
+
+```text
+41
+```
+
+O MySQL realiza esse cálculo automaticamente.
+
+---
+
+# 13. AVG() com filtro
+
+Também posso calcular uma média somente de determinados registros.
+
+```sql
+SELECT AVG(totalaulas)
 FROM cursos
-WHERE ano = 2028
-AND carga > 24
-ORDER BY nome;
-```
-
-Aqui estou combinando:
-
-* `SELECT` → escolhe as colunas;
-* `FROM` → escolhe a tabela;
-* `WHERE` → filtra;
-* `AND` → adiciona outra condição;
-* `ORDER BY` → organiza o resultado.
-
----
-
-## Ordem lógica de uma consulta
-
-Uma forma de pensar em uma Query é:
-
-```
-                 BANCO DE DADOS
-                       ↓
-                    TABELA
-                       ↓
-                     FROM
-                       ↓
-                  WHERE
-               ┌───────┴───────┐
-             FILTRO       CONDIÇÕES
-                       ↓
-                    SELECT
-                       ↓
-                 COLUNAS DESEJADAS
-                       ↓
-                  ORDER BY
-                       ↓
-                RESULTADO FINAL
-```
-
-Na escrita da Query, normalmente usamos:
-
-```sql
-SELECT
-FROM
-WHERE
-ORDER BY
-```
-
-Mas conceitualmente estou dizendo:
-
-> **De onde pegar → quais registros considerar → quais informações mostrar → como organizar.**
-
----
-
-**Uma observação importante sobre textos**
-
-Quando comparo um texto diretamente, utilizo aspas simples:
-
-```sql
-WHERE nome = 'Algoritmos';
-```
-
-Enquanto números normalmente são escritos sem aspas:
-
-```sql
 WHERE ano = 2028;
 ```
 
-Embora o MySQL possa fazer algumas conversões automaticamente, é uma boa prática manter os tipos corretamente.
+Essa consulta responde:
+
+> "Qual é a média da quantidade de aulas dos cursos de 2028?"
 
 ---
 
-# Principais comandos desta aula
+# 🧠 As cinco principais funções de agregação
 
-| Comando/Operador | Função                                         |
-| ---------------- | ---------------------------------------------- |
-| `SELECT`         | Escolhe os dados que serão exibidos            |
-| `FROM`           | Indica a tabela consultada                     |
-| `WHERE`          | Filtra registros                               |
-| `ORDER BY`       | Ordena o resultado                             |
-| `ASC`            | Ordem crescente                                |
-| `DESC`           | Ordem decrescente                              |
-| `=`              | Igual                                          |
-| `>`              | Maior que                                      |
-| `<`              | Menor que                                      |
-| `>=`             | Maior ou igual                                 |
-| `<=`             | Menor ou igual                                 |
-| `<>`             | Diferente                                      |
-| `BETWEEN`        | Procura dentro de um intervalo                 |
-| `IN`             | Procura valores específicos                    |
-| `AND`            | Todas as condições precisam ser verdadeiras    |
-| `OR`             | Pelo menos uma condição precisa ser verdadeira |
-| `LIKE`           | Procura padrões em textos                      |
-| `NOT LIKE`       | Exclui textos que correspondem ao padrão       |
-| `%`              | Zero ou mais caracteres                        |
-| `_`              | Exatamente um caractere                        |
+Nesta aula, as principais funções foram:
+
+```text
+COUNT()
+MAX()
+MIN()
+SUM()
+AVG()
+```
+
+Uma forma simples de memorizar:
+
+| Função    | Pergunta          |
+| --------- | ----------------- |
+| `COUNT()` | **Quantos?**      |
+| `MAX()`   | **Qual o maior?** |
+| `MIN()`   | **Qual o menor?** |
+| `SUM()`   | **Qual o total?** |
+| `AVG()`   | **Qual a média?** |
 
 ---
 
-# O que é preciso memorizar
+# 14. DISTINCT x funções de agregação
 
-A estrutura:
+É importante não confundir os dois.
+
+## DISTINCT
+
+Remove valores repetidos do resultado:
 
 ```sql
-SELECT ...
-FROM ...
-WHERE ...
-ORDER BY ...;
+SELECT DISTINCT carga
+FROM cursos;
 ```
 
-é uma das bases das consultas SQL.
+Resultado:
 
-E preciso lembrar principalmente:
-
-```
-SELECT → o que quero ver
-FROM → de onde vem
-WHERE → o que quero filtrar
-ORDER BY → como quero organizar
-```
-
-Além disso:
-
-```
-% → qualquer quantidade de caracteres
-_ → exatamente um caractere
+```text
+24
+40
+60
+72
 ```
 
 ---
 
-# Resumo final
+## COUNT()
 
-Nesta aula aprendi a transformar consultas simples em consultas mais específicas. Utilizei `ORDER BY` para organizar registros em ordem crescente ou decrescente e aprendi que `SELECT` pode mostrar somente as colunas que realmente preciso. Com `WHERE`, consigo filtrar registros utilizando operadores como `=`, `>`, `<`, `>=`, `<=` e `<>`. Também aprendi `BETWEEN` para intervalos, `IN` para valores específicos e `AND`/`OR` para combinar condições. Por fim, conheci o `LIKE`, que permite pesquisar padrões em textos utilizando `%` e `_`, tornando as consultas muito mais flexíveis.
+Conta:
+
+```sql
+SELECT COUNT(*)
+FROM cursos;
+```
+
+Resultado:
+
+```text
+9
+```
+
+Ou seja:
+
+* `DISTINCT` → **quais valores diferentes existem?**
+* `COUNT` → **quantos registros existem?**
+
+---
+
+# 15. WHERE + funções de agregação
+
+Uma característica importante é que posso combinar filtros com praticamente todas essas funções.
+
+### COUNT
+
+```sql
+SELECT COUNT(*)
+FROM cursos
+WHERE carga > 40;
+```
+
+### MAX
+
+```sql
+SELECT MAX(carga)
+FROM cursos
+WHERE ano = 2026;
+```
+
+### MIN
+
+```sql
+SELECT MIN(carga)
+FROM cursos
+WHERE ano = 2026;
+```
+
+### SUM
+
+```sql
+SELECT SUM(carga)
+FROM cursos
+WHERE ano = 2027;
+```
+
+### AVG
+
+```sql
+SELECT AVG(carga)
+FROM cursos
+WHERE ano = 2028;
+```
+
+A lógica é sempre parecida:
+
+```text
+Tabela
+ ↓
+WHERE
+ ↓
+Registros filtrados
+ ↓
+Função de agregação
+ ↓
+Resultado
+```
+
+---
+
+# 16. Uma diferença importante: resultado resumido x registros
+
+Veja:
+
+```sql
+SELECT *
+FROM cursos
+WHERE ano = 2026
+ORDER BY totalaulas;
+```
+
+Essa consulta retorna **várias linhas**.
+
+Ela mostra os cursos encontrados.
+
+Já:
+
+```sql
+SELECT MAX(totalaulas)
+FROM cursos
+WHERE ano = 2026;
+```
+
+retorna apenas **um valor**.
+
+Ela não mostra qual curso possui esse valor, apenas informa qual é o maior número de aulas.
+
+Isso é importante.
+
+Se eu quiser descobrir **qual curso possui a maior quantidade de aulas**, `MAX()` sozinho não é suficiente. Ele me dá o número máximo, não necessariamente os dados completos do curso.
+
+---
+
+# 🧠 Analogia
+
+Imagine uma sala com vários alunos.
+
+### `COUNT()`
+
+> "Quantos alunos existem?"
+
+### `MAX()`
+
+> "Qual foi a maior nota?"
+
+### `MIN()`
+
+> "Qual foi a menor nota?"
+
+### `SUM()`
+
+> "Qual é a soma de todas as notas?"
+
+### `AVG()`
+
+> "Qual é a média das notas?"
+
+### `DISTINCT`
+
+> "Quais notas diferentes apareceram, sem repetir?"
+
+Essa é exatamente a função dessas operações no banco.
+
+---
+
+# 📌 Principais consultas da aula
+
+## Valores sem repetição
+
+```sql
+SELECT DISTINCT carga
+FROM cursos
+ORDER BY carga;
+```
+
+## Quantidade de cursos
+
+```sql
+SELECT COUNT(*)
+FROM cursos;
+```
+
+## Quantidade com filtro
+
+```sql
+SELECT COUNT(*)
+FROM cursos
+WHERE carga > 40;
+```
+
+## Quantidade de estudantes brasileiros
+
+```sql
+SELECT COUNT(*)
+FROM estudantes
+WHERE nacionalidade = 'Brasileiro';
+```
+
+## Maior carga
+
+```sql
+SELECT MAX(carga)
+FROM cursos;
+```
+
+## Maior quantidade de aulas em 2026
+
+```sql
+SELECT MAX(totalaulas)
+FROM cursos
+WHERE ano = 2026;
+```
+
+## Menor quantidade de aulas em 2026
+
+```sql
+SELECT MIN(totalaulas)
+FROM cursos
+WHERE ano = 2026;
+```
+
+## Soma das cargas
+
+```sql
+SELECT SUM(carga)
+FROM cursos;
+```
+
+## Soma das cargas de 2027
+
+```sql
+SELECT SUM(carga)
+FROM cursos
+WHERE ano = 2027;
+```
+
+## Média das cargas
+
+```sql
+SELECT AVG(carga)
+FROM cursos;
+```
+
+## Média das aulas de 2028
+
+```sql
+SELECT AVG(totalaulas)
+FROM cursos
+WHERE ano = 2028;
+```
+
+---
+
+# 💡 Um detalhe importante sobre AVG()
+
+Dependendo dos valores, o resultado de `AVG()` pode possuir casas decimais.
+
+Por exemplo:
+
+```text
+20
+30
+40
+```
+
+A média é:
+
+```text
+30
+```
+
+Mas:
+
+```text
+20
+30
+41
+```
+
+resulta em:
+
+```text
+30,333...
+```
+
+O MySQL pode apresentar várias casas decimais dependendo do tipo dos dados e da forma como o resultado é exibido.
+
+Se posteriormente eu quiser controlar a quantidade de casas decimais, posso utilizar funções como `ROUND()`.
+
+---
+
+# 🔥 Resumo conceitual
+
+Até aqui, as consultas começaram a ficar muito mais poderosas.
+
+Antes:
+
+```sql
+SELECT * FROM cursos;
+```
+
+> "Mostre tudo."
+
+Agora posso perguntar coisas muito mais específicas:
+
+```sql
+SELECT COUNT(*)
+FROM cursos
+WHERE ano = 2026;
+```
+
+> "Quantos cursos existem em 2026?"
+
+Ou:
+
+```sql
+SELECT MAX(carga)
+FROM cursos
+WHERE ano = 2026;
+```
+
+> "Qual é a maior carga horária dos cursos de 2026?"
+
+Ou:
+
+```sql
+SELECT AVG(carga)
+FROM cursos
+WHERE ano = 2028;
+```
+
+> "Qual é a média da carga horária dos cursos de 2028?"
+
+É justamente aí que o banco de dados começa a deixar de ser apenas um lugar para **guardar informações** e passa a ser uma ferramenta para **analisar informações**.
 
 ---
 
 **Resumo Relâmpago**
 
-1. **Query** é uma consulta feita ao banco de dados para obter informações.
-2. `SELECT` define quais colunas quero visualizar.
-3. `FROM` informa de qual tabela os dados serão retirados.
-4. `WHERE` filtra os registros de acordo com uma condição.
-5. `ORDER BY` organiza o resultado; `ASC` é crescente e `DESC` é decrescente.
-6. `BETWEEN` pesquisa valores dentro de um intervalo, incluindo os limites.
-7. `IN` permite procurar vários valores específicos.
-8. `AND` exige que todas as condições sejam verdadeiras; `OR` permite qualquer uma.
-9. `LIKE` pesquisa padrões em textos; `NOT LIKE` faz o contrário.
-10. No `LIKE`, `%` representa zero ou mais caracteres e `_` representa exatamente um caractere.
+1. `DISTINCT` remove valores repetidos do resultado.
+2. `COUNT()` conta registros ou valores não nulos de uma coluna.
+3. `COUNT(*)` conta as linhas da consulta.
+4. `MAX()` retorna o maior valor encontrado.
+5. `MIN()` retorna o menor valor encontrado.
+6. `SUM()` soma os valores de uma coluna.
+7. `AVG()` calcula a média dos valores.
+8. `WHERE` pode ser utilizado antes da agregação para filtrar os registros analisados.
+9. Funções de agregação normalmente retornam um resultado resumido, e não todos os registros.
+10. `DISTINCT`, `COUNT`, `MAX`, `MIN`, `SUM` e `AVG` permitem transformar dados armazenados em informações úteis para análise.
