@@ -1,6 +1,4 @@
-# Banco de Dados (MySQL) — GROUP BY e HAVING
-
-Nesta parte aprendi a **agrupar registros** e depois aplicar filtros sobre esses grupos.
+# GROUP BY e HAVING
 
 Até agora eu já sabia filtrar registros com `WHERE` e fazer cálculos com funções como `COUNT()`, `AVG()`, `MAX()`, `MIN()` e `SUM()`.
 
@@ -10,7 +8,7 @@ Agora o `GROUP BY` permite responder perguntas como:
 
 ---
 
-# 1. GROUP BY — Agrupando registros
+## GROUP BY — Agrupando registros
 
 O comando básico é:
 
@@ -53,7 +51,7 @@ Ou seja, os valores iguais foram colocados no mesmo grupo.
 
 ---
 
-# 🧠 GROUP BY x DISTINCT
+# GROUP BY x DISTINCT
 
 Nesse exemplo, existe uma semelhança importante:
 
@@ -76,7 +74,7 @@ Mas a finalidade do `GROUP BY` é mais ampla.
 
 O `GROUP BY` é especialmente útil quando eu quero **fazer cálculos sobre cada grupo**.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```sql
 SELECT carga, COUNT(*)
@@ -88,7 +86,7 @@ Agora consigo descobrir quantos cursos existem em cada carga horária.
 
 ---
 
-# 2. GROUP BY + COUNT()
+## GROUP BY + COUNT()
 
 ```sql
 SELECT carga, COUNT(*)
@@ -98,15 +96,15 @@ GROUP BY carga;
 
 Essa consulta faz duas coisas:
 
-### `carga`
+**`carga`**
 
 Define os grupos.
 
-### `COUNT(*)`
+**`COUNT(*)`**
 
 Conta quantos registros existem dentro de cada grupo.
 
-Por exemplo:
+- **Por exemplo:**
 
 | carga | COUNT(*) |
 | ----: | -------: |
@@ -124,7 +122,7 @@ Isso significa:
 
 ---
 
-# 3. Deixando o resultado organizado com ORDER BY
+**Deixando o resultado organizado com ORDER BY**
 
 Posso ordenar o resultado:
 
@@ -147,11 +145,11 @@ para mostrar do maior para o menor.
 
 ---
 
-# 4. GROUP BY com WHERE
+# GROUP BY com WHERE
 
 Também posso filtrar os registros **antes de agrupá-los**.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT carga, totalaulas
@@ -163,7 +161,7 @@ ORDER BY carga;
 
 Aqui o processo é:
 
-```text
+```
 Todos os cursos
       ↓
 WHERE totalaulas = 8
@@ -179,41 +177,16 @@ ORDER BY carga
 Organiza o resultado
 ```
 
-### ⚠️ Observação importante
-
-Essa consulta funciona em determinadas configurações do MySQL, mas não é uma boa prática usar `GROUP BY carga` enquanto também seleciono `totalaulas` sem agregá-lo.
-
-Como `totalaulas` já foi filtrado para ser `8`, uma consulta mais simples seria:
-
-```sql
-SELECT carga, totalaulas
-FROM cursos
-WHERE totalaulas = 8
-ORDER BY carga;
-```
-
-Se a intenção for realmente contar quantos cursos existem em cada carga com 8 aulas, eu faria:
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-WHERE totalaulas = 8
-GROUP BY carga
-ORDER BY carga;
-```
-
-Essa forma deixa claramente definido o que estou agrupando e contando.
-
 ---
 
-# 5. HAVING — Filtrando grupos
+# HAVING — Filtrando grupos
 
 Agora entra uma diferença muito importante:
 
 * `WHERE` → filtra **registros**
 * `HAVING` → filtra **grupos**
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT carga, COUNT(*)
@@ -243,11 +216,11 @@ Isso significa:
 
 ---
 
-# 6. WHERE x HAVING
+## WHERE x HAVING
 
 Essa é uma das diferenças mais importantes desta aula.
 
-## WHERE
+**WHERE**
 
 Filtra os registros **antes do agrupamento**.
 
@@ -264,7 +237,7 @@ Podemos interpretar:
 
 ---
 
-## HAVING
+**HAVING**
 
 Filtra os grupos **depois do agrupamento**.
 
@@ -277,7 +250,7 @@ HAVING ano > 2026;
 
 Aqui:
 
-```text
+```
 GROUP BY
    ↓
 Cria os grupos por ano
@@ -289,9 +262,9 @@ Mantém somente os grupos cujo ano > 2026
 
 ---
 
-# 7. GROUP BY + HAVING + ORDER BY
+# GROUP BY + HAVING + ORDER BY
 
-Um exemplo completo:
+- **Um exemplo completo:**
 
 ```sql
 SELECT ano, COUNT(*)
@@ -303,7 +276,7 @@ ORDER BY ano;
 
 Cada parte possui uma função:
 
-```text
+```
 SELECT
 ↓
 O que quero visualizar
@@ -327,7 +300,7 @@ Como o resultado será organizado
 
 ---
 
-# 8. WHERE + GROUP BY + HAVING
+# WHERE + GROUP BY + HAVING
 
 Posso usar os dois tipos de filtro na mesma consulta:
 
@@ -342,7 +315,7 @@ ORDER BY ano;
 
 Aqui acontece uma sequência muito importante:
 
-```text
+```
 1. FROM
    ↓
 2. WHERE
@@ -362,11 +335,11 @@ De forma simplificada:
 
 ---
 
-# 9. Usando AVG() junto com GROUP BY
+# Usando AVG() junto com GROUP BY
 
 Agora posso combinar `GROUP BY` com `AVG()`.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```sql
 SELECT AVG(carga)
@@ -377,7 +350,7 @@ Essa consulta calcula a média da carga horária de todos os cursos.
 
 No meu exemplo, o resultado é aproximadamente:
 
-```text
+```
 42,38
 ```
 
@@ -385,7 +358,7 @@ Mas posso fazer análises mais específicas utilizando agrupamento.
 
 ---
 
-# 10. Subconsulta — Usando AVG() dentro de outra consulta
+## Subconsulta — Usando AVG() dentro de outra consulta
 
 Uma consulta interessante é:
 
@@ -418,7 +391,7 @@ FROM cursos;
 
 Ela produz aproximadamente:
 
-```text
+```
 42,38
 ```
 
@@ -434,7 +407,7 @@ Ou seja:
 
 ---
 
-# 🧠 Por que usar uma subconsulta?
+**Por que usar uma subconsulta?**
 
 Eu poderia escrever diretamente:
 
@@ -446,15 +419,15 @@ Mas existe um problema.
 
 Se eu adicionar novos cursos ou alterar as cargas existentes, a média pode mudar.
 
-Por exemplo, hoje:
+- **Por exemplo, hoje:**
 
-```text
+```
 Média = 42,38
 ```
 
 Amanhã, depois de adicionar vários cursos:
 
-```text
+```
 Média = 45,20
 ```
 
@@ -478,7 +451,7 @@ Isso torna a consulta dinâmica.
 
 ---
 
-# 11. Entendendo a subconsulta por partes
+**Entendendo a subconsulta por partes**
 
 A consulta:
 
@@ -492,7 +465,7 @@ HAVING carga > (SELECT AVG(carga) FROM cursos);
 
 pode ser desmontada assim.
 
-### 1️⃣ FROM
+**FROM**
 
 ```sql
 FROM cursos
@@ -502,7 +475,7 @@ Estou trabalhando com a tabela `cursos`.
 
 ---
 
-### 2️⃣ WHERE
+**WHERE**
 
 ```sql
 WHERE ano > 2026
@@ -512,7 +485,7 @@ Seleciono somente cursos posteriores a 2026.
 
 ---
 
-### 3️⃣ GROUP BY
+**GROUP BY**
 
 ```sql
 GROUP BY carga
@@ -522,7 +495,7 @@ Agrupo os registros pela carga horária.
 
 ---
 
-### 4️⃣ Subconsulta
+**Subconsulta**
 
 ```sql
 (SELECT AVG(carga) FROM cursos)
@@ -532,7 +505,7 @@ Calculo a média geral da carga horária.
 
 ---
 
-### 5️⃣ HAVING
+**HAVING**
 
 ```sql
 HAVING carga > (SELECT AVG(carga) FROM cursos)
@@ -542,7 +515,7 @@ Mantenho somente os grupos cuja carga seja maior que a média.
 
 ---
 
-### 6️⃣ COUNT(*)
+**COUNT(*)**
 
 ```sql
 COUNT(*)
@@ -552,7 +525,7 @@ Conto quantos registros existem em cada grupo.
 
 ---
 
-# ⚠️ Um detalhe importante nessa última consulta
+**Um detalhe importante nessa última consulta**
 
 Existe uma questão conceitual na combinação:
 
@@ -594,7 +567,7 @@ Essa diferença é importante porque muda completamente o significado da anális
 
 ---
 
-# 12. O papel de cada comando
+# O papel de cada comando
 
 Agora tenho uma visão mais completa:
 
@@ -613,11 +586,11 @@ Agora tenho uma visão mais completa:
 
 ---
 
-# 🔄 WHERE e HAVING — diferença essencial
+## WHERE e HAVING — diferença essencial
 
 Essa diferença vale muito a pena memorizar:
 
-```text
+```
 WHERE
  ↓
 Filtra registros
@@ -631,7 +604,7 @@ HAVING
 Filtra grupos
 ```
 
-### Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT ano, COUNT(*)
@@ -648,11 +621,11 @@ Tradução:
 
 ---
 
-# 📌 GROUP BY não é apenas para COUNT()
+# GROUP BY não é apenas para COUNT()
 
 Posso utilizar várias funções de agregação:
 
-### Contar
+**Contar**
 
 ```sql
 SELECT carga, COUNT(*)
@@ -660,7 +633,7 @@ FROM cursos
 GROUP BY carga;
 ```
 
-### Média
+**Média**
 
 ```sql
 SELECT ano, AVG(carga)
@@ -668,7 +641,7 @@ FROM cursos
 GROUP BY ano;
 ```
 
-### Soma
+**Soma**
 
 ```sql
 SELECT ano, SUM(carga)
@@ -676,7 +649,7 @@ FROM cursos
 GROUP BY ano;
 ```
 
-### Maior valor
+**Maior valor**
 
 ```sql
 SELECT ano, MAX(carga)
@@ -684,7 +657,7 @@ FROM cursos
 GROUP BY ano;
 ```
 
-### Menor valor
+**Menor valor**
 
 ```sql
 SELECT ano, MIN(carga)
@@ -696,7 +669,7 @@ O `GROUP BY` determina **quais grupos serão analisados**, enquanto a função d
 
 ---
 
-# 🧩 Analogia para memorizar
+**Analogia para memorizar**
 
 Imagine uma escola com várias turmas.
 
@@ -732,7 +705,7 @@ HAVING COUNT(*) > 30
 
 A lógica fica:
 
-```text
+```
 Alunos
   ↓
 Separar por turma
@@ -750,7 +723,7 @@ HAVING
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. `GROUP BY` serve para **agrupar registros que possuem valores iguais**.
 2. Ele fica especialmente útil quando combinado com funções como `COUNT()`, `SUM()` e `AVG()`.
