@@ -1,966 +1,764 @@
-# DISTINCT e Funções de Agregação
+# Banco de Dados (MySQL) — GROUP BY e HAVING
 
-**Ideia principal**
+Nesta parte aprendi a **agrupar registros** e depois aplicar filtros sobre esses grupos.
 
-Aprendi a **resumir informações do banco de dados** em vez de simplesmente mostrar todos os registros.
+Até agora eu já sabia filtrar registros com `WHERE` e fazer cálculos com funções como `COUNT()`, `AVG()`, `MAX()`, `MIN()` e `SUM()`.
 
-Até agora, eu estava principalmente consultando registros individuais:
+Agora o `GROUP BY` permite responder perguntas como:
 
-```sql
-SELECT * FROM cursos;
-```
-
-Agora aprendi a fazer perguntas mais gerais ao banco, como:
-
-* Quais valores existem sem repetição?
-* Quantos cursos existem?
-* Quantos cursos possuem determinada característica?
-* Qual é a maior carga horária?
-* Qual é a menor quantidade de aulas?
-* Qual é a soma das cargas horárias?
-* Qual é a média?
-
-Para isso, vou utilizar principalmente:
-
-```
-DISTINCT
-COUNT()
-MAX()
-MIN()
-SUM()
-AVG()
-```
-
-Essas funções são chamadas de **funções de agregação**, porque pegam vários registros e produzem um **resultado resumido**.
+> "Quais registros possuem o mesmo valor e quantos existem em cada grupo?"
 
 ---
 
-# DISTINCT — Removendo valores repetidos
+# 1. GROUP BY — Agrupando registros
 
-Para trazer valores sem repetição:
+O comando básico é:
+
+```sql
+SELECT carga
+FROM cursos
+GROUP BY carga;
+```
+
+O `GROUP BY` agrupa os registros que possuem o mesmo valor na coluna indicada.
+
+Se eu tiver:
+
+| curso      | carga |
+| ---------- | ----: |
+| Algoritmos |    40 |
+| Excel      |    40 |
+| PHP        |    24 |
+| Front-end  |    60 |
+| JavaScript |    40 |
+| MySQL      |    24 |
+
+Ao executar:
+
+```sql
+SELECT carga
+FROM cursos
+GROUP BY carga;
+```
+
+o resultado será algo parecido com:
+
+| carga |
+| ----: |
+|    24 |
+|    40 |
+|    60 |
+
+Ou seja, os valores iguais foram colocados no mesmo grupo.
+
+---
+
+# 🧠 GROUP BY x DISTINCT
+
+Nesse exemplo, existe uma semelhança importante:
 
 ```sql
 SELECT DISTINCT carga
+FROM cursos;
+```
+
+e:
+
+```sql
+SELECT carga
 FROM cursos
+GROUP BY carga;
+```
+
+podem produzir os mesmos valores.
+
+Mas a finalidade do `GROUP BY` é mais ampla.
+
+O `GROUP BY` é especialmente útil quando eu quero **fazer cálculos sobre cada grupo**.
+
+Por exemplo:
+
+```sql
+SELECT carga, COUNT(*)
+FROM cursos
+GROUP BY carga;
+```
+
+Agora consigo descobrir quantos cursos existem em cada carga horária.
+
+---
+
+# 2. GROUP BY + COUNT()
+
+```sql
+SELECT carga, COUNT(*)
+FROM cursos
+GROUP BY carga;
+```
+
+Essa consulta faz duas coisas:
+
+### `carga`
+
+Define os grupos.
+
+### `COUNT(*)`
+
+Conta quantos registros existem dentro de cada grupo.
+
+Por exemplo:
+
+| carga | COUNT(*) |
+| ----: | -------: |
+|    24 |        2 |
+|    40 |        4 |
+|    60 |        2 |
+|    72 |        1 |
+
+Isso significa:
+
+* Existem 2 cursos com 24 horas.
+* Existem 4 cursos com 40 horas.
+* Existem 2 cursos com 60 horas.
+* Existe 1 curso com 72 horas.
+
+---
+
+# 3. Deixando o resultado organizado com ORDER BY
+
+Posso ordenar o resultado:
+
+```sql
+SELECT carga, COUNT(*)
+FROM cursos
+GROUP BY carga
 ORDER BY carga;
 ```
 
----
+O resultado será organizado pela carga horária, do menor para o maior.
 
-**O que o DISTINCT faz?**
-
-Imagine que a tabela tenha:
-
-| nome             | carga |
-| ---------------- | ----: |
-| Algoritmos       |    40 |
-| Excel Essencial  |    40 |
-| Excel Avançado I |    24 |
-| PHP com MySQL    |    40 |
-| Front-end I      |    60 |
-
-Se eu fizer:
+Também posso usar:
 
 ```sql
-SELECT carga FROM cursos;
+ORDER BY carga DESC;
 ```
 
-o resultado poderá ser:
-
-```
-40
-40
-24
-40
-60
-```
-
-Existem valores repetidos.
-
-Agora:
-
-```sql
-SELECT DISTINCT carga
-FROM cursos;
-```
-
-retorna:
-
-```
-24
-40
-60
-```
-
-O `DISTINCT` elimina as repetições do resultado.
+para mostrar do maior para o menor.
 
 ---
 
-> Analogia
+# 4. GROUP BY com WHERE
 
-Imagine que eu tenha uma lista de compras:
+Também posso filtrar os registros **antes de agrupá-los**.
 
-```
-Arroz
-Feijão
-Arroz
-Café
-Café
-Café
-```
-
-Se eu quiser saber **quais produtos diferentes existem**, não preciso ver o arroz três vezes e o café três vezes.
-
-O resultado seria:
-
-```
-Arroz
-Feijão
-Café
-```
-
-É exatamente essa ideia do `DISTINCT`.
-
----
-
-# COUNT() — Contando registros
-
-Agora comecei a utilizar funções de agregação.
-
-A primeira é:
+Exemplo:
 
 ```sql
-COUNT()
-```
-
-Ela serve para **contar**.
-
-- **Exemplo:**
-
-```sql
-SELECT COUNT(*)
-FROM cursos;
-```
-
-Isso retorna a quantidade de registros existentes na tabela `cursos`.
-
----
-
-**O que significa COUNT(*)?**
-
-O `*` significa que quero considerar **todas as linhas**.
-
-Então:
-
-```sql
-SELECT COUNT(*)
-FROM cursos;
-```
-
-pode ser interpretado como:
-
-> "Quantos registros existem na tabela `cursos`?"
-
-Se houver 9 cursos:
-
-```
-9
-```
-
-será o resultado.
-
----
-
-# COUNT() com WHERE
-
-Posso combinar `COUNT()` com filtros.
-
-```sql
-SELECT COUNT(*)
+SELECT carga, totalaulas
 FROM cursos
-WHERE carga > 40;
+WHERE totalaulas = 8
+GROUP BY carga
+ORDER BY carga;
 ```
 
-Agora a pergunta é:
+Aqui o processo é:
 
-> "Quantos cursos possuem carga maior que 40 horas?"
-
-O banco primeiro aplica:
-
-```sql
-WHERE carga > 40
-```
-
-e depois conta os registros encontrados.
-
----
-
-**Como o banco pensa nessa consulta?**
-
-```sql
-SELECT COUNT(*)
-FROM cursos
-WHERE carga > 40;
-```
-
-Podemos imaginar:
-
-```
+```text
 Todos os cursos
       ↓
-Filtrar carga > 40
+WHERE totalaulas = 8
       ↓
-Cursos que sobraram
+Somente cursos com 8 aulas
       ↓
-COUNT(*)
+GROUP BY carga
       ↓
-Quantidade
+Agrupa pela carga
+      ↓
+ORDER BY carga
+      ↓
+Organiza o resultado
 ```
 
-Essa lógica de **filtrar primeiro e agregar depois** é muito importante.
+### ⚠️ Observação importante
 
----
+Essa consulta funciona em determinadas configurações do MySQL, mas não é uma boa prática usar `GROUP BY carga` enquanto também seleciono `totalaulas` sem agregá-lo.
 
-# COUNT(nome)
-
-Também posso utilizar uma coluna dentro do `COUNT()`:
+Como `totalaulas` já foi filtrado para ser `8`, uma consulta mais simples seria:
 
 ```sql
-SELECT COUNT(nome)
+SELECT carga, totalaulas
 FROM cursos
-WHERE carga >= 60;
+WHERE totalaulas = 8
+ORDER BY carga;
 ```
 
-Isso conta quantos registros possuem `nome` preenchido dentro do conjunto que atende:
+Se a intenção for realmente contar quantos cursos existem em cada carga com 8 aulas, eu faria:
 
 ```sql
-carga >= 60
-```
-
-Como `nome` foi definido como:
-
-```sql
-nome VARCHAR(50) NOT NULL
-```
-
-nesse caso, `COUNT(nome)` e `COUNT(*)` produzirão o mesmo resultado.
-
----
-
-# COUNT(*) x COUNT(coluna)
-
-Existe uma diferença importante.
-
-**`COUNT(*)`**
-
-Conta as linhas.
-
-```sql
-COUNT(*)
-```
-
-**`COUNT(coluna)`**
-
-Conta os valores **não nulos** daquela coluna.
-
-- **Por exemplo:**
-
-```sql
-SELECT COUNT(nome)
-FROM cursos;
-```
-
-contará somente registros em que `nome` não seja `NULL`.
-
----
-
-## Uma diferença importante
-
-Se uma tabela tivesse:
-
-| id | nome       |
-| -: | ---------- |
-|  1 | Algoritmos |
-|  2 | Excel      |
-|  3 | NULL       |
-
-Então:
-
-```sql
-COUNT(*)
-```
-
-retornaria:
-
-```
-3
-```
-
-Mas:
-
-```sql
-COUNT(nome)
-```
-
-retornaria:
-
-```
-2
-```
-
-porque o terceiro registro possui `nome = NULL`.
-
----
-
-## Contando estudantes brasileiros
-
-Também posso utilizar `COUNT()` em outra tabela:
-
-```sql
-SELECT COUNT(*)
-FROM estudantes
-WHERE nacionalidade = 'Brasileiro';
-```
-
-Essa consulta responde:
-
-> "Quantos estudantes possuem nacionalidade igual a Brasileiro?"
-
----
-
-# MAX() — Encontrando o maior valor
-
-Outra função de agregação é:
-
-```sql
-MAX()
-```
-
-Ela retorna o **maior valor** encontrado.
-
-- **Exemplo:**
-
-```sql
-SELECT MAX(carga)
-FROM cursos;
-```
-
-Isso responde:
-
-> "Qual é a maior carga horária entre os cursos?"
-
-Se as cargas forem:
-
-```
-24
-40
-40
-60
-72
-```
-
-o resultado será:
-
-```
-72
-```
-
----
-
-# MAX() com filtro
-
-Também posso restringir a pesquisa:
-
-```sql
-SELECT MAX(totalaulas)
+SELECT carga, COUNT(*)
 FROM cursos
-WHERE ano = 2026;
+WHERE totalaulas = 8
+GROUP BY carga
+ORDER BY carga;
 ```
 
-Agora estou perguntando:
-
-> "Entre os cursos de 2026, qual possui a maior quantidade de aulas?"
-
-O `WHERE` limita os registros para 2026.
-
-Depois o `MAX()` procura o maior valor de `totalaulas`.
+Essa forma deixa claramente definido o que estou agrupando e contando.
 
 ---
 
-## Ver os cursos de 2026 ordenados pelas aulas
+# 5. HAVING — Filtrando grupos
 
-Também posso simplesmente visualizar os cursos:
+Agora entra uma diferença muito importante:
+
+* `WHERE` → filtra **registros**
+* `HAVING` → filtra **grupos**
+
+Exemplo:
 
 ```sql
-SELECT *
+SELECT carga, COUNT(*)
 FROM cursos
-WHERE ano = 2026
-ORDER BY totalaulas;
+GROUP BY carga
+HAVING COUNT(carga) >= 30
+ORDER BY carga;
 ```
 
-Nesse caso, não estou obtendo apenas o maior valor.
+Aqui existe um problema lógico: se `COUNT(carga)` estiver contando a quantidade de cursos em cada carga, exigir `>= 30` significa procurar grupos com **30 ou mais cursos**, o que provavelmente não corresponde aos dados dessa tabela.
 
-Estou vendo **todos os cursos de 2026**, organizados pela quantidade de aulas.
+A sintaxe está correta, mas a condição provavelmente não produzirá resultados com a quantidade de cursos que tenho.
 
-Por padrão:
-
-```sql
-ORDER BY totalaulas
-```
-
-é crescente.
-
-Se quiser do maior para o menor:
+Um exemplo mais adequado seria:
 
 ```sql
-SELECT *
+SELECT carga, COUNT(*)
 FROM cursos
-WHERE ano = 2026
-ORDER BY totalaulas DESC;
+GROUP BY carga
+HAVING COUNT(*) >= 2
+ORDER BY carga;
 ```
+
+Isso significa:
+
+> "Agrupe os cursos pela carga e mostre somente as cargas que possuem pelo menos 2 cursos."
 
 ---
 
-# MIN() — Encontrando o menor valor
+# 6. WHERE x HAVING
 
-Se `MAX()` encontra o maior, `MIN()` encontra o menor.
+Essa é uma das diferenças mais importantes desta aula.
+
+## WHERE
+
+Filtra os registros **antes do agrupamento**.
 
 ```sql
-SELECT MIN(totalaulas)
+SELECT ano, COUNT(*)
 FROM cursos
-WHERE ano = 2026;
+WHERE carga >= 40
+GROUP BY ano;
 ```
 
-Essa consulta responde:
+Podemos interpretar:
 
-> "Qual é a menor quantidade de aulas entre os cursos de 2026?"
+> "Pegue somente cursos com carga maior ou igual a 40 e depois agrupe esses cursos por ano."
 
 ---
 
-# MAX() x MIN()
+## HAVING
 
-| Função  | Retorna     |
-| ------- | ----------- |
-| `MAX()` | Maior valor |
-| `MIN()` | Menor valor |
-
-- **Exemplo:**
-
-```
-24
-40
-40
-60
-72
-```
+Filtra os grupos **depois do agrupamento**.
 
 ```sql
-MAX(carga)
-```
-
-→ `72`
-
-```sql
-MIN(carga)
-```
-
-→ `24`
-
----
-
-# SUM() — Somando valores
-
-A função:
-
-```sql
-SUM()
-```
-
-serve para **somar os valores de uma coluna**.
-
-- **Exemplo:**
-
-```sql
-SELECT SUM(carga)
-FROM cursos;
-```
-
-Isso soma todas as cargas horárias dos cursos.
-
-Imagine:
-
-```
-40 + 40 + 24 + 24 + 72
-```
-
-O banco calcula automaticamente o resultado.
-
----
-
-# SUM() com WHERE
-
-Também posso fazer uma soma específica:
-
-```sql
-SELECT SUM(carga)
+SELECT ano, COUNT(*)
 FROM cursos
-WHERE ano = 2027;
+GROUP BY ano
+HAVING ano > 2026;
 ```
 
-Agora estou perguntando:
+Aqui:
 
-> "Qual é a soma das cargas horárias de todos os cursos de 2027?"
-
-O processo é:
-
-```
-Todos os cursos
-      ↓
-Selecionar somente ano = 2027
-      ↓
-Pegar a coluna carga
-      ↓
-Somar os valores
-      ↓
-Resultado
+```text
+GROUP BY
+   ↓
+Cria os grupos por ano
+   ↓
+HAVING
+   ↓
+Mantém somente os grupos cujo ano > 2026
 ```
 
 ---
 
-# AVG() — Calculando a média
+# 7. GROUP BY + HAVING + ORDER BY
 
-A função:
+Um exemplo completo:
 
 ```sql
-AVG()
+SELECT ano, COUNT(*)
+FROM cursos
+GROUP BY ano
+HAVING ano > 2026
+ORDER BY ano;
 ```
 
-calcula a **média aritmética** dos valores.
+Cada parte possui uma função:
 
-- **Exemplo:**
+```text
+SELECT
+↓
+O que quero visualizar
+
+FROM
+↓
+De onde vêm os dados
+
+GROUP BY
+↓
+Como os dados serão agrupados
+
+HAVING
+↓
+Quais grupos permanecem
+
+ORDER BY
+↓
+Como o resultado será organizado
+```
+
+---
+
+# 8. WHERE + GROUP BY + HAVING
+
+Posso usar os dois tipos de filtro na mesma consulta:
+
+```sql
+SELECT ano, COUNT(*)
+FROM cursos
+WHERE carga >= 40
+GROUP BY ano
+HAVING ano > 2026
+ORDER BY ano;
+```
+
+Aqui acontece uma sequência muito importante:
+
+```text
+1. FROM
+   ↓
+2. WHERE
+   ↓
+3. GROUP BY
+   ↓
+4. HAVING
+   ↓
+5. SELECT
+   ↓
+6. ORDER BY
+```
+
+De forma simplificada:
+
+> Primeiro filtro os registros → depois agrupo → depois filtro os grupos → finalmente organizo o resultado.
+
+---
+
+# 9. Usando AVG() junto com GROUP BY
+
+Agora posso combinar `GROUP BY` com `AVG()`.
+
+Por exemplo:
 
 ```sql
 SELECT AVG(carga)
 FROM cursos;
 ```
 
-Se tivermos:
+Essa consulta calcula a média da carga horária de todos os cursos.
 
-```
-40
-40
-24
-60
-```
+No meu exemplo, o resultado é aproximadamente:
 
-a média será:
-
-```
-(40 + 40 + 24 + 60) / 4
+```text
+42,38
 ```
 
-Resultado:
-
-```
-41
-```
-
-O MySQL realiza esse cálculo automaticamente.
+Mas posso fazer análises mais específicas utilizando agrupamento.
 
 ---
 
-# AVG() com filtro
+# 10. Subconsulta — Usando AVG() dentro de outra consulta
 
-Também posso calcular uma média somente de determinados registros.
+Uma consulta interessante é:
 
 ```sql
-SELECT AVG(totalaulas)
+SELECT ano, carga, COUNT(*)
 FROM cursos
-WHERE ano = 2028;
+WHERE ano > 2026
+GROUP BY carga
+HAVING carga > (SELECT AVG(carga) FROM cursos);
 ```
 
-Essa consulta responde:
+Aqui aparece um conceito novo:
 
-> "Qual é a média da quantidade de aulas dos cursos de 2028?"
+# Subconsulta
 
----
+Uma **subconsulta** é uma consulta dentro de outra consulta.
 
-# As cinco principais funções de agregação
-
-As principais funções foram:
-
-```
-COUNT()
-MAX()
-MIN()
-SUM()
-AVG()
-```
-
-Uma forma simples de memorizar:
-
-| Função    | Pergunta          |
-| --------- | ----------------- |
-| `COUNT()` | **Quantos?**      |
-| `MAX()`   | **Qual o maior?** |
-| `MIN()`   | **Qual o menor?** |
-| `SUM()`   | **Qual o total?** |
-| `AVG()`   | **Qual a média?** |
-
----
-
-# DISTINCT x funções de agregação
-
-É importante não confundir os dois.
-
-**DISTINCT**
-
-Remove valores repetidos do resultado:
+Neste trecho:
 
 ```sql
-SELECT DISTINCT carga
+(SELECT AVG(carga) FROM cursos)
+```
+
+o MySQL executa primeiro essa consulta:
+
+```sql
+SELECT AVG(carga)
 FROM cursos;
 ```
 
-Resultado:
+Ela produz aproximadamente:
 
-```
-24
-40
-60
-72
+```text
+42,38
 ```
 
----
-
-**COUNT()**
-
-Conta:
+Então a consulta principal passa a funcionar como se fosse:
 
 ```sql
-SELECT COUNT(*)
-FROM cursos;
-```
-
-Resultado:
-
-```
-9
+HAVING carga > 42.38
 ```
 
 Ou seja:
 
-* `DISTINCT` → **quais valores diferentes existem?**
-* `COUNT` → **quantos registros existem?**
+> "Mostre os grupos cuja carga seja maior que a média geral dos cursos."
 
 ---
 
-# WHERE + funções de agregação
+# 🧠 Por que usar uma subconsulta?
 
-Uma característica importante é que posso combinar filtros com praticamente todas essas funções.
-
-**COUNT**
+Eu poderia escrever diretamente:
 
 ```sql
-SELECT COUNT(*)
-FROM cursos
-WHERE carga > 40;
+HAVING carga > 42.38
 ```
 
-**MAX**
+Mas existe um problema.
+
+Se eu adicionar novos cursos ou alterar as cargas existentes, a média pode mudar.
+
+Por exemplo, hoje:
+
+```text
+Média = 42,38
+```
+
+Amanhã, depois de adicionar vários cursos:
+
+```text
+Média = 45,20
+```
+
+Se eu deixei:
 
 ```sql
-SELECT MAX(carga)
-FROM cursos
-WHERE ano = 2026;
+HAVING carga > 42.38
 ```
 
-**MIN**
+o valor continuará sendo `42.38`.
+
+Já com:
 
 ```sql
-SELECT MIN(carga)
-FROM cursos
-WHERE ano = 2026;
+HAVING carga > (SELECT AVG(carga) FROM cursos)
 ```
 
-**SUM**
+o banco **calcula novamente a média sempre que a consulta for executada**.
+
+Isso torna a consulta dinâmica.
+
+---
+
+# 11. Entendendo a subconsulta por partes
+
+A consulta:
 
 ```sql
-SELECT SUM(carga)
+SELECT ano, carga, COUNT(*)
 FROM cursos
-WHERE ano = 2027;
+WHERE ano > 2026
+GROUP BY carga
+HAVING carga > (SELECT AVG(carga) FROM cursos);
 ```
 
-**AVG**
+pode ser desmontada assim.
+
+### 1️⃣ FROM
 
 ```sql
-SELECT AVG(carga)
 FROM cursos
-WHERE ano = 2028;
 ```
 
-A lógica é sempre parecida:
+Estou trabalhando com a tabela `cursos`.
 
+---
+
+### 2️⃣ WHERE
+
+```sql
+WHERE ano > 2026
 ```
-Tabela
- ↓
+
+Seleciono somente cursos posteriores a 2026.
+
+---
+
+### 3️⃣ GROUP BY
+
+```sql
+GROUP BY carga
+```
+
+Agrupo os registros pela carga horária.
+
+---
+
+### 4️⃣ Subconsulta
+
+```sql
+(SELECT AVG(carga) FROM cursos)
+```
+
+Calculo a média geral da carga horária.
+
+---
+
+### 5️⃣ HAVING
+
+```sql
+HAVING carga > (SELECT AVG(carga) FROM cursos)
+```
+
+Mantenho somente os grupos cuja carga seja maior que a média.
+
+---
+
+### 6️⃣ COUNT(*)
+
+```sql
+COUNT(*)
+```
+
+Conto quantos registros existem em cada grupo.
+
+---
+
+# ⚠️ Um detalhe importante nessa última consulta
+
+Existe uma questão conceitual na combinação:
+
+```sql
+WHERE ano > 2026
+GROUP BY carga
+HAVING carga > (SELECT AVG(carga) FROM cursos)
+```
+
+A média da subconsulta é calculada sobre **todos os cursos**, porque ela não possui:
+
+```sql
+WHERE ano > 2026
+```
+
+Portanto, estou comparando:
+
+> **cargas dos cursos de 2027+**
+> contra
+> **média de todos os cursos**
+
+Isso pode ser exatamente o que eu quero.
+
+Se eu quisesse comparar os cursos de 2027+ apenas contra a **média dos cursos de 2027+**, precisaria colocar o mesmo filtro dentro da subconsulta:
+
+```sql
+SELECT ano, carga, COUNT(*)
+FROM cursos
+WHERE ano > 2026
+GROUP BY carga
+HAVING carga > (
+    SELECT AVG(carga)
+    FROM cursos
+    WHERE ano > 2026
+);
+```
+
+Essa diferença é importante porque muda completamente o significado da análise.
+
+---
+
+# 12. O papel de cada comando
+
+Agora tenho uma visão mais completa:
+
+| Comando    | Função                       |
+| ---------- | ---------------------------- |
+| `WHERE`    | Filtra registros             |
+| `GROUP BY` | Agrupa registros semelhantes |
+| `HAVING`   | Filtra os grupos             |
+| `ORDER BY` | Ordena o resultado           |
+| `COUNT()`  | Conta                        |
+| `SUM()`    | Soma                         |
+| `AVG()`    | Calcula média                |
+| `MAX()`    | Encontra o maior             |
+| `MIN()`    | Encontra o menor             |
+| `DISTINCT` | Remove repetições            |
+
+---
+
+# 🔄 WHERE e HAVING — diferença essencial
+
+Essa diferença vale muito a pena memorizar:
+
+```text
 WHERE
  ↓
-Registros filtrados
+Filtra registros
  ↓
-Função de agregação
+GROUP BY
  ↓
-Resultado
+Cria grupos
+ ↓
+HAVING
+ ↓
+Filtra grupos
+```
+
+### Exemplo:
+
+```sql
+SELECT ano, COUNT(*)
+FROM cursos
+WHERE carga >= 40
+GROUP BY ano
+HAVING COUNT(*) >= 2
+ORDER BY ano;
+```
+
+Tradução:
+
+> "Pegue somente cursos com pelo menos 40 horas, agrupe-os por ano, mantenha somente os anos que possuem pelo menos 2 cursos e organize os anos em ordem crescente."
+
+---
+
+# 📌 GROUP BY não é apenas para COUNT()
+
+Posso utilizar várias funções de agregação:
+
+### Contar
+
+```sql
+SELECT carga, COUNT(*)
+FROM cursos
+GROUP BY carga;
+```
+
+### Média
+
+```sql
+SELECT ano, AVG(carga)
+FROM cursos
+GROUP BY ano;
+```
+
+### Soma
+
+```sql
+SELECT ano, SUM(carga)
+FROM cursos
+GROUP BY ano;
+```
+
+### Maior valor
+
+```sql
+SELECT ano, MAX(carga)
+FROM cursos
+GROUP BY ano;
+```
+
+### Menor valor
+
+```sql
+SELECT ano, MIN(carga)
+FROM cursos
+GROUP BY ano;
+```
+
+O `GROUP BY` determina **quais grupos serão analisados**, enquanto a função de agregação determina **o que será calculado dentro de cada grupo**.
+
+---
+
+# 🧩 Analogia para memorizar
+
+Imagine uma escola com várias turmas.
+
+Eu posso dizer:
+
+> "Separe os alunos por turma."
+
+Isso é:
+
+```sql
+GROUP BY turma
+```
+
+Depois:
+
+> "Conte quantos alunos existem em cada turma."
+
+Isso é:
+
+```sql
+COUNT(*)
+```
+
+Depois:
+
+> "Mostre somente as turmas que possuem mais de 30 alunos."
+
+Isso é:
+
+```sql
+HAVING COUNT(*) > 30
+```
+
+A lógica fica:
+
+```text
+Alunos
+  ↓
+Separar por turma
+  ↓
+GROUP BY
+  ↓
+Contar alunos de cada turma
+  ↓
+COUNT()
+  ↓
+Eliminar turmas com poucos alunos
+  ↓
+HAVING
 ```
 
 ---
 
-# Uma diferença importante: resultado resumido x registros
-
-Veja:
-
-```sql
-SELECT *
-FROM cursos
-WHERE ano = 2026
-ORDER BY totalaulas;
-```
-
-Essa consulta retorna **várias linhas**.
-
-Ela mostra os cursos encontrados.
-
-Já:
-
-```sql
-SELECT MAX(totalaulas)
-FROM cursos
-WHERE ano = 2026;
-```
-
-retorna apenas **um valor**.
-
-Ela não mostra qual curso possui esse valor, apenas informa qual é o maior número de aulas.
-
-Isso é importante.
-
-Se eu quiser descobrir **qual curso possui a maior quantidade de aulas**, `MAX()` sozinho não é suficiente. Ele me dá o número máximo, não necessariamente os dados completos do curso.
-
----
-
-> Analogia
-
-Imagine uma sala com vários alunos.
-
-**`COUNT()`**
-
-> "Quantos alunos existem?"
-
-**`MAX()`**
-
-> "Qual foi a maior nota?"
-
-**`MIN()`**
-
-> "Qual foi a menor nota?"
-
-**`SUM()`**
-
-> "Qual é a soma de todas as notas?"
-
-**`AVG()`**
-
-> "Qual é a média das notas?"
-
-**`DISTINCT`**
-
-> "Quais notas diferentes apareceram, sem repetir?"
-
-Essa é exatamente a função dessas operações no banco.
-
----
-
-# Principais consultas
-
-Valores sem repetição
-
-```sql
-SELECT DISTINCT carga
-FROM cursos
-ORDER BY carga;
-```
-
-**Quantidade de cursos**
-
-```sql
-SELECT COUNT(*)
-FROM cursos;
-```
-
-**Quantidade com filtro**
-
-```sql
-SELECT COUNT(*)
-FROM cursos
-WHERE carga > 40;
-```
-
-**Quantidade de estudantes brasileiros**
-
-```sql
-SELECT COUNT(*)
-FROM estudantes
-WHERE nacionalidade = 'Brasileiro';
-```
-
-**Maior carga**
-
-```sql
-SELECT MAX(carga)
-FROM cursos;
-```
-
-**Maior quantidade de aulas em 2026**
-
-```sql
-SELECT MAX(totalaulas)
-FROM cursos
-WHERE ano = 2026;
-```
-
-**Menor quantidade de aulas em 2026**
-
-```sql
-SELECT MIN(totalaulas)
-FROM cursos
-WHERE ano = 2026;
-```
-
-**Soma das cargas**
-
-```sql
-SELECT SUM(carga)
-FROM cursos;
-```
-
-**Soma das cargas de 2027**
-
-```sql
-SELECT SUM(carga)
-FROM cursos
-WHERE ano = 2027;
-```
-
-**Média das cargas**
-
-```sql
-SELECT AVG(carga)
-FROM cursos;
-```
-
-**Média das aulas de 2028**
-
-```sql
-SELECT AVG(totalaulas)
-FROM cursos
-WHERE ano = 2028;
-```
-
----
-
-**Um detalhe importante sobre AVG()**
-
-Dependendo dos valores, o resultado de `AVG()` pode possuir casas decimais.
-
-- **Por exemplo:**
-
-```
-20
-30
-40
-```
-
-A média é:
-
-```
-30
-```
-
-Mas:
-
-```
-20
-30
-41
-```
-
-resulta em:
-
-```
-30,333...
-```
-
-O MySQL pode apresentar várias casas decimais dependendo do tipo dos dados e da forma como o resultado é exibido.
-
-Se posteriormente eu quiser controlar a quantidade de casas decimais, posso utilizar funções como `ROUND()`.
-
----
-
-# Resumo Geral 
-
-Até aqui, as consultas começaram a ficar muito mais poderosas.
-
-Antes:
-
-```sql
-SELECT * FROM cursos;
-```
-
-> "Mostre tudo."
-
-Agora posso perguntar coisas muito mais específicas:
-
-```sql
-SELECT COUNT(*)
-FROM cursos
-WHERE ano = 2026;
-```
-
-> "Quantos cursos existem em 2026?"
-
-Ou:
-
-```sql
-SELECT MAX(carga)
-FROM cursos
-WHERE ano = 2026;
-```
-
-> "Qual é a maior carga horária dos cursos de 2026?"
-
-Ou:
-
-```sql
-SELECT AVG(carga)
-FROM cursos
-WHERE ano = 2028;
-```
-
-> "Qual é a média da carga horária dos cursos de 2028?"
-
-É justamente aí que o banco de dados começa a deixar de ser apenas um lugar para **guardar informações** e passa a ser uma ferramenta para **analisar informações**.
-
----
-
-**Resumo Relâmpago**
-
-1. `DISTINCT` remove valores repetidos do resultado.
-2. `COUNT()` conta registros ou valores não nulos de uma coluna.
-3. `COUNT(*)` conta as linhas da consulta.
-4. `MAX()` retorna o maior valor encontrado.
-5. `MIN()` retorna o menor valor encontrado.
-6. `SUM()` soma os valores de uma coluna.
-7. `AVG()` calcula a média dos valores.
-8. `WHERE` pode ser utilizado antes da agregação para filtrar os registros analisados.
-9. Funções de agregação normalmente retornam um resultado resumido, e não todos os registros.
-10. `DISTINCT`, `COUNT`, `MAX`, `MIN`, `SUM` e `AVG` permitem transformar dados armazenados em informações úteis para análise.
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. `GROUP BY` serve para **agrupar registros que possuem valores iguais**.
+2. Ele fica especialmente útil quando combinado com funções como `COUNT()`, `SUM()` e `AVG()`.
+3. `COUNT(*)` pode mostrar quantos registros existem em cada grupo.
+4. `WHERE` filtra os registros **antes** do agrupamento.
+5. `HAVING` filtra os grupos **depois** do `GROUP BY`.
+6. `ORDER BY` organiza o resultado final.
+7. `GROUP BY carga` cria grupos de cursos com a mesma carga horária.
+8. `HAVING COUNT(*) >= 2` pode manter somente grupos que possuem pelo menos dois registros.
+9. Uma subconsulta é uma consulta colocada dentro de outra consulta.
+10. `HAVING carga > (SELECT AVG(carga) FROM cursos)` compara cada grupo com uma média calculada dinamicamente pelo banco.
