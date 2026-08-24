@@ -8,7 +8,7 @@ Agora o `GROUP BY` permite responder perguntas como:
 
 ---
 
-## GROUP BY — Agrupando registros
+# GROUP BY — Agrupando registros
 
 O comando básico é:
 
@@ -86,7 +86,7 @@ Agora consigo descobrir quantos cursos existem em cada carga horária.
 
 ---
 
-## GROUP BY + COUNT()
+# GROUP BY + COUNT()
 
 ```sql
 SELECT carga, COUNT(*)
@@ -216,7 +216,7 @@ Isso significa:
 
 ---
 
-## WHERE x HAVING
+# WHERE x HAVING
 
 Essa é uma das diferenças mais importantes desta aula.
 
