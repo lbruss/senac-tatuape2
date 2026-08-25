@@ -1,16 +1,16 @@
 # JavaScript — Introdução, Sintaxe, Variáveis e Operadores
 
-## 1. O que é JavaScript?
+**O que é JavaScript**
 
 **JavaScript** é uma linguagem de programação muito utilizada no mercado atualmente.
 
 Ela é principalmente conhecida pelo desenvolvimento **Front-end**, mas também pode ser utilizada no **Back-end**.
 
-### Onde o JavaScript pode ser usado?
+**Onde o JavaScript pode ser usado?**
 
-* 🌐 **Front-end:** interação e comportamento das páginas Web.
-* 🖥️ **Back-end:** desenvolvimento da parte do servidor, utilizando ambientes como o Node.js.
-* 📱 **Aplicações:** também pode ser utilizado em diferentes tipos de aplicações.
+**Front-end:** interação e comportamento das páginas Web.
+**Back-end:** desenvolvimento da parte do servidor, utilizando ambientes como o Node.js.
+**Aplicações:** também pode ser utilizado em diferentes tipos de aplicações.
 
 Uma forma simples de entender:
 
