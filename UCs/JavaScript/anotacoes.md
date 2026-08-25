@@ -586,7 +586,7 @@ onde:
 
 ---
 
-# 12. Exemplo reunindo tipos de dados
+## Exemplo reunindo tipos de dados
 
 ```javascript
 var nome = "Maria Aparecida";
@@ -613,11 +613,11 @@ Aqui temos:
 
 ---
 
-# 13. Operadores
+# Operadores
 
 Os **operadores** são símbolos que permitem realizar operações com valores e variáveis.
 
-Exemplos:
+- **Exemplos:**
 
 ```javascript
 +
@@ -636,11 +636,11 @@ Também existem operadores utilizados para:
 
 ---
 
-# 14. Operadores incrementais
+# Operadores incrementais
 
 Os operadores incrementais permitem aumentar ou diminuir o valor de uma variável.
 
-## Incremento `++`
+**Incremento `++`**
 
 Adiciona `1`:
 
@@ -652,13 +652,13 @@ x++;
 
 Agora:
 
-```text
+```
 x = 11
 ```
 
 ---
 
-## Decremento `--`
+**Decremento `--`**
 
 Subtrai `1`:
 
@@ -670,7 +670,7 @@ x--;
 
 Agora:
 
-```text
+```
 x = 9
 ```
 
@@ -680,7 +680,7 @@ x = 9
 
 O `++` e o `--` podem aparecer antes ou depois da variável.
 
-## Pós-fixado
+**Pós-fixado**
 
 ```javascript
 x++;
@@ -688,7 +688,7 @@ x++;
 
 Primeiro o valor atual é utilizado e **depois** acontece o incremento.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 var x = 10;
@@ -698,19 +698,19 @@ console.log(x++);
 
 Resultado:
 
-```text
+```
 10
 ```
 
 Depois da execução:
 
-```text
+```
 x = 11
 ```
 
 ---
 
-## Pré-fixado
+**Pré-fixado**
 
 ```javascript
 ++x;
@@ -718,7 +718,7 @@ x = 11
 
 Primeiro acontece o incremento e **depois** o valor é utilizado.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 var x = 10;
@@ -728,7 +728,7 @@ console.log(++x);
 
 Resultado:
 
-```text
+```
 11
 ```
 
@@ -736,16 +736,16 @@ Nesse caso, o valor de `x` passa para `11` antes de ser enviado para o `console.
 
 A diferença está na **ordem da operação**. 
 
-### Forma de lembrar
+**Forma de lembrar**
 
-```text
+```
 x++ → usa → aumenta
 ++x → aumenta → usa
 ```
 
 ---
 
-# 16. Operadores comparativos
+# Operadores comparativos
 
 Os operadores comparativos servem para **comparar valores**.
 
@@ -780,7 +780,7 @@ Eles são fundamentais para estruturas de decisão, como `if` e `else`.
 
 ---
 
-# 17. `==` — igualdade solta
+**`==` — igualdade solta**
 
 Compara os valores permitindo conversão de tipo.
 
@@ -790,7 +790,7 @@ console.log(5 == "5");
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -798,7 +798,7 @@ Isso acontece porque, nesse caso, o JavaScript considera os valores equivalentes
 
 ---
 
-# 18. `===` — igualdade estrita
+**`===` — igualdade estrita**
 
 Compara **valor e tipo**.
 
@@ -808,7 +808,7 @@ console.log(5 === "5");
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -816,14 +816,14 @@ Por quê?
 
 Porque:
 
-```text
+```
 5   → Number
 "5" → String
 ```
 
 Os valores parecem iguais, mas os tipos são diferentes.
 
-### Regra prática
+**Regra prática**
 
 Em JavaScript moderno, geralmente é preferível utilizar:
 
@@ -841,9 +841,9 @@ quando queremos uma comparação mais previsível.
 
 ---
 
-# 19. `!=` e `!==`
+**`!=` e `!==`**
 
-### Diferente
+**Diferente**
 
 ```javascript
 5 != 3
@@ -851,11 +851,11 @@ quando queremos uma comparação mais previsível.
 
 Resultado:
 
-```text
+```
 true
 ```
 
-### Diferente estrito
+**Diferente estrito**
 
 ```javascript
 5 !== "5"
@@ -863,7 +863,7 @@ true
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -871,7 +871,7 @@ Nesse caso, o valor e o tipo são considerados na comparação.
 
 ---
 
-# 20. Maior e menor
+# Maior e menor
 
 Podemos comparar números utilizando:
 
@@ -882,7 +882,7 @@ Podemos comparar números utilizando:
 <=
 ```
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 console.log(10 > 8);
@@ -890,7 +890,7 @@ console.log(10 > 8);
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -898,7 +898,7 @@ Porque `10` realmente é maior que `8`.
 
 ---
 
-# 21. Operadores aritméticos
+# Operadores aritméticos
 
 Os operadores aritméticos permitem realizar cálculos matemáticos. 
 
@@ -913,7 +913,7 @@ Os operadores aritméticos permitem realizar cálculos matemáticos.
 
 ---
 
-## 21.1 Adição `+`
+**Adição `+`**
 
 ```javascript
 console.log(10 + 5);
@@ -921,13 +921,13 @@ console.log(10 + 5);
 
 Resultado:
 
-```text
+```
 15
 ```
 
 ---
 
-## 21.2 Subtração `-`
+**Subtração `-`**
 
 ```javascript
 console.log(10 - 5);
@@ -935,13 +935,13 @@ console.log(10 - 5);
 
 Resultado:
 
-```text
+```
 5
 ```
 
 ---
 
-## 21.3 Multiplicação `*`
+**Multiplicação `*`**
 
 ```javascript
 console.log(10 * 5);
@@ -949,13 +949,13 @@ console.log(10 * 5);
 
 Resultado:
 
-```text
+```
 50
 ```
 
 ---
 
-## 21.4 Divisão `/`
+**Divisão `/`**
 
 ```javascript
 console.log(10 / 5);
@@ -963,17 +963,17 @@ console.log(10 / 5);
 
 Resultado:
 
-```text
+```
 2
 ```
 
 ---
 
-## 21.5 Resto da divisão `%`
+**Resto da divisão `%`**
 
 O operador `%` retorna o **resto** de uma divisão inteira.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 console.log(10 % 3);
@@ -981,14 +981,14 @@ console.log(10 % 3);
 
 Temos:
 
-```text
+```
 10 ÷ 3 = 3
 resto = 1
 ```
 
 Portanto:
 
-```text
+```
 1
 ```
 
@@ -1002,7 +1002,7 @@ Se o resultado for `0`, o número é par.
 
 ---
 
-## 21.6 Exponenciação `**`
+**Exponenciação `**`**
 
 O operador `**` realiza uma potência.
 
@@ -1012,27 +1012,27 @@ console.log(10 ** 5);
 
 Significa:
 
-```text
+```
 10⁵
 ```
 
 ou:
 
-```text
+```
 10 × 10 × 10 × 10 × 10
 ```
 
 Resultado:
 
-```text
+```
 100000
 ```
 
-⚠️ Em JavaScript, `^` **não é o operador de potência**. Para exponenciação, utilizamos `**`.
+**Em JavaScript, `^` **não é o operador de potência**. Para exponenciação, utilizamos `**`.**
 
 ---
 
-# 22. Operadores lógicos
+# Operadores lógicos
 
 Os operadores lógicos são utilizados para combinar ou inverter expressões booleanas.
 
@@ -1046,7 +1046,7 @@ Os três principais são:
 
 ---
 
-## 22.1 E — `&&`
+**E — `&&`**
 
 Retorna `true` somente quando **as duas condições são verdadeiras**.
 
@@ -1059,24 +1059,24 @@ console.log(idade >= 18 && habilidade);
 
 Analisando:
 
-```text
+```
 idade >= 18 → true
 habilidade  → true
 ```
 
 Então:
 
-```text
+```
 true && true → true
 ```
 
 ---
 
-## 22.2 OU — `||`
+**OU — `||`**
 
 Retorna `true` quando **pelo menos uma condição é verdadeira**.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 let idade = 20;
@@ -1086,20 +1086,20 @@ console.log(idade >= 18 || idade == 15);
 
 Temos:
 
-```text
+```
 idade >= 18 → true
 idade == 15 → false
 ```
 
 Como existe pelo menos uma condição verdadeira:
 
-```text
+```
 true || false → true
 ```
 
 ---
 
-## 22.3 NÃO — `!`
+**NÃO — `!`**
 
 O operador `!` inverte um valor booleano.
 
@@ -1111,20 +1111,20 @@ console.log(!habilidade);
 
 Resultado:
 
-```text
+```
 false
 ```
 
 Porque:
 
-```text
+```
 !true → false
 !false → true
 ```
 
 ---
 
-# 23. ⚠️ Cuidado com `||` e `|`
+**Cuidado com `||` e `|`**
 
 Existe uma diferença importante entre:
 
@@ -1158,7 +1158,7 @@ condicaoA || condicaoB
 
 ---
 
-# 24. Preparando o ambiente para programar
+### Preparando o ambiente para programar
 
 Para executar os exemplos de JavaScript, será utilizado o **Visual Studio Code**.
 
@@ -1170,25 +1170,25 @@ Ela permite executar determinados códigos diretamente pelo Visual Studio Code.
 
 ---
 
-# 25. Criando o primeiro arquivo JavaScript
+## Criando o primeiro arquivo JavaScript
 
-## Passo 1 — Criar um novo arquivo
+**Passo 1 — Criar um novo arquivo**
 
 No Visual Studio Code:
 
-```text
+```
 File → New File
 ```
 
 Depois podemos criar um arquivo chamado:
 
-```text
+```
 olamundo.js
 ```
 
 A extensão:
 
-```text
+```
 .js
 ```
 
@@ -1196,11 +1196,11 @@ A extensão:
 
 ---
 
-## Passo 2 — Salvar o arquivo
+**Passo 2 - Salvar o arquivo**
 
 Escolha uma pasta para guardar o arquivo e salve como:
 
-```text
+```
 olamundo.js
 ```
 
@@ -1208,7 +1208,7 @@ O `.js` é importante porque identifica o arquivo como JavaScript.
 
 ---
 
-## Passo 3 — Escrever o código
+**Passo 3 — Escrever o código**
 
 Digite:
 
@@ -1218,7 +1218,7 @@ console.log("Olá Mundo!");
 
 ---
 
-## Passo 4 — Executar
+**Passo 4 — Executar**
 
 Com o Code Runner instalado, podemos utilizar o botão:
 
@@ -1228,19 +1228,19 @@ no canto superior direito do Visual Studio Code.
 
 Também podemos utilizar o atalho:
 
-```text
+```
 Ctrl + Alt + N
 ```
 
 ---
 
-# 26. Se o código não executar corretamente
+**Se o código não executar corretamente**
 
 Caso o Code Runner não funcione como esperado, uma possibilidade é abrir a pasta do projeto no Visual Studio Code.
 
 Vá em:
 
-```text
+```
 File → Open Folder
 ```
 
@@ -1252,7 +1252,7 @@ Depois:
 4. No painel esquerdo, clique no arquivo `.js`.
 5. Execute novamente utilizando **Run Code**.
 
-### Por que abrir a pasta?
+**Por que abrir a pasta?**
 
 Porque o Visual Studio Code passa a tratar aquela pasta como o **projeto/workspace atual**.
 
@@ -1260,7 +1260,7 @@ Isso facilita a organização dos arquivos e a execução do código dentro daqu
 
 ---
 
-# 27. Primeiro teste com variável
+**Primeiro teste com variável**
 
 Agora podemos combinar `console.log()` com uma variável:
 
@@ -1272,7 +1272,7 @@ var a = 10;
 console.log(a);
 ```
 
-### Linha 1
+**Linha 1**
 
 ```javascript
 console.log("Olá Mundo!");
@@ -1280,11 +1280,11 @@ console.log("Olá Mundo!");
 
 Mostra o texto:
 
-```text
+```
 Olá Mundo!
 ```
 
-### Linha 2
+**Linha 2**
 
 ```javascript
 var a = 10;
@@ -1292,7 +1292,7 @@ var a = 10;
 
 Cria uma variável chamada `a` e armazena o número `10`.
 
-### Linha 3
+**Linha 3**
 
 ```javascript
 console.log(a);
@@ -1302,14 +1302,14 @@ Mostra o valor armazenado em `a`.
 
 Resultado:
 
-```text
+```
 Olá Mundo!
 10
 ```
 
 ---
 
-# 28. Trabalhando com duas variáveis
+# Trabalhando com duas variáveis
 
 ```javascript
 console.log("Olá Mundo!");
@@ -1325,7 +1325,7 @@ console.log("O resultado de a+b é:", a + b);
 
 Aqui temos duas variáveis:
 
-```text
+```
 a = 10
 b = 5
 ```
@@ -1338,13 +1338,13 @@ a + b
 
 é:
 
-```text
+```
 10 + 5 = 15
 ```
 
 Resultado esperado:
 
-```text
+```
 Olá Mundo!
 10
 5
@@ -1354,7 +1354,7 @@ O resultado de a+b é: 15
 
 ---
 
-# 29. Testando os operadores aritméticos
+# Testando os operadores aritméticos
 
 ```javascript
 console.log("Olá Mundo!");
@@ -1374,7 +1374,7 @@ console.log(a ** b);
 
 Com:
 
-```text
+```
 a = 10
 b = 5
 ```
@@ -1392,7 +1392,7 @@ temos:
 
 ---
 
-# 30. Entendendo o `console.log()` mais profundamente
+# Entendendo o `console.log()` mais profundamente
 
 Podemos enviar mais de um valor para `console.log()`:
 
@@ -1402,7 +1402,7 @@ console.log("O resultado de a+b é:", a + b);
 
 Aqui existem dois argumentos:
 
-```text
+```
 "O resultado de a+b é:"
 a + b
 ```
@@ -1415,30 +1415,30 @@ a + b
 
 Se:
 
-```text
+```
 a = 10
 b = 5
 ```
 
 então:
 
-```text
+```
 a + b = 15
 ```
 
 O console exibirá:
 
-```text
+```
 O resultado de a+b é: 15
 ```
 
 ---
 
-# 31. Calculando uma média
+# Calculando uma média
 
 Podemos utilizar variáveis e operadores para realizar cálculos mais completos.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 let num1 = 5;
@@ -1451,11 +1451,11 @@ var media = (num1 + num2 + num3 + num4) / 4;
 console.log("A média é:", media);
 ```
 
-## Entendendo passo a passo
+**Entendendo passo a passo**
 
 Temos quatro números:
 
-```text
+```
 num1 = 5
 num2 = 6
 num3 = 2
@@ -1464,25 +1464,25 @@ num4 = 3
 
 Primeiro somamos:
 
-```text
+```
 5 + 6 + 2 + 3 = 16
 ```
 
 Depois dividimos pela quantidade de números:
 
-```text
+```
 16 / 4 = 4
 ```
 
 Portanto:
 
-```text
+```
 A média é: 4
 ```
 
 ---
 
-## Por que usamos parênteses?
+**Por que usamos parênteses?**
 
 A expressão:
 
@@ -1500,7 +1500,7 @@ Os parênteses funcionam como uma forma de dizer:
 
 ---
 
-# 32. Uma versão mais moderna do exemplo
+**Uma versão mais moderna do exemplo**
 
 Podemos utilizar `const` para valores que não serão reatribuídos:
 
@@ -1519,11 +1519,11 @@ Neste caso, `const` deixa claro que não pretendemos trocar os valores dessas va
 
 ---
 
-# 33. Como tudo isso começa a se conectar
+**Como tudo isso começa a se conectar**
 
 Até aqui, já temos várias peças importantes do JavaScript:
 
-```text
+```
 VARIÁVEIS
    ↓
 armazenam valores
@@ -1545,7 +1545,7 @@ ESTRUTURAS DE DECISÃO
 if / else
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 let idade = 20;
@@ -1555,33 +1555,33 @@ console.log(idade >= 18);
 
 O que acontece?
 
-### 1. Criamos a variável
+**1. Criamos a variável**
 
 ```javascript
 let idade = 20;
 ```
 
-### 2. Fazemos uma comparação
+**2. Fazemos uma comparação**
 
 ```javascript
 idade >= 18
 ```
 
-### 3. O JavaScript calcula
+**3. O JavaScript calcula**
 
-```text
+```
 20 >= 18
 ```
 
-### 4. O resultado é booleano
+**4. O resultado é booleano**
 
-```text
+```
 true
 ```
 
-### 5. O `console.log()` exibe o resultado
+**5. O `console.log()` exibe o resultado**
 
-```text
+```
 true
 ```
 
@@ -1589,7 +1589,7 @@ Esse raciocínio será fundamental quando começarmos a estudar **condicionais**
 
 ---
 
-# 34. Resumo dos principais conceitos
+# Resumo dos principais conceitos
 
 | Conceito                    | O que faz                                 |   |           |
 | --------------------------- | ----------------------------------------- | - | --------- |
