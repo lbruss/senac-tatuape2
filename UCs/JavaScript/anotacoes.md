@@ -9,7 +9,9 @@ Ela é principalmente conhecida pelo desenvolvimento **Front-end**, mas também 
 **Onde o JavaScript pode ser usado?**
 
 **Front-end:** interação e comportamento das páginas Web.
+
 **Back-end:** desenvolvimento da parte do servidor, utilizando ambientes como o Node.js.
+
 **Aplicações:** também pode ser utilizado em diferentes tipos de aplicações.
 
 Uma forma simples de entender:
@@ -22,7 +24,7 @@ Por exemplo, o HTML pode criar um botão, o CSS pode deixá-lo bonito e o JavaSc
 
 ---
 
-# 2. Sintaxe do JavaScript
+# Sintaxe do JavaScript
 
 A **sintaxe** é o conjunto de regras que define como devemos escrever o código para que ele seja entendido corretamente pelo JavaScript.
 
@@ -34,11 +36,11 @@ Entre as regras básicas estão:
 * As instruções são executadas, normalmente, **de cima para baixo**.
 * O `;` pode ser utilizado para indicar o final de uma instrução. 
 
-## 2.1 JavaScript diferencia maiúsculas e minúsculas
+**JavaScript diferencia maiúsculas e minúsculas**
 
 Isso é chamado de **case-sensitive**.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 var nome = "Bruss";
@@ -59,9 +61,9 @@ não é a mesma coisa que:
 console.log(Nome);
 ```
 
-⚠️ Também é importante lembrar que os comandos e métodos precisam respeitar sua escrita correta.
+**Também é importante lembrar que os comandos e métodos precisam respeitar sua escrita correta.**
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 console.log("Olá Mundo!");
