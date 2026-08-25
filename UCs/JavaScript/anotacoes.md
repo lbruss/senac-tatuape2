@@ -73,7 +73,7 @@ O correto é `console.log()` com `console` em letras minúsculas.
 
 ---
 
-# 3. Ponto e vírgula `;`
+**Ponto e vírgula `;`**
 
 O ponto e vírgula pode ser utilizado para indicar o final de uma instrução:
 
@@ -88,7 +88,7 @@ O JavaScript possui **Automatic Semicolon Insertion (ASI)**, portanto o `;` nem 
 
 ---
 
-# 4. Primeiro exemplo de JavaScript
+## Primeiro exemplo de JavaScript
 
 ```javascript
 // Declarando a variável mensagem
@@ -98,9 +98,9 @@ var mensagem = "Olá Mundo";
 console.log(mensagem);
 ```
 
-### Entendendo linha por linha
+**Entendendo linha por linha**
 
-#### Linha 1
+**Linha 1**
 
 ```javascript
 // Declarando a variável mensagem
@@ -112,7 +112,7 @@ O JavaScript ignora essa linha durante a execução. Ela serve para nós, progra
 
 ---
 
-#### Linha 2
+**Linha 2**
 
 ```javascript
 var mensagem = "Olá Mundo";
@@ -122,7 +122,7 @@ Aqui estamos criando uma variável chamada `mensagem`.
 
 Podemos separar essa instrução:
 
-```text
+```
 var       mensagem       =       "Olá Mundo";
 │             │          │             │
 │             │          │             └─ valor armazenado
@@ -139,7 +139,7 @@ Nesse caso:
 
 ---
 
-#### Linha 3
+**Linha 3**
 
 ```javascript
 console.log(mensagem);
@@ -151,13 +151,13 @@ O JavaScript pega o valor armazenado em `mensagem` e o envia para o console.
 
 Resultado:
 
-```text
+```
 Olá Mundo
 ```
 
 ---
 
-# 5. Comentários
+**Comentários**
 
 Os comentários são textos inseridos no código para **explicar, documentar ou organizar o programa**.
 
@@ -165,7 +165,7 @@ Eles não são executados pelo JavaScript.
 
 Existem duas formas principais.
 
-## 5.1 Comentário de uma linha
+**Comentário de uma linha**
 
 Utilizamos `//`:
 
@@ -178,7 +178,7 @@ Tudo que estiver depois de `//` naquela linha será ignorado pelo JavaScript.
 
 ---
 
-## 5.2 Comentário de várias linhas
+**Comentário de várias linhas**
 
 Utilizamos:
 
@@ -191,7 +191,7 @@ Utilizamos:
 
 É útil quando precisamos explicar uma parte maior do código.
 
-### Resumindo
+- **Resumindo**
 
 | Sintaxe     | Tipo                        |
 | ----------- | --------------------------- |
@@ -200,13 +200,13 @@ Utilizamos:
 
 ---
 
-# 6. Métodos
+# Métodos
 
 Um **método** é uma função associada a um objeto que pode realizar determinada ação.
 
 Durante esta introdução, veremos métodos relacionados ao `document` e ao `console`.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 console.log("Olá Mundo!");
@@ -228,7 +228,7 @@ document.getElementById();
 
 ---
 
-# 7. `document.write()`
+## `document.write()`
 
 O método:
 
@@ -238,7 +238,7 @@ document.write();
 
 pode escrever conteúdo diretamente no documento HTML. 
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 document.write("Esta frase foi escrita em JavaScript");
@@ -246,7 +246,7 @@ document.write("Esta frase foi escrita em JavaScript");
 
 Nesse caso, o texto será inserido na página.
 
-### ⚠️ Atenção
+> Atenção
 
 `document.write()` deve ser utilizado com cuidado. Quando executado depois que a página já foi carregada, ele pode substituir o conteúdo existente do documento.
 
@@ -254,7 +254,7 @@ Por isso, em aplicações reais, normalmente existem formas mais apropriadas de 
 
 ---
 
-# 8. `document.getElementById()`
+## `document.getElementById()`
 
 O método:
 
@@ -264,7 +264,7 @@ document.getElementById();
 
 serve para localizar um elemento HTML através do seu atributo `id`. 
 
-Exemplo:
+- **Exemplo:**
 
 ```html
 <p id="teste">Olá mundo!</p>
@@ -279,7 +279,7 @@ function mudaTexto() {
 }
 ```
 
-### Entendendo
+**Entendendo**
 
 ```javascript
 document
@@ -315,17 +315,17 @@ altera o conteúdo interno do elemento.
 
 Antes:
 
-```text
+```
 Olá mundo!
 ```
 
 Depois:
 
-```text
+```
 JavaScript
 ```
 
-### Analogia
+> Analogia
 
 Imagine o HTML como uma casa cheia de objetos.
 
@@ -351,13 +351,13 @@ significa:
 
 ---
 
-# 9. Variáveis
+# Variáveis
 
 Uma **variável** é um espaço utilizado para armazenar um valor que poderá ser utilizado pelo programa.
 
 Podemos pensar em uma variável como uma caixa:
 
-```text
+```
 ┌───────────────┐
 │   mensagem    │
 │  "Olá Mundo"  │
@@ -376,9 +376,9 @@ const
 
 ---
 
-# 10. `var`, `let` e `const`
+## `var`, `let` e `const`
 
-## `var`
+**`var`**
 
 É uma forma mais antiga de declarar variáveis:
 
@@ -390,7 +390,7 @@ Ainda funciona, mas em código JavaScript moderno, normalmente preferimos `let` 
 
 ---
 
-## `let`
+**`let`**
 
 É utilizada quando o valor da variável pode ser alterado:
 
@@ -404,7 +404,7 @@ O valor inicialmente era `18` e depois passou a ser `19`.
 
 ---
 
-## `const`
+**`const`**
 
 É utilizada quando não pretendemos reatribuir a variável:
 
@@ -420,7 +420,7 @@ nome = "João";
 
 porque `nome` foi declarado com `const`.
 
-### Regra prática
+- **Regra prática**
 
 ```text
 const → valor não será reatribuído
@@ -432,7 +432,7 @@ var   → forma antiga, ainda existente
 
 ---
 
-# 11. Tipos de dados
+# Tipos de dados
 
 Uma variável pode armazenar diferentes tipos de valores.
 
@@ -446,11 +446,11 @@ Os principais tipos apresentados são:
 
 ---
 
-## 11.1 String
+**String**
 
 `String` representa **texto**.
 
-Exemplos:
+- **Exemplos:**
 
 ```javascript
 "Olá Mundo"
@@ -469,11 +469,11 @@ O texto fica entre aspas para que o JavaScript saiba que aquilo é uma sequênci
 
 ---
 
-## 11.2 Number
+**Number**
 
 `Number` representa números.
 
-Exemplos:
+- **Exemplos:**
 
 ```javascript
 10
@@ -484,7 +484,7 @@ Exemplos:
 
 No JavaScript, o tipo `Number` é utilizado tanto para números inteiros quanto para números decimais.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 let idade = 18;
@@ -495,7 +495,7 @@ Não precisamos utilizar tipos separados equivalentes a `int` e `float` apenas p
 
 ---
 
-## 11.3 Boolean
+**Boolean**
 
 `Boolean` representa apenas dois valores:
 
@@ -506,12 +506,12 @@ false
 
 Ou seja:
 
-```text
+```
 true  → verdadeiro
 false → falso
 ```
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 let maiorDeIdade = true;
@@ -521,11 +521,11 @@ Esse tipo é muito utilizado em decisões e condições.
 
 ---
 
-## 11.4 Array
+**Array**
 
 Um `Array` permite armazenar vários valores em uma única estrutura.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 let frutas = ["Maçã", "Pera", "Laranja"];
@@ -533,7 +533,7 @@ let frutas = ["Maçã", "Pera", "Laranja"];
 
 Podemos imaginar:
 
-```text
+```
 frutas
  ├── Maçã
  ├── Pera
@@ -542,15 +542,15 @@ frutas
 
 O array é parecido com uma **lista**.
 
-⚠️ Embora possa ser usado para representar uma coleção de dados semelhante a uma matriz/lista de outras linguagens, o `Array` do JavaScript possui características próprias.
+**Embora possa ser usado para representar uma coleção de dados semelhante a uma matriz/lista de outras linguagens, o `Array` do JavaScript possui características próprias.**
 
 ---
 
-## 11.5 Object
+**Object**
 
 Um `Object` permite armazenar dados organizados em **propriedades**.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 let pessoa = {
@@ -561,7 +561,7 @@ let pessoa = {
 
 Podemos visualizar:
 
-```text
+```
 pessoa
 ├── nome  → "Pedro"
 └── idade → 35
@@ -569,11 +569,11 @@ pessoa
 
 Cada propriedade possui:
 
-```text
+```
 nome: valor
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 nome: "Pedro"
