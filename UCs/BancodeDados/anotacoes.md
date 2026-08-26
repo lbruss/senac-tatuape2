@@ -6,7 +6,7 @@ Até agora, eu estava trabalhando principalmente com a criação das tabelas e m
 
 ---
 
-# 1. Modelo Relacional
+# Modelo Relacional
 
 O **modelo relacional** é uma forma de organizar os dados em um banco utilizando **tabelas relacionadas entre si**.
 
@@ -14,7 +14,7 @@ Uma tabela normalmente representa uma **entidade** ou um conjunto de entidades d
 
 Por exemplo, no banco que criei:
 
-```text
+```
 ESTUDANTES
 CURSOS
 ```
@@ -26,9 +26,9 @@ Eu tenho duas entidades principais:
 
 Cada tabela possui **colunas**, que representam os atributos, e **linhas**, que representam os registros.
 
-### Exemplo
+- **Exemplo**
 
-```text
+```
 ESTUDANTES
 
 id | nome | nascimento | profissão
@@ -48,17 +48,17 @@ Aqui:
 
 ---
 
-# 2. As linguagens do SQL
+# As linguagens do SQL
 
 O SQL pode ser dividido em categorias de acordo com o tipo de operação realizada.
 
-## DDL — Data Definition Language
+**DDL — Data Definition Language**
 
 **Linguagem de Definição de Dados.**
 
 É utilizada para criar e modificar a **estrutura** do banco de dados.
 
-Exemplos:
+- **Exemplos:**
 
 ```sql
 CREATE DATABASE cadastro;
@@ -84,19 +84,19 @@ DROP TABLE estudantes;
 
 Exclui uma tabela.
 
-### Resumindo:
+**Resumindo:**
 
 > **DDL = estrutura do banco.**
 
 ---
 
-# 3. DML — Data Manipulation Language
+**DML — Data Manipulation Language**
 
 **Linguagem de Manipulação de Dados.**
 
 É utilizada para trabalhar com os **dados que estão dentro das tabelas**.
 
-Exemplos:
+- **Exemplos:**
 
 ```sql
 INSERT INTO estudantes (...);
@@ -119,13 +119,13 @@ WHERE id = 1;
 
 Exclui registros.
 
-### Resumindo:
+**Resumindo:**
 
 > **DML = manipulação dos dados.**
 
 ---
 
-# 4. DQL — Data Query Language
+**DQL — Data Query Language**
 
 **Linguagem de Consulta de Dados.**
 
@@ -137,7 +137,7 @@ O principal comando é:
 SELECT
 ```
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 SELECT * FROM estudantes;
@@ -157,13 +157,13 @@ WHERE sexo = 'f';
 
 Aqui estou fazendo uma consulta mais específica.
 
-### Resumindo:
+**Resumindo:**
 
 > **DQL = consultar dados.**
 
 ---
 
-# 5. DCL — Data Control Language
+**DCL — Data Control Language**
 
 **Linguagem de Controle de Dados.**
 
@@ -176,23 +176,23 @@ GRANT
 REVOKE
 ```
 
-### `GRANT`
+- `GRANT`
 
 Concede permissões.
 
-### `REVOKE`
+- `REVOKE`
 
 Remove permissões.
 
 Por exemplo, um administrador pode permitir que determinado usuário consulte uma tabela, mas não possa alterá-la.
 
-### Resumindo:
+**Resumindo:**
 
 > **DCL = permissões e controle de acesso.**
 
 ---
 
-# 6. DTL — Data Transaction Language
+**DTL — Data Transaction Language**
 
 Também é chamada em muitos materiais de **TCL — Transaction Control Language**.
 
@@ -207,17 +207,17 @@ COMMIT
 ROLLBACK
 ```
 
-### COMMIT
+**COMMIT**
 
 Confirma definitivamente as alterações.
 
-### ROLLBACK
+**ROLLBACK**
 
 Desfaz alterações que ainda não foram confirmadas.
 
-Exemplo conceitual:
+- **Exemplo conceitual:**
 
-```text
+```
 Começo da transação
        ↓
 Alterações
@@ -233,7 +233,7 @@ Confirma   Desfaz
 
 ---
 
-# 📌 Resumo das categorias
+# Resumo das categorias
 
 | Categoria   | Significado                                   | Principal finalidade |
 | ----------- | --------------------------------------------- | -------------------- |
@@ -245,7 +245,7 @@ Confirma   Desfaz
 
 Uma forma fácil de memorizar:
 
-```text
+```
 DDL  → estrutura
 DML  → dados
 DQL  → consulta
@@ -255,7 +255,7 @@ DTL  → transação
 
 ---
 
-# 7. DER — Diagrama Entidade-Relacionamento
+# DER — Diagrama Entidade-Relacionamento
 
 **DER** significa:
 
@@ -279,13 +279,13 @@ Da mesma forma, antes ou durante a construção de um banco, posso utilizar o DE
 
 ---
 
-# 8. Visualizando o DER no MySQL Workbench
+## Visualizando o DER no MySQL Workbench
 
 No MySQL Workbench posso gerar um diagrama a partir de um banco já existente.
 
 O caminho é:
 
-```text
+```
 Database
    ↓
 Reverse Engineer
@@ -309,7 +309,7 @@ O Workbench analisa a estrutura existente do banco e gera uma representação vi
 
 Esse processo é chamado de **engenharia reversa (Reverse Engineering)** porque estou fazendo o caminho:
 
-```text
+```
 Banco existente
       ↓
 Estrutura
@@ -319,7 +319,7 @@ Diagrama
 
 Em vez de:
 
-```text
+```
 Diagrama
       ↓
 Estrutura
@@ -329,17 +329,17 @@ Banco
 
 ---
 
-# 9. O problema do nosso banco
+### O problema do nosso banco
 
 Eu tenho:
 
-```text
+```
 ESTUDANTES
 ```
 
 e:
 
-```text
+```
 CURSOS
 ```
 
@@ -347,7 +347,7 @@ Mas existe um problema.
 
 Eu sei quem são os estudantes:
 
-```text
+```
 Bruss
 João
 Douglas
@@ -356,7 +356,7 @@ Douglas
 
 E sei quais são os cursos:
 
-```text
+```
 Algoritmos
 Excel
 PHP
@@ -367,9 +367,9 @@ Mas o banco ainda não sabe:
 
 > **Qual estudante está fazendo qual curso?**
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Bruss → Algoritmos
 João → Excel
 Douglas → PHP
@@ -379,13 +379,13 @@ Essa informação representa um **relacionamento** entre as tabelas.
 
 ---
 
-# 10. Relacionamento
+# Relacionamento
 
 Um relacionamento indica como duas entidades estão associadas.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 ESTUDANTE ───── CURSO
 ```
 
@@ -399,19 +399,19 @@ Mas precisamos descobrir **quantos cursos um estudante pode fazer** e **quantos 
 
 ---
 
-# 11. Cardinalidade
+# Cardinalidade
 
 A **cardinalidade** indica quantas ocorrências de uma entidade podem estar relacionadas com ocorrências de outra entidade.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 1
 ```
 
 significa **um**.
 
-```text
+```
 N
 ```
 
@@ -419,7 +419,7 @@ significa **muitos**.
 
 Também podemos encontrar:
 
-```text
+```
 0
 ```
 
@@ -427,7 +427,7 @@ representando nenhuma ocorrência.
 
 Por isso, posso encontrar relacionamentos como:
 
-```text
+```
 1 : 1
 1 : N
 N : N
@@ -435,7 +435,7 @@ N : N
 
 ---
 
-# 12. Relacionamento 1 : 1
+## Relacionamento 1 : 1
 
 Significa:
 
@@ -443,9 +443,9 @@ Significa:
 
 Uma ocorrência de uma entidade está relacionada com apenas uma ocorrência da outra.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 PESSOA ───── DOCUMENTO
    1            1
 ```
@@ -458,7 +458,7 @@ Mas **não é obrigatório juntar as tabelas**. A decisão depende do modelo e d
 
 ---
 
-# 13. Relacionamento 1 : N
+## Relacionamento 1 : N
 
 Significa:
 
@@ -466,7 +466,7 @@ Significa:
 
 Uma ocorrência de uma tabela pode estar relacionada a várias ocorrências de outra tabela.
 
-Exemplo:
+- **Exemplo:**
 
 ```text
 CLIENTE ───── PEDIDO
@@ -479,7 +479,7 @@ Mas cada pedido pertence a um cliente.
 
 Visualmente:
 
-```text
+```
 Cliente 1
    ├── Pedido 1
    ├── Pedido 2
@@ -491,13 +491,13 @@ Esse é um dos relacionamentos mais comuns em bancos de dados.
 
 ---
 
-# 14. Chave estrangeira no relacionamento 1 : N
+# Chave estrangeira no relacionamento 1 : N
 
 Aqui entra a **Foreign Key (FK)**, ou **chave estrangeira**.
 
 Imagine:
 
-```text
+```
 CLIENTE
 id_cliente
 nome
@@ -505,7 +505,7 @@ nome
 
 e:
 
-```text
+```
 PEDIDO
 id_pedido
 data
@@ -513,26 +513,26 @@ data
 
 A chave primária do lado `1`:
 
-```text
+```
 CLIENTE.id_cliente
 ```
 
 é levada para o lado `N`:
 
-```text
+```
 PEDIDO.id_cliente
 ```
 
 Então:
 
-```text
+```
 CLIENTE
 ---------
 id_cliente ← PK
 nome
 ```
 
-```text
+```
 PEDIDO
 ---------
 id_pedido ← PK
@@ -544,13 +544,13 @@ Agora cada pedido consegue indicar **qual cliente fez aquele pedido**.
 
 ---
 
-# 15. Chave primária e chave estrangeira
+# Chave primária e chave estrangeira
 
-## Primary Key — PK
+**Primary Key — PK**
 
 A **chave primária** identifica unicamente um registro dentro da própria tabela.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
@@ -560,19 +560,19 @@ Cada estudante possui um `id` diferente.
 
 ---
 
-## Foreign Key — FK
+**Foreign Key — FK**
 
 A **chave estrangeira** é um campo utilizado para criar uma relação com outra tabela.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 estudantes
 id
 nome
 ```
 
-```text
+```
 matriculas
 id
 id_estudante
@@ -580,30 +580,30 @@ id_estudante
 
 Nesse caso:
 
-```text
+```
 matriculas.id_estudante
 ```
 
 pode referenciar:
 
-```text
+```
 estudantes.id
 ```
 
-### Regra importante
+> **Regra importante**
 
 A coluna da FK deve ser compatível com a coluna referenciada, principalmente em tipo e atributos relevantes.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 estudantes.id
 INT
 ```
 
 e:
 
-```text
+```
 matriculas.id_estudante
 INT
 ```
@@ -612,15 +612,15 @@ Além disso, a FK normalmente referencia uma **PK** ou outra chave que tenha uma
 
 ---
 
-# 16. Relacionamento N : N
+## Relacionamento N : N
 
 Agora chegamos ao caso mais interessante.
 
 **N : N = muitos para muitos.**
 
-No meu exemplo:
+- **No meu exemplo:**
 
-```text
+```
 ESTUDANTES
       N
       │
@@ -637,9 +637,9 @@ E:
 
 > Um curso pode ter vários estudantes.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Bruss
  ├── Algoritmos
  ├── Excel
@@ -648,7 +648,7 @@ Bruss
 
 Enquanto:
 
-```text
+```
 Algoritmos
  ├── Bruss
  ├── João
@@ -657,14 +657,14 @@ Algoritmos
 
 Portanto:
 
-```text
+```
 Estudante → vários cursos
 Curso → vários estudantes
 ```
 
 ---
 
-# 17. O problema do N : N
+## O problema do N : N
 
 No modelo relacional, não é recomendado representar diretamente esse relacionamento N:N apenas colocando uma FK de um lado no outro.
 
@@ -672,9 +672,9 @@ A solução é criar uma **terceira tabela**.
 
 Essa tabela representa o relacionamento.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 ESTUDANTES
      │
      │ 1
@@ -692,23 +692,23 @@ Agora o N:N foi transformado em dois relacionamentos 1:N.
 
 ---
 
-# 18. Tabela associativa
+## Tabela associativa
 
 A tabela criada para representar o relacionamento pode ser chamada de:
 
-```text
+```
 matriculas
 ```
 
 Ela pode possuir:
 
-```text
+```
 id
 id_estudante
 id_curso
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 | id | id_estudante | id_curso |
 | -: | -----------: | -------: |
@@ -719,7 +719,7 @@ Por exemplo:
 
 Podemos interpretar:
 
-```text
+```
 Estudante 1 → Curso 1
 Estudante 1 → Curso 2
 Estudante 2 → Curso 1
@@ -730,29 +730,29 @@ Isso resolve o relacionamento N:N.
 
 ---
 
-# 19. Por que o N:N vira duas relações 1:N?
+**Por que o N:N vira duas relações 1:N?**
 
 Antes:
 
-```text
+```
 ESTUDANTES N : N CURSOS
 ```
 
 Depois:
 
-```text
+```
 ESTUDANTES 1 : N MATRICULAS N : 1 CURSOS
 ```
 
 Ou, olhando individualmente:
 
-```text
+```
 ESTUDANTES 1 : N MATRICULAS
 ```
 
 e:
 
-```text
+```
 CURSOS 1 : N MATRICULAS
 ```
 
@@ -762,15 +762,15 @@ Essa é uma das ideias mais importantes desta parte.
 
 ---
 
-# 20. A tabela de relacionamento também pode possuir atributos
+# A tabela de relacionamento também pode possuir atributos
 
 A tabela associativa não serve apenas para guardar as duas chaves.
 
 Ela pode possuir informações próprias do relacionamento.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 MATRICULAS
 ----------------
 id
@@ -785,15 +785,15 @@ Isso é importante porque:
 
 > `data_matricula`, `status` e `nota` não são necessariamente atributos do estudante ou do curso. Eles são atributos da **relação entre estudante e curso**.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Bruss → Algoritmos
 ```
 
 pode ter:
 
-```text
+```
 data_matricula = 2026-08-26
 nota = 8.5
 status = 'Ativo'
@@ -801,11 +801,11 @@ status = 'Ativo'
 
 ---
 
-# 21. Resumindo as regras de relacionamento
+# Resumindo as regras de relacionamento
 
-### 1 : 1
+**1 : 1**
 
-```text
+```
 Tabela A 1 ───── 1 Tabela B
 ```
 
@@ -815,15 +815,15 @@ A chave estrangeira pode ser colocada em um dos lados, conforme as regras do sis
 
 ---
 
-### 1 : N
+**1 : N**
 
-```text
+```
 Tabela A 1 ───── N Tabela B
 ```
 
 A PK do lado `1` é colocada como FK no lado `N`.
 
-```text
+```
 A
 PK
  ↓
@@ -833,15 +833,15 @@ FK
 
 ---
 
-### N : N
+**N : N**
 
-```text
+```
 Tabela A N ───── N Tabela B
 ```
 
 Crio uma terceira tabela:
 
-```text
+```
 Tabela A 1 ───── N Tabela Associativa N ───── 1 Tabela B
 ```
 
@@ -849,11 +849,11 @@ As duas chaves estrangeiras ficam na tabela associativa.
 
 ---
 
-# 22. Tuplas
+# Tuplas
 
 No modelo relacional, uma **tupla** corresponde a uma linha/registro da relação.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```text
 id | nome | profissão
@@ -865,7 +865,7 @@ Essa linha representa uma tupla.
 
 Uma tabela pode possuir:
 
-```text
+```
 0 tuplas
 1 tupla
 10 tuplas
@@ -877,7 +877,7 @@ As tuplas podem estar relacionadas a outras tuplas através das chaves.
 
 ---
 
-# 23. InnoDB
+# InnoDB
 
 O **InnoDB** é um mecanismo de armazenamento (*storage engine*) do MySQL.
 
@@ -892,7 +892,7 @@ Ele é importante porque oferece recursos como:
 
 Por isso, quando estou trabalhando com relacionamentos e integridade referencial, o InnoDB é especialmente importante.
 
-Exemplo:
+- **Exemplo:**
 
 ```sql
 CREATE TABLE cursos (
@@ -904,20 +904,20 @@ CREATE TABLE cursos (
 
 ---
 
-# 24. Integridade referencial
+# Integridade referencial
 
 Quando utilizo uma chave estrangeira, o banco pode garantir que os relacionamentos sejam válidos.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 estudantes
 id = 1
 ```
 
 e:
 
-```text
+```
 matriculas
 id_estudante = 1
 ```
@@ -926,7 +926,7 @@ Isso é válido porque o estudante `1` existe.
 
 Mas se eu tentar:
 
-```text
+```
 id_estudante = 999
 ```
 
@@ -938,11 +938,11 @@ A ideia é evitar registros "órfãos".
 
 ---
 
-# 25. ACID
+# ACID
 
 **ACID** reúne quatro propriedades fundamentais das transações em bancos de dados:
 
-```text
+```
 A → Atomicity
 C → Consistency
 I → Isolation
@@ -951,7 +951,7 @@ D → Durability
 
 Em português:
 
-```text
+```
 A → Atomicidade
 C → Consistência
 I → Isolamento
@@ -960,7 +960,7 @@ D → Durabilidade
 
 ---
 
-# 26. A — Atomicidade
+## A — Atomicidade
 
 **Atomicidade** significa:
 
@@ -968,7 +968,7 @@ D → Durabilidade
 
 Imagine uma transferência bancária:
 
-```text
+```
 Conta A → -R$100
 Conta B → +R$100
 ```
@@ -979,7 +979,7 @@ Se o dinheiro for retirado da conta A, mas não chegar à conta B, teremos um pr
 
 Então as duas operações devem ser tratadas como uma única transação.
 
-```text
+```
 Tudo certo
    ↓
 COMMIT
@@ -989,7 +989,7 @@ Confirma tudo
 
 Se houver erro:
 
-```text
+```
 Erro
  ↓
 ROLLBACK
@@ -999,13 +999,13 @@ Desfaz a transação
 
 ---
 
-# 27. C — Consistência
+## C — Consistência
 
 A transação deve levar o banco de um **estado válido para outro estado válido**.
 
 As regras e restrições do banco devem continuar sendo respeitadas.
 
-Por exemplo:
+- **Por exemplo:**
 
 Se uma coluna possui:
 
@@ -1019,7 +1019,7 @@ A consistência protege as **regras de integridade do banco**.
 
 ---
 
-# 28. I — Isolamento
+## I — Isolamento
 
 **Isolamento** significa que transações executadas simultaneamente não devem interferir indevidamente umas nas outras.
 
@@ -1031,7 +1031,7 @@ O MySQL/InnoDB utiliza mecanismos de controle de concorrência e níveis de isol
 
 ---
 
-# 29. D — Durabilidade
+## D — Durabilidade
 
 Depois que uma transação foi confirmada com:
 
@@ -1041,9 +1041,9 @@ COMMIT;
 
 as alterações devem permanecer gravadas mesmo se ocorrer uma falha posteriormente.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 INSERT
    ↓
 COMMIT
@@ -1059,33 +1059,33 @@ Essa é a ideia da durabilidade.
 
 ---
 
-# 🧠 Analogia do ACID
+> Analogia do ACID
 
 Posso imaginar uma compra em uma loja:
 
-### Atomicidade
+**Atomicidade**
 
 A compra inteira acontece ou é cancelada.
 
-### Consistência
+**Consistência**
 
 O estoque, pagamento e pedido devem continuar obedecendo às regras.
 
-### Isolamento
+**Isolamento**
 
 Duas compras simultâneas não devem causar conflito incorreto no estoque.
 
-### Durabilidade
+**Durabilidade**
 
 Depois de confirmar a compra, ela continua registrada mesmo se o sistema reiniciar.
 
 ---
 
-# 🔗 Visão geral
+# Visão geral
 
 Agora consigo enxergar o banco de dados em vários níveis:
 
-```text
+```
 BANCO DE DADOS
       │
       ├── Tabelas
