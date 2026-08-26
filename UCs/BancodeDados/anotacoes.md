@@ -1,737 +1,1125 @@
-# GROUP BY e HAVING
+# Modelo Relacional e Relacionamentos em Banco de Dados
 
-Até agora eu já sabia filtrar registros com `WHERE` e fazer cálculos com funções como `COUNT()`, `AVG()`, `MAX()`, `MIN()` e `SUM()`.
+Nesta parte comecei a entender como **as tabelas de um banco de dados se relacionam entre si**.
 
-Agora o `GROUP BY` permite responder perguntas como:
-
-> "Quais registros possuem o mesmo valor e quantos existem em cada grupo?"
+Até agora, eu estava trabalhando principalmente com a criação das tabelas e manipulação dos dados. Agora o foco passa a ser entender **a estrutura do banco como um todo**, incluindo entidades, relacionamentos, cardinalidade, chaves estrangeiras e transações.
 
 ---
 
-# GROUP BY — Agrupando registros
+# 1. Modelo Relacional
 
-O comando básico é:
+O **modelo relacional** é uma forma de organizar os dados em um banco utilizando **tabelas relacionadas entre si**.
 
-```sql
-SELECT carga
-FROM cursos
-GROUP BY carga;
+Uma tabela normalmente representa uma **entidade** ou um conjunto de entidades do sistema.
+
+Por exemplo, no banco que criei:
+
+```text
+ESTUDANTES
+CURSOS
 ```
 
-O `GROUP BY` agrupa os registros que possuem o mesmo valor na coluna indicada.
+Eu tenho duas entidades principais:
 
-Se eu tiver:
+* `estudantes` → informações dos estudantes;
+* `cursos` → informações dos cursos.
 
-| curso      | carga |
-| ---------- | ----: |
-| Algoritmos |    40 |
-| Excel      |    40 |
-| PHP        |    24 |
-| Front-end  |    60 |
-| JavaScript |    40 |
-| MySQL      |    24 |
+Cada tabela possui **colunas**, que representam os atributos, e **linhas**, que representam os registros.
 
-Ao executar:
+### Exemplo
 
-```sql
-SELECT carga
-FROM cursos
-GROUP BY carga;
-```
+```text
+ESTUDANTES
 
-o resultado será algo parecido com:
-
-| carga |
-| ----: |
-|    24 |
-|    40 |
-|    60 |
-
-Ou seja, os valores iguais foram colocados no mesmo grupo.
-
----
-
-# GROUP BY x DISTINCT
-
-Nesse exemplo, existe uma semelhança importante:
-
-```sql
-SELECT DISTINCT carga
-FROM cursos;
-```
-
-e:
-
-```sql
-SELECT carga
-FROM cursos
-GROUP BY carga;
-```
-
-podem produzir os mesmos valores.
-
-Mas a finalidade do `GROUP BY` é mais ampla.
-
-O `GROUP BY` é especialmente útil quando eu quero **fazer cálculos sobre cada grupo**.
-
-- **Por exemplo:**
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-GROUP BY carga;
-```
-
-Agora consigo descobrir quantos cursos existem em cada carga horária.
-
----
-
-# GROUP BY + COUNT()
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-GROUP BY carga;
-```
-
-Essa consulta faz duas coisas:
-
-**`carga`**
-
-Define os grupos.
-
-**`COUNT(*)`**
-
-Conta quantos registros existem dentro de cada grupo.
-
-- **Por exemplo:**
-
-| carga | COUNT(*) |
-| ----: | -------: |
-|    24 |        2 |
-|    40 |        4 |
-|    60 |        2 |
-|    72 |        1 |
-
-Isso significa:
-
-* Existem 2 cursos com 24 horas.
-* Existem 4 cursos com 40 horas.
-* Existem 2 cursos com 60 horas.
-* Existe 1 curso com 72 horas.
-
----
-
-**Deixando o resultado organizado com ORDER BY**
-
-Posso ordenar o resultado:
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-GROUP BY carga
-ORDER BY carga;
-```
-
-O resultado será organizado pela carga horária, do menor para o maior.
-
-Também posso usar:
-
-```sql
-ORDER BY carga DESC;
-```
-
-para mostrar do maior para o menor.
-
----
-
-# GROUP BY com WHERE
-
-Também posso filtrar os registros **antes de agrupá-los**.
-
-- **Exemplo:**
-
-```sql
-SELECT carga, totalaulas
-FROM cursos
-WHERE totalaulas = 8
-GROUP BY carga
-ORDER BY carga;
-```
-
-Aqui o processo é:
-
-```
-Todos os cursos
-      ↓
-WHERE totalaulas = 8
-      ↓
-Somente cursos com 8 aulas
-      ↓
-GROUP BY carga
-      ↓
-Agrupa pela carga
-      ↓
-ORDER BY carga
-      ↓
-Organiza o resultado
-```
-
----
-
-# HAVING — Filtrando grupos
-
-Agora entra uma diferença muito importante:
-
-* `WHERE` → filtra **registros**
-* `HAVING` → filtra **grupos**
-
-- **Exemplo:**
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-GROUP BY carga
-HAVING COUNT(carga) >= 30
-ORDER BY carga;
-```
-
-Aqui existe um problema lógico: se `COUNT(carga)` estiver contando a quantidade de cursos em cada carga, exigir `>= 30` significa procurar grupos com **30 ou mais cursos**, o que provavelmente não corresponde aos dados dessa tabela.
-
-A sintaxe está correta, mas a condição provavelmente não produzirá resultados com a quantidade de cursos que tenho.
-
-Um exemplo mais adequado seria:
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-GROUP BY carga
-HAVING COUNT(*) >= 2
-ORDER BY carga;
-```
-
-Isso significa:
-
-> "Agrupe os cursos pela carga e mostre somente as cargas que possuem pelo menos 2 cursos."
-
----
-
-# WHERE x HAVING
-
-Essa é uma das diferenças mais importantes desta aula.
-
-**WHERE**
-
-Filtra os registros **antes do agrupamento**.
-
-```sql
-SELECT ano, COUNT(*)
-FROM cursos
-WHERE carga >= 40
-GROUP BY ano;
-```
-
-Podemos interpretar:
-
-> "Pegue somente cursos com carga maior ou igual a 40 e depois agrupe esses cursos por ano."
-
----
-
-**HAVING**
-
-Filtra os grupos **depois do agrupamento**.
-
-```sql
-SELECT ano, COUNT(*)
-FROM cursos
-GROUP BY ano
-HAVING ano > 2026;
+id | nome | nascimento | profissão
+---|------|-------------|-----------
+1  | Bruss | 2007-05-29 | ...
+2  | João  | 2007-07-10 | ...
 ```
 
 Aqui:
 
-```
-GROUP BY
-   ↓
-Cria os grupos por ano
-   ↓
-HAVING
-   ↓
-Mantém somente os grupos cujo ano > 2026
-```
+* `estudantes` → entidade/tabela;
+* `id`, `nome`, `nascimento`, `profissão` → atributos;
+* cada linha → uma ocorrência/registro;
+* cada registro também pode ser chamado de **tupla** no modelo relacional.
+
+> **Importante:** tecnicamente, uma tabela representa uma relação no modelo relacional; "entidade" é um conceito do modelo conceitual/DER. Na prática das aulas, é comum falar que uma tabela representa uma entidade.
 
 ---
 
-# GROUP BY + HAVING + ORDER BY
+# 2. As linguagens do SQL
 
-- **Um exemplo completo:**
+O SQL pode ser dividido em categorias de acordo com o tipo de operação realizada.
+
+## DDL — Data Definition Language
+
+**Linguagem de Definição de Dados.**
+
+É utilizada para criar e modificar a **estrutura** do banco de dados.
+
+Exemplos:
 
 ```sql
-SELECT ano, COUNT(*)
-FROM cursos
-GROUP BY ano
-HAVING ano > 2026
-ORDER BY ano;
+CREATE DATABASE cadastro;
 ```
 
-Cada parte possui uma função:
+Cria um banco.
 
+```sql
+CREATE TABLE estudantes (...);
 ```
+
+Cria uma tabela.
+
+```sql
+ALTER TABLE estudantes ...;
+```
+
+Modifica a estrutura da tabela.
+
+```sql
+DROP TABLE estudantes;
+```
+
+Exclui uma tabela.
+
+### Resumindo:
+
+> **DDL = estrutura do banco.**
+
+---
+
+# 3. DML — Data Manipulation Language
+
+**Linguagem de Manipulação de Dados.**
+
+É utilizada para trabalhar com os **dados que estão dentro das tabelas**.
+
+Exemplos:
+
+```sql
+INSERT INTO estudantes (...);
+```
+
+Insere registros.
+
+```sql
+UPDATE estudantes
+SET nome = 'Bruss'
+WHERE id = 1;
+```
+
+Atualiza registros.
+
+```sql
+DELETE FROM estudantes
+WHERE id = 1;
+```
+
+Exclui registros.
+
+### Resumindo:
+
+> **DML = manipulação dos dados.**
+
+---
+
+# 4. DQL — Data Query Language
+
+**Linguagem de Consulta de Dados.**
+
+É utilizada para **consultar informações** no banco.
+
+O principal comando é:
+
+```sql
 SELECT
-↓
-O que quero visualizar
+```
 
-FROM
-↓
-De onde vêm os dados
+Exemplo:
 
-GROUP BY
-↓
-Como os dados serão agrupados
+```sql
+SELECT * FROM estudantes;
+```
 
-HAVING
-↓
-Quais grupos permanecem
+Isso significa:
 
-ORDER BY
-↓
-Como o resultado será organizado
+> "Mostre todos os registros da tabela `estudantes`."
+
+Também posso utilizar:
+
+```sql
+SELECT nome, profissão
+FROM estudantes
+WHERE sexo = 'f';
+```
+
+Aqui estou fazendo uma consulta mais específica.
+
+### Resumindo:
+
+> **DQL = consultar dados.**
+
+---
+
+# 5. DCL — Data Control Language
+
+**Linguagem de Controle de Dados.**
+
+É relacionada ao **controle de acesso e permissões** do banco.
+
+Alguns comandos:
+
+```sql
+GRANT
+REVOKE
+```
+
+### `GRANT`
+
+Concede permissões.
+
+### `REVOKE`
+
+Remove permissões.
+
+Por exemplo, um administrador pode permitir que determinado usuário consulte uma tabela, mas não possa alterá-la.
+
+### Resumindo:
+
+> **DCL = permissões e controle de acesso.**
+
+---
+
+# 6. DTL — Data Transaction Language
+
+Também é chamada em muitos materiais de **TCL — Transaction Control Language**.
+
+É utilizada para controlar **transações**.
+
+Uma transação é um conjunto de operações que deve ser tratado como uma unidade.
+
+Os comandos mais conhecidos são:
+
+```sql
+COMMIT
+ROLLBACK
+```
+
+### COMMIT
+
+Confirma definitivamente as alterações.
+
+### ROLLBACK
+
+Desfaz alterações que ainda não foram confirmadas.
+
+Exemplo conceitual:
+
+```text
+Começo da transação
+       ↓
+Alterações
+       ↓
+Tudo certo?
+   ↙       ↘
+ SIM       NÃO
+ ↓          ↓
+COMMIT    ROLLBACK
+ ↓          ↓
+Confirma   Desfaz
 ```
 
 ---
 
-# WHERE + GROUP BY + HAVING
+# 📌 Resumo das categorias
 
-Posso usar os dois tipos de filtro na mesma consulta:
+| Categoria   | Significado                                   | Principal finalidade |
+| ----------- | --------------------------------------------- | -------------------- |
+| **DDL**     | Data Definition Language                      | Estrutura            |
+| **DML**     | Data Manipulation Language                    | Manipulação          |
+| **DQL**     | Data Query Language                           | Consulta             |
+| **DCL**     | Data Control Language                         | Permissões           |
+| **DTL/TCL** | Data Transaction/Transaction Control Language | Transações           |
 
-```sql
-SELECT ano, COUNT(*)
-FROM cursos
-WHERE carga >= 40
-GROUP BY ano
-HAVING ano > 2026
-ORDER BY ano;
+Uma forma fácil de memorizar:
+
+```text
+DDL  → estrutura
+DML  → dados
+DQL  → consulta
+DCL  → controle
+DTL  → transação
 ```
-
-Aqui acontece uma sequência muito importante:
-
-```
-1. FROM
-   ↓
-2. WHERE
-   ↓
-3. GROUP BY
-   ↓
-4. HAVING
-   ↓
-5. SELECT
-   ↓
-6. ORDER BY
-```
-
-De forma simplificada:
-
-> Primeiro filtro os registros → depois agrupo → depois filtro os grupos → finalmente organizo o resultado.
 
 ---
 
-# Usando AVG() junto com GROUP BY
+# 7. DER — Diagrama Entidade-Relacionamento
 
-Agora posso combinar `GROUP BY` com `AVG()`.
+**DER** significa:
 
-- **Por exemplo:**
+> **Diagrama Entidade-Relacionamento**
 
-```sql
-SELECT AVG(carga)
-FROM cursos;
-```
+Ele é uma representação visual do banco de dados.
 
-Essa consulta calcula a média da carga horária de todos os cursos.
+Em vez de enxergar apenas o código SQL, eu consigo visualizar:
 
-No meu exemplo, o resultado é aproximadamente:
+* entidades;
+* atributos;
+* relacionamentos;
+* chaves;
+* cardinalidades.
 
-```
-42,38
-```
+É como se fosse uma **planta do banco de dados**.
 
-Mas posso fazer análises mais específicas utilizando agrupamento.
+Antes de construir uma casa, eu faço a planta.
 
----
-
-## Subconsulta — Usando AVG() dentro de outra consulta
-
-Uma consulta interessante é:
-
-```sql
-SELECT ano, carga, COUNT(*)
-FROM cursos
-WHERE ano > 2026
-GROUP BY carga
-HAVING carga > (SELECT AVG(carga) FROM cursos);
-```
-
-Aqui aparece um conceito novo:
-
-# Subconsulta
-
-Uma **subconsulta** é uma consulta dentro de outra consulta.
-
-Neste trecho:
-
-```sql
-(SELECT AVG(carga) FROM cursos)
-```
-
-o MySQL executa primeiro essa consulta:
-
-```sql
-SELECT AVG(carga)
-FROM cursos;
-```
-
-Ela produz aproximadamente:
-
-```
-42,38
-```
-
-Então a consulta principal passa a funcionar como se fosse:
-
-```sql
-HAVING carga > 42.38
-```
-
-Ou seja:
-
-> "Mostre os grupos cuja carga seja maior que a média geral dos cursos."
+Da mesma forma, antes ou durante a construção de um banco, posso utilizar o DER para visualizar como as informações estarão organizadas.
 
 ---
 
-**Por que usar uma subconsulta?**
+# 8. Visualizando o DER no MySQL Workbench
 
-Eu poderia escrever diretamente:
+No MySQL Workbench posso gerar um diagrama a partir de um banco já existente.
 
-```sql
-HAVING carga > 42.38
+O caminho é:
+
+```text
+Database
+   ↓
+Reverse Engineer
+   ↓
+Next
+   ↓
+Escolher a conexão
+   ↓
+Next
+   ↓
+Selecionar o banco
+   ↓
+Next
+   ↓
+Next
+   ↓
+Finish
+```
+
+O Workbench analisa a estrutura existente do banco e gera uma representação visual.
+
+Esse processo é chamado de **engenharia reversa (Reverse Engineering)** porque estou fazendo o caminho:
+
+```text
+Banco existente
+      ↓
+Estrutura
+      ↓
+Diagrama
+```
+
+Em vez de:
+
+```text
+Diagrama
+      ↓
+Estrutura
+      ↓
+Banco
+```
+
+---
+
+# 9. O problema do nosso banco
+
+Eu tenho:
+
+```text
+ESTUDANTES
+```
+
+e:
+
+```text
+CURSOS
 ```
 
 Mas existe um problema.
 
-Se eu adicionar novos cursos ou alterar as cargas existentes, a média pode mudar.
+Eu sei quem são os estudantes:
 
-- **Por exemplo, hoje:**
-
-```
-Média = 42,38
-```
-
-Amanhã, depois de adicionar vários cursos:
-
-```
-Média = 45,20
+```text
+Bruss
+João
+Douglas
+...
 ```
 
-Se eu deixei:
+E sei quais são os cursos:
 
-```sql
-HAVING carga > 42.38
+```text
+Algoritmos
+Excel
+PHP
+...
 ```
 
-o valor continuará sendo `42.38`.
+Mas o banco ainda não sabe:
 
-Já com:
+> **Qual estudante está fazendo qual curso?**
 
-```sql
-HAVING carga > (SELECT AVG(carga) FROM cursos)
+Por exemplo:
+
+```text
+Bruss → Algoritmos
+João → Excel
+Douglas → PHP
 ```
 
-o banco **calcula novamente a média sempre que a consulta for executada**.
-
-Isso torna a consulta dinâmica.
+Essa informação representa um **relacionamento** entre as tabelas.
 
 ---
 
-**Entendendo a subconsulta por partes**
+# 10. Relacionamento
 
-A consulta:
+Um relacionamento indica como duas entidades estão associadas.
 
-```sql
-SELECT ano, carga, COUNT(*)
-FROM cursos
-WHERE ano > 2026
-GROUP BY carga
-HAVING carga > (SELECT AVG(carga) FROM cursos);
+Por exemplo:
+
+```text
+ESTUDANTE ───── CURSO
 ```
 
-pode ser desmontada assim.
+Podemos interpretar:
 
-**FROM**
+> Um estudante participa de um curso.
 
-```sql
-FROM cursos
-```
+Mas precisamos descobrir **quantos cursos um estudante pode fazer** e **quantos estudantes podem fazer um curso**.
 
-Estou trabalhando com a tabela `cursos`.
+É aí que entra a **cardinalidade**.
 
 ---
 
-**WHERE**
+# 11. Cardinalidade
 
-```sql
-WHERE ano > 2026
+A **cardinalidade** indica quantas ocorrências de uma entidade podem estar relacionadas com ocorrências de outra entidade.
+
+Por exemplo:
+
+```text
+1
 ```
 
-Seleciono somente cursos posteriores a 2026.
+significa **um**.
+
+```text
+N
+```
+
+significa **muitos**.
+
+Também podemos encontrar:
+
+```text
+0
+```
+
+representando nenhuma ocorrência.
+
+Por isso, posso encontrar relacionamentos como:
+
+```text
+1 : 1
+1 : N
+N : N
+```
 
 ---
 
-**GROUP BY**
+# 12. Relacionamento 1 : 1
 
-```sql
-GROUP BY carga
+Significa:
+
+> **Um para um.**
+
+Uma ocorrência de uma entidade está relacionada com apenas uma ocorrência da outra.
+
+Exemplo:
+
+```text
+PESSOA ───── DOCUMENTO
+   1            1
 ```
 
-Agrupo os registros pela carga horária.
+Uma pessoa pode possuir um determinado registro de documento, e esse registro pertence a uma pessoa.
+
+Nesse tipo de relacionamento, dependendo da regra de negócio, pode fazer sentido manter as informações em uma única tabela.
+
+Mas **não é obrigatório juntar as tabelas**. A decisão depende do modelo e das regras do sistema.
 
 ---
 
-**Subconsulta**
+# 13. Relacionamento 1 : N
 
-```sql
-(SELECT AVG(carga) FROM cursos)
+Significa:
+
+> **Um para muitos.**
+
+Uma ocorrência de uma tabela pode estar relacionada a várias ocorrências de outra tabela.
+
+Exemplo:
+
+```text
+CLIENTE ───── PEDIDO
+   1            N
 ```
 
-Calculo a média geral da carga horária.
+Um cliente pode fazer vários pedidos.
+
+Mas cada pedido pertence a um cliente.
+
+Visualmente:
+
+```text
+Cliente 1
+   ├── Pedido 1
+   ├── Pedido 2
+   ├── Pedido 3
+   └── Pedido 4
+```
+
+Esse é um dos relacionamentos mais comuns em bancos de dados.
 
 ---
 
-**HAVING**
+# 14. Chave estrangeira no relacionamento 1 : N
 
-```sql
-HAVING carga > (SELECT AVG(carga) FROM cursos)
+Aqui entra a **Foreign Key (FK)**, ou **chave estrangeira**.
+
+Imagine:
+
+```text
+CLIENTE
+id_cliente
+nome
 ```
 
-Mantenho somente os grupos cuja carga seja maior que a média.
+e:
+
+```text
+PEDIDO
+id_pedido
+data
+```
+
+A chave primária do lado `1`:
+
+```text
+CLIENTE.id_cliente
+```
+
+é levada para o lado `N`:
+
+```text
+PEDIDO.id_cliente
+```
+
+Então:
+
+```text
+CLIENTE
+---------
+id_cliente ← PK
+nome
+```
+
+```text
+PEDIDO
+---------
+id_pedido ← PK
+data
+id_cliente ← FK
+```
+
+Agora cada pedido consegue indicar **qual cliente fez aquele pedido**.
 
 ---
 
-**COUNT(*)**
+# 15. Chave primária e chave estrangeira
+
+## Primary Key — PK
+
+A **chave primária** identifica unicamente um registro dentro da própria tabela.
+
+Exemplo:
 
 ```sql
-COUNT(*)
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
 ```
 
-Conto quantos registros existem em cada grupo.
+Cada estudante possui um `id` diferente.
 
 ---
 
-**Um detalhe importante nessa última consulta**
+## Foreign Key — FK
 
-Existe uma questão conceitual na combinação:
+A **chave estrangeira** é um campo utilizado para criar uma relação com outra tabela.
 
-```sql
-WHERE ano > 2026
-GROUP BY carga
-HAVING carga > (SELECT AVG(carga) FROM cursos)
+Exemplo:
+
+```text
+estudantes
+id
+nome
 ```
 
-A média da subconsulta é calculada sobre **todos os cursos**, porque ela não possui:
-
-```sql
-WHERE ano > 2026
+```text
+matriculas
+id
+id_estudante
 ```
 
-Portanto, estou comparando:
+Nesse caso:
 
-> **cargas dos cursos de 2027+**
-> contra
-> **média de todos os cursos**
-
-Isso pode ser exatamente o que eu quero.
-
-Se eu quisesse comparar os cursos de 2027+ apenas contra a **média dos cursos de 2027+**, precisaria colocar o mesmo filtro dentro da subconsulta:
-
-```sql
-SELECT ano, carga, COUNT(*)
-FROM cursos
-WHERE ano > 2026
-GROUP BY carga
-HAVING carga > (
-    SELECT AVG(carga)
-    FROM cursos
-    WHERE ano > 2026
-);
+```text
+matriculas.id_estudante
 ```
 
-Essa diferença é importante porque muda completamente o significado da análise.
+pode referenciar:
+
+```text
+estudantes.id
+```
+
+### Regra importante
+
+A coluna da FK deve ser compatível com a coluna referenciada, principalmente em tipo e atributos relevantes.
+
+Por exemplo:
+
+```text
+estudantes.id
+INT
+```
+
+e:
+
+```text
+matriculas.id_estudante
+INT
+```
+
+Além disso, a FK normalmente referencia uma **PK** ou outra chave que tenha uma restrição de unicidade adequada.
 
 ---
 
-# O papel de cada comando
+# 16. Relacionamento N : N
 
-Agora tenho uma visão mais completa:
+Agora chegamos ao caso mais interessante.
 
-| Comando    | Função                       |
-| ---------- | ---------------------------- |
-| `WHERE`    | Filtra registros             |
-| `GROUP BY` | Agrupa registros semelhantes |
-| `HAVING`   | Filtra os grupos             |
-| `ORDER BY` | Ordena o resultado           |
-| `COUNT()`  | Conta                        |
-| `SUM()`    | Soma                         |
-| `AVG()`    | Calcula média                |
-| `MAX()`    | Encontra o maior             |
-| `MIN()`    | Encontra o menor             |
-| `DISTINCT` | Remove repetições            |
+**N : N = muitos para muitos.**
+
+No meu exemplo:
+
+```text
+ESTUDANTES
+      N
+      │
+      │
+      N
+    CURSOS
+```
+
+Isso significa:
+
+> Um estudante pode fazer vários cursos.
+
+E:
+
+> Um curso pode ter vários estudantes.
+
+Por exemplo:
+
+```text
+Bruss
+ ├── Algoritmos
+ ├── Excel
+ └── PHP
+```
+
+Enquanto:
+
+```text
+Algoritmos
+ ├── Bruss
+ ├── João
+ └── Douglas
+```
+
+Portanto:
+
+```text
+Estudante → vários cursos
+Curso → vários estudantes
+```
 
 ---
 
-## WHERE e HAVING — diferença essencial
+# 17. O problema do N : N
 
-Essa diferença vale muito a pena memorizar:
+No modelo relacional, não é recomendado representar diretamente esse relacionamento N:N apenas colocando uma FK de um lado no outro.
 
-```
-WHERE
- ↓
-Filtra registros
- ↓
-GROUP BY
- ↓
-Cria grupos
- ↓
-HAVING
- ↓
-Filtra grupos
-```
+A solução é criar uma **terceira tabela**.
 
-- **Exemplo:**
+Essa tabela representa o relacionamento.
 
-```sql
-SELECT ano, COUNT(*)
-FROM cursos
-WHERE carga >= 40
-GROUP BY ano
-HAVING COUNT(*) >= 2
-ORDER BY ano;
+Por exemplo:
+
+```text
+ESTUDANTES
+     │
+     │ 1
+     │
+     N
+MATRICULAS
+     N
+     │
+     │ 1
+     │
+   CURSOS
 ```
 
-Tradução:
-
-> "Pegue somente cursos com pelo menos 40 horas, agrupe-os por ano, mantenha somente os anos que possuem pelo menos 2 cursos e organize os anos em ordem crescente."
+Agora o N:N foi transformado em dois relacionamentos 1:N.
 
 ---
 
-# GROUP BY não é apenas para COUNT()
+# 18. Tabela associativa
 
-Posso utilizar várias funções de agregação:
+A tabela criada para representar o relacionamento pode ser chamada de:
 
-**Contar**
-
-```sql
-SELECT carga, COUNT(*)
-FROM cursos
-GROUP BY carga;
+```text
+matriculas
 ```
 
-**Média**
+Ela pode possuir:
 
-```sql
-SELECT ano, AVG(carga)
-FROM cursos
-GROUP BY ano;
+```text
+id
+id_estudante
+id_curso
 ```
 
-**Soma**
+Por exemplo:
 
-```sql
-SELECT ano, SUM(carga)
-FROM cursos
-GROUP BY ano;
+| id | id_estudante | id_curso |
+| -: | -----------: | -------: |
+|  1 |            1 |        1 |
+|  2 |            1 |        2 |
+|  3 |            2 |        1 |
+|  4 |            3 |        3 |
+
+Podemos interpretar:
+
+```text
+Estudante 1 → Curso 1
+Estudante 1 → Curso 2
+Estudante 2 → Curso 1
+Estudante 3 → Curso 3
 ```
 
-**Maior valor**
-
-```sql
-SELECT ano, MAX(carga)
-FROM cursos
-GROUP BY ano;
-```
-
-**Menor valor**
-
-```sql
-SELECT ano, MIN(carga)
-FROM cursos
-GROUP BY ano;
-```
-
-O `GROUP BY` determina **quais grupos serão analisados**, enquanto a função de agregação determina **o que será calculado dentro de cada grupo**.
+Isso resolve o relacionamento N:N.
 
 ---
 
-**Analogia para memorizar**
+# 19. Por que o N:N vira duas relações 1:N?
 
-Imagine uma escola com várias turmas.
+Antes:
 
-Eu posso dizer:
-
-> "Separe os alunos por turma."
-
-Isso é:
-
-```sql
-GROUP BY turma
+```text
+ESTUDANTES N : N CURSOS
 ```
 
 Depois:
 
-> "Conte quantos alunos existem em cada turma."
+```text
+ESTUDANTES 1 : N MATRICULAS N : 1 CURSOS
+```
 
-Isso é:
+Ou, olhando individualmente:
+
+```text
+ESTUDANTES 1 : N MATRICULAS
+```
+
+e:
+
+```text
+CURSOS 1 : N MATRICULAS
+```
+
+Portanto, o relacionamento N:N é **resolvido por uma entidade associativa**.
+
+Essa é uma das ideias mais importantes desta parte.
+
+---
+
+# 20. A tabela de relacionamento também pode possuir atributos
+
+A tabela associativa não serve apenas para guardar as duas chaves.
+
+Ela pode possuir informações próprias do relacionamento.
+
+Por exemplo:
+
+```text
+MATRICULAS
+----------------
+id
+id_estudante
+id_curso
+data_matricula
+status
+nota
+```
+
+Isso é importante porque:
+
+> `data_matricula`, `status` e `nota` não são necessariamente atributos do estudante ou do curso. Eles são atributos da **relação entre estudante e curso**.
+
+Por exemplo:
+
+```text
+Bruss → Algoritmos
+```
+
+pode ter:
+
+```text
+data_matricula = 2026-08-26
+nota = 8.5
+status = 'Ativo'
+```
+
+---
+
+# 21. Resumindo as regras de relacionamento
+
+### 1 : 1
+
+```text
+Tabela A 1 ───── 1 Tabela B
+```
+
+Existe uma relação de um para um.
+
+A chave estrangeira pode ser colocada em um dos lados, conforme as regras do sistema.
+
+---
+
+### 1 : N
+
+```text
+Tabela A 1 ───── N Tabela B
+```
+
+A PK do lado `1` é colocada como FK no lado `N`.
+
+```text
+A
+PK
+ ↓
+B
+FK
+```
+
+---
+
+### N : N
+
+```text
+Tabela A N ───── N Tabela B
+```
+
+Crio uma terceira tabela:
+
+```text
+Tabela A 1 ───── N Tabela Associativa N ───── 1 Tabela B
+```
+
+As duas chaves estrangeiras ficam na tabela associativa.
+
+---
+
+# 22. Tuplas
+
+No modelo relacional, uma **tupla** corresponde a uma linha/registro da relação.
+
+Por exemplo:
+
+```text
+id | nome | profissão
+---|------|-----------
+1  | Bruss | Desenvolvedor
+```
+
+Essa linha representa uma tupla.
+
+Uma tabela pode possuir:
+
+```text
+0 tuplas
+1 tupla
+10 tuplas
+1000 tuplas
+...
+```
+
+As tuplas podem estar relacionadas a outras tuplas através das chaves.
+
+---
+
+# 23. InnoDB
+
+O **InnoDB** é um mecanismo de armazenamento (*storage engine*) do MySQL.
+
+Ele é importante porque oferece recursos como:
+
+* transações;
+* `COMMIT`;
+* `ROLLBACK`;
+* controle de concorrência;
+* recuperação após falhas;
+* **chaves estrangeiras**.
+
+Por isso, quando estou trabalhando com relacionamentos e integridade referencial, o InnoDB é especialmente importante.
+
+Exemplo:
 
 ```sql
-COUNT(*)
+CREATE TABLE cursos (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB;
 ```
 
-Depois:
+---
 
-> "Mostre somente as turmas que possuem mais de 30 alunos."
+# 24. Integridade referencial
 
-Isso é:
+Quando utilizo uma chave estrangeira, o banco pode garantir que os relacionamentos sejam válidos.
+
+Por exemplo:
+
+```text
+estudantes
+id = 1
+```
+
+e:
+
+```text
+matriculas
+id_estudante = 1
+```
+
+Isso é válido porque o estudante `1` existe.
+
+Mas se eu tentar:
+
+```text
+id_estudante = 999
+```
+
+e o estudante `999` não existir, o banco pode impedir essa operação, dependendo das restrições configuradas.
+
+Isso é chamado de **integridade referencial**.
+
+A ideia é evitar registros "órfãos".
+
+---
+
+# 25. ACID
+
+**ACID** reúne quatro propriedades fundamentais das transações em bancos de dados:
+
+```text
+A → Atomicity
+C → Consistency
+I → Isolation
+D → Durability
+```
+
+Em português:
+
+```text
+A → Atomicidade
+C → Consistência
+I → Isolamento
+D → Durabilidade
+```
+
+---
+
+# 26. A — Atomicidade
+
+**Atomicidade** significa:
+
+> A transação acontece por completo ou não acontece.
+
+Imagine uma transferência bancária:
+
+```text
+Conta A → -R$100
+Conta B → +R$100
+```
+
+Não pode acontecer apenas a primeira operação.
+
+Se o dinheiro for retirado da conta A, mas não chegar à conta B, teremos um problema.
+
+Então as duas operações devem ser tratadas como uma única transação.
+
+```text
+Tudo certo
+   ↓
+COMMIT
+   ↓
+Confirma tudo
+```
+
+Se houver erro:
+
+```text
+Erro
+ ↓
+ROLLBACK
+ ↓
+Desfaz a transação
+```
+
+---
+
+# 27. C — Consistência
+
+A transação deve levar o banco de um **estado válido para outro estado válido**.
+
+As regras e restrições do banco devem continuar sendo respeitadas.
+
+Por exemplo:
+
+Se uma coluna possui:
 
 ```sql
-HAVING COUNT(*) > 30
+PRIMARY KEY
 ```
 
-A lógica fica:
+não posso terminar uma transação criando duas linhas com a mesma chave primária.
 
+A consistência protege as **regras de integridade do banco**.
+
+---
+
+# 28. I — Isolamento
+
+**Isolamento** significa que transações executadas simultaneamente não devem interferir indevidamente umas nas outras.
+
+Imagine duas pessoas acessando e alterando os mesmos dados ao mesmo tempo.
+
+O banco precisa controlar essas operações para evitar resultados inconsistentes.
+
+O MySQL/InnoDB utiliza mecanismos de controle de concorrência e níveis de isolamento para lidar com esse problema.
+
+---
+
+# 29. D — Durabilidade
+
+Depois que uma transação foi confirmada com:
+
+```sql
+COMMIT;
 ```
-Alunos
-  ↓
-Separar por turma
-  ↓
-GROUP BY
-  ↓
-Contar alunos de cada turma
-  ↓
-COUNT()
-  ↓
-Eliminar turmas com poucos alunos
-  ↓
-HAVING
+
+as alterações devem permanecer gravadas mesmo se ocorrer uma falha posteriormente.
+
+Por exemplo:
+
+```text
+INSERT
+   ↓
+COMMIT
+   ↓
+Dados confirmados
+   ↓
+Servidor reinicia
+   ↓
+Dados continuam existindo
 ```
+
+Essa é a ideia da durabilidade.
+
+---
+
+# 🧠 Analogia do ACID
+
+Posso imaginar uma compra em uma loja:
+
+### Atomicidade
+
+A compra inteira acontece ou é cancelada.
+
+### Consistência
+
+O estoque, pagamento e pedido devem continuar obedecendo às regras.
+
+### Isolamento
+
+Duas compras simultâneas não devem causar conflito incorreto no estoque.
+
+### Durabilidade
+
+Depois de confirmar a compra, ela continua registrada mesmo se o sistema reiniciar.
+
+---
+
+# 🔗 Visão geral
+
+Agora consigo enxergar o banco de dados em vários níveis:
+
+```text
+BANCO DE DADOS
+      │
+      ├── Tabelas
+      │      │
+      │      ├── Colunas → atributos
+      │      │
+      │      └── Linhas → tuplas/registros
+      │
+      ├── Chaves
+      │      ├── PK → identifica
+      │      └── FK → relaciona
+      │
+      └── Relacionamentos
+             │
+             ├── 1 : 1
+             ├── 1 : N
+             └── N : N
+                    ↓
+              tabela associativa
+```
+
+E o DER serve para representar visualmente essa estrutura.
 
 ---
 
 **Resumo Relâmpago**
 
-1. `GROUP BY` serve para **agrupar registros que possuem valores iguais**.
-2. Ele fica especialmente útil quando combinado com funções como `COUNT()`, `SUM()` e `AVG()`.
-3. `COUNT(*)` pode mostrar quantos registros existem em cada grupo.
-4. `WHERE` filtra os registros **antes** do agrupamento.
-5. `HAVING` filtra os grupos **depois** do `GROUP BY`.
-6. `ORDER BY` organiza o resultado final.
-7. `GROUP BY carga` cria grupos de cursos com a mesma carga horária.
-8. `HAVING COUNT(*) >= 2` pode manter somente grupos que possuem pelo menos dois registros.
-9. Uma subconsulta é uma consulta colocada dentro de outra consulta.
-10. `HAVING carga > (SELECT AVG(carga) FROM cursos)` compara cada grupo com uma média calculada dinamicamente pelo banco.
+1. **Modelo relacional** organiza dados em tabelas relacionadas.
+2. **DDL** define e modifica a estrutura do banco.
+3. **DML** insere, altera e exclui dados.
+4. **DQL** consulta dados, principalmente com `SELECT`.
+5. **DCL** controla permissões de acesso.
+6. **DTL/TCL** controla transações, usando comandos como `COMMIT` e `ROLLBACK`.
+7. **DER** representa visualmente entidades, atributos e relacionamentos.
+8. **Cardinalidade** indica quantas ocorrências podem participar de um relacionamento.
+9. `1:N` usa a PK do lado 1 como FK no lado N; `N:N` precisa de uma tabela associativa.
+10. **ACID** significa Atomicidade, Consistência, Isolamento e Durabilidade — propriedades fundamentais das transações.
