@@ -12,6 +12,7 @@ Os materiais estão organizados por temas, com atualizações contínuas conform
 - Photoshop
 - Lógica de Programação
 - Banco de Dados
+- JavaScript
 - 
 
 ---
