@@ -1,18 +1,18 @@
-# 🟨 JavaScript — Entrada de Dados pelo Usuário
+# Entrada de Dados pelo Usuário
 
-Agora vou avançar a anotação para a parte de **entrada de dados pelo usuário**. O objetivo é sair de programas em que os valores ficam escritos diretamente no código e passar a permitir que o usuário **digite os valores durante a execução**.
+O objetivo é sair de programas em que os valores ficam escritos diretamente no código e passar a permitir que o usuário **digite os valores durante a execução**.
 
 > **Ideia principal:** até aqui, eu fazia `let a = 10`. Agora quero que o usuário possa digitar o valor de `a`.
 
 ---
 
-## 1. Entrada de dados no JavaScript
+**Entrada de dados no JavaScript**
 
 Quando executo um programa pelo **Node.js**, posso utilizar o módulo `readline` para criar uma interação com o usuário pelo terminal.
 
 A ideia é:
 
-```text
+```
 Programa
    ↓
 faz uma pergunta
@@ -26,9 +26,9 @@ JavaScript processa o valor
 Programa apresenta o resultado
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Digite o primeiro valor: 10
 Digite o segundo valor: 5
 
@@ -39,7 +39,7 @@ O usuário não precisa modificar o código para informar `10` e `5`.
 
 ---
 
-# 2. O módulo `readline`
+# O módulo `readline`
 
 Para utilizar essa funcionalidade, primeiro importo o módulo:
 
@@ -47,9 +47,9 @@ Para utilizar essa funcionalidade, primeiro importo o módulo:
 const readline = require('readline');
 ```
 
-### Entendendo cada parte
+**Entendendo cada parte**
 
-### `const`
+**`const`**
 
 Declara uma constante.
 
@@ -59,7 +59,7 @@ const readline
 
 Estou criando uma constante chamada `readline`.
 
-### `require()`
+**`require()`**
 
 ```javascript
 require('readline')
@@ -67,7 +67,7 @@ require('readline')
 
 O `require()` permite carregar um módulo para utilizá-lo no programa.
 
-### `'readline'`
+**`'readline'`**
 
 É o módulo nativo do Node.js utilizado para trabalhar com entrada e saída de dados de maneira interativa.
 
@@ -83,7 +83,7 @@ pode ser entendido como:
 
 ---
 
-# 3. Criando a interface de entrada e saída
+# Criando a interface de entrada e saída
 
 Depois de carregar o módulo, preciso criar uma interface:
 
@@ -98,7 +98,7 @@ Essa é uma das partes mais importantes do código.
 
 ---
 
-## 3.1 `readline.createInterface()`
+**`readline.createInterface()`**
 
 ```javascript
 readline.createInterface()
@@ -118,7 +118,7 @@ Poderia ser outro nome, mas `rl` é uma abreviação bastante utilizada.
 
 ---
 
-## 3.2 `input: process.stdin`
+**`input: process.stdin`**
 
 ```javascript
 input: process.stdin
@@ -130,11 +130,11 @@ Define de onde o programa receberá os dados.
 
 Na prática, nesse caso:
 
-> ⌨️ A entrada vem do teclado/terminal.
+> A entrada vem do teclado/terminal.
 
 ---
 
-## 3.3 `output: process.stdout`
+**`output: process.stdout`**
 
 ```javascript
 output: process.stdout
@@ -146,13 +146,13 @@ Define para onde as mensagens de saída serão enviadas.
 
 Na prática:
 
-> 🖥️ As mensagens aparecem no terminal.
+> As mensagens aparecem no terminal.
 
 ---
 
-## 3.4 Visualizando a estrutura
+## Visualizando a estrutura
 
-```text
+```
                  Node.js
                     │
           ┌─────────┴─────────┐
@@ -171,7 +171,7 @@ Na prática:
 
 ---
 
-# 4. Fazendo uma pergunta com `rl.question()`
+# Fazendo uma pergunta com `rl.question()`
 
 Depois de criar a interface, posso perguntar algo ao usuário:
 
@@ -191,7 +191,7 @@ faz uma pergunta e espera o usuário digitar uma resposta.
 
 ---
 
-## 4.1 A pergunta
+**A pergunta**
 
 ```javascript
 'Digite o seu nome: '
@@ -201,7 +201,7 @@ faz uma pergunta e espera o usuário digitar uma resposta.
 
 ---
 
-## 4.2 `(nome) => { ... }`
+**`(nome) => { ... }`**
 
 Essa parte é uma **função de callback**.
 
@@ -215,9 +215,9 @@ Podemos entender inicialmente como:
 
 > "Quando o usuário responder, coloque a resposta dentro da variável `nome` e execute o código que está dentro das chaves."
 
-Por exemplo, se o usuário digitar:
+- **Por exemplo, se o usuário digitar:**
 
-```text
+```
 Bruss
 ```
 
@@ -229,7 +229,7 @@ nome = "Bruss";
 
 ---
 
-# 5. Primeiro programa completo
+# Primeiro programa completo
 
 ```javascript
 // Configurando a entrada de dados pelo usuário
@@ -247,7 +247,7 @@ rl.question('Digite o seu nome: ', (nome) => {
 });
 ```
 
-### Fluxo de execução
+**Fluxo de execução**
 
 1. Carrego o `readline`.
 2. Crio a interface `rl`.
@@ -259,15 +259,15 @@ rl.question('Digite o seu nome: ', (nome) => {
 
 ---
 
-# 6. Por que preciso usar `Number()`?
+**Por que preciso usar `Number()`?**
 
 Existe um detalhe **muito importante** quando recebo números através do `readline`:
 
 > A entrada recebida pelo usuário chega como **String**.
 
-Por exemplo, se o usuário digitar:
+- **Por exemplo, se o usuário digitar:**
 
-```text
+```
 10
 ```
 
@@ -285,7 +285,7 @@ e não:
 
 A diferença é:
 
-```text
+```
 "10" → String
 10   → Number
 ```
@@ -300,7 +300,7 @@ para converter o texto recebido em número.
 
 ---
 
-# 7. Exemplo com dois valores
+**Exemplo com dois valores**
 
 ```javascript
 const soma = Number(valor1) + Number(valor2);
@@ -322,13 +322,13 @@ o JavaScript transforma:
 
 Então realiza:
 
-```text
+```
 10 + 5 = 15
 ```
 
 ---
 
-# 8. Programa para somar dois valores
+# Programa para somar dois valores
 
 ```javascript
 // Configurando a entrada de dados pelo usuário
@@ -356,9 +356,9 @@ rl.question('Digite o seu nome: ', (nome) => {
 
 ---
 
-# 9. Entendendo o código por partes
+**Entendendo o código por partes**
 
-## Carregando o módulo
+**Carregando o módulo**
 
 ```javascript
 const readline = require('readline');
@@ -368,7 +368,7 @@ Carrega o módulo `readline`.
 
 ---
 
-## Criando a interface
+**Criando a interface**
 
 ```javascript
 const rl = readline.createInterface({
@@ -384,7 +384,7 @@ Configura:
 
 ---
 
-## Primeira pergunta
+**Primeira pergunta**
 
 ```javascript
 rl.question('Digite o seu nome: ', (nome) => {
@@ -400,7 +400,7 @@ nome
 
 ---
 
-## Segunda pergunta
+**Segunda pergunta**
 
 ```javascript
 rl.question('Digite o primeiro valor: ', (valor1) => {
@@ -414,7 +414,7 @@ valor1
 
 ---
 
-## Terceira pergunta
+**Terceira pergunta**
 
 ```javascript
 rl.question('Digite o segundo valor: ', (valor2) => {
@@ -428,7 +428,7 @@ valor2
 
 ---
 
-## Fazendo a conversão e soma
+**Fazendo a conversão e soma**
 
 ```javascript
 const soma = Number(valor1) + Number(valor2);
@@ -438,7 +438,7 @@ Converto os dois valores para `Number` e depois faço a soma.
 
 ---
 
-## Exibindo o nome
+**Exibindo o nome**
 
 ```javascript
 console.log(`Nome: ${nome}`);
@@ -466,13 +466,13 @@ nome = "Bruss";
 
 o resultado será:
 
-```text
+```
 Nome: Bruss
 ```
 
 ---
 
-## Exibindo a soma
+**Exibindo a soma**
 
 ```javascript
 console.log(`Soma dos valores: ${soma}`);
@@ -480,13 +480,13 @@ console.log(`Soma dos valores: ${soma}`);
 
 Se `soma` for `15`:
 
-```text
+```
 Soma dos valores: 15
 ```
 
 ---
 
-## Encerrando a interface
+**Encerrando a interface**
 
 ```javascript
 rl.close();
@@ -498,13 +498,13 @@ Fecha a interface do `readline`.
 
 ---
 
-# 10. Executando pelo terminal
+## Executando pelo terminal
 
 Depois de salvar o arquivo, posso abrir o terminal integrado do VS Code.
 
 Atalho:
 
-```text
+```
 Ctrl + J
 ```
 
@@ -514,15 +514,15 @@ Depois utilizo:
 node somadedoisvalores.js
 ```
 
-### O que significa?
+**O que significa?**
 
-```text
+```
 node
 ```
 
 é o comando utilizado para executar JavaScript através do **Node.js**.
 
-```text
+```
 somadedoisvalores.js
 ```
 
@@ -540,7 +540,7 @@ significa:
 
 ---
 
-# 11. Criando uma calculadora simples
+# Criando uma calculadora simples
 
 Agora posso aproveitar o mesmo conceito para criar uma calculadora.
 
@@ -571,34 +571,20 @@ rl.question('Digite o primeiro valor: ', (valor1) => {
 });
 ```
 
-### ⚠️ Um detalhe
-
-Na anotação original, a segunda pergunta estava escrita novamente como:
-
-```javascript
-'Digite o primeiro valor: '
-```
-
-Para a calculadora, o correto é:
-
-```javascript
-'Digite o segundo valor: '
-```
-
 ---
 
-# 12. O que a calculadora faz?
+**O que a calculadora faz?**
 
 Supondo:
 
-```text
+```
 Digite o primeiro valor: 10
 Digite o segundo valor: 5
 ```
 
 Temos:
 
-```text
+```
 soma          = 15
 subtração     = 5
 multiplicação = 50
@@ -607,7 +593,7 @@ divisão       = 2
 
 Resultado:
 
-```text
+```
 ===== RESULTADO =====
 Soma dos valores: 15
 Subtração dos valores: 5
@@ -617,11 +603,11 @@ Divisão dos valores: 2
 
 ---
 
-# 13. Exercício — Área do quadrado
+# Exercício — Área do quadrado
 
 A fórmula da área de um quadrado é:
 
-```text
+```
 A = lado × lado
 ```
 
@@ -648,7 +634,7 @@ rl.question('Digite o lado 1: ', (l1) => {
 });
 ```
 
-### Exemplo
+- **Exemplo**
 
 ```text
 lado 1 = 5
@@ -657,13 +643,13 @@ lado 2 = 5
 
 Então:
 
-```text
+```
 5 × 5 = 25
 ```
 
 Resultado:
 
-```text
+```
 A área do quadrado é de: 25 m²
 ```
 
@@ -671,11 +657,11 @@ A área do quadrado é de: 25 m²
 
 ---
 
-# 14. Exercício — Área do triângulo
+# Exercício — Área do triângulo
 
 A fórmula é:
 
-```text
+```
 A = (base × altura) / 2
 ```
 
@@ -702,16 +688,16 @@ rl.question('Digite o valor da base: ', (b) => {
 });
 ```
 
-### Exemplo
+- **Exemplo**
 
-```text
+```
 base = 10
 altura = 5
 ```
 
 Cálculo:
 
-```text
+```
 (10 × 5) / 2
 50 / 2
 25
@@ -719,17 +705,17 @@ Cálculo:
 
 Resultado:
 
-```text
+```
 A área do triângulo é de: 25 m²
 ```
 
 ---
 
-# 15. Exercício — Área do trapézio
+# Exercício — Área do trapézio
 
 A fórmula é:
 
-```text
+```
 A = ((B + b) × h) / 2
 ```
 
@@ -764,9 +750,9 @@ rl.question('Digite o valor da base maior: ', (B) => {
 });
 ```
 
-### Exemplo
+- **Exemplo**
 
-```text
+```
 B = 10
 b = 6
 h = 5
@@ -774,7 +760,7 @@ h = 5
 
 Cálculo:
 
-```text
+```
 ((10 + 6) × 5) / 2
 (16 × 5) / 2
 80 / 2
@@ -783,17 +769,17 @@ Cálculo:
 
 Resultado:
 
-```text
+```
 A área do trapézio é de: 40 m²
 ```
 
 ---
 
-# 16. Exercício — Área do losango
+# Exercício — Área do losango
 
 A fórmula é:
 
-```text
+```
 A = (D × d) / 2
 ```
 
@@ -825,32 +811,32 @@ rl.question('Digite o valor da diagonal maior: ', (D) => {
 });
 ```
 
-### Exemplo
+- **Exemplo**
 
-```text
+```
 D = 10
 d = 6
 ```
 
 Então:
 
-```text
+```
 (10 × 6) / 2 = 30
 ```
 
 Resultado:
 
-```text
+```
 A área do losango é de: 30 m²
 ```
 
 ---
 
-# 17. Exercício — Área do retângulo
+# Exercício — Área do retângulo
 
 A fórmula é:
 
-```text
+```
 A = base × altura
 ```
 
@@ -877,30 +863,30 @@ rl.question('Digite o valor da base: ', (b) => {
 });
 ```
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 base = 10
 altura = 5
 ```
 
-```text
+```
 10 × 5 = 50
 ```
 
 Resultado:
 
-```text
+```
 A área do retângulo é de: 50 m²
 ```
 
 ---
 
-# 18. Exercício — Juros simples
+# Exercício — Juros simples
 
 A fórmula dos juros simples é:
 
-```text
+```
 J = C × i × t
 ```
 
@@ -913,7 +899,7 @@ Onde:
 
 Como a taxa é informada em porcentagem, preciso transformá-la em decimal:
 
-```text
+```
 i / 100
 ```
 
@@ -925,7 +911,7 @@ Number(i) / 100
 
 ---
 
-## Código
+**Código**
 
 ```javascript
 const readline = require('readline');
@@ -951,11 +937,11 @@ rl.question('Digite o capital aplicado: ', (c) => {
 });
 ```
 
-### Exemplo
+**Exemplo**
 
 Supondo:
 
-```text
+```
 Capital = 1000
 Taxa = 2%
 Tempo = 5 meses
@@ -963,40 +949,38 @@ Tempo = 5 meses
 
 Primeiro:
 
-```text
+```
 2 / 100 = 0,02
 ```
 
 Depois:
 
-```text
+```
 J = 1000 × 0,02 × 5
 J = 100
 ```
 
 Montante:
 
-```text
+```
 M = 1000 + 100
 M = 1100
 ```
 
 Resultado:
 
-```text
+```
 Juros simples: 100
 Montante: 1100
 ```
 
-> ⚠️ Ajustei o nome da variável para `juros`, porque `simples` representava o valor dos juros, enquanto o conceito matemático é o **juro**. Também é mais claro exibir "juros" no resultado.
-
 ---
 
-# 19. Exercício — Juros compostos
+# Exercício — Juros compostos
 
 Nos juros compostos, a fórmula do **montante** é:
 
-```text
+```
 M = C × (1 + i)ᵗ
 ```
 
@@ -1015,7 +999,7 @@ const montante = Number(c) * (1 + Number(i) / 100) ** Number(t);
 
 ---
 
-## Código
+**Código**
 
 ```javascript
 const readline = require('readline');
@@ -1043,7 +1027,7 @@ rl.question('Digite o capital aplicado: ', (c) => {
 });
 ```
 
-### Por que fiz duas variáveis?
+**Por que fiz duas variáveis?**
 
 A fórmula:
 
@@ -1069,9 +1053,9 @@ const juros = montante - Number(c);
 
 calcula somente a parte correspondente aos juros.
 
-### Exemplo
+- **Exemplo**
 
-```text
+```
 Capital = 1000
 Taxa = 2%
 Tempo = 5 meses
@@ -1079,25 +1063,25 @@ Tempo = 5 meses
 
 A fórmula é:
 
-```text
+```
 M = 1000 × (1 + 0,02)⁵
 ```
 
 aproximadamente:
 
-```text
+```
 M = 1104,08
 ```
 
 Então os juros são aproximadamente:
 
-```text
+```
 1104,08 - 1000 = 104,08
 ```
 
 ---
 
-# 20. Um padrão que aparece em quase todos os exercícios
+**Um padrão que aparece em quase todos os exercícios**
 
 Observe que vários códigos possuem a mesma estrutura:
 
@@ -1152,7 +1136,7 @@ para encerrar a entrada de dados.
 
 Podemos representar isso assim:
 
-```text
+```
 ┌──────────────────────────────┐
 │ 1. Importar readline         │
 └──────────────┬───────────────┘
@@ -1190,7 +1174,7 @@ Esse padrão será muito importante para os próximos exercícios.
 
 ---
 
-# 21. ⚠️ Um detalhe importante sobre entrada de números
+**Um detalhe importante sobre entrada de números**
 
 Como `rl.question()` entrega texto, preciso converter quando quero fazer cálculos:
 
@@ -1198,7 +1182,7 @@ Como `rl.question()` entrega texto, preciso converter quando quero fazer cálcul
 Number(valor1)
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 const resultado = Number(valor1) + Number(valor2);
@@ -1206,7 +1190,7 @@ const resultado = Number(valor1) + Number(valor2);
 
 Sem essa conversão, o operador `+` pode trabalhar como concatenação de strings.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 "10" + "5"
@@ -1214,7 +1198,7 @@ Exemplo:
 
 resulta em:
 
-```text
+```
 "105"
 ```
 
@@ -1226,7 +1210,7 @@ Number("10") + Number("5")
 
 resulta em:
 
-```text
+```
 15
 ```
 
