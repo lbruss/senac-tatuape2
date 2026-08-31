@@ -1,6 +1,4 @@
-Vou continuar exatamente no padrão que você definiu: **organização em Markdown, explicação didática, destrinchando os conceitos e cada comando SQL, incluindo o motivo de cada etapa**. Também vou manter os exemplos próximos das suas anotações e separar teoria, prática e revisão.
-
-# 🗄️ Banco de Dados — Relacionamento Muitos-para-Muitos (N:N)
+# Relacionamento Muitos-para-Muitos (N:N)
 
 Nesta etapa, vou trabalhar com o relacionamento entre as tabelas **`estudantes`**, **`cursos`** e a tabela intermediária **`prefere`**.
 
@@ -8,7 +6,7 @@ O objetivo é entender como relacionar vários estudantes a vários cursos usand
 
 ---
 
-# 1. 🔗 Relembrando o relacionamento N:N
+**Relembrando o relacionamento N:N**
 
 Temos duas entidades principais:
 
@@ -17,7 +15,7 @@ Temos duas entidades principais:
 
 Um estudante pode estar relacionado a vários cursos.
 
-Por exemplo:
+- **Por exemplo:**
 
 > Bruss pode fazer Algoritmos, Banco de Dados e JavaScript.
 
@@ -27,7 +25,7 @@ Ao mesmo tempo, um curso pode ter vários estudantes:
 
 Portanto:
 
-```text
+```
 ESTUDANTE N ───── N CURSO
 ```
 
@@ -41,7 +39,7 @@ Por isso, criamos uma **terceira tabela**.
 
 ---
 
-# 2. 🧩 Tabela intermediária `prefere`
+## Tabela intermediária `prefere`
 
 A tabela `prefere` funciona como uma espécie de **ponte** entre estudantes e cursos.
 
@@ -63,9 +61,9 @@ create table prefere(
 ) default charset = utf8;
 ```
 
-## Destrinchando
+**Destrinchando**
 
-### `create table prefere`
+**`create table prefere`**
 
 Cria uma nova tabela chamada `prefere`.
 
@@ -75,7 +73,7 @@ Ela representa **o relacionamento entre eles**.
 
 ---
 
-### `idpref int auto_increment primary key`
+**`idpref int auto_increment primary key`**
 
 ```sql
 idpref int auto_increment primary key
@@ -88,7 +86,7 @@ Cria o identificador da própria tabela.
 * `auto_increment` → o MySQL gera automaticamente o próximo número.
 * `primary key` → identifica exclusivamente cada registro.
 
-Por exemplo:
+- **Por exemplo:**
 
 | idpref | idest | idcurso |
 | -----: | ----: | ------: |
@@ -98,7 +96,7 @@ Por exemplo:
 
 ---
 
-### `datas date`
+**`datas date`**
 
 ```sql
 datas date
@@ -106,21 +104,21 @@ datas date
 
 Armazena a data em que o relacionamento foi registrado.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 2026-08-31
 ```
 
 O tipo `DATE` representa uma data no formato:
 
-```text
+```
 AAAA-MM-DD
 ```
 
 ---
 
-### `idest int`
+**`idest int`**
 
 ```sql
 idest int
@@ -130,13 +128,13 @@ Armazena o ID do estudante.
 
 Esse valor será relacionado à coluna:
 
-```text
+```
 estudantes.id
 ```
 
 ---
 
-### `idcurso int`
+**`idcurso int`**
 
 ```sql
 idcurso int
@@ -146,13 +144,13 @@ Armazena o ID do curso.
 
 Esse valor será relacionado à coluna:
 
-```text
+```
 cursos.idcurso
 ```
 
 ---
 
-# 3. 🔑 Chaves estrangeiras
+##  Chaves estrangeiras
 
 Agora aparecem duas partes muito importantes:
 
@@ -161,7 +159,7 @@ foreign key (idest) references estudantes(id),
 foreign key (idcurso) references cursos(idcurso)
 ```
 
-## Primeira chave estrangeira
+**Primeira chave estrangeira**
 
 ```sql
 foreign key (idest) references estudantes(id)
@@ -171,21 +169,21 @@ Significa:
 
 > O valor colocado em `prefere.idest` precisa corresponder a um ID existente em `estudantes.id`.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 idest = 1
 ```
 
 significa que estamos falando do estudante cujo:
 
-```text
+```
 estudantes.id = 1
 ```
 
 ---
 
-## Segunda chave estrangeira
+**Segunda chave estrangeira**
 
 ```sql
 foreign key (idcurso) references cursos(idcurso)
@@ -197,17 +195,17 @@ Significa:
 
 Assim conseguimos ligar:
 
-```text
+```
 estudante → prefere → curso
 ```
 
 ---
 
-# 4. 🧠 Visualizando a estrutura
+# Visualizando a estrutura
 
 Podemos imaginar:
 
-```text
+```
 ┌──────────────┐
 │  estudantes  │
 ├──────────────┤
@@ -242,13 +240,13 @@ Podemos imaginar:
 
 O relacionamento original:
 
-```text
+```
 N : N
 ```
 
 foi transformado em:
 
-```text
+```t
 1 : N       N : 1
 ```
 
@@ -256,7 +254,7 @@ Isso é exatamente o que fazemos com um relacionamento muitos-para-muitos em um 
 
 ---
 
-# 5. ➕ Inserindo relacionamentos
+# Inserindo relacionamentos
 
 Agora podemos preencher a tabela `prefere`:
 
@@ -289,7 +287,7 @@ Isso evita ficar repetindo informações.
 
 ---
 
-# 6. 🔎 Consultando estudantes + `prefere`
+# Consultando estudantes + `prefere`
 
 Podemos juntar `estudantes` com `prefere`:
 
@@ -299,9 +297,9 @@ join prefere
 on estudantes.id = prefere.idest;
 ```
 
-## O que está acontecendo?
+**O que está acontecendo?**
 
-### `select *`
+**`select *`**
 
 ```sql
 select *
@@ -309,7 +307,7 @@ select *
 
 Pede todas as colunas selecionadas pelas tabelas envolvidas.
 
-### `from estudantes`
+**`from estudantes`**
 
 ```sql
 from estudantes
@@ -317,7 +315,7 @@ from estudantes
 
 Define `estudantes` como a tabela principal da consulta.
 
-### `join prefere`
+**`join prefere`**
 
 ```sql
 join prefere
@@ -327,7 +325,7 @@ Diz:
 
 > Quero juntar a tabela `estudantes` com a tabela `prefere`.
 
-### `on`
+**`on`**
 
 ```sql
 on estudantes.id = prefere.idest;
@@ -337,7 +335,7 @@ Define **como as tabelas serão relacionadas**.
 
 Estamos dizendo:
 
-```text
+```
 estudantes.id
        =
 prefere.idest
@@ -345,7 +343,7 @@ prefere.idest
 
 ---
 
-# 7. 🔎 Consultando cursos + `prefere`
+# Consultando cursos + `prefere`
 
 Podemos fazer a mesma coisa com cursos:
 
@@ -357,7 +355,7 @@ on cursos.idcurso = prefere.idcurso;
 
 Agora o relacionamento é:
 
-```text
+```
 cursos.idcurso
        =
 prefere.idcurso
@@ -367,7 +365,7 @@ Assim descobrimos quais cursos estão relacionados aos registros da tabela `pref
 
 ---
 
-# 8. 🏷️ Selecionando somente as informações necessárias
+# Selecionando somente as informações necessárias
 
 Não precisamos sempre utilizar:
 
@@ -388,7 +386,7 @@ Aqui usamos **apelidos para as tabelas**.
 
 ---
 
-# 9. 🏷️ Apelidos com `AS`
+# Apelidos com `AS`
 
 ```sql
 from estudantes as e
@@ -416,7 +414,7 @@ e.nome
 
 é:
 
-```text
+```
 estudantes.nome
 ```
 
@@ -428,7 +426,7 @@ p.datas
 
 é:
 
-```text
+```
 prefere.datas
 ```
 
@@ -436,7 +434,7 @@ Isso deixa consultas grandes muito mais fáceis de escrever e ler.
 
 ---
 
-# 10. 🔗 Juntando as três tabelas
+# Juntando as três tabelas
 
 Agora chegamos à parte mais importante.
 
@@ -446,7 +444,7 @@ Queremos descobrir:
 
 Temos três tabelas:
 
-```text
+```
 estudantes
      ↓
    prefere
@@ -465,7 +463,7 @@ on cursos.idcurso = prefere.idcurso
 order by estudantes.nome;
 ```
 
-## Destrinchando
+**Destrinchando**
 
 Primeiro:
 
@@ -503,7 +501,7 @@ Organizamos o resultado pelo nome do estudante.
 
 ---
 
-# 11. 🎯 Consulta mais limpa
+## Consulta mais limpa
 
 Em vez de mostrar todas as colunas:
 
@@ -537,7 +535,7 @@ Ele está **cruzando as informações das três tabelas** para produzir uma info
 
 ---
 
-# 12. 🧠 A ideia mais importante do `JOIN`
+# A ideia mais importante do `JOIN`
 
 É importante entender o `JOIN` como uma operação de **ligação entre informações**.
 
@@ -567,13 +565,13 @@ Ele guarda apenas a referência.
 
 ---
 
-# 13. 🗺️ DER desse relacionamento
+**DER desse relacionamento**
 
 Depois de criar as três tabelas, podemos visualizar o relacionamento no **DER — Diagrama Entidade-Relacionamento** do MySQL Workbench.
 
 A estrutura será aproximadamente:
 
-```text
+```
 ESTUDANTES
     │
     │ 1
@@ -589,19 +587,19 @@ CURSOS
 
 O relacionamento original:
 
-```text
+```
 ESTUDANTES N : N CURSOS
 ```
 
 foi dividido:
 
-```text
+```
 ESTUDANTES 1 : N PREFERE
 ```
 
 e:
 
-```text
+```
 PREFERE N : 1 CURSOS
 ```
 
@@ -609,11 +607,11 @@ Essa transformação permite representar corretamente um relacionamento N:N dent
 
 ---
 
-# 14. 🔑 Resumo das chaves
+## Resumo das chaves
 
 Neste exemplo temos:
 
-### Tabela `estudantes`
+**Tabela `estudantes`**
 
 ```sql
 id
@@ -623,7 +621,7 @@ id
 
 ---
 
-### Tabela `cursos`
+**Tabela `cursos`**
 
 ```sql
 idcurso
@@ -633,7 +631,7 @@ idcurso
 
 ---
 
-### Tabela `prefere`
+**Tabela `prefere`**
 
 ```sql
 idpref
@@ -667,7 +665,7 @@ cursos(idcurso)
 
 Portanto:
 
-```text
+```
 prefere.idest
       ↓
 estudantes.id
@@ -675,7 +673,7 @@ estudantes.id
 
 e:
 
-```text
+```
 prefere.idcurso
       ↓
 cursos.idcurso
@@ -683,11 +681,11 @@ cursos.idcurso
 
 ---
 
-# 15. ⚠️ Por que não colocar tudo em `estudantes`?
+**Por que não colocar tudo em `estudantes`**
 
 Imagine que fizéssemos:
 
-```text
+```
 estudantes
 
 id | nome | curso
@@ -697,7 +695,7 @@ O problema apareceria quando um estudante fizesse vários cursos.
 
 Teríamos algo como:
 
-```text
+```
 1 | Bruss | Algoritmos, MySQL, JavaScript
 ```
 
@@ -705,7 +703,7 @@ Isso não representa bem um modelo relacional.
 
 Ou poderíamos repetir o estudante:
 
-```text
+```
 1 | Bruss | Algoritmos
 1 | Bruss | MySQL
 1 | Bruss | JavaScript
@@ -715,7 +713,7 @@ Agora estamos repetindo dados do estudante.
 
 A tabela intermediária resolve isso:
 
-```text
+```
 estudantes
 1 | Bruss
 
@@ -734,7 +732,7 @@ O estudante aparece **uma vez** e seus relacionamentos ficam registrados separad
 
 ---
 
-# 16. 🧠 Conceito de normalização
+# Conceito de normalização
 
 Essa organização está relacionada à ideia de **normalização de bancos de dados**.
 
@@ -751,7 +749,7 @@ Por exemplo, se o nome de um curso mudar, não precisamos alterar o nome em deze
 
 Alteramos apenas:
 
-```text
+```
 cursos.nome
 ```
 
@@ -759,7 +757,7 @@ Os relacionamentos continuam apontando para o mesmo `idcurso`.
 
 ---
 
-# 17. 🧪 Consulta final recomendada
+# Consulta final recomendada
 
 Para visualizar os estudantes e os cursos relacionados, uma consulta bem organizada seria:
 
@@ -775,7 +773,7 @@ join cursos
 order by estudantes.nome;
 ```
 
-### Linha por linha
+**Linha por linha**
 
 ```sql
 select
@@ -833,7 +831,7 @@ Ordena o resultado pelo nome do estudante.
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. **N:N** significa muitos-para-muitos.
 2. Um estudante pode estar relacionado a vários cursos.
@@ -845,33 +843,3 @@ Ordena o resultado pelo nome do estudante.
 8. O `JOIN` combina informações relacionadas entre tabelas.
 9. `ON` determina quais colunas serão usadas para fazer a ligação.
 10. Três tabelas permitem transformar N:N em dois relacionamentos **1:N**.
-
-## 🚀 Resumo final
-
-A ideia central desta aula é:
-
-```text
-ESTUDANTES
-     │
-     │ 1:N
-     ▼
-  PREFERE
-     ▲
-     │ N:1
-     │
-   CURSOS
-```
-
-A tabela `prefere` funciona como uma **ponte**. Ela guarda as chaves estrangeiras que conectam estudantes e cursos.
-
-E com:
-
-```sql
-JOIN
-```
-
-conseguimos reconstruir a informação:
-
-> **"Qual estudante está relacionado a qual curso?"**
-
-Esse é um dos conceitos fundamentais de **modelagem relacional de bancos de dados**.
