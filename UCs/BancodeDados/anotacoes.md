@@ -1,1125 +1,877 @@
-# Modelo Relacional e Relacionamentos em Banco de Dados
+Vou continuar exatamente no padrão que você definiu: **organização em Markdown, explicação didática, destrinchando os conceitos e cada comando SQL, incluindo o motivo de cada etapa**. Também vou manter os exemplos próximos das suas anotações e separar teoria, prática e revisão.
 
-Nesta parte comecei a entender como **as tabelas de um banco de dados se relacionam entre si**.
+# 🗄️ Banco de Dados — Relacionamento Muitos-para-Muitos (N:N)
 
-Até agora, eu estava trabalhando principalmente com a criação das tabelas e manipulação dos dados. Agora o foco passa a ser entender **a estrutura do banco como um todo**, incluindo entidades, relacionamentos, cardinalidade, chaves estrangeiras e transações.
+Nesta etapa, vou trabalhar com o relacionamento entre as tabelas **`estudantes`**, **`cursos`** e a tabela intermediária **`prefere`**.
 
----
-
-# Modelo Relacional
-
-O **modelo relacional** é uma forma de organizar os dados em um banco utilizando **tabelas relacionadas entre si**.
-
-Uma tabela normalmente representa uma **entidade** ou um conjunto de entidades do sistema.
-
-Por exemplo, no banco que criei:
-
-```
-ESTUDANTES
-CURSOS
-```
-
-Eu tenho duas entidades principais:
-
-* `estudantes` → informações dos estudantes;
-* `cursos` → informações dos cursos.
-
-Cada tabela possui **colunas**, que representam os atributos, e **linhas**, que representam os registros.
-
-- **Exemplo**
-
-```
-ESTUDANTES
-
-id | nome | nascimento | profissão
----|------|-------------|-----------
-1  | Bruss | 2007-05-29 | ...
-2  | João  | 2007-07-10 | ...
-```
-
-Aqui:
-
-* `estudantes` → entidade/tabela;
-* `id`, `nome`, `nascimento`, `profissão` → atributos;
-* cada linha → uma ocorrência/registro;
-* cada registro também pode ser chamado de **tupla** no modelo relacional.
-
-> **Importante:** tecnicamente, uma tabela representa uma relação no modelo relacional; "entidade" é um conceito do modelo conceitual/DER. Na prática das aulas, é comum falar que uma tabela representa uma entidade.
+O objetivo é entender como relacionar vários estudantes a vários cursos usando **chaves estrangeiras**, **JOINs** e uma **tabela associativa**.
 
 ---
 
-# As linguagens do SQL
+# 1. 🔗 Relembrando o relacionamento N:N
 
-O SQL pode ser dividido em categorias de acordo com o tipo de operação realizada.
+Temos duas entidades principais:
 
-**DDL — Data Definition Language**
+* **Estudantes**
+* **Cursos**
 
-**Linguagem de Definição de Dados.**
+Um estudante pode estar relacionado a vários cursos.
 
-É utilizada para criar e modificar a **estrutura** do banco de dados.
+Por exemplo:
 
-- **Exemplos:**
+> Bruss pode fazer Algoritmos, Banco de Dados e JavaScript.
 
-```sql
-CREATE DATABASE cadastro;
+Ao mesmo tempo, um curso pode ter vários estudantes:
+
+> O curso de Algoritmos pode ter Bruss, Ana, Carlos, João etc.
+
+Portanto:
+
+```text
+ESTUDANTE N ───── N CURSO
 ```
 
-Cria um banco.
+Isso é um relacionamento:
 
-```sql
-CREATE TABLE estudantes (...);
-```
+> **Muitos-para-Muitos (N:N)**
 
-Cria uma tabela.
+O problema é que não podemos simplesmente colocar uma chave estrangeira em apenas uma das duas tabelas para representar corretamente todos esses relacionamentos.
 
-```sql
-ALTER TABLE estudantes ...;
-```
-
-Modifica a estrutura da tabela.
-
-```sql
-DROP TABLE estudantes;
-```
-
-Exclui uma tabela.
-
-**Resumindo:**
-
-> **DDL = estrutura do banco.**
+Por isso, criamos uma **terceira tabela**.
 
 ---
 
-**DML — Data Manipulation Language**
+# 2. 🧩 Tabela intermediária `prefere`
 
-**Linguagem de Manipulação de Dados.**
+A tabela `prefere` funciona como uma espécie de **ponte** entre estudantes e cursos.
 
-É utilizada para trabalhar com os **dados que estão dentro das tabelas**.
+Ela terá:
 
-- **Exemplos:**
-
-```sql
-INSERT INTO estudantes (...);
-```
-
-Insere registros.
+* o ID do estudante;
+* o ID do curso;
+* a data do relacionamento;
+* seu próprio identificador.
 
 ```sql
-UPDATE estudantes
-SET nome = 'Bruss'
-WHERE id = 1;
+create table prefere(
+    idpref int auto_increment primary key,
+    datas date,
+    idest int,
+    idcurso int,
+    foreign key (idest) references estudantes(id),
+    foreign key (idcurso) references cursos(idcurso)
+) default charset = utf8;
 ```
 
-Atualiza registros.
+## Destrinchando
 
-```sql
-DELETE FROM estudantes
-WHERE id = 1;
-```
+### `create table prefere`
 
-Exclui registros.
+Cria uma nova tabela chamada `prefere`.
 
-**Resumindo:**
+Essa tabela não representa exatamente uma pessoa ou um curso.
 
-> **DML = manipulação dos dados.**
+Ela representa **o relacionamento entre eles**.
 
 ---
 
-**DQL — Data Query Language**
-
-**Linguagem de Consulta de Dados.**
-
-É utilizada para **consultar informações** no banco.
-
-O principal comando é:
+### `idpref int auto_increment primary key`
 
 ```sql
-SELECT
+idpref int auto_increment primary key
 ```
 
-- **Exemplo:**
+Cria o identificador da própria tabela.
 
-```sql
-SELECT * FROM estudantes;
-```
+* `idpref` → nome da coluna.
+* `int` → número inteiro.
+* `auto_increment` → o MySQL gera automaticamente o próximo número.
+* `primary key` → identifica exclusivamente cada registro.
 
-Isso significa:
+Por exemplo:
 
-> "Mostre todos os registros da tabela `estudantes`."
-
-Também posso utilizar:
-
-```sql
-SELECT nome, profissão
-FROM estudantes
-WHERE sexo = 'f';
-```
-
-Aqui estou fazendo uma consulta mais específica.
-
-**Resumindo:**
-
-> **DQL = consultar dados.**
+| idpref | idest | idcurso |
+| -----: | ----: | ------: |
+|      1 |     1 |       2 |
+|      2 |     2 |       5 |
+|      3 |     3 |      10 |
 
 ---
 
-**DCL — Data Control Language**
-
-**Linguagem de Controle de Dados.**
-
-É relacionada ao **controle de acesso e permissões** do banco.
-
-Alguns comandos:
+### `datas date`
 
 ```sql
-GRANT
-REVOKE
+datas date
 ```
 
-- `GRANT`
+Armazena a data em que o relacionamento foi registrado.
 
-Concede permissões.
+Exemplo:
 
-- `REVOKE`
-
-Remove permissões.
-
-Por exemplo, um administrador pode permitir que determinado usuário consulte uma tabela, mas não possa alterá-la.
-
-**Resumindo:**
-
-> **DCL = permissões e controle de acesso.**
-
----
-
-**DTL — Data Transaction Language**
-
-Também é chamada em muitos materiais de **TCL — Transaction Control Language**.
-
-É utilizada para controlar **transações**.
-
-Uma transação é um conjunto de operações que deve ser tratado como uma unidade.
-
-Os comandos mais conhecidos são:
-
-```sql
-COMMIT
-ROLLBACK
+```text
+2026-08-31
 ```
 
-**COMMIT**
+O tipo `DATE` representa uma data no formato:
 
-Confirma definitivamente as alterações.
-
-**ROLLBACK**
-
-Desfaz alterações que ainda não foram confirmadas.
-
-- **Exemplo conceitual:**
-
-```
-Começo da transação
-       ↓
-Alterações
-       ↓
-Tudo certo?
-   ↙       ↘
- SIM       NÃO
- ↓          ↓
-COMMIT    ROLLBACK
- ↓          ↓
-Confirma   Desfaz
+```text
+AAAA-MM-DD
 ```
 
 ---
 
-# Resumo das categorias
+### `idest int`
 
-| Categoria   | Significado                                   | Principal finalidade |
-| ----------- | --------------------------------------------- | -------------------- |
-| **DDL**     | Data Definition Language                      | Estrutura            |
-| **DML**     | Data Manipulation Language                    | Manipulação          |
-| **DQL**     | Data Query Language                           | Consulta             |
-| **DCL**     | Data Control Language                         | Permissões           |
-| **DTL/TCL** | Data Transaction/Transaction Control Language | Transações           |
-
-Uma forma fácil de memorizar:
-
+```sql
+idest int
 ```
-DDL  → estrutura
-DML  → dados
-DQL  → consulta
-DCL  → controle
-DTL  → transação
+
+Armazena o ID do estudante.
+
+Esse valor será relacionado à coluna:
+
+```text
+estudantes.id
 ```
 
 ---
 
-# DER — Diagrama Entidade-Relacionamento
+### `idcurso int`
 
-**DER** significa:
-
-> **Diagrama Entidade-Relacionamento**
-
-Ele é uma representação visual do banco de dados.
-
-Em vez de enxergar apenas o código SQL, eu consigo visualizar:
-
-* entidades;
-* atributos;
-* relacionamentos;
-* chaves;
-* cardinalidades.
-
-É como se fosse uma **planta do banco de dados**.
-
-Antes de construir uma casa, eu faço a planta.
-
-Da mesma forma, antes ou durante a construção de um banco, posso utilizar o DER para visualizar como as informações estarão organizadas.
-
----
-
-## Visualizando o DER no MySQL Workbench
-
-No MySQL Workbench posso gerar um diagrama a partir de um banco já existente.
-
-O caminho é:
-
-```
-Database
-   ↓
-Reverse Engineer
-   ↓
-Next
-   ↓
-Escolher a conexão
-   ↓
-Next
-   ↓
-Selecionar o banco
-   ↓
-Next
-   ↓
-Next
-   ↓
-Finish
+```sql
+idcurso int
 ```
 
-O Workbench analisa a estrutura existente do banco e gera uma representação visual.
+Armazena o ID do curso.
 
-Esse processo é chamado de **engenharia reversa (Reverse Engineering)** porque estou fazendo o caminho:
+Esse valor será relacionado à coluna:
 
-```
-Banco existente
-      ↓
-Estrutura
-      ↓
-Diagrama
-```
-
-Em vez de:
-
-```
-Diagrama
-      ↓
-Estrutura
-      ↓
-Banco
+```text
+cursos.idcurso
 ```
 
 ---
 
-### O problema do nosso banco
+# 3. 🔑 Chaves estrangeiras
 
-Eu tenho:
+Agora aparecem duas partes muito importantes:
 
-```
-ESTUDANTES
-```
-
-e:
-
-```
-CURSOS
+```sql
+foreign key (idest) references estudantes(id),
+foreign key (idcurso) references cursos(idcurso)
 ```
 
-Mas existe um problema.
+## Primeira chave estrangeira
 
-Eu sei quem são os estudantes:
-
-```
-Bruss
-João
-Douglas
-...
+```sql
+foreign key (idest) references estudantes(id)
 ```
 
-E sei quais são os cursos:
+Significa:
 
-```
-Algoritmos
-Excel
-PHP
-...
-```
+> O valor colocado em `prefere.idest` precisa corresponder a um ID existente em `estudantes.id`.
 
-Mas o banco ainda não sabe:
+Por exemplo:
 
-> **Qual estudante está fazendo qual curso?**
-
-- **Por exemplo:**
-
-```
-Bruss → Algoritmos
-João → Excel
-Douglas → PHP
+```text
+idest = 1
 ```
 
-Essa informação representa um **relacionamento** entre as tabelas.
+significa que estamos falando do estudante cujo:
+
+```text
+estudantes.id = 1
+```
 
 ---
 
-# Relacionamento
+## Segunda chave estrangeira
 
-Um relacionamento indica como duas entidades estão associadas.
-
-- **Por exemplo:**
-
-```
-ESTUDANTE ───── CURSO
+```sql
+foreign key (idcurso) references cursos(idcurso)
 ```
 
-Podemos interpretar:
+Significa:
 
-> Um estudante participa de um curso.
+> O valor colocado em `prefere.idcurso` precisa corresponder a um curso existente em `cursos.idcurso`.
 
-Mas precisamos descobrir **quantos cursos um estudante pode fazer** e **quantos estudantes podem fazer um curso**.
+Assim conseguimos ligar:
 
-É aí que entra a **cardinalidade**.
+```text
+estudante → prefere → curso
+```
 
 ---
 
-# Cardinalidade
+# 4. 🧠 Visualizando a estrutura
 
-A **cardinalidade** indica quantas ocorrências de uma entidade podem estar relacionadas com ocorrências de outra entidade.
+Podemos imaginar:
 
-- **Por exemplo:**
-
+```text
+┌──────────────┐
+│  estudantes  │
+├──────────────┤
+│ id           │
+│ nome         │
+│ ...          │
+└──────┬───────┘
+       │
+       │ 1
+       │
+       │ N
+┌──────▼───────┐
+│    prefere   │
+├──────────────┤
+│ idpref       │
+│ datas        │
+│ idest        │
+│ idcurso      │
+└──────┬───────┘
+       │
+       │ N
+       │
+       │ 1
+┌──────▼───────┐
+│    cursos    │
+├──────────────┤
+│ idcurso      │
+│ nome         │
+│ ...          │
+└──────────────┘
 ```
-1
-```
 
-significa **um**.
+O relacionamento original:
 
-```
-N
-```
-
-significa **muitos**.
-
-Também podemos encontrar:
-
-```
-0
-```
-
-representando nenhuma ocorrência.
-
-Por isso, posso encontrar relacionamentos como:
-
-```
-1 : 1
-1 : N
+```text
 N : N
 ```
 
----
-
-## Relacionamento 1 : 1
-
-Significa:
-
-> **Um para um.**
-
-Uma ocorrência de uma entidade está relacionada com apenas uma ocorrência da outra.
-
-- **Exemplo:**
-
-```
-PESSOA ───── DOCUMENTO
-   1            1
-```
-
-Uma pessoa pode possuir um determinado registro de documento, e esse registro pertence a uma pessoa.
-
-Nesse tipo de relacionamento, dependendo da regra de negócio, pode fazer sentido manter as informações em uma única tabela.
-
-Mas **não é obrigatório juntar as tabelas**. A decisão depende do modelo e das regras do sistema.
-
----
-
-## Relacionamento 1 : N
-
-Significa:
-
-> **Um para muitos.**
-
-Uma ocorrência de uma tabela pode estar relacionada a várias ocorrências de outra tabela.
-
-- **Exemplo:**
+foi transformado em:
 
 ```text
-CLIENTE ───── PEDIDO
-   1            N
+1 : N       N : 1
 ```
 
-Um cliente pode fazer vários pedidos.
-
-Mas cada pedido pertence a um cliente.
-
-Visualmente:
-
-```
-Cliente 1
-   ├── Pedido 1
-   ├── Pedido 2
-   ├── Pedido 3
-   └── Pedido 4
-```
-
-Esse é um dos relacionamentos mais comuns em bancos de dados.
+Isso é exatamente o que fazemos com um relacionamento muitos-para-muitos em um banco relacional.
 
 ---
 
-# Chave estrangeira no relacionamento 1 : N
+# 5. ➕ Inserindo relacionamentos
 
-Aqui entra a **Foreign Key (FK)**, ou **chave estrangeira**.
-
-Imagine:
-
-```
-CLIENTE
-id_cliente
-nome
-```
-
-e:
-
-```
-PEDIDO
-id_pedido
-data
-```
-
-A chave primária do lado `1`:
-
-```
-CLIENTE.id_cliente
-```
-
-é levada para o lado `N`:
-
-```
-PEDIDO.id_cliente
-```
-
-Então:
-
-```
-CLIENTE
----------
-id_cliente ← PK
-nome
-```
-
-```
-PEDIDO
----------
-id_pedido ← PK
-data
-id_cliente ← FK
-```
-
-Agora cada pedido consegue indicar **qual cliente fez aquele pedido**.
-
----
-
-# Chave primária e chave estrangeira
-
-**Primary Key — PK**
-
-A **chave primária** identifica unicamente um registro dentro da própria tabela.
-
-- **Exemplo:**
+Agora podemos preencher a tabela `prefere`:
 
 ```sql
-id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+insert into prefere
+(idpref, datas, idest, idcurso)
+values
+(default, '2026-08-31', 1, 2),
+(default, '2026-08-28', 2, 5),
+(default, '2026-08-25', 3, 10),
+(default, '2026-08-24', 4, 25);
 ```
 
-Cada estudante possui um `id` diferente.
+Aqui estamos criando **quatro relacionamentos**.
+
+Podemos interpretar:
+
+| idpref | data       | estudante | curso |
+| -----: | ---------- | --------: | ----: |
+|      1 | 2026-08-31 |         1 |     2 |
+|      2 | 2026-08-28 |         2 |     5 |
+|      3 | 2026-08-25 |         3 |    10 |
+|      4 | 2026-08-24 |         4 |    25 |
+
+O importante é perceber que `prefere` não guarda o nome do estudante nem o nome do curso.
+
+Ela guarda os **IDs**.
+
+Isso evita ficar repetindo informações.
 
 ---
 
-**Foreign Key — FK**
+# 6. 🔎 Consultando estudantes + `prefere`
 
-A **chave estrangeira** é um campo utilizado para criar uma relação com outra tabela.
+Podemos juntar `estudantes` com `prefere`:
 
-- **Exemplo:**
-
-```
-estudantes
-id
-nome
+```sql
+select * from estudantes
+join prefere
+on estudantes.id = prefere.idest;
 ```
 
-```
-matriculas
-id
-id_estudante
+## O que está acontecendo?
+
+### `select *`
+
+```sql
+select *
 ```
 
-Nesse caso:
+Pede todas as colunas selecionadas pelas tabelas envolvidas.
 
-```
-matriculas.id_estudante
+### `from estudantes`
+
+```sql
+from estudantes
 ```
 
-pode referenciar:
+Define `estudantes` como a tabela principal da consulta.
 
+### `join prefere`
+
+```sql
+join prefere
 ```
+
+Diz:
+
+> Quero juntar a tabela `estudantes` com a tabela `prefere`.
+
+### `on`
+
+```sql
+on estudantes.id = prefere.idest;
+```
+
+Define **como as tabelas serão relacionadas**.
+
+Estamos dizendo:
+
+```text
 estudantes.id
+       =
+prefere.idest
 ```
-
-> **Regra importante**
-
-A coluna da FK deve ser compatível com a coluna referenciada, principalmente em tipo e atributos relevantes.
-
-- **Por exemplo:**
-
-```
-estudantes.id
-INT
-```
-
-e:
-
-```
-matriculas.id_estudante
-INT
-```
-
-Além disso, a FK normalmente referencia uma **PK** ou outra chave que tenha uma restrição de unicidade adequada.
 
 ---
 
-## Relacionamento N : N
+# 7. 🔎 Consultando cursos + `prefere`
 
-Agora chegamos ao caso mais interessante.
+Podemos fazer a mesma coisa com cursos:
 
-**N : N = muitos para muitos.**
-
-- **No meu exemplo:**
-
-```
-ESTUDANTES
-      N
-      │
-      │
-      N
-    CURSOS
+```sql
+select * from cursos
+join prefere
+on cursos.idcurso = prefere.idcurso;
 ```
 
-Isso significa:
+Agora o relacionamento é:
 
-> Um estudante pode fazer vários cursos.
+```text
+cursos.idcurso
+       =
+prefere.idcurso
+```
+
+Assim descobrimos quais cursos estão relacionados aos registros da tabela `prefere`.
+
+---
+
+# 8. 🏷️ Selecionando somente as informações necessárias
+
+Não precisamos sempre utilizar:
+
+```sql
+select *
+```
+
+Podemos escolher exatamente o que queremos visualizar.
+
+```sql
+select e.nome, e.id, p.idest, p.datas
+from estudantes as e
+join prefere as p
+on e.id = p.idest;
+```
+
+Aqui usamos **apelidos para as tabelas**.
+
+---
+
+# 9. 🏷️ Apelidos com `AS`
+
+```sql
+from estudantes as e
+```
+
+Significa:
+
+> Durante essa consulta, posso chamar `estudantes` simplesmente de `e`.
 
 E:
 
-> Um curso pode ter vários estudantes.
-
-- **Por exemplo:**
-
+```sql
+join prefere as p
 ```
-Bruss
- ├── Algoritmos
- ├── Excel
- └── PHP
+
+significa:
+
+> Durante essa consulta, posso chamar `prefere` de `p`.
+
+Assim:
+
+```sql
+e.nome
+```
+
+é:
+
+```text
+estudantes.nome
+```
+
+E:
+
+```sql
+p.datas
+```
+
+é:
+
+```text
+prefere.datas
+```
+
+Isso deixa consultas grandes muito mais fáceis de escrever e ler.
+
+---
+
+# 10. 🔗 Juntando as três tabelas
+
+Agora chegamos à parte mais importante.
+
+Queremos descobrir:
+
+> **Qual estudante está relacionado a qual curso?**
+
+Temos três tabelas:
+
+```text
+estudantes
+     ↓
+   prefere
+     ↓
+   cursos
+```
+
+Então fazemos:
+
+```sql
+select * from estudantes
+join prefere
+on estudantes.id = prefere.idest
+join cursos
+on cursos.idcurso = prefere.idcurso
+order by estudantes.nome;
+```
+
+## Destrinchando
+
+Primeiro:
+
+```sql
+from estudantes
+```
+
+Começamos pela tabela dos estudantes.
+
+Depois:
+
+```sql
+join prefere
+on estudantes.id = prefere.idest
+```
+
+Encontramos os relacionamentos daquele estudante.
+
+Depois:
+
+```sql
+join cursos
+on cursos.idcurso = prefere.idcurso
+```
+
+Encontramos o curso correspondente.
+
+Por fim:
+
+```sql
+order by estudantes.nome;
+```
+
+Organizamos o resultado pelo nome do estudante.
+
+---
+
+# 11. 🎯 Consulta mais limpa
+
+Em vez de mostrar todas as colunas:
+
+```sql
+select *
+```
+
+podemos mostrar somente aquilo que interessa:
+
+```sql
+select estudantes.nome, cursos.nome
+from estudantes
+join prefere
+on estudantes.id = prefere.idest
+join cursos
+on cursos.idcurso = prefere.idcurso
+order by estudantes.nome;
+```
+
+O resultado será conceitualmente parecido com:
+
+| Estudante                   | Curso                                |
+| --------------------------- | ------------------------------------ |
+| Ana Beatriz Almeida Souza   | Excel Essencial                      |
+| Carlos Eduardo Pereira Lima | Formação Excel do Básico ao Avançado |
+| ...                         | ...                                  |
+
+Agora o banco não está mostrando apenas IDs.
+
+Ele está **cruzando as informações das três tabelas** para produzir uma informação útil.
+
+---
+
+# 12. 🧠 A ideia mais importante do `JOIN`
+
+É importante entender o `JOIN` como uma operação de **ligação entre informações**.
+
+Imagine três fichas:
+
+```text
+Ficha do estudante
+        ↓
+"ID 5"
+        ↓
+Ficha de relacionamento
+        ↓
+"ID do curso 10"
+        ↓
+Ficha do curso
+        ↓
+"PHP Básico"
+```
+
+O banco percorre essas relações e consegue responder:
+
+> O estudante de ID 5 está relacionado ao curso de ID 10, cujo nome é PHP Básico.
+
+Ou seja, o banco **não precisa repetir o nome do curso dentro da tabela de estudantes**.
+
+Ele guarda apenas a referência.
+
+---
+
+# 13. 🗺️ DER desse relacionamento
+
+Depois de criar as três tabelas, podemos visualizar o relacionamento no **DER — Diagrama Entidade-Relacionamento** do MySQL Workbench.
+
+A estrutura será aproximadamente:
+
+```text
+ESTUDANTES
+    │
+    │ 1
+    │
+    │ N
+PREFERE
+    │
+    │ N
+    │
+    │ 1
+CURSOS
+```
+
+O relacionamento original:
+
+```text
+ESTUDANTES N : N CURSOS
+```
+
+foi dividido:
+
+```text
+ESTUDANTES 1 : N PREFERE
+```
+
+e:
+
+```text
+PREFERE N : 1 CURSOS
+```
+
+Essa transformação permite representar corretamente um relacionamento N:N dentro do modelo relacional.
+
+---
+
+# 14. 🔑 Resumo das chaves
+
+Neste exemplo temos:
+
+### Tabela `estudantes`
+
+```sql
+id
+```
+
+é a **chave primária**.
+
+---
+
+### Tabela `cursos`
+
+```sql
+idcurso
+```
+
+é a **chave primária**.
+
+---
+
+### Tabela `prefere`
+
+```sql
+idpref
+```
+
+é a **chave primária**.
+
+E:
+
+```sql
+idest
+```
+
+é uma **chave estrangeira** para:
+
+```sql
+estudantes(id)
 ```
 
 Enquanto:
 
+```sql
+idcurso
 ```
-Algoritmos
- ├── Bruss
- ├── João
- └── Douglas
+
+é uma **chave estrangeira** para:
+
+```sql
+cursos(idcurso)
 ```
 
 Portanto:
 
+```text
+prefere.idest
+      ↓
+estudantes.id
 ```
-Estudante → vários cursos
-Curso → vários estudantes
+
+e:
+
+```text
+prefere.idcurso
+      ↓
+cursos.idcurso
 ```
 
 ---
 
-## O problema do N : N
+# 15. ⚠️ Por que não colocar tudo em `estudantes`?
 
-No modelo relacional, não é recomendado representar diretamente esse relacionamento N:N apenas colocando uma FK de um lado no outro.
+Imagine que fizéssemos:
 
-A solução é criar uma **terceira tabela**.
+```text
+estudantes
 
-Essa tabela representa o relacionamento.
-
-- **Por exemplo:**
-
+id | nome | curso
 ```
+
+O problema apareceria quando um estudante fizesse vários cursos.
+
+Teríamos algo como:
+
+```text
+1 | Bruss | Algoritmos, MySQL, JavaScript
+```
+
+Isso não representa bem um modelo relacional.
+
+Ou poderíamos repetir o estudante:
+
+```text
+1 | Bruss | Algoritmos
+1 | Bruss | MySQL
+1 | Bruss | JavaScript
+```
+
+Agora estamos repetindo dados do estudante.
+
+A tabela intermediária resolve isso:
+
+```text
+estudantes
+1 | Bruss
+
+prefere
+1 | 1 | 2
+2 | 1 | 5
+3 | 1 | 10
+
+cursos
+2 | Excel Essencial
+5 | Formação Excel...
+10 | PHP Básico
+```
+
+O estudante aparece **uma vez** e seus relacionamentos ficam registrados separadamente.
+
+---
+
+# 16. 🧠 Conceito de normalização
+
+Essa organização está relacionada à ideia de **normalização de bancos de dados**.
+
+A normalização busca, entre outras coisas:
+
+* reduzir repetição de dados;
+* evitar inconsistências;
+* organizar as informações;
+* separar entidades diferentes;
+* facilitar alterações;
+* manter os relacionamentos através de chaves.
+
+Por exemplo, se o nome de um curso mudar, não precisamos alterar o nome em dezenas de registros de estudantes.
+
+Alteramos apenas:
+
+```text
+cursos.nome
+```
+
+Os relacionamentos continuam apontando para o mesmo `idcurso`.
+
+---
+
+# 17. 🧪 Consulta final recomendada
+
+Para visualizar os estudantes e os cursos relacionados, uma consulta bem organizada seria:
+
+```sql
+select
+    estudantes.nome,
+    cursos.nome
+from estudantes
+join prefere
+    on estudantes.id = prefere.idest
+join cursos
+    on cursos.idcurso = prefere.idcurso
+order by estudantes.nome;
+```
+
+### Linha por linha
+
+```sql
+select
+```
+
+Define quais informações queremos mostrar.
+
+```sql
+estudantes.nome,
+```
+
+Mostra o nome do estudante.
+
+```sql
+cursos.nome
+```
+
+Mostra o nome do curso.
+
+```sql
+from estudantes
+```
+
+Começa a consulta pela tabela `estudantes`.
+
+```sql
+join prefere
+```
+
+Junta os relacionamentos registrados na tabela intermediária.
+
+```sql
+on estudantes.id = prefere.idest
+```
+
+Liga o estudante ao seu registro na tabela `prefere`.
+
+```sql
+join cursos
+```
+
+Depois junta a tabela de cursos.
+
+```sql
+on cursos.idcurso = prefere.idcurso
+```
+
+Liga o relacionamento ao curso correspondente.
+
+```sql
+order by estudantes.nome;
+```
+
+Ordena o resultado pelo nome do estudante.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. **N:N** significa muitos-para-muitos.
+2. Um estudante pode estar relacionado a vários cursos.
+3. Um curso pode estar relacionado a vários estudantes.
+4. Para representar N:N, criamos uma **tabela intermediária**.
+5. Neste exemplo, a tabela intermediária é `prefere`.
+6. `idest` é chave estrangeira para `estudantes.id`.
+7. `idcurso` é chave estrangeira para `cursos.idcurso`.
+8. O `JOIN` combina informações relacionadas entre tabelas.
+9. `ON` determina quais colunas serão usadas para fazer a ligação.
+10. Três tabelas permitem transformar N:N em dois relacionamentos **1:N**.
+
+## 🚀 Resumo final
+
+A ideia central desta aula é:
+
+```text
 ESTUDANTES
      │
-     │ 1
-     │
-     N
-MATRICULAS
-     N
-     │
-     │ 1
+     │ 1:N
+     ▼
+  PREFERE
+     ▲
+     │ N:1
      │
    CURSOS
 ```
 
-Agora o N:N foi transformado em dois relacionamentos 1:N.
+A tabela `prefere` funciona como uma **ponte**. Ela guarda as chaves estrangeiras que conectam estudantes e cursos.
 
----
-
-## Tabela associativa
-
-A tabela criada para representar o relacionamento pode ser chamada de:
-
-```
-matriculas
-```
-
-Ela pode possuir:
-
-```
-id
-id_estudante
-id_curso
-```
-
-- **Por exemplo:**
-
-| id | id_estudante | id_curso |
-| -: | -----------: | -------: |
-|  1 |            1 |        1 |
-|  2 |            1 |        2 |
-|  3 |            2 |        1 |
-|  4 |            3 |        3 |
-
-Podemos interpretar:
-
-```
-Estudante 1 → Curso 1
-Estudante 1 → Curso 2
-Estudante 2 → Curso 1
-Estudante 3 → Curso 3
-```
-
-Isso resolve o relacionamento N:N.
-
----
-
-**Por que o N:N vira duas relações 1:N?**
-
-Antes:
-
-```
-ESTUDANTES N : N CURSOS
-```
-
-Depois:
-
-```
-ESTUDANTES 1 : N MATRICULAS N : 1 CURSOS
-```
-
-Ou, olhando individualmente:
-
-```
-ESTUDANTES 1 : N MATRICULAS
-```
-
-e:
-
-```
-CURSOS 1 : N MATRICULAS
-```
-
-Portanto, o relacionamento N:N é **resolvido por uma entidade associativa**.
-
-Essa é uma das ideias mais importantes desta parte.
-
----
-
-# A tabela de relacionamento também pode possuir atributos
-
-A tabela associativa não serve apenas para guardar as duas chaves.
-
-Ela pode possuir informações próprias do relacionamento.
-
-- **Por exemplo:**
-
-```
-MATRICULAS
-----------------
-id
-id_estudante
-id_curso
-data_matricula
-status
-nota
-```
-
-Isso é importante porque:
-
-> `data_matricula`, `status` e `nota` não são necessariamente atributos do estudante ou do curso. Eles são atributos da **relação entre estudante e curso**.
-
-- **Por exemplo:**
-
-```
-Bruss → Algoritmos
-```
-
-pode ter:
-
-```
-data_matricula = 2026-08-26
-nota = 8.5
-status = 'Ativo'
-```
-
----
-
-# Resumindo as regras de relacionamento
-
-**1 : 1**
-
-```
-Tabela A 1 ───── 1 Tabela B
-```
-
-Existe uma relação de um para um.
-
-A chave estrangeira pode ser colocada em um dos lados, conforme as regras do sistema.
-
----
-
-**1 : N**
-
-```
-Tabela A 1 ───── N Tabela B
-```
-
-A PK do lado `1` é colocada como FK no lado `N`.
-
-```
-A
-PK
- ↓
-B
-FK
-```
-
----
-
-**N : N**
-
-```
-Tabela A N ───── N Tabela B
-```
-
-Crio uma terceira tabela:
-
-```
-Tabela A 1 ───── N Tabela Associativa N ───── 1 Tabela B
-```
-
-As duas chaves estrangeiras ficam na tabela associativa.
-
----
-
-# Tuplas
-
-No modelo relacional, uma **tupla** corresponde a uma linha/registro da relação.
-
-- **Por exemplo:**
-
-```text
-id | nome | profissão
----|------|-----------
-1  | Bruss | Desenvolvedor
-```
-
-Essa linha representa uma tupla.
-
-Uma tabela pode possuir:
-
-```
-0 tuplas
-1 tupla
-10 tuplas
-1000 tuplas
-...
-```
-
-As tuplas podem estar relacionadas a outras tuplas através das chaves.
-
----
-
-# InnoDB
-
-O **InnoDB** é um mecanismo de armazenamento (*storage engine*) do MySQL.
-
-Ele é importante porque oferece recursos como:
-
-* transações;
-* `COMMIT`;
-* `ROLLBACK`;
-* controle de concorrência;
-* recuperação após falhas;
-* **chaves estrangeiras**.
-
-Por isso, quando estou trabalhando com relacionamentos e integridade referencial, o InnoDB é especialmente importante.
-
-- **Exemplo:**
+E com:
 
 ```sql
-CREATE TABLE cursos (
-    id INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
-) ENGINE = InnoDB;
+JOIN
 ```
 
----
+conseguimos reconstruir a informação:
 
-# Integridade referencial
+> **"Qual estudante está relacionado a qual curso?"**
 
-Quando utilizo uma chave estrangeira, o banco pode garantir que os relacionamentos sejam válidos.
-
-- **Por exemplo:**
-
-```
-estudantes
-id = 1
-```
-
-e:
-
-```
-matriculas
-id_estudante = 1
-```
-
-Isso é válido porque o estudante `1` existe.
-
-Mas se eu tentar:
-
-```
-id_estudante = 999
-```
-
-e o estudante `999` não existir, o banco pode impedir essa operação, dependendo das restrições configuradas.
-
-Isso é chamado de **integridade referencial**.
-
-A ideia é evitar registros "órfãos".
-
----
-
-# ACID
-
-**ACID** reúne quatro propriedades fundamentais das transações em bancos de dados:
-
-```
-A → Atomicity
-C → Consistency
-I → Isolation
-D → Durability
-```
-
-Em português:
-
-```
-A → Atomicidade
-C → Consistência
-I → Isolamento
-D → Durabilidade
-```
-
----
-
-## A — Atomicidade
-
-**Atomicidade** significa:
-
-> A transação acontece por completo ou não acontece.
-
-Imagine uma transferência bancária:
-
-```
-Conta A → -R$100
-Conta B → +R$100
-```
-
-Não pode acontecer apenas a primeira operação.
-
-Se o dinheiro for retirado da conta A, mas não chegar à conta B, teremos um problema.
-
-Então as duas operações devem ser tratadas como uma única transação.
-
-```
-Tudo certo
-   ↓
-COMMIT
-   ↓
-Confirma tudo
-```
-
-Se houver erro:
-
-```
-Erro
- ↓
-ROLLBACK
- ↓
-Desfaz a transação
-```
-
----
-
-## C — Consistência
-
-A transação deve levar o banco de um **estado válido para outro estado válido**.
-
-As regras e restrições do banco devem continuar sendo respeitadas.
-
-- **Por exemplo:**
-
-Se uma coluna possui:
-
-```sql
-PRIMARY KEY
-```
-
-não posso terminar uma transação criando duas linhas com a mesma chave primária.
-
-A consistência protege as **regras de integridade do banco**.
-
----
-
-## I — Isolamento
-
-**Isolamento** significa que transações executadas simultaneamente não devem interferir indevidamente umas nas outras.
-
-Imagine duas pessoas acessando e alterando os mesmos dados ao mesmo tempo.
-
-O banco precisa controlar essas operações para evitar resultados inconsistentes.
-
-O MySQL/InnoDB utiliza mecanismos de controle de concorrência e níveis de isolamento para lidar com esse problema.
-
----
-
-## D — Durabilidade
-
-Depois que uma transação foi confirmada com:
-
-```sql
-COMMIT;
-```
-
-as alterações devem permanecer gravadas mesmo se ocorrer uma falha posteriormente.
-
-- **Por exemplo:**
-
-```
-INSERT
-   ↓
-COMMIT
-   ↓
-Dados confirmados
-   ↓
-Servidor reinicia
-   ↓
-Dados continuam existindo
-```
-
-Essa é a ideia da durabilidade.
-
----
-
-> Analogia do ACID
-
-Posso imaginar uma compra em uma loja:
-
-**Atomicidade**
-
-A compra inteira acontece ou é cancelada.
-
-**Consistência**
-
-O estoque, pagamento e pedido devem continuar obedecendo às regras.
-
-**Isolamento**
-
-Duas compras simultâneas não devem causar conflito incorreto no estoque.
-
-**Durabilidade**
-
-Depois de confirmar a compra, ela continua registrada mesmo se o sistema reiniciar.
-
----
-
-# Visão geral
-
-Agora consigo enxergar o banco de dados em vários níveis:
-
-```
-BANCO DE DADOS
-      │
-      ├── Tabelas
-      │      │
-      │      ├── Colunas → atributos
-      │      │
-      │      └── Linhas → tuplas/registros
-      │
-      ├── Chaves
-      │      ├── PK → identifica
-      │      └── FK → relaciona
-      │
-      └── Relacionamentos
-             │
-             ├── 1 : 1
-             ├── 1 : N
-             └── N : N
-                    ↓
-              tabela associativa
-```
-
-E o DER serve para representar visualmente essa estrutura.
-
----
-
-**Resumo Relâmpago**
-
-1. **Modelo relacional** organiza dados em tabelas relacionadas.
-2. **DDL** define e modifica a estrutura do banco.
-3. **DML** insere, altera e exclui dados.
-4. **DQL** consulta dados, principalmente com `SELECT`.
-5. **DCL** controla permissões de acesso.
-6. **DTL/TCL** controla transações, usando comandos como `COMMIT` e `ROLLBACK`.
-7. **DER** representa visualmente entidades, atributos e relacionamentos.
-8. **Cardinalidade** indica quantas ocorrências podem participar de um relacionamento.
-9. `1:N` usa a PK do lado 1 como FK no lado N; `N:N` precisa de uma tabela associativa.
-10. **ACID** significa Atomicidade, Consistência, Isolamento e Durabilidade — propriedades fundamentais das transações.
+Esse é um dos conceitos fundamentais de **modelagem relacional de bancos de dados**.
