@@ -1,4 +1,4 @@
-# 🟨 JavaScript — Primeiros contatos com HTML
+# HTML e JavaScript 
 
 Nesta parte, vou apenas **conhecer o HTML e entender como o JavaScript pode interagir com uma página**. O aprofundamento de HTML e CSS ficará para depois.
 
@@ -6,11 +6,11 @@ A ideia principal é começar a sair do JavaScript executado apenas no terminal 
 
 ---
 
-# 1. Criando a pasta do projeto
+**Criando a pasta do projeto**
 
 Primeiro, crio uma pasta chamada:
 
-```text
+```
 exemplohtml
 ```
 
@@ -23,7 +23,7 @@ Depois:
 
 A estrutura ficará aproximadamente assim:
 
-```text
+```
 exemplohtml/
 │
 ├── exemplo1.html
@@ -35,11 +35,11 @@ exemplohtml/
 
 ---
 
-# 2. Primeiro contato com HTML
+## Primeiro contato com HTML
 
 Crio o arquivo:
 
-```text
+```
 exemplo1.html
 ```
 
@@ -57,11 +57,11 @@ E coloco:
 </html>
 ```
 
-## Entendendo a estrutura
+**Entendendo a estrutura**
 
 O HTML utiliza **tags** para estruturar o conteúdo de uma página.
 
-### `<html>`
+**`<html>`**
 
 ```html
 <html>
@@ -77,7 +77,7 @@ O documento termina com:
 
 ---
 
-### `<head>`
+**`<head>`**
 
 ```html
 <head>
@@ -87,7 +87,7 @@ Contém informações e configurações da página que não são, normalmente, o
 
 ---
 
-### `<title>`
+**`<title>`**
 
 ```html
 <title>Turma TI 0425</title>
@@ -97,7 +97,7 @@ Define o título da página, normalmente apresentado na aba do navegador.
 
 ---
 
-### `<body>`
+**`<body>`**
 
 ```html
 <body>
@@ -109,7 +109,7 @@ O `<body>` contém o conteúdo que será apresentado na página.
 
 Podemos pensar assim:
 
-```text
+```
 HTML
 │
 ├── HEAD
@@ -121,11 +121,11 @@ HTML
 
 ---
 
-# 3. Primeira página em JavaScript
+# Primeira página em JavaScript
 
 Agora crio:
 
-```text
+```
 01-primeira-pagina.html
 ```
 
@@ -151,9 +151,9 @@ O HTML inicial será:
 
 ---
 
-# 4. Algumas partes novas do HTML
+# Algumas partes novas do HTML
 
-## `<!DOCTYPE html>`
+**`<!DOCTYPE html>`**
 
 ```html
 <!DOCTYPE html>
@@ -163,7 +163,7 @@ Informa ao navegador que o documento utiliza HTML5.
 
 ---
 
-## `lang="pt-br"`
+**`lang="pt-br"`**
 
 ```html
 <html lang="pt-br">
@@ -173,13 +173,13 @@ Indica o idioma principal do documento.
 
 Neste caso:
 
-```text
+```
 pt-br → português do Brasil
 ```
 
 ---
 
-## `<meta charset="utf-8">`
+**`<meta charset="utf-8">`**
 
 ```html
 <meta charset="utf-8">
@@ -189,7 +189,7 @@ Define a codificação dos caracteres.
 
 O UTF-8 permite representar corretamente diversos caracteres, incluindo:
 
-```text
+```
 á
 ã
 ç
@@ -201,7 +201,7 @@ Isso é especialmente importante quando estou escrevendo páginas em português.
 
 ---
 
-## `<meta name="viewport"...>`
+**`<meta name="viewport"...>`**
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -213,7 +213,7 @@ Por enquanto, basta entender que ela ajuda no comportamento **responsivo** da p�
 
 ---
 
-## `<h1>`
+**`<h1>`**
 
 ```html
 <h1>Primeira página em JavaScript</h1>
@@ -223,7 +223,7 @@ Representa um título de nível 1.
 
 ---
 
-## `<p id="texto"></p>`
+**`<p id="texto"></p>`**
 
 ```html
 <p id="texto"></p>
@@ -243,7 +243,7 @@ Esse `id` será utilizado posteriormente pelo JavaScript para localizar esse ele
 
 ---
 
-# 5. Colocando JavaScript dentro do HTML
+# Colocando JavaScript dentro do HTML
 
 Agora adiciono:
 
@@ -253,7 +253,7 @@ Agora adiciono:
 </script>
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```html
 <body>
@@ -278,11 +278,11 @@ indica ao navegador que o conteúdo a seguir contém código JavaScript.
 
 ---
 
-# 6. Comentários em JavaScript
+**Comentários em JavaScript**
 
 Dentro do `<script>` posso utilizar comentários.
 
-### Comentário de uma linha
+**Comentário de uma linha**
 
 ```javascript
 // Comentário na linha
@@ -290,7 +290,7 @@ Dentro do `<script>` posso utilizar comentários.
 
 Tudo depois de `//`, naquela linha, será ignorado pelo interpretador.
 
-### Comentário de várias linhas
+**Comentário de várias linhas**
 
 ```javascript
 /*
@@ -304,7 +304,7 @@ Tudo depois de `//`, naquela linha, será ignorado pelo interpretador.
 
 ---
 
-# 7. `document.write()`
+# `document.write()`
 
 Posso escrever diretamente na página utilizando:
 
@@ -322,9 +322,9 @@ document.write('Meu primeiro texto em JavaScript');
 
 faz o texto aparecer na página.
 
-### Entendendo
+**Entendendo**
 
-```text
+```
 document
    ↓
 representa o documento/página
@@ -338,7 +338,7 @@ escreve conteúdo
 
 ---
 
-# 8. `document.getElementById()`
+# `document.getElementById()`
 
 Agora aparece um dos conceitos mais importantes:
 
@@ -352,7 +352,7 @@ Esse método procura no HTML um elemento que tenha:
 id="texto"
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```html
 <p id="texto"></p>
@@ -366,7 +366,7 @@ document.getElementById('texto')
 
 Podemos imaginar:
 
-```text
+```
 HTML
 │
 └── <p id="texto"></p>
@@ -380,7 +380,7 @@ document.getElementById('texto')
 
 ---
 
-# 9. Alterando o conteúdo com `innerHTML`
+# Alterando o conteúdo com `innerHTML`
 
 Depois de encontrar o elemento, posso modificar seu conteúdo:
 
@@ -391,13 +391,13 @@ document.getElementById('texto').innerHTML =
 
 Aqui acontecem duas coisas:
 
-### 1. Localizo o elemento
+**1. Localizo o elemento**
 
 ```javascript
 document.getElementById('texto')
 ```
 
-### 2. Altero seu conteúdo
+**2. Altero seu conteúdo**
 
 ```javascript
 .innerHTML = 'Segundo texto em JavaScript';
@@ -417,7 +417,7 @@ passa a ser equivalente a:
 
 ---
 
-# 10. Código completo
+**Código completo**
 
 ```html
 <!DOCTYPE html>
