@@ -1030,11 +1030,11 @@ Dados do carro: Volkswagen-Jetta-Azul-2026
 
 ---
 
-# 25. Operadores incrementais
+## Operadores incrementais
 
 Agora crio outro arquivo para testar:
 
-```text
+```
 operadoresincrementais.html
 ```
 
@@ -1070,7 +1070,7 @@ Estrutura:
 
 ---
 
-# 26. `++` e `--`
+**`++` e `--`**
 
 Os operadores incrementais são:
 
@@ -1079,7 +1079,7 @@ Os operadores incrementais são:
 --
 ```
 
-### Incremento
+**Incremento**
 
 ```javascript
 ++
@@ -1087,7 +1087,7 @@ Os operadores incrementais são:
 
 adiciona `1`.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 var a = 5;
@@ -1100,7 +1100,7 @@ Agora:
 a = 6
 ```
 
-### Decremento
+**Decremento**
 
 ```javascript
 --
@@ -1108,7 +1108,7 @@ a = 6
 
 subtrai `1`.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 var a = 5;
@@ -1117,13 +1117,13 @@ a--;
 
 Agora:
 
-```text
+```
 a = 4
 ```
 
 ---
 
-# 27. Pré-fixado e pós-fixado
+**Pré-fixado e pós-fixado**
 
 Existe uma diferença importante entre:
 
@@ -1137,7 +1137,7 @@ e:
 a++
 ```
 
-### Pré-incremento
+**Pré-incremento**
 
 ```javascript
 ++a
@@ -1145,7 +1145,7 @@ a++
 
 Primeiro incrementa e depois utiliza o valor.
 
-### Pós-incremento
+**Pós-incremento**
 
 ```javascript
 a++
@@ -1153,7 +1153,7 @@ a++
 
 Primeiro utiliza o valor atual e depois incrementa.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 var a = 5;
@@ -1163,13 +1163,13 @@ console.log(++a);
 
 Resultado:
 
-```text
+```
 6
 ```
 
 Porque primeiro aumentou:
 
-```text
+```
 5 → 6
 ```
 
@@ -1183,19 +1183,19 @@ console.log(a++);
 
 O valor utilizado na expressão é:
 
-```text
+```
 5
 ```
 
 e depois `a` passa a valer:
 
-```text
+```
 6
 ```
 
 ---
 
-# 28. Analisando o exercício dos incrementos
+# Analisando o exercício dos incrementos
 
 Código:
 
@@ -1218,35 +1218,35 @@ Vamos separar.
 
 ---
 
-## `a = ++a`
+**`a = ++a`**
 
 Inicialmente:
 
-```text
+```
 a = 1
 ```
 
 O `++a` incrementa primeiro:
 
-```text
+```
 1 → 2
 ```
 
 Então:
 
-```text
+```
 a = 2
 ```
 
 ---
 
-## `b = b++`
+**`b = b++`**
 
 Aqui existe uma pegadinha importante.
 
 Inicialmente:
 
-```text
+```
 b = 1
 ```
 
@@ -1262,7 +1262,7 @@ o valor antigo é utilizado na atribuição e, apesar do incremento ocorrer dura
 
 Nesse caso, `b` permanece:
 
-```text
+```
 b = 1
 ```
 
@@ -1276,29 +1276,29 @@ b++;
 
 ---
 
-# 29. `d = --d`
+**`d = --d`**
 
 Inicialmente:
 
-```text
+```
 d = 5
 ```
 
 O `--d` decrementa primeiro:
 
-```text
+```
 5 → 4
 ```
 
 Então:
 
-```text
+```
 d = 4
 ```
 
 ---
 
-# 30. O `for`
+**O `for`**
 
 Agora temos:
 
@@ -1320,7 +1320,7 @@ for (
 )
 ```
 
-### 1. Inicialização
+**1. Inicialização**
 
 ```javascript
 var cont = 1
@@ -1328,7 +1328,7 @@ var cont = 1
 
 Começo o contador em `1`.
 
-### 2. Condição
+**2. Condição**
 
 ```javascript
 cont <= 3
@@ -1336,7 +1336,7 @@ cont <= 3
 
 Enquanto essa condição for verdadeira, o bloco será executado.
 
-### 3. Incremento
+**3. Incremento(*
 
 ```javascript
 cont++
@@ -1346,63 +1346,63 @@ Depois de cada repetição, aumento `cont` em `1`.
 
 ---
 
-# 31. Calculando `c`
+**Calculando `c`**
 
 Inicialmente:
 
-```text
+```
 c = 1
 ```
 
-### Primeira repetição
+**Primeira repetição**
 
-```text
+```
 cont = 1
 ```
 
 Então:
 
-```text
+```
 c = c + cont
 c = 1 + 1
 c = 2
 ```
 
-### Segunda repetição
+**Segunda repetição**
 
-```text
+```
 cont = 2
 ```
 
 Então:
 
-```text
+```
 c = 2 + 2
 c = 4
 ```
 
-### Terceira repetição
+**Terceira repetição**
 
-```text
+```
 cont = 3
 ```
 
 Então:
 
-```text
+```
 c = 4 + 3
 c = 7
 ```
 
 Depois:
 
-```text
+```
 cont = 4
 ```
 
 A condição:
 
-```text
+```
 4 <= 3
 ```
 
@@ -1412,13 +1412,13 @@ O `for` termina.
 
 Portanto:
 
-```text
+```
 c = 7
 ```
 
 ---
 
-# 32. Exibindo os resultados
+**Exibindo os resultados**
 
 Finalmente:
 
@@ -1433,7 +1433,7 @@ Cada linha encontra um `<p>` pelo `id` e acrescenta o valor correspondente.
 
 Os valores finais são:
 
-```text
+```
 a = 2
 b = 1
 c = 7
@@ -1442,7 +1442,7 @@ d = 4
 
 ---
 
-# 33. Código completo do exercício
+**Código completo do exercício**
 
 ```html
 <!DOCTYPE html>
@@ -1496,13 +1496,13 @@ d = 4
 
 ---
 
-# 🧠 O que eu aprendi nesta parte
+**O que eu aprendi nesta parte**
 
 A parte mais importante desta aula não é decorar todas as tags HTML. É começar a entender **como JavaScript conversa com uma página HTML**.
 
 O fluxo básico é:
 
-```text
+```
               HTML
                │
                ↓
@@ -1544,7 +1544,7 @@ E também comecei a trabalhar com:
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. **HTML** é utilizado para estruturar o conteúdo da página.
 2. `<head>` contém informações/configurações e `<body>` contém o conteúdo da página.
