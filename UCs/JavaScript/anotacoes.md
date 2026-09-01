@@ -460,11 +460,11 @@ passa a ser equivalente a:
 
 ---
 
-# 11. HTML + JavaScript
+# HTML + JavaScript
 
 Aqui aparece uma ideia fundamental para o desenvolvimento web:
 
-```text
+```
 HTML
  ↓
 estrutura da página
@@ -480,7 +480,7 @@ comportamento/interação
 
 Por enquanto, estou começando a entender a relação:
 
-```text
+```
 HTML
   ↓
 cria <p id="texto">
@@ -496,7 +496,7 @@ Esse conceito será muito importante quando eu começar a trabalhar com **DOM (D
 
 ---
 
-# 12. Tipos de dados no HTML + JavaScript
+# Tipos de dados no HTML + JavaScript
 
 Agora crio outro arquivo HTML para visualizar diferentes tipos de dados.
 
@@ -547,7 +547,7 @@ Cada um possui um `id` diferente para que o JavaScript possa encontrá-lo indivi
 
 ---
 
-# 13. Declarando diferentes tipos de dados
+# Declarando diferentes tipos de dados
 
 Dentro do `<script>`:
 
@@ -567,7 +567,7 @@ Agora vou destrinchar cada uma.
 
 ---
 
-## `a` — variável sem valor atribuído
+**`a` — variável sem valor atribuído**
 
 ```javascript
 var a;
@@ -583,14 +583,14 @@ undefined
 
 Portanto, é importante diferenciar:
 
-```text
+```
 undefined → não foi atribuído um valor
 null      → representa intencionalmente ausência de valor
 ```
 
 ---
 
-## `b` — número
+**`b` — número**
 
 ```javascript
 var b = 1;
@@ -600,7 +600,7 @@ O valor `1` é um número.
 
 No JavaScript, o tipo `Number` é utilizado para números inteiros e decimais.
 
-Exemplos:
+- **Exemplos:**
 
 ```javascript
 10
@@ -611,7 +611,7 @@ Exemplos:
 
 ---
 
-## `c` — array
+**`c` — array**
 
 ```javascript
 var c = [1, 2, 3, 4, 5];
@@ -621,13 +621,13 @@ Um **array** permite armazenar vários valores em uma única variável.
 
 Posso imaginar como uma sequência de posições:
 
-```text
+```
 Índice:   0   1   2   3   4
           ↓   ↓   ↓   ↓   ↓
 Valor:   [1,  2,  3,  4,  5]
 ```
 
-⚠️ A contagem começa em **0**, não em 1.
+**A contagem começa em **0**, não em 1.**
 
 Portanto:
 
@@ -641,7 +641,7 @@ c[4] → 5
 
 ---
 
-# 14. `c[2]`
+**`c[2]`**
 
 No código:
 
@@ -657,7 +657,7 @@ c[2]
 
 Como os índices começam em zero:
 
-```text
+```
 c[0] = 1
 c[1] = 2
 c[2] = 3
@@ -671,13 +671,13 @@ c[2]
 
 retorna:
 
-```text
+```
 3
 ```
 
 ---
 
-# 15. `d` — array de strings
+**`d` — array de strings**
 
 ```javascript
 var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
@@ -685,13 +685,13 @@ var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
 
 Também é um array, mas agora seus elementos são strings.
 
-```text
+```
 Índice:    0         1          2        3
            ↓         ↓          ↓        ↓
          Verde    Amarelo      Azul    Branco
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 d[0]
@@ -699,13 +699,13 @@ d[0]
 
 retorna:
 
-```text
+```
 Verde
 ```
 
 ---
 
-# 16. `e` — String
+**`e` — String**
 
 ```javascript
 var e = 'JavaScript';
@@ -721,7 +721,7 @@ var e = "JavaScript";
 
 ---
 
-# 17. `f` — Boolean
+**`f` — Boolean**
 
 ```javascript
 var f = false;
@@ -738,7 +738,7 @@ false
 
 Eles são muito utilizados em decisões e condições.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 var maiorDeIdade = true;
@@ -746,7 +746,7 @@ var maiorDeIdade = true;
 
 ---
 
-# 18. `g` — `null`
+**`g` — `null`**
 
 ```javascript
 var g = null;
@@ -764,14 +764,14 @@ que resulta em `undefined`.
 
 Uma forma simples de lembrar:
 
-```text
+```
 undefined → ainda não existe um valor atribuído
 null      → eu defini que não há valor
 ```
 
 ---
 
-# 19. Exibindo as variáveis no HTML
+# Exibindo as variáveis no HTML
 
 Agora utilizo:
 
@@ -789,7 +789,7 @@ significa:
 
 > "Pegue o conteúdo atual e acrescente o novo valor."
 
-Por exemplo:
+- **Por exemplo:**
 
 ```html
 <p id="teste1">O valor de a é: </p>
@@ -803,7 +803,7 @@ document.getElementById("teste1").innerHTML += a;
 
 mantém:
 
-```text
+```
 O valor de a é:
 ```
 
@@ -811,7 +811,7 @@ e acrescenta o valor de `a`.
 
 ---
 
-## Código completo
+**Código completo**
 
 ```html
 <!DOCTYPE html>
@@ -864,11 +864,11 @@ e acrescenta o valor de `a`.
 
 ---
 
-# 20. Variável do tipo objeto
+# Variável do tipo objeto
 
 Agora crio:
 
-```text
+```
 objeto.html
 ```
 
@@ -900,13 +900,13 @@ HTML inicial:
 
 ---
 
-# 21. O que é um objeto?
+**O que é um objeto?**
 
 Um objeto permite agrupar informações relacionadas.
 
 Por exemplo, posso representar um carro:
 
-```text
+```
 Carro
 ├── fábrica → Volkswagen
 ├── modelo  → Jetta
@@ -918,7 +918,7 @@ Cada informação é uma **propriedade** do objeto.
 
 É parecido com uma ficha:
 
-```text
+```
 ┌──────────────────────┐
 │ CARRO                │
 ├──────────────────────┤
@@ -931,7 +931,7 @@ Cada informação é uma **propriedade** do objeto.
 
 ---
 
-# 22. Criando o objeto
+# Criando o objeto
 
 O código apresentado utiliza:
 
@@ -952,7 +952,7 @@ meuCarro.ano = 2026;
 
 Agora o objeto possui:
 
-```text
+```
 meuCarro
 ├── fabrica
 ├── modelo
@@ -962,7 +962,7 @@ meuCarro
 
 ---
 
-# 23. Acessando propriedades
+# Acessando propriedades
 
 Posso acessar uma propriedade utilizando:
 
@@ -982,7 +982,7 @@ meuCarro.modelo
 
 retorna:
 
-```text
+```
 Jetta
 ```
 
@@ -994,13 +994,13 @@ meuCarro.cor
 
 retorna:
 
-```text
+```
 Azul
 ```
 
 ---
 
-# 24. Exibindo o objeto na página
+**Exibindo o objeto na página**
 
 ```javascript
 document.getElementById('dados').innerHTML +=
@@ -1022,7 +1022,7 @@ Estou:
 
 Resultado aproximado:
 
-```text
+```
 Dados do carro: Volkswagen-Jetta-Azul-2026
 ```
 
