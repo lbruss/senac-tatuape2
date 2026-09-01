@@ -1,1233 +1,1558 @@
-# Entrada de Dados pelo Usuário
+# 🟨 JavaScript — Primeiros contatos com HTML
 
-O objetivo é sair de programas em que os valores ficam escritos diretamente no código e passar a permitir que o usuário **digite os valores durante a execução**.
+Nesta parte, vou apenas **conhecer o HTML e entender como o JavaScript pode interagir com uma página**. O aprofundamento de HTML e CSS ficará para depois.
 
-> **Ideia principal:** até aqui, eu fazia `let a = 10`. Agora quero que o usuário possa digitar o valor de `a`.
-
----
-
-**Entrada de dados no JavaScript**
-
-Quando executo um programa pelo **Node.js**, posso utilizar o módulo `readline` para criar uma interação com o usuário pelo terminal.
-
-A ideia é:
-
-```
-Programa
-   ↓
-faz uma pergunta
-   ↓
-Usuário digita uma resposta
-   ↓
-Programa recebe a resposta
-   ↓
-JavaScript processa o valor
-   ↓
-Programa apresenta o resultado
-```
-
-- **Por exemplo:**
-
-```
-Digite o primeiro valor: 10
-Digite o segundo valor: 5
-
-Soma dos valores: 15
-```
-
-O usuário não precisa modificar o código para informar `10` e `5`.
+A ideia principal é começar a sair do JavaScript executado apenas no terminal e entender como ele funciona **dentro de uma página web**.
 
 ---
 
-# O módulo `readline`
+# 1. Criando a pasta do projeto
 
-Para utilizar essa funcionalidade, primeiro importo o módulo:
-
-```javascript
-const readline = require('readline');
-```
-
-**Entendendo cada parte**
-
-**`const`**
-
-Declara uma constante.
-
-```javascript
-const readline
-```
-
-Estou criando uma constante chamada `readline`.
-
-**`require()`**
-
-```javascript
-require('readline')
-```
-
-O `require()` permite carregar um módulo para utilizá-lo no programa.
-
-**`'readline'`**
-
-É o módulo nativo do Node.js utilizado para trabalhar com entrada e saída de dados de maneira interativa.
-
-Portanto:
-
-```javascript
-const readline = require('readline');
-```
-
-pode ser entendido como:
-
-> "Carregue o módulo `readline` e guarde sua referência na constante `readline`."
-
----
-
-# Criando a interface de entrada e saída
-
-Depois de carregar o módulo, preciso criar uma interface:
-
-```javascript
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-```
-
-Essa é uma das partes mais importantes do código.
-
----
-
-**`readline.createInterface()`**
-
-```javascript
-readline.createInterface()
-```
-
-Cria uma interface que permite ao programa **receber entradas e enviar saídas** pelo terminal.
-
-Guardo essa interface na constante:
-
-```javascript
-rl
-```
-
-`rl` é apenas um nome escolhido para representar a interface do `readline`.
-
-Poderia ser outro nome, mas `rl` é uma abreviação bastante utilizada.
-
----
-
-**`input: process.stdin`**
-
-```javascript
-input: process.stdin
-```
-
-Define de onde o programa receberá os dados.
-
-`process.stdin` representa a **entrada padrão** do processo.
-
-Na prática, nesse caso:
-
-> A entrada vem do teclado/terminal.
-
----
-
-**`output: process.stdout`**
-
-```javascript
-output: process.stdout
-```
-
-Define para onde as mensagens de saída serão enviadas.
-
-`process.stdout` representa a **saída padrão**.
-
-Na prática:
-
-> As mensagens aparecem no terminal.
-
----
-
-## Visualizando a estrutura
-
-```
-                 Node.js
-                    │
-          ┌─────────┴─────────┐
-          ↓                   ↓
-   process.stdin       process.stdout
-          │                   │
-          ↓                   ↓
-       ⌨️ Teclado          🖥️ Terminal
-          │
-          ↓
-       readline
-          │
-          ↓
-     Programa JavaScript
-```
-
----
-
-# Fazendo uma pergunta com `rl.question()`
-
-Depois de criar a interface, posso perguntar algo ao usuário:
-
-```javascript
-rl.question('Digite o seu nome: ', (nome) => {
-    // código executado depois que o usuário responder
-});
-```
-
-O método:
-
-```javascript
-rl.question()
-```
-
-faz uma pergunta e espera o usuário digitar uma resposta.
-
----
-
-**A pergunta**
-
-```javascript
-'Digite o seu nome: '
-```
-
-É o texto que aparece no terminal.
-
----
-
-**`(nome) => { ... }`**
-
-Essa parte é uma **função de callback**.
-
-```javascript
-(nome) => {
-    // código
-}
-```
-
-Podemos entender inicialmente como:
-
-> "Quando o usuário responder, coloque a resposta dentro da variável `nome` e execute o código que está dentro das chaves."
-
-- **Por exemplo, se o usuário digitar:**
-
-```
-Bruss
-```
-
-a variável `nome` receberá:
-
-```javascript
-nome = "Bruss";
-```
-
----
-
-# Primeiro programa completo
-
-```javascript
-// Configurando a entrada de dados pelo usuário
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o seu nome: ', (nome) => {
-    console.log(`Nome: ${nome}`);
-
-    rl.close();
-});
-```
-
-**Fluxo de execução**
-
-1. Carrego o `readline`.
-2. Crio a interface `rl`.
-3. O programa pergunta o nome.
-4. O usuário digita o nome.
-5. A resposta é armazenada em `nome`.
-6. `console.log()` mostra o nome.
-7. `rl.close()` encerra a interface.
-
----
-
-**Por que preciso usar `Number()`?**
-
-Existe um detalhe **muito importante** quando recebo números através do `readline`:
-
-> A entrada recebida pelo usuário chega como **String**.
-
-- **Por exemplo, se o usuário digitar:**
-
-```
-10
-```
-
-o programa recebe algo equivalente a:
-
-```javascript
-"10"
-```
-
-e não:
-
-```javascript
-10
-```
-
-A diferença é:
-
-```
-"10" → String
-10   → Number
-```
-
-Por isso utilizo:
-
-```javascript
-Number(valor)
-```
-
-para converter o texto recebido em número.
-
----
-
-**Exemplo com dois valores**
-
-```javascript
-const soma = Number(valor1) + Number(valor2);
-```
-
-Se:
+Primeiro, crio uma pasta chamada:
 
 ```text
-valor1 = "10"
-valor2 = "5"
-```
-
-o JavaScript transforma:
-
-```text
-"10" → 10
-"5"  → 5
-```
-
-Então realiza:
-
-```
-10 + 5 = 15
-```
-
----
-
-# Programa para somar dois valores
-
-```javascript
-// Configurando a entrada de dados pelo usuário
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o seu nome: ', (nome) => {
-    rl.question('Digite o primeiro valor: ', (valor1) => {
-        rl.question('Digite o segundo valor: ', (valor2) => {
-
-            const soma = Number(valor1) + Number(valor2);
-
-            console.log(`Nome: ${nome}`);
-            console.log(`Soma dos valores: ${soma}`);
-
-            rl.close();
-        });
-    });
-});
-```
-
----
-
-**Entendendo o código por partes**
-
-**Carregando o módulo**
-
-```javascript
-const readline = require('readline');
-```
-
-Carrega o módulo `readline`.
-
----
-
-**Criando a interface**
-
-```javascript
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-```
-
-Configura:
-
-* entrada → `process.stdin`;
-* saída → `process.stdout`.
-
----
-
-**Primeira pergunta**
-
-```javascript
-rl.question('Digite o seu nome: ', (nome) => {
-```
-
-O programa pergunta o nome.
-
-A resposta é armazenada em:
-
-```javascript
-nome
-```
-
----
-
-**Segunda pergunta**
-
-```javascript
-rl.question('Digite o primeiro valor: ', (valor1) => {
-```
-
-O primeiro valor digitado fica armazenado em:
-
-```javascript
-valor1
-```
-
----
-
-**Terceira pergunta**
-
-```javascript
-rl.question('Digite o segundo valor: ', (valor2) => {
-```
-
-O segundo valor fica armazenado em:
-
-```javascript
-valor2
-```
-
----
-
-**Fazendo a conversão e soma**
-
-```javascript
-const soma = Number(valor1) + Number(valor2);
-```
-
-Converto os dois valores para `Number` e depois faço a soma.
-
----
-
-**Exibindo o nome**
-
-```javascript
-console.log(`Nome: ${nome}`);
-```
-
-Aqui estou utilizando uma **template string**.
-
-As crases:
-
-```javascript
-`
-```
-
-permitem inserir variáveis dentro do texto usando:
-
-```javascript
-${variavel}
-```
-
-Se:
-
-```javascript
-nome = "Bruss";
-```
-
-o resultado será:
-
-```
-Nome: Bruss
-```
-
----
-
-**Exibindo a soma**
-
-```javascript
-console.log(`Soma dos valores: ${soma}`);
-```
-
-Se `soma` for `15`:
-
-```
-Soma dos valores: 15
-```
-
----
-
-**Encerrando a interface**
-
-```javascript
-rl.close();
-```
-
-Fecha a interface do `readline`.
-
-É importante encerrar a interface quando não precisarei mais receber entradas.
-
----
-
-## Executando pelo terminal
-
-Depois de salvar o arquivo, posso abrir o terminal integrado do VS Code.
-
-Atalho:
-
-```
-Ctrl + J
-```
-
-Depois utilizo:
-
-```bash
-node somadedoisvalores.js
-```
-
-**O que significa?**
-
-```
-node
-```
-
-é o comando utilizado para executar JavaScript através do **Node.js**.
-
-```
-somadedoisvalores.js
-```
-
-é o arquivo que quero executar.
-
-Portanto:
-
-```bash
-node somadedoisvalores.js
-```
-
-significa:
-
-> "Execute este arquivo JavaScript usando o Node.js."
-
----
-
-# Criando uma calculadora simples
-
-Agora posso aproveitar o mesmo conceito para criar uma calculadora.
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o primeiro valor: ', (valor1) => {
-    rl.question('Digite o segundo valor: ', (valor2) => {
-
-        let soma = Number(valor1) + Number(valor2);
-        let subtracao = Number(valor1) - Number(valor2);
-        let multiplicacao = Number(valor1) * Number(valor2);
-        let divisao = Number(valor1) / Number(valor2);
-
-        console.log('===== RESULTADO =====');
-        console.log(`Soma dos valores: ${soma}`);
-        console.log(`Subtração dos valores: ${subtracao}`);
-        console.log(`Multiplicação dos valores: ${multiplicacao}`);
-        console.log(`Divisão dos valores: ${divisao}`);
-
-        rl.close();
-    });
-});
-```
-
----
-
-**O que a calculadora faz?**
-
-Supondo:
-
-```
-Digite o primeiro valor: 10
-Digite o segundo valor: 5
-```
-
-Temos:
-
-```
-soma          = 15
-subtração     = 5
-multiplicação = 50
-divisão       = 2
-```
-
-Resultado:
-
-```
-===== RESULTADO =====
-Soma dos valores: 15
-Subtração dos valores: 5
-Multiplicação dos valores: 50
-Divisão dos valores: 2
-```
-
----
-
-# Exercício — Área do quadrado
-
-A fórmula da área de um quadrado é:
-
-```
-A = lado × lado
-```
-
-Código:
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o lado 1: ', (l1) => {
-    rl.question('Digite o lado 2: ', (l2) => {
-
-        const area = Number(l1) * Number(l2);
-
-        console.log('===== RESULTADO =====');
-        console.log(`A área do quadrado é de: ${area} m²`);
-
-        rl.close();
-    });
-});
-```
-
-- **Exemplo**
-
-```text
-lado 1 = 5
-lado 2 = 5
-```
-
-Então:
-
-```
-5 × 5 = 25
-```
-
-Resultado:
-
-```
-A área do quadrado é de: 25 m²
-```
-
-> Para um quadrado verdadeiro, os dois lados possuem a mesma medida. O exercício usa dois valores, mas matematicamente basta um lado: `lado × lado`.
-
----
-
-# Exercício — Área do triângulo
-
-A fórmula é:
-
-```
-A = (base × altura) / 2
-```
-
-Código:
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o valor da base: ', (b) => {
-    rl.question('Digite o valor da altura: ', (h) => {
-
-        const area = (Number(b) * Number(h)) / 2;
-
-        console.log('===== RESULTADO =====');
-        console.log(`A área do triângulo é de: ${area} m²`);
-
-        rl.close();
-    });
-});
-```
-
-- **Exemplo**
-
-```
-base = 10
-altura = 5
-```
-
-Cálculo:
-
-```
-(10 × 5) / 2
-50 / 2
-25
-```
-
-Resultado:
-
-```
-A área do triângulo é de: 25 m²
-```
-
----
-
-# Exercício — Área do trapézio
-
-A fórmula é:
-
-```
-A = ((B + b) × h) / 2
-```
-
-Onde:
-
-* `B` → base maior;
-* `b` → base menor;
-* `h` → altura.
-
-Código:
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o valor da base maior: ', (B) => {
-    rl.question('Digite o valor da base menor: ', (b) => {
-        rl.question('Digite o valor da altura: ', (h) => {
-
-            const area = ((Number(B) + Number(b)) * Number(h)) / 2;
-
-            console.log('===== RESULTADO =====');
-            console.log(`A área do trapézio é de: ${area} m²`);
-
-            rl.close();
-        });
-    });
-});
-```
-
-- **Exemplo**
-
-```
-B = 10
-b = 6
-h = 5
-```
-
-Cálculo:
-
-```
-((10 + 6) × 5) / 2
-(16 × 5) / 2
-80 / 2
-40
-```
-
-Resultado:
-
-```
-A área do trapézio é de: 40 m²
-```
-
----
-
-# Exercício — Área do losango
-
-A fórmula é:
-
-```
-A = (D × d) / 2
-```
-
-Onde:
-
-* `D` → diagonal maior;
-* `d` → diagonal menor.
-
-Código:
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o valor da diagonal maior: ', (D) => {
-    rl.question('Digite o valor da diagonal menor: ', (d) => {
-
-        const area = (Number(D) * Number(d)) / 2;
-
-        console.log('===== RESULTADO =====');
-        console.log(`A área do losango é de: ${area} m²`);
-
-        rl.close();
-    });
-});
-```
-
-- **Exemplo**
-
-```
-D = 10
-d = 6
-```
-
-Então:
-
-```
-(10 × 6) / 2 = 30
-```
-
-Resultado:
-
-```
-A área do losango é de: 30 m²
-```
-
----
-
-# Exercício — Área do retângulo
-
-A fórmula é:
-
-```
-A = base × altura
-```
-
-Código:
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o valor da base: ', (b) => {
-    rl.question('Digite o valor da altura: ', (h) => {
-
-        const area = Number(b) * Number(h);
-
-        console.log('===== RESULTADO =====');
-        console.log(`A área do retângulo é de: ${area} m²`);
-
-        rl.close();
-    });
-});
-```
-
-- **Exemplo:**
-
-```
-base = 10
-altura = 5
-```
-
-```
-10 × 5 = 50
-```
-
-Resultado:
-
-```
-A área do retângulo é de: 50 m²
-```
-
----
-
-# Exercício — Juros simples
-
-A fórmula dos juros simples é:
-
-```
-J = C × i × t
-```
-
-Onde:
-
-* `J` → juros;
-* `C` → capital;
-* `i` → taxa;
-* `t` → tempo.
-
-Como a taxa é informada em porcentagem, preciso transformá-la em decimal:
-
-```
-i / 100
-```
-
-Por isso:
-
-```javascript
-Number(i) / 100
-```
-
----
-
-**Código**
-
-```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o capital aplicado: ', (c) => {
-    rl.question('Digite a taxa de juros: ', (i) => {
-        rl.question('Digite o tempo (em meses): ', (t) => {
-
-            const juros = Number(c) * (Number(i) / 100) * Number(t);
-            const montante = Number(c) + juros;
-
-            console.log(`O juros simples é de: ${juros}`);
-            console.log(`O valor do montante é de: ${montante}`);
-
-            rl.close();
-        });
-    });
-});
-```
-
-**Exemplo**
-
-Supondo:
-
-```
-Capital = 1000
-Taxa = 2%
-Tempo = 5 meses
-```
-
-Primeiro:
-
-```
-2 / 100 = 0,02
+exemplohtml
 ```
 
 Depois:
 
-```
-J = 1000 × 0,02 × 5
-J = 100
-```
+1. Abro o **Visual Studio Code**.
+2. Vou em **File → Open Folder**.
+3. Seleciono a pasta `exemplohtml`.
+4. Dentro dela, crio os arquivos `.html`.
 
-Montante:
+A estrutura ficará aproximadamente assim:
 
-```
-M = 1000 + 100
-M = 1100
-```
-
-Resultado:
-
-```
-Juros simples: 100
-Montante: 1100
+```text
+exemplohtml/
+│
+├── exemplo1.html
+├── 01-primeira-pagina.html
+├── tipodedados.html
+├── objeto.html
+└── operadoresincrementais.html
 ```
 
 ---
 
-# Exercício — Juros compostos
+# 2. Primeiro contato com HTML
 
-Nos juros compostos, a fórmula do **montante** é:
+Crio o arquivo:
 
+```text
+exemplo1.html
 ```
-M = C × (1 + i)ᵗ
+
+E coloco:
+
+```html
+<html>
+<head>
+    <title>Turma TI 0425</title>
+</head>
+
+<body>
+    HTML - CSS - JAVASCRIPT
+</body>
+</html>
 ```
 
-Onde:
+## Entendendo a estrutura
 
-* `M` → montante;
-* `C` → capital;
-* `i` → taxa em decimal;
-* `t` → tempo.
+O HTML utiliza **tags** para estruturar o conteúdo de uma página.
+
+### `<html>`
+
+```html
+<html>
+```
+
+Indica o início do documento HTML.
+
+O documento termina com:
+
+```html
+</html>
+```
+
+---
+
+### `<head>`
+
+```html
+<head>
+```
+
+Contém informações e configurações da página que não são, normalmente, o conteúdo principal exibido para o usuário.
+
+---
+
+### `<title>`
+
+```html
+<title>Turma TI 0425</title>
+```
+
+Define o título da página, normalmente apresentado na aba do navegador.
+
+---
+
+### `<body>`
+
+```html
+<body>
+    HTML - CSS - JAVASCRIPT
+</body>
+```
+
+O `<body>` contém o conteúdo que será apresentado na página.
+
+Podemos pensar assim:
+
+```text
+HTML
+│
+├── HEAD
+│   └── Informações/configurações da página
+│
+└── BODY
+    └── Conteúdo apresentado ao usuário
+```
+
+---
+
+# 3. Primeira página em JavaScript
+
+Agora crio:
+
+```text
+01-primeira-pagina.html
+```
+
+O HTML inicial será:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Primeira página em JavaScript</title>
+</head>
+
+<body>
+    <h1>Primeira página em JavaScript</h1>
+    <p id="texto"></p>
+</body>
+
+</html>
+```
+
+---
+
+# 4. Algumas partes novas do HTML
+
+## `<!DOCTYPE html>`
+
+```html
+<!DOCTYPE html>
+```
+
+Informa ao navegador que o documento utiliza HTML5.
+
+---
+
+## `lang="pt-br"`
+
+```html
+<html lang="pt-br">
+```
+
+Indica o idioma principal do documento.
+
+Neste caso:
+
+```text
+pt-br → português do Brasil
+```
+
+---
+
+## `<meta charset="utf-8">`
+
+```html
+<meta charset="utf-8">
+```
+
+Define a codificação dos caracteres.
+
+O UTF-8 permite representar corretamente diversos caracteres, incluindo:
+
+```text
+á
+ã
+ç
+é
+õ
+```
+
+Isso é especialmente importante quando estou escrevendo páginas em português.
+
+---
+
+## `<meta name="viewport"...>`
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+É uma configuração importante para que a página se adapte melhor a diferentes tamanhos de tela, principalmente celulares.
+
+Por enquanto, basta entender que ela ajuda no comportamento **responsivo** da página.
+
+---
+
+## `<h1>`
+
+```html
+<h1>Primeira página em JavaScript</h1>
+```
+
+Representa um título de nível 1.
+
+---
+
+## `<p id="texto"></p>`
+
+```html
+<p id="texto"></p>
+```
+
+Cria um parágrafo.
+
+O atributo:
+
+```html
+id="texto"
+```
+
+dá a esse elemento um identificador único chamado `texto`.
+
+Esse `id` será utilizado posteriormente pelo JavaScript para localizar esse elemento.
+
+---
+
+# 5. Colocando JavaScript dentro do HTML
+
+Agora adiciono:
+
+```html
+<script>
+    // Código JavaScript
+</script>
+```
+
+Por exemplo:
+
+```html
+<body>
+
+    <h1>Primeira página em JavaScript</h1>
+    <p id="texto"></p>
+
+    <script>
+        // Código JavaScript
+    </script>
+
+</body>
+```
+
+A tag:
+
+```html
+<script>
+```
+
+indica ao navegador que o conteúdo a seguir contém código JavaScript.
+
+---
+
+# 6. Comentários em JavaScript
+
+Dentro do `<script>` posso utilizar comentários.
+
+### Comentário de uma linha
+
+```javascript
+// Comentário na linha
+```
+
+Tudo depois de `//`, naquela linha, será ignorado pelo interpretador.
+
+### Comentário de várias linhas
+
+```javascript
+/*
+    Isto é um comentário
+    que contém várias linhas
+    de informações
+*/
+```
+
+É útil quando quero documentar uma explicação maior.
+
+---
+
+# 7. `document.write()`
+
+Posso escrever diretamente na página utilizando:
+
+```javascript
+document.write('Meu primeiro texto em JavaScript');
+```
+
+O método `document.write()` escreve conteúdo no documento HTML.
+
+Então:
+
+```javascript
+document.write('Meu primeiro texto em JavaScript');
+```
+
+faz o texto aparecer na página.
+
+### Entendendo
+
+```text
+document
+   ↓
+representa o documento/página
+   ↓
+.write()
+   ↓
+escreve conteúdo
+```
+
+> `document.write()` é útil para entender a interação básica entre JavaScript e HTML, embora não seja a abordagem mais utilizada para atualizar o conteúdo de páginas modernas.
+
+---
+
+# 8. `document.getElementById()`
+
+Agora aparece um dos conceitos mais importantes:
+
+```javascript
+document.getElementById('texto')
+```
+
+Esse método procura no HTML um elemento que tenha:
+
+```html
+id="texto"
+```
+
+Por exemplo:
+
+```html
+<p id="texto"></p>
+```
+
+O JavaScript consegue localizar esse elemento através de:
+
+```javascript
+document.getElementById('texto')
+```
+
+Podemos imaginar:
+
+```text
+HTML
+│
+└── <p id="texto"></p>
+            ↑
+            │
+JavaScript procura pelo ID
+            │
+            ↓
+document.getElementById('texto')
+```
+
+---
+
+# 9. Alterando o conteúdo com `innerHTML`
+
+Depois de encontrar o elemento, posso modificar seu conteúdo:
+
+```javascript
+document.getElementById('texto').innerHTML =
+    'Segundo texto em JavaScript';
+```
+
+Aqui acontecem duas coisas:
+
+### 1. Localizo o elemento
+
+```javascript
+document.getElementById('texto')
+```
+
+### 2. Altero seu conteúdo
+
+```javascript
+.innerHTML = 'Segundo texto em JavaScript';
+```
+
+Então:
+
+```html
+<p id="texto"></p>
+```
+
+passa a ser equivalente a:
+
+```html
+<p id="texto">Segundo texto em JavaScript</p>
+```
+
+---
+
+# 10. Código completo
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Primeira página em JavaScript</title>
+</head>
+
+<body>
+
+    <h1>Primeira página em JavaScript</h1>
+    <p id="texto"></p>
+
+    <script>
+
+        // Comentário de uma linha
+
+        /*
+            Isto é um comentário
+            que contém várias linhas
+            de informações
+        */
+
+        document.write('Meu primeiro texto em JavaScript');
+
+        // Localiza o elemento que possui id="texto"
+        // e altera seu conteúdo.
+        document.getElementById('texto').innerHTML =
+            'Segundo texto em JavaScript';
+
+    </script>
+
+</body>
+
+</html>
+```
+
+---
+
+# 11. HTML + JavaScript
+
+Aqui aparece uma ideia fundamental para o desenvolvimento web:
+
+```text
+HTML
+ ↓
+estrutura da página
+
+CSS
+ ↓
+aparência/estilo
+
+JavaScript
+ ↓
+comportamento/interação
+```
+
+Por enquanto, estou começando a entender a relação:
+
+```text
+HTML
+  ↓
+cria <p id="texto">
+  ↓
+JavaScript
+  ↓
+encontra id="texto"
+  ↓
+altera o conteúdo
+```
+
+Esse conceito será muito importante quando eu começar a trabalhar com **DOM (Document Object Model)**.
+
+---
+
+# 12. Tipos de dados no HTML + JavaScript
+
+Agora crio outro arquivo HTML para visualizar diferentes tipos de dados.
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tipo de dados</title>
+</head>
+
+<body>
+
+    <h1>Tipo de dados</h1>
+
+    <p id="teste1">O valor de a é: </p>
+    <p id="teste2">O valor de b é: </p>
+    <p id="teste3">O valor de c é: </p>
+    <p id="teste4">O valor de d é: </p>
+    <p id="teste5">O valor de e é: </p>
+    <p id="teste6">O valor de f é: </p>
+    <p id="teste7">O valor de g é: </p>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
+```
+
+Aqui tenho sete elementos diferentes:
+
+```text
+teste1
+teste2
+teste3
+teste4
+teste5
+teste6
+teste7
+```
+
+Cada um possui um `id` diferente para que o JavaScript possa encontrá-lo individualmente.
+
+---
+
+# 13. Declarando diferentes tipos de dados
+
+Dentro do `<script>`:
+
+```javascript
+// Definindo as variáveis
+
+var a;
+var b = 1;
+var c = [1, 2, 3, 4, 5];
+var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+var e = 'JavaScript';
+var f = false;
+var g = null;
+```
+
+Agora vou destrinchar cada uma.
+
+---
+
+## `a` — variável sem valor atribuído
+
+```javascript
+var a;
+```
+
+A variável foi declarada, mas nenhum valor foi atribuído.
+
+Nesse caso, seu valor é:
+
+```javascript
+undefined
+```
+
+Portanto, é importante diferenciar:
+
+```text
+undefined → não foi atribuído um valor
+null      → representa intencionalmente ausência de valor
+```
+
+---
+
+## `b` — número
+
+```javascript
+var b = 1;
+```
+
+O valor `1` é um número.
+
+No JavaScript, o tipo `Number` é utilizado para números inteiros e decimais.
+
+Exemplos:
+
+```javascript
+10
+3.14
+-5
+0
+```
+
+---
+
+## `c` — array
+
+```javascript
+var c = [1, 2, 3, 4, 5];
+```
+
+Um **array** permite armazenar vários valores em uma única variável.
+
+Posso imaginar como uma sequência de posições:
+
+```text
+Índice:   0   1   2   3   4
+          ↓   ↓   ↓   ↓   ↓
+Valor:   [1,  2,  3,  4,  5]
+```
+
+⚠️ A contagem começa em **0**, não em 1.
+
+Portanto:
+
+```javascript
+c[0] → 1
+c[1] → 2
+c[2] → 3
+c[3] → 4
+c[4] → 5
+```
+
+---
+
+# 14. `c[2]`
 
 No código:
 
 ```javascript
-const montante = Number(c) * (1 + Number(i) / 100) ** Number(t);
+document.getElementById("teste3").innerHTML += c[2];
+```
+
+Estou acessando:
+
+```javascript
+c[2]
+```
+
+Como os índices começam em zero:
+
+```text
+c[0] = 1
+c[1] = 2
+c[2] = 3
+```
+
+Portanto:
+
+```javascript
+c[2]
+```
+
+retorna:
+
+```text
+3
 ```
 
 ---
 
-**Código**
+# 15. `d` — array de strings
 
 ```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Digite o capital aplicado: ', (c) => {
-    rl.question('Digite a taxa de juros: ', (i) => {
-        rl.question('Digite o tempo (em meses): ', (t) => {
-
-            const montante = Number(c) *
-                (1 + Number(i) / 100) ** Number(t);
-
-            const juros = montante - Number(c);
-
-            console.log(`O montante é de: ${montante}`);
-            console.log(`Os juros compostos são de: ${juros}`);
-
-            rl.close();
-        });
-    });
-});
+var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
 ```
 
-**Por que fiz duas variáveis?**
-
-A fórmula:
+Também é um array, mas agora seus elementos são strings.
 
 ```text
-C × (1 + i)ᵗ
+Índice:    0         1          2        3
+           ↓         ↓          ↓        ↓
+         Verde    Amarelo      Azul    Branco
 ```
 
-calcula diretamente o **montante**, não apenas os juros.
+Por exemplo:
+
+```javascript
+d[0]
+```
+
+retorna:
+
+```text
+Verde
+```
+
+---
+
+# 16. `e` — String
+
+```javascript
+var e = 'JavaScript';
+```
+
+É uma **String**, ou seja, uma sequência de caracteres usada para representar texto.
+
+Também poderia ser:
+
+```javascript
+var e = "JavaScript";
+```
+
+---
+
+# 17. `f` — Boolean
+
+```javascript
+var f = false;
+```
+
+É um valor booleano.
+
+Os valores booleanos são:
+
+```javascript
+true
+false
+```
+
+Eles são muito utilizados em decisões e condições.
+
+Por exemplo:
+
+```javascript
+var maiorDeIdade = true;
+```
+
+---
+
+# 18. `g` — `null`
+
+```javascript
+var g = null;
+```
+
+`null` representa uma ausência intencional de valor.
+
+É diferente de:
+
+```javascript
+var a;
+```
+
+que resulta em `undefined`.
+
+Uma forma simples de lembrar:
+
+```text
+undefined → ainda não existe um valor atribuído
+null      → eu defini que não há valor
+```
+
+---
+
+# 19. Exibindo as variáveis no HTML
+
+Agora utilizo:
+
+```javascript
+document.getElementById("teste1").innerHTML += a;
+```
+
+O operador:
+
+```javascript
++=
+```
+
+significa:
+
+> "Pegue o conteúdo atual e acrescente o novo valor."
+
+Por exemplo:
+
+```html
+<p id="teste1">O valor de a é: </p>
+```
+
+e:
+
+```javascript
+document.getElementById("teste1").innerHTML += a;
+```
+
+mantém:
+
+```text
+O valor de a é:
+```
+
+e acrescenta o valor de `a`.
+
+---
+
+## Código completo
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tipo de dados</title>
+</head>
+
+<body>
+
+    <h1>Tipo de dados</h1>
+
+    <p id="teste1">O valor de a é: </p>
+    <p id="teste2">O valor de b é: </p>
+    <p id="teste3">O valor de c é: </p>
+    <p id="teste4">O valor de d é: </p>
+    <p id="teste5">O valor de e é: </p>
+    <p id="teste6">O valor de f é: </p>
+    <p id="teste7">O valor de g é: </p>
+
+    <script>
+
+        // Definindo as variáveis
+        var a;
+        var b = 1;
+        var c = [1, 2, 3, 4, 5];
+        var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+        var e = 'JavaScript';
+        var f = false;
+        var g = null;
+
+        // Exibindo o conteúdo de cada variável
+        document.getElementById("teste1").innerHTML += a;
+        document.getElementById("teste2").innerHTML += b;
+        document.getElementById("teste3").innerHTML += c[2];
+        document.getElementById("teste4").innerHTML += d;
+        document.getElementById("teste5").innerHTML += e;
+        document.getElementById("teste6").innerHTML += f;
+        document.getElementById("teste7").innerHTML += g;
+
+    </script>
+
+</body>
+
+</html>
+```
+
+---
+
+# 20. Variável do tipo objeto
+
+Agora crio:
+
+```text
+objeto.html
+```
+
+HTML inicial:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Variável do tipo objeto</title>
+</head>
+
+<body>
+
+    <h1>Variável do tipo objeto</h1>
+    <p id="dados">Dados do carro: </p>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
+```
+
+---
+
+# 21. O que é um objeto?
+
+Um objeto permite agrupar informações relacionadas.
+
+Por exemplo, posso representar um carro:
+
+```text
+Carro
+├── fábrica → Volkswagen
+├── modelo  → Jetta
+├── cor     → Azul
+└── ano     → 2026
+```
+
+Cada informação é uma **propriedade** do objeto.
+
+É parecido com uma ficha:
+
+```text
+┌──────────────────────┐
+│ CARRO                │
+├──────────────────────┤
+│ Fábrica: Volkswagen │
+│ Modelo: Jetta        │
+│ Cor: Azul            │
+│ Ano: 2026            │
+└──────────────────────┘
+```
+
+---
+
+# 22. Criando o objeto
+
+O código apresentado utiliza:
+
+```javascript
+var meuCarro = new Object();
+```
+
+Isso cria um novo objeto vazio.
+
+Depois adiciono propriedades:
+
+```javascript
+meuCarro.fabrica = 'Volkswagen';
+meuCarro.modelo = 'Jetta';
+meuCarro.cor = 'Azul';
+meuCarro.ano = 2026;
+```
+
+Agora o objeto possui:
+
+```text
+meuCarro
+├── fabrica
+├── modelo
+├── cor
+└── ano
+```
+
+---
+
+# 23. Acessando propriedades
+
+Posso acessar uma propriedade utilizando:
+
+```javascript
+meuCarro.modelo
+```
+
+Isso significa:
+
+> "Pegue a propriedade `modelo` do objeto `meuCarro`."
 
 Então:
 
 ```javascript
-const montante = ...
+meuCarro.modelo
 ```
 
-calcula o valor total.
+retorna:
 
-Depois:
+```text
+Jetta
+```
+
+Da mesma maneira:
 
 ```javascript
-const juros = montante - Number(c);
+meuCarro.cor
 ```
 
-calcula somente a parte correspondente aos juros.
+retorna:
 
-- **Exemplo**
-
-```
-Capital = 1000
-Taxa = 2%
-Tempo = 5 meses
-```
-
-A fórmula é:
-
-```
-M = 1000 × (1 + 0,02)⁵
-```
-
-aproximadamente:
-
-```
-M = 1104,08
-```
-
-Então os juros são aproximadamente:
-
-```
-1104,08 - 1000 = 104,08
+```text
+Azul
 ```
 
 ---
 
-**Um padrão que aparece em quase todos os exercícios**
-
-Observe que vários códigos possuem a mesma estrutura:
+# 24. Exibindo o objeto na página
 
 ```javascript
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+document.getElementById('dados').innerHTML +=
+    meuCarro.fabrica + '-' +
+    meuCarro.modelo + '-' +
+    meuCarro.cor + '-' +
+    meuCarro.ano;
 ```
 
-Depois:
+Estou:
 
-```javascript
-rl.question(...)
+1. encontrando o elemento `dados`;
+2. pegando a propriedade `fabrica`;
+3. pegando `modelo`;
+4. pegando `cor`;
+5. pegando `ano`;
+6. juntando os valores;
+7. colocando o resultado no HTML.
+
+Resultado aproximado:
+
+```text
+Dados do carro: Volkswagen-Jetta-Azul-2026
 ```
 
-para receber os dados.
-
-Depois:
-
-```javascript
-Number(...)
-```
-
-para converter os dados.
-
-Depois:
-
-```javascript
-const resultado = ...
-```
-
-para realizar o cálculo.
-
-Depois:
-
-```javascript
-console.log(...)
-```
-
-para apresentar o resultado.
-
-E finalmente:
-
-```javascript
-rl.close();
-```
-
-para encerrar a entrada de dados.
-
-Podemos representar isso assim:
-
-```
-┌──────────────────────────────┐
-│ 1. Importar readline         │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 2. Criar interface rl        │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 3. Perguntar ao usuário      │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 4. Receber os valores        │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 5. Converter com Number()    │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 6. Realizar o cálculo        │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 7. Mostrar resultado         │
-└──────────────┬───────────────┘
-               ↓
-┌──────────────────────────────┐
-│ 8. Fechar com rl.close()     │
-└──────────────────────────────┘
-```
-
-Esse padrão será muito importante para os próximos exercícios.
+> O nome correto da fabricante é **Volkswagen**.
 
 ---
 
-**Um detalhe importante sobre entrada de números**
+# 25. Operadores incrementais
 
-Como `rl.question()` entrega texto, preciso converter quando quero fazer cálculos:
+Agora crio outro arquivo para testar:
 
-```javascript
-Number(valor1)
+```text
+operadoresincrementais.html
 ```
 
-- **Por exemplo:**
+Estrutura:
 
-```javascript
-const resultado = Number(valor1) + Number(valor2);
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operadores incrementais</title>
+</head>
+
+<body>
+
+    <h1>Operadores incrementais</h1>
+
+    <p id="teste1">O valor de a é: </p>
+    <p id="teste2">O valor de b é: </p>
+    <p id="teste3">O valor de c é: </p>
+    <p id="teste4">O valor de d é: </p>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
 ```
-
-Sem essa conversão, o operador `+` pode trabalhar como concatenação de strings.
-
-- **Exemplo:**
-
-```javascript
-"10" + "5"
-```
-
-resulta em:
-
-```
-"105"
-```
-
-Enquanto:
-
-```javascript
-Number("10") + Number("5")
-```
-
-resulta em:
-
-```
-15
-```
-
-Essa diferença é **fundamental em JavaScript**.
 
 ---
 
-**Resumo Relâmpago**
+# 26. `++` e `--`
 
-1. Para receber dados do usuário no Node.js, posso utilizar o módulo nativo **`readline`**.
-2. `require('readline')` carrega o módulo para dentro do programa.
-3. `readline.createInterface()` cria a interface de comunicação com o terminal.
-4. `process.stdin` representa a **entrada** e `process.stdout` representa a **saída**.
-5. `rl.question()` faz uma pergunta e recebe a resposta do usuário por meio de um callback.
-6. Os dados recebidos pelo `rl.question()` são tratados como **String**.
-7. Para utilizar esses dados em cálculos, posso convertê-los com `Number()`.
-8. `console.log()` apresenta informações no terminal e `${}` permite inserir valores dentro de template strings.
-9. `rl.close()` encerra a interface do `readline` quando não preciso mais receber dados.
-10. A estrutura básica é: **configurar → perguntar → receber → converter → calcular → mostrar → fechar**.
-    :::
+Os operadores incrementais são:
+
+```javascript
+++
+--
+```
+
+### Incremento
+
+```javascript
+++
+```
+
+adiciona `1`.
+
+Exemplo:
+
+```javascript
+var a = 5;
+a++;
+```
+
+Agora:
+
+```text
+a = 6
+```
+
+### Decremento
+
+```javascript
+--
+```
+
+subtrai `1`.
+
+Exemplo:
+
+```javascript
+var a = 5;
+a--;
+```
+
+Agora:
+
+```text
+a = 4
+```
+
+---
+
+# 27. Pré-fixado e pós-fixado
+
+Existe uma diferença importante entre:
+
+```javascript
+++a
+```
+
+e:
+
+```javascript
+a++
+```
+
+### Pré-incremento
+
+```javascript
+++a
+```
+
+Primeiro incrementa e depois utiliza o valor.
+
+### Pós-incremento
+
+```javascript
+a++
+```
+
+Primeiro utiliza o valor atual e depois incrementa.
+
+Exemplo:
+
+```javascript
+var a = 5;
+
+console.log(++a);
+```
+
+Resultado:
+
+```text
+6
+```
+
+Porque primeiro aumentou:
+
+```text
+5 → 6
+```
+
+Agora:
+
+```javascript
+var a = 5;
+
+console.log(a++);
+```
+
+O valor utilizado na expressão é:
+
+```text
+5
+```
+
+e depois `a` passa a valer:
+
+```text
+6
+```
+
+---
+
+# 28. Analisando o exercício dos incrementos
+
+Código:
+
+```javascript
+var a = 1;
+var b = 1;
+var c = 1;
+var d = 5;
+
+a = ++a;
+b = b++;
+d = --d;
+
+for (var cont = 1; cont <= 3; cont++) {
+    c = c + cont;
+}
+```
+
+Vamos separar.
+
+---
+
+## `a = ++a`
+
+Inicialmente:
+
+```text
+a = 1
+```
+
+O `++a` incrementa primeiro:
+
+```text
+1 → 2
+```
+
+Então:
+
+```text
+a = 2
+```
+
+---
+
+## `b = b++`
+
+Aqui existe uma pegadinha importante.
+
+Inicialmente:
+
+```text
+b = 1
+```
+
+O `b++` é pós-incremento.
+
+Na atribuição:
+
+```javascript
+b = b++;
+```
+
+o valor antigo é utilizado na atribuição e, apesar do incremento ocorrer durante a expressão, a atribuição acaba sobrescrevendo o resultado.
+
+Nesse caso, `b` permanece:
+
+```text
+b = 1
+```
+
+Portanto, essa linha **não é uma forma útil de incrementar uma variável**.
+
+O correto para simplesmente incrementar seria:
+
+```javascript
+b++;
+```
+
+---
+
+# 29. `d = --d`
+
+Inicialmente:
+
+```text
+d = 5
+```
+
+O `--d` decrementa primeiro:
+
+```text
+5 → 4
+```
+
+Então:
+
+```text
+d = 4
+```
+
+---
+
+# 30. O `for`
+
+Agora temos:
+
+```javascript
+for (var cont = 1; cont <= 3; cont++) {
+    c = c + cont;
+}
+```
+
+O `for` cria uma repetição.
+
+Ele possui três partes:
+
+```javascript
+for (
+    var cont = 1;
+    cont <= 3;
+    cont++
+)
+```
+
+### 1. Inicialização
+
+```javascript
+var cont = 1
+```
+
+Começo o contador em `1`.
+
+### 2. Condição
+
+```javascript
+cont <= 3
+```
+
+Enquanto essa condição for verdadeira, o bloco será executado.
+
+### 3. Incremento
+
+```javascript
+cont++
+```
+
+Depois de cada repetição, aumento `cont` em `1`.
+
+---
+
+# 31. Calculando `c`
+
+Inicialmente:
+
+```text
+c = 1
+```
+
+### Primeira repetição
+
+```text
+cont = 1
+```
+
+Então:
+
+```text
+c = c + cont
+c = 1 + 1
+c = 2
+```
+
+### Segunda repetição
+
+```text
+cont = 2
+```
+
+Então:
+
+```text
+c = 2 + 2
+c = 4
+```
+
+### Terceira repetição
+
+```text
+cont = 3
+```
+
+Então:
+
+```text
+c = 4 + 3
+c = 7
+```
+
+Depois:
+
+```text
+cont = 4
+```
+
+A condição:
+
+```text
+4 <= 3
+```
+
+é falsa.
+
+O `for` termina.
+
+Portanto:
+
+```text
+c = 7
+```
+
+---
+
+# 32. Exibindo os resultados
+
+Finalmente:
+
+```javascript
+document.getElementById('teste1').innerHTML += a;
+document.getElementById('teste2').innerHTML += b;
+document.getElementById('teste3').innerHTML += c;
+document.getElementById('teste4').innerHTML += d;
+```
+
+Cada linha encontra um `<p>` pelo `id` e acrescenta o valor correspondente.
+
+Os valores finais são:
+
+```text
+a = 2
+b = 1
+c = 7
+d = 4
+```
+
+---
+
+# 33. Código completo do exercício
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operadores incrementais</title>
+</head>
+
+<body>
+
+    <h1>Operadores incrementais</h1>
+
+    <p id="teste1">O valor de a é: </p>
+    <p id="teste2">O valor de b é: </p>
+    <p id="teste3">O valor de c é: </p>
+    <p id="teste4">O valor de d é: </p>
+
+    <script>
+
+        // Criação das variáveis
+        var a = 1;
+        var b = 1;
+        var c = 1;
+        var d = 5;
+
+        // O pré-incremento aumenta o valor antes de utilizá-lo.
+        // O pós-incremento aumenta o valor depois de utilizá-lo.
+
+        a = ++a;
+        b = b++;
+        d = --d;
+
+        for (var cont = 1; cont <= 3; cont++) {
+            c = c + cont;
+        }
+
+        document.getElementById('teste1').innerHTML += a;
+        document.getElementById('teste2').innerHTML += b;
+        document.getElementById('teste3').innerHTML += c;
+        document.getElementById('teste4').innerHTML += d;
+
+    </script>
+
+</body>
+
+</html>
+```
+
+---
+
+# 🧠 O que eu aprendi nesta parte
+
+A parte mais importante desta aula não é decorar todas as tags HTML. É começar a entender **como JavaScript conversa com uma página HTML**.
+
+O fluxo básico é:
+
+```text
+              HTML
+               │
+               ↓
+        Cria elementos
+               │
+               ↓
+       <p id="texto">
+               │
+               ↓
+          JavaScript
+               │
+               ↓
+document.getElementById("texto")
+               │
+               ↓
+          innerHTML
+               │
+               ↓
+     Modifica a página
+```
+
+E também comecei a trabalhar com:
+
+* `document.write()`;
+* `document.getElementById()`;
+* `innerHTML`;
+* `id`;
+* `<script>`;
+* arrays;
+* índices de arrays;
+* objetos e propriedades;
+* `null`;
+* `undefined`;
+* `true` e `false`;
+* `++` e `--`;
+* pré e pós-incremento;
+* `for`;
+* integração entre JavaScript e HTML.
+
+---
+
+# ⚡ Resumo Relâmpago — 10 linhas
+
+1. **HTML** é utilizado para estruturar o conteúdo da página.
+2. `<head>` contém informações/configurações e `<body>` contém o conteúdo da página.
+3. `<script>` permite colocar JavaScript dentro do HTML.
+4. `document.write()` escreve conteúdo diretamente no documento.
+5. `document.getElementById()` localiza um elemento HTML pelo seu `id`.
+6. `innerHTML` permite alterar o conteúdo interno de um elemento.
+7. Arrays armazenam vários valores e seus índices começam em **0**.
+8. Objetos agrupam informações através de **propriedades**, como `meuCarro.modelo`.
+9. `++` incrementa e `--` decrementa; a posição do operador determina se o valor é alterado antes ou depois da expressão.
+10. O `for` permite repetir um bloco de código enquanto uma condição for verdadeira.
