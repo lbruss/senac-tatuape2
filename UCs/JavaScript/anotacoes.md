@@ -165,7 +165,7 @@ Apesar de visualmente serem parecidos, são tipos diferentes.
 
 ---
 
-## 1.3 Igualdade `==`
+**Igualdade `==`**
 
 ```javascript
 a == b
@@ -173,7 +173,7 @@ a == b
 
 O operador `==` compara os valores.
 
-No exemplo:
+- **No exemplo:**
 
 ```javascript
 a = 1;
@@ -188,15 +188,15 @@ Então:
 
 Resultado:
 
-```text
+```
 true
 ```
 
-### `==` — igualdade simples
+**`==` — igualdade simples**
 
 O operador `==` verifica se os valores são iguais, podendo realizar conversão de tipo.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 1 == '1'
@@ -204,7 +204,7 @@ Exemplo:
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -212,7 +212,7 @@ Isso acontece porque o JavaScript pode converter os tipos durante essa comparaç
 
 ---
 
-## 1.4 Igualdade estrita `===`
+**Igualdade estrita `===`**
 
 ```javascript
 a === c
@@ -227,7 +227,7 @@ c = '1';
 
 O valor é parecido, mas os tipos são diferentes:
 
-```text
+```
 a → Number
 c → String
 ```
@@ -240,7 +240,7 @@ Portanto:
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -251,16 +251,16 @@ O operador `===` verifica:
 
 Por isso ele é chamado de **igualdade estrita**.
 
-### Regra prática
+**Regra prática**
 
-```text
+```
 ==   → compara valor
 ===  → compara valor + tipo
 ```
 
 ---
 
-## 1.5 Maior ou igual `>=`
+**Maior ou igual `>=`**
 
 ```javascript
 a >= b
@@ -272,26 +272,26 @@ Significa:
 
 Como:
 
-```text
+```
 a = 1
 b = 1
 ```
 
 Temos:
 
-```text
+```
 1 >= 1
 ```
 
 Resultado:
 
-```text
+```
 true
 ```
 
 ---
 
-## 1.6 Menor ou igual `<=`
+**Menor ou igual `<=`**
 
 ```javascript
 a <= c
@@ -303,7 +303,7 @@ Significa:
 
 Nesse caso:
 
-```text
+```
 a = 1
 c = '1'
 ```
@@ -312,13 +312,13 @@ Em uma comparação relacional, o JavaScript realiza a conversão necessária pa
 
 Resultado:
 
-```text
+```
 true
 ```
 
 ---
 
-## 1.7 Principais operadores comparativos
+**Principais operadores comparativos**
 
 | Operador | Significado                |
 | -------- | -------------------------- |
@@ -333,7 +333,7 @@ true
 
 ---
 
-# 2. Operadores Aritméticos
+## Operadores Aritméticos
 
 Os **operadores aritméticos** são utilizados para realizar cálculos.
 
@@ -367,220 +367,7 @@ Estrutura inicial:
 
 ---
 
-# 2.1 Número + número
-
-```javascript
-var resposta = 1 + 2;
-
-document.write(resposta + '<br>');
-```
-
-Como os dois valores são números:
-
-```text
-1 + 2 = 3
-```
-
-Resultado:
-
-```text
-3
-```
-
-O:
-
-```html
-<br>
-```
-
-é uma quebra de linha no HTML.
-
----
-
-# 2.2 Booleano + número
-
-Em operações numéricas, o JavaScript pode converter valores Booleanos:
-
-```text
-true  → 1
-false → 0
-```
-
-Por exemplo:
-
-```javascript
-resposta = true + 1;
-```
-
-O JavaScript interpreta:
-
-```text
-true → 1
-```
-
-Então:
-
-```text
-1 + 1 = 2
-```
-
-Resultado:
-
-```text
-2
-```
-
----
-
-# 2.3 Booleano + Booleano
-
-### `false + false`
-
-```javascript
-var resposta1 = false + false;
-```
-
-Convertendo:
-
-```text
-0 + 0 = 0
-```
-
-Resultado:
-
-```text
-0
-```
-
-### `false + true`
-
-```javascript
-var resposta2 = false + true;
-```
-
-Convertendo:
-
-```text
-0 + 1 = 1
-```
-
-Resultado:
-
-```text
-1
-```
-
-### `true + true`
-
-```javascript
-var resposta3 = true + true;
-```
-
-Convertendo:
-
-```text
-1 + 1 = 2
-```
-
-Resultado:
-
-```text
-2
-```
-
----
-
-# 2.4 Número + String
-
-Quando uma operação com `+` envolve uma **String**, o comportamento muda.
-
-```javascript
-resposta = 5 + 'Senac';
-```
-
-Nesse caso não ocorre uma soma numérica.
-
-O JavaScript realiza uma **concatenação**:
-
-```text
-5 + 'Senac'
-```
-
-vira:
-
-```text
-'5Senac'
-```
-
-### Concatenação
-
-**Concatenação** significa juntar valores.
-
-Exemplo:
-
-```javascript
-'Olá ' + 'mundo'
-```
-
-Resultado:
-
-```text
-Olá mundo
-```
-
----
-
-# 2.5 String + String
-
-```javascript
-resposta = 'Senac' + 'JavaScript';
-```
-
-As duas partes são Strings, então são concatenadas:
-
-```text
-SenacJavaScript
-```
-
-Se houver um espaço:
-
-```javascript
-resposta = 'Senac ' + 'JavaScript';
-```
-
-Resultado:
-
-```text
-Senac JavaScript
-```
-
----
-
-# 2.6 String + Booleano
-
-```javascript
-resposta = 'Senac ' + false;
-```
-
-Como existe uma String na operação, o resultado é uma concatenação.
-
-O Booleano:
-
-```text
-false
-```
-
-é convertido para sua representação textual.
-
-Resultado:
-
-```text
-Senac false
-```
-
----
-
-## 2.7 Código completo dos operadores aritméticos
+# Código completo - Operadores Aritméticos
 
 ```html
 <!DOCTYPE html>
@@ -633,11 +420,224 @@ Senac false
 
 ---
 
-# 3. Operadores Lógicos
+**Número + número**
+
+```javascript
+var resposta = 1 + 2;
+
+document.write(resposta + '<br>');
+```
+
+Como os dois valores são números:
+
+```
+1 + 2 = 3
+```
+
+Resultado:
+
+```
+3
+```
+
+O:
+
+```html
+<br>
+```
+
+é uma quebra de linha no HTML.
+
+---
+
+**Booleano + número**
+
+Em operações numéricas, o JavaScript pode converter valores Booleanos:
+
+```
+true  → 1
+false → 0
+```
+
+- **Por exemplo:**
+
+```javascript
+resposta = true + 1;
+```
+
+O JavaScript interpreta:
+
+```
+true → 1
+```
+
+Então:
+
+```
+1 + 1 = 2
+```
+
+Resultado:
+
+```
+2
+```
+
+---
+
+**Booleano + Booleano**
+
+**`false + false`**
+
+```javascript
+var resposta1 = false + false;
+```
+
+Convertendo:
+
+```
+0 + 0 = 0
+```
+
+Resultado:
+
+```
+0
+```
+
+(*`false + true`**
+
+```javascript
+var resposta2 = false + true;
+```
+
+Convertendo:
+
+```
+0 + 1 = 1
+```
+
+Resultado:
+
+```
+1
+```
+
+**`true + true`**
+
+```javascript
+var resposta3 = true + true;
+```
+
+Convertendo:
+
+```
+1 + 1 = 2
+```
+
+Resultado:
+
+```
+2
+```
+
+---
+
+**Número + String**
+
+Quando uma operação com `+` envolve uma **String**, o comportamento muda.
+
+```javascript
+resposta = 5 + 'Senac';
+```
+
+Nesse caso não ocorre uma soma numérica.
+
+O JavaScript realiza uma **concatenação**:
+
+```
+5 + 'Senac'
+```
+
+vira:
+
+```
+'5Senac'
+```
+
+**Concatenação**
+
+**Concatenação** significa juntar valores.
+
+- **Exemplo:**
+
+```javascript
+'Olá ' + 'mundo'
+```
+
+Resultado:
+
+```
+Olá mundo
+```
+
+---
+
+**String + String**
+
+```javascript
+resposta = 'Senac' + 'JavaScript';
+```
+
+As duas partes são Strings, então são concatenadas:
+
+```
+SenacJavaScript
+```
+
+Se houver um espaço:
+
+```javascript
+resposta = 'Senac ' + 'JavaScript';
+```
+
+Resultado:
+
+```
+Senac JavaScript
+```
+
+---
+
+**String + Booleano**
+
+```javascript
+resposta = 'Senac ' + false;
+```
+
+Como existe uma String na operação, o resultado é uma concatenação.
+
+O Booleano:
+
+```
+false
+```
+
+é convertido para sua representação textual.
+
+Resultado:
+
+```
+Senac false
+```
+
+---
+
+## Operadores Lógicos
 
 Os operadores lógicos trabalham principalmente com valores Booleanos:
 
-```text
+```
 true
 false
 ```
@@ -652,7 +652,7 @@ Os três principais operadores estudados são:
 
 ---
 
-# 3.1 Operador `&&` — E
+**Operador `&&` — E**
 
 O operador:
 
@@ -666,7 +666,7 @@ A ideia é:
 
 > Todas as condições precisam ser verdadeiras.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 true && true
@@ -674,7 +674,7 @@ true && true
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -686,7 +686,7 @@ false && true
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -703,7 +703,7 @@ Uma única condição falsa já faz o resultado lógico ser falso.
 
 ---
 
-## 3.2 Exemplos com `&&`
+**Exemplos com `&&`**
 
 ```javascript
 var resposta = true && true;
@@ -711,7 +711,7 @@ var resposta = true && true;
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -723,7 +723,7 @@ resposta = false && false;
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -735,7 +735,7 @@ resposta = false && true;
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -755,29 +755,29 @@ Primeiro:
 
 é:
 
-```text
+```
 false
 ```
 
 Então:
 
-```text
+```
 false && false
 ```
 
 Resultado:
 
-```text
+```
 false
 ```
 
 ---
 
-# 3.3 `&&` com Strings
+## `&&` com Strings
 
 O operador lógico `&&` também pode trabalhar com outros valores, não apenas `true` e `false`.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 resposta = 'Senac' && 'JavaScript';
@@ -785,11 +785,11 @@ resposta = 'Senac' && 'JavaScript';
 
 Como os dois valores são considerados verdadeiros, o resultado da expressão é o último valor:
 
-```text
+```
 JavaScript
 ```
 
-Outro exemplo:
+- **Outro exemplo:**
 
 ```javascript
 resposta = false && 'Senac';
@@ -797,13 +797,13 @@ resposta = false && 'Senac';
 
 Como o primeiro valor já é falso:
 
-```text
+```
 false
 ```
 
 o resultado é:
 
-```text
+```
 false
 ```
 
@@ -811,7 +811,7 @@ Isso acontece porque o `&&` procura um valor falso; se encontrar, ele pode parar
 
 ---
 
-## 3.4 String vazia
+### String vazia
 
 Uma String vazia:
 
@@ -823,7 +823,7 @@ não possui conteúdo.
 
 Ela é considerada um valor **falsy** em JavaScript.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 resposta = '' && false;
@@ -831,7 +831,7 @@ resposta = '' && false;
 
 Resultado:
 
-```text
+```
 ''
 ```
 
@@ -843,7 +843,7 @@ resposta = false && '';
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -851,9 +851,9 @@ false
 
 JavaScript possui valores que são tratados como verdadeiros ou falsos em contextos lógicos.
 
-Exemplos:
+- **Exemplos:**
 
-```text
+```
 true       → truthy
 'Senac'    → truthy
 1          → truthy
@@ -868,7 +868,7 @@ NaN        → falsy
 
 ---
 
-# 4. Operador `||` — OU
+## Operador `||` — OU
 
 O operador:
 
@@ -895,7 +895,7 @@ Portanto, diferente do `&&`, basta uma condição verdadeira.
 
 ---
 
-## 4.1 Exemplos
+- **Exemplos**
 
 ```javascript
 var resposta = true || true;
@@ -903,7 +903,7 @@ var resposta = true || true;
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -915,7 +915,7 @@ resposta = false || true;
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -927,7 +927,7 @@ resposta = true || false;
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -947,19 +947,19 @@ A comparação:
 
 Então:
 
-```text
+```
 false || false
 ```
 
 Resultado:
 
-```text
+```
 false
 ```
 
 ---
 
-## 4.2 `||` com Strings
+### `||` com Strings
 
 ```javascript
 resposta = 'Senac' || 'JavaScript';
@@ -967,20 +967,20 @@ resposta = 'Senac' || 'JavaScript';
 
 Como `'Senac'` é um valor truthy, o operador `||` retorna esse primeiro valor:
 
-```text
+```
 Senac
 ```
 
 Uma forma simples de pensar:
 
-```text
+```
 && → procura um valor falso
 || → procura um valor verdadeiro
 ```
 
 ---
 
-# 5. Operador `!` — NOT
+## Operador `!` — NOT
 
 O operador:
 
@@ -998,7 +998,7 @@ Ele inverte o valor lógico.
 
 vira:
 
-```text
+```
 false
 ```
 
@@ -1010,7 +1010,7 @@ E:
 
 vira:
 
-```text
+```
 true
 ```
 
@@ -1023,7 +1023,7 @@ true
 
 ---
 
-## 5.1 Exemplos
+- **Exemplos**
 
 ```javascript
 var resposta = !true;
@@ -1031,7 +1031,7 @@ var resposta = !true;
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -1043,7 +1043,7 @@ resposta = !false;
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -1057,19 +1057,19 @@ resposta = !'Senac';
 
 Como `'Senac'` é truthy:
 
-```text
+```
 !'Senac'
 ```
 
 resulta em:
 
-```text
+```
 false
 ```
 
 ---
 
-# 6. Estruturas Condicionais
+# Estruturas Condicionais
 
 As estruturas condicionais permitem que o programa **tome decisões**.
 
@@ -1077,9 +1077,9 @@ A ideia básica é:
 
 > Se uma condição for verdadeira, faça determinada coisa.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Se a média for maior ou igual a 7:
     aluno aprovado
 ```
@@ -1092,11 +1092,11 @@ if
 
 ---
 
-# 7. Condicional Simples — `if`
+## Condicional Simples — `if`
 
 Foi criado o arquivo:
 
-```text
+```
 condicional-simples.html
 ```
 
@@ -1126,7 +1126,7 @@ Estrutura:
 
 ---
 
-## 7.1 Código completo
+# Código completo
 
 ```html
 <!DOCTYPE html>
@@ -1159,7 +1159,7 @@ Estrutura:
 </html>
 ```
 
-### Entendendo o `if`
+**Entendendo o `if`**
 
 ```javascript
 if (media >= 7) {
@@ -1181,9 +1181,9 @@ que significa:
 
 > ...execute este bloco de código.
 
-No exemplo:
+- **No exemplo:**
 
-```text
+```
 media = 7
 ```
 
@@ -1205,7 +1205,7 @@ resposta = 'Aprovado(a)';
 
 ---
 
-## 7.2 Estrutura básica
+**Estrutura básica**
 
 ```javascript
 if (condição) {
@@ -1219,24 +1219,24 @@ A condição precisa resultar em algo que possa ser avaliado como verdadeiro ou 
 
 ---
 
-# 8. Condicional Composta — `if...else`
+## Condicional Composta — `if...else`
 
 A condicional composta possui dois caminhos:
 
-```text
+```
 SE for verdadeiro → faça uma coisa
 SENÃO → faça outra
 ```
 
 Foi criado o arquivo:
 
-```text
+```
 condicional-composta.html
 ```
 
 ---
 
-## 8.1 Aprovado ou reprovado
+# Aprovado ou reprovado
 
 ```html
 <!DOCTYPE html>
@@ -1273,7 +1273,7 @@ condicional-composta.html
 
 Como:
 
-```text
+```
 media = 6
 ```
 
@@ -1299,13 +1299,13 @@ Reprovado(a)
 
 ---
 
-# 9. `if...else if...else`
+**`if...else if...else`**
 
 Podemos ter mais de duas possibilidades.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 7 ou mais → Aprovado
 6 até menos de 7 → Recuperação
 menos de 6 → Reprovado
@@ -1319,7 +1319,7 @@ else if
 
 ---
 
-## 9.1 Código
+**Código**
 
 ```html
 <script>
@@ -1340,13 +1340,13 @@ else if
 </script>
 ```
 
-### Como o JavaScript verifica?
+**Como o JavaScript verifica?**
 
 Ele testa as condições de cima para baixo.
 
 Com:
 
-```text
+```
 media = 6
 ```
 
@@ -1358,7 +1358,7 @@ media >= 7
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -1370,13 +1370,13 @@ media >= 6
 
 Resultado:
 
-```text
+```
 true
 ```
 
 Portanto:
 
-```text
+```
 Recuperação
 ```
 
@@ -1384,13 +1384,13 @@ Recuperação
 
 ---
 
-# 10. Condicional Ternário
+## Condicional Ternário
 
 O **operador ternário** permite escrever uma condição simples de forma mais curta.
 
 Foi criado o arquivo:
 
-```text
+```
 condicional-ternario.html
 ```
 
@@ -1402,14 +1402,14 @@ condição ? valorSeVerdadeiro : valorSeFalso;
 
 Podemos interpretar como:
 
-```text
+```
 Se condição for verdadeira → primeiro valor
 Senão → segundo valor
 ```
 
 ---
 
-## 10.1 Exemplo
+- **Exemplo**
 
 ```javascript
 var media = 7;
@@ -1426,19 +1426,19 @@ media >= 7
 
 Se for verdadeira:
 
-```text
+```
 Aprovado(a)
 ```
 
 Se for falsa:
 
-```text
+```
 Reprovado(a)
 ```
 
 ---
 
-## 10.2 Código completo
+# Código completo - Condicional Ternário 
 
 ```html
 <!DOCTYPE html>
@@ -1472,7 +1472,7 @@ Reprovado(a)
 </html>
 ```
 
-### Desmontando a expressão
+**Desmontando a expressão**
 
 ```javascript
 resultado = (media >= 7) ? 'Aprovado(a)' : 'Reprovado(a)';
@@ -1480,31 +1480,31 @@ resultado = (media >= 7) ? 'Aprovado(a)' : 'Reprovado(a)';
 
 Temos:
 
-```text
+```
 (media >= 7)
 ```
 
 → condição
 
-```text
+```
 ?
 ```
 
 → separa a condição dos resultados
 
-```text
+```
 'Aprovado(a)'
 ```
 
 → resultado se for verdadeiro
 
-```text
+```
 :
 ```
 
 → separa verdadeiro e falso
 
-```text
+```
 'Reprovado(a)'
 ```
 
@@ -1512,11 +1512,11 @@ Temos:
 
 ---
 
-# 11. Ternário com três possibilidades
+# Ternário com três possibilidades
 
 Também é possível colocar outro ternário dentro do primeiro.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 var media = 6;
@@ -1531,7 +1531,7 @@ resultado = (media >= 7)
 
 A lógica é:
 
-```text
+```
 media >= 7?
     SIM → Aprovado(a)
     NÃO → media >= 6?
@@ -1541,23 +1541,23 @@ media >= 7?
 
 Com:
 
-```text
+```
 media = 6
 ```
 
 o resultado será:
 
-```text
+```
 Recuperação
 ```
 
-### Observação
+**Observação**
 
 O ternário aninhado funciona, mas quando existem muitas condições, o `if...else if...else` normalmente fica mais fácil de ler.
 
 ---
 
-# 12. Condicional de Escolha — `switch`
+# Condicional de Escolha — `switch`
 
 Quando temos várias opções baseadas no valor de uma variável, podemos utilizar:
 
@@ -1575,7 +1575,7 @@ condicional-escolha.html
 
 ---
 
-# 12.1 Exemplo com dias da semana
+## Exemplo com dias da semana
 
 O programa solicita um número de `1` a `7` e transforma esse número no respectivo dia da semana.
 
@@ -1588,7 +1588,7 @@ dia = parseInt(prompt('Digite um número entre 1 a 7', ''));
 
 ---
 
-## 12.2 `prompt()`
+**`prompt()`**
 
 ```javascript
 prompt('Digite um número entre 1 a 7', '');
@@ -1606,7 +1606,7 @@ parseInt()
 
 para converter o valor recebido para um número inteiro.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 parseInt('5')
@@ -1614,13 +1614,13 @@ parseInt('5')
 
 resulta em:
 
-```text
+```
 5
 ```
 
 ---
 
-# 12.3 Estrutura `switch`
+**Estrutura `switch`**
 
 ```javascript
 switch (dia) {
@@ -1657,11 +1657,11 @@ switch (dia) {
 }
 ```
 
-### Como funciona?
+**Como funciona?**
 
 Se:
 
-```text
+```
 dia = 1
 ```
 
@@ -1679,7 +1679,7 @@ resposta = 'Domingo';
 
 Se:
 
-```text
+```
 dia = 5
 ```
 
@@ -1697,7 +1697,7 @@ resposta = 'Quinta-Feira';
 
 ---
 
-# 12.4 O `break`
+**O `break`**
 
 O:
 
@@ -1719,7 +1719,7 @@ case 1:
 
 ---
 
-# 12.5 O `default`
+**O `default`**
 
 O:
 
@@ -1729,9 +1729,9 @@ default:
 
 é executado quando nenhum `case` corresponde ao valor informado.
 
-Por exemplo, se o usuário digitar:
+- **Por exemplo, se o usuário digitar:**
 
-```text
+```
 8
 ```
 
@@ -1752,7 +1752,7 @@ default:
 
 ---
 
-# 12.6 Código completo
+# Código completo - Condicional Escolha
 
 ```html
 <!DOCTYPE html>
@@ -1826,11 +1826,11 @@ default:
 
 ---
 
-# 13. Comparando as estruturas condicionais
+### Comparando as estruturas condicionais
 
 Cada estrutura possui uma finalidade mais adequada.
 
-### `if`
+**`if`**
 
 Usado quando precisamos verificar uma condição.
 
@@ -1842,7 +1842,7 @@ if (media >= 7) {
 
 ---
 
-### `if...else`
+**`if...else`**
 
 Usado quando existem dois caminhos.
 
@@ -1856,7 +1856,7 @@ if (media >= 7) {
 
 ---
 
-### `if...else if...else`
+`if...else if...else`
 
 Usado quando existem várias condições diferentes.
 
@@ -1872,7 +1872,7 @@ if (media >= 7) {
 
 ---
 
-### Ternário
+**Ternário**
 
 Usado principalmente para uma decisão curta.
 
@@ -1882,7 +1882,7 @@ resultado = media >= 7 ? 'Aprovado' : 'Reprovado';
 
 ---
 
-### `switch`
+**`switch`**
 
 Usado quando precisamos escolher entre vários valores específicos.
 
@@ -1900,11 +1900,11 @@ switch (dia) {
 
 ---
 
-# 14. Fluxo mental para resolver exercícios
+**Fluxo mental para resolver exercícios**
 
 Ao receber um problema de programação, posso pensar nesta sequência:
 
-```text
+```
 1. Quais são os dados?
         ↓
 2. Quais são os tipos desses dados?
@@ -1927,9 +1927,9 @@ Isso ajuda a transformar um problema escrito em linguagem natural em código.
 
 ---
 
-# 15. Conceitos importantes desta aula
+# Conceitos importantes
 
-## Comparação
+**Comparação**
 
 Compara valores e retorna um resultado lógico:
 
@@ -1939,7 +1939,7 @@ a >= b
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -1951,7 +1951,7 @@ false
 
 ---
 
-## Adição
+**Adição**
 
 Quando temos números:
 
@@ -1963,7 +1963,7 @@ temos uma soma.
 
 ---
 
-## Concatenação
+**Concatenação**
 
 Quando o `+` envolve uma String:
 
@@ -1975,7 +1975,7 @@ temos junção de textos.
 
 ---
 
-## Lógica `&&`
+**Lógica `&&`**
 
 Representa **E**:
 
@@ -1987,7 +1987,7 @@ Normalmente, ambas precisam ser verdadeiras.
 
 ---
 
-## Lógica `||`
+**Lógica `||`**
 
 Representa **OU**:
 
@@ -1999,7 +1999,7 @@ Pelo menos uma precisa ser verdadeira.
 
 ---
 
-## Negação `!`
+**Negação `!`**
 
 Inverte o valor lógico:
 
@@ -2009,13 +2009,13 @@ Inverte o valor lógico:
 
 resulta em:
 
-```text
+```
 false
 ```
 
 ---
 
-## Condicional
+**Condicional**
 
 Permite ao programa tomar decisões:
 
@@ -2027,7 +2027,7 @@ if (condicao) {
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. **Operadores comparativos** comparam valores e produzem `true` ou `false`.
 2. `==` compara principalmente o valor, enquanto `===` compara **valor e tipo**.
@@ -2039,5 +2039,3 @@ if (condicao) {
 8. `!` significa **NÃO** e inverte um valor lógico.
 9. `if`, `else if` e `else` permitem criar decisões; o ternário é uma forma curta para decisões simples.
 10. `switch`, `case`, `break` e `default` permitem escolher uma ação com base em vários valores possíveis.
-
-Esse trecho fecha uma etapa importante: agora você já tem a base para fazer o JavaScript **comparar, calcular e tomar decisões**. O próximo passo naturalmente será aplicar essas estruturas em exercícios mais próximos de problemas reais.
