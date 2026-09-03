@@ -223,51 +223,6 @@ desc cursos;
 desc prefere;
 desc estudantes;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 select e.nome, c.nome, c.ano, c.carga from estudantes as e
 join prefere as p
 on e.id = p.idest
