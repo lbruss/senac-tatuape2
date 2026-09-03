@@ -1,845 +1,743 @@
-# Relacionamento Muitos-para-Muitos (N:N)
+# 📚 Banco de Dados — Biblioteca: Chaves Estrangeiras e Relacionamentos
 
-Nesta etapa, vou trabalhar com o relacionamento entre as tabelas **`estudantes`**, **`cursos`** e a tabela intermediária **`prefere`**.
-
-O objetivo é entender como relacionar vários estudantes a vários cursos usando **chaves estrangeiras**, **JOINs** e uma **tabela associativa**.
+Nesta atividade, pratiquei **chaves estrangeiras** no banco `biblioteca`. Primeiro, relacionei **livros** com **autores** e, depois, criei uma tabela própria para **categorias** e substituí a categoria armazenada diretamente em `livros` por uma referência à nova tabela.
 
 ---
 
-**Relembrando o relacionamento N:N**
-
-Temos duas entidades principais:
-
-* **Estudantes**
-* **Cursos**
-
-Um estudante pode estar relacionado a vários cursos.
-
-- **Por exemplo:**
-
-> Bruss pode fazer Algoritmos, Banco de Dados e JavaScript.
-
-Ao mesmo tempo, um curso pode ter vários estudantes:
-
-> O curso de Algoritmos pode ter Bruss, Ana, Carlos, João etc.
-
-Portanto:
-
-```
-ESTUDANTE N ───── N CURSO
-```
-
-Isso é um relacionamento:
-
-> **Muitos-para-Muitos (N:N)**
-
-O problema é que não podemos simplesmente colocar uma chave estrangeira em apenas uma das duas tabelas para representar corretamente todos esses relacionamentos.
-
-Por isso, criamos uma **terceira tabela**.
-
----
-
-## Tabela intermediária `prefere`
-
-A tabela `prefere` funciona como uma espécie de **ponte** entre estudantes e cursos.
-
-Ela terá:
-
-* o ID do estudante;
-* o ID do curso;
-* a data do relacionamento;
-* seu próprio identificador.
+# 1. 🗄️ Selecionando o banco
 
 ```sql
-create table prefere(
-    idpref int auto_increment primary key,
-    datas date,
-    idest int,
-    idcurso int,
-    foreign key (idest) references estudantes(id),
-    foreign key (idcurso) references cursos(idcurso)
+use biblioteca;
+```
+
+O comando `USE` define qual banco de dados será utilizado pelos próximos comandos.
+
+Neste caso:
+
+```text
+biblioteca
+```
+
+passa a ser o banco ativo.
+
+Isso é importante porque comandos como `CREATE TABLE`, `ALTER TABLE`, `INSERT` etc. serão executados dentro desse banco.
+
+---
+
+# 2. ✍️ Criando a tabela `autores`
+
+```sql
+create table autores(
+    id_autor int not null auto_increment,
+    nome varchar(100) not null,
+    nacionalidade varchar(50),
+    data_nascimento date,
+    primary key (id_autor)
 ) default charset = utf8;
 ```
 
-**Destrinchando**
+Essa tabela representa a entidade **Autor**.
 
-**`create table prefere`**
+## Estrutura
 
-Cria uma nova tabela chamada `prefere`.
+| Campo             | Tipo           | Função                 |
+| ----------------- | -------------- | ---------------------- |
+| `id_autor`        | `INT`          | Identificador do autor |
+| `nome`            | `VARCHAR(100)` | Nome do autor          |
+| `nacionalidade`   | `VARCHAR(50)`  | Nacionalidade          |
+| `data_nascimento` | `DATE`         | Data de nascimento     |
 
-Essa tabela não representa exatamente uma pessoa ou um curso.
+### `id_autor`
 
-Ela representa **o relacionamento entre eles**.
+```sql
+id_autor int not null auto_increment
+```
+
+* `INT` → número inteiro.
+* `NOT NULL` → não pode ficar vazio.
+* `AUTO_INCREMENT` → o MySQL gera automaticamente o próximo número.
+
+E:
+
+```sql
+primary key (id_autor)
+```
+
+define `id_autor` como **chave primária**.
+
+Assim, cada autor possui um identificador único.
 
 ---
 
-**`idpref int auto_increment primary key`**
+# 3. 🔍 Verificando a tabela
 
 ```sql
-idpref int auto_increment primary key
+desc autores;
 ```
 
-Cria o identificador da própria tabela.
+`DESC` é uma forma abreviada de `DESCRIBE`.
 
-* `idpref` → nome da coluna.
-* `int` → número inteiro.
-* `auto_increment` → o MySQL gera automaticamente o próximo número.
-* `primary key` → identifica exclusivamente cada registro.
+Ele mostra a **estrutura da tabela**, incluindo:
 
-- **Por exemplo:**
+* campos;
+* tipos;
+* possibilidade de `NULL`;
+* chaves;
+* valores padrão;
+* outras propriedades.
 
-| idpref | idest | idcurso |
-| -----: | ----: | ------: |
-|      1 |     1 |       2 |
-|      2 |     2 |       5 |
-|      3 |     3 |      10 |
+Já:
+
+```sql
+select * from autores;
+```
+
+mostra os **registros** existentes.
 
 ---
 
-**`datas date`**
+# 4. ➕ Inserindo os autores
 
 ```sql
-datas date
-```
-
-Armazena a data em que o relacionamento foi registrado.
-
-- **Exemplo:**
-
-```
-2026-08-31
-```
-
-O tipo `DATE` representa uma data no formato:
-
-```
-AAAA-MM-DD
-```
-
----
-
-**`idest int`**
-
-```sql
-idest int
-```
-
-Armazena o ID do estudante.
-
-Esse valor será relacionado à coluna:
-
-```
-estudantes.id
-```
-
----
-
-**`idcurso int`**
-
-```sql
-idcurso int
-```
-
-Armazena o ID do curso.
-
-Esse valor será relacionado à coluna:
-
-```
-cursos.idcurso
-```
-
----
-
-##  Chaves estrangeiras
-
-Agora aparecem duas partes muito importantes:
-
-```sql
-foreign key (idest) references estudantes(id),
-foreign key (idcurso) references cursos(idcurso)
-```
-
-**Primeira chave estrangeira**
-
-```sql
-foreign key (idest) references estudantes(id)
-```
-
-Significa:
-
-> O valor colocado em `prefere.idest` precisa corresponder a um ID existente em `estudantes.id`.
-
-- **Por exemplo:**
-
-```
-idest = 1
-```
-
-significa que estamos falando do estudante cujo:
-
-```
-estudantes.id = 1
-```
-
----
-
-**Segunda chave estrangeira**
-
-```sql
-foreign key (idcurso) references cursos(idcurso)
-```
-
-Significa:
-
-> O valor colocado em `prefere.idcurso` precisa corresponder a um curso existente em `cursos.idcurso`.
-
-Assim conseguimos ligar:
-
-```
-estudante → prefere → curso
-```
-
----
-
-# Visualizando a estrutura
-
-Podemos imaginar:
-
-```
-┌──────────────┐
-│  estudantes  │
-├──────────────┤
-│ id           │
-│ nome         │
-│ ...          │
-└──────┬───────┘
-       │
-       │ 1
-       │
-       │ N
-┌──────▼───────┐
-│    prefere   │
-├──────────────┤
-│ idpref       │
-│ datas        │
-│ idest        │
-│ idcurso      │
-└──────┬───────┘
-       │
-       │ N
-       │
-       │ 1
-┌──────▼───────┐
-│    cursos    │
-├──────────────┤
-│ idcurso      │
-│ nome         │
-│ ...          │
-└──────────────┘
-```
-
-O relacionamento original:
-
-```
-N : N
-```
-
-foi transformado em:
-
-```t
-1 : N       N : 1
-```
-
-Isso é exatamente o que fazemos com um relacionamento muitos-para-muitos em um banco relacional.
-
----
-
-# Inserindo relacionamentos
-
-Agora podemos preencher a tabela `prefere`:
-
-```sql
-insert into prefere
-(idpref, datas, idest, idcurso)
+insert into autores
+(id_autor, nome, nacionalidade, data_nascimento)
 values
-(default, '2026-08-31', 1, 2),
-(default, '2026-08-28', 2, 5),
-(default, '2026-08-25', 3, 10),
-(default, '2026-08-24', 4, 25);
+(default, 'J.K. Rowling', 'Britânica', '1965-07-31'),
+(default, 'Dan Brown', 'Americana', '1964-06-22'),
+(default, 'Markus Zusak', 'Australiana', '1975-06-23'),
+(default, 'Stephenie Meyer', 'Americana', '1973-12-24'),
+(default, 'Suzanne Collins', 'Americana', '1962-08-10'),
+(default, 'Rick Riordan', 'Americana', '1964-06-05'),
+(default, 'Patrick Rothfuss', 'Americana', '1973-06-06'),
+(default, 'John Green', 'Americana', '1977-08-24'),
+(default, 'R.J. Palacio', 'Americana', '1963-07-13'),
+(default, 'Carlos Ruiz Zafón', 'Espanhola', '1964-09-25');
 ```
 
-Aqui estamos criando **quatro relacionamentos**.
+Como `id_autor` é `AUTO_INCREMENT`, usamos:
 
-Podemos interpretar:
+```sql
+default
+```
 
-| idpref | data       | estudante | curso |
-| -----: | ---------- | --------: | ----: |
-|      1 | 2026-08-31 |         1 |     2 |
-|      2 | 2026-08-28 |         2 |     5 |
-|      3 | 2026-08-25 |         3 |    10 |
-|      4 | 2026-08-24 |         4 |    25 |
+para deixar o MySQL gerar os IDs.
 
-O importante é perceber que `prefere` não guarda o nome do estudante nem o nome do curso.
+O resultado será semelhante a:
 
-Ela guarda os **IDs**.
+| id_autor | nome              | nacionalidade |
+| -------: | ----------------- | ------------- |
+|        1 | J.K. Rowling      | Britânica     |
+|        2 | Dan Brown         | Americana     |
+|        3 | Markus Zusak      | Australiana   |
+|      ... | ...               | ...           |
+|       10 | Carlos Ruiz Zafón | Espanhola     |
 
-Isso evita ficar repetindo informações.
+Esses IDs serão importantes posteriormente para criar o relacionamento com `livros`.
 
 ---
 
-# Consultando estudantes + `prefere`
+# 5. 🔗 Adicionando o autor à tabela `livros`
 
-Podemos juntar `estudantes` com `prefere`:
-
-```sql
-select * from estudantes
-join prefere
-on estudantes.id = prefere.idest;
-```
-
-**O que está acontecendo?**
-
-**`select *`**
+Agora a tabela `livros` precisa ter uma coluna capaz de guardar **qual autor escreveu cada livro**.
 
 ```sql
-select *
+alter table livros
+add column id_autor int;
 ```
 
-Pede todas as colunas selecionadas pelas tabelas envolvidas.
+### `ALTER TABLE`
 
-**`from estudantes`**
+O comando:
 
 ```sql
-from estudantes
+alter table
 ```
 
-Define `estudantes` como a tabela principal da consulta.
+modifica a **estrutura de uma tabela que já existe**.
 
-**`join prefere`**
+### `ADD COLUMN`
 
 ```sql
-join prefere
+add column id_autor int;
 ```
 
-Diz:
+adiciona uma nova coluna chamada `id_autor`.
 
-> Quero juntar a tabela `estudantes` com a tabela `prefere`.
+Inicialmente, ela é apenas uma coluna `INT`.
 
-**`on`**
+Ainda falta dizer ao banco que ela será uma **chave estrangeira**.
+
+---
+
+# 6. 🔑 Criando a chave estrangeira
 
 ```sql
-on estudantes.id = prefere.idest;
+alter table livros
+add foreign key (id_autor)
+references autores(id_autor);
 ```
 
-Define **como as tabelas serão relacionadas**.
+Aqui acontece o relacionamento.
 
 Estamos dizendo:
 
-```
-estudantes.id
-       =
-prefere.idest
-```
+> O valor de `livros.id_autor` deve fazer referência a um valor existente em `autores.id_autor`.
 
----
-
-# Consultando cursos + `prefere`
-
-Podemos fazer a mesma coisa com cursos:
-
-```sql
-select * from cursos
-join prefere
-on cursos.idcurso = prefere.idcurso;
-```
-
-Agora o relacionamento é:
-
-```
-cursos.idcurso
-       =
-prefere.idcurso
-```
-
-Assim descobrimos quais cursos estão relacionados aos registros da tabela `prefere`.
-
----
-
-# Selecionando somente as informações necessárias
-
-Não precisamos sempre utilizar:
-
-```sql
-select *
-```
-
-Podemos escolher exatamente o que queremos visualizar.
-
-```sql
-select e.nome, e.id, p.idest, p.datas
-from estudantes as e
-join prefere as p
-on e.id = p.idest;
-```
-
-Aqui usamos **apelidos para as tabelas**.
-
----
-
-# Apelidos com `AS`
-
-```sql
-from estudantes as e
-```
-
-Significa:
-
-> Durante essa consulta, posso chamar `estudantes` simplesmente de `e`.
-
-E:
-
-```sql
-join prefere as p
-```
-
-significa:
-
-> Durante essa consulta, posso chamar `prefere` de `p`.
-
-Assim:
-
-```sql
-e.nome
-```
-
-é:
-
-```
-estudantes.nome
-```
-
-E:
-
-```sql
-p.datas
-```
-
-é:
-
-```
-prefere.datas
-```
-
-Isso deixa consultas grandes muito mais fáceis de escrever e ler.
-
----
-
-# Juntando as três tabelas
-
-Agora chegamos à parte mais importante.
-
-Queremos descobrir:
-
-> **Qual estudante está relacionado a qual curso?**
-
-Temos três tabelas:
-
-```
-estudantes
-     ↓
-   prefere
-     ↓
-   cursos
-```
-
-Então fazemos:
-
-```sql
-select * from estudantes
-join prefere
-on estudantes.id = prefere.idest
-join cursos
-on cursos.idcurso = prefere.idcurso
-order by estudantes.nome;
-```
-
-**Destrinchando**
-
-Primeiro:
-
-```sql
-from estudantes
-```
-
-Começamos pela tabela dos estudantes.
-
-Depois:
-
-```sql
-join prefere
-on estudantes.id = prefere.idest
-```
-
-Encontramos os relacionamentos daquele estudante.
-
-Depois:
-
-```sql
-join cursos
-on cursos.idcurso = prefere.idcurso
-```
-
-Encontramos o curso correspondente.
-
-Por fim:
-
-```sql
-order by estudantes.nome;
-```
-
-Organizamos o resultado pelo nome do estudante.
-
----
-
-## Consulta mais limpa
-
-Em vez de mostrar todas as colunas:
-
-```sql
-select *
-```
-
-podemos mostrar somente aquilo que interessa:
-
-```sql
-select estudantes.nome, cursos.nome
-from estudantes
-join prefere
-on estudantes.id = prefere.idest
-join cursos
-on cursos.idcurso = prefere.idcurso
-order by estudantes.nome;
-```
-
-O resultado será conceitualmente parecido com:
-
-| Estudante                   | Curso                                |
-| --------------------------- | ------------------------------------ |
-| Ana Beatriz Almeida Souza   | Excel Essencial                      |
-| Carlos Eduardo Pereira Lima | Formação Excel do Básico ao Avançado |
-| ...                         | ...                                  |
-
-Agora o banco não está mostrando apenas IDs.
-
-Ele está **cruzando as informações das três tabelas** para produzir uma informação útil.
-
----
-
-# A ideia mais importante do `JOIN`
-
-É importante entender o `JOIN` como uma operação de **ligação entre informações**.
-
-Imagine três fichas:
+Visualmente:
 
 ```text
-Ficha do estudante
-        ↓
-"ID 5"
-        ↓
-Ficha de relacionamento
-        ↓
-"ID do curso 10"
-        ↓
-Ficha do curso
-        ↓
-"PHP Básico"
+AUTORES
+┌─────────────┐
+│ id_autor PK │
+│ nome        │
+│ ...         │
+└──────┬──────┘
+       │
+       │ 1
+       │
+       │ N
+┌──────▼──────┐
+│   LIVROS    │
+├─────────────┤
+│ id_livro PK │
+│ titulo      │
+│ ...         │
+│ id_autor FK │
+└─────────────┘
 ```
 
-O banco percorre essas relações e consegue responder:
+Isso representa:
 
-> O estudante de ID 5 está relacionado ao curso de ID 10, cujo nome é PHP Básico.
+> **Um autor pode ter vários livros.**
 
-Ou seja, o banco **não precisa repetir o nome do curso dentro da tabela de estudantes**.
+Enquanto cada livro, nesse modelo, referencia um autor.
 
-Ele guarda apenas a referência.
+Portanto:
+
+```text
+AUTORES 1 ───── N LIVROS
+```
 
 ---
 
-**DER desse relacionamento**
+# 7. 📚 Inserindo livros com seus autores
 
-Depois de criar as três tabelas, podemos visualizar o relacionamento no **DER — Diagrama Entidade-Relacionamento** do MySQL Workbench.
+Agora podemos cadastrar livros já indicando seus autores:
 
-A estrutura será aproximadamente:
-
-```
-ESTUDANTES
-    │
-    │ 1
-    │
-    │ N
-PREFERE
-    │
-    │ N
-    │
-    │ 1
-CURSOS
+```sql
+INSERT INTO livros
+(id_livro, titulo, editora, categoria, paginas, preco, estoque, lingua, ano, disponivel, id_autor)
+VALUES
+(default, 'Inferno', 'Arqueiro', 'Suspense', 448, 54.90, 14, 'Português', 2013, default, 2),
+(default, 'O Mar de Monstros', 'Intrínseca', 'Fantasia', 304, 42.90, 16, 'Português', 2006, default, 6),
+(default, 'O Teorema Katherine', 'Intrínseca', 'Romance', 304, 39.90, 10, 'Português', 2006, default, 8);
 ```
 
-O relacionamento original:
+O ponto importante está no último valor de cada registro:
 
-```
-ESTUDANTES N : N CURSOS
+```text
+2
+6
+8
 ```
 
-foi dividido:
+Esses números são os IDs dos autores.
 
+Por exemplo:
+
+```text
+Inferno → id_autor = 2
 ```
-ESTUDANTES 1 : N PREFERE
+
+E o autor com ID 2 é:
+
+```text
+Dan Brown
+```
+
+Portanto, temos:
+
+```text
+Dan Brown
+    ↓
+Inferno
+```
+
+Da mesma maneira:
+
+```text
+Rick Riordan
+    ↓
+O Mar de Monstros
 ```
 
 e:
 
+```text
+John Green
+    ↓
+O Teorema Katherine
 ```
-PREFERE N : 1 CURSOS
-```
-
-Essa transformação permite representar corretamente um relacionamento N:N dentro do modelo relacional.
 
 ---
 
-## Resumo das chaves
+# 8. 🔗 Criando uma tabela própria para categorias
 
-Neste exemplo temos:
+Na segunda parte da atividade, foi feita uma melhoria na estrutura do banco.
 
-**Tabela `estudantes`**
+Em vez de guardar diretamente o texto:
 
-```sql
-id
+```text
+categoria = "Fantasia"
 ```
 
-é a **chave primária**.
+dentro de `livros`, foi criada uma entidade própria:
+
+```text
+categoria
+```
+
+```sql
+create table categoria(
+    id_categoria int not null auto_increment,
+    nome varchar(100) not null,
+    descricao text,
+    primary key (id_categoria)
+) default charset = utf8;
+```
+
+Agora temos uma tabela específica para armazenar as categorias.
 
 ---
 
-**Tabela `cursos`**
+# 9. 🏷️ Estrutura da tabela `categoria`
 
-```sql
-idcurso
+```text
+categoria
+├── id_categoria
+├── nome
+└── descricao
 ```
 
-é a **chave primária**.
+### `id_categoria`
+
+```sql
+id_categoria int not null auto_increment
+```
+
+É o identificador único da categoria.
+
+### `nome`
+
+```sql
+nome varchar(100) not null
+```
+
+Armazena o nome:
+
+```text
+Fantasia
+Suspense
+Drama
+Romance
+...
+```
+
+### `descricao`
+
+```sql
+descricao text
+```
+
+Permite armazenar uma descrição maior sobre a categoria.
 
 ---
 
-**Tabela `prefere`**
+# 10. ➕ Inserindo as categorias
 
 ```sql
-idpref
+insert into categoria
+(id_categoria, nome, descricao)
+values
+(default, 'Fantasia', 'Livros que apresentam elementos mágicos, mundos imaginários e criaturas fantásticas.'),
+(default, 'Suspense', 'Livros que apresentam mistério, tensão e situações que prendem a atenção do leitor.'),
+(default, 'Drama', 'Livros que abordam conflitos emocionais, sociais ou pessoais dos personagens.'),
+(default, 'Romance', 'Livros que têm relacionamentos amorosos e questões afetivas como parte importante da história.'),
+(default, 'Ficção Científica', 'Livros que exploram ciência, tecnologia, futuro e conceitos científicos imaginários ou especulativos.'),
+(default, 'Distopia', 'Livros que apresentam sociedades fictícias marcadas por controle, desigualdade ou condições sociais negativas.');
 ```
 
-é a **chave primária**.
+O `AUTO_INCREMENT` gera automaticamente:
 
-E:
-
-```sql
-idest
+```text
+1 → Fantasia
+2 → Suspense
+3 → Drama
+4 → Romance
+5 → Ficção Científica
+6 → Distopia
 ```
 
-é uma **chave estrangeira** para:
+---
+
+# 11. 🔄 Alterando a tabela `livros`
+
+Agora precisamos substituir o campo antigo `categoria`.
+
+Primeiro adicionamos a nova coluna:
 
 ```sql
-estudantes(id)
+alter table livros
+add column id_categoria int;
 ```
 
-Enquanto:
+Agora `livros` passa a ter:
 
-```sql
-idcurso
+```text
+id_categoria
 ```
 
-é uma **chave estrangeira** para:
+Essa coluna armazenará o ID da categoria.
+
+---
+
+# 12. 🗑️ Removendo a coluna antiga
 
 ```sql
-cursos(idcurso)
+alter table livros
+drop column categoria;
+```
+
+A coluna:
+
+```text
+categoria
+```
+
+é removida da tabela `livros`.
+
+Antes:
+
+```text
+livros
+├── id_livro
+├── titulo
+├── categoria
+├── preco
+└── ...
+```
+
+Depois:
+
+```text
+livros
+├── id_livro
+├── titulo
+├── id_categoria
+├── preco
+└── ...
+```
+
+Agora `livros` não guarda mais o nome da categoria diretamente.
+
+Guarda apenas sua referência.
+
+---
+
+# 13. 🔐 Criando a chave estrangeira da categoria
+
+```sql
+alter table livros
+add constraint fk_livros_categorias
+foreign key (id_categoria)
+references categoria(id_categoria);
+```
+
+Aqui foi usado:
+
+```sql
+add constraint
+```
+
+para criar uma **restrição** com um nome específico.
+
+O nome escolhido foi:
+
+```text
+fk_livros_categorias
+```
+
+`fk` é uma abreviação bastante utilizada para **Foreign Key**.
+
+A relação criada é:
+
+```text
+categoria.id_categoria
+          ↑
+          │
+          │
+livros.id_categoria
+```
+
+Ou, visualmente:
+
+```text
+CATEGORIA
+┌─────────────────┐
+│ id_categoria PK │
+│ nome            │
+│ descricao       │
+└────────┬────────┘
+         │
+         │ 1
+         │
+         │ N
+┌────────▼────────┐
+│     LIVROS      │
+├─────────────────┤
+│ id_livro PK     │
+│ titulo          │
+│ ...             │
+│ id_categoria FK │
+└─────────────────┘
 ```
 
 Portanto:
 
-```
-prefere.idest
-      ↓
-estudantes.id
+> Uma categoria pode estar associada a vários livros.
+
+---
+
+# 14. 🧠 O que mudou no banco?
+
+Antes tínhamos algo parecido com:
+
+```text
+livros
+┌──────────────────────┐
+│ titulo               │
+│ categoria            │
+├──────────────────────┤
+│ Inferno              │
+│ Suspense             │
+│ O Mar de Monstros    │
+│ Fantasia             │
+└──────────────────────┘
 ```
 
-e:
+A categoria era armazenada diretamente como texto.
 
+Agora temos:
+
+```text
+categoria
+┌────┬───────────────┐
+│ id │ nome          │
+├────┼───────────────┤
+│ 1  │ Fantasia      │
+│ 2  │ Suspense      │
+│ 3  │ Drama         │
+│ 4  │ Romance       │
+└────┴───────────────┘
 ```
-prefere.idcurso
-      ↓
-cursos.idcurso
+
+E:
+
+```text
+livros
+┌───────────────┬──────────────┐
+│ titulo        │ id_categoria │
+├───────────────┼──────────────┤
+│ Inferno       │ 2            │
+│ O Mar...      │ 1            │
+└───────────────┴──────────────┘
+```
+
+Assim:
+
+```text
+livros.id_categoria = 2
+             ↓
+categoria.id_categoria = 2
+             ↓
+categoria.nome = "Suspense"
+```
+
+Esse modelo evita repetir informações e facilita a manutenção do banco.
+
+---
+
+# 15. 🧩 Estrutura final do relacionamento
+
+Ao final dessa atividade, temos pelo menos três entidades relacionadas:
+
+```text
+                    ┌──────────────┐
+                    │   AUTORES    │
+                    ├──────────────┤
+                    │ id_autor PK  │
+                    │ nome         │
+                    │ ...          │
+                    └──────┬───────┘
+                           │
+                           │ 1:N
+                           ▼
+                    ┌──────────────┐
+                    │    LIVROS    │
+                    ├──────────────┤
+                    │ id_livro PK  │
+                    │ titulo       │
+                    │ id_autor FK  │
+                    │ id_categoria │
+                    │ ...          │
+                    └──────┬───────┘
+                           │
+                           │ N:1
+                           ▼
+                    ┌──────────────┐
+                    │  CATEGORIA   │
+                    ├──────────────┤
+                    │ id_categoria │
+                    │ nome         │
+                    │ descricao    │
+                    └──────────────┘
+```
+
+A ideia fundamental é:
+
+```text
+AUTORES ───────< LIVROS >─────── CATEGORIA
+```
+
+Um autor pode escrever vários livros, e uma categoria pode classificar vários livros.
+
+---
+
+# ⚠️ Um detalhe importante sobre a atividade
+
+Depois de criar:
+
+```sql
+id_categoria
+```
+
+e remover:
+
+```sql
+categoria
+```
+
+os livros que já existiam precisam receber seus respectivos `id_categoria` para que a relação fique completa.
+
+Por exemplo:
+
+```sql
+update livros
+set id_categoria = 2
+where titulo = 'Inferno';
+```
+
+Aqui:
+
+```text
+2 = Suspense
+```
+
+Então `Inferno` passa a apontar para a categoria `Suspense`.
+
+Da mesma forma, os demais livros podem receber seus IDs correspondentes.
+
+---
+
+# 🔗 O que aprendemos com essa atividade?
+
+Essa atividade junta vários conceitos que já vimos:
+
+### `CREATE TABLE`
+
+Cria uma tabela.
+
+### `ALTER TABLE`
+
+Modifica a estrutura de uma tabela existente.
+
+### `ADD COLUMN`
+
+Adiciona uma coluna.
+
+### `DROP COLUMN`
+
+Remove uma coluna.
+
+### `PRIMARY KEY`
+
+Identifica exclusivamente cada registro.
+
+### `FOREIGN KEY`
+
+Cria uma ligação entre tabelas.
+
+### `REFERENCES`
+
+Indica qual tabela e qual coluna são referenciadas.
+
+### `CONSTRAINT`
+
+Permite definir uma restrição e dar um nome a ela.
+
+### `AUTO_INCREMENT`
+
+Gera IDs automaticamente.
+
+### `JOIN`
+
+Posteriormente, podemos usar `JOIN` para transformar os IDs novamente em informações úteis, como:
+
+```text
+Livro → Autor → Categoria
 ```
 
 ---
 
-**Por que não colocar tudo em `estudantes`**
+# ⚡ Resumo Relâmpago — 10 linhas
 
-Imagine que fizéssemos:
+1. Criei a tabela `autores` para armazenar os autores.
+2. `id_autor` é a chave primária de `autores`.
+3. Adicionei `id_autor` à tabela `livros`.
+4. Transformei `livros.id_autor` em chave estrangeira.
+5. Assim, **um autor pode ter vários livros**.
+6. Criei a tabela `categoria` para organizar as categorias.
+7. Adicionei `id_categoria` à tabela `livros`.
+8. Removi a antiga coluna textual `categoria`.
+9. `livros.id_categoria` referencia `categoria.id_categoria`.
+10. O banco agora está mais organizado e preparado para relacionamentos entre entidades.
 
-```
-estudantes
+## 🚀 Resumo final
 
-id | nome | curso
-```
+O principal aprendizado dessa atividade é entender que **uma chave estrangeira conecta tabelas**.
 
-O problema apareceria quando um estudante fizesse vários cursos.
+Em vez de repetir informações:
 
-Teríamos algo como:
-
-```
-1 | Bruss | Algoritmos, MySQL, JavaScript
-```
-
-Isso não representa bem um modelo relacional.
-
-Ou poderíamos repetir o estudante:
-
-```
-1 | Bruss | Algoritmos
-1 | Bruss | MySQL
-1 | Bruss | JavaScript
+```text
+Livro → "Suspense"
+Livro → "Suspense"
+Livro → "Suspense"
 ```
 
-Agora estamos repetindo dados do estudante.
+podemos armazenar uma referência:
 
-A tabela intermediária resolve isso:
-
-```
-estudantes
-1 | Bruss
-
-prefere
-1 | 1 | 2
-2 | 1 | 5
-3 | 1 | 10
-
-cursos
-2 | Excel Essencial
-5 | Formação Excel...
-10 | PHP Básico
+```text
+Livro → id_categoria = 2
+                  ↓
+          Categoria → Suspense
 ```
 
-O estudante aparece **uma vez** e seus relacionamentos ficam registrados separadamente.
+Da mesma forma:
 
----
-
-# Conceito de normalização
-
-Essa organização está relacionada à ideia de **normalização de bancos de dados**.
-
-A normalização busca, entre outras coisas:
-
-* reduzir repetição de dados;
-* evitar inconsistências;
-* organizar as informações;
-* separar entidades diferentes;
-* facilitar alterações;
-* manter os relacionamentos através de chaves.
-
-Por exemplo, se o nome de um curso mudar, não precisamos alterar o nome em dezenas de registros de estudantes.
-
-Alteramos apenas:
-
-```
-cursos.nome
+```text
+Livro → id_autor = 2
+                 ↓
+          Autor → Dan Brown
 ```
 
-Os relacionamentos continuam apontando para o mesmo `idcurso`.
-
----
-
-# Consulta final recomendada
-
-Para visualizar os estudantes e os cursos relacionados, uma consulta bem organizada seria:
-
-```sql
-select
-    estudantes.nome,
-    cursos.nome
-from estudantes
-join prefere
-    on estudantes.id = prefere.idest
-join cursos
-    on cursos.idcurso = prefere.idcurso
-order by estudantes.nome;
-```
-
-**Linha por linha**
-
-```sql
-select
-```
-
-Define quais informações queremos mostrar.
-
-```sql
-estudantes.nome,
-```
-
-Mostra o nome do estudante.
-
-```sql
-cursos.nome
-```
-
-Mostra o nome do curso.
-
-```sql
-from estudantes
-```
-
-Começa a consulta pela tabela `estudantes`.
-
-```sql
-join prefere
-```
-
-Junta os relacionamentos registrados na tabela intermediária.
-
-```sql
-on estudantes.id = prefere.idest
-```
-
-Liga o estudante ao seu registro na tabela `prefere`.
-
-```sql
-join cursos
-```
-
-Depois junta a tabela de cursos.
-
-```sql
-on cursos.idcurso = prefere.idcurso
-```
-
-Liga o relacionamento ao curso correspondente.
-
-```sql
-order by estudantes.nome;
-```
-
-Ordena o resultado pelo nome do estudante.
-
----
-
-**Resumo Relâmpago**
-
-1. **N:N** significa muitos-para-muitos.
-2. Um estudante pode estar relacionado a vários cursos.
-3. Um curso pode estar relacionado a vários estudantes.
-4. Para representar N:N, criamos uma **tabela intermediária**.
-5. Neste exemplo, a tabela intermediária é `prefere`.
-6. `idest` é chave estrangeira para `estudantes.id`.
-7. `idcurso` é chave estrangeira para `cursos.idcurso`.
-8. O `JOIN` combina informações relacionadas entre tabelas.
-9. `ON` determina quais colunas serão usadas para fazer a ligação.
-10. Três tabelas permitem transformar N:N em dois relacionamentos **1:N**.
+Ou seja, **as tabelas armazenam as informações separadamente e as chaves estrangeiras permitem relacioná-las**. Isso é fundamental para construir bancos de dados relacionais bem estruturados.
