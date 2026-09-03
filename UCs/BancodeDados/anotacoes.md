@@ -1,10 +1,10 @@
-# 📚 Banco de Dados — Biblioteca: Chaves Estrangeiras e Relacionamentos
+# Biblioteca: Chaves Estrangeiras e Relacionamentos
 
 Nesta atividade, pratiquei **chaves estrangeiras** no banco `biblioteca`. Primeiro, relacionei **livros** com **autores** e, depois, criei uma tabela própria para **categorias** e substituí a categoria armazenada diretamente em `livros` por uma referência à nova tabela.
 
 ---
 
-# 1. 🗄️ Selecionando o banco
+**Selecionando o banco**
 
 ```sql
 use biblioteca;
@@ -14,7 +14,7 @@ O comando `USE` define qual banco de dados será utilizado pelos próximos coman
 
 Neste caso:
 
-```text
+```
 biblioteca
 ```
 
@@ -24,7 +24,7 @@ Isso é importante porque comandos como `CREATE TABLE`, `ALTER TABLE`, `INSERT` 
 
 ---
 
-# 2. ✍️ Criando a tabela `autores`
+**Criando a tabela `autores`**
 
 ```sql
 create table autores(
@@ -38,7 +38,7 @@ create table autores(
 
 Essa tabela representa a entidade **Autor**.
 
-## Estrutura
+**Estrutura**
 
 | Campo             | Tipo           | Função                 |
 | ----------------- | -------------- | ---------------------- |
@@ -47,7 +47,7 @@ Essa tabela representa a entidade **Autor**.
 | `nacionalidade`   | `VARCHAR(50)`  | Nacionalidade          |
 | `data_nascimento` | `DATE`         | Data de nascimento     |
 
-### `id_autor`
+**`id_autor`**
 
 ```sql
 id_autor int not null auto_increment
@@ -69,7 +69,7 @@ Assim, cada autor possui um identificador único.
 
 ---
 
-# 3. 🔍 Verificando a tabela
+**Verificando a tabela**
 
 ```sql
 desc autores;
@@ -96,7 +96,7 @@ mostra os **registros** existentes.
 
 ---
 
-# 4. ➕ Inserindo os autores
+**Inserindo os autores**
 
 ```sql
 insert into autores
@@ -136,7 +136,7 @@ Esses IDs serão importantes posteriormente para criar o relacionamento com `liv
 
 ---
 
-# 5. 🔗 Adicionando o autor à tabela `livros`
+**Adicionando o autor à tabela `livros`**
 
 Agora a tabela `livros` precisa ter uma coluna capaz de guardar **qual autor escreveu cada livro**.
 
@@ -145,7 +145,7 @@ alter table livros
 add column id_autor int;
 ```
 
-### `ALTER TABLE`
+**`ALTER TABLE`**
 
 O comando:
 
@@ -155,7 +155,7 @@ alter table
 
 modifica a **estrutura de uma tabela que já existe**.
 
-### `ADD COLUMN`
+**`ADD COLUMN`**
 
 ```sql
 add column id_autor int;
@@ -169,7 +169,7 @@ Ainda falta dizer ao banco que ela será uma **chave estrangeira**.
 
 ---
 
-# 6. 🔑 Criando a chave estrangeira
+**Criando a chave estrangeira**
 
 ```sql
 alter table livros
@@ -185,7 +185,7 @@ Estamos dizendo:
 
 Visualmente:
 
-```text
+```
 AUTORES
 ┌─────────────┐
 │ id_autor PK │
@@ -214,13 +214,13 @@ Enquanto cada livro, nesse modelo, referencia um autor.
 
 Portanto:
 
-```text
+```
 AUTORES 1 ───── N LIVROS
 ```
 
 ---
 
-# 7. 📚 Inserindo livros com seus autores
+**Inserindo livros com seus autores**
 
 Agora podemos cadastrar livros já indicando seus autores:
 
@@ -235,7 +235,7 @@ VALUES
 
 O ponto importante está no último valor de cada registro:
 
-```text
+```
 2
 6
 8
@@ -243,21 +243,21 @@ O ponto importante está no último valor de cada registro:
 
 Esses números são os IDs dos autores.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 Inferno → id_autor = 2
 ```
 
 E o autor com ID 2 é:
 
-```text
+```
 Dan Brown
 ```
 
 Portanto, temos:
 
-```text
+```
 Dan Brown
     ↓
 Inferno
@@ -265,7 +265,7 @@ Inferno
 
 Da mesma maneira:
 
-```text
+```
 Rick Riordan
     ↓
 O Mar de Monstros
@@ -273,7 +273,7 @@ O Mar de Monstros
 
 e:
 
-```text
+```
 John Green
     ↓
 O Teorema Katherine
@@ -281,19 +281,19 @@ O Teorema Katherine
 
 ---
 
-# 8. 🔗 Criando uma tabela própria para categorias
+**Criando uma tabela própria para categorias**
 
 Na segunda parte da atividade, foi feita uma melhoria na estrutura do banco.
 
 Em vez de guardar diretamente o texto:
 
-```text
+```
 categoria = "Fantasia"
 ```
 
 dentro de `livros`, foi criada uma entidade própria:
 
-```text
+```
 categoria
 ```
 
@@ -310,16 +310,16 @@ Agora temos uma tabela específica para armazenar as categorias.
 
 ---
 
-# 9. 🏷️ Estrutura da tabela `categoria`
+**Estrutura da tabela `categoria`**
 
-```text
+```
 categoria
 ├── id_categoria
 ├── nome
 └── descricao
 ```
 
-### `id_categoria`
+**`id_categoria`**
 
 ```sql
 id_categoria int not null auto_increment
@@ -327,7 +327,7 @@ id_categoria int not null auto_increment
 
 É o identificador único da categoria.
 
-### `nome`
+**`nome`**
 
 ```sql
 nome varchar(100) not null
@@ -335,7 +335,7 @@ nome varchar(100) not null
 
 Armazena o nome:
 
-```text
+```
 Fantasia
 Suspense
 Drama
@@ -343,7 +343,7 @@ Romance
 ...
 ```
 
-### `descricao`
+**`descricao`**
 
 ```sql
 descricao text
@@ -353,7 +353,7 @@ Permite armazenar uma descrição maior sobre a categoria.
 
 ---
 
-# 10. ➕ Inserindo as categorias
+**Inserindo as categorias**
 
 ```sql
 insert into categoria
@@ -369,7 +369,7 @@ values
 
 O `AUTO_INCREMENT` gera automaticamente:
 
-```text
+```
 1 → Fantasia
 2 → Suspense
 3 → Drama
@@ -380,7 +380,7 @@ O `AUTO_INCREMENT` gera automaticamente:
 
 ---
 
-# 11. 🔄 Alterando a tabela `livros`
+**Alterando a tabela `livros`**
 
 Agora precisamos substituir o campo antigo `categoria`.
 
@@ -393,7 +393,7 @@ add column id_categoria int;
 
 Agora `livros` passa a ter:
 
-```text
+```
 id_categoria
 ```
 
@@ -401,7 +401,7 @@ Essa coluna armazenará o ID da categoria.
 
 ---
 
-# 12. 🗑️ Removendo a coluna antiga
+**Removendo a coluna antiga**
 
 ```sql
 alter table livros
@@ -410,7 +410,7 @@ drop column categoria;
 
 A coluna:
 
-```text
+```
 categoria
 ```
 
@@ -418,7 +418,7 @@ categoria
 
 Antes:
 
-```text
+```
 livros
 ├── id_livro
 ├── titulo
@@ -429,7 +429,7 @@ livros
 
 Depois:
 
-```text
+```
 livros
 ├── id_livro
 ├── titulo
@@ -444,7 +444,7 @@ Guarda apenas sua referência.
 
 ---
 
-# 13. 🔐 Criando a chave estrangeira da categoria
+### Criando a chave estrangeira da categoria
 
 ```sql
 alter table livros
@@ -463,7 +463,7 @@ para criar uma **restrição** com um nome específico.
 
 O nome escolhido foi:
 
-```text
+```
 fk_livros_categorias
 ```
 
@@ -471,7 +471,7 @@ fk_livros_categorias
 
 A relação criada é:
 
-```text
+```
 categoria.id_categoria
           ↑
           │
@@ -481,7 +481,7 @@ livros.id_categoria
 
 Ou, visualmente:
 
-```text
+```
 CATEGORIA
 ┌─────────────────┐
 │ id_categoria PK │
@@ -508,11 +508,11 @@ Portanto:
 
 ---
 
-# 14. 🧠 O que mudou no banco?
+**O que mudou no banco?**
 
 Antes tínhamos algo parecido com:
 
-```text
+```
 livros
 ┌──────────────────────┐
 │ titulo               │
@@ -529,7 +529,7 @@ A categoria era armazenada diretamente como texto.
 
 Agora temos:
 
-```text
+```
 categoria
 ┌────┬───────────────┐
 │ id │ nome          │
@@ -543,7 +543,7 @@ categoria
 
 E:
 
-```text
+```
 livros
 ┌───────────────┬──────────────┐
 │ titulo        │ id_categoria │
@@ -555,7 +555,7 @@ livros
 
 Assim:
 
-```text
+```
 livros.id_categoria = 2
              ↓
 categoria.id_categoria = 2
@@ -567,11 +567,11 @@ Esse modelo evita repetir informações e facilita a manutenção do banco.
 
 ---
 
-# 15. 🧩 Estrutura final do relacionamento
+# Estrutura final do relacionamento
 
 Ao final dessa atividade, temos pelo menos três entidades relacionadas:
 
-```text
+```
                     ┌──────────────┐
                     │   AUTORES    │
                     ├──────────────┤
@@ -605,7 +605,7 @@ Ao final dessa atividade, temos pelo menos três entidades relacionadas:
 
 A ideia fundamental é:
 
-```text
+```
 AUTORES ───────< LIVROS >─────── CATEGORIA
 ```
 
@@ -613,7 +613,7 @@ Um autor pode escrever vários livros, e uma categoria pode classificar vários 
 
 ---
 
-# ⚠️ Um detalhe importante sobre a atividade
+**Um detalhe importante sobre a atividade**
 
 Depois de criar:
 
@@ -629,7 +629,7 @@ categoria
 
 os livros que já existiam precisam receber seus respectivos `id_categoria` para que a relação fique completa.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```sql
 update livros
@@ -639,7 +639,7 @@ where titulo = 'Inferno';
 
 Aqui:
 
-```text
+```
 2 = Suspense
 ```
 
@@ -649,57 +649,57 @@ Da mesma forma, os demais livros podem receber seus IDs correspondentes.
 
 ---
 
-# 🔗 O que aprendemos com essa atividade?
+**O que aprendemos com essa atividade?**
 
 Essa atividade junta vários conceitos que já vimos:
 
-### `CREATE TABLE`
+**`CREATE TABLE`**
 
 Cria uma tabela.
 
-### `ALTER TABLE`
+**`ALTER TABLE`**
 
 Modifica a estrutura de uma tabela existente.
 
-### `ADD COLUMN`
+**`ADD COLUMN`**
 
 Adiciona uma coluna.
 
-### `DROP COLUMN`
+**`DROP COLUMN`**
 
 Remove uma coluna.
 
-### `PRIMARY KEY`
+**`PRIMARY KEY`**
 
 Identifica exclusivamente cada registro.
 
-### `FOREIGN KEY`
+**`FOREIGN KEY`**
 
 Cria uma ligação entre tabelas.
 
-### `REFERENCES`
+**`REFERENCES`**
 
 Indica qual tabela e qual coluna são referenciadas.
 
-### `CONSTRAINT`
+**`CONSTRAINT`**
 
 Permite definir uma restrição e dar um nome a ela.
 
-### `AUTO_INCREMENT`
+**`AUTO_INCREMENT`**
 
 Gera IDs automaticamente.
 
-### `JOIN`
+**`JOIN`**
 
 Posteriormente, podemos usar `JOIN` para transformar os IDs novamente em informações úteis, como:
 
-```text
+```
 Livro → Autor → Categoria
 ```
 
 ---
 
-# ⚡ Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. Criei a tabela `autores` para armazenar os autores.
 2. `id_autor` é a chave primária de `autores`.
@@ -712,13 +712,13 @@ Livro → Autor → Categoria
 9. `livros.id_categoria` referencia `categoria.id_categoria`.
 10. O banco agora está mais organizado e preparado para relacionamentos entre entidades.
 
-## 🚀 Resumo final
+## Resumo final
 
 O principal aprendizado dessa atividade é entender que **uma chave estrangeira conecta tabelas**.
 
 Em vez de repetir informações:
 
-```text
+```
 Livro → "Suspense"
 Livro → "Suspense"
 Livro → "Suspense"
@@ -726,7 +726,7 @@ Livro → "Suspense"
 
 podemos armazenar uma referência:
 
-```text
+```
 Livro → id_categoria = 2
                   ↓
           Categoria → Suspense
@@ -734,7 +734,7 @@ Livro → id_categoria = 2
 
 Da mesma forma:
 
-```text
+```
 Livro → id_autor = 2
                  ↓
           Autor → Dan Brown
