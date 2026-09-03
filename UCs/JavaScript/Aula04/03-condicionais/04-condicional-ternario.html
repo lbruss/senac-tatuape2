@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Estrutura condicional ternario</title>
+</head>
+<body>
+	<h1>Estrutura condicional ternario</h1>
+	<p id="teste"></p>
+
+	<script>
+		//Criando as variáveis
+		var media = 7;
+		var resultado = '';
+
+		//Condicional ternário
+		resultado = (media>=7)? 'Aprovado(a)':'Reprovado(a)';
+
+		/*
+		* Condição: (média >= 7) -> verifica se a variável media
+		é maior ou igual a 7;
+		* Se verdadeiro: 'Aprovado(a)' -> esse valor será
+		atribuído à variável resultado;
+		* Se falso: 'Reprovado(a)' -> esse valor será
+		atribuído à variável resultado;
+		*/
+
+		//Mostrar o resuldato
+		document.getElementById('teste').innerHTML = resultado;
+	</script>
+
+</body>
+</html>
