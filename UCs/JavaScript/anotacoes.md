@@ -1,1041 +1,1103 @@
-# HTML e JavaScript 
+# Operadores e Estruturas Condicionais
 
-Nesta parte, vou apenas **conhecer o HTML e entender como o JavaScript pode interagir com uma página**. O aprofundamento de HTML e CSS ficará para depois.
+Nesta parte foram estudados os **operadores comparativos, aritméticos e lógicos**, além das principais **estruturas condicionais** do JavaScript.
 
-A ideia principal é começar a sair do JavaScript executado apenas no terminal e entender como ele funciona **dentro de uma página web**.
+Esses conceitos são fundamentais porque permitem que o programa:
 
----
-
-**Criando a pasta do projeto**
-
-Primeiro, crio uma pasta chamada:
-
-```
-exemplohtml
-```
-
-Depois:
-
-1. Abro o **Visual Studio Code**.
-2. Vou em **File → Open Folder**.
-3. Seleciono a pasta `exemplohtml`.
-4. Dentro dela, crio os arquivos `.html`.
-
-A estrutura ficará aproximadamente assim:
-
-```
-exemplohtml/
-│
-├── exemplo1.html
-├── 01-primeira-pagina.html
-├── tipodedados.html
-├── objeto.html
-└── operadoresincrementais.html
-```
+* compare valores;
+* faça cálculos;
+* tome decisões;
+* execute determinado código somente quando uma condição for verdadeira;
+* escolha entre várias possibilidades.
 
 ---
 
-## Primeiro contato com HTML
+# 1. Operadores Comparativos
 
-Crio o arquivo:
+Os **operadores comparativos** servem para comparar dois valores.
 
-```
-exemplo1.html
-```
+O resultado de uma comparação é sempre um **Booleano**:
 
-E coloco:
+* `true` → verdadeiro;
+* `false` → falso.
 
-```html
-<html>
-<head>
-    <title>Turma TI 0425</title>
-</head>
-
-<body>
-    HTML - CSS - JAVASCRIPT
-</body>
-</html>
-```
-
-**Entendendo a estrutura**
-
-O HTML utiliza **tags** para estruturar o conteúdo de uma página.
-
-**`<html>`**
-
-```html
-<html>
-```
-
-Indica o início do documento HTML.
-
-O documento termina com:
-
-```html
-</html>
-```
-
----
-
-**`<head>`**
-
-```html
-<head>
-```
-
-Contém informações e configurações da página que não são, normalmente, o conteúdo principal exibido para o usuário.
-
----
-
-**`<title>`**
-
-```html
-<title>Turma TI 0425</title>
-```
-
-Define o título da página, normalmente apresentado na aba do navegador.
-
----
-
-**`<body>`**
-
-```html
-<body>
-    HTML - CSS - JAVASCRIPT
-</body>
-```
-
-O `<body>` contém o conteúdo que será apresentado na página.
-
-Podemos pensar assim:
-
-```
-HTML
-│
-├── HEAD
-│   └── Informações/configurações da página
-│
-└── BODY
-    └── Conteúdo apresentado ao usuário
-```
-
----
-
-# Primeira página em JavaScript
-
-Agora crio:
-
-```
-01-primeira-pagina.html
-```
-
-O HTML inicial será:
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Primeira página em JavaScript</title>
-</head>
-
-<body>
-    <h1>Primeira página em JavaScript</h1>
-    <p id="texto"></p>
-</body>
-
-</html>
-```
-
----
-
-# Algumas partes novas do HTML
-
-**`<!DOCTYPE html>`**
-
-```html
-<!DOCTYPE html>
-```
-
-Informa ao navegador que o documento utiliza HTML5.
-
----
-
-**`lang="pt-br"`**
-
-```html
-<html lang="pt-br">
-```
-
-Indica o idioma principal do documento.
-
-Neste caso:
-
-```
-pt-br → português do Brasil
-```
-
----
-
-**`<meta charset="utf-8">`**
-
-```html
-<meta charset="utf-8">
-```
-
-Define a codificação dos caracteres.
-
-O UTF-8 permite representar corretamente diversos caracteres, incluindo:
-
-```
-á
-ã
-ç
-é
-õ
-```
-
-Isso é especialmente importante quando estou escrevendo páginas em português.
-
----
-
-**`<meta name="viewport"...>`**
-
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1">
-```
-
-É uma configuração importante para que a página se adapte melhor a diferentes tamanhos de tela, principalmente celulares.
-
-Por enquanto, basta entender que ela ajuda no comportamento **responsivo** da página.
-
----
-
-**`<h1>`**
-
-```html
-<h1>Primeira página em JavaScript</h1>
-```
-
-Representa um título de nível 1.
-
----
-
-**`<p id="texto"></p>`**
-
-```html
-<p id="texto"></p>
-```
-
-Cria um parágrafo.
-
-O atributo:
-
-```html
-id="texto"
-```
-
-dá a esse elemento um identificador único chamado `texto`.
-
-Esse `id` será utilizado posteriormente pelo JavaScript para localizar esse elemento.
-
----
-
-# Colocando JavaScript dentro do HTML
-
-Agora adiciono:
-
-```html
-<script>
-    // Código JavaScript
-</script>
-```
-
-- **Por exemplo:**
-
-```html
-<body>
-
-    <h1>Primeira página em JavaScript</h1>
-    <p id="texto"></p>
-
-    <script>
-        // Código JavaScript
-    </script>
-
-</body>
-```
-
-A tag:
-
-```html
-<script>
-```
-
-indica ao navegador que o conteúdo a seguir contém código JavaScript.
-
----
-
-**Comentários em JavaScript**
-
-Dentro do `<script>` posso utilizar comentários.
-
-**Comentário de uma linha**
+Por exemplo:
 
 ```javascript
-// Comentário na linha
+1 == 1
 ```
 
-Tudo depois de `//`, naquela linha, será ignorado pelo interpretador.
-
-**Comentário de várias linhas**
-
-```javascript
-/*
-    Isto é um comentário
-    que contém várias linhas
-    de informações
-*/
-```
-
-É útil quando quero documentar uma explicação maior.
-
----
-
-# `document.write()`
-
-Posso escrever diretamente na página utilizando:
-
-```javascript
-document.write('Meu primeiro texto em JavaScript');
-```
-
-O método `document.write()` escreve conteúdo no documento HTML.
-
-Então:
-
-```javascript
-document.write('Meu primeiro texto em JavaScript');
-```
-
-faz o texto aparecer na página.
-
-**Entendendo**
-
-```
-document
-   ↓
-representa o documento/página
-   ↓
-.write()
-   ↓
-escreve conteúdo
-```
-
-> `document.write()` é útil para entender a interação básica entre JavaScript e HTML, embora não seja a abordagem mais utilizada para atualizar o conteúdo de páginas modernas.
-
----
-
-# `document.getElementById()`
-
-Agora aparece um dos conceitos mais importantes:
-
-```javascript
-document.getElementById('texto')
-```
-
-Esse método procura no HTML um elemento que tenha:
-
-```html
-id="texto"
-```
-
-- **Por exemplo:**
-
-```html
-<p id="texto"></p>
-```
-
-O JavaScript consegue localizar esse elemento através de:
-
-```javascript
-document.getElementById('texto')
-```
-
-Podemos imaginar:
-
-```
-HTML
-│
-└── <p id="texto"></p>
-            ↑
-            │
-JavaScript procura pelo ID
-            │
-            ↓
-document.getElementById('texto')
-```
-
----
-
-# Alterando o conteúdo com `innerHTML`
-
-Depois de encontrar o elemento, posso modificar seu conteúdo:
-
-```javascript
-document.getElementById('texto').innerHTML =
-    'Segundo texto em JavaScript';
-```
-
-Aqui acontecem duas coisas:
-
-**1. Localizo o elemento**
-
-```javascript
-document.getElementById('texto')
-```
-
-**2. Altero seu conteúdo**
-
-```javascript
-.innerHTML = 'Segundo texto em JavaScript';
-```
-
-Então:
-
-```html
-<p id="texto"></p>
-```
-
-passa a ser equivalente a:
-
-```html
-<p id="texto">Segundo texto em JavaScript</p>
-```
-
----
-
-**Código completo**
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Primeira página em JavaScript</title>
-</head>
-
-<body>
-
-    <h1>Primeira página em JavaScript</h1>
-    <p id="texto"></p>
-
-    <script>
-
-        // Comentário de uma linha
-
-        /*
-            Isto é um comentário
-            que contém várias linhas
-            de informações
-        */
-
-        document.write('Meu primeiro texto em JavaScript');
-
-        // Localiza o elemento que possui id="texto"
-        // e altera seu conteúdo.
-        document.getElementById('texto').innerHTML =
-            'Segundo texto em JavaScript';
-
-    </script>
-
-</body>
-
-</html>
-```
-
----
-
-# HTML + JavaScript
-
-Aqui aparece uma ideia fundamental para o desenvolvimento web:
-
-```
-HTML
- ↓
-estrutura da página
-
-CSS
- ↓
-aparência/estilo
-
-JavaScript
- ↓
-comportamento/interação
-```
-
-Por enquanto, estou começando a entender a relação:
-
-```
-HTML
-  ↓
-cria <p id="texto">
-  ↓
-JavaScript
-  ↓
-encontra id="texto"
-  ↓
-altera o conteúdo
-```
-
-Esse conceito será muito importante quando eu começar a trabalhar com **DOM (Document Object Model)**.
-
----
-
-# Tipos de dados no HTML + JavaScript
-
-Agora crio outro arquivo HTML para visualizar diferentes tipos de dados.
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tipo de dados</title>
-</head>
-
-<body>
-
-    <h1>Tipo de dados</h1>
-
-    <p id="teste1">O valor de a é: </p>
-    <p id="teste2">O valor de b é: </p>
-    <p id="teste3">O valor de c é: </p>
-    <p id="teste4">O valor de d é: </p>
-    <p id="teste5">O valor de e é: </p>
-    <p id="teste6">O valor de f é: </p>
-    <p id="teste7">O valor de g é: </p>
-
-    <script>
-
-    </script>
-
-</body>
-
-</html>
-```
-
-Aqui tenho sete elementos diferentes:
+Resultado:
 
 ```text
-teste1
-teste2
-teste3
-teste4
-teste5
-teste6
-teste7
+true
 ```
 
-Cada um possui um `id` diferente para que o JavaScript possa encontrá-lo individualmente.
+Já:
+
+```javascript
+1 == 2
+```
+
+Resultado:
+
+```text
+false
+```
 
 ---
 
-# Declarando diferentes tipos de dados
+## 1.1 Criando o arquivo `comparativos.html`
 
-Dentro do `<script>`:
+No VS Code, foi criado o arquivo:
+
+```text
+comparativos.html
+```
+
+Estrutura inicial:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operadores comparativos</title>
+</head>
+<body>
+
+    <h1>Operadores comparativos</h1>
+
+    <p id="teste1">O valor de a é: </p>
+    <p id="teste2">O valor de a é: </p>
+    <p id="teste3">O valor de a é: </p>
+    <p id="teste4">O valor de a é: </p>
+    <p id="teste5">O valor de a é: </p>
+    <p id="teste6">O valor de a é: </p>
+
+    <script>
+
+    </script>
+
+</body>
+</html>
+```
+
+Os elementos `<p>` possuem IDs diferentes para que o JavaScript possa colocar cada resultado em um local específico da página.
+
+---
+
+## 1.2 Código completo
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operadores comparativos</title>
+</head>
+<body>
+
+    <h1>Operadores comparativos</h1>
+
+    <p id="teste1">O valor de a é: </p>
+    <p id="teste2">O valor de a é: </p>
+    <p id="teste3">O valor de a é: </p>
+    <p id="teste4">O valor de a é: </p>
+    <p id="teste5">O valor de a é: </p>
+    <p id="teste6">O valor de a é: </p>
+
+    <script>
+        // Criação de variáveis
+        var a = 1;
+        var b = 1;
+        var c = '1';
+        var d = 2;
+
+        // Impressão dos resultados
+        document.getElementById('teste1').innerHTML += a == b;
+        document.getElementById('teste2').innerHTML += a === c;
+        document.getElementById('teste3').innerHTML += a === b;
+        document.getElementById('teste4').innerHTML += a >= b;
+        document.getElementById('teste5').innerHTML += a >= d;
+        document.getElementById('teste6').innerHTML += a <= c;
+    </script>
+
+</body>
+</html>
+```
+
+### Variáveis
 
 ```javascript
-// Definindo as variáveis
-
-var a;
+var a = 1;
 var b = 1;
-var c = [1, 2, 3, 4, 5];
-var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
-var e = 'JavaScript';
-var f = false;
-var g = null;
+var c = '1';
+var d = 2;
 ```
 
-Agora vou destrinchar cada uma.
+Temos:
+
+| Variável | Valor | Tipo   |
+| -------- | ----: | ------ |
+| `a`      |   `1` | Number |
+| `b`      |   `1` | Number |
+| `c`      | `'1'` | String |
+| `d`      |   `2` | Number |
+
+Observe que:
+
+```javascript
+1
+```
+
+é um número, enquanto:
+
+```javascript
+'1'
+```
+
+é um texto.
+
+Apesar de visualmente serem parecidos, são tipos diferentes.
 
 ---
 
-**`a` — variável sem valor atribuído**
+## 1.3 Igualdade `==`
 
 ```javascript
-var a;
+a == b
 ```
 
-A variável foi declarada, mas nenhum valor foi atribuído.
+O operador `==` compara os valores.
 
-Nesse caso, seu valor é:
+No exemplo:
 
 ```javascript
-undefined
+a = 1;
+b = 1;
 ```
 
-Portanto, é importante diferenciar:
+Então:
 
+```javascript
+1 == 1
 ```
-undefined → não foi atribuído um valor
-null      → representa intencionalmente ausência de valor
+
+Resultado:
+
+```text
+true
 ```
+
+### `==` — igualdade simples
+
+O operador `==` verifica se os valores são iguais, podendo realizar conversão de tipo.
+
+Exemplo:
+
+```javascript
+1 == '1'
+```
+
+Resultado:
+
+```text
+true
+```
+
+Isso acontece porque o JavaScript pode converter os tipos durante essa comparação.
 
 ---
 
-**`b` — número**
+## 1.4 Igualdade estrita `===`
 
 ```javascript
-var b = 1;
+a === c
 ```
 
-O valor `1` é um número.
-
-No JavaScript, o tipo `Number` é utilizado para números inteiros e decimais.
-
-- **Exemplos:**
+Aqui:
 
 ```javascript
-10
-3.14
--5
-0
+a = 1;
+c = '1';
 ```
 
----
+O valor é parecido, mas os tipos são diferentes:
 
-**`c` — array**
-
-```javascript
-var c = [1, 2, 3, 4, 5];
+```text
+a → Number
+c → String
 ```
-
-Um **array** permite armazenar vários valores em uma única variável.
-
-Posso imaginar como uma sequência de posições:
-
-```
-Índice:   0   1   2   3   4
-          ↓   ↓   ↓   ↓   ↓
-Valor:   [1,  2,  3,  4,  5]
-```
-
-**A contagem começa em **0**, não em 1.**
 
 Portanto:
 
 ```javascript
-c[0] → 1
-c[1] → 2
-c[2] → 3
-c[3] → 4
-c[4] → 5
+1 === '1'
+```
+
+Resultado:
+
+```text
+false
+```
+
+O operador `===` verifica:
+
+1. se o valor é igual;
+2. se o tipo é igual.
+
+Por isso ele é chamado de **igualdade estrita**.
+
+### Regra prática
+
+```text
+==   → compara valor
+===  → compara valor + tipo
 ```
 
 ---
 
-**`c[2]`**
-
-No código:
+## 1.5 Maior ou igual `>=`
 
 ```javascript
-document.getElementById("teste3").innerHTML += c[2];
+a >= b
 ```
 
-Estou acessando:
+Significa:
+
+> `a` é maior ou igual a `b`?
+
+Como:
+
+```text
+a = 1
+b = 1
+```
+
+Temos:
+
+```text
+1 >= 1
+```
+
+Resultado:
+
+```text
+true
+```
+
+---
+
+## 1.6 Menor ou igual `<=`
 
 ```javascript
-c[2]
+a <= c
 ```
 
-Como os índices começam em zero:
+Significa:
 
-```
-c[0] = 1
-c[1] = 2
-c[2] = 3
+> `a` é menor ou igual a `c`?
+
+Nesse caso:
+
+```text
+a = 1
+c = '1'
 ```
 
-Portanto:
+Em uma comparação relacional, o JavaScript realiza a conversão necessária para comparar os valores.
+
+Resultado:
+
+```text
+true
+```
+
+---
+
+## 1.7 Principais operadores comparativos
+
+| Operador | Significado                |
+| -------- | -------------------------- |
+| `==`     | igual em valor             |
+| `===`    | igual em valor e tipo      |
+| `!=`     | diferente em valor         |
+| `!==`    | diferente em valor ou tipo |
+| `>`      | maior que                  |
+| `<`      | menor que                  |
+| `>=`     | maior ou igual             |
+| `<=`     | menor ou igual             |
+
+---
+
+# 2. Operadores Aritméticos
+
+Os **operadores aritméticos** são utilizados para realizar cálculos.
+
+Foi criado o arquivo:
+
+```text
+aritméticos.html
+```
+
+Estrutura inicial:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operadores aritméticos</title>
+</head>
+<body>
+
+    <h1>Operadores aritméticos</h1>
+
+    <script>
+
+    </script>
+
+</body>
+</html>
+```
+
+---
+
+# 2.1 Número + número
 
 ```javascript
-c[2]
+var resposta = 1 + 2;
+
+document.write(resposta + '<br>');
 ```
 
-retorna:
+Como os dois valores são números:
 
+```text
+1 + 2 = 3
 ```
+
+Resultado:
+
+```text
 3
 ```
 
----
+O:
 
-**`d` — array de strings**
-
-```javascript
-var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+```html
+<br>
 ```
 
-Também é um array, mas agora seus elementos são strings.
-
-```
-Índice:    0         1          2        3
-           ↓         ↓          ↓        ↓
-         Verde    Amarelo      Azul    Branco
-```
-
-- **Por exemplo:**
-
-```javascript
-d[0]
-```
-
-retorna:
-
-```
-Verde
-```
+é uma quebra de linha no HTML.
 
 ---
 
-**`e` — String**
+# 2.2 Booleano + número
 
-```javascript
-var e = 'JavaScript';
+Em operações numéricas, o JavaScript pode converter valores Booleanos:
+
+```text
+true  → 1
+false → 0
 ```
 
-É uma **String**, ou seja, uma sequência de caracteres usada para representar texto.
-
-Também poderia ser:
+Por exemplo:
 
 ```javascript
-var e = "JavaScript";
+resposta = true + 1;
+```
+
+O JavaScript interpreta:
+
+```text
+true → 1
+```
+
+Então:
+
+```text
+1 + 1 = 2
+```
+
+Resultado:
+
+```text
+2
 ```
 
 ---
 
-**`f` — Boolean**
+# 2.3 Booleano + Booleano
+
+### `false + false`
 
 ```javascript
-var f = false;
+var resposta1 = false + false;
 ```
 
-É um valor booleano.
+Convertendo:
 
-Os valores booleanos são:
+```text
+0 + 0 = 0
+```
+
+Resultado:
+
+```text
+0
+```
+
+### `false + true`
 
 ```javascript
+var resposta2 = false + true;
+```
+
+Convertendo:
+
+```text
+0 + 1 = 1
+```
+
+Resultado:
+
+```text
+1
+```
+
+### `true + true`
+
+```javascript
+var resposta3 = true + true;
+```
+
+Convertendo:
+
+```text
+1 + 1 = 2
+```
+
+Resultado:
+
+```text
+2
+```
+
+---
+
+# 2.4 Número + String
+
+Quando uma operação com `+` envolve uma **String**, o comportamento muda.
+
+```javascript
+resposta = 5 + 'Senac';
+```
+
+Nesse caso não ocorre uma soma numérica.
+
+O JavaScript realiza uma **concatenação**:
+
+```text
+5 + 'Senac'
+```
+
+vira:
+
+```text
+'5Senac'
+```
+
+### Concatenação
+
+**Concatenação** significa juntar valores.
+
+Exemplo:
+
+```javascript
+'Olá ' + 'mundo'
+```
+
+Resultado:
+
+```text
+Olá mundo
+```
+
+---
+
+# 2.5 String + String
+
+```javascript
+resposta = 'Senac' + 'JavaScript';
+```
+
+As duas partes são Strings, então são concatenadas:
+
+```text
+SenacJavaScript
+```
+
+Se houver um espaço:
+
+```javascript
+resposta = 'Senac ' + 'JavaScript';
+```
+
+Resultado:
+
+```text
+Senac JavaScript
+```
+
+---
+
+# 2.6 String + Booleano
+
+```javascript
+resposta = 'Senac ' + false;
+```
+
+Como existe uma String na operação, o resultado é uma concatenação.
+
+O Booleano:
+
+```text
+false
+```
+
+é convertido para sua representação textual.
+
+Resultado:
+
+```text
+Senac false
+```
+
+---
+
+## 2.7 Código completo dos operadores aritméticos
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operadores aritméticos</title>
+</head>
+<body>
+
+    <h1>Operadores aritméticos</h1>
+
+    <script>
+        // Número + número = adição
+        var resposta = 1 + 2;
+        document.write(resposta + '<br>');
+
+        // Booleano + número = adição
+        resposta = true + 1;
+        document.write(resposta + '<br>');
+
+        // Booleano + Booleano = adição
+        var resposta1 = false + false;
+        var resposta2 = false + true;
+        var resposta3 = true + true;
+
+        document.write(resposta1 + '<br>');
+        document.write(resposta2 + '<br>');
+        document.write(resposta3 + '<br>');
+
+        // Número + String = concatenação
+        resposta = 5 + 'Senac';
+        document.write(resposta + '<br>');
+
+        // String + String = concatenação
+        resposta = 'Senac' + 'JavaScript';
+        document.write(resposta + '<br>');
+
+        // String + Booleano = concatenação
+        resposta = 'Senac ' + false;
+        document.write(resposta + '<br>');
+    </script>
+
+</body>
+</html>
+```
+
+> **Observação:** `+` pode representar **adição** ou **concatenação**, dependendo dos tipos envolvidos.
+
+---
+
+# 3. Operadores Lógicos
+
+Os operadores lógicos trabalham principalmente com valores Booleanos:
+
+```text
 true
 false
 ```
 
-Eles são muito utilizados em decisões e condições.
+Os três principais operadores estudados são:
 
-- **Por exemplo:**
-
-```javascript
-var maiorDeIdade = true;
-```
-
----
-
-**`g` — `null`**
-
-```javascript
-var g = null;
-```
-
-`null` representa uma ausência intencional de valor.
-
-É diferente de:
-
-```javascript
-var a;
-```
-
-que resulta em `undefined`.
-
-Uma forma simples de lembrar:
-
-```
-undefined → ainda não existe um valor atribuído
-null      → eu defini que não há valor
-```
+| Operador | Nome | Significado |    |    |
+| -------- | ---- | ----------- | -- | -- |
+| `&&`     | AND  | E           |    |    |
+| `        |      | `           | OR | OU |
+| `!`      | NOT  | NÃO         |    |    |
 
 ---
 
-# Exibindo as variáveis no HTML
-
-Agora utilizo:
-
-```javascript
-document.getElementById("teste1").innerHTML += a;
-```
+# 3.1 Operador `&&` — E
 
 O operador:
 
 ```javascript
-+=
+&&
 ```
 
-significa:
+significa **E**.
 
-> "Pegue o conteúdo atual e acrescente o novo valor."
+A ideia é:
 
-- **Por exemplo:**
+> Todas as condições precisam ser verdadeiras.
 
-```html
-<p id="teste1">O valor de a é: </p>
-```
-
-e:
+Exemplo:
 
 ```javascript
-document.getElementById("teste1").innerHTML += a;
+true && true
 ```
 
-mantém:
+Resultado:
 
-```
-O valor de a é:
-```
-
-e acrescenta o valor de `a`.
-
----
-
-**Código completo**
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tipo de dados</title>
-</head>
-
-<body>
-
-    <h1>Tipo de dados</h1>
-
-    <p id="teste1">O valor de a é: </p>
-    <p id="teste2">O valor de b é: </p>
-    <p id="teste3">O valor de c é: </p>
-    <p id="teste4">O valor de d é: </p>
-    <p id="teste5">O valor de e é: </p>
-    <p id="teste6">O valor de f é: </p>
-    <p id="teste7">O valor de g é: </p>
-
-    <script>
-
-        // Definindo as variáveis
-        var a;
-        var b = 1;
-        var c = [1, 2, 3, 4, 5];
-        var d = ['Verde', 'Amarelo', 'Azul', 'Branco'];
-        var e = 'JavaScript';
-        var f = false;
-        var g = null;
-
-        // Exibindo o conteúdo de cada variável
-        document.getElementById("teste1").innerHTML += a;
-        document.getElementById("teste2").innerHTML += b;
-        document.getElementById("teste3").innerHTML += c[2];
-        document.getElementById("teste4").innerHTML += d;
-        document.getElementById("teste5").innerHTML += e;
-        document.getElementById("teste6").innerHTML += f;
-        document.getElementById("teste7").innerHTML += g;
-
-    </script>
-
-</body>
-
-</html>
+```text
+true
 ```
 
----
-
-# Variável do tipo objeto
-
-Agora crio:
-
-```
-objeto.html
-```
-
-HTML inicial:
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Variável do tipo objeto</title>
-</head>
-
-<body>
-
-    <h1>Variável do tipo objeto</h1>
-    <p id="dados">Dados do carro: </p>
-
-    <script>
-
-    </script>
-
-</body>
-
-</html>
-```
-
----
-
-**O que é um objeto?**
-
-Um objeto permite agrupar informações relacionadas.
-
-Por exemplo, posso representar um carro:
-
-```
-Carro
-├── fábrica → Volkswagen
-├── modelo  → Jetta
-├── cor     → Azul
-└── ano     → 2026
-```
-
-Cada informação é uma **propriedade** do objeto.
-
-É parecido com uma ficha:
-
-```
-┌──────────────────────┐
-│ CARRO                │
-├──────────────────────┤
-│ Fábrica: Volkswagen │
-│ Modelo: Jetta        │
-│ Cor: Azul            │
-│ Ano: 2026            │
-└──────────────────────┘
-```
-
----
-
-# Criando o objeto
-
-O código apresentado utiliza:
+Mas:
 
 ```javascript
-var meuCarro = new Object();
+false && true
 ```
 
-Isso cria um novo objeto vazio.
+Resultado:
 
-Depois adiciono propriedades:
+```text
+false
+```
+
+Uma única condição falsa já faz o resultado lógico ser falso.
+
+### Tabela verdade do `&&`
+
+| A       | B       | A && B  |
+| ------- | ------- | ------- |
+| `true`  | `true`  | `true`  |
+| `true`  | `false` | `false` |
+| `false` | `true`  | `false` |
+| `false` | `false` | `false` |
+
+---
+
+## 3.2 Exemplos com `&&`
 
 ```javascript
-meuCarro.fabrica = 'Volkswagen';
-meuCarro.modelo = 'Jetta';
-meuCarro.cor = 'Azul';
-meuCarro.ano = 2026;
+var resposta = true && true;
 ```
 
-Agora o objeto possui:
+Resultado:
 
-```
-meuCarro
-├── fabrica
-├── modelo
-├── cor
-└── ano
+```text
+true
 ```
 
 ---
 
-# Acessando propriedades
-
-Posso acessar uma propriedade utilizando:
-
 ```javascript
-meuCarro.modelo
+resposta = false && false;
 ```
 
-Isso significa:
+Resultado:
 
-> "Pegue a propriedade `modelo` do objeto `meuCarro`."
+```text
+false
+```
+
+---
+
+```javascript
+resposta = false && true;
+```
+
+Resultado:
+
+```text
+false
+```
+
+---
+
+Também podemos colocar uma comparação:
+
+```javascript
+resposta = false && (3 == 4);
+```
+
+Primeiro:
+
+```javascript
+3 == 4
+```
+
+é:
+
+```text
+false
+```
 
 Então:
 
-```javascript
-meuCarro.modelo
+```text
+false && false
 ```
 
-retorna:
+Resultado:
 
-```
-Jetta
-```
-
-Da mesma maneira:
-
-```javascript
-meuCarro.cor
-```
-
-retorna:
-
-```
-Azul
+```text
+false
 ```
 
 ---
 
-**Exibindo o objeto na página**
+# 3.3 `&&` com Strings
+
+O operador lógico `&&` também pode trabalhar com outros valores, não apenas `true` e `false`.
+
+Por exemplo:
 
 ```javascript
-document.getElementById('dados').innerHTML +=
-    meuCarro.fabrica + '-' +
-    meuCarro.modelo + '-' +
-    meuCarro.cor + '-' +
-    meuCarro.ano;
+resposta = 'Senac' && 'JavaScript';
 ```
 
-Estou:
+Como os dois valores são considerados verdadeiros, o resultado da expressão é o último valor:
 
-1. encontrando o elemento `dados`;
-2. pegando a propriedade `fabrica`;
-3. pegando `modelo`;
-4. pegando `cor`;
-5. pegando `ano`;
-6. juntando os valores;
-7. colocando o resultado no HTML.
-
-Resultado aproximado:
-
-```
-Dados do carro: Volkswagen-Jetta-Azul-2026
+```text
+JavaScript
 ```
 
-> O nome correto da fabricante é **Volkswagen**.
+Outro exemplo:
+
+```javascript
+resposta = false && 'Senac';
+```
+
+Como o primeiro valor já é falso:
+
+```text
+false
+```
+
+o resultado é:
+
+```text
+false
+```
+
+Isso acontece porque o `&&` procura um valor falso; se encontrar, ele pode parar ali.
 
 ---
 
-## Operadores incrementais
+## 3.4 String vazia
 
-Agora crio outro arquivo para testar:
+Uma String vazia:
 
+```javascript
+''
 ```
-operadoresincrementais.html
+
+não possui conteúdo.
+
+Ela é considerada um valor **falsy** em JavaScript.
+
+Exemplo:
+
+```javascript
+resposta = '' && false;
+```
+
+Resultado:
+
+```text
+''
+```
+
+E:
+
+```javascript
+resposta = false && '';
+```
+
+Resultado:
+
+```text
+false
+```
+
+### Valores truthy e falsy
+
+JavaScript possui valores que são tratados como verdadeiros ou falsos em contextos lógicos.
+
+Exemplos:
+
+```text
+true       → truthy
+'Senac'    → truthy
+1          → truthy
+
+false      → falsy
+''         → falsy
+0          → falsy
+null       → falsy
+undefined  → falsy
+NaN        → falsy
+```
+
+---
+
+# 4. Operador `||` — OU
+
+O operador:
+
+```javascript
+||
+```
+
+significa **OU**.
+
+A lógica é:
+
+> Pelo menos uma das condições precisa ser verdadeira.
+
+### Tabela verdade do `||`
+
+| A       | B       | A || B  |
+| ------- | ------- | ------- |
+| `true`  | `true`  | `true`  |
+| `true`  | `false` | `true`  |
+| `false` | `true`  | `true`  |
+| `false` | `false` | `false` |
+
+Portanto, diferente do `&&`, basta uma condição verdadeira.
+
+---
+
+## 4.1 Exemplos
+
+```javascript
+var resposta = true || true;
+```
+
+Resultado:
+
+```text
+true
+```
+
+---
+
+```javascript
+resposta = false || true;
+```
+
+Resultado:
+
+```text
+true
+```
+
+---
+
+```javascript
+resposta = true || false;
+```
+
+Resultado:
+
+```text
+true
+```
+
+---
+
+```javascript
+resposta = false || (3 == 4);
+```
+
+A comparação:
+
+```javascript
+3 == 4
+```
+
+é falsa.
+
+Então:
+
+```text
+false || false
+```
+
+Resultado:
+
+```text
+false
+```
+
+---
+
+## 4.2 `||` com Strings
+
+```javascript
+resposta = 'Senac' || 'JavaScript';
+```
+
+Como `'Senac'` é um valor truthy, o operador `||` retorna esse primeiro valor:
+
+```text
+Senac
+```
+
+Uma forma simples de pensar:
+
+```text
+&& → procura um valor falso
+|| → procura um valor verdadeiro
+```
+
+---
+
+# 5. Operador `!` — NOT
+
+O operador:
+
+```javascript
+!
+```
+
+significa **NÃO** ou **negação**.
+
+Ele inverte o valor lógico.
+
+```javascript
+!true
+```
+
+vira:
+
+```text
+false
+```
+
+E:
+
+```javascript
+!false
+```
+
+vira:
+
+```text
+true
+```
+
+### Tabela verdade
+
+| Valor   | `!valor` |
+| ------- | -------- |
+| `true`  | `false`  |
+| `false` | `true`   |
+
+---
+
+## 5.1 Exemplos
+
+```javascript
+var resposta = !true;
+```
+
+Resultado:
+
+```text
+false
+```
+
+---
+
+```javascript
+resposta = !false;
+```
+
+Resultado:
+
+```text
+true
+```
+
+---
+
+Com uma String:
+
+```javascript
+resposta = !'Senac';
+```
+
+Como `'Senac'` é truthy:
+
+```text
+!'Senac'
+```
+
+resulta em:
+
+```text
+false
+```
+
+---
+
+# 6. Estruturas Condicionais
+
+As estruturas condicionais permitem que o programa **tome decisões**.
+
+A ideia básica é:
+
+> Se uma condição for verdadeira, faça determinada coisa.
+
+Por exemplo:
+
+```text
+Se a média for maior ou igual a 7:
+    aluno aprovado
+```
+
+Isso é implementado com:
+
+```javascript
+if
+```
+
+---
+
+# 7. Condicional Simples — `if`
+
+Foi criado o arquivo:
+
+```text
+condicional-simples.html
 ```
 
 Estrutura:
@@ -1043,516 +1105,939 @@ Estrutura:
 ```html
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operadores incrementais</title>
+    <title>Estrutura condicional simples</title>
 </head>
-
 <body>
 
-    <h1>Operadores incrementais</h1>
+    <h1>Estrutura condicional simples</h1>
 
-    <p id="teste1">O valor de a é: </p>
-    <p id="teste2">O valor de b é: </p>
-    <p id="teste3">O valor de c é: </p>
-    <p id="teste4">O valor de d é: </p>
+    <p id="teste"></p>
 
     <script>
 
     </script>
 
 </body>
-
 </html>
 ```
 
 ---
 
-**`++` e `--`**
-
-Os operadores incrementais são:
-
-```javascript
-++
---
-```
-
-**Incremento**
-
-```javascript
-++
-```
-
-adiciona `1`.
-
-- **Exemplo:**
-
-```javascript
-var a = 5;
-a++;
-```
-
-Agora:
-
-```text
-a = 6
-```
-
-**Decremento**
-
-```javascript
---
-```
-
-subtrai `1`.
-
-- **Exemplo:**
-
-```javascript
-var a = 5;
-a--;
-```
-
-Agora:
-
-```
-a = 4
-```
-
----
-
-**Pré-fixado e pós-fixado**
-
-Existe uma diferença importante entre:
-
-```javascript
-++a
-```
-
-e:
-
-```javascript
-a++
-```
-
-**Pré-incremento**
-
-```javascript
-++a
-```
-
-Primeiro incrementa e depois utiliza o valor.
-
-**Pós-incremento**
-
-```javascript
-a++
-```
-
-Primeiro utiliza o valor atual e depois incrementa.
-
-- **Exemplo:**
-
-```javascript
-var a = 5;
-
-console.log(++a);
-```
-
-Resultado:
-
-```
-6
-```
-
-Porque primeiro aumentou:
-
-```
-5 → 6
-```
-
-Agora:
-
-```javascript
-var a = 5;
-
-console.log(a++);
-```
-
-O valor utilizado na expressão é:
-
-```
-5
-```
-
-e depois `a` passa a valer:
-
-```
-6
-```
-
----
-
-# Analisando o exercício dos incrementos
-
-Código:
-
-```javascript
-var a = 1;
-var b = 1;
-var c = 1;
-var d = 5;
-
-a = ++a;
-b = b++;
-d = --d;
-
-for (var cont = 1; cont <= 3; cont++) {
-    c = c + cont;
-}
-```
-
-Vamos separar.
-
----
-
-**`a = ++a`**
-
-Inicialmente:
-
-```
-a = 1
-```
-
-O `++a` incrementa primeiro:
-
-```
-1 → 2
-```
-
-Então:
-
-```
-a = 2
-```
-
----
-
-**`b = b++`**
-
-Aqui existe uma pegadinha importante.
-
-Inicialmente:
-
-```
-b = 1
-```
-
-O `b++` é pós-incremento.
-
-Na atribuição:
-
-```javascript
-b = b++;
-```
-
-o valor antigo é utilizado na atribuição e, apesar do incremento ocorrer durante a expressão, a atribuição acaba sobrescrevendo o resultado.
-
-Nesse caso, `b` permanece:
-
-```
-b = 1
-```
-
-Portanto, essa linha **não é uma forma útil de incrementar uma variável**.
-
-O correto para simplesmente incrementar seria:
-
-```javascript
-b++;
-```
-
----
-
-**`d = --d`**
-
-Inicialmente:
-
-```
-d = 5
-```
-
-O `--d` decrementa primeiro:
-
-```
-5 → 4
-```
-
-Então:
-
-```
-d = 4
-```
-
----
-
-**O `for`**
-
-Agora temos:
-
-```javascript
-for (var cont = 1; cont <= 3; cont++) {
-    c = c + cont;
-}
-```
-
-O `for` cria uma repetição.
-
-Ele possui três partes:
-
-```javascript
-for (
-    var cont = 1;
-    cont <= 3;
-    cont++
-)
-```
-
-**1. Inicialização**
-
-```javascript
-var cont = 1
-```
-
-Começo o contador em `1`.
-
-**2. Condição**
-
-```javascript
-cont <= 3
-```
-
-Enquanto essa condição for verdadeira, o bloco será executado.
-
-**3. Incremento(*
-
-```javascript
-cont++
-```
-
-Depois de cada repetição, aumento `cont` em `1`.
-
----
-
-**Calculando `c`**
-
-Inicialmente:
-
-```
-c = 1
-```
-
-**Primeira repetição**
-
-```
-cont = 1
-```
-
-Então:
-
-```
-c = c + cont
-c = 1 + 1
-c = 2
-```
-
-**Segunda repetição**
-
-```
-cont = 2
-```
-
-Então:
-
-```
-c = 2 + 2
-c = 4
-```
-
-**Terceira repetição**
-
-```
-cont = 3
-```
-
-Então:
-
-```
-c = 4 + 3
-c = 7
-```
-
-Depois:
-
-```
-cont = 4
-```
-
-A condição:
-
-```
-4 <= 3
-```
-
-é falsa.
-
-O `for` termina.
-
-Portanto:
-
-```
-c = 7
-```
-
----
-
-**Exibindo os resultados**
-
-Finalmente:
-
-```javascript
-document.getElementById('teste1').innerHTML += a;
-document.getElementById('teste2').innerHTML += b;
-document.getElementById('teste3').innerHTML += c;
-document.getElementById('teste4').innerHTML += d;
-```
-
-Cada linha encontra um `<p>` pelo `id` e acrescenta o valor correspondente.
-
-Os valores finais são:
-
-```
-a = 2
-b = 1
-c = 7
-d = 4
-```
-
----
-
-**Código completo do exercício**
+## 7.1 Código completo
 
 ```html
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operadores incrementais</title>
+    <title>Estrutura condicional simples</title>
 </head>
-
 <body>
 
-    <h1>Operadores incrementais</h1>
+    <h1>Estrutura condicional simples</h1>
 
-    <p id="teste1">O valor de a é: </p>
-    <p id="teste2">O valor de b é: </p>
-    <p id="teste3">O valor de c é: </p>
-    <p id="teste4">O valor de d é: </p>
+    <p id="teste"></p>
 
     <script>
+        // Criando a variável
+        var media = 7;
 
-        // Criação das variáveis
-        var a = 1;
-        var b = 1;
-        var c = 1;
-        var d = 5;
-
-        // O pré-incremento aumenta o valor antes de utilizá-lo.
-        // O pós-incremento aumenta o valor depois de utilizá-lo.
-
-        a = ++a;
-        b = b++;
-        d = --d;
-
-        for (var cont = 1; cont <= 3; cont++) {
-            c = c + cont;
+        // Criando a condicional simples
+        if (media >= 7) {
+            resposta = 'Aprovado(a)';
         }
 
-        document.getElementById('teste1').innerHTML += a;
-        document.getElementById('teste2').innerHTML += b;
-        document.getElementById('teste3').innerHTML += c;
-        document.getElementById('teste4').innerHTML += d;
-
+        // Mostrar o resultado
+        document.getElementById('teste').innerHTML = resposta;
     </script>
 
 </body>
+</html>
+```
 
+### Entendendo o `if`
+
+```javascript
+if (media >= 7) {
+```
+
+Pode ser lido como:
+
+> **Se** a média for maior ou igual a 7...
+
+Depois temos:
+
+```javascript
+{
+    resposta = 'Aprovado(a)';
+}
+```
+
+que significa:
+
+> ...execute este bloco de código.
+
+No exemplo:
+
+```text
+media = 7
+```
+
+A condição:
+
+```javascript
+media >= 7
+```
+
+é verdadeira.
+
+Então:
+
+```javascript
+resposta = 'Aprovado(a)';
+```
+
+é executado.
+
+---
+
+## 7.2 Estrutura básica
+
+```javascript
+if (condição) {
+    // código executado se a condição for verdadeira
+}
+```
+
+O `if` significa **se**.
+
+A condição precisa resultar em algo que possa ser avaliado como verdadeiro ou falso.
+
+---
+
+# 8. Condicional Composta — `if...else`
+
+A condicional composta possui dois caminhos:
+
+```text
+SE for verdadeiro → faça uma coisa
+SENÃO → faça outra
+```
+
+Foi criado o arquivo:
+
+```text
+condicional-composta.html
+```
+
+---
+
+## 8.1 Aprovado ou reprovado
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estrutura condicional composta</title>
+</head>
+<body>
+
+    <h1>Estrutura condicional composta</h1>
+
+    <p id="teste"></p>
+
+    <script>
+        // Criando a variável
+        var media = 6;
+
+        // Criando a condicional composta
+        if (media >= 7) {
+            resposta = 'Aprovado(a)';
+        } else {
+            resposta = 'Reprovado(a)';
+        }
+
+        // Mostrar o resultado
+        document.getElementById('teste').innerHTML = resposta;
+    </script>
+
+</body>
+</html>
+```
+
+Como:
+
+```text
+media = 6
+```
+
+a condição:
+
+```javascript
+media >= 7
+```
+
+é falsa.
+
+Portanto, o `else` é executado:
+
+```javascript
+resposta = 'Reprovado(a)';
+```
+
+Resultado:
+
+```text
+Reprovado(a)
+```
+
+---
+
+# 9. `if...else if...else`
+
+Podemos ter mais de duas possibilidades.
+
+Exemplo:
+
+```text
+7 ou mais → Aprovado
+6 até menos de 7 → Recuperação
+menos de 6 → Reprovado
+```
+
+Para isso usamos:
+
+```javascript
+else if
+```
+
+---
+
+## 9.1 Código
+
+```html
+<script>
+    // Criando a variável
+    var media = 6;
+
+    // Criando a condicional composta
+    if (media >= 7) {
+        resposta = 'Aprovado(a)';
+    } else if (media >= 6) {
+        resposta = 'Recuperação';
+    } else {
+        resposta = 'Reprovado(a)';
+    }
+
+    // Mostrar o resultado
+    document.getElementById('teste').innerHTML = resposta;
+</script>
+```
+
+### Como o JavaScript verifica?
+
+Ele testa as condições de cima para baixo.
+
+Com:
+
+```text
+media = 6
+```
+
+Primeiro:
+
+```javascript
+media >= 7
+```
+
+Resultado:
+
+```text
+false
+```
+
+Então passa para:
+
+```javascript
+media >= 6
+```
+
+Resultado:
+
+```text
+true
+```
+
+Portanto:
+
+```text
+Recuperação
+```
+
+é atribuído à variável `resposta`.
+
+---
+
+# 10. Condicional Ternário
+
+O **operador ternário** permite escrever uma condição simples de forma mais curta.
+
+Foi criado o arquivo:
+
+```text
+condicional-ternario.html
+```
+
+A estrutura básica é:
+
+```javascript
+condição ? valorSeVerdadeiro : valorSeFalso;
+```
+
+Podemos interpretar como:
+
+```text
+Se condição for verdadeira → primeiro valor
+Senão → segundo valor
+```
+
+---
+
+## 10.1 Exemplo
+
+```javascript
+var media = 7;
+var resultado = '';
+
+resultado = (media >= 7) ? 'Aprovado(a)' : 'Reprovado(a)';
+```
+
+A condição é:
+
+```javascript
+media >= 7
+```
+
+Se for verdadeira:
+
+```text
+Aprovado(a)
+```
+
+Se for falsa:
+
+```text
+Reprovado(a)
+```
+
+---
+
+## 10.2 Código completo
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estrutura condicional ternário</title>
+</head>
+<body>
+
+    <h1>Estrutura condicional ternário</h1>
+
+    <p id="teste"></p>
+
+    <script>
+        // Criando as variáveis
+        var media = 7;
+        var resultado = '';
+
+        // Condicional ternário
+        resultado = (media >= 7)
+            ? 'Aprovado(a)'
+            : 'Reprovado(a)';
+
+        // Mostrar o resultado
+        document.getElementById('teste').innerHTML = resultado;
+    </script>
+
+</body>
+</html>
+```
+
+### Desmontando a expressão
+
+```javascript
+resultado = (media >= 7) ? 'Aprovado(a)' : 'Reprovado(a)';
+```
+
+Temos:
+
+```text
+(media >= 7)
+```
+
+→ condição
+
+```text
+?
+```
+
+→ separa a condição dos resultados
+
+```text
+'Aprovado(a)'
+```
+
+→ resultado se for verdadeiro
+
+```text
+:
+```
+
+→ separa verdadeiro e falso
+
+```text
+'Reprovado(a)'
+```
+
+→ resultado se for falso
+
+---
+
+# 11. Ternário com três possibilidades
+
+Também é possível colocar outro ternário dentro do primeiro.
+
+Exemplo:
+
+```javascript
+var media = 6;
+var resultado = '';
+
+resultado = (media >= 7)
+    ? 'Aprovado(a)'
+    : (media >= 6)
+        ? 'Recuperação'
+        : 'Reprovado(a)';
+```
+
+A lógica é:
+
+```text
+media >= 7?
+    SIM → Aprovado(a)
+    NÃO → media >= 6?
+              SIM → Recuperação
+              NÃO → Reprovado(a)
+```
+
+Com:
+
+```text
+media = 6
+```
+
+o resultado será:
+
+```text
+Recuperação
+```
+
+### Observação
+
+O ternário aninhado funciona, mas quando existem muitas condições, o `if...else if...else` normalmente fica mais fácil de ler.
+
+---
+
+# 12. Condicional de Escolha — `switch`
+
+Quando temos várias opções baseadas no valor de uma variável, podemos utilizar:
+
+```javascript
+switch
+```
+
+Ele funciona como uma estrutura de **escolha**.
+
+Foi criado o arquivo:
+
+```text
+condicional-escolha.html
+```
+
+---
+
+# 12.1 Exemplo com dias da semana
+
+O programa solicita um número de `1` a `7` e transforma esse número no respectivo dia da semana.
+
+```javascript
+var dia = 0;
+var resposta = '';
+
+dia = parseInt(prompt('Digite um número entre 1 a 7', ''));
+```
+
+---
+
+## 12.2 `prompt()`
+
+```javascript
+prompt('Digite um número entre 1 a 7', '');
+```
+
+Abre uma caixa de diálogo no navegador solicitando uma informação ao usuário.
+
+Por padrão, o valor recebido pelo `prompt()` é uma **String**.
+
+Por isso foi utilizado:
+
+```javascript
+parseInt()
+```
+
+para converter o valor recebido para um número inteiro.
+
+Exemplo:
+
+```javascript
+parseInt('5')
+```
+
+resulta em:
+
+```text
+5
+```
+
+---
+
+# 12.3 Estrutura `switch`
+
+```javascript
+switch (dia) {
+    case 1:
+        resposta = 'Domingo';
+        break;
+
+    case 2:
+        resposta = 'Segunda-Feira';
+        break;
+
+    case 3:
+        resposta = 'Terça-Feira';
+        break;
+
+    case 4:
+        resposta = 'Quarta-Feira';
+        break;
+
+    case 5:
+        resposta = 'Quinta-Feira';
+        break;
+
+    case 6:
+        resposta = 'Sexta-Feira';
+        break;
+
+    case 7:
+        resposta = 'Sábado';
+        break;
+
+    default:
+        resposta = 'Dia da semana não existe.';
+}
+```
+
+### Como funciona?
+
+Se:
+
+```text
+dia = 1
+```
+
+o JavaScript procura:
+
+```javascript
+case 1:
+```
+
+e executa:
+
+```javascript
+resposta = 'Domingo';
+```
+
+Se:
+
+```text
+dia = 5
+```
+
+ele encontra:
+
+```javascript
+case 5:
+```
+
+e executa:
+
+```javascript
+resposta = 'Quinta-Feira';
+```
+
+---
+
+# 12.4 O `break`
+
+O:
+
+```javascript
+break;
+```
+
+serve para interromper o `switch` depois que o caso correspondente foi executado.
+
+Sem o `break`, o JavaScript pode continuar executando os próximos `case`.
+
+Portanto, normalmente usamos:
+
+```javascript
+case 1:
+    resposta = 'Domingo';
+    break;
+```
+
+---
+
+# 12.5 O `default`
+
+O:
+
+```javascript
+default:
+```
+
+é executado quando nenhum `case` corresponde ao valor informado.
+
+Por exemplo, se o usuário digitar:
+
+```text
+8
+```
+
+não existe:
+
+```javascript
+case 8
+```
+
+Então o `default` será executado.
+
+No exercício original havia uma mensagem com uma ofensa ao usuário. Para uma aplicação real, é melhor utilizar uma mensagem neutra:
+
+```javascript
+default:
+    resposta = 'Dia da semana não existe.';
+```
+
+---
+
+# 12.6 Código completo
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estrutura condicional escolha</title>
+</head>
+<body>
+
+    <h1>Estrutura condicional escolha</h1>
+
+    <p id="teste"></p>
+
+    <script>
+        // Criando as variáveis
+        var dia = 0;
+        var resposta = '';
+
+        // Solicitando um número para o usuário
+        dia = parseInt(prompt('Digite um número entre 1 a 7', ''));
+
+        /*
+            Vai abrir uma caixa de diálogo no navegador
+            pedindo para o usuário digitar um número
+            entre 1 e 7.
+        */
+
+        // Criando a condicional escolha
+        switch (dia) {
+            case 1:
+                resposta = 'Domingo';
+                break;
+
+            case 2:
+                resposta = 'Segunda-Feira';
+                break;
+
+            case 3:
+                resposta = 'Terça-Feira';
+                break;
+
+            case 4:
+                resposta = 'Quarta-Feira';
+                break;
+
+            case 5:
+                resposta = 'Quinta-Feira';
+                break;
+
+            case 6:
+                resposta = 'Sexta-Feira';
+                break;
+
+            case 7:
+                resposta = 'Sábado';
+                break;
+
+            default:
+                resposta = 'Dia da semana não existe.';
+        }
+
+        // Mostrar o resultado
+        document.getElementById('teste').innerHTML = resposta;
+    </script>
+
+</body>
 </html>
 ```
 
 ---
 
-**O que eu aprendi nesta parte**
+# 13. Comparando as estruturas condicionais
 
-A parte mais importante desta aula não é decorar todas as tags HTML. É começar a entender **como JavaScript conversa com uma página HTML**.
+Cada estrutura possui uma finalidade mais adequada.
 
-O fluxo básico é:
+### `if`
 
+Usado quando precisamos verificar uma condição.
+
+```javascript
+if (media >= 7) {
+    resposta = 'Aprovado';
+}
 ```
-              HTML
-               │
-               ↓
-        Cria elementos
-               │
-               ↓
-       <p id="texto">
-               │
-               ↓
-          JavaScript
-               │
-               ↓
-document.getElementById("texto")
-               │
-               ↓
-          innerHTML
-               │
-               ↓
-     Modifica a página
-```
-
-E também comecei a trabalhar com:
-
-* `document.write()`;
-* `document.getElementById()`;
-* `innerHTML`;
-* `id`;
-* `<script>`;
-* arrays;
-* índices de arrays;
-* objetos e propriedades;
-* `null`;
-* `undefined`;
-* `true` e `false`;
-* `++` e `--`;
-* pré e pós-incremento;
-* `for`;
-* integração entre JavaScript e HTML.
 
 ---
 
-**Resumo Relâmpago**
+### `if...else`
 
-1. **HTML** é utilizado para estruturar o conteúdo da página.
-2. `<head>` contém informações/configurações e `<body>` contém o conteúdo da página.
-3. `<script>` permite colocar JavaScript dentro do HTML.
-4. `document.write()` escreve conteúdo diretamente no documento.
-5. `document.getElementById()` localiza um elemento HTML pelo seu `id`.
-6. `innerHTML` permite alterar o conteúdo interno de um elemento.
-7. Arrays armazenam vários valores e seus índices começam em **0**.
-8. Objetos agrupam informações através de **propriedades**, como `meuCarro.modelo`.
-9. `++` incrementa e `--` decrementa; a posição do operador determina se o valor é alterado antes ou depois da expressão.
-10. O `for` permite repetir um bloco de código enquanto uma condição for verdadeira.
+Usado quando existem dois caminhos.
+
+```javascript
+if (media >= 7) {
+    resposta = 'Aprovado';
+} else {
+    resposta = 'Reprovado';
+}
+```
+
+---
+
+### `if...else if...else`
+
+Usado quando existem várias condições diferentes.
+
+```javascript
+if (media >= 7) {
+    resposta = 'Aprovado';
+} else if (media >= 6) {
+    resposta = 'Recuperação';
+} else {
+    resposta = 'Reprovado';
+}
+```
+
+---
+
+### Ternário
+
+Usado principalmente para uma decisão curta.
+
+```javascript
+resultado = media >= 7 ? 'Aprovado' : 'Reprovado';
+```
+
+---
+
+### `switch`
+
+Usado quando precisamos escolher entre vários valores específicos.
+
+```javascript
+switch (dia) {
+    case 1:
+        resposta = 'Domingo';
+        break;
+
+    case 2:
+        resposta = 'Segunda-Feira';
+        break;
+}
+```
+
+---
+
+# 14. Fluxo mental para resolver exercícios
+
+Ao receber um problema de programação, posso pensar nesta sequência:
+
+```text
+1. Quais são os dados?
+        ↓
+2. Quais são os tipos desses dados?
+        ↓
+3. Preciso fazer algum cálculo?
+        ↓
+4. Preciso comparar valores?
+        ↓
+5. Preciso tomar uma decisão?
+        ↓
+6. Tenho duas possibilidades ou várias?
+        ↓
+7. Escolho a estrutura adequada:
+   if / else / else if / ternário / switch
+        ↓
+8. Exibo o resultado
+```
+
+Isso ajuda a transformar um problema escrito em linguagem natural em código.
+
+---
+
+# 15. Conceitos importantes desta aula
+
+## Comparação
+
+Compara valores e retorna um resultado lógico:
+
+```javascript
+a >= b
+```
+
+Resultado:
+
+```text
+true
+```
+
+ou:
+
+```text
+false
+```
+
+---
+
+## Adição
+
+Quando temos números:
+
+```javascript
+1 + 2
+```
+
+temos uma soma.
+
+---
+
+## Concatenação
+
+Quando o `+` envolve uma String:
+
+```javascript
+'Olá ' + 'mundo'
+```
+
+temos junção de textos.
+
+---
+
+## Lógica `&&`
+
+Representa **E**:
+
+```javascript
+condicao1 && condicao2
+```
+
+Normalmente, ambas precisam ser verdadeiras.
+
+---
+
+## Lógica `||`
+
+Representa **OU**:
+
+```javascript
+condicao1 || condicao2
+```
+
+Pelo menos uma precisa ser verdadeira.
+
+---
+
+## Negação `!`
+
+Inverte o valor lógico:
+
+```javascript
+!true
+```
+
+resulta em:
+
+```text
+false
+```
+
+---
+
+## Condicional
+
+Permite ao programa tomar decisões:
+
+```javascript
+if (condicao) {
+    // ação
+}
+```
+
+---
+
+# Resumo Relâmpago — 10 linhas
+
+1. **Operadores comparativos** comparam valores e produzem `true` ou `false`.
+2. `==` compara principalmente o valor, enquanto `===` compara **valor e tipo**.
+3. `>`, `<`, `>=` e `<=` fazem comparações numéricas.
+4. O `+` pode fazer **adição** ou **concatenação**, dependendo dos valores envolvidos.
+5. Em operações numéricas, `true` pode representar `1` e `false` pode representar `0`.
+6. `&&` significa **E** e exige que as condições sejam verdadeiras para o resultado lógico ser verdadeiro.
+7. `||` significa **OU** e precisa de pelo menos uma condição verdadeira.
+8. `!` significa **NÃO** e inverte um valor lógico.
+9. `if`, `else if` e `else` permitem criar decisões; o ternário é uma forma curta para decisões simples.
+10. `switch`, `case`, `break` e `default` permitem escolher uma ação com base em vários valores possíveis.
+
+Esse trecho fecha uma etapa importante: agora você já tem a base para fazer o JavaScript **comparar, calcular e tomar decisões**. O próximo passo naturalmente será aplicar essas estruturas em exercícios mais próximos de problemas reais.
