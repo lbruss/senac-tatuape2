@@ -12,7 +12,7 @@ Esses conceitos são fundamentais porque permitem que o programa:
 
 ---
 
-# 1. Operadores Comparativos
+## Operadores Comparativos
 
 Os **operadores comparativos** servem para comparar dois valores.
 
@@ -21,7 +21,7 @@ O resultado de uma comparação é sempre um **Booleano**:
 * `true` → verdadeiro;
 * `false` → falso.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 1 == 1
@@ -29,7 +29,7 @@ Por exemplo:
 
 Resultado:
 
-```text
+```
 true
 ```
 
@@ -41,17 +41,17 @@ Já:
 
 Resultado:
 
-```text
+```
 false
 ```
 
 ---
 
-## 1.1 Criando o arquivo `comparativos.html`
+**Criando o arquivo `comparativos.html`**
 
 No VS Code, foi criado o arquivo:
 
-```text
+```
 comparativos.html
 ```
 
@@ -88,7 +88,7 @@ Os elementos `<p>` possuem IDs diferentes para que o JavaScript possa colocar ca
 
 ---
 
-## 1.2 Código completo
+# Código completo - Operadores Comparativos 
 
 ```html
 <!DOCTYPE html>
@@ -129,7 +129,7 @@ Os elementos `<p>` possuem IDs diferentes para que o JavaScript possa colocar ca
 </html>
 ```
 
-### Variáveis
+**Variáveis**
 
 ```javascript
 var a = 1;
