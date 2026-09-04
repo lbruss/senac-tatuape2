@@ -236,10 +236,27 @@ status_emprestimo varchar(20),
 primary key(id_emprestimo)
 ) default charset = utf8;
 
-insert into emprestimo
+insert into emprestimos
 (id_emprestimo, id_leitor, id_livro, data_emprestimo, data_devolucao, status_emprestimo)
-values
-();
+VALUES
+(default, 1, 16, '2026-08-01', '2026-08-10', 'Devolvido'),
+(default, 2, 17, '2026-08-03', '2026-08-12', 'Devolvido'),
+(default, 3, 18, '2026-08-05', NULL, 'Emprestado'),
+(default, 4, 19, '2026-08-07', '2026-08-15', 'Devolvido'),
+(default, 5, 20, '2026-08-10', NULL, 'Emprestado'),
+(default, 6, 21, '2026-08-12', '2026-08-20', 'Devolvido'),
+(default, 7, 22, '2026-08-15', NULL, 'Emprestado'),
+(default, 8, 23, '2026-08-17', '2026-08-25', 'Devolvido'),
+(default, 1, 24, '2026-08-20', NULL, 'Emprestado'),
+(default, 2, 25, '2026-08-22', '2026-08-30', 'Devolvido'),
+(default, 3, 26, '2026-08-24', NULL, 'Emprestado'),
+(default, 4, 27, '2026-08-26', '2026-09-01', 'Devolvido'),
+(default, 5, 28, '2026-08-28', NULL, 'Emprestado'),
+(default, 6, 29, '2026-08-30', '2026-09-03', 'Devolvido'),
+(default, 7, 30, '2026-09-01', NULL, 'Emprestado');
+
+select * from emprestimos;
+desc emprestimos;
 
 select * from leitores;
 select * from autores;
@@ -247,3 +264,4 @@ select * from categoria;
 select * from editora;
 select * from livros;
 select * from emprestimo;
+
