@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Variável acumuladora</title>
+</head>
+<body>
+	<h1>Variável acumuladora</h1>
+	<p id="teste">O total de vendas foi: </p>
+
+	<script>
+		/*
+		Código exemplo de controle de quantidade de entradas.
+		O usuário informa quantas vendas foram feitas no dia.
+		Digita os valores de cada venda,
+		e o programa calcula o total das vendas
+		*/
+
+		//Criando as variáveis
+		var cont = 1; //Contador do loop
+		var total = 0; //Acumulador das vendas
+		var venda = 0; //Valor de cada venda
+		var fim = 0; //Quantidade de vendas
+
+		/*
+		cont -> contador que começa com 1.
+		total -> acumulador que começa com 0.
+		venda -> guarda temporariamente o valor de cada venda digitada.
+		fim -> vai armazenar quantas vendas o usuário fez.
+		*/
+
+		//Solicitar ao usuário a quantidade de vendas do dia
+		fim = parseInt(prompt('Digite a quantidade de vendas',''));
+		/*
+		prompt(...) -> Pergunta ao usuário quantas vendas foram feitas 
+		parseInt(...) -> Converte a resposta para número inteiro e guarda na variável fim
+		*/
+
+		//Criando laço de repetição
+		for(cont = 1; cont <= fim; cont++){
+			venda = parseFloat(prompt('Digite o valor da '+ cont + 'ª venda',''));
+			total = total + venda;
+			/*
+			O laço vai de cont = 1 até cont = fim
+			prompt(...) -> pede ao usuário o valor da venda
+			parseFloat(...) -> converter o texto para o número decimal
+			total -> soma esse valor no acumulador
+			*/
+		}
+
+		//Exibir o resultado
+			document.getElementById('teste').innerHTML += total;
+			/*
+			Depois que todas as vendas foram digitadas,
+			o valor acumulado em total é exibido dentro
+			do elemento HTML com o id-'teste'
+			*/
+	</script>
+
+</body>
+</html>

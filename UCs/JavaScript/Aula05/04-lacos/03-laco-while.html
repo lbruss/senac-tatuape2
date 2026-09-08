@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Laço de repetição WHILE</title>
+</head>
+<body>
+	<h1>Laço de repetição WHILE</h1>
+	<p id="tabuada"></p>
+
+	<script type="text/javascript">
+		//Criando as variáveis
+		var num = 5; //Número da tabuada
+		var cont = 1; //contador do loop
+		var resposta = ''; //String que vai armazenar o resultado
+
+		while(cont <= 10){
+			resposta += num + 'x' + cont + ' = ' + num * cont + '<br>';
+			cont++;
+			/*
+			A condição é cont <= 10
+			Enquanto essa condição for verdadeira,
+			o bloco dentro do while será executado
+
+			Diferença entre o FOR - DO..WHILE e WHILE
+			* O for define o início, condição e incremento tudo na mesma linha.
+			* do...while executa pelo menos uma vez antes de verificar a condição.
+			* while só executa se a condição ja for verdadeira logo no começo.
+			Ou seja, se cont começasse co 11, o while não executa nenhuma vez,
+			diferente do do...while que roda pelo menos uma vez.
+			*/
+			document.getElementById('tabuada').innerHTML = resposta;
+		}
+	</script>
+
+</body>
+</html>

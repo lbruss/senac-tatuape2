@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Laço de repetição DO</title>
+</head>
+<body>
+	<h1>Laço de repetição DO</h1>
+	<p id="tabuada"></p>
+
+	<script type="text/javascript">
+		//Criando as variáveis
+		var num = 5; //Número da tabuada
+		var cont = 1; //contador do loop
+		var resposta = ''; //String que vai armazenar o resultado
+
+		//Criando a tabuada
+		do{
+			resposta += num + 'x' + cont + ' = ' + num * cont + '<br>';
+			cont++;
+		} while (cont <= 10);
+		/*
+		Diferença principal entre FOR and WHILE 
+		* No for, é definido o início, condição e incremento tudo na mesma linha
+		* No do..while, o bloco de código sempre é executado pelo menos uma vez 
+		e só depois verifica a condição (cont <= 10)
+
+		ou seja
+		* O código dentro do DO{...} roda primeiro
+		depois o while (cont <= 10) verifica se deve continuar repetindo
+		*/
+
+		// Exibir a tabuada
+		document.getElementById('tabuada').innerHTML = resposta;
+
+		/*
+		Em resumo:
+		tanto o código for e o código do...while chegam no mesmo resultado,
+		a diferença é que o do...while garante pelo menos uma execução,
+		mesmo que a condição seja falsa logo no início.
+
+		Exemplo for:
+		var cont = 11;
+		for (cont; cont <= 10; cont++){
+		console.log("Executando: "+ cont);
+		}
+		-> Como op cont começa com 11, a condição cont <= 10 é falsa
+		Resultado: o loop não acontece.
+
+		Exemplo do...while:
+		var cont = 11;
+		
+		do {
+		console.log("Executando: " + cont);
+		cont++;
+		}while(cont <= 10);
+
+		-> Mesmo com o cont = 11, bloco dentro do DO é executado uma vez
+		antes de verificar a condição
+		Resultado: Imprime "Executando: 11" e só depois para o laço de repetição.
+
+		Vantagem do Do...while:
+		* Quando você precisa validar uma entrada do usuário,
+		você mostra a primeira vez, e só depois continua repetindo enquanto
+		a condição não for satisfeita.
+		*/
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Atividade 2 - Do...while</title>
+</head>
+<body>
+	<h1>Atividade 2 - Do...while</h1>
+	<p id="repetir"></p>
+
+	<script type="text/javascript">
+        /*Faça um algoritmo em JavaScript para exibir
+        número de 1 até 50 usando
+        - Do...While
+        */
+		var cont = 1;
+		var num = '';
+
+		do{
+			num += + cont + '<br>';
+			cont++;
+		} while (cont <= 50);
+
+		document.getElementById('repetir').innerHTML = num;
+	</script>
+
+</body>
+</html>
