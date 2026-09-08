@@ -22,7 +22,7 @@ Também foi praticado o uso de:
 
 ---
 
-# 1. Laços de repetição
+## Laços de repetição
 
 Um **laço de repetição** permite executar o mesmo bloco de código várias vezes sem precisar escrever o código repetidamente.
 
@@ -50,7 +50,7 @@ Os três principais laços estudados possuem a mesma finalidade geral, mas funci
 
 ---
 
-# 2. Laço `for`
+## Laço `for`
 
 O `for` é utilizado quando normalmente sabemos ou conseguimos definir claramente:
 
@@ -68,7 +68,7 @@ for (início; condição; incremento) {
 
 Podemos imaginar:
 
-```text
+```
 INÍCIO
    ↓
 VERIFICA CONDIÇÃO
@@ -82,11 +82,11 @@ Volta para a condição
 
 ---
 
-# 3. Exemplo: tabuada utilizando `for`
+## Exemplo: tabuada utilizando `for`
 
 Foi criado o arquivo:
 
-```text
+```
 laco-for.html
 ```
 
@@ -115,7 +115,7 @@ Estrutura inicial:
 
 ---
 
-## 3.1 Código completo
+### Código completo
 
 ```html
 <!DOCTYPE html>
@@ -154,7 +154,7 @@ Estrutura inicial:
 
 ---
 
-# 4. Entendendo o `for`
+**Entendendo o `for`**
 
 A parte mais importante é:
 
@@ -174,7 +174,7 @@ O contador começa com `1`.
 
 ---
 
-## 4.2 Segunda parte — condição
+**Segunda parte — condição**
 
 ```javascript
 cont <= 10
@@ -184,7 +184,7 @@ Enquanto essa condição for verdadeira, o código será executado.
 
 Ou seja:
 
-```text
+```
 cont = 1 → executa
 cont = 2 → executa
 cont = 3 → executa
@@ -195,7 +195,7 @@ cont = 11 → para
 
 ---
 
-## 4.3 Terceira parte — incremento
+**Terceira parte — incremento**
 
 ```javascript
 cont++
@@ -211,7 +211,7 @@ cont = cont + 1;
 
 ---
 
-# 5. Gerando a tabuada
+**Gerando a tabuada**
 
 Dentro do `for` temos:
 
@@ -227,7 +227,7 @@ num
 
 vale:
 
-```text
+```
 5
 ```
 
@@ -241,13 +241,13 @@ vai de `1` até `10`.
 
 Na primeira repetição:
 
-```text
+```
 5 x 1 = 5
 ```
 
 Na segunda:
 
-```text
+```
 5 x 2 = 10
 ```
 
@@ -255,7 +255,7 @@ E assim por diante.
 
 No final:
 
-```text
+```
 5 x 10 = 50
 ```
 
@@ -263,7 +263,7 @@ A variável `resposta` vai acumulando todas essas linhas.
 
 ---
 
-# 6. O operador `+=`
+**O operador `+=`**
 
 Aqui:
 
@@ -279,7 +279,7 @@ estamos adicionando um novo conteúdo ao que já existe na variável.
 resposta = resposta + ...
 ```
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 var texto = '';
@@ -290,7 +290,7 @@ texto += ' mundo';
 
 Resultado:
 
-```text
+```
 Olá mundo
 ```
 
@@ -298,7 +298,7 @@ Portanto, `+=` é muito útil quando precisamos **acumular informações** duran
 
 ---
 
-# 7. Exibindo o resultado
+**Exibindo o resultado**
 
 Depois que o laço termina:
 
@@ -316,11 +316,11 @@ Como `resposta` contém várias linhas com `<br>`, a tabuada aparece organizada 
 
 ---
 
-# 8. Laço `do...while`
+## Laço `do...while`
 
 Foi criado o arquivo:
 
-```text
+```
 laco-do.html
 ```
 
@@ -338,7 +338,7 @@ do {
 
 A ordem é:
 
-```text
+```
 Executa o código
        ↓
 Verifica a condição
@@ -350,7 +350,7 @@ Falsa? → encerra
 
 ---
 
-# 9. Tabuada utilizando `do...while`
+### Tabuada utilizando `do...while`
 
 ```html
 <!DOCTYPE html>
@@ -389,7 +389,7 @@ Falsa? → encerra
 
 ---
 
-# 10. Diferença entre `for` e `do...while`
+**Diferença entre `for` e `do...while`**
 
 No `for`, normalmente colocamos início, condição e incremento na mesma linha:
 
@@ -410,7 +410,7 @@ do {
 
 A principal diferença é **quando a condição é verificada**.
 
-### `for`
+**`for`**
 
 Primeiro verifica a condição:
 
@@ -418,17 +418,17 @@ Primeiro verifica a condição:
 Verifica → executa → incrementa
 ```
 
-### `do...while`
+**`do...while`**
 
 Primeiro executa:
 
-```text
+```
 Executa → incrementa → verifica
 ```
 
 ---
 
-# 11. Uma diferença muito importante
+**Uma diferença muito importante**
 
 Considere:
 
@@ -448,13 +448,13 @@ cont <= 10
 
 é:
 
-```text
+```
 11 <= 10
 ```
 
 Resultado:
 
-```text
+```
 false
 ```
 
@@ -474,21 +474,21 @@ do {
 
 O `do` executa primeiro:
 
-```text
+```
 Executando: 11
 ```
 
 Somente depois o JavaScript verifica:
 
-```text
+```
 12 <= 10
 ```
 
 Como é falso, o laço termina.
 
-### Regra para memorizar
+**Regra para memorizar**
 
-```text
+```
 FOR
 → verifica antes de executar.
 
@@ -501,7 +501,7 @@ DO...WHILE
 
 ---
 
-# 12. Quando utilizar `do...while`?
+#**Quando utilizar `do...while`?**
 
 O `do...while` é especialmente útil quando precisamos que uma ação aconteça **pelo menos uma vez**.
 
@@ -517,11 +517,11 @@ Nesse caso, o usuário precisa receber a primeira solicitação antes que o prog
 
 ---
 
-# 13. Laço `while`
+## Laço `while`
 
 Foi criado o arquivo:
 
-```text
+```
 laco-while.html
 ```
 
@@ -541,7 +541,7 @@ A condição é verificada **antes** da execução.
 
 ---
 
-# 14. Tabuada utilizando `while`
+### Tabuada utilizando `while`
 
 ```html
 <!DOCTYPE html>
@@ -580,7 +580,7 @@ A condição é verificada **antes** da execução.
 
 ---
 
-# 15. Entendendo o `while`
+**Entendendo o `while`**
 
 A linha:
 
@@ -602,7 +602,7 @@ cont++;
 
 Isso faz o contador aumentar:
 
-```text
+```
 1 → 2 → 3 → 4 → ... → 10 → 11
 ```
 
@@ -614,7 +614,7 @@ Quando chegar em `11`:
 
 será:
 
-```text
+```
 false
 ```
 
@@ -622,11 +622,11 @@ e o laço terminará.
 
 ---
 
-# 16. Cuidado com o loop infinito
+**Cuidado com o loop infinito**
 
 É muito importante alterar a variável utilizada na condição.
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 var cont = 1;
@@ -642,13 +642,13 @@ Esse código possui um problema.
 
 Ela continua sendo:
 
-```text
+```
 1
 ```
 
 Então:
 
-```text
+```
 1 <= 10
 ```
 
@@ -671,7 +671,7 @@ Agora o contador avança até a condição ficar falsa.
 
 ---
 
-# 17. Comparação dos três laços
+# Comparação dos três laços
 
 | Laço         | Verifica condição | Estrutura                      | Executa pelo menos uma vez? |
 | ------------ | ----------------- | ------------------------------ | --------------------------- |
@@ -681,7 +681,7 @@ Agora o contador avança até a condição ficar falsa.
 
 Uma forma simples de lembrar:
 
-```text
+```
 FOR
 "Sei a estrutura da repetição."
 
@@ -694,7 +694,7 @@ DO...WHILE
 
 ---
 
-# 18. Atividade 1 — Mostrar números de 1 até 50 com `for`
+### Atividade 1 — Mostrar números de 1 até 50 com `for`
 
 A proposta foi:
 
@@ -738,7 +738,7 @@ Código corrigido:
 
 ---
 
-## 18.1 Como funciona
+**Como funciona**
 
 O `for` começa:
 
@@ -770,7 +770,7 @@ aumenta o contador.
 
 O resultado será:
 
-```text
+```
 1
 2
 3
@@ -782,7 +782,7 @@ O resultado será:
 
 ---
 
-# 19. Atividade 2 — Mostrar números de 1 até 50 com `do...while`
+### Atividade 2 — Mostrar números de 1 até 50 com `do...while`
 
 Código:
 
@@ -831,7 +831,7 @@ do {
 
 ---
 
-# 20. Atividade 3 — Mostrar números de 1 até 50 com `while`
+### Atividade 3 — Mostrar números de 1 até 50 com `while`
 
 Código:
 
@@ -872,7 +872,7 @@ Código:
 
 ---
 
-# 21. Variável acumuladora
+# Variável acumuladora
 
 Agora foi introduzido um conceito muito importante:
 
@@ -880,9 +880,9 @@ Agora foi introduzido um conceito muito importante:
 
 Uma variável acumuladora é utilizada para guardar e atualizar um resultado durante várias repetições.
 
-Por exemplo, queremos somar:
+- **Por exemplo, queremos somar:**
 
-```text
+```
 1 + 2 + 3 + 4 + 5
 ```
 
@@ -900,7 +900,7 @@ total = total + 1;
 
 Agora:
 
-```text
+```
 total = 1
 ```
 
@@ -912,13 +912,13 @@ total = total + 2;
 
 Agora:
 
-```text
+```
 total = 3
 ```
 
 Depois:
 
-```text
+```
 3 + 3 = 6
 ```
 
@@ -928,11 +928,11 @@ E assim por diante.
 
 ---
 
-# 22. Acumulador x contador
+## Acumulador x contador
 
 É importante não confundir os dois.
 
-### Contador
+**Contador**
 
 Normalmente serve para controlar quantas vezes o laço foi executado.
 
@@ -940,13 +940,13 @@ Normalmente serve para controlar quantas vezes o laço foi executado.
 cont++;
 ```
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 1 → 2 → 3 → 4 → 5
 ```
 
-### Acumulador
+**Acumulador**
 
 Serve para acumular um resultado.
 
@@ -954,18 +954,18 @@ Serve para acumular um resultado.
 total = total + numero;
 ```
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 0
 0 + 5 = 5
 5 + 3 = 8
 8 + 7 = 15
 ```
 
-### Resumindo
+**Resumindo**
 
-```text
+```
 CONTADOR
 → conta.
 
@@ -975,11 +975,11 @@ ACUMULADOR
 
 ---
 
-# 23. Atividade — Somar 10 números
+## Atividade — Somar 10 números
 
 Foi criado o arquivo:
 
-```text
+```
 acumuladora.html
 ```
 
@@ -1008,7 +1008,7 @@ Estrutura:
 
 ---
 
-# 24. Código completo
+### Código completo
 
 ```html
 <!DOCTYPE html>
@@ -1057,9 +1057,9 @@ Estrutura:
 
 ---
 
-# 25. Entendendo o programa passo a passo
+**Entendendo o programa passo a passo**
 
-## 25.1 Contador
+**Contador**
 
 ```javascript
 var cont = 1;
@@ -1069,7 +1069,7 @@ Controla o número da repetição.
 
 O `for` fará:
 
-```text
+```
 1ª repetição
 2ª repetição
 3ª repetição
@@ -1079,7 +1079,7 @@ O `for` fará:
 
 ---
 
-## 25.2 Acumulador
+**Acumulador**
 
 ```javascript
 var total = 0;
@@ -1089,7 +1089,7 @@ Começamos com zero porque ainda não existe nenhum número somado.
 
 ---
 
-## 25.3 Variável temporária
+**Variável temporária**
 
 ```javascript
 var numero = 0;
@@ -1099,9 +1099,9 @@ Essa variável guarda o número digitado na repetição atual.
 
 Ela não é o acumulador.
 
-Por exemplo:
+- **Por exemplo:**
 
-```text
+```
 numero = 10
 total = 25
 ```
@@ -1112,7 +1112,7 @@ O `total` representa tudo que já foi acumulado.
 
 ---
 
-# 26. `alert()`
+**`alert()`**
 
 ```javascript
 alert('Digite 10 números aleatórios');
@@ -1124,7 +1124,7 @@ Serve para informar ao usuário o que ele deve fazer.
 
 ---
 
-# 27. `prompt()`
+**`prompt()`**
 
 ```javascript
 prompt('Digite o ' + cont + 'º número', '')
@@ -1134,7 +1134,7 @@ Abre uma caixa para o usuário digitar um valor.
 
 Como `cont` muda a cada repetição, a mensagem também muda:
 
-```text
+```
 Digite o 1º número
 Digite o 2º número
 Digite o 3º número
@@ -1144,7 +1144,7 @@ Digite o 10º número
 
 ---
 
-# 28. `parseInt()`
+**`parseInt()`**
 
 O valor recebido pelo `prompt()` é uma String.
 
@@ -1156,7 +1156,7 @@ parseInt(...)
 
 para transformar o texto em um número inteiro.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 parseInt('25')
@@ -1164,13 +1164,13 @@ parseInt('25')
 
 resulta em:
 
-```text
+```
 25
 ```
 
 ---
 
-# 29. Acumulando a soma
+**Acumulando a soma**
 
 A linha principal é:
 
@@ -1180,7 +1180,7 @@ total = total + numero;
 
 Imagine que o usuário digite:
 
-```text
+```
 10
 20
 5
@@ -1188,7 +1188,7 @@ Imagine que o usuário digite:
 
 O programa fará:
 
-```text
+```
 total = 0
 
 total = 0 + 10
@@ -1205,7 +1205,7 @@ Esse processo continua até os 10 números serem digitados.
 
 ---
 
-# 30. Exibindo o resultado
+**Exibindo o resultado**
 
 Depois que o `for` termina:
 
@@ -1225,7 +1225,7 @@ O `+=` é utilizado porque queremos **manter o texto que já existe** e acrescen
 
 ---
 
-# 31. Segundo exercício — Total de vendas
+## Segundo exercício — Total de vendas
 
 Agora o conceito de acumulador foi aplicado a uma situação mais próxima de um problema real.
 
@@ -1238,7 +1238,7 @@ O programa deverá:
 
 ---
 
-# 32. Código completo
+### Código completo
 
 ```html
 <!DOCTYPE html>
@@ -1300,7 +1300,7 @@ O programa deverá:
 
 ---
 
-# 33. Entendendo o exercício de vendas
+**Entendendo o exercício de vendas**
 
 Aqui temos quatro variáveis:
 
@@ -1322,7 +1322,7 @@ Cada uma possui uma função diferente.
 
 ---
 
-# 34. Quantidade de vendas
+**Quantidade de vendas**
 
 ```javascript
 fim = parseInt(
@@ -1332,13 +1332,13 @@ fim = parseInt(
 
 O usuário informa, por exemplo:
 
-```text
+```
 3
 ```
 
 Então:
 
-```text
+```
 fim = 3
 ```
 
@@ -1346,7 +1346,7 @@ O `for` será executado três vezes.
 
 ---
 
-# 35. Valor de cada venda
+**Valor de cada venda**
 
 Dentro do `for`:
 
@@ -1358,9 +1358,9 @@ venda = parseFloat(
 
 Aqui usamos `parseFloat()` porque uma venda pode possuir casas decimais.
 
-Exemplo:
+- **Exemplo:**
 
-```text
+```
 25.50
 10.75
 8.90
@@ -1370,11 +1370,11 @@ Exemplo:
 
 ---
 
-# 36. Por que `parseFloat()` e não `parseInt()`?
+**Por que `parseFloat()` e não `parseInt()`?**
 
 `parseInt()` trabalha com números inteiros.
 
-Exemplo:
+- **Exemplo:**
 
 ```javascript
 parseInt('25')
@@ -1394,11 +1394,11 @@ Por isso `parseFloat()` é mais adequado para valores monetários nesse exercíc
 
 ---
 
-# 37. Acumulando as vendas
+**Acumulando as vendas**
 
 Suponha que o usuário informe:
 
-```text
+```
 Quantidade de vendas: 3
 
 Venda 1: 10.50
@@ -1408,7 +1408,7 @@ Venda 3: 5.50
 
 O programa fará:
 
-```text
+```
 total = 0
 
 total = 0 + 10.50
@@ -1423,13 +1423,13 @@ total = 36.00
 
 Resultado:
 
-```text
+```
 O total de vendas foi: 36
 ```
 
 ---
 
-# 38. Estrutura geral de um acumulador
+**Estrutura geral de um acumulador**
 
 Um padrão muito importante é:
 
@@ -1461,11 +1461,11 @@ total += valor;
 
 ---
 
-# 39. Padrão mental para exercícios com repetição
+**Padrão mental para exercícios com repetição**
 
 Quando um exercício pedir para repetir alguma ação, procurar estas quatro perguntas:
 
-### 1. O que controla a repetição?
+**1. O que controla a repetição?**
 
 Normalmente será o **contador**:
 
@@ -1473,7 +1473,7 @@ Normalmente será o **contador**:
 var cont = 1;
 ```
 
-### 2. Até quando repetir?
+**2. Até quando repetir?**
 
 É a **condição**:
 
@@ -1481,15 +1481,15 @@ var cont = 1;
 cont <= 10
 ```
 
-### 3. O que será feito em cada repetição?
+**3. O que será feito em cada repetição?**
 
-Por exemplo:
+- **Por exemplo:**
 
 ```javascript
 numero = parseInt(prompt(...));
 ```
 
-### 4. Preciso guardar/acumular algum resultado?
+**4. Preciso guardar/acumular algum resultado?**
 
 Se sim, criar um **acumulador**:
 
@@ -1505,7 +1505,7 @@ total += numero;
 
 ---
 
-# 40. Contador e acumulador juntos
+**Contador e acumulador juntos**
 
 É muito comum os dois aparecerem no mesmo programa:
 
@@ -1520,7 +1520,7 @@ for (cont = 1; cont <= 10; cont++) {
 
 Nesse caso:
 
-```text
+```
 cont
 ↓
 controla quantas vezes o código executa
@@ -1534,9 +1534,9 @@ Essa combinação aparece constantemente em exercícios de programação.
 
 ---
 
-# 41. `for`, `while` e `do...while` — visão final
+# `for`, `while` e `do...while` — visão final
 
-### `for`
+**`for`**
 
 ```javascript
 for (cont = 1; cont <= 10; cont++) {
@@ -1548,7 +1548,7 @@ Ideal quando a estrutura do contador já está bem definida.
 
 ---
 
-### `while`
+**`while`**
 
 ```javascript
 while (condicao) {
@@ -1562,7 +1562,7 @@ Pode executar zero vezes.
 
 ---
 
-### `do...while`
+**`do...while`**
 
 ```javascript
 do {
@@ -1576,7 +1576,7 @@ Executa **pelo menos uma vez**.
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. **Laços de repetição** permitem executar um bloco de código várias vezes.
 2. `for` reúne início, condição e incremento na mesma estrutura.
