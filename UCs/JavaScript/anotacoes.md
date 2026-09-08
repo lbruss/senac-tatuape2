@@ -1,346 +1,93 @@
-# Operadores e Estruturas Condicionais
+# Laços de Repetição e Variáveis Acumuladoras
 
-Nesta parte foram estudados os **operadores comparativos, aritméticos e lógicos**, além das principais **estruturas condicionais** do JavaScript.
+Nesta parte da aula foram estudados os **laços de repetição** e as **variáveis acumuladoras**.
 
-Esses conceitos são fundamentais porque permitem que o programa:
+Os principais laços estudados foram:
 
-* compare valores;
-* faça cálculos;
-* tome decisões;
-* execute determinado código somente quando uma condição for verdadeira;
-* escolha entre várias possibilidades.
+* `for`
+* `while`
+* `do...while`
 
----
+Também foi praticado o uso de:
 
-## Operadores Comparativos
-
-Os **operadores comparativos** servem para comparar dois valores.
-
-O resultado de uma comparação é sempre um **Booleano**:
-
-* `true` → verdadeiro;
-* `false` → falso.
-
-- **Por exemplo:**
-
-```javascript
-1 == 1
-```
-
-Resultado:
-
-```
-true
-```
-
-Já:
-
-```javascript
-1 == 2
-```
-
-Resultado:
-
-```
-false
-```
+* contador;
+* acumulador;
+* `prompt()`;
+* `parseInt()`;
+* `parseFloat()`;
+* `alert()`;
+* `innerHTML`;
+* repetição para gerar tabuadas;
+* repetição para somar valores digitados pelo usuário.
 
 ---
 
-**Criando o arquivo `comparativos.html`**
+# 1. Laços de repetição
 
-No VS Code, foi criado o arquivo:
+Um **laço de repetição** permite executar o mesmo bloco de código várias vezes sem precisar escrever o código repetidamente.
 
-```
-comparativos.html
-```
+Imagine que precisamos mostrar os números de `1` até `50`.
 
-Estrutura inicial:
+Sem um laço, seria necessário escrever:
 
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operadores comparativos</title>
-</head>
-<body>
-
-    <h1>Operadores comparativos</h1>
-
-    <p id="teste1">O valor de a é: </p>
-    <p id="teste2">O valor de a é: </p>
-    <p id="teste3">O valor de a é: </p>
-    <p id="teste4">O valor de a é: </p>
-    <p id="teste5">O valor de a é: </p>
-    <p id="teste6">O valor de a é: </p>
-
-    <script>
-
-    </script>
-
-</body>
-</html>
+```javascript
+document.write(1);
+document.write(2);
+document.write(3);
+// ...
+document.write(50);
 ```
 
-Os elementos `<p>` possuem IDs diferentes para que o JavaScript possa colocar cada resultado em um local específico da página.
+Isso seria trabalhoso e pouco eficiente.
+
+Com um laço, podemos dizer:
+
+> "Comece no 1 e continue enquanto não chegar ao 50."
+
+O JavaScript fará as repetições automaticamente.
+
+Os três principais laços estudados possuem a mesma finalidade geral, mas funcionam de maneiras diferentes.
 
 ---
 
-# Código completo - Operadores Comparativos 
+# 2. Laço `for`
 
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operadores comparativos</title>
-</head>
-<body>
+O `for` é utilizado quando normalmente sabemos ou conseguimos definir claramente:
 
-    <h1>Operadores comparativos</h1>
+* onde a repetição começa;
+* qual é a condição para continuar;
+* como o contador será alterado.
 
-    <p id="teste1">O valor de a é: </p>
-    <p id="teste2">O valor de a é: </p>
-    <p id="teste3">O valor de a é: </p>
-    <p id="teste4">O valor de a é: </p>
-    <p id="teste5">O valor de a é: </p>
-    <p id="teste6">O valor de a é: </p>
-
-    <script>
-        // Criação de variáveis
-        var a = 1;
-        var b = 1;
-        var c = '1';
-        var d = 2;
-
-        // Impressão dos resultados
-        document.getElementById('teste1').innerHTML += a == b;
-        document.getElementById('teste2').innerHTML += a === c;
-        document.getElementById('teste3').innerHTML += a === b;
-        document.getElementById('teste4').innerHTML += a >= b;
-        document.getElementById('teste5').innerHTML += a >= d;
-        document.getElementById('teste6').innerHTML += a <= c;
-    </script>
-
-</body>
-</html>
-```
-
-**Variáveis**
+A estrutura básica é:
 
 ```javascript
-var a = 1;
-var b = 1;
-var c = '1';
-var d = 2;
+for (início; condição; incremento) {
+    // código que será repetido
+}
 ```
 
-Temos:
+Podemos imaginar:
 
-| Variável | Valor | Tipo   |
-| -------- | ----: | ------ |
-| `a`      |   `1` | Number |
-| `b`      |   `1` | Number |
-| `c`      | `'1'` | String |
-| `d`      |   `2` | Number |
-
-Observe que:
-
-```javascript
-1
-```
-
-é um número, enquanto:
-
-```javascript
-'1'
-```
-
-é um texto.
-
-Apesar de visualmente serem parecidos, são tipos diferentes.
-
----
-
-**Igualdade `==`**
-
-```javascript
-a == b
-```
-
-O operador `==` compara os valores.
-
-- **No exemplo:**
-
-```javascript
-a = 1;
-b = 1;
-```
-
-Então:
-
-```javascript
-1 == 1
-```
-
-Resultado:
-
-```
-true
-```
-
-**`==` — igualdade simples**
-
-O operador `==` verifica se os valores são iguais, podendo realizar conversão de tipo.
-
-- **Exemplo:**
-
-```javascript
-1 == '1'
-```
-
-Resultado:
-
-```
-true
-```
-
-Isso acontece porque o JavaScript pode converter os tipos durante essa comparação.
-
----
-
-**Igualdade estrita `===`**
-
-```javascript
-a === c
-```
-
-Aqui:
-
-```javascript
-a = 1;
-c = '1';
-```
-
-O valor é parecido, mas os tipos são diferentes:
-
-```
-a → Number
-c → String
-```
-
-Portanto:
-
-```javascript
-1 === '1'
-```
-
-Resultado:
-
-```
-false
-```
-
-O operador `===` verifica:
-
-1. se o valor é igual;
-2. se o tipo é igual.
-
-Por isso ele é chamado de **igualdade estrita**.
-
-**Regra prática**
-
-```
-==   → compara valor
-===  → compara valor + tipo
+```text
+INÍCIO
+   ↓
+VERIFICA CONDIÇÃO
+   ↓
+Executa o código
+   ↓
+Incrementa
+   ↓
+Volta para a condição
 ```
 
 ---
 
-**Maior ou igual `>=`**
-
-```javascript
-a >= b
-```
-
-Significa:
-
-> `a` é maior ou igual a `b`?
-
-Como:
-
-```
-a = 1
-b = 1
-```
-
-Temos:
-
-```
-1 >= 1
-```
-
-Resultado:
-
-```
-true
-```
-
----
-
-**Menor ou igual `<=`**
-
-```javascript
-a <= c
-```
-
-Significa:
-
-> `a` é menor ou igual a `c`?
-
-Nesse caso:
-
-```
-a = 1
-c = '1'
-```
-
-Em uma comparação relacional, o JavaScript realiza a conversão necessária para comparar os valores.
-
-Resultado:
-
-```
-true
-```
-
----
-
-**Principais operadores comparativos**
-
-| Operador | Significado                |
-| -------- | -------------------------- |
-| `==`     | igual em valor             |
-| `===`    | igual em valor e tipo      |
-| `!=`     | diferente em valor         |
-| `!==`    | diferente em valor ou tipo |
-| `>`      | maior que                  |
-| `<`      | menor que                  |
-| `>=`     | maior ou igual             |
-| `<=`     | menor ou igual             |
-
----
-
-## Operadores Aritméticos
-
-Os **operadores aritméticos** são utilizados para realizar cálculos.
+# 3. Exemplo: tabuada utilizando `for`
 
 Foi criado o arquivo:
 
 ```text
-aritméticos.html
+laco-for.html
 ```
 
 Estrutura inicial:
@@ -351,14 +98,15 @@ Estrutura inicial:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operadores aritméticos</title>
+    <title>Laço de repetição FOR</title>
 </head>
 <body>
 
-    <h1>Operadores aritméticos</h1>
+    <h1>Laço de repetição FOR</h1>
+
+    <p id="tabuada"></p>
 
     <script>
-
     </script>
 
 </body>
@@ -367,7 +115,7 @@ Estrutura inicial:
 
 ---
 
-# Código completo - Operadores Aritméticos
+## 3.1 Código completo
 
 ```html
 <!DOCTYPE html>
@@ -375,729 +123,864 @@ Estrutura inicial:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Operadores aritméticos</title>
+    <title>Laço de repetição FOR</title>
 </head>
 <body>
 
-    <h1>Operadores aritméticos</h1>
+    <h1>Laço de repetição FOR</h1>
+
+    <p id="tabuada"></p>
 
     <script>
-        // Número + número = adição
-        var resposta = 1 + 2;
-        document.write(resposta + '<br>');
+        // Criando as variáveis
+        var num = 5;       // Número da tabuada
+        var cont = 1;      // Contador do loop
+        var resposta = ''; // String que vai armazenar o resultado
 
-        // Booleano + número = adição
-        resposta = true + 1;
-        document.write(resposta + '<br>');
+        // Criando a tabuada
+        for (cont = 1; cont <= 10; cont++) {
 
-        // Booleano + Booleano = adição
-        var resposta1 = false + false;
-        var resposta2 = false + true;
-        var resposta3 = true + true;
+            // Esse laço repete de 1 até 10
+            resposta += num + ' x ' + cont + ' = ' + (num * cont) + '<br>';
+        }
 
-        document.write(resposta1 + '<br>');
-        document.write(resposta2 + '<br>');
-        document.write(resposta3 + '<br>');
-
-        // Número + String = concatenação
-        resposta = 5 + 'Senac';
-        document.write(resposta + '<br>');
-
-        // String + String = concatenação
-        resposta = 'Senac' + 'JavaScript';
-        document.write(resposta + '<br>');
-
-        // String + Booleano = concatenação
-        resposta = 'Senac ' + false;
-        document.write(resposta + '<br>');
+        // Mostrar o resultado da tabuada
+        document.getElementById('tabuada').innerHTML = resposta;
     </script>
 
 </body>
 </html>
 ```
 
-> **Observação:** `+` pode representar **adição** ou **concatenação**, dependendo dos tipos envolvidos.
+---
+
+# 4. Entendendo o `for`
+
+A parte mais importante é:
+
+```javascript
+for (cont = 1; cont <= 10; cont++) {
+```
+
+Essa única linha possui três partes.
+
+## 4.1 Primeira parte — início
+
+```javascript
+cont = 1
+```
+
+O contador começa com `1`.
 
 ---
 
-**Número + número**
+## 4.2 Segunda parte — condição
 
 ```javascript
-var resposta = 1 + 2;
-
-document.write(resposta + '<br>');
+cont <= 10
 ```
 
-Como os dois valores são números:
+Enquanto essa condição for verdadeira, o código será executado.
 
-```
-1 + 2 = 3
-```
+Ou seja:
 
-Resultado:
-
-```
-3
-```
-
-O:
-
-```html
-<br>
-```
-
-é uma quebra de linha no HTML.
-
----
-
-**Booleano + número**
-
-Em operações numéricas, o JavaScript pode converter valores Booleanos:
-
-```
-true  → 1
-false → 0
-```
-
-- **Por exemplo:**
-
-```javascript
-resposta = true + 1;
-```
-
-O JavaScript interpreta:
-
-```
-true → 1
-```
-
-Então:
-
-```
-1 + 1 = 2
-```
-
-Resultado:
-
-```
-2
+```text
+cont = 1 → executa
+cont = 2 → executa
+cont = 3 → executa
+...
+cont = 10 → executa
+cont = 11 → para
 ```
 
 ---
 
-**Booleano + Booleano**
-
-**`false + false`**
+## 4.3 Terceira parte — incremento
 
 ```javascript
-var resposta1 = false + false;
+cont++
 ```
 
-Convertendo:
+Depois de cada repetição, o contador aumenta em 1.
 
-```
-0 + 0 = 0
-```
-
-Resultado:
-
-```
-0
-```
-
-(*`false + true`**
+É equivalente a:
 
 ```javascript
-var resposta2 = false + true;
-```
-
-Convertendo:
-
-```
-0 + 1 = 1
-```
-
-Resultado:
-
-```
-1
-```
-
-**`true + true`**
-
-```javascript
-var resposta3 = true + true;
-```
-
-Convertendo:
-
-```
-1 + 1 = 2
-```
-
-Resultado:
-
-```
-2
+cont = cont + 1;
 ```
 
 ---
 
-**Número + String**
+# 5. Gerando a tabuada
 
-Quando uma operação com `+` envolve uma **String**, o comportamento muda.
-
-```javascript
-resposta = 5 + 'Senac';
-```
-
-Nesse caso não ocorre uma soma numérica.
-
-O JavaScript realiza uma **concatenação**:
-
-```
-5 + 'Senac'
-```
-
-vira:
-
-```
-'5Senac'
-```
-
-**Concatenação**
-
-**Concatenação** significa juntar valores.
-
-- **Exemplo:**
+Dentro do `for` temos:
 
 ```javascript
-'Olá ' + 'mundo'
+resposta += num + ' x ' + cont + ' = ' + (num * cont) + '<br>';
+```
+
+A variável:
+
+```javascript
+num
+```
+
+vale:
+
+```text
+5
+```
+
+Enquanto:
+
+```javascript
+cont
+```
+
+vai de `1` até `10`.
+
+Na primeira repetição:
+
+```text
+5 x 1 = 5
+```
+
+Na segunda:
+
+```text
+5 x 2 = 10
+```
+
+E assim por diante.
+
+No final:
+
+```text
+5 x 10 = 50
+```
+
+A variável `resposta` vai acumulando todas essas linhas.
+
+---
+
+# 6. O operador `+=`
+
+Aqui:
+
+```javascript
+resposta += ...
+```
+
+estamos adicionando um novo conteúdo ao que já existe na variável.
+
+É equivalente a:
+
+```javascript
+resposta = resposta + ...
+```
+
+Por exemplo:
+
+```javascript
+var texto = '';
+
+texto += 'Olá';
+texto += ' mundo';
 ```
 
 Resultado:
 
-```
+```text
 Olá mundo
 ```
 
----
-
-**String + String**
-
-```javascript
-resposta = 'Senac' + 'JavaScript';
-```
-
-As duas partes são Strings, então são concatenadas:
-
-```
-SenacJavaScript
-```
-
-Se houver um espaço:
-
-```javascript
-resposta = 'Senac ' + 'JavaScript';
-```
-
-Resultado:
-
-```
-Senac JavaScript
-```
+Portanto, `+=` é muito útil quando precisamos **acumular informações** durante um laço.
 
 ---
 
-**String + Booleano**
+# 7. Exibindo o resultado
+
+Depois que o laço termina:
 
 ```javascript
-resposta = 'Senac ' + false;
+document.getElementById('tabuada').innerHTML = resposta;
 ```
 
-Como existe uma String na operação, o resultado é uma concatenação.
+O JavaScript:
 
-O Booleano:
+1. procura o elemento que possui `id="tabuada"`;
+2. acessa seu `innerHTML`;
+3. coloca dentro dele todo o conteúdo armazenado em `resposta`.
 
-```
-false
-```
-
-é convertido para sua representação textual.
-
-Resultado:
-
-```
-Senac false
-```
+Como `resposta` contém várias linhas com `<br>`, a tabuada aparece organizada na página.
 
 ---
 
-## Operadores Lógicos
+# 8. Laço `do...while`
 
-Os operadores lógicos trabalham principalmente com valores Booleanos:
+Foi criado o arquivo:
 
+```text
+laco-do.html
 ```
-true
-false
-```
 
-Os três principais operadores estudados são:
+O `do...while` possui uma característica muito importante:
 
-| Operador | Nome | Significado |    |    |
-| -------- | ---- | ----------- | -- | -- |
-| `&&`     | AND  | E           |    |    |
-| `        |      | `           | OR | OU |
-| `!`      | NOT  | NÃO         |    |    |
+> **O código dentro do `do` é executado pelo menos uma vez.**
 
----
-
-**Operador `&&` — E**
-
-O operador:
+Sua estrutura é:
 
 ```javascript
-&&
+do {
+    // código
+} while (condição);
 ```
 
-significa **E**.
+A ordem é:
 
-A ideia é:
-
-> Todas as condições precisam ser verdadeiras.
-
-- **Exemplo:**
-
-```javascript
-true && true
-```
-
-Resultado:
-
-```
-true
-```
-
-Mas:
-
-```javascript
-false && true
-```
-
-Resultado:
-
-```
-false
-```
-
-Uma única condição falsa já faz o resultado lógico ser falso.
-
-### Tabela verdade do `&&`
-
-| A       | B       | A && B  |
-| ------- | ------- | ------- |
-| `true`  | `true`  | `true`  |
-| `true`  | `false` | `false` |
-| `false` | `true`  | `false` |
-| `false` | `false` | `false` |
-
----
-
-**Exemplos com `&&`**
-
-```javascript
-var resposta = true && true;
-```
-
-Resultado:
-
-```
-true
+```text
+Executa o código
+       ↓
+Verifica a condição
+       ↓
+Verdadeira? → repete
+       ↓
+Falsa? → encerra
 ```
 
 ---
 
-```javascript
-resposta = false && false;
-```
+# 9. Tabuada utilizando `do...while`
 
-Resultado:
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laço de repetição DO</title>
+</head>
+<body>
 
-```
-false
+    <h1>Laço de repetição DO</h1>
+
+    <p id="tabuada"></p>
+
+    <script>
+        // Criando as variáveis
+        var num = 5;       // Número da tabuada
+        var cont = 1;      // Contador do loop
+        var resposta = ''; // String que vai armazenar o resultado
+
+        // Criando a tabuada
+        do {
+            resposta += num + ' x ' + cont + ' = ' + (num * cont) + '<br>';
+
+            cont++;
+        } while (cont <= 10);
+
+        // Exibir a tabuada
+        document.getElementById('tabuada').innerHTML = resposta;
+    </script>
+
+</body>
+</html>
 ```
 
 ---
 
+# 10. Diferença entre `for` e `do...while`
+
+No `for`, normalmente colocamos início, condição e incremento na mesma linha:
+
 ```javascript
-resposta = false && true;
+for (cont = 1; cont <= 10; cont++) {
+    // código
+}
 ```
 
-Resultado:
+No `do...while`, essas partes ficam separadas:
 
+```javascript
+do {
+    // código
+    cont++;
+} while (cont <= 10);
 ```
-false
+
+A principal diferença é **quando a condição é verificada**.
+
+### `for`
+
+Primeiro verifica a condição:
+
+```text
+Verifica → executa → incrementa
+```
+
+### `do...while`
+
+Primeiro executa:
+
+```text
+Executa → incrementa → verifica
 ```
 
 ---
 
-Também podemos colocar uma comparação:
+# 11. Uma diferença muito importante
+
+Considere:
 
 ```javascript
-resposta = false && (3 == 4);
+var cont = 11;
+
+for (cont; cont <= 10; cont++) {
+    console.log('Executando: ' + cont);
+}
 ```
 
-Primeiro:
+A condição:
 
 ```javascript
-3 == 4
+cont <= 10
 ```
 
 é:
 
-```
-false
-```
-
-Então:
-
-```
-false && false
+```text
+11 <= 10
 ```
 
 Resultado:
 
-```
+```text
 false
 ```
 
----
+Então o `for` não executa nenhuma vez.
 
-## `&&` com Strings
-
-O operador lógico `&&` também pode trabalhar com outros valores, não apenas `true` e `false`.
-
-- **Por exemplo:**
+Agora:
 
 ```javascript
-resposta = 'Senac' && 'JavaScript';
+var cont = 11;
+
+do {
+    console.log('Executando: ' + cont);
+
+    cont++;
+} while (cont <= 10);
 ```
 
-Como os dois valores são considerados verdadeiros, o resultado da expressão é o último valor:
+O `do` executa primeiro:
 
-```
-JavaScript
-```
-
-- **Outro exemplo:**
-
-```javascript
-resposta = false && 'Senac';
+```text
+Executando: 11
 ```
 
-Como o primeiro valor já é falso:
+Somente depois o JavaScript verifica:
 
-```
-false
-```
-
-o resultado é:
-
-```
-false
+```text
+12 <= 10
 ```
 
-Isso acontece porque o `&&` procura um valor falso; se encontrar, ele pode parar ali.
+Como é falso, o laço termina.
 
----
+### Regra para memorizar
 
-### String vazia
+```text
+FOR
+→ verifica antes de executar.
 
-Uma String vazia:
+WHILE
+→ verifica antes de executar.
 
-```javascript
-''
-```
-
-não possui conteúdo.
-
-Ela é considerada um valor **falsy** em JavaScript.
-
-- **Exemplo:**
-
-```javascript
-resposta = '' && false;
-```
-
-Resultado:
-
-```
-''
-```
-
-E:
-
-```javascript
-resposta = false && '';
-```
-
-Resultado:
-
-```
-false
-```
-
-### Valores truthy e falsy
-
-JavaScript possui valores que são tratados como verdadeiros ou falsos em contextos lógicos.
-
-- **Exemplos:**
-
-```
-true       → truthy
-'Senac'    → truthy
-1          → truthy
-
-false      → falsy
-''         → falsy
-0          → falsy
-null       → falsy
-undefined  → falsy
-NaN        → falsy
+DO...WHILE
+→ executa antes de verificar.
 ```
 
 ---
 
-## Operador `||` — OU
+# 12. Quando utilizar `do...while`?
 
-O operador:
+O `do...while` é especialmente útil quando precisamos que uma ação aconteça **pelo menos uma vez**.
+
+Um exemplo clássico é solicitar uma informação ao usuário.
 
 ```javascript
-||
+do {
+    // pede uma informação
+} while (informação inválida);
 ```
 
-significa **OU**.
-
-A lógica é:
-
-> Pelo menos uma das condições precisa ser verdadeira.
-
-### Tabela verdade do `||`
-
-| A       | B       | A || B  |
-| ------- | ------- | ------- |
-| `true`  | `true`  | `true`  |
-| `true`  | `false` | `true`  |
-| `false` | `true`  | `true`  |
-| `false` | `false` | `false` |
-
-Portanto, diferente do `&&`, basta uma condição verdadeira.
+Nesse caso, o usuário precisa receber a primeira solicitação antes que o programa possa verificar se a informação está correta.
 
 ---
 
-- **Exemplos**
-
-```javascript
-var resposta = true || true;
-```
-
-Resultado:
-
-```
-true
-```
-
----
-
-```javascript
-resposta = false || true;
-```
-
-Resultado:
-
-```
-true
-```
-
----
-
-```javascript
-resposta = true || false;
-```
-
-Resultado:
-
-```
-true
-```
-
----
-
-```javascript
-resposta = false || (3 == 4);
-```
-
-A comparação:
-
-```javascript
-3 == 4
-```
-
-é falsa.
-
-Então:
-
-```
-false || false
-```
-
-Resultado:
-
-```
-false
-```
-
----
-
-### `||` com Strings
-
-```javascript
-resposta = 'Senac' || 'JavaScript';
-```
-
-Como `'Senac'` é um valor truthy, o operador `||` retorna esse primeiro valor:
-
-```
-Senac
-```
-
-Uma forma simples de pensar:
-
-```
-&& → procura um valor falso
-|| → procura um valor verdadeiro
-```
-
----
-
-## Operador `!` — NOT
-
-O operador:
-
-```javascript
-!
-```
-
-significa **NÃO** ou **negação**.
-
-Ele inverte o valor lógico.
-
-```javascript
-!true
-```
-
-vira:
-
-```
-false
-```
-
-E:
-
-```javascript
-!false
-```
-
-vira:
-
-```
-true
-```
-
-### Tabela verdade
-
-| Valor   | `!valor` |
-| ------- | -------- |
-| `true`  | `false`  |
-| `false` | `true`   |
-
----
-
-- **Exemplos**
-
-```javascript
-var resposta = !true;
-```
-
-Resultado:
-
-```
-false
-```
-
----
-
-```javascript
-resposta = !false;
-```
-
-Resultado:
-
-```
-true
-```
-
----
-
-Com uma String:
-
-```javascript
-resposta = !'Senac';
-```
-
-Como `'Senac'` é truthy:
-
-```
-!'Senac'
-```
-
-resulta em:
-
-```
-false
-```
-
----
-
-# Estruturas Condicionais
-
-As estruturas condicionais permitem que o programa **tome decisões**.
-
-A ideia básica é:
-
-> Se uma condição for verdadeira, faça determinada coisa.
-
-- **Por exemplo:**
-
-```
-Se a média for maior ou igual a 7:
-    aluno aprovado
-```
-
-Isso é implementado com:
-
-```javascript
-if
-```
-
----
-
-## Condicional Simples — `if`
+# 13. Laço `while`
 
 Foi criado o arquivo:
 
+```text
+laco-while.html
 ```
-condicional-simples.html
+
+O `while` significa:
+
+> **enquanto**
+
+Sua estrutura é:
+
+```javascript
+while (condição) {
+    // código repetido
+}
+```
+
+A condição é verificada **antes** da execução.
+
+---
+
+# 14. Tabuada utilizando `while`
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laço de repetição WHILE</title>
+</head>
+<body>
+
+    <h1>Laço de repetição WHILE</h1>
+
+    <p id="tabuada"></p>
+
+    <script>
+        // Criando as variáveis
+        var num = 5;       // Número da tabuada
+        var cont = 1;      // Contador do loop
+        var resposta = ''; // String que vai armazenar o resultado
+
+        while (cont <= 10) {
+
+            resposta += num + ' x ' + cont + ' = ' + (num * cont) + '<br>';
+
+            cont++;
+        }
+
+        // Mostrar o resultado
+        document.getElementById('tabuada').innerHTML = resposta;
+    </script>
+
+</body>
+</html>
+```
+
+---
+
+# 15. Entendendo o `while`
+
+A linha:
+
+```javascript
+while (cont <= 10) {
+```
+
+significa:
+
+> Enquanto `cont` for menor ou igual a `10`, execute o código.
+
+Dentro do bloco:
+
+```javascript
+cont++;
+```
+
+é fundamental.
+
+Isso faz o contador aumentar:
+
+```text
+1 → 2 → 3 → 4 → ... → 10 → 11
+```
+
+Quando chegar em `11`:
+
+```javascript
+11 <= 10
+```
+
+será:
+
+```text
+false
+```
+
+e o laço terminará.
+
+---
+
+# 16. Cuidado com o loop infinito
+
+É muito importante alterar a variável utilizada na condição.
+
+Por exemplo:
+
+```javascript
+var cont = 1;
+
+while (cont <= 10) {
+    console.log(cont);
+}
+```
+
+Esse código possui um problema.
+
+`cont` nunca muda.
+
+Ela continua sendo:
+
+```text
+1
+```
+
+Então:
+
+```text
+1 <= 10
+```
+
+continua sendo verdadeiro para sempre.
+
+Resultado: **loop infinito**.
+
+O correto seria:
+
+```javascript
+var cont = 1;
+
+while (cont <= 10) {
+    console.log(cont);
+    cont++;
+}
+```
+
+Agora o contador avança até a condição ficar falsa.
+
+---
+
+# 17. Comparação dos três laços
+
+| Laço         | Verifica condição | Estrutura                      | Executa pelo menos uma vez? |
+| ------------ | ----------------- | ------------------------------ | --------------------------- |
+| `for`        | antes             | início + condição + incremento | ❌ Não                       |
+| `while`      | antes             | condição separada              | ❌ Não                       |
+| `do...while` | depois            | código + condição              | ✅ Sim                       |
+
+Uma forma simples de lembrar:
+
+```text
+FOR
+"Sei a estrutura da repetição."
+
+WHILE
+"Enquanto isso for verdadeiro, continue."
+
+DO...WHILE
+"Faça primeiro; depois veja se continua."
+```
+
+---
+
+# 18. Atividade 1 — Mostrar números de 1 até 50 com `for`
+
+A proposta foi:
+
+> Fazer um algoritmo em JavaScript para exibir os números de 1 até 50 utilizando `for`.
+
+Código corrigido:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atividade 1 - For</title>
+</head>
+<body>
+
+    <h1>Atividade 1 - For</h1>
+
+    <p id="repetir"></p>
+
+    <script>
+        /*
+            Faça um algoritmo em JavaScript para exibir
+            os números de 1 até 50 usando for.
+        */
+
+        var cont = 1;
+        var num = '';
+
+        for (cont = 1; cont <= 50; cont++) {
+            num += cont + '<br>';
+        }
+
+        document.getElementById('repetir').innerHTML = num;
+    </script>
+
+</body>
+</html>
+```
+
+---
+
+## 18.1 Como funciona
+
+O `for` começa:
+
+```javascript
+cont = 1
+```
+
+Depois verifica:
+
+```javascript
+cont <= 50
+```
+
+Enquanto for verdadeiro:
+
+```javascript
+num += cont + '<br>';
+```
+
+adiciona o número à String.
+
+Depois:
+
+```javascript
+cont++;
+```
+
+aumenta o contador.
+
+O resultado será:
+
+```text
+1
+2
+3
+4
+5
+...
+50
+```
+
+---
+
+# 19. Atividade 2 — Mostrar números de 1 até 50 com `do...while`
+
+Código:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atividade 2 - Do...while</title>
+</head>
+<body>
+
+    <h1>Atividade 2 - Do...while</h1>
+
+    <p id="repetir"></p>
+
+    <script>
+        /*
+            Faça um algoritmo em JavaScript para exibir
+            os números de 1 até 50 usando do...while.
+        */
+
+        var cont = 1;
+        var num = '';
+
+        do {
+            num += cont + '<br>';
+            cont++;
+        } while (cont <= 50);
+
+        document.getElementById('repetir').innerHTML = num;
+    </script>
+
+</body>
+</html>
+```
+
+A diferença está na estrutura:
+
+```javascript
+do {
+    // executa primeiro
+} while (condição);
+```
+
+---
+
+# 20. Atividade 3 — Mostrar números de 1 até 50 com `while`
+
+Código:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atividade 3 - While</title>
+</head>
+<body>
+
+    <h1>Atividade 3 - While</h1>
+
+    <p id="repetir"></p>
+
+    <script>
+        /*
+            Faça um algoritmo em JavaScript para exibir
+            os números de 1 até 50 usando while.
+        */
+
+        var cont = 1;
+        var num = '';
+
+        while (cont <= 50) {
+            num += cont + '<br>';
+            cont++;
+        }
+
+        document.getElementById('repetir').innerHTML = num;
+    </script>
+
+</body>
+</html>
+```
+
+---
+
+# 21. Variável acumuladora
+
+Agora foi introduzido um conceito muito importante:
+
+> **Variável acumuladora.**
+
+Uma variável acumuladora é utilizada para guardar e atualizar um resultado durante várias repetições.
+
+Por exemplo, queremos somar:
+
+```text
+1 + 2 + 3 + 4 + 5
+```
+
+Podemos começar com:
+
+```javascript
+var total = 0;
+```
+
+Depois:
+
+```javascript
+total = total + 1;
+```
+
+Agora:
+
+```text
+total = 1
+```
+
+Depois:
+
+```javascript
+total = total + 2;
+```
+
+Agora:
+
+```text
+total = 3
+```
+
+Depois:
+
+```text
+3 + 3 = 6
+```
+
+E assim por diante.
+
+É como uma **caixa** onde vamos colocando os resultados anteriores junto com o próximo valor.
+
+---
+
+# 22. Acumulador x contador
+
+É importante não confundir os dois.
+
+### Contador
+
+Normalmente serve para controlar quantas vezes o laço foi executado.
+
+```javascript
+cont++;
+```
+
+Exemplo:
+
+```text
+1 → 2 → 3 → 4 → 5
+```
+
+### Acumulador
+
+Serve para acumular um resultado.
+
+```javascript
+total = total + numero;
+```
+
+Exemplo:
+
+```text
+0
+0 + 5 = 5
+5 + 3 = 8
+8 + 7 = 15
+```
+
+### Resumindo
+
+```text
+CONTADOR
+→ conta.
+
+ACUMULADOR
+→ soma/acumula.
+```
+
+---
+
+# 23. Atividade — Somar 10 números
+
+Foi criado o arquivo:
+
+```text
+acumuladora.html
 ```
 
 Estrutura:
@@ -1108,16 +991,15 @@ Estrutura:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Estrutura condicional simples</title>
+    <title>Variável acumuladora</title>
 </head>
 <body>
 
-    <h1>Estrutura condicional simples</h1>
+    <h1>Variável acumuladora</h1>
 
-    <p id="teste"></p>
+    <p id="teste">A soma de todos os números é: </p>
 
     <script>
-
     </script>
 
 </body>
@@ -1126,7 +1008,7 @@ Estrutura:
 
 ---
 
-# Código completo
+# 24. Código completo
 
 ```html
 <!DOCTYPE html>
@@ -1134,625 +1016,229 @@ Estrutura:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Estrutura condicional simples</title>
+    <title>Variável acumuladora</title>
 </head>
 <body>
 
-    <h1>Estrutura condicional simples</h1>
+    <h1>Variável acumuladora</h1>
 
-    <p id="teste"></p>
+    <p id="teste">A soma de todos os números é: </p>
 
     <script>
-        // Criando a variável
-        var media = 7;
+        // Contador do loop
+        var cont = 1;
 
-        // Criando a condicional simples
-        if (media >= 7) {
-            resposta = 'Aprovado(a)';
+        // Acumulador da soma
+        var total = 0;
+
+        // Variável para armazenar cada número digitado
+        var numero = 0;
+
+        // Informar ao usuário o que ele precisa fazer
+        alert('Digite 10 números aleatórios');
+
+        // Criando o laço de repetição
+        for (cont = 1; cont <= 10; cont++) {
+
+            numero = parseInt(
+                prompt('Digite o ' + cont + 'º número', '')
+            );
+
+            total = total + numero;
         }
 
-        // Mostrar o resultado
-        document.getElementById('teste').innerHTML = resposta;
+        // Mostrando o resultado
+        document.getElementById('teste').innerHTML += total;
     </script>
 
 </body>
 </html>
 ```
 
-**Entendendo o `if`**
-
-```javascript
-if (media >= 7) {
-```
-
-Pode ser lido como:
-
-> **Se** a média for maior ou igual a 7...
-
-Depois temos:
-
-```javascript
-{
-    resposta = 'Aprovado(a)';
-}
-```
-
-que significa:
-
-> ...execute este bloco de código.
-
-- **No exemplo:**
-
-```
-media = 7
-```
-
-A condição:
-
-```javascript
-media >= 7
-```
-
-é verdadeira.
-
-Então:
-
-```javascript
-resposta = 'Aprovado(a)';
-```
-
-é executado.
-
 ---
 
-**Estrutura básica**
+# 25. Entendendo o programa passo a passo
+
+## 25.1 Contador
 
 ```javascript
-if (condição) {
-    // código executado se a condição for verdadeira
-}
+var cont = 1;
 ```
 
-O `if` significa **se**.
+Controla o número da repetição.
 
-A condição precisa resultar em algo que possa ser avaliado como verdadeiro ou falso.
-
----
-
-## Condicional Composta — `if...else`
-
-A condicional composta possui dois caminhos:
-
-```
-SE for verdadeiro → faça uma coisa
-SENÃO → faça outra
-```
-
-Foi criado o arquivo:
-
-```
-condicional-composta.html
-```
-
----
-
-# Aprovado ou reprovado
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Estrutura condicional composta</title>
-</head>
-<body>
-
-    <h1>Estrutura condicional composta</h1>
-
-    <p id="teste"></p>
-
-    <script>
-        // Criando a variável
-        var media = 6;
-
-        // Criando a condicional composta
-        if (media >= 7) {
-            resposta = 'Aprovado(a)';
-        } else {
-            resposta = 'Reprovado(a)';
-        }
-
-        // Mostrar o resultado
-        document.getElementById('teste').innerHTML = resposta;
-    </script>
-
-</body>
-</html>
-```
-
-Como:
-
-```
-media = 6
-```
-
-a condição:
-
-```javascript
-media >= 7
-```
-
-é falsa.
-
-Portanto, o `else` é executado:
-
-```javascript
-resposta = 'Reprovado(a)';
-```
-
-Resultado:
+O `for` fará:
 
 ```text
-Reprovado(a)
+1ª repetição
+2ª repetição
+3ª repetição
+...
+10ª repetição
 ```
 
 ---
 
-**`if...else if...else`**
-
-Podemos ter mais de duas possibilidades.
-
-- **Exemplo:**
-
-```
-7 ou mais → Aprovado
-6 até menos de 7 → Recuperação
-menos de 6 → Reprovado
-```
-
-Para isso usamos:
+## 25.2 Acumulador
 
 ```javascript
-else if
+var total = 0;
 ```
+
+Começamos com zero porque ainda não existe nenhum número somado.
 
 ---
 
-**Código**
-
-```html
-<script>
-    // Criando a variável
-    var media = 6;
-
-    // Criando a condicional composta
-    if (media >= 7) {
-        resposta = 'Aprovado(a)';
-    } else if (media >= 6) {
-        resposta = 'Recuperação';
-    } else {
-        resposta = 'Reprovado(a)';
-    }
-
-    // Mostrar o resultado
-    document.getElementById('teste').innerHTML = resposta;
-</script>
-```
-
-**Como o JavaScript verifica?**
-
-Ele testa as condições de cima para baixo.
-
-Com:
-
-```
-media = 6
-```
-
-Primeiro:
+## 25.3 Variável temporária
 
 ```javascript
-media >= 7
+var numero = 0;
 ```
 
-Resultado:
+Essa variável guarda o número digitado na repetição atual.
 
-```
-false
-```
+Ela não é o acumulador.
 
-Então passa para:
-
-```javascript
-media >= 6
-```
-
-Resultado:
-
-```
-true
-```
-
-Portanto:
-
-```
-Recuperação
-```
-
-é atribuído à variável `resposta`.
-
----
-
-## Condicional Ternário
-
-O **operador ternário** permite escrever uma condição simples de forma mais curta.
-
-Foi criado o arquivo:
-
-```
-condicional-ternario.html
-```
-
-A estrutura básica é:
-
-```javascript
-condição ? valorSeVerdadeiro : valorSeFalso;
-```
-
-Podemos interpretar como:
-
-```
-Se condição for verdadeira → primeiro valor
-Senão → segundo valor
-```
-
----
-
-- **Exemplo**
-
-```javascript
-var media = 7;
-var resultado = '';
-
-resultado = (media >= 7) ? 'Aprovado(a)' : 'Reprovado(a)';
-```
-
-A condição é:
-
-```javascript
-media >= 7
-```
-
-Se for verdadeira:
-
-```
-Aprovado(a)
-```
-
-Se for falsa:
-
-```
-Reprovado(a)
-```
-
----
-
-# Código completo - Condicional Ternário 
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Estrutura condicional ternário</title>
-</head>
-<body>
-
-    <h1>Estrutura condicional ternário</h1>
-
-    <p id="teste"></p>
-
-    <script>
-        // Criando as variáveis
-        var media = 7;
-        var resultado = '';
-
-        // Condicional ternário
-        resultado = (media >= 7)
-            ? 'Aprovado(a)'
-            : 'Reprovado(a)';
-
-        // Mostrar o resultado
-        document.getElementById('teste').innerHTML = resultado;
-    </script>
-
-</body>
-</html>
-```
-
-**Desmontando a expressão**
-
-```javascript
-resultado = (media >= 7) ? 'Aprovado(a)' : 'Reprovado(a)';
-```
-
-Temos:
-
-```
-(media >= 7)
-```
-
-→ condição
-
-```
-?
-```
-
-→ separa a condição dos resultados
-
-```
-'Aprovado(a)'
-```
-
-→ resultado se for verdadeiro
-
-```
-:
-```
-
-→ separa verdadeiro e falso
-
-```
-'Reprovado(a)'
-```
-
-→ resultado se for falso
-
----
-
-# Ternário com três possibilidades
-
-Também é possível colocar outro ternário dentro do primeiro.
-
-- **Exemplo:**
-
-```javascript
-var media = 6;
-var resultado = '';
-
-resultado = (media >= 7)
-    ? 'Aprovado(a)'
-    : (media >= 6)
-        ? 'Recuperação'
-        : 'Reprovado(a)';
-```
-
-A lógica é:
-
-```
-media >= 7?
-    SIM → Aprovado(a)
-    NÃO → media >= 6?
-              SIM → Recuperação
-              NÃO → Reprovado(a)
-```
-
-Com:
-
-```
-media = 6
-```
-
-o resultado será:
-
-```
-Recuperação
-```
-
-**Observação**
-
-O ternário aninhado funciona, mas quando existem muitas condições, o `if...else if...else` normalmente fica mais fácil de ler.
-
----
-
-# Condicional de Escolha — `switch`
-
-Quando temos várias opções baseadas no valor de uma variável, podemos utilizar:
-
-```javascript
-switch
-```
-
-Ele funciona como uma estrutura de **escolha**.
-
-Foi criado o arquivo:
+Por exemplo:
 
 ```text
-condicional-escolha.html
+numero = 10
+total = 25
+```
+
+O `numero` representa apenas o valor atual.
+
+O `total` representa tudo que já foi acumulado.
+
+---
+
+# 26. `alert()`
+
+```javascript
+alert('Digite 10 números aleatórios');
+```
+
+Mostra uma caixa de alerta no navegador.
+
+Serve para informar ao usuário o que ele deve fazer.
+
+---
+
+# 27. `prompt()`
+
+```javascript
+prompt('Digite o ' + cont + 'º número', '')
+```
+
+Abre uma caixa para o usuário digitar um valor.
+
+Como `cont` muda a cada repetição, a mensagem também muda:
+
+```text
+Digite o 1º número
+Digite o 2º número
+Digite o 3º número
+...
+Digite o 10º número
 ```
 
 ---
 
-## Exemplo com dias da semana
+# 28. `parseInt()`
 
-O programa solicita um número de `1` a `7` e transforma esse número no respectivo dia da semana.
+O valor recebido pelo `prompt()` é uma String.
+
+Por isso utilizamos:
 
 ```javascript
-var dia = 0;
-var resposta = '';
-
-dia = parseInt(prompt('Digite um número entre 1 a 7', ''));
+parseInt(...)
 ```
 
----
+para transformar o texto em um número inteiro.
 
-**`prompt()`**
-
-```javascript
-prompt('Digite um número entre 1 a 7', '');
-```
-
-Abre uma caixa de diálogo no navegador solicitando uma informação ao usuário.
-
-Por padrão, o valor recebido pelo `prompt()` é uma **String**.
-
-Por isso foi utilizado:
+Exemplo:
 
 ```javascript
-parseInt()
-```
-
-para converter o valor recebido para um número inteiro.
-
-- **Exemplo:**
-
-```javascript
-parseInt('5')
+parseInt('25')
 ```
 
 resulta em:
 
+```text
+25
 ```
+
+---
+
+# 29. Acumulando a soma
+
+A linha principal é:
+
+```javascript
+total = total + numero;
+```
+
+Imagine que o usuário digite:
+
+```text
+10
+20
 5
 ```
 
----
+O programa fará:
 
-**Estrutura `switch`**
+```text
+total = 0
 
-```javascript
-switch (dia) {
-    case 1:
-        resposta = 'Domingo';
-        break;
+total = 0 + 10
+total = 10
 
-    case 2:
-        resposta = 'Segunda-Feira';
-        break;
+total = 10 + 20
+total = 30
 
-    case 3:
-        resposta = 'Terça-Feira';
-        break;
-
-    case 4:
-        resposta = 'Quarta-Feira';
-        break;
-
-    case 5:
-        resposta = 'Quinta-Feira';
-        break;
-
-    case 6:
-        resposta = 'Sexta-Feira';
-        break;
-
-    case 7:
-        resposta = 'Sábado';
-        break;
-
-    default:
-        resposta = 'Dia da semana não existe.';
-}
+total = 30 + 5
+total = 35
 ```
 
-**Como funciona?**
-
-Se:
-
-```
-dia = 1
-```
-
-o JavaScript procura:
-
-```javascript
-case 1:
-```
-
-e executa:
-
-```javascript
-resposta = 'Domingo';
-```
-
-Se:
-
-```
-dia = 5
-```
-
-ele encontra:
-
-```javascript
-case 5:
-```
-
-e executa:
-
-```javascript
-resposta = 'Quinta-Feira';
-```
+Esse processo continua até os 10 números serem digitados.
 
 ---
 
-**O `break`**
+# 30. Exibindo o resultado
 
-O:
-
-```javascript
-break;
-```
-
-serve para interromper o `switch` depois que o caso correspondente foi executado.
-
-Sem o `break`, o JavaScript pode continuar executando os próximos `case`.
-
-Portanto, normalmente usamos:
+Depois que o `for` termina:
 
 ```javascript
-case 1:
-    resposta = 'Domingo';
-    break;
+document.getElementById('teste').innerHTML += total;
 ```
+
+O valor final de `total` é colocado no parágrafo:
+
+```html
+<p id="teste">
+    A soma de todos os números é:
+</p>
+```
+
+O `+=` é utilizado porque queremos **manter o texto que já existe** e acrescentar o resultado.
 
 ---
 
-**O `default`**
+# 31. Segundo exercício — Total de vendas
 
-O:
+Agora o conceito de acumulador foi aplicado a uma situação mais próxima de um problema real.
 
-```javascript
-default:
-```
+O programa deverá:
 
-é executado quando nenhum `case` corresponde ao valor informado.
-
-- **Por exemplo, se o usuário digitar:**
-
-```
-8
-```
-
-não existe:
-
-```javascript
-case 8
-```
-
-Então o `default` será executado.
-
-No exercício original havia uma mensagem com uma ofensa ao usuário. Para uma aplicação real, é melhor utilizar uma mensagem neutra:
-
-```javascript
-default:
-    resposta = 'Dia da semana não existe.';
-```
+1. perguntar quantas vendas foram feitas;
+2. pedir o valor de cada venda;
+3. somar todas as vendas;
+4. mostrar o total.
 
 ---
 
-# Código completo - Condicional Escolha
+# 32. Código completo
 
 ```html
 <!DOCTYPE html>
@@ -1760,64 +1246,52 @@ default:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Estrutura condicional escolha</title>
+    <title>Variável acumuladora</title>
 </head>
 <body>
 
-    <h1>Estrutura condicional escolha</h1>
+    <h1>Variável acumuladora</h1>
 
-    <p id="teste"></p>
+    <p id="teste">O total de vendas foi: </p>
 
     <script>
-        // Criando as variáveis
-        var dia = 0;
-        var resposta = '';
-
-        // Solicitando um número para o usuário
-        dia = parseInt(prompt('Digite um número entre 1 a 7', ''));
-
         /*
-            Vai abrir uma caixa de diálogo no navegador
-            pedindo para o usuário digitar um número
-            entre 1 e 7.
+            Código exemplo de controle de quantidade de entradas.
+
+            O usuário informa quantas vendas foram feitas no dia.
+            Depois digita os valores de cada venda,
+            e o programa calcula o total das vendas.
         */
 
-        // Criando a condicional escolha
-        switch (dia) {
-            case 1:
-                resposta = 'Domingo';
-                break;
+        // Contador do loop
+        var cont = 1;
 
-            case 2:
-                resposta = 'Segunda-Feira';
-                break;
+        // Acumulador das vendas
+        var total = 0;
 
-            case 3:
-                resposta = 'Terça-Feira';
-                break;
+        // Valor de cada venda
+        var venda = 0;
 
-            case 4:
-                resposta = 'Quarta-Feira';
-                break;
+        // Quantidade de vendas
+        var fim = 0;
 
-            case 5:
-                resposta = 'Quinta-Feira';
-                break;
+        // Solicitar ao usuário a quantidade de vendas do dia
+        fim = parseInt(
+            prompt('Digite a quantidade de vendas', '')
+        );
 
-            case 6:
-                resposta = 'Sexta-Feira';
-                break;
+        // Criando o laço de repetição
+        for (cont = 1; cont <= fim; cont++) {
 
-            case 7:
-                resposta = 'Sábado';
-                break;
+            venda = parseFloat(
+                prompt('Digite o valor da ' + cont + 'ª venda', '')
+            );
 
-            default:
-                resposta = 'Dia da semana não existe.';
+            total = total + venda;
         }
 
-        // Mostrar o resultado
-        document.getElementById('teste').innerHTML = resposta;
+        // Exibir o resultado
+        document.getElementById('teste').innerHTML += total;
     </script>
 
 </body>
@@ -1826,216 +1300,291 @@ default:
 
 ---
 
-### Comparando as estruturas condicionais
+# 33. Entendendo o exercício de vendas
 
-Cada estrutura possui uma finalidade mais adequada.
-
-**`if`**
-
-Usado quando precisamos verificar uma condição.
+Aqui temos quatro variáveis:
 
 ```javascript
-if (media >= 7) {
-    resposta = 'Aprovado';
-}
+var cont = 1;
+var total = 0;
+var venda = 0;
+var fim = 0;
 ```
+
+Cada uma possui uma função diferente.
+
+| Variável | Função                         |
+| -------- | ------------------------------ |
+| `cont`   | controla as repetições         |
+| `total`  | acumula os valores das vendas  |
+| `venda`  | guarda a venda atual           |
+| `fim`    | informa quantas vendas existem |
 
 ---
 
-**`if...else`**
-
-Usado quando existem dois caminhos.
+# 34. Quantidade de vendas
 
 ```javascript
-if (media >= 7) {
-    resposta = 'Aprovado';
-} else {
-    resposta = 'Reprovado';
-}
+fim = parseInt(
+    prompt('Digite a quantidade de vendas', '')
+);
 ```
+
+O usuário informa, por exemplo:
+
+```text
+3
+```
+
+Então:
+
+```text
+fim = 3
+```
+
+O `for` será executado três vezes.
 
 ---
 
-`if...else if...else`
+# 35. Valor de cada venda
 
-Usado quando existem várias condições diferentes.
+Dentro do `for`:
 
 ```javascript
-if (media >= 7) {
-    resposta = 'Aprovado';
-} else if (media >= 6) {
-    resposta = 'Recuperação';
-} else {
-    resposta = 'Reprovado';
-}
+venda = parseFloat(
+    prompt('Digite o valor da ' + cont + 'ª venda', '')
+);
 ```
+
+Aqui usamos `parseFloat()` porque uma venda pode possuir casas decimais.
+
+Exemplo:
+
+```text
+25.50
+10.75
+8.90
+```
+
+`parseFloat()` converte o texto recebido para um número decimal.
 
 ---
 
-**Ternário**
+# 36. Por que `parseFloat()` e não `parseInt()`?
 
-Usado principalmente para uma decisão curta.
+`parseInt()` trabalha com números inteiros.
+
+Exemplo:
 
 ```javascript
-resultado = media >= 7 ? 'Aprovado' : 'Reprovado';
+parseInt('25')
 ```
+
+→ `25`
+
+Já `parseFloat()` permite valores com casas decimais:
+
+```javascript
+parseFloat('25.50')
+```
+
+→ `25.50`
+
+Por isso `parseFloat()` é mais adequado para valores monetários nesse exercício.
 
 ---
 
-**`switch`**
+# 37. Acumulando as vendas
 
-Usado quando precisamos escolher entre vários valores específicos.
+Suponha que o usuário informe:
 
-```javascript
-switch (dia) {
-    case 1:
-        resposta = 'Domingo';
-        break;
+```text
+Quantidade de vendas: 3
 
-    case 2:
-        resposta = 'Segunda-Feira';
-        break;
-}
+Venda 1: 10.50
+Venda 2: 20.00
+Venda 3: 5.50
 ```
 
----
+O programa fará:
 
-**Fluxo mental para resolver exercícios**
+```text
+total = 0
 
-Ao receber um problema de programação, posso pensar nesta sequência:
+total = 0 + 10.50
+total = 10.50
 
-```
-1. Quais são os dados?
-        ↓
-2. Quais são os tipos desses dados?
-        ↓
-3. Preciso fazer algum cálculo?
-        ↓
-4. Preciso comparar valores?
-        ↓
-5. Preciso tomar uma decisão?
-        ↓
-6. Tenho duas possibilidades ou várias?
-        ↓
-7. Escolho a estrutura adequada:
-   if / else / else if / ternário / switch
-        ↓
-8. Exibo o resultado
-```
+total = 10.50 + 20.00
+total = 30.50
 
-Isso ajuda a transformar um problema escrito em linguagem natural em código.
-
----
-
-# Conceitos importantes
-
-**Comparação**
-
-Compara valores e retorna um resultado lógico:
-
-```javascript
-a >= b
+total = 30.50 + 5.50
+total = 36.00
 ```
 
 Resultado:
 
-```
-true
-```
-
-ou:
-
 ```text
-false
+O total de vendas foi: 36
 ```
 
 ---
 
-**Adição**
+# 38. Estrutura geral de um acumulador
 
-Quando temos números:
-
-```javascript
-1 + 2
-```
-
-temos uma soma.
-
----
-
-**Concatenação**
-
-Quando o `+` envolve uma String:
+Um padrão muito importante é:
 
 ```javascript
-'Olá ' + 'mundo'
-```
+var total = 0;
 
-temos junção de textos.
-
----
-
-**Lógica `&&`**
-
-Representa **E**:
-
-```javascript
-condicao1 && condicao2
-```
-
-Normalmente, ambas precisam ser verdadeiras.
-
----
-
-**Lógica `||`**
-
-Representa **OU**:
-
-```javascript
-condicao1 || condicao2
-```
-
-Pelo menos uma precisa ser verdadeira.
-
----
-
-**Negação `!`**
-
-Inverte o valor lógico:
-
-```javascript
-!true
-```
-
-resulta em:
-
-```
-false
-```
-
----
-
-**Condicional**
-
-Permite ao programa tomar decisões:
-
-```javascript
-if (condicao) {
-    // ação
+for (...) {
+    total = total + valor;
 }
 ```
 
+Também podemos escrever:
+
+```javascript
+total += valor;
+```
+
+As duas formas representam a mesma ideia:
+
+```javascript
+total = total + valor;
+```
+
+e:
+
+```javascript
+total += valor;
+```
+
 ---
 
-**Resumo Relâmpago**
+# 39. Padrão mental para exercícios com repetição
 
-1. **Operadores comparativos** comparam valores e produzem `true` ou `false`.
-2. `==` compara principalmente o valor, enquanto `===` compara **valor e tipo**.
-3. `>`, `<`, `>=` e `<=` fazem comparações numéricas.
-4. O `+` pode fazer **adição** ou **concatenação**, dependendo dos valores envolvidos.
-5. Em operações numéricas, `true` pode representar `1` e `false` pode representar `0`.
-6. `&&` significa **E** e exige que as condições sejam verdadeiras para o resultado lógico ser verdadeiro.
-7. `||` significa **OU** e precisa de pelo menos uma condição verdadeira.
-8. `!` significa **NÃO** e inverte um valor lógico.
-9. `if`, `else if` e `else` permitem criar decisões; o ternário é uma forma curta para decisões simples.
-10. `switch`, `case`, `break` e `default` permitem escolher uma ação com base em vários valores possíveis.
+Quando um exercício pedir para repetir alguma ação, procurar estas quatro perguntas:
+
+### 1. O que controla a repetição?
+
+Normalmente será o **contador**:
+
+```javascript
+var cont = 1;
+```
+
+### 2. Até quando repetir?
+
+É a **condição**:
+
+```javascript
+cont <= 10
+```
+
+### 3. O que será feito em cada repetição?
+
+Por exemplo:
+
+```javascript
+numero = parseInt(prompt(...));
+```
+
+### 4. Preciso guardar/acumular algum resultado?
+
+Se sim, criar um **acumulador**:
+
+```javascript
+var total = 0;
+```
+
+e atualizar:
+
+```javascript
+total += numero;
+```
+
+---
+
+# 40. Contador e acumulador juntos
+
+É muito comum os dois aparecerem no mesmo programa:
+
+```javascript
+var cont = 1;
+var total = 0;
+
+for (cont = 1; cont <= 10; cont++) {
+    total += numero;
+}
+```
+
+Nesse caso:
+
+```text
+cont
+↓
+controla quantas vezes o código executa
+
+total
+↓
+guarda o resultado acumulado
+```
+
+Essa combinação aparece constantemente em exercícios de programação.
+
+---
+
+# 41. `for`, `while` e `do...while` — visão final
+
+### `for`
+
+```javascript
+for (cont = 1; cont <= 10; cont++) {
+    // código
+}
+```
+
+Ideal quando a estrutura do contador já está bem definida.
+
+---
+
+### `while`
+
+```javascript
+while (condicao) {
+    // código
+}
+```
+
+Verifica a condição **antes** de executar.
+
+Pode executar zero vezes.
+
+---
+
+### `do...while`
+
+```javascript
+do {
+    // código
+} while (condicao);
+```
+
+Executa primeiro e verifica depois.
+
+Executa **pelo menos uma vez**.
+
+---
+
+# Resumo Relâmpago — 10 linhas
+
+1. **Laços de repetição** permitem executar um bloco de código várias vezes.
+2. `for` reúne início, condição e incremento na mesma estrutura.
+3. `while` verifica a condição antes de executar o bloco.
+4. `do...while` executa o bloco primeiro e verifica a condição depois.
+5. Por isso, `do...while` sempre executa pelo menos uma vez.
+6. Um **contador** controla quantas vezes o laço será executado.
+7. Um **acumulador** guarda e atualiza um resultado durante as repetições.
+8. `+=` pode ser usado para acumular valores ou textos.
+9. `parseInt()` converte entradas para números inteiros e `parseFloat()` permite números decimais.
+10. O padrão **contador + condição + acumulador** é uma das bases para resolver exercícios de repetição.
