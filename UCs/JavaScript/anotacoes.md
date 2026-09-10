@@ -1,4 +1,3 @@
-```markdown
 # 📝 Caderno de Estudos: JavaScript — Manipulação de Vetores (Arrays) e Métodos Nativos
 
 ---
