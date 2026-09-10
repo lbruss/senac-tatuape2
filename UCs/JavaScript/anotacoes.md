@@ -1,53 +1,76 @@
-# 📝 Caderno de Estudos: JavaScript — Manipulação de Vetores (Arrays) e Métodos Nativos
+📚 JavaScript — Vetores (Arrays)
 
 ---
 
-## 🧠 1. Visão Geral & Caixa-Preta
+🧠 1. Visão Geral
 
-### 📌 Ideia Principal
-Nesta aula, avancei para o estudo de **Vetores (Arrays)** em JavaScript. Até agora, minhas variáveis guardavam apenas um único valor por vez (ex: `var cor = 'Verde'`). Com os vetores, aprendi a armazenar uma **coleção ordenada de múltiplos dados** sob um único nome de variável, além de utilizar propriedades e métodos nativos para medir, percorrer, unir e alterar essas listas dinamicamente.
+Nesta aula, aprendi a trabalhar com **Vetores**, que no JavaScript são chamados de **Arrays**. 
 
-### 💡 A "Caixa-Preta" & Analogia do Cotidiano
-* **Explicando de Forma Simples:** Um vetor é uma variável "especial" composta por vários compartimentos numerados. Em vez de criar quatro variáveis separadas (`cor1`, `cor2`, `cor3`, `cor4`), eu crio um único vetor `cores` que guarda todas elas.
-* **Analogia Prática:** Imagine um **armário de correio com gavetas numeradas**:
-  * O armário inteiro chama-se `cores`.
-  * Cada gaveta guarda uma informação (uma cor).
-  * O número marcado na frente da gaveta é o **Índice (Index)**.
-  * **A Regra de Ouro da Programação:** A numeração das gavetas **sempre começa no 0** (Índice Base Zero). Portanto, o 1º item fica na gaveta `0`, o 2º item na gaveta `1`, e assim por diante.
-  * A propriedade `.length` funciona como um **fiscais de patrimônio**: ele conta quantas gavetas ocupadas existem no armário.
+Até agora, eu estava acostumado a criar uma variável para guardar apenas um valor por vez:
+```javascript
+let cor1 = 'Verde';
+let cor2 = 'Amarelo';
+let cor3 = 'Azul';
+let cor4 = 'Branco';
 
-### 🔄 Ordem Lógica / Fluxo de Execução
-```text
-  [ DECLARAÇÃO DO VETOR ]
-  var cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
-             ↓
-  [ ACESSO E MEDIÇÃO ]
-  cores[0]  → Primeiro item ('Verde')
-  cores.length → Tamanho total (4)
-  cores[cores.length - 1] → Último item ('Branco')
-             ↓
-  [ MANIPULAÇÃO VIA MÉTODOS ]
-  .unshift() → Insere no início
-  .push()    → Insere no final
-  .concat()  → Unifica vetores
-             ↓
-  [ PROCESSAMENTO EM LAÇO (FOR) ]
-  Varre do índice 0 até length - 1
-             ↓
-  [ INJEÇÃO NO DOM (HTML) ]
-  Exibição dos dados na página
+Entendi que o Array serve para resolver esse problema: ele é uma estrutura de dados que permite armazenar múltiplos valores dentro de uma única variável.
+let cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
 
-```
+Para que serve?
+O Array serve para organizar listas de dados (como nomes de clientes, produtos, notas de alunos ou dados vindos de um banco de dados) de forma simplificada, permitindo que a gente manipule dezenas ou centenas de informações usando um único nome de variável.
+💡 2. Entendendo o Conceito
+Uma forma simples de entender um Array é imaginá-lo como uma estante numerada ou uma gaveta com vários compartimentos.
+Índice:       0          1          2          3
+          ┌──────────┬──────────┬──────────┬──────────┐
+Array:    │  Verde   │ Amarelo  │   Azul   │  Branco  │
+          └──────────┴──────────┴──────────┴──────────┘
 
----
+Conceito Técnico:
+Cada espaço do Array guarda um valor e possui uma posição fixa identificada por um número chamado Índice (Index).
+A Regra do Índice Base Zero (Zero-based Indexing):
+Em JavaScript, a contagem dos índices sempre começa em 0, e não em 1.
+ * A 1ª posição da lista é o índice 0.
+ * A 2ª posição da lista é o índice 1.
+ * A 3ª posição da lista é o índice 2.
+ * A 4ª posição da lista é o índice 3.
+📌 3. Conceitos Fundamentais
+A. Criando um Array
+Podemos criar um vetor de duas formas:
+ * Sintaxe Literal (com colchetes []): É a forma padrão e mais usada no mercado.
+   let cores1 = ['Verde', 'Amarelo', 'Azul', 'Branco'];
 
-## 💻 2. Código / Passo a Passo Comentado
+ * Construtor new Array(): Usa a função padrão nativa da linguagem.
+   let cores2 = new Array('Laranja', 'Vermelho', 'Preto', 'Cinza');
 
-### 🛠️ Estrutura & Sintaxe dos Códigos Estudados
+Cuidados: A forma com colchetes [] é preferida porque é mais simples, clara e evita comportamentos inesperados.
+B. Acessando Elementos
+Para ler um valor guardado, informamos o nome do Array e o número do índice entre colchetes:
+let cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
 
-#### Exemplo 1: Criação, Declaração e Acesso por Índice (`vetor-declaracao.html`)
+console.log(cores[0]); // Retorna: Verde
+console.log(cores[1]); // Retorna: Amarelo
+console.log(cores[2]); // Retorna: Azul
 
-```html
+C. A Propriedade length
+A propriedade .length informa a quantidade total de elementos presentes no Array.
+let cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+console.log(cores.length); // Retorna: 4
+
+⚠️ Atenção para não confundir:
+ * cores.length: Informa quantos elementos existem (retorna 4).
+ * cores[3]: Informa qual elemento está no índice 3 (retorna 'Branco').
+D. Primeiro e Último Elemento
+ * Primeiro elemento: Sempre estará no índice 0 (cores[0]).
+ * Último elemento: É acessado de forma dinâmica com cores[cores.length - 1].
+Por que - 1?
+Se o Array tem 4 elementos (length = 4), seus índices são 0, 1, 2, 3.
+Logo, 4 - 1 resulta no índice 3, que é exatamente a última posição.
+E. Métodos Principais de Manipulação
+ * push(): Adiciona um ou mais elementos no FINAL do Array. Modifica o vetor original.
+ * unshift(): Adiciona um ou mais elementos no INÍCIO do Array. Modifica o vetor original.
+ * concat(): Junta dois ou mais Arrays. Não modifica os originais; ele cria e retorna um novo Array unificado.
+💻 4. Código / Exemplos Práticos
+Exemplo 1: Declaração e Acesso a Posições (vetor-declaracao.html)
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -57,30 +80,29 @@ Nesta aula, avancei para o estudo de **Vetores (Arrays)** em JavaScript. Até ag
 </head>
 <body>
     <h1>Exemplo de vetor</h1>
+
     <p id="teste1">Conteúdo do vetor 1: </p>
     <p id="teste2">Conteúdo do vetor 2: </p>
     <p id="teste3">Segunda posição do vetor 1: </p>
     <p id="teste4">Terceira posição do vetor 2: </p>
 
     <script>
-        // Criando Vetores
-        var cores1 = ['Verde', 'Amarelo', 'Azul', 'Branco']; // Sintaxe Literal (Mais recomendada)
-        var cores2 = new Array('Laranja', 'Vermelho', 'Preto', 'Cinza'); // Construtor de Objeto
+        // Criando vetores
+        let cores1 = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+        let cores2 = new Array('Laranja', 'Vermelho', 'Preto', 'Cinza');
 
-        // Exibindo o vetor completo e elementos por posição
+        // Exibindo todo o conteúdo
         document.getElementById('teste1').innerHTML += cores1;
         document.getElementById('teste2').innerHTML += cores2;
-        document.getElementById('teste3').innerHTML += cores1[1]; // Acessa o índice 1 (2º elemento)
-        document.getElementById('teste4').innerHTML += cores2[2]; // Acessa o índice 2 (3º elemento)
+
+        // Exibindo elementos específicos pelo índice
+        document.getElementById('teste3').innerHTML += cores1[1]; // Exibe: Amarelo
+        document.getElementById('teste4').innerHTML += cores2[2]; // Exibe: Preto
     </script>
 </body>
 </html>
 
-```
-
-#### Exemplo 2: Medição e Busca do Último Item (`vetor-tamanho.html`)
-
-```html
+Exemplo 2: Medindo Tamanho e Limites (vetor-tamanho.html)
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -90,30 +112,27 @@ Nesta aula, avancei para o estudo de **Vetores (Arrays)** em JavaScript. Até ag
 </head>
 <body>
     <h1>Exemplo de vetor</h1>
+
     <p id="teste1">Quantidade de itens do vetor: </p>
     <p id="teste2">Primeiro item do vetor: </p>
     <p id="teste3">Último item do vetor: </p>
 
     <script>
-        var cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+        let cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
 
-        // Quantidade total de elementos
-        document.getElementById('teste1').innerHTML += cores.length; // Retorna 4
+        // Exibe a quantidade total de elementos (4)
+        document.getElementById('teste1').innerHTML += cores.length;
 
-        // Primeiro elemento (Índice 0)
-        document.getElementById('teste2').innerHTML += cores[0]; // Retorna 'Verde'
+        // Exibe o primeiro elemento (índice 0 -> Verde)
+        document.getElementById('teste2').innerHTML += cores[0];
 
-        // Cálculo dinâmico para pegar o último elemento
-        document.getElementById('teste3').innerHTML += cores[cores.length - 1]; // cores[4 - 1] = cores[3] ('Branco')
+        // Exibe o último elemento de forma dinâmica (índice 4-1 = 3 -> Branco)
+        document.getElementById('teste3').innerHTML += cores[cores.length - 1];
     </script>
 </body>
 </html>
 
-```
-
-#### Exemplo 3: Varredura Dinâmica e Construção de Lista HTML (`vetor-loop.html`)
-
-```html
+Exemplo 3: Percorrendo Array com for para Criar Lista HTML (vetor-loop.html)
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -126,29 +145,49 @@ Nesta aula, avancei para o estudo de **Vetores (Arrays)** em JavaScript. Até ag
     <p id="teste"></p>
 
     <script>
-        var cores, resultado, fim, cont;
-        cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
-        fim = cores.length; // Guarda a quantidade total [4] para otimizar o laço
+        let cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];
+        let fim = cores.length; // Guarda o tamanho total (4)
+        let resultado = '<ul>'; // Inicia a marcação de lista não ordenada
 
-        resultado = '<ul>'; // Abertura da tag de lista não ordenada
-
-        // Laço for varrendo do índice 0 até enquanto cont for menor que o tamanho total
-        for (cont = 0; cont < fim; cont++) {
+        // Percorre do índice 0 até enquanto for menor que o tamanho (0, 1, 2, 3)
+        for (let cont = 0; cont < fim; cont++) {
             resultado += '<li>' + cores[cont] + '</li>';
         }
 
-        resultado += '</ul>'; // Fechamento da tag de lista
+        resultado += '</ul>'; // Fecha a tag da lista
 
         document.getElementById('teste').innerHTML = resultado;
     </script>
 </body>
 </html>
 
-```
+Exemplo 4: Unindo Arrays com concat() (vetor-concat.html)
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exemplo de vetor</title>
+</head>
+<body>
+    <h1>Exemplo de vetor</h1>
+    <h3>Unindo conteúdo de vetores</h3>
+    <p id="teste"></p>
 
-#### Exemplo 4: Métodos `concat()`, `unshift()` e `push()` (`vetor-metodos.html`)
+    <script>
+        let vetor1 = [1, 2, 3];
+        let vetor2 = [4, 5, 6];
+        let vetor3 = [7, 8, 9];
 
-```html
+        // O método concat() gera um novo array unindo os três anteriores
+        let resultado = vetor1.concat(vetor2, vetor3);
+
+        document.getElementById('teste').innerHTML = resultado;
+    </script>
+</body>
+</html>
+
+Exemplo 5: Adicionando Elementos com unshift() e push() (atividade-vetor.html)
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -158,117 +197,100 @@ Nesta aula, avancei para o estudo de **Vetores (Arrays)** em JavaScript. Até ag
 </head>
 <body>
     <h1>Atividade 4 - Vetor (unshift e push)</h1>
+
     <p id="timesi">Times iniciais: </p>
     <p id="timec">Times no começo: </p>
     <p id="timef">Times no final: </p>
 
     <script>
-        // 1. Array Inicial
-        var vetor = ['Corinthians', 'Palmeiras', 'Grêmio', 'Vasco'];
+        // 1. Array inicial com 4 times
+        let vetor = ['Corinthians', 'Palmeiras', 'Grêmio', 'Vasco'];
         document.getElementById('timesi').innerHTML += vetor;
 
-        // 2. Método unshift(): Insere novos elementos no INÍCIO do vetor
+        // 2. Adiciona 2 times no INÍCIO do vetor
         vetor.unshift('Flamengo', 'Ceará');
         document.getElementById('timec').innerHTML += vetor;
 
-        // 3. Método push(): Insere novos elementos no FINAL do vetor
+        // 3. Adiciona 2 times no FINAL do vetor
         vetor.push('Fortaleza', 'Internacional');
         document.getElementById('timef').innerHTML += vetor;
-
-        // Exemplo isolado do método concat():
-        var v1 = [1, 2], v2 = [3, 4];
-        var uniao = v1.concat(v2); // Retorna [1, 2, 3, 4] sem alterar v1 ou v2
     </script>
 </body>
 </html>
 
-```
+🔍 5. Desmontando o Código
+A. Como funciona a busca dinâmica do último item (cores[cores.length - 1])
+ * cores.length avalia o tamanho total do array e entrega o número 4.
+ * A expressão vira cores[4 - 1].
+ * A matemática resolve para cores[3].
+ * O JavaScript busca o elemento localizado no índice 3 e retorna 'Branco'.
+B. Como funciona o laço for varrendo o Array
+for (let cont = 0; cont < cores.length; cont++)
 
----
+ * Inicialização (let cont = 0): Começa em zero para apontar para a primeira posição do vetor.
+ * Condição (cont < cores.length): Testa se o contador é menor que o tamanho (4). O laço executa para 0, 1, 2, 3. Quando cont vira 4, a condição falha (4 < 4 é falso) e o laço para, evitando buscar um índice que não existe.
+ * Incremento (cont++): Avança o índice de um em um a cada volta.
+📊 6. Tabelas Comparativas
+Comparando Métodos de Inserção e União
+| Método | Onde atua? | Modifica o Array original? | O que retorna? |
+|---|---|---|---|
+| push() | Adiciona no final | ✅ Sim (Mutável) | O novo tamanho (length) do Array |
+| unshift() | Adiciona no início | ✅ Sim (Mutável) | O novo tamanho (length) do Array |
+| concat() | Unifica múltiplos Arrays | ❌ Não (Imutável) | Um novo Array unificado |
+⚠️ 7. Erros Comuns e Cuidados
+1. Confundir posição humana com índice
+❌ cores[2] para pegar o segundo elemento.
+✅ cores[1] é o correto, pois a contagem inicia em 0.
+2. Acessar índice igual ao .length
+let cores = ['Verde', 'Amarelo', 'Azul', 'Branco']; // length = 4
+console.log(cores[cores.length]); // Tenta acessar cores[4]
 
-### 🔬 Desmontando o Código (Linha por Linha / Etapa por Etapa)
+❌ Incorreto: Retorna undefined porque o último índice é 3.
+✅ Correto: cores[cores.length - 1].
+3. A pegadinha do construtor new Array() com 1 número
+let lista1 = [5]; // Cria um Array de 1 elemento contendo o número 5
+let lista2 = new Array(5); // NÃO cria um Array com o número 5!
 
-* **`var cores = ['Verde', 'Amarelo', 'Azul', 'Branco'];`**: Instancia um vetor com 4 elementos do tipo `String`. O JavaScript atribui automaticamente os índices: `0: 'Verde'`, `1: 'Amarelo'`, `2: 'Azul'`, `3: 'Branco'`.
-* **`cores[1]`**: Pega o valor armazenado na posição do índice `1`. Como a contagem inicia em zero, o índice `1` representa o **segundo elemento** da lista (`'Amarelo'`).
-* **`cores.length`**: Propriedade nativa que lê a extensão do vetor e retorna um número inteiro referente ao total de itens (neste caso, `4`).
-* **`cores[cores.length - 1]`**: Como os índices vão de `0` até `tamanho - 1`, para acessar o último elemento de qualquer vetor (independente de quantos itens ele tenha), subtrai-se `1` do total. Em um vetor de tamanho 4, `4 - 1 = 3`, acessando o índice `3`.
-* **`for(cont = 0; cont < fim; cont++)`**:
-* O contador `cont` deve começar em **`0`** para bater com o primeiro índice do vetor.
-* A condição de parada usa o operador menor estrito **`< fim`** (e não `<=`), pois se o tamanho é `4`, os índices válidos são apenas `0, 1, 2, 3`.
+❌ new Array(5) cria um Array vazio com 5 posições indefinidas (empty × 5).
+✅ Use sempre a sintaxe literal [].
+🔎 8. Correções Técnicas das Minhas Anotações
+ * Atributos e Tags HTML grudados:
+   * Rascunho: <!DOCTYPEhtml> e <htmllang="pt-br">
+   * Correção: Ajustado para <!DOCTYPE html> e <html lang="pt-br">. Os espaços separando os atributos são obrigatórios no HTML5.
+ * Palavras reservadas e nomes colados em JS:
+   * Rascunho: varcores = [...] e newArray(...)
+   * Correção: Ajustado para let cores e new Array(). Sem o espaço, o motor JS interpreta como uma variável diferente.
+ * Confusão entre Lista Ordenada e Não Ordenada:
+   * Rascunho: O comentário dizia que <ul> iniciava uma "lista ordenada".
+   * Correção: A tag <ul> representa uma Unordered List (lista não ordenada, com bolinhas). Para lista ordenada (com números 1, 2, 3), utiliza-se <ol>.
+ * Erros de ortografia nos dados:
+   * Rascunho: 'Corinthias'
+   * Correção: Corrigido para 'Corinthians'.
+🚀 9. Aprofundamento e Boas Práticas
+ * Declaração Moderna (let e const vs var):
+   A aula utilizou var. Em JavaScript moderno (ES6+), prefere-se usar let para vetores que terão elementos alterados ou reatribuídos, e const para declarar vetores cuja referência não mudará.
+ * Mutabilidade vs Imutabilidade:
+   Métodos como push() e unshift() são chamados de mutáveis porque alteram a estrutura do Array existente em memória. O método concat() é imutável porque preserva os vetores originais e entrega uma estrutura inteiramente nova.
+📌 10. Guia Rápido de Memorização
+Criação:   let lista = ['A', 'B', 'C'];
 
+Primeiro:  lista[0]                 -> Retorna 'A'
+Último:    lista[lista.length - 1]   -> Retorna 'C'
+Tamanho:   lista.length             -> Retorna 3
 
-* **`vetor.unshift('Flamengo', 'Ceará');`**: Adiciona os parâmetros passados no **início** da lista. O JavaScript empurra todos os itens pré-existentes para a direita, recalculando seus índices.
-* **`vetor.push('Fortaleza', 'Internacional');`**: Anexa os novos parâmetros ao **final** da lista, expandindo o tamanho do vetor sem alterar os índices já existentes.
-* **`vetor1.concat(vetor2)`**: Une o conteúdo de dois ou mais vetores e retorna uma **nova estrutura unificada**.
+Início:    lista.unshift('X')        -> Adiciona 'X' na FRENTE
+Final:     lista.push('X')           -> Adiciona 'X' no FIM
+Unir:      let nova = v1.concat(v2); -> Junta v1 e v2
 
----
+⚡ 11. Resumo Relâmpago — 10 linhas
+ * Array (vetor): Estrutura de dados que armazena múltiplos valores dentro de uma única variável.
+ * Sintaxe Recomendada: A criação de Arrays deve ser feita preferencialmente com colchetes [].
+ * Índice Base Zero: A contagem das posições do Array em JavaScript sempre começa no índice 0.
+ * Acesso por Índice: Utilizamos array[0] para resgatar o primeiro elemento da lista.
+ * Propriedade length: Informa a quantidade total de elementos presentes no Array.
+ * Acesso ao Último Elemento: É feito dinamicamente através de array[array.length - 1].
+ * Varredura com for: O laço deve iniciar em 0 e rodar enquanto o contador for < array.length.
+ * Método unshift(): Adiciona elementos no início do Array, modificando a estrutura original.
+ * Método push(): Adiciona elementos no final do Array, modificando a estrutura original.
+ * Método concat(): Unifica dois ou mais Arrays gerando um novo vetor, mantendo os originais intactos.
 
-### 📊 Tabela de Operadores, Padrões e Sintaxe de Vetores
-
-| Método / Propriedade | Função / Significado | Exemplo Prático | Resultado Esperado |
-| --- | --- | --- | --- |
-| **`[...]`** | Declarador Literal de Vetor | `var v = ['A', 'B'];` | Cria o vetor com os itens |
-| **`.length`** | Retorna a quantidade total de elementos | `['A', 'B'].length` | `2` |
-| **`array[i]`** | Acessa o elemento do índice `i` | `['A', 'B'][0]` | `'A'` |
-| **`.unshift()`** | Adiciona 1 ou mais itens no **INÍCIO** | `v.unshift('Z');` | `['Z', 'A', 'B']` |
-| **`.push()`** | Adiciona 1 ou mais itens no **FINAL** | `v.push('C');` | `['A', 'B', 'C']` |
-| **`.concat()`** | Une dois ou mais arrays (retorna novo vetor) | `[1].concat([2])` | `[1, 2]` |
-
----
-
-## 🚀 3. O que a aula não contou (Aprofundamento & Boas Práticas)
-
-* **📌 Sintaxe Literal vs. Construtor `new Array()`:**
-Sempre prefira a sintaxe literal `var v = []` em vez de `var v = new Array()`. O construtor `new Array()` possui um comportamento ambíguo: se você passar apenas um número inteiro como argumento (ex: `new Array(5)`), ele **não** criará um vetor contendo o número 5, mas sim um vetor **vazio com 5 posições indefinidas** (`empty x 5`).
-* **⚡ Desempenho: `push()` vs. `unshift()`:**
-O método `push()` é computacionalmente mais rápido do que o `unshift()`. Isso ocorre porque o `push()` apenas encaixa o dado no final do espaço reservado na memória. Já o `unshift()` exige que o motor do JavaScript **reorganize e altere o índice de cada um dos elementos existentes** no vetor para abrir espaço na posição `0`.
-* **🔍 Mutabilidade vs. Imutabilidade:**
-* **Métodos Mutáveis (Alteram o vetor original):** `push()` e `unshift()` modificam diretamente a variável onde o vetor foi armazenado.
-* **Métodos Imutáveis (NÃO alteram o original):** `concat()` **não** altera o vetor base. Ele gera uma **cópia combinada** inteiramente nova. Para reaproveitá-la, você deve atribuí-la a uma nova variável (ex: `var unificado = v1.concat(v2);`).
-
-
-
----
-
-## 📌 4. Guia Rápido de Memorização
-
-### 🗝️ Estrutura Geral para Fixar
-
-```text
-Criação:  var lista = [item0, item1, item2];
-Leitura:  lista[0]                // Primeiro
-          lista[lista.length - 1] // Último
-Adicionar: lista.unshift(item)    // Início (Push no Começo)
-          lista.push(item)       // Fim (Empurra no Final)
-Unir:     var nova = v1.concat(v2);
-
-```
-
-### 📋 Principais Comandos da Aula
-
-| Comando | O que faz? |
-| --- | --- |
-| **`array[0]`** | Pega o primeiro elemento da lista. |
-| **`array.length`** | Mede o número total de elementos. |
-| **`array.unshift()`** | Insere itens na **cabeça** (início) do vetor. |
-| **`array.push()`** | Insere itens na **cauda** (final) do vetor. |
-| **`array.concat()`** | Agrupa e funde múltiplos vetores em um novo. |
-
----
-
-## ⚡ 5. Resumo Relâmpago (10 Linhas)
-
-1. **Vetor (Array):** Estrutura que armazena uma coleção de múltiplos dados sob uma única variável.
-2. **Índice Base Zero:** A contagem de posições no JavaScript sempre começa em `0` (o 1º item é o índice `0`).
-3. **`length`:** Propriedade que informa o total de elementos presentes dentro do vetor.
-4. **Primeiro Item:** É acessado estaticamente através do índice zero (`array[0]`).
-5. **Último Item:** É acessado dinamicamente subtraindo 1 do total (`array[array.length - 1]`).
-6. **Varredura com `for`:** O laço deve iniciar em `0` e rodar enquanto o contador for estritamente menor que a extensão (`cont < array.length`).
-7. **`unshift()`:** Adiciona um ou mais elementos no **início** do vetor, alterando os índices dos demais.
-8. **`push()`:** Adiciona um ou mais elementos no **final** do vetor, sem alterar os índices anteriores.
-9. **`concat()`:** Unifica dois ou mais vetores retornando um novo array sem alterar os originais.
-10. **Mutabilidade:** `push` e `unshift` modificam o array original; `concat` preserva os originais e gera um novo.
-
-```
-
-```
