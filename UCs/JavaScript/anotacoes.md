@@ -1,8 +1,8 @@
-# Caderno de Estudos: Vetores (Arrays) em JavaScript — Manipulação, Iteração e Métodos Principais
+# Vetores (Arrays) em JavaScript — Manipulação, Iteração e Métodos Principais
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, entrei em um dos tópicos mais fundamentais de toda a ciência da computação: os **Vetores (Arrays)**. Aprendi como armazenar múltiplos valores dentro de uma única variável e como utilizar métodos nativos do JavaScript para manipular essas listas.
 
@@ -13,7 +13,7 @@ Nesta aula, entrei em um dos tópicos mais fundamentais de toda a ciência da co
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
 Pense em um vetor como uma **caixa organizadora com várias divisórias numeradas**.
 
@@ -31,7 +31,7 @@ Valor:  │ 'Verde'   │ 'Amarelo' │  'Azul'   │ 'Branco'  │
 3. **O Índice (Index):** É o número impresso em cima de cada divisória. **No JavaScript, a contagem de índices sempre começa no número 0**.
 4. **O Tamanho (`length`):** É a quantidade total de divisórias existentes na caixa (neste exemplo, 4).
 
-### 💡 Analogia do Cotidiano
+**Analogia do Cotidiano**
 
 Imagine um **porta-comprimidos semanal**:
 
@@ -42,9 +42,9 @@ Imagine um **porta-comprimidos semanal**:
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### A. Formas de Criar um Vetor
+**A. Formas de Criar um Vetor**
 
 Existem duas maneiras de declarar um array em JavaScript:
 
@@ -66,7 +66,7 @@ Existem duas maneiras de declarar um array em JavaScript:
 
 ---
 
-### B. Acessando Elementos e a Propriedade `.length`
+**B. Acessando Elementos e a Propriedade `.length`**
 
 Para acessar um item individual do vetor, passamos o índice desejado dentro de colchetes ao lado do nome do vetor:
 
@@ -76,21 +76,21 @@ Para acessar um item individual do vetor, passamos o índice desejado dentro de 
 
 ---
 
-### C. Métodos Principais de Manipulação de Vetores
+**C. Métodos Principais de Manipulação de Vetores**
 
-#### 1. `.concat()` — Unindo Vetores (Imutável)
+**1. `.concat()` — Unindo Vetores (Imutável)**
 
 O método `.concat()` junta dois ou mais vetores em uma nova lista.
 
 * **Importante:** Ele **não altera** os arrays originais; ele retorna um **novo** array resultante da fusão.
 
-#### 2. `.unshift()` — Adicionando no Início (Mutável)
+**2. `.unshift()` — Adicionando no Início (Mutável)**
 
 O método `.unshift()` insere um ou mais elementos no **começo** (índice 0) do vetor.
 
 * **Efeito colateral:** Ele reindexa todos os elementos antigos para a direita (o que era 0 vira 1, o que era 1 vira 2, etc.) e **modifica o vetor original**.
 
-#### 3. `.push()` — Adicionando no Final (Mutável)
+**3. `.push()` — Adicionando no Final (Mutável)**
 
 O método `.push()` insere um ou mais elementos no **final** do vetor.
 
@@ -98,7 +98,7 @@ O método `.push()` insere um ou mais elementos no **final** do vetor.
 
 ---
 
-## 4. Código / Exemplos Práticos
+## Código / Exemplos Práticos
 
 ### Exemplo 1: Declaração e Acesso Direto por Índice
 
@@ -356,9 +356,9 @@ Exercício integrando a declaração de vetores e a aplicação combinada dos m�
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Fórmula do Último Elemento: `cores[cores.length - 1]`
+**A. Desmontando a Fórmula do Último Elemento: `cores[cores.length - 1]`**
 
 1. Suponha que o vetor `cores` possua 4 elementos: `['Verde', 'Amarelo', 'Azul', 'Branco']`.
 2. A propriedade `cores.length` retorna **`4`** (quantidade total de itens).
@@ -368,7 +368,7 @@ Exercício integrando a declaração de vetores e a aplicação combinada dos m�
 
 ---
 
-### B. Desmontando a Iteração do Laço `for` com Array:
+**B. Desmontando a Iteração do Laço `for` com Array:**
 
 ```javascript
 for (let cont = 0; cont < fim; cont++) {
@@ -383,7 +383,7 @@ for (let cont = 0; cont < fim; cont++) {
 
 ---
 
-### C. Desmontando a diferença entre `.concat()`, `.unshift()` e `.push()`:
+**C. Desmontando a diferença entre `.concat()`, `.unshift()` e `.push()`:**
 
 * `let novo = v1.concat(v2)` ➔ Preserva `v1` e `v2` intactos. Cria uma terceira variável `novo` na memória RAM.
 * `v1.unshift('X')` ➔ Pega o vetor `v1` existente, empurra todos os itens uma casa para a direita e grava `'X'` no índice `0`.
@@ -391,7 +391,7 @@ for (let cont = 0; cont < fim; cont++) {
 
 ---
 
-## 6. Passo a Passo: Construindo uma Lista HTML a partir de um Array
+## Passo a Passo: Construindo uma Lista HTML a partir de um Array
 
 ```
 1. Declarar o Vetor:
@@ -417,9 +417,9 @@ for (let cont = 0; cont < fim; cont++) {
 
 ---
 
-## 7. Tabelas Comparativas
+# Tabelas Comparativas
 
-### Comparativo de Métodos de Arrays
+**Comparativo de Métodos de Arrays**
 
 | Método | Onde Adiciona/Une? | Altera o Array Original? | O que Retorna? |
 | --- | --- | --- | --- |
@@ -429,7 +429,7 @@ for (let cont = 0; cont < fim; cont++) {
 
 ---
 
-### Formas de Declaração de Vetores
+**Formas de Declaração de Vetores**
 
 | Sintaxe | Exemplo | Recomendação | Motivo |
 | --- | --- | --- | --- |
@@ -438,16 +438,16 @@ for (let cont = 0; cont < fim; cont++) {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Tentar Acessar o Último Elemento Usando `array[array.length]`
+**1. Tentar Acessar o Último Elemento Usando `array[array.length]`**
 
 * **Incorreto:** `let ultimo = cores[cores.length];`
 * **Resultado:** Retorna `undefined`.
 * **Motivo:** Se um array tem 4 elementos, seus índices são `0, 1, 2, 3`. A propriedade `.length` vale `4`. Tentar acessar `cores[4]` busca uma posição que não existe.
 * **Correto:** `let ultimo = cores[cores.length - 1];`
 
-### 2. Acreditar que `.concat()` Altera o Vetor Original
+**2. Acreditar que `.concat()` Altera o Vetor Original**
 
 * **Incorreto:**
 
@@ -468,7 +468,7 @@ for (let cont = 0; cont < fim; cont++) {
 
 ```
 
-### 3. Usar `<=` no Laço `for` com `.length`
+**3. Usar `<=` no Laço `for` com `.length`**
 
 * **Incorreto:** `for (let i = 0; i <= cores.length; i++)`
 * **Sintoma:** O laço tenta dar uma volta a mais do que a quantidade de itens, gerando uma tag `<li>undefined</li>` no final da lista.
@@ -476,7 +476,7 @@ for (let cont = 0; cont < fim; cont++) {
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+**Correções Técnicas das Minhas Anotações**
 
 Foram feitas as seguintes correções diretas nos trechos fornecidos do rascunho original:
 
@@ -487,9 +487,9 @@ Foram feitas as seguintes correções diretas nos trechos fornecidos do rascunho
 
 ---
 
-## 10. Aprofundamento e Boas Práticas
+**Aprofundamento e Boas Práticas**
 
-### A. O Método Moderno `.at()` para Índices Negativos
+**A. O Método Moderno `.at()` para Índices Negativos**
 
 No JavaScript moderno (ES2022+), existe um método alternativo para acessar o último elemento sem precisar escrever `array[array.length - 1]`. É o método **`.at()`**:
 
@@ -502,7 +502,7 @@ console.log(cores.at(-2)); // Exibe: 'Azul' (penúltimo)
 
 ```
 
-### B. O Operador Spread (`...`) como alternativa ao `.concat()` e `.push()`
+**B. O Operador Spread (`...`) como alternativa ao `.concat()` e `.push()`**
 
 Em projetos modernos com ES6+, costuma-se usar o **Operador Spread (`...`)** para unificar vetores. Ele "desempacota" os itens de um array dentro de outro:
 
@@ -520,7 +520,7 @@ let novoInicio = ['Zero', ...v1]; // Resulta em ['Zero', 1, 2, 3]
 
 ---
 
-## 11. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Vetores (Arrays) armazenam múltiplos valores organizados sob um único nome de variável.
 2. A criação de vetores deve ser feita preferencialmente pela sintaxe literal de colchetes `[]`.
@@ -535,7 +535,7 @@ let novoInicio = ['Zero', ...v1]; // Resulta em ['Zero', 1, 2, 3]
 
 ---
 
-## 12. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Criar Array:** `let lista = ['A', 'B', 'C'];`
 * **Primeiro Item:** `lista[0]`
