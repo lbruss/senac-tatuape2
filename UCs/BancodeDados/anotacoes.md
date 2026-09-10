@@ -1,743 +1,266 @@
-# Biblioteca: Chaves Estrangeiras e Relacionamentos
-
-Nesta atividade, pratiquei **chaves estrangeiras** no banco `biblioteca`. Primeiro, relacionei **livros** com **autores** e, depois, criei uma tabela própria para **categorias** e substituí a categoria armazenada diretamente em `livros` por uma referência à nova tabela.
+# Introdução a Banco de Dados e MySQL
 
 ---
 
-**Selecionando o banco**
+## 1. Visão Geral
 
-```sql
-use biblioteca;
-```
+Nesta aula, comecei os estudos sobre **Banco de Dados Relacional**, utilizando o ecossistema MySQL com a ferramenta de gerenciamento gráfico **MySQL Workbench** e o **XAMPP**.
 
-O comando `USE` define qual banco de dados será utilizado pelos próximos comandos.
-
-Neste caso:
-
-```
-biblioteca
-```
-
-passa a ser o banco ativo.
-
-Isso é importante porque comandos como `CREATE TABLE`, `ALTER TABLE`, `INSERT` etc. serão executados dentro desse banco.
+O objetivo de um banco de dados é armazenar, organizar e persistir as informações fornecidas por sistemas ou formulários web. Em vez de salvar dados em arquivos de texto soltos, o banco garante segurança, integridade, facilidade de consulta e acesso simultâneo para os dados das nossas aplicações.
 
 ---
 
-**Criando a tabela `autores`**
+## 2. Entendendo o Conceito
 
-```sql
-create table autores(
-    id_autor int not null auto_increment,
-    nome varchar(100) not null,
-    nacionalidade varchar(50),
-    data_nascimento date,
-    primary key (id_autor)
-) default charset = utf8;
-```
+Para compreender como as informações ficam guardadas, a estrutura segue uma hierarquia simples:
 
-Essa tabela representa a entidade **Autor**.
+1. **Servidor de Banco de Dados:** É o computador ou serviço que roda o sistema gerenciador (ex: MySQL).
+2. **Banco de Dados (Schema):** É como uma grande pasta ou diretório do projeto.
+3. **Tabela:** É uma estrutura de linhas e colunas criada dentro do banco para organizar um tipo específico de entidade (ex: usuários, produtos, pedidos).
+4. **Registro (ou Linha/Tupla):** É o dado individual inserido em uma tabela.
 
-**Estrutura**
+### Analogia
 
-| Campo             | Tipo           | Função                 |
-| ----------------- | -------------- | ---------------------- |
-| `id_autor`        | `INT`          | Identificador do autor |
-| `nome`            | `VARCHAR(100)` | Nome do autor          |
-| `nacionalidade`   | `VARCHAR(50)`  | Nacionalidade          |
-| `data_nascimento` | `DATE`         | Data de nascimento     |
-
-**`id_autor`**
-
-```sql
-id_autor int not null auto_increment
-```
-
-* `INT` → número inteiro.
-* `NOT NULL` → não pode ficar vazio.
-* `AUTO_INCREMENT` → o MySQL gera automaticamente o próximo número.
-
-E:
-
-```sql
-primary key (id_autor)
-```
-
-define `id_autor` como **chave primária**.
-
-Assim, cada autor possui um identificador único.
+> Pense no **Banco de Dados** como um armário de arquivos de uma empresa.
+> Cada **Tabela** é uma gaveta rotulada (ex: "Ficha de Clientes").
+> Cada **Registro** é uma folha de papel preenchida com os dados de um único cliente que fica dentro dessa gaveta.
 
 ---
 
-**Verificando a tabela**
+## 3. Conceitos Fundamentais
 
-```sql
-desc autores;
-```
+### Tipos de Dados Básicos no MySQL
 
-`DESC` é uma forma abreviada de `DESCRIBE`.
+Os tipos de dados definem qual natureza de informação uma coluna de tabela pode armazenar:
 
-Ele mostra a **estrutura da tabela**, incluindo:
+* **`INT`**: Armazena números inteiros sem casas decimais (ex: IDs, contagens).
+* **`VARCHAR(n)`**: Armazena texto de tamanho variável até o limite $n$ de caracteres. Se alocarmos `VARCHAR(30)` e gravarmos "Bruss" (5 caracteres), o banco ocupará espaço equivalente a apenas 5 caracteres.
+* **`CHAR(n)`**: Armazena texto com tamanho fixo. Se definir `CHAR(10)` e salvar "Ana", o banco preencherá os 7 caracteres restantes com espaços em branco. É ideal para dados com tamanho constante, como siglas de estados (`CHAR(2)`) ou sexo (`CHAR(1)`).
+* **`FLOAT`**: Armazena números com ponto flutuante (decimais) de precisão simples.
+* **`DECIMAL(m, d)`**: Armazena números decimais com precisão exata. Onde $m$ é o número total de dígitos e $d$ é a quantidade de casas após a vírgula. Exemplo: `DECIMAL(5,2)` suporta valores até `999.99`.
+* **`DATE`**: Armazena datas no formato padrão ISO `'AAAA-MM-DD'`.
+* **`ENUM('val1', 'val2', ...)`**: Limita a coluna a aceitar apenas uma das opções pré-definidas na lista.
 
-* campos;
-* tipos;
-* possibilidade de `NULL`;
-* chaves;
-* valores padrão;
-* outras propriedades.
+### Chave Primária (Primary Key)
 
-Já:
-
-```sql
-select * from autores;
-```
-
-mostra os **registros** existentes.
+A **Chave Primária (PK)** é um campo ou conjunto de campos que identifica cada registro de uma tabela de forma única. Ela impede a duplicação de dados e garante que uma pessoa ou item não seja cadastrado repetidamente com as mesmas características sem uma forma de diferenciação.
 
 ---
 
-**Inserindo os autores**
+## 4. Ferramentas Utilizadas: XAMPP e MySQL Workbench
 
-```sql
-insert into autores
-(id_autor, nome, nacionalidade, data_nascimento)
-values
-(default, 'J.K. Rowling', 'Britânica', '1965-07-31'),
-(default, 'Dan Brown', 'Americana', '1964-06-22'),
-(default, 'Markus Zusak', 'Australiana', '1975-06-23'),
-(default, 'Stephenie Meyer', 'Americana', '1973-12-24'),
-(default, 'Suzanne Collins', 'Americana', '1962-08-10'),
-(default, 'Rick Riordan', 'Americana', '1964-06-05'),
-(default, 'Patrick Rothfuss', 'Americana', '1973-06-06'),
-(default, 'John Green', 'Americana', '1977-08-24'),
-(default, 'R.J. Palacio', 'Americana', '1963-07-13'),
-(default, 'Carlos Ruiz Zafón', 'Espanhola', '1964-09-25');
-```
+Para trabalhar com banco de dados localmente durante o desenvolvimento, utilizamos duas ferramentas complementares:
 
-Como `id_autor` é `AUTO_INCREMENT`, usamos:
+### XAMPP (Servidor Local)
 
-```sql
-default
-```
+Servidor simulado que roda localmente na máquina (`localhost`). Nele, ativamos o módulo **Apache** (servidor web) e o módulo **MySQL** (servidor de banco de dados).
 
-para deixar o MySQL gerar os IDs.
+### MySQL Workbench
 
-O resultado será semelhante a:
-
-| id_autor | nome              | nacionalidade |
-| -------: | ----------------- | ------------- |
-|        1 | J.K. Rowling      | Britânica     |
-|        2 | Dan Brown         | Americana     |
-|        3 | Markus Zusak      | Australiana   |
-|      ... | ...               | ...           |
-|       10 | Carlos Ruiz Zafón | Espanhola     |
-
-Esses IDs serão importantes posteriormente para criar o relacionamento com `livros`.
+Cliente gráfico que se conecta ao MySQL rodando no XAMPP para executarmos nossos scripts SQL, visualizar esquemas e gerenciar as tabelas visualmente.
 
 ---
 
-**Adicionando o autor à tabela `livros`**
+## 5. Passo a Passo: Configuração do Ambiente
 
-Agora a tabela `livros` precisa ter uma coluna capaz de guardar **qual autor escreveu cada livro**.
+1. **Iniciar os Serviços no XAMPP:**
+* Abra o painel do XAMPP.
+* Clique em **Start** no *Apache* e no *MySQL* para subir os serviços locais.
 
-```sql
-alter table livros
-add column id_autor int;
-```
 
-**`ALTER TABLE`**
+2. **Criar a Conexão no MySQL Workbench:**
+* Abra o MySQL Workbench e clique no ícone **`+`** ao lado de *MySQL Connections*.
+* **Connection Name:** Digite um nome para a conexão (ex: `Localhost`).
+* **Hostname:** Mantenha `127.0.0.1` ou `localhost` (representa a própria máquina).
+* **Port:** Verifique se está apontando para a porta do MySQL no XAMPP (padrão: `3306`).
+* **Username:** Deixe como `root`.
+* Clique em **OK** e abra a conexão criada.
 
-O comando:
 
-```sql
-alter table
-```
+3. **Localizar o painel de esquemas:**
+* No menu inferior esquerdo do Workbench, selecione a aba **Schemas** para visualizar todos os bancos de dados criados.
 
-modifica a **estrutura de uma tabela que já existe**.
 
-**`ADD COLUMN`**
-
-```sql
-add column id_autor int;
-```
-
-adiciona uma nova coluna chamada `id_autor`.
-
-Inicialmente, ela é apenas uma coluna `INT`.
-
-Ainda falta dizer ao banco que ela será uma **chave estrangeira**.
 
 ---
 
-**Criando a chave estrangeira**
+## 6. Código / Exemplos Práticos
+
+### Primeiro Teste: Criação Inicial e Ajuste de Erros
+
+Abaixo está o primeiro script testado em aula, corrigindo o comando incorreto de criação de tabela (`CREATE TABLES` foi corrigido para `CREATE TABLE`).
 
 ```sql
-alter table livros
-add foreign key (id_autor)
-references autores(id_autor);
-```
+-- Seleciona qual banco de dados receberá os comandos a seguir
+USE cadastro;
 
-Aqui acontece o relacionamento.
+-- Criação inicial da tabela de pessoas
+CREATE TABLE pessoas (
+    nome VARCHAR(30),
+    idade INT,
+    sexo CHAR(1),
+    peso FLOAT,
+    altura FLOAT,
+    nacionalidade VARCHAR(30)
+);
 
-Estamos dizendo:
+-- Exibe a estrutura e os tipos de dados da tabela
+DESCRIBE pessoas;
 
-> O valor de `livros.id_autor` deve fazer referência a um valor existente em `autores.id_autor`.
-
-Visualmente:
-
-```
-AUTORES
-┌─────────────┐
-│ id_autor PK │
-│ nome        │
-│ ...         │
-└──────┬──────┘
-       │
-       │ 1
-       │
-       │ N
-┌──────▼──────┐
-│   LIVROS    │
-├─────────────┤
-│ id_livro PK │
-│ titulo      │
-│ ...         │
-│ id_autor FK │
-└─────────────┘
-```
-
-Isso representa:
-
-> **Um autor pode ter vários livros.**
-
-Enquanto cada livro, nesse modelo, referencia um autor.
-
-Portanto:
-
-```
-AUTORES 1 ───── N LIVROS
 ```
 
 ---
 
-**Inserindo livros com seus autores**
+### Desmontando o Código
 
-Agora podemos cadastrar livros já indicando seus autores:
+* `USE cadastro;`: Informa ao MySQL em qual banco de dados os comandos subsequentes devem ser aplicados. Sem esse comando, o MySQL retorna erro de "Nenhum banco selecionado".
+* `CREATE TABLE pessoas (...);`: Instrui o banco a estruturar uma nova tabela chamada `pessoas` com os campos especificados entre parênteses.
+* `DESCRIBE pessoas;`: Retorna o esquema da tabela (colunas, tipos de dados, aceitação de nulos, chaves e valores padrão).
+
+---
+
+### Apagando e Reconstruindo o Banco com Codificação UTF-8
+
+Para dar suporte correto a acentos e caracteres da língua portuguesa, apagamos a estrutura inicial e recriamos o banco especificando o *charset* correto.
 
 ```sql
-INSERT INTO livros
-(id_livro, titulo, editora, categoria, paginas, preco, estoque, lingua, ano, disponivel, id_autor)
-VALUES
-(default, 'Inferno', 'Arqueiro', 'Suspense', 448, 54.90, 14, 'Português', 2013, default, 2),
-(default, 'O Mar de Monstros', 'Intrínseca', 'Fantasia', 304, 42.90, 16, 'Português', 2006, default, 6),
-(default, 'O Teorema Katherine', 'Intrínseca', 'Romance', 304, 39.90, 10, 'Português', 2006, default, 8);
-```
+-- Exclusão de estruturas antigas caso existam
+DROP TABLE IF EXISTS pessoas;
+DROP DATABASE IF EXISTS cadastro;
 
-O ponto importante está no último valor de cada registro:
+-- Criação do banco de dados configurado para padrão UTF-8
+CREATE DATABASE cadastro
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
 
-```
-2
-6
-8
-```
+-- Seleção do banco de dados ativo
+USE cadastro;
 
-Esses números são os IDs dos autores.
+-- Criação da tabela otimizada com restrições e valores padrão
+CREATE TABLE pessoas (
+    nome VARCHAR(50) NOT NULL,
+    nascimento DATE,
+    sexo ENUM('m', 'f', 'o'),
+    peso DECIMAL(5, 2),
+    altura DECIMAL(3, 2),
+    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro'
+) DEFAULT CHARSET = utf8;
 
-- **Por exemplo:**
+-- Inserção de um registro de teste
+INSERT INTO pessoas 
+(nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES 
+('Bruss', '2007-05-29', 'm', 70.00, 1.65, 'Brasileiro');
 
-```
-Inferno → id_autor = 2
-```
+-- Consulta de todos os registros salvos na tabela
+SELECT * FROM pessoas;
 
-E o autor com ID 2 é:
-
-```
-Dan Brown
-```
-
-Portanto, temos:
-
-```
-Dan Brown
-    ↓
-Inferno
-```
-
-Da mesma maneira:
-
-```
-Rick Riordan
-    ↓
-O Mar de Monstros
-```
-
-e:
-
-```
-John Green
-    ↓
-O Teorema Katherine
 ```
 
 ---
 
-**Criando uma tabela própria para categorias**
+### Desmontando o Código Avançado
 
-Na segunda parte da atividade, foi feita uma melhoria na estrutura do banco.
-
-Em vez de guardar diretamente o texto:
-
-```
-categoria = "Fantasia"
-```
-
-dentro de `livros`, foi criada uma entidade própria:
-
-```
-categoria
-```
-
-```sql
-create table categoria(
-    id_categoria int not null auto_increment,
-    nome varchar(100) not null,
-    descricao text,
-    primary key (id_categoria)
-) default charset = utf8;
-```
-
-Agora temos uma tabela específica para armazenar as categorias.
+* `DROP DATABASE cadastro;`: Apaga permanentemente o banco de dados e todas as tabelas contidas nele.
+* `DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci`: Define a codificação do banco para UTF-8, garantindo suporte a acentuação e caracteres especiais sem corromper o texto.
+* `NOT NULL`: Garante que o campo `nome` seja de preenchimento obrigatório no momento do cadastro.
+* `ENUM('m', 'f', 'o')`: Restringe as opções aceitas no campo `sexo` apenas aos valores definidos.
+* `DEFAULT 'Brasileiro'`: Define um valor automático para a coluna caso nenhum valor seja informado na inserção.
+* `INSERT INTO pessoas (...) VALUES (...)`: Insere uma nova linha de dados na tabela associando as colunas declaradas aos seus respetivos valores.
+* `SELECT * FROM pessoas;`: Realiza uma busca e retorna todas as colunas (`*`) e registros existentes na tabela `pessoas`.
 
 ---
 
-**Estrutura da tabela `categoria`**
+## 7. Tabelas Comparativas
 
-```
-categoria
-├── id_categoria
-├── nome
-└── descricao
-```
+### Diferença Entre Tipos Textuais
 
-**`id_categoria`**
-
-```sql
-id_categoria int not null auto_increment
-```
-
-É o identificador único da categoria.
-
-**`nome`**
-
-```sql
-nome varchar(100) not null
-```
-
-Armazena o nome:
-
-```
-Fantasia
-Suspense
-Drama
-Romance
-...
-```
-
-**`descricao`**
-
-```sql
-descricao text
-```
-
-Permite armazenar uma descrição maior sobre a categoria.
+| Tipo de Dado | Comportamento no Armazenamento | Exemplo de Aplicação | Desempenho / Uso |
+| --- | --- | --- | --- |
+| **`CHAR(n)`** | Tamanho fixo. Preenche o restante com espaços. | Sigla de UF (`'SP'`), Sexo (`'M'`) | Mais rápido para buscas em tamanhos fixos. |
+| **`VARCHAR(n)`** | Tamanho variável. Aloca apenas os caracteres usados. | Nome completo, E-mail | Economiza espaço em disco. |
+| **`ENUM(...)`** | Aceita estritamente opções de uma lista fechada. | Estado civil, Sexo, Status do pedido | Garante validação no próprio banco. |
 
 ---
 
-**Inserindo as categorias**
+## 8. Erros Comuns e Cuidados
+
+### 1. Digitar o comando no plural
 
 ```sql
-insert into categoria
-(id_categoria, nome, descricao)
-values
-(default, 'Fantasia', 'Livros que apresentam elementos mágicos, mundos imaginários e criaturas fantásticas.'),
-(default, 'Suspense', 'Livros que apresentam mistério, tensão e situações que prendem a atenção do leitor.'),
-(default, 'Drama', 'Livros que abordam conflitos emocionais, sociais ou pessoais dos personagens.'),
-(default, 'Romance', 'Livros que têm relacionamentos amorosos e questões afetivas como parte importante da história.'),
-(default, 'Ficção Científica', 'Livros que exploram ciência, tecnologia, futuro e conceitos científicos imaginários ou especulativos.'),
-(default, 'Distopia', 'Livros que apresentam sociedades fictícias marcadas por controle, desigualdade ou condições sociais negativas.');
-```
-
-O `AUTO_INCREMENT` gera automaticamente:
+-- INCORRETO
+CREATE TABLES pessoas ( ... );
 
 ```
-1 → Fantasia
-2 → Suspense
-3 → Drama
-4 → Romance
-5 → Ficção Científica
-6 → Distopia
+
+```sql
+-- CORRETO
+CREATE TABLE pessoas ( ... );
+
 ```
+
+* **Motivo:** A sintaxe DDL do SQL exige que o objeto seja declarado no singular (`CREATE TABLE`, `CREATE DATABASE`).
+
+### 2. Esquecer de selecionar o banco ativo
+
+Ao executar `CREATE TABLE` sem executar `USE nome_do_banco;` antes, o Workbench exibirá um erro informando que nenhum banco de dados padrão foi selecionado (*No database selected*).
+
+### 3. Usar idade em vez de data de nascimento
+
+Guardar a **idade** diretamente no banco de dados exige atualização constante a cada ano. A boa prática é armazenar a **data de nascimento** (`DATE`) e calcular a idade dinamicamente via consulta quando necessário.
+
+### 4. Ausência de Chave Primária
+
+Inserir registros sem uma **Chave Primária** permite a entrada de dados duplicados e idênticos, tornando impossível distinguir ou atualizar um registro específico no futuro.
 
 ---
 
-**Alterando a tabela `livros`**
+## 9. Aprofundamento e Boas Práticas
 
-Agora precisamos substituir o campo antigo `categoria`.
-
-Primeiro adicionamos a nova coluna:
+> **Observação importante (Conhecimento Complementar):**
+> Na aula criamos a tabela sem uma chave primária explicitada. Para resolver o problema de duplicidade de registros mencionado no final do rascunho, adicionamos uma coluna com auto-incremento configurada como chave primária:
 
 ```sql
-alter table livros
-add column id_categoria int;
+CREATE TABLE pessoas (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    nascimento DATE,
+    sexo ENUM('m', 'f', 'o'),
+    peso DECIMAL(5, 2),
+    altura DECIMAL(3, 2),
+    nacionalidade VARCHAR(30) DEFAULT 'Brasileiro',
+    PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8;
+
 ```
 
-Agora `livros` passa a ter:
-
-```
-id_categoria
-```
-
-Essa coluna armazenará o ID da categoria.
+O atributo `AUTO_INCREMENT` faz com que o MySQL gere automaticamente um número sequencial único (1, 2, 3...) para cada nova pessoa cadastrada.
 
 ---
 
-**Removendo a coluna antiga**
+## 10. Guia Rápido de Memorização
 
-```sql
-alter table livros
-drop column categoria;
-```
-
-A coluna:
-
-```
-categoria
-```
-
-é removida da tabela `livros`.
-
-Antes:
-
-```
-livros
-├── id_livro
-├── titulo
-├── categoria
-├── preco
-└── ...
-```
-
-Depois:
-
-```
-livros
-├── id_livro
-├── titulo
-├── id_categoria
-├── preco
-└── ...
-```
-
-Agora `livros` não guarda mais o nome da categoria diretamente.
-
-Guarda apenas sua referência.
+* **Criar Banco:** `CREATE DATABASE nome;`
+* **Deletar Banco:** `DROP DATABASE nome;`
+* **Selecionar Banco:** `USE nome;`
+* **Criar Tabela:** `CREATE TABLE nome (coluna TIPO);`
+* **Deletar Tabela:** `DROP TABLE nome;`
+* **Ver Estrutura:** `DESCRIBE nome_da_tabela;`
+* **Inserir Dados:** `INSERT INTO tabela (colunas) VALUES (valores);`
+* **Consultar Dados:** `SELECT * FROM tabela;`
+* **Executar no Workbench:** Ícone do raio (`Ctrl + Enter` na linha selecionada).
 
 ---
 
-### Criando a chave estrangeira da categoria
-
-```sql
-alter table livros
-add constraint fk_livros_categorias
-foreign key (id_categoria)
-references categoria(id_categoria);
-```
-
-Aqui foi usado:
-
-```sql
-add constraint
-```
-
-para criar uma **restrição** com um nome específico.
-
-O nome escolhido foi:
-
-```
-fk_livros_categorias
-```
-
-`fk` é uma abreviação bastante utilizada para **Foreign Key**.
-
-A relação criada é:
-
-```
-categoria.id_categoria
-          ↑
-          │
-          │
-livros.id_categoria
-```
-
-Ou, visualmente:
-
-```
-CATEGORIA
-┌─────────────────┐
-│ id_categoria PK │
-│ nome            │
-│ descricao       │
-└────────┬────────┘
-         │
-         │ 1
-         │
-         │ N
-┌────────▼────────┐
-│     LIVROS      │
-├─────────────────┤
-│ id_livro PK     │
-│ titulo          │
-│ ...             │
-│ id_categoria FK │
-└─────────────────┘
-```
-
-Portanto:
-
-> Uma categoria pode estar associada a vários livros.
-
----
-
-**O que mudou no banco?**
-
-Antes tínhamos algo parecido com:
-
-```
-livros
-┌──────────────────────┐
-│ titulo               │
-│ categoria            │
-├──────────────────────┤
-│ Inferno              │
-│ Suspense             │
-│ O Mar de Monstros    │
-│ Fantasia             │
-└──────────────────────┘
-```
-
-A categoria era armazenada diretamente como texto.
-
-Agora temos:
-
-```
-categoria
-┌────┬───────────────┐
-│ id │ nome          │
-├────┼───────────────┤
-│ 1  │ Fantasia      │
-│ 2  │ Suspense      │
-│ 3  │ Drama         │
-│ 4  │ Romance       │
-└────┴───────────────┘
-```
-
-E:
-
-```
-livros
-┌───────────────┬──────────────┐
-│ titulo        │ id_categoria │
-├───────────────┼──────────────┤
-│ Inferno       │ 2            │
-│ O Mar...      │ 1            │
-└───────────────┴──────────────┘
-```
-
-Assim:
-
-```
-livros.id_categoria = 2
-             ↓
-categoria.id_categoria = 2
-             ↓
-categoria.nome = "Suspense"
-```
-
-Esse modelo evita repetir informações e facilita a manutenção do banco.
-
----
-
-# Estrutura final do relacionamento
-
-Ao final dessa atividade, temos pelo menos três entidades relacionadas:
-
-```
-                    ┌──────────────┐
-                    │   AUTORES    │
-                    ├──────────────┤
-                    │ id_autor PK  │
-                    │ nome         │
-                    │ ...          │
-                    └──────┬───────┘
-                           │
-                           │ 1:N
-                           ▼
-                    ┌──────────────┐
-                    │    LIVROS    │
-                    ├──────────────┤
-                    │ id_livro PK  │
-                    │ titulo       │
-                    │ id_autor FK  │
-                    │ id_categoria │
-                    │ ...          │
-                    └──────┬───────┘
-                           │
-                           │ N:1
-                           ▼
-                    ┌──────────────┐
-                    │  CATEGORIA   │
-                    ├──────────────┤
-                    │ id_categoria │
-                    │ nome         │
-                    │ descricao    │
-                    └──────────────┘
-```
-
-A ideia fundamental é:
-
-```
-AUTORES ───────< LIVROS >─────── CATEGORIA
-```
-
-Um autor pode escrever vários livros, e uma categoria pode classificar vários livros.
-
----
-
-**Um detalhe importante sobre a atividade**
-
-Depois de criar:
-
-```sql
-id_categoria
-```
-
-e remover:
-
-```sql
-categoria
-```
-
-os livros que já existiam precisam receber seus respectivos `id_categoria` para que a relação fique completa.
-
-- **Por exemplo:**
-
-```sql
-update livros
-set id_categoria = 2
-where titulo = 'Inferno';
-```
-
-Aqui:
-
-```
-2 = Suspense
-```
-
-Então `Inferno` passa a apontar para a categoria `Suspense`.
-
-Da mesma forma, os demais livros podem receber seus IDs correspondentes.
-
----
-
-**O que aprendemos com essa atividade?**
-
-Essa atividade junta vários conceitos que já vimos:
-
-**`CREATE TABLE`**
-
-Cria uma tabela.
-
-**`ALTER TABLE`**
-
-Modifica a estrutura de uma tabela existente.
-
-**`ADD COLUMN`**
-
-Adiciona uma coluna.
-
-**`DROP COLUMN`**
-
-Remove uma coluna.
-
-**`PRIMARY KEY`**
-
-Identifica exclusivamente cada registro.
-
-**`FOREIGN KEY`**
-
-Cria uma ligação entre tabelas.
-
-**`REFERENCES`**
-
-Indica qual tabela e qual coluna são referenciadas.
-
-**`CONSTRAINT`**
-
-Permite definir uma restrição e dar um nome a ela.
-
-**`AUTO_INCREMENT`**
-
-Gera IDs automaticamente.
-
-**`JOIN`**
-
-Posteriormente, podemos usar `JOIN` para transformar os IDs novamente em informações úteis, como:
-
-```
-Livro → Autor → Categoria
-```
-
----
-
-**Resumo Relâmpago**
-
-1. Criei a tabela `autores` para armazenar os autores.
-2. `id_autor` é a chave primária de `autores`.
-3. Adicionei `id_autor` à tabela `livros`.
-4. Transformei `livros.id_autor` em chave estrangeira.
-5. Assim, **um autor pode ter vários livros**.
-6. Criei a tabela `categoria` para organizar as categorias.
-7. Adicionei `id_categoria` à tabela `livros`.
-8. Removi a antiga coluna textual `categoria`.
-9. `livros.id_categoria` referencia `categoria.id_categoria`.
-10. O banco agora está mais organizado e preparado para relacionamentos entre entidades.
-
-## Resumo final
-
-O principal aprendizado dessa atividade é entender que **uma chave estrangeira conecta tabelas**.
-
-Em vez de repetir informações:
-
-```
-Livro → "Suspense"
-Livro → "Suspense"
-Livro → "Suspense"
-```
-
-podemos armazenar uma referência:
-
-```
-Livro → id_categoria = 2
-                  ↓
-          Categoria → Suspense
-```
-
-Da mesma forma:
-
-```
-Livro → id_autor = 2
-                 ↓
-          Autor → Dan Brown
-```
-
-Ou seja, **as tabelas armazenam as informações separadamente e as chaves estrangeiras permitem relacioná-las**. Isso é fundamental para construir bancos de dados relacionais bem estruturados.
+## Resumo Relâmpago — 10 Linhas
+
+1. Banco de Dados armazena de forma estruturada as informações enviadas por aplicações e formulários.
+2. O XAMPP emula o servidor local (`localhost`) rodando os serviços do Apache e MySQL.
+3. O MySQL Workbench é a interface gráfica para escrita e execução de scripts SQL.
+4. Bancos de dados são organizados em tabelas, e tabelas são compostas por linhas (registros) e colunas.
+5. Os comandos `CREATE DATABASE` e `CREATE TABLE` estruturam os bancos e tabelas.
+6. É necessário executar `USE nome_do_banco;` para indicar onde as tabelas serão criadas.
+7. O tipo `VARCHAR` aloca texto de tamanho variável e o `CHAR` reserva tamanho fixo.
+8. Configurar `DEFAULT CHARACTER SET utf8` evita erros de acentuação no banco.
+9. O comando `INSERT INTO` grava novos registros e o `SELECT * FROM` faz a leitura desses dados.
+10. A Chave Primária (`PRIMARY KEY`) é indispensável para evitar cadastros duplicados e identificar registros de forma única.
