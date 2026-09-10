@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Atividade 4 - Vetor</title>
+</head>
+<body>
+	<h1>Atividade 4 - Vetor (unshift e push)</h1>
+	<p id="timesi">Times iniciais: </p>
+    <p id="timec">Times no começo: </p>
+	<p id="timef">Times no final: </p>
+
+	<script>
+		/*
+		Criar um vetor em javascript do tipo Strinfg contendo
+		times de futebol - Inserir 4 times depois, inserir mais
+		2 times no início e no final
+		*/
+		var vetor = ['Corinthias', 'Palmeiras', 'Gremio', 'Vasco'];
+        document.getElementById('timesi').innerHTML += vetor;
+
+        vetor.unshift('Flamengo','Ceará');
+
+		document.getElementById('timec').innerHTML += vetor;
+
+		vetor.push('Fortaleza','Internacional');
+
+		document.getElementById('timef').innerHTML += vetor;
+	</script>
+
+</body>
+</html>
