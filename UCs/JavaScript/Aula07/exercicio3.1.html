@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>5 cidades - array</title>
+</head>
+<body>
+	<h1>Exercício 3.1</h1>
+	<p id="vetor">Conteúdo completo do vetor : </p>
+	<p id="Qelementos">A quantidade de elementos armazenados: </p>
+	<p id="pelemento">Primeiro elemento: </p>
+	<p id="uelemento">segunda elemento: </p>
+
+	<script>
+        /*
+        Exercício 1
+        Crie um vetor contendo os nomes de cinco cidades brasileiras. Exiba na página o conteúdo completo do
+        vetor, a quantidade de elementos armazenados, o primeiro elemento e o último elemento do vetor.
+        */
+		
+		var cidades = new Array ('São Paulo', ' Maranhão', ' Guarulhos', ' Ceará',' Bahia');
+
+		document.getElementById('vetor').innerHTML += cidades;
+		document.getElementById('Qelementos').innerHTML += cidades.length;
+		document.getElementById('pelemento').innerHTML += cidades[0];
+		document.getElementById('uelemento').innerHTML += cidades[4];
+	</script>
+</body>
+</html>

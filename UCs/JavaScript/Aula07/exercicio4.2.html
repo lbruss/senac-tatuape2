@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Adicionando 1 e 2 no começo</title>
+</head>
+<body>
+	<h1>Exercício 4.2</h1>
+	<p id="normal">Vetor normal: </p>
+    <p id="inicio">Vetor com 1 e 2 no início: </p>
+
+	<script>
+        /*
+        Exercício 2
+        Desenvolva um programa que crie um vetor com os números 3, 4 e 5. Em seguida, utilize o método
+        unshift() para adicionar os números 1 e 2 no início do vetor e exiba o resultado final.
+        */
+
+		var vetor = [3,4,5];
+		document.getElementById('normal').innerHTML += vetor;
+
+		vetor.unshift(1,2);
+
+		document.getElementById('inicio').innerHTML += vetor;
+	</script>
+</body>
+</html>

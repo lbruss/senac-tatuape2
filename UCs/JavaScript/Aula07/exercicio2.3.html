@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Soma produtos</title>
+</head>
+<body>
+	<h1>Exercício 2.3</h1>
+	<p id="final">O valor final a pagar é de: R$ </p>
+
+	<script>
+        /*
+        Exercício 3
+        Elabore um programa que pergunte ao usuário quantos produtos foram comprados. Em seguida, solicite o
+        valor de cada produto, acumule o total da compra e exiba o valor final a pagar.
+        */
+		var cont = 1; 
+		var total = 0;
+		var produto = 0;
+		var nvendas = 0;
+
+		nvendas = parseInt(prompt('Quantos produtos foram comprados?',''));
+
+		for(cont = 1; cont <= nvendas; cont++){
+			produto = parseFloat(prompt('Digite o valor do '+ cont + 'º produto',''));
+			total = total + produto;
+		}
+
+			document.getElementById('final').innerHTML += total;
+	</script>
+
+</body>
+</html>

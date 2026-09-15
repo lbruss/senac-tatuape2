@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Números - concat()</title>
+</head>
+<body>
+	<h1>Exercício 4.1</h1>
+	<p id="final"></p>
+
+	<script>
+        /*
+        Exercício 1
+        Crie três vetores contendo três números cada. Utilize o método concat() para unir todos os vetores em um
+        único array e exiba o resultado na página.
+        */
+
+		var vetor1 = [34,12,78];
+		var vetor2 = [87,32,66];
+		var vetor3 = [67,98,100];
+
+		var resultado = vetor1.concat(vetor2,vetor3);
+
+		document.getElementById('final').innerHTML = resultado;
+	</script>
+</body>
+</html>

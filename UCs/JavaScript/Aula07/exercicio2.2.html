@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>5 aluno e média</title>
+</head>
+<body>
+	<h1>Exercício 2.2</h1>
+	<p id="nmedia">A média dos 5 alunos é de: </p>
+
+	<script>
+        /*
+        Exercício 2
+        Desenvolva um sistema para registrar as notas de 5 alunos. O programa deve acumular as notas
+        informadas e, ao final, calcular e exibir a média da turma.
+        */
+		var cont = 1;
+		var total = 0;
+		var numero = 0;
+
+		alert('Digite 5 notas, para saber a média delas');
+
+		for(cont = 1; cont <= 5; cont++){
+			numero = parseInt(prompt('Digite o '+ cont + 'º nota', ''));
+			total = total + numero;
+		}
+
+        var media = total / 5;
+
+		document.getElementById('nmedia').innerHTML += media;
+	</script>
+</body>
+</html>

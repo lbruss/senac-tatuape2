@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 1.4</title>
+</head>
+<body>
+    <h1>Nº Usuário - Tabuada</h1>
+    <p id="tabuada"></p>
+ 
+    <script type="text/javascript">
+       
+        var num = (prompt('Digite o número da tabuada', ''));
+        var cont = 1;
+        var resposta = '';
+
+        for(cont = 1; cont <= 10; cont++){
+        resposta += num + 'x' + cont + ' = ' + num * cont + '<br>';
+        document.getElementById('tabuada').innerHTML = resposta;
+        }
+    </script>
+</body>
+</html>

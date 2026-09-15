@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>6 frutas - array</title>
+</head>
+<body>
+	<h1>Exercício 3.2</h1>
+    <p id="frutas">As frutas são: </p>
+	<p id="sfruta">Segunda fruta: </p>
+	<p id="qfruta">Quinta fruta: </p>
+
+	<script>
+        /*
+        Exercício 2
+        Desenvolva um programa que crie um vetor com seis frutas. Em seguida, exiba apenas a segunda e a
+        quinta posição do vetor utilizando seus respectivos índices.
+        */
+		
+		var frutas = new Array ('Banana', ' Laranja', ' Melão', ' Manga',' Limão', ' Mamão');
+
+		document.getElementById('frutas').innerHTML += frutas;
+		document.getElementById('sfruta').innerHTML += frutas[1];
+		document.getElementById('qfruta').innerHTML += frutas[5];
+	</script>
+</body>
+</html>

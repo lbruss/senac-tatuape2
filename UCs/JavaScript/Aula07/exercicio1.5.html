@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número pares - 2 até 50</title>
+</head>
+<body>
+    <h1>Exercício 1.5</h1>
+    <p id="numero"></p>
+    <script>
+        /*
+        Exercício 5
+        Crie um programa que exiba apenas os números pares de 2 a 50 utilizando while
+        */
+
+        var num = 0;
+        var cont = 2;
+        var resposta = '';
+
+        while(cont <=50){
+            resposta += num + cont + '<br>';
+            cont = cont + 2;
+        }
+
+        document.getElementById('numero').innerHTML = resposta;
+    </script>
+</body>
+</html>

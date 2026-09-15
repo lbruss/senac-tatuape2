@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<h1>Exercício 4.2</h1>
+	<p id="normal">Produtos: </p>
+	<p id="dprodutos">Dois produto no final: </p>
+
+	<script>
+        /*
+        Exercício 3
+        Crie um vetor contendo os nomes de quatro produtos. Utilize o método push() para adicionar mais dois
+        produtos ao final do vetor e exiba o conteúdo atualizado.
+        */
+
+		var vetor = [1,2,3,4,5];
+
+		//Exibir o vetor no ID chamado 'teste1'
+		document.getElementById('normal').innerHTML += vetor;
+
+		//Adicionar elementos no final do vetor
+		vetor.push(6,7);
+
+		//Exibir novamente o vetor, agora com os elementos adicionados no final-
+		document.getElementById('teste2').innerHTML += vetor;
+	</script>
+
+</body>
+</html>

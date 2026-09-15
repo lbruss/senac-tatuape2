@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vendas e média vendas</title>
+</head>
+<body>
+	<h1>Exercício 2.4</h1>
+	<p id="faturamento">O faturamento final é de: R$ </p>
+    <p id="media">A média das vendas realizadas é de: R$ </p>
+
+	<script>
+        /*
+        Exercício 4
+        Crie um programa que registre uma quantidade de vendas definida pelo usuário. Para cada venda,
+        informe o valor arrecadado. Ao final, exiba o faturamento total e a média das vendas realizadas.
+        */
+		var cont = 1; 
+		var total = 0;
+		var venda = 0;
+		var qvendas = 0;
+
+		qvendas = parseInt(prompt('Digite a quantidade de vendas.',''));
+
+		for(cont = 1; cont <= qvendas; cont++){
+			venda = parseFloat(prompt('Digite o valor do produto '+ cont,''));
+			total = total + venda;
+		}
+
+        media = total / qvendas;
+
+			document.getElementById('faturamento').innerHTML += total;
+            document.getElementById('media').innerHTML += media;
+	</script>
+
+</body>
+</html>

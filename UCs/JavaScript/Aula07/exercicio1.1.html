@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tabuada</title>
+</head>
+<body>
+	<h1>Exercício 1.1</h1>
+	<p id="tabuada"></p>
+
+	<script type="text/javascript">
+        /*
+        Exercício 1
+        Utilizando o laço for, desenvolva um programa que exiba a tabuada do número 5 de 1 a 10.
+        */
+		var num = 5;
+		var cont = 1;
+		var resposta = '';
+		for(cont = 1; cont <= 10; cont++){
+			resposta += num + 'x' + cont + ' = ' + num * cont + '<br>';
+			document.getElementById('tabuada').innerHTML = resposta;
+		}
+	</script>
+</body>
+</html>
+
+
