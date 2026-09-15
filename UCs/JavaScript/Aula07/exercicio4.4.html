@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Exercício 4.4</h1>
-	<p id="final"></p>
+	<p id="nomes"></p>
 
 	<script>
         /*
@@ -17,12 +17,12 @@ Elabore um programa que crie dois vetores: um contendo nomes de alunos e outro c
 
 */
 
-		var alunos = [34,12,78];
-		var professores = [87,32,66];
+		var alunos = ['Eduardo',' Enzo',' Daniel'];
+		var professores = ['Sirlene',' José',' Vinicius];
 
-		var resultado = vetor1.concat(vetor2,vetor3);
+		var resultado = alunos.concat(professores);
 
-		document.getElementById('final').innerHTML = resultado;
+		document.getElementById('nomes').innerHTML = resultado;
 	</script>
 </body>
 </html>
