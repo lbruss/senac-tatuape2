@@ -8,14 +8,13 @@
 <body>
 	<h1>Exercício 4.4</h1>
 	<p id="nomesAP">Nomes dos alunos e professores: </p>
- <p id="alunoN">Nomes dos alunos e professores (um novo aluno no início): </p>
+ 	<p id="alunoN">Nomes dos alunos e professores (um novo aluno no início): </p>
 	<p id="professorN">Nomes dos alunos e professores (um novo professor no final): </p>
 
 
 	<script>
         /*
         Exercício 4
-
         Elabore um programa que crie dois vetores: um contendo nomes de alunos e outro contendo nomes
         de professores. Utilize concat() para uni-los em um único vetor. Depois, adicione um novo nome no 
         início usando unshift() e outro no final usando push(). Exiba o vetor resultante.
@@ -25,17 +24,13 @@
 		var professores = ['Sirlene',' José',' Vinicius'];
 
 		var resultado = alunos.concat(professores);
+		document.getElementById('nomesAP').innerHTML += resultado;
 
-		document.getElementById('nomesAP').innerHTML = resultado;
+        resultado.unshift('Bruss');
+		document.getElementById('alunoN').innerHTML += resultado;
 
-        alunos.unshift('Bruss');
-
-		document.getElementById('alunoN').innerHTML = resultado;
-
-		professores.push(' Leandro');
-
-		document.getElementById('professorN').innerHTML = resultado;
-
+		resultado.push(' Leandro');
+		document.getElementById('professorN').innerHTML += resultado;
 	</script>
 </body>
 </html>
