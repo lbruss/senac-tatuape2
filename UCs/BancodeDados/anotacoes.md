@@ -1,199 +1,229 @@
-# BANCO JAPDV
+# Tabela de Vendas, Itens da Venda, Exclusão em Cascata (ON DELETE CASCADE) e Agregação com COUNT() no Banco JAPDV
 
 ---
 
-**Visão Geral**
+## 1. Visão Geral
 
-Nesta prática, iniciamos do zero a construção do banco de dados **`japdv`**, projetado para atender às necessidades reais de um **Sistema de Ponto de Venda (PDV)** e controle de estoque de uma loja.
+Nesta etapa do desenvolvimento do banco de dados **`japdv`**, avançamos para o registro de transações comerciais completas, construindo a estrutura de **Cabeçalho e Itens de Venda** (relacionamento Mestre/Detalhe).
 
-O foco da aula foi estabelecer o relacionamento **1:N (Um-para-Muitos)** entre a tabela pai (**`fornecedores`**) e a tabela filho (**`produtos`**), além de aplicar tipos de dados e restrições fundamentais para sistemas comerciais:
-
-* Uso de **`DECIMAL(8,2)`** para precisão em valores monetários.
-* Uso da restrição **`UNIQUE`** no código de barras para evitar duplicidade de itens.
-* Cruzamento de dados entre produto e seu respectivo fornecedor utilizando o **`INNER JOIN`**.
+Aprendemos a automatizar o registro temporal usando **`DATETIME DEFAULT CURRENT_TIMESTAMP`**, dominamos a regra de integridade referencial com remoção em cascata (**`ON DELETE CASCADE`**), registramos 5 vendas completas com seus respectivos itens e introduzimos as primeiras consultas estatísticas utilizando a função de agregação **`COUNT()`**.
 
 ---
 
-**Entendendo o Conceito**
+## 2. Entendendo o Conceito
 
-**O Cenário de Negócio do PDV**
+### 1. Estrutura Mestre/Detalhe (`vendas` e `itens_venda`)
 
-Em uma loja, os produtos vendidos no caixa precisam estar associados a quem os forneceu.
+Em sistemas de PDV e e-commerce, uma venda nunca é gravada em uma única tabela. Ela é dividida em duas:
 
-* **Um fornecedor** pode nos fornecer **vários produtos** ($1:N$).
-* **Um produto** específico vem de apenas **um fornecedor principal** cadastrado.
+* **`vendas` (Cabeçalho/Mestre):** Guarda as informações gerais do cupom fiscal, como número da venda, data/hora e o valor total cobrado.
+* **`itens_venda` (Detalhes/Itens):** Guarda cada produto individual comprado naquela venda, junto com a quantidade e o preço unitário praticado no momento da compra.
 
-**Por que usar `DECIMAL(8,2)` para Preços?**
+### 2. O Carimbo de Data/Hora Automático (`CURRENT_TIMESTAMP`)
 
-Tipos numéricos como `FLOAT` e `DOUBLE` utilizam representação de ponto flutuante, o que pode gerar pequenas imprecisões de arredondamento em operações matemáticas (ex: $0.1 + 0.2 = 0.30000000000000004$). Em sistemas financeiros e de PDV, onde cada centavo importa, o tipo **`DECIMAL(M,D)`** é obrigatório por armazenar os números de forma exata.
+Em vez de depender da digitação manual da data pelo operador de caixa ou pela aplicação, definimos o valor padrão da coluna `dataVenda` como **`CURRENT_TIMESTAMP`**. O próprio MySQL consulta o relógio do servidor no momento do `INSERT` e grava a data e a hora exatas da transação.
 
-* `DECIMAL(8,2)` significa: **8 dígitos no total**, dos quais **2 são decimais** (permite valores até $999.999,99$).
+### 3. Exclusão em Cascata (`ON DELETE CASCADE`)
 
-## A Restrição `UNIQUE` (Unicidade)
+Por padrão, o MySQL bloqueia a exclusão de uma venda que possua itens cadastrados. Ao adicionar a instrução **`ON DELETE CASCADE`** na Chave Estrangeira de `idVenda`:
 
-Ao contrário da Chave Primária (`PRIMARY KEY`), que identifica a linha inteira na tabela, a restrição **`UNIQUE`** pode ser aplicada a qualquer coluna para garantir que não existam dois registros com o mesmo valor nesse campo.
+* Quando uma venda for cancelada/excluída da tabela `vendas`, o banco de dados **apaga automaticamente todos os itens dessa venda** na tabela `itens_venda`, mantendo o banco limpo e sem registros órfãos.
 
-* **Aplicação no PDV:** O campo `codigoBarras` (GTIN/EAN) recebe a restrição `UNIQUE` para que o sistema impeça o cadastro acidental de dois produtos diferentes com o mesmo código de barras.
+### 4. A Função de Agregação `COUNT()`
+
+A função **`COUNT()`** serve para contar a quantidade de linhas que atendem a um determinado critério na consulta, sendo essencial para levantar dados de estoque e relatórios operacionais.
+
+### Analogia
+
+> Pense em um **Cupom Fiscal de Supermercado**:
+> * O **topo do cupom** (Número da Venda, Data/Hora e Total Pago) é a tabela **`vendas`**.
+> * Cada **linha de produto impresso** no cupom (Ex: *2x Refrigerante R$ 5,00*) é um registro na tabela **`itens_venda`**.
+> * Se a venda for cancelada e o cupom for jogado no lixo (**`DELETE FROM vendas`**), todas as linhas impressas nele somem juntas (**`ON DELETE CASCADE`**).
+> 
+> 
 
 ---
 
-## Conceitos Fundamentais
+## 3. Conceitos Fundamentais
 
-* **`DECIMAL(P, D)`**: Tipo numérico exato. `P` é a precisão (total de dígitos) e `D` é a escala (casas decimais).
-* **`UNIQUE`**: Restrição que impede valores duplicados em uma coluna específica na tabela.
-* **Chave Estrangeira (`idFornecedor`)**: Coluna na tabela `produtos` que garante que o produto só seja cadastrado se apontar para um fornecedor válido.
-* **`ORDER BY nome`**: Cláusula que ordena o resultado da consulta em ordem alfabética crescente (A-Z).
-* **`INNER JOIN`**: Cláusula de junção que combina as linhas da tabela `produtos` com a tabela `fornecedores` onde a chave estrangeira for igual à chave primária.
+* **`DATETIME DEFAULT CURRENT_TIMESTAMP`**: Preenche a coluna automaticamente com a data e o horário atual do servidor.
+* **`ON DELETE CASCADE`**: Regra de integridade referencial que remove automaticamente os registros filhos ao excluir o registro pai.
+* **`itens_venda`**: Tabela associativa que conecta `vendas` e `produtos`, permitindo que uma venda tenha múltiplos produtos e um produto esteja em múltiplas vendas ($N:N$).
+* **Congelamento do Preço (`precoUnitario`)**: Armazena o preço do produto **no momento da venda**, impedindo que alterações futuras no cadastro do produto alterem o histórico de vendas passadas.
+* **`COUNT(*)`**: Função de agregação que conta o total de registros retornados por uma consulta SQL.
 
 ---
 
-### Código / Exemplos Práticos
+## 4. Código / Exemplos Práticos
 
-**Script Completo de Criação, Povoamento e Consulta do Banco `japdv`**
+### Script Completo de Transações, Tabelas e Consultas de Agregação
 
 ```sql
--- 1. Criação e seleção do banco de dados JAPDV
-CREATE DATABASE japdv
-DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
-
 USE japdv;
 
--- 2. Criação da Tabela Pai: FORNECEDORES
-CREATE TABLE fornecedores (
-    idFornecedor INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    fone VARCHAR(50),
-    email VARCHAR(100),
-    PRIMARY KEY (idFornecedor)
+-- 1. Criação da Tabela de Vendas (Cabeçalho da Transação)
+CREATE TABLE vendas (
+    idVenda INT NOT NULL AUTO_INCREMENT,
+    dataVenda DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(idVenda)
 ) DEFAULT CHARSET = utf8;
 
--- Inserção de fornecedores para o sistema
-INSERT INTO fornecedores
-(idFornecedor, nome, fone, email)
-VALUES
-(DEFAULT, 'Tech Supplies LTDA', '(11) 987654321', 'contato@techsupplies.com.br'),
-(DEFAULT, 'Distribuidora Silva S/A', '(21) 34567890', 'vendas@distribuidorasilva.com'),
-(DEFAULT, 'Comércio de Embalagens Brasil', '(31) 991234567', 'atendimento@embalagensbrasil.com.br');
-
--- Listagem de fornecedores ordenada alfabeticamente
-SELECT * FROM fornecedores
-ORDER BY nome;
-
--- 3. Criação da Tabela Filho: PRODUTOS (com UNIQUE e FOREIGN KEY)
-CREATE TABLE produtos (
-    idProduto INT NOT NULL AUTO_INCREMENT,
-    codigoBarras VARCHAR(100) UNIQUE,
-    descricao TEXT NOT NULL,
-    categoria VARCHAR(100),
-    precoCusto DECIMAL(8,2) NOT NULL,
-    precoVenda DECIMAL(8,2) NOT NULL,
+-- 2. Criação da Tabela de Itens da Venda (com Exclusão em Cascata)
+CREATE TABLE itens_venda (
+    idItem INT NOT NULL AUTO_INCREMENT,
+    idVenda INT NOT NULL,
+    FOREIGN KEY (idVenda) REFERENCES vendas(idVenda) ON DELETE CASCADE,
+    idProduto INT NOT NULL,
+    FOREIGN KEY (idProduto) REFERENCES produtos(idProduto),
     quantidade INT NOT NULL,
-    estoqueMinimo INT NOT NULL,
-    idFornecedor INT,
-    FOREIGN KEY (idFornecedor) REFERENCES fornecedores(idFornecedor),
-    PRIMARY KEY (idProduto)
+    precoUnitario DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(idItem)
 ) DEFAULT CHARSET = utf8;
 
--- Inserção de produtos vinculados aos seus fornecedores (IDs 1, 2 e 3)
-INSERT INTO produtos
-(idProduto, codigoBarras, descricao, categoria, precoCusto, precoVenda, quantidade, estoqueMinimo, idFornecedor)
-VALUES
-(DEFAULT, '7891234567890', 'Mouse Sem Fio óptico', 'Periféricos', 25.00, 49.90, 20, 5, 1),
-(DEFAULT, '7891234567891', 'Teclado Mecânico RGB', 'Periféricos', 110.00, 199.90, 12, 3, 1),
-(DEFAULT, '7891234567892', 'Suporte Ergonomico para Notebook', 'Acessórios', 35.00, 69.90, 15, 4, 2),
-(DEFAULT, '7891234567893', 'Cabo HDMI 2.0 2 Metros', 'Cabos', 12.00, 29.90, 50, 10, 2),
-(DEFAULT, '7891234567894', 'Caixa de Papelão 30x30x30 (10 Unid)', 'Embalagens', 18.00, 35.00, 100, 20, 3),
-(DEFAULT, '7891234567895', 'Fita Adesiva Transparente 45mm x 45m', 'Embalagens', 4.50, 12.00, 80, 15, 3);
+-- 3. Registro das Transações de Venda (DML)
 
--- 4. Consulta Relatório de Estoque com INNER JOIN
-SELECT 
-    produtos.idProduto, 
-    produtos.descricao, 
-    produtos.categoria, 
-    produtos.precoVenda, 
-    produtos.quantidade, 
-    produtos.estoqueMinimo, 
-    fornecedores.nome AS fornecedor
-FROM produtos
-INNER JOIN fornecedores
-ON fornecedores.idFornecedor = produtos.idFornecedor;
+-- Venda 1
+INSERT INTO vendas (total) VALUES (16.00);
+
+INSERT INTO itens_venda (idVenda, idProduto, quantidade, precoUnitario) VALUES
+(1, 1, 2, 3.00),
+(1, 4, 1, 10.00);
+
+-- Venda 2
+INSERT INTO vendas (total) VALUES (199.90);
+
+INSERT INTO itens_venda (idVenda, idProduto, quantidade, precoUnitario) VALUES
+(2, 2, 1, 199.90);
+
+-- Venda 3
+INSERT INTO vendas (total) VALUES (165.70);
+
+INSERT INTO itens_venda (idVenda, idProduto, quantidade, precoUnitario) VALUES
+(3, 1, 2, 49.90),
+(3, 4, 1, 29.90),
+(3, 6, 3, 12.00);
+
+-- Venda 4
+INSERT INTO vendas (total) VALUES (139.90);
+
+INSERT INTO itens_venda (idVenda, idProduto, quantidade, precoUnitario) VALUES
+(4, 3, 1, 69.90),
+(4, 5, 2, 35.00);
+
+-- Venda 5
+INSERT INTO vendas (total) VALUES (60.00);
+
+INSERT INTO itens_venda (idVenda, idProduto, quantidade, precoUnitario) VALUES
+(5, 6, 5, 12.00);
+
+-- Validação das vendas realizadas
+SELECT * FROM vendas;
+
+-- 4. Consultas de Agregação e Estoque (DQL)
+
+-- Total de produtos cadastrados no sistema
+SELECT COUNT(*) FROM produtos;
+
+-- Total de produtos que estão com estoque zerado
+SELECT COUNT(*) FROM produtos
+WHERE quantidade = 0;
 
 ```
 
 ---
 
-**Desmontando o Código**
+## 5. Desmontando o Código
 
-* `codigoBarras VARCHAR(100) UNIQUE`: Adiciona a coluna de código de barras impondo a regra de unicidade. Se tentar inserir um segundo produto com o código `'7891234567890'`, o banco gera um erro de violação de chave única (*Duplicate entry*).
-* `precoCusto DECIMAL(8,2) NOT NULL`: Permite registrar custos até `999999.99` garantindo exatidão centesimal.
-* `FOREIGN KEY (idFornecedor) REFERENCES fornecedores(idFornecedor)`: Cria o vínculo de integridade referencial com a tabela de fornecedores.
-* `fornecedores.nome AS fornecedor`: Atribui um apelido de coluna (*column alias*) para que no resultado da busca a coluna `nome` do fornecedor apareça com o título clareador **`fornecedor`**.
+* `dataVenda DATETIME DEFAULT CURRENT_TIMESTAMP`: Define o campo como tipo data/hora e atribui o valor padrão do instante da inserção.
+* `FOREIGN KEY (idVenda) REFERENCES vendas(idVenda) ON DELETE CASCADE`: Vincula o item ao cabeçalho da venda e habilita a remoção automática dos itens caso a venda seja excluída.
+* `precoUnitario DECIMAL(10,2) NOT NULL`: Registra o preço do item no instante exato da compra.
+* `SELECT COUNT(*) FROM produtos;`: Conta todas as linhas existentes na tabela de produtos.
+* `SELECT COUNT(*) FROM produtos WHERE quantidade = 0;`: Filtra com `WHERE` antes de contar, retornando apenas quantos produtos estão sem estoque.
 
 ---
 
-## Tabelas Comparativas
+## 6. Tabelas Comparativas
 
-**`PRIMARY KEY` vs `UNIQUE`**
+### 1. Comportamentos de Exclusão na Chave Estrangeira (`ON DELETE`)
 
-| Característica | `PRIMARY KEY` (Chave Primária) | `UNIQUE` (Restrição de Unicidade) |
+| Opção | Comportamento ao Excluir o Registro Pai | Recomendado Para |
 | --- | --- | --- |
-| **Identificação** | Identificador principal e obrigatório da linha. | Garante que valores de uma coluna não se repitam. |
-| **Quantidade por Tabela** | Apenas **uma** por tabela. | Pode haver **múltiplas** em uma mesma tabela. |
-| **Aceita Valores Nulos (`NULL`)** | **Não** (Sempre é `NOT NULL`). | **Sim** (Pode aceitar `NULL`, dependendo da declaração). |
-| **Exemplo no JAPDV** | `idProduto` | `codigoBarras` |
+| **`RESTRICT` / `NO ACTION**` *(Padrão)* | Bloqueia a exclusão do pai se houver filhos vinculados. | Produtos, Clientes, Fornecedores. |
+| **`ON DELETE CASCADE`** | Apaga automaticamente todos os registros filhos correspondentes. | Itens de Venda, Histórico temporário. |
+| **`ON DELETE SET NULL`** | Mantém o registro filho, mas define o campo da FK como `NULL`. | Responsáveis secundários, categorias opcionais. |
 
 ---
 
-**Tipos de Dados Numéricos para Valores Financeiros**
+### 2. Funções de Contagem e Agregação no SQL
 
-| Tipo de Dado | Precisão | Uso Recomendado |
-| --- | --- | --- |
-| **`FLOAT` / `DOUBLE**` | Ponto Flutuante (Aproximado) | Medições científicas, peso, altura, coordenadas GPS. |
-| **`DECIMAL(M,D)`** | Numérico Exato (Fixo) | **Valores monetários**, preços, saldos bancários, impostos. |
-| **`INT`** | Inteiro Sem Decimais | Quantidades em estoque, IDs, contadores. |
+| Comando | O que faz? |
+| --- | --- |
+| **`COUNT(*)`** | Conta o número total de **linhas** retornadas pela consulta. |
+| **`COUNT(coluna)`** | Conta apenas os valores **não-nulos (`NOT NULL`)** daquela coluna. |
+| **`COUNT(DISTINCT coluna)`** | Conta a quantidade de valores **únicos e diferentes** em uma coluna. |
 
 ---
 
-## Erros Comuns e Cuidados
+## 7. Erros Comuns e Cuidados
 
-**Usar `FLOAT` para Guardar Preços de Produtos**
-
-Utilizar `FLOAT` pode fazer com que um preço de `R$ 49.90` seja salvo no disco como `49.89999961853027`. Ao calcular totais de vendas e relatórios de fechamento de caixa, o sistema acumulará diferenças de centavos. Use sempre `DECIMAL(8,2)`.
-
-**Tentar Inserir Código de Barras Duplicado**
+### 1. Não Congelar o Preço na Tabela de Itens
 
 ```sql
--- INCORRETO (Gera Erro 1062: Duplicate entry '7891234567890' for key 'codigoBarras')
-INSERT INTO produtos (codigoBarras, descricao, ...) 
-VALUES ('7891234567890', 'Mouse Gamer', ...);
+-- INCORRETO: Não salvar precoUnitario em itens_venda e buscar sempre do cadastro de produtos.
 
 ```
 
-* **Motivo:** A restrição `UNIQUE` impede a gravação de um código que já existe em outro produto cadastrado.
+* **Motivo:** Se o produto subir de preço no mês seguinte, o relatório de vendas passadas mudará de valor, adulterando a contabilidade da loja. **O preço da venda deve ser congelado no `itens_venda**`.
+
+### 2. Usar `ON DELETE CASCADE` na Tabela de Produtos
+
+Se você colocar `ON DELETE CASCADE` na FK `idProduto` da tabela `itens_venda`, ao apagar um produto do cadastro, todas as vendas passadas daquele produto serão apagas. Em produtos e fornecedores, deve-se usar o padrão (**`RESTRICT`**) ou desativar o produto (`ativo = false`).
 
 ---
 
-**Guia Rápido de Memorização**
+## 8. Aprofundamento e Boas Práticas
 
-* **Criar Banco:** `CREATE DATABASE japdv DEFAULT CHARACTER SET utf8;`
-* **Definir Preço Exato:** `precoVenda DECIMAL(8,2) NOT NULL`
-* **Evitar Código Duplicado:** `codigoBarras VARCHAR(100) UNIQUE`
-* **Criar FK na Tabela:** `FOREIGN KEY (idFornecedor) REFERENCES fornecedores(idFornecedor)`
-* **Consulta com Fornecedor:** `SELECT ... FROM produtos INNER JOIN fornecedores ON fornecedores.idFornecedor = produtos.idFornecedor;`
+> **Observação importante (Conhecimento Complementar):**
+> **Consultando a Venda Completa com `SUM()` e `JOIN`:**
+> Podemos verificar se o total calculado bate com os itens inseridos somando a quantidade multiplicada pelo preço unitário:
+
+```sql
+> SELECT 
+>     v.idVenda, 
+>     v.dataVenda, 
+>     p.descricao AS produto, 
+>     iv.quantidade, 
+>     iv.precoUnitario,
+>     (iv.quantidade * iv.precoUnitario) AS subtotal
+> FROM vendas v
+> JOIN itens_venda iv ON v.idVenda = iv.idVenda
+> JOIN produtos p ON p.idProduto = iv.idProduto
+> WHERE v.idVenda = 1;
+> 
+
+```
 
 ---
 
-**Resumo Relâmpago**
+## 9. Guia Rápido de Memorização
 
-1. O banco `japdv` foi criado para gerenciar o estoque e os fornecedores de um sistema de Ponto de Venda (PDV).
-2. A tabela `fornecedores` atua como tabela pai e a tabela `produtos` atua como tabela filho no relacionamento 1:N.
-3. A ordenação dos fornecedores foi realizada com a cláusula `ORDER BY nome`.
-4. O tipo `DECIMAL(8,2)` foi utilizado nos preços para garantir precisão exata de centavos sem erros de arredondamento.
-5. A restrição `UNIQUE` no `codigoBarras` impede que o mesmo código GTIN/EAN seja cadastrado duas vezes.
-6. A chave estrangeira `idFornecedor` na tabela `produtos` garante a integridade referencial com os fornecedores.
-7. O povoamento incluiu 3 fornecedores e 6 produtos devidamente vinculados por seus respectivos IDs.
-8. O comando `INNER JOIN` cruzou as duas tabelas para exibir os detalhes dos produtos ao lado do nome do fornecedor.
-9. A cláusula `ON fornecedores.idFornecedor = produtos.idFornecedor` estabelece a condição de igualdade da junção.
-10. O uso de apelidos (`AS fornecedor`) melhora a legibilidade e a apresentação dos relatórios de consulta.Compreendido. Vou focar estritamente em organizar, refinar e formatar o texto exato que você enviar, sem adicionar informações extras ou criar conteúdo do zero.
+* **Data e Hora Automáticas:** `DATETIME DEFAULT CURRENT_TIMESTAMP`
+* **Exclusão Filha Automática:** `FOREIGN KEY (...) REFERENCES ... ON DELETE CASCADE`
+* **Contar Total de Registros:** `SELECT COUNT(*) FROM tabela;`
+* **Contar com Filtro:** `SELECT COUNT(*) FROM tabela WHERE condicao;`
 
+---
+
+## Resumo Relâmpago — 10 Linhas
+
+1. A modelagem Mestre/Detalhe divide a transação em duas tabelas: `vendas` (cabeçalho) e `itens_venda` (itens).
+2. O parâmetro `DEFAULT CURRENT_TIMESTAMP` registra a data e hora do servidor automaticamente.
+3. A regra `ON DELETE CASCADE` elimina os itens da venda automaticamente se o cabeçalho da venda for apagado.
+4. A tabela `itens_venda` conecta `vendas` e `produtos` em um relacionamento $N:N$.
+5. O campo `precoUnitario` em `itens_venda` congela o valor do produto no momento da compra.
+6. Foram cadastradas 5 vendas completas no banco `japdv` com seus respectivos produtos e quantidades.
+7. A função `COUNT(*)` é uma função de agregação usada para contar linhas no banco de dados.
+8. `SELECT COUNT(*) FROM produtos;` retorna o total geral de itens cadastrados no estoque.
+9. A cláusula `WHERE quantidade = 0` combinada com o `COUNT(*)` identifica produtos esgotados.
+10. O tipo `DECIMAL(10,2)` garante precisão financeira tanto no total da venda quanto nos preços unitários.Entendido! Pode enviar as anotações. Vou reorganizar e refinar todo o conteúdo com uma estrutura clara, lógica e em linguagem simples e direta, ideal para facilitar os seus estudos em TI.
