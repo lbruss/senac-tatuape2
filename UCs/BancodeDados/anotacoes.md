@@ -145,7 +145,7 @@ WHERE quantidade = 0;
 
 # Tabelas Comparativas
 
-## Comportamentos de Exclusão na Chave Estrangeira (`ON DELETE`)
+**Comportamentos de Exclusão na Chave Estrangeira (`ON DELETE`)**
 
 | Opção | Comportamento ao Excluir o Registro Pai | Recomendado Para |
 | --- | --- | --- |
@@ -155,7 +155,7 @@ WHERE quantidade = 0;
 
 ---
 
-## Funções de Contagem e Agregação no SQL
+**Funções de Contagem e Agregação no SQL**
 
 | Comando | O que faz? |
 | --- | --- |
@@ -165,9 +165,9 @@ WHERE quantidade = 0;
 
 ---
 
-## 7. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Não Congelar o Preço na Tabela de Itens
+**Não Congelar o Preço na Tabela de Itens**
 
 ```sql
 -- INCORRETO: Não salvar precoUnitario em itens_venda e buscar sempre do cadastro de produtos.
@@ -176,13 +176,13 @@ WHERE quantidade = 0;
 
 * **Motivo:** Se o produto subir de preço no mês seguinte, o relatório de vendas passadas mudará de valor, adulterando a contabilidade da loja. **O preço da venda deve ser congelado no `itens_venda**`.
 
-### 2. Usar `ON DELETE CASCADE` na Tabela de Produtos
+**Usar `ON DELETE CASCADE` na Tabela de Produtos**
 
 Se você colocar `ON DELETE CASCADE` na FK `idProduto` da tabela `itens_venda`, ao apagar um produto do cadastro, todas as vendas passadas daquele produto serão apagas. Em produtos e fornecedores, deve-se usar o padrão (**`RESTRICT`**) ou desativar o produto (`ativo = false`).
 
 ---
 
-## 8. Aprofundamento e Boas Práticas
+## Aprofundamento e Boas Práticas
 
 > **Observação importante (Conhecimento Complementar):**
 > **Consultando a Venda Completa com `SUM()` e `JOIN`:**
@@ -206,7 +206,7 @@ Se você colocar `ON DELETE CASCADE` na FK `idProduto` da tabela `itens_venda`, 
 
 ---
 
-## 9. Guia Rápido de Memorização
+**Guia Rápido de Memorização**
 
 * **Data e Hora Automáticas:** `DATETIME DEFAULT CURRENT_TIMESTAMP`
 * **Exclusão Filha Automática:** `FOREIGN KEY (...) REFERENCES ... ON DELETE CASCADE`
@@ -215,7 +215,7 @@ Se você colocar `ON DELETE CASCADE` na FK `idProduto` da tabela `itens_venda`, 
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. A modelagem Mestre/Detalhe divide a transação em duas tabelas: `vendas` (cabeçalho) e `itens_venda` (itens).
 2. O parâmetro `DEFAULT CURRENT_TIMESTAMP` registra a data e hora do servidor automaticamente.
@@ -226,4 +226,5 @@ Se você colocar `ON DELETE CASCADE` na FK `idProduto` da tabela `itens_venda`, 
 7. A função `COUNT(*)` é uma função de agregação usada para contar linhas no banco de dados.
 8. `SELECT COUNT(*) FROM produtos;` retorna o total geral de itens cadastrados no estoque.
 9. A cláusula `WHERE quantidade = 0` combinada com o `COUNT(*)` identifica produtos esgotados.
-10. O tipo `DECIMAL(10,2)` garante precisão financeira tanto no total da venda quanto nos preços unitários.Entendido! Pode enviar as anotações. Vou reorganizar e refinar todo o conteúdo com uma estrutura clara, lógica e em linguagem simples e direta, ideal para facilitar os seus estudos em TI.
+10. O tipo `DECIMAL(10,2)` garante precisão financeira tanto no total da venda quanto nos preços unitários.
+
