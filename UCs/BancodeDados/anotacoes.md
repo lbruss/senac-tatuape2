@@ -1,8 +1,8 @@
-# Tabela de Vendas, Itens da Venda, Exclusão em Cascata (ON DELETE CASCADE) e Agregação com COUNT() no Banco JAPDV
+# Tabela de Vendas, Itens da Venda, Exclusão em Cascata (ON DELETE CASCADE), Data e hora automático (CURRENT_TIMESTAMP) e Agregação com COUNT() no Banco JAPDV
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta etapa do desenvolvimento do banco de dados **`japdv`**, avançamos para o registro de transações comerciais completas, construindo a estrutura de **Cabeçalho e Itens de Venda** (relacionamento Mestre/Detalhe).
 
@@ -10,30 +10,30 @@ Aprendemos a automatizar o registro temporal usando **`DATETIME DEFAULT CURRENT_
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### 1. Estrutura Mestre/Detalhe (`vendas` e `itens_venda`)
+**Estrutura Mestre/Detalhe (`vendas` e `itens_venda`)**
 
 Em sistemas de PDV e e-commerce, uma venda nunca é gravada em uma única tabela. Ela é dividida em duas:
 
 * **`vendas` (Cabeçalho/Mestre):** Guarda as informações gerais do cupom fiscal, como número da venda, data/hora e o valor total cobrado.
 * **`itens_venda` (Detalhes/Itens):** Guarda cada produto individual comprado naquela venda, junto com a quantidade e o preço unitário praticado no momento da compra.
 
-### 2. O Carimbo de Data/Hora Automático (`CURRENT_TIMESTAMP`)
+## O Carimbo de Data/Hora Automático (`CURRENT_TIMESTAMP`)
 
 Em vez de depender da digitação manual da data pelo operador de caixa ou pela aplicação, definimos o valor padrão da coluna `dataVenda` como **`CURRENT_TIMESTAMP`**. O próprio MySQL consulta o relógio do servidor no momento do `INSERT` e grava a data e a hora exatas da transação.
 
-### 3. Exclusão em Cascata (`ON DELETE CASCADE`)
+## Exclusão em Cascata (`ON DELETE CASCADE`)
 
 Por padrão, o MySQL bloqueia a exclusão de uma venda que possua itens cadastrados. Ao adicionar a instrução **`ON DELETE CASCADE`** na Chave Estrangeira de `idVenda`:
 
 * Quando uma venda for cancelada/excluída da tabela `vendas`, o banco de dados **apaga automaticamente todos os itens dessa venda** na tabela `itens_venda`, mantendo o banco limpo e sem registros órfãos.
 
-### 4. A Função de Agregação `COUNT()`
+## A Função de Agregação `COUNT()`
 
 A função **`COUNT()`** serve para contar a quantidade de linhas que atendem a um determinado critério na consulta, sendo essencial para levantar dados de estoque e relatórios operacionais.
 
-### Analogia
+> Analogia
 
 > Pense em um **Cupom Fiscal de Supermercado**:
 > * O **topo do cupom** (Número da Venda, Data/Hora e Total Pago) é a tabela **`vendas`**.
@@ -44,7 +44,7 @@ A função **`COUNT()`** serve para contar a quantidade de linhas que atendem a 
 
 ---
 
-## 3. Conceitos Fundamentais
+# Conceitos Fundamentais
 
 * **`DATETIME DEFAULT CURRENT_TIMESTAMP`**: Preenche a coluna automaticamente com a data e o horário atual do servidor.
 * **`ON DELETE CASCADE`**: Regra de integridade referencial que remove automaticamente os registros filhos ao excluir o registro pai.
@@ -54,9 +54,9 @@ A função **`COUNT()`** serve para contar a quantidade de linhas que atendem a 
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Script Completo de Transações, Tabelas e Consultas de Agregação
+**Script Completo de Transações, Tabelas e Consultas de Agregação**
 
 ```sql
 USE japdv;
@@ -133,7 +133,7 @@ WHERE quantidade = 0;
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 * `dataVenda DATETIME DEFAULT CURRENT_TIMESTAMP`: Define o campo como tipo data/hora e atribui o valor padrão do instante da inserção.
 * `FOREIGN KEY (idVenda) REFERENCES vendas(idVenda) ON DELETE CASCADE`: Vincula o item ao cabeçalho da venda e habilita a remoção automática dos itens caso a venda seja excluída.
@@ -143,9 +143,9 @@ WHERE quantidade = 0;
 
 ---
 
-## 6. Tabelas Comparativas
+# Tabelas Comparativas
 
-### 1. Comportamentos de Exclusão na Chave Estrangeira (`ON DELETE`)
+## Comportamentos de Exclusão na Chave Estrangeira (`ON DELETE`)
 
 | Opção | Comportamento ao Excluir o Registro Pai | Recomendado Para |
 | --- | --- | --- |
@@ -155,7 +155,7 @@ WHERE quantidade = 0;
 
 ---
 
-### 2. Funções de Contagem e Agregação no SQL
+## Funções de Contagem e Agregação no SQL
 
 | Comando | O que faz? |
 | --- | --- |
