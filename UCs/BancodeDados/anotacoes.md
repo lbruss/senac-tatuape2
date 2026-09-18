@@ -1,8 +1,8 @@
-# Anotações de Estudo: Consultas Agregadas em Vendas (JAPDV) e Banco Pizzaria
+# Consultas Agregadas em Vendas (JAPDV) e Banco Pizzaria
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta sessão de estudos, abordamos dois tópicos essenciais do ecossistema de bancos de dados relacionais:
 
@@ -11,9 +11,9 @@ Nesta sessão de estudos, abordamos dois tópicos essenciais do ecossistema de b
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### 1. Consultas com Agregação (`SUM`) e Agrupamento (`GROUP BY`)
+**Consultas com Agregação (`SUM`) e Agrupamento (`GROUP BY`**
 
 Quando realizamos vendas em um PDV, muitas vezes precisamos responder a perguntas de negócio como:
 
@@ -22,11 +22,11 @@ Quando realizamos vendas em um PDV, muitas vezes precisamos responder a pergunta
 
 O comando **`GROUP BY`** junta todas as linhas que possuem o mesmo valor nas colunas especificadas (ex: mesmo `idProduto` e `dataVenda`) e aplica a função de agregação (**`SUM`**) para cada grupo individualmente.
 
-### 2. Filtro de Data em Campos `DATETIME` com `LIKE`
+**Filtro de Data em Campos `DATETIME` com `LIKE`**
 
 O campo `dataVenda` armazena data e hora juntas (ex: `2026-09-16 14:30:00`). Ao usar a cláusula `WHERE dataVenda LIKE '2026-09-16%'`, o MySQL filtra todos os registros que iniciem com o ano, mês e dia desejados, ignorando as variações de horário.
 
-### 3. Modelagem do Banco `pizzaria` ($1:N$)
+Modelagem do Banco `pizzaria` ($1:N$)
 
 No domínio de uma pizzaria:
 
