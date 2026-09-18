@@ -37,7 +37,7 @@ Para implementar essa regra no banco físico, colocamos a Chave Primária de `cl
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
 * **`SUM(coluna)`**: Função de agregação que calcula a soma total dos valores numéricos de uma coluna.
 * **`GROUP BY coluna1, coluna2`**: Cláusula que divide o conjunto de resultados em grupos de linhas correspondentes para aplicar funções agregadas.
@@ -47,9 +47,9 @@ Para implementar essa regra no banco físico, colocamos a Chave Primária de `cl
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Parte 1: Consultas de Vendas Diárias no Banco `japdv`
+**Parte 1: Consultas de Vendas Diárias no Banco `japdv`**
 
 ```sql
 USE japdv;
@@ -94,7 +94,7 @@ GROUP BY vendas.dataVenda, itens_venda.idProduto;
 
 ---
 
-### Parte 2: Criação e Povoamento do Banco `pizzaria`
+**Parte 2: Criação e Povoamento do Banco `pizzaria`**
 
 ```sql
 -- 1. Criação e seleção do Banco de Dados
@@ -153,7 +153,7 @@ DESCRIBE pedidos;
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 * **Análise das 3 Abordagens de Consulta no `japdv`:**
 * **Jeito 1:** Tenta listar data e quantidade individual junto com `SUM(quantidade)`. Sem `GROUP BY`, em instâncias estritas do MySQL (`ONLY_FULL_GROUP_BY`), essa consulta pode gerar erro de sintaxe por misturar campos detalhados com agregação global.
