@@ -169,9 +169,9 @@ DESCRIBE pedidos;
 
 ---
 
-## 6. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Comparativo dos 3 Jeitos de Consultar Vendas com Agregação
+**Comparativo dos 3 Jeitos de Consultar Vendas com Agregação**
 
 | Abordagem | Usa `WHERE` (Filtro de Data)? | Usa `GROUP BY`? | O que o Resultado Representa? |
 | --- | --- | --- | --- |
@@ -181,7 +181,7 @@ DESCRIBE pedidos;
 
 ---
 
-### 2. Estrutura do Relacionamento no Banco `pizzaria`
+**Estrutura do Relacionamento no Banco `pizzaria`**
 
 | Tabela | Papel no Banco | Chave Primária (PK) | Chave Estrangeira (FK) |
 | --- | --- | --- | --- |
@@ -190,9 +190,9 @@ DESCRIBE pedidos;
 
 ---
 
-## 7. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Omitir Colunas do `GROUP BY` ao Usar Funções de Agregação
+**Omitir Colunas do `GROUP BY` ao Usar Funções de Agregação**
 
 ```sql
 -- INCORRETO (Em MySQL estrito gera erro 1055: ONLY_FULL_GROUP_BY)
@@ -205,13 +205,13 @@ GROUP BY itens_venda.idProduto; -- Faltou incluir vendas.dataVenda no GROUP BY
 
 * **Regra de Ouro:** Todas as colunas presentes no `SELECT` que **não estejam** dentro de uma função agregada (como `SUM`, `COUNT`, `AVG`) devem obrigatoriamente figurar na cláusula `GROUP BY`.
 
-### 2. Quebras de Linha Inadvertidas em Inserção de Strings (`INSERT`)
+**Quebras de Linha Inadvertidas em Inserção de Strings (`INSERT`)**
 
 Ao cadastrar os e-mails da tabela `clientes`, certifique-se de que a string não possua quebras de linha acidentais dentro das aspas, pois isso gravará caracteres de nova linha (`\n`) no banco de dados.
 
 ---
 
-## 8. Guia Rápido de Memorização
+**Guia Rápido de Memorização**
 
 * **Somar campo numérico:** `SUM(nome_coluna)`
 * **Agrupar relatórios por categoria/item:** `GROUP BY coluna1, coluna2`
@@ -220,7 +220,7 @@ Ao cadastrar os e-mails da tabela `clientes`, certifique-se de que a string não
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O comando `SUM()` soma todos os valores numéricos das linhas selecionadas.
 2. Usar `SUM()` com colunas normais no `SELECT` exige a inclusão da cláusula `GROUP BY`.
@@ -232,5 +232,3 @@ Ao cadastrar os e-mails da tabela `clientes`, certifique-se de que a string não
 8. A tabela `pedidos` guarda a pizza solicitada, tamanho, quantidade, preço, data, status e a FK do cliente.
 9. O relacionamento 1:N garante que um único cliente possa realizar múltiplos pedidos.
 10. A `FOREIGN KEY (idCliente)` em `pedidos` garante a integridade referencial com a tabela `clientes`.Entendido, todo o texto será escrito e exibido diretamente aqui no chat.
-
-Para que eu possa elaborar o conteúdo exato que você precisa, qual é o tema, formato (ex: artigo, redação, e-mail, roteiro) ou assunto que devemos abordar?
