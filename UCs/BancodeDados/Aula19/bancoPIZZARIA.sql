@@ -102,3 +102,12 @@ group by clientes.nome;
 
 select sum(quantidade) as total_pizzas_pedidas
 from pedidos;
+
+select count(*) as total_clientes
+from clientes;
+
+select count(*) as total_pedidos
+from pedidos;
+
+select sum(quantidade) as total_pizzas_vendidas
+from pedidos;
