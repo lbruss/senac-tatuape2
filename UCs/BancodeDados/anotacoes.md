@@ -1,8 +1,8 @@
-# Anotações de Estudo: Povoamento, Consultas DQL, UPDATE e Agregações no Banco Pizzaria
+# Povoamento, Consultas DQL, UPDATE e Agregações no Banco Pizzaria
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta sessão de estudos, demos continuidade ao banco de dados **`pizzaria`**, realizando o povoamento completo da tabela filho **`pedidos`** e executando um conjunto diversificado de consultas operacionais e gerenciais.
 
@@ -10,24 +10,24 @@ Aprofundamos o uso da cláusula **`WHERE`** para filtragens específicas (por ci
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### 1. Inserção de Dados na Tabela Relacionada (Lado $N$)
+## Inserção de Dados na Tabela Relacionada (Lado $N$)
 
 Ao inserir registros na tabela `pedidos`, o campo **`idCliente`** obrigatoriamente deve conter o ID de um cliente que já foi previamente cadastrado na tabela `clientes` (IDs de 1 a 10). Isso garante a **Integridade Referencial**.
 
-### 2. Filtros Operacionais (`WHERE` + `ORDER BY`)
+## Filtros Operacionais (`WHERE` + `ORDER BY`)
 
 Em um sistema de pizzaria, a cozinha e os entregadores precisam de visões específicas dos dados:
 
 * *Filtro por Status:* Listar apenas os pedidos com status `'Entregue'`, ordenados do mais antigo para o mais recente (`ORDER BY data_pedido`).
 * *Filtro por Categoria:* Isolar pizzas de categorias específicas (ex: `'Especial'`) exibindo apenas as colunas relevantes para a produção (`pizza`, `tamanho`, `categoria`, `quantidade`, `preco`).
 
-### 3. Atualização Segura de Dados (`UPDATE`)
+## Atualização Segura de Dados (`UPDATE`)
 
 Conforme um pedido avança no fluxo do restaurante, seu estado muda. O comando **`UPDATE`** altera o atributo `statusp`, sendo indispensável o uso do **`WHERE id_pedido = X`** para limitar a alteração exclusivamente àquele registro.
 
-### 4. Relatórios com Agrupamento e Métricas Globais
+## Relatórios com Agrupamento e Métricas Globais
 
 Diferenciamos três indicadores fundamentais do negócio:
 
@@ -38,7 +38,7 @@ Diferenciamos três indicadores fundamentais do negócio:
 
 ---
 
-## 3. Conceitos Fundamentais
+# Conceitos Fundamentais
 
 * **`INSERT INTO pedidos`**: Inserção de registros na tabela filho associando cada compra a um `idCliente`.
 * **`WHERE`**: Cláusula de filtragem condicional para selecionar linhas que atendem a critérios específicos (cidade, categoria, status).
@@ -50,9 +50,9 @@ Diferenciamos três indicadores fundamentais do negócio:
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Script Completo: Povoamento, Consultas, Alterações e Agregações
+**Script Completo: Povoamento, Consultas, Alterações e Agregações**
 
 ```sql
 USE pizzaria;
@@ -162,7 +162,7 @@ FROM pedidos;
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 * `WHERE statusp = 'Entregue' ORDER BY data_pedido`: Isola apenas as entregas concluídas e organiza os resultados cronologicamente.
 * `UPDATE pedidos SET statusp = 'Pendente' WHERE id_pedido = 1`: Altera a coluna `statusp` de forma cirúrgica, afetando exclusivamente a linha cujo `id_pedido` é igual a 1.
@@ -176,9 +176,9 @@ FROM pedidos;
 
 ---
 
-## 6. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Indicadores Globais no Banco `pizzaria`
+**Indicadores Globais no Banco `pizzaria`**
 
 | Consulta / Função | O que mede? | Resultado no Exemplo |
 | --- | --- | --- |
@@ -188,7 +188,7 @@ FROM pedidos;
 
 ---
 
-### 2. Consulta Simples vs. Consulta com `INNER JOIN`
+**Consulta Simples vs. Consulta com `INNER JOIN`**
 
 | Abordagem | Tabela(s) Consultada(s) | O que exibe? |
 | --- | --- | --- |
@@ -197,9 +197,9 @@ FROM pedidos;
 
 ---
 
-## 7. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Executar `UPDATE` sem a cláusula `WHERE`
+**Executar `UPDATE` sem a cláusula `WHERE`**
 
 ```sql
 -- PERIGO EXTREMO (Alteraria O STATUS DE TODOS OS PEDIDOS do banco para 'Pendente')
@@ -209,14 +209,14 @@ UPDATE pedidos SET statusp = 'Pendente';
 
 * **Regra de Ouro:** Sempre inclua a cláusula `WHERE` referenciando a chave primária (`WHERE id_pedido = 1`) ao executar comandos `UPDATE` ou `DELETE`.
 
-### 2. Confundir `COUNT()` com `SUM()` em Relatórios de Estoque/Vendas
+**Confundir `COUNT()` com `SUM()` em Relatórios de Estoque/Vendas**
 
 * **Incorreto para total de itens:** Usar `COUNT(quantidade)` apenas conta quantas linhas possuem valor preenchido na coluna `quantidade` (retornaria 15).
 * **Correto para total de itens:** Usar `SUM(quantidade)` soma os valores contidos dentro da coluna (retorna 18).
 
 ---
 
-## 8. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Filtrar por texto:** `WHERE coluna = 'Valor'`
 * **Ordenar por data:** `ORDER BY data_pedido`
@@ -227,7 +227,7 @@ UPDATE pedidos SET statusp = 'Pendente';
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Foram inseridos 15 pedidos na tabela `pedidos`, todos associados aos clientes de ID 1 a 10.
 2. A ordenação alfabética dos clientes é realizada com `SELECT * FROM clientes ORDER BY nome`.
