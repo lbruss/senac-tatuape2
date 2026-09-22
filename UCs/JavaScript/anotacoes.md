@@ -1,32 +1,39 @@
-# Caderno de Estudos: Controle de Fluxo (Break/Continue), Funções em JavaScript e Modularização de Código
+# Controle de Fluxo (Break/Continue), Funções em JavaScript e Modularização de Código
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei em dois pilares essenciais da lógica e da arquitetura de software: o **controle fino de laços de repetição** (usando `break` e `continue`) e a **criação de Funções**, aprendendo também a organizar o projeto separando o código JavaScript em arquivos externos `.js`.
 
 * **O que é:**
+
 * *Controle de Fluxo (`break`/`continue`):* Instruções que alteram a execução normal de um laço de repetição antes que ele atinja sua condição de parada final.
 * *Funções:* Blocos de código reutilizáveis projetados para realizar uma tarefa específica. Podem receber dados (parâmetros) e devolver um resultado (`return`).
 * *Modularização:* Técnica de separar o HTML (estrutura) do JavaScript (comportamento/lógica) em arquivos distintos.
 
 
 * **Para que serve:**
+
 * `break` interrompe e encerra um laço imediatamente;
 * `continue` pula apenas a iteração atual e passa para a próxima;
 * Funções evitam a repetição de código (*DRY - Don't Repeat Yourself*);
 * Arquivos `.js` externos tornam o sistema organizado, modular e fácil de manter.
 
 
-* **Por que é importante:** Nenhum sistema profissional escreve o mesmo cálculo várias vezes ou mantém milhares de linhas de script dentro do HTML. Aprender a isolar a lógica em funções e arquivos externos é o primeiro passo para pensar como um desenvolvedor de verdade.
-* **Ideia principal da aula:** Dominar a interrupção de loops, entender a diferença entre funções com e sem parâmetros, manipular o comando `return` e conectar arquivos HTML a scripts JavaScript externos usando o atalho de criação rápida do VS Code.
+* **Por que é importante:**
+
+Nenhum sistema profissional escreve o mesmo cálculo várias vezes ou mantém milhares de linhas de script dentro do HTML. Aprender a isolar a lógica em funções e arquivos externos é o primeiro passo para pensar como um desenvolvedor de verdade.
+
+* **Ideia principal da aula:**
+
+Dominar a interrupção de loops, entender a diferença entre funções com e sem parâmetros, manipular o comando `return` e conectar arquivos HTML a scripts JavaScript externos usando o atalho de criação rápida do VS Code.
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. O Desvio de Fluxo no Loop
+## O Desvio de Fluxo no Loop
 
 Normalmente, um laço `for` ou `while` executa todas as suas voltas do início ao fim. No entanto, às vezes precisamos intervir durante o percurso:
 
@@ -35,7 +42,7 @@ Normalmente, um laço `for` ou `while` executa todas as suas voltas do início a
 
 ---
 
-### B. O Conceito de Função (A Caixa-Preta)
+# O Conceito de Função (A Caixa-Preta)
 
 Uma **função** funciona exatamente como uma **máquina** ou um **eletrodoméstico**:
 
@@ -47,11 +54,19 @@ Uma **função** funciona exatamente como uma **máquina** ou um **eletrodomést
 
 ```
 
-1. **Parâmetros (Entrada):** São os ingredientes ou dados que você entrega para a máquina (ex: dois números para somar).
-2. **Corpo da Função (Processamento):** É o trabalho interno que a máquina realiza longe dos olhos do usuário.
-3. **`return` (Saída):** É o produto final pronto que a máquina devolve para quem a chamou.
+1. **Parâmetros (Entrada):**
 
-### 💡 Analogia do Cotidiano
+São os ingredientes ou dados que você entrega para a máquina (ex: dois números para somar).
+
+2. **Corpo da Função (Processamento):**
+
+É o trabalho interno que a máquina realiza longe dos olhos do usuário.
+
+3. **`return` (Saída):**
+
+É o produto final pronto que a máquina devolve para quem a chamou.
+
+> Analogia do Cotidiano
 
 Imagine um **Micro-ondas**:
 
@@ -63,9 +78,9 @@ Imagine um **Micro-ondas**:
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### A. Interruptores de Laço: `break` vs `continue`
+**Interruptores de Laço: `break` vs `continue`**
 
 ```javascript
 // O laço iria de 0 a 10...
@@ -85,7 +100,7 @@ for (let cont = 0; cont <= 10; cont++) {
 
 ---
 
-### B. Anatomia de uma Função em JavaScript
+**Anatomia de uma Função em JavaScript**
 
 ```javascript
 function nomeDaFuncao(parametro1, parametro2) {
@@ -98,13 +113,16 @@ function nomeDaFuncao(parametro1, parametro2) {
 ```
 
 1. **`function`:** Palavra-chave obrigatória para declarar uma função.
+
 2. **Nome da Função:** Segue as regras de identificadores (deve ser claro e descrever uma ação, como `Soma`, `CalcularMedia`, `mostraTexto`).
+
 3. **Parâmetros `(a, b)`:** Variáveis locais criadas para receber os valores externos (chamados de **argumentos**) quando a função é invocada.
+
 4. **Instrução `return`:** Encerra a execução da função e envia o resultado de volta para o ponto onde a função foi chamada. Se não houver `return`, a função executa a tarefa e retorna `undefined` por padrão.
 
 ---
 
-### C. Separação de Responsabilidades: HTML vs JS Externo
+**Separação de Responsabilidades: HTML vs JS Externo**
 
 Em vez de poluir a página web escrevendo código dentro da tag `<script>`, criamos um arquivo com extensão `.js` e fazemos a ligação através do atributo `src`:
 
@@ -114,7 +132,7 @@ Em vez de poluir a página web escrevendo código dentro da tag `<script>`, cria
 
 ```
 
-#### 💡 Dica de Produtividade no VS Code:
+## Dica de Produtividade no VS Code:
 
 Para criar o arquivo `.js` externo rapidamente pelo HTML:
 
@@ -124,9 +142,9 @@ Para criar o arquivo `.js` externo rapidamente pelo HTML:
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Interrompendo o Laço com `break` (`break.html`)
+**Exemplo 1: Interrompendo o Laço com `break` (`break.html`)**
 
 ```html
 <!DOCTYPE html>
@@ -161,7 +179,7 @@ Para criar o arquivo `.js` externo rapidamente pelo HTML:
 
 ---
 
-### Exemplo 2: Pulando uma Iteração com `continue` (`continue.html`)
+**Exemplo 2: Pulando uma Iteração com `continue` (`continue.html`)**
 
 ```html
 <!DOCTYPE html>
@@ -196,7 +214,7 @@ Para criar o arquivo `.js` externo rapidamente pelo HTML:
 
 ---
 
-### Exemplo 3: Função Sem Parâmetros Disparada por Botão (`funcao-sem-parametro.html`)
+**Exemplo 3: Função Sem Parâmetros Disparada por Botão (`funcao-sem-parametro.html`)**
 
 ```html
 <!DOCTYPE html>
@@ -231,9 +249,9 @@ Para criar o arquivo `.js` externo rapidamente pelo HTML:
 
 ---
 
-### Exemplo 4: Função Com Parâmetros e Arquivo JS Externo
+**Exemplo 4: Função Com Parâmetros e Arquivo JS Externo**
 
-#### Arquivo HTML (`funcao-com-parametros.html`):
+**Arquivo HTML (`funcao-com-parametros.html`):**
 
 ```html
 <!DOCTYPE html>
@@ -254,7 +272,7 @@ Para criar o arquivo `.js` externo rapidamente pelo HTML:
 
 ```
 
-#### Arquivo JS (`02-funcao-com-parametros.js`):
+**Arquivo JS (`02-funcao-com-parametros.js`):**
 
 ```javascript
 // Declaração da função com dois parâmetros (a, b)
@@ -277,9 +295,9 @@ document.getElementById('teste').innerHTML += Soma(num1, num2);
 
 ---
 
-### Exemplo 5: Calculadora com 4 Funções Matemáticas e Eventos de Botão
+**Exemplo 5: Calculadora com 4 Funções Matemáticas e Eventos de Botão**
 
-#### Arquivo HTML (`calculadora-botoes.html`):
+**Arquivo HTML (`calculadora-botoes.html`):**
 
 ```html
 <!DOCTYPE html>
@@ -310,7 +328,7 @@ document.getElementById('teste').innerHTML += Soma(num1, num2);
 
 ```
 
-#### Arquivo JS (`03-funcao-com-parametros.js`):
+**Arquivo JS (`03-funcao-com-parametros.js`):**
 
 ```javascript
 // Módulo de Funções Aritméticas (Retornam valores puros)
@@ -342,9 +360,9 @@ num2 = parseInt(prompt('Digite o 2º número:', '0')) || 0;
 
 ---
 
-### Exemplo 6: Sistema de Média Escolar com Função de 4 Parâmetros
+**Exemplo 6: Sistema de Média Escolar com Função de 4 Parâmetros**
 
-#### Arquivo HTML (`media-aluno.html`):
+**Arquivo HTML (`media-aluno.html`):**
 
 ```html
 <!DOCTYPE html>
@@ -364,7 +382,7 @@ num2 = parseInt(prompt('Digite o 2º número:', '0')) || 0;
 
 ```
 
-#### Arquivo JS (`04-funcao-com-parametros.js`):
+**Arquivo JS (`04-funcao-com-parametros.js`):**
 
 ```javascript
 // Função que recebe 4 notas e calcula a média aritmética
@@ -390,9 +408,9 @@ document.getElementById('teste').innerHTML += Media(nota1, nota2, nota3, nota4).
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Funcionamento do `break` no Exemplo 1:
+**Desmontando o Funcionamento do `break` no Exemplo 1:**
 
 1. O laço `for` inicia com `cont = 0`.
 2. A cada ciclo, imprime o texto no padrão `"Valor da variável é: X"`.
@@ -403,7 +421,7 @@ document.getElementById('teste').innerHTML += Media(nota1, nota2, nota3, nota4).
 
 ---
 
-### B. Desmontando o Funcionamento de `Media(nota1, nota2, nota3, nota4)`:
+**Desmontando o Funcionamento de `Media(nota1, nota2, nota3, nota4)`:**
 
 1. Suponha que o usuário digitou as notas `8`, `7`, `6` e `9`.
 2. O JavaScript chama a função `Media(8, 7, 6, 9)`.
@@ -417,7 +435,7 @@ document.getElementById('teste').innerHTML += Media(nota1, nota2, nota3, nota4).
 
 ---
 
-## 6. Passo a Passo: Criando e Ligando Arquivos JavaScript Externos
+**Passo a Passo: Criando e Ligando Arquivos JavaScript Externos**
 
 ```
 1. No VS Code, crie a pasta do projeto e o arquivo HTML (ex: index.html).
@@ -433,9 +451,9 @@ document.getElementById('teste').innerHTML += Media(nota1, nota2, nota3, nota4).
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### `break` vs `continue`
+**`break` vs `continue`**
 
 | Característica | `break` | `continue` |
 | --- | --- | --- |
@@ -445,16 +463,16 @@ document.getElementById('teste').innerHTML += Media(nota1, nota2, nota3, nota4).
 
 ---
 
-### Funções Sem Parâmetro vs Funções Com Parâmetros
+**Funções Sem Parâmetro vs Funções Com Parâmetros**
 
 | Tipo de Função | Recebe Dados Externos? | Flexibilidade | Exemplo de Uso |
 | --- | --- | --- | --- |
-| **Sem Parâmetro** | ❌ Não | Baixa (Sempre faz a mesma coisa exata). | Exibir um aviso fixo, limpar uma tela. |
-| **Com Parâmetros** | ✅ Sim | Alta (Trabalha com dados dinâmicos). | Somar 2 números quaisquer, calcular médias. |
+| **Sem Parâmetro** | Não | Baixa (Sempre faz a mesma coisa exata). | Exibir um aviso fixo, limpar uma tela. |
+| **Com Parâmetros** | Sim | Alta (Trabalha com dados dinâmicos). | Somar 2 números quaisquer, calcular médias. |
 
 ---
 
-### Script Interno vs Script Externo
+**Script Interno vs Script Externo**
 
 | Abordagem | Onde fica o código JS? | Vantagem | Desvantagem |
 | --- | --- | --- | --- |
@@ -463,45 +481,28 @@ document.getElementById('teste').innerHTML += Media(nota1, nota2, nota3, nota4).
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Palavras-Chave e Identificadores "Colados" (Erros de Digitação)
-
-* **Incorreto:** `functionmostraTexto()`, `functionSoma(a,b)`, `returna+b;`, `<scriptsrc="...">`
-* **Correto:** `function mostraTexto()`, `function Soma(a, b)`, `return a + b;`, `<script src="...">`
-* **Sintoma:** O navegador emite um erro de sintaxe `Uncaught SyntaxError: Unexpected token` e o script para de funcionar completamente.
-
-### 2. Colocar Tags HTML `<script>` Dentro de Arquivos `.js`
+**Colocar Tags HTML `<script>` Dentro de Arquivos `.js`**
 
 * **Erro:** Escrever `<script> let x = 10; </script>` dentro do arquivo `meuscript.js`.
 * **Regra de Ouro:** Arquivos `.js` contêm **somente código JavaScript puro**. Tags HTML só pertencem a arquivos `.html`.
 
-### 3. Confusão de Nomes em Parâmetros vs Argumentos
+**Confusão de Nomes em Parâmetros vs Argumentos**
 
 * **Parâmetros:** São as variáveis da **definição** da função (ex: `a` e `b` em `function Soma(a, b)`).
 * **Argumentos:** São os **valores reais** passados na hora de chamar a função (ex: `num1` e `num2` em `Soma(num1, num2)`).
 
-### 4. Nome de Arquivo com Dupla Extensão (`.html.html`)
+**Nome de Arquivo com Dupla Extensão (`.html.html`)**
 
 * **Erro Comum:** Digitar `funcao.html` na caixa de criação do VS Code quando a opção de tipo já insere o `.html`, resultando em `funcao.html.html`.
 * **Solução:** Atente-se à barra de arquivos do VS Code para garantir extensões limpas como `index.html` e `script.js`.
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas
 
-Foram feitas as seguintes correções diretas nos trechos fornecidos do rascunho original:
-
-1. **Separação de Palavras-Chave Unidas:** Corrigidas todas as ocorrências de palavras coladas, como `functionmostraTexto()` ➔ `function mostraTexto()`, `functionSoma(a,b)` ➔ `function Soma(a, b)`, `functionSub` ➔ `function Sub`, e `<scriptsrc>` ➔ `<script src>`.
-2. **Correção de Nome de Arquivo Duplicado:** O arquivo referenciado no rascunho como `funcao-com-parametros.html.html` foi corrigido para a extensão simples e padrão `funcao-com-parametros.html`.
-3. **Conversão de Média para Números Decimais:** No exercício de média de alunos (`04-funcao-com-parametros.js`), alterei a conversão de notas de `parseInt` para `parseFloat`. Notas escolares frequentemente possuem decimais (ex: 7.5), e o uso de `parseInt` truncaria indevidamente os decimais.
-4. **Formatação de Fechamento de Comentário:** No arquivo `02-funcao-com-parametros.js`, o comentário em bloco de fechamento continha digitação incorreta `/` no lugar de `*/`. Foi devidamente corrigido para garantir que o script seja executado sem erros.
-
----
-
-## 10. Aprofundamento e Boas Práticas
-
-### A. Funções Puras vs Manipulação Direta do DOM
+**Funções Puras vs Manipulação Direta do DOM**
 
 Percebeu que as nossas funções de cálculo como `Soma(a, b)` apenas fazem a conta e usam `return a + b;`, sem utilizar `document.getElementById` dentro delas?
 
@@ -511,7 +512,7 @@ Isso é uma **boa prática de arquitetura de software** chamada **Função Pura*
 * Quem chamou a função decide o que fazer com o resultado (exibir na tela, salvar em banco de dados ou enviar por e-mail).
 * Isso torna a função **reutilizável** em qualquer parte do sistema!
 
-### B. Funções Modernas: Arrow Functions (ES6)
+**Funções Modernas: Arrow Functions (ES6)**
 
 A partir do JavaScript moderno (ES6), aprendemos uma forma mais curta de escrever funções usando a sintaxe de "flecha" (**Arrow Functions**):
 
@@ -530,7 +531,7 @@ Para funções simples de uma única linha, a Arrow Function omite a palavra `fu
 
 ---
 
-## 11. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O comando `break` encerra um laço de repetição imediatamente, pulando para fora dele.
 2. O comando `continue` ignora o restante do código da volta atual e pula para a próxima iteração.
@@ -545,7 +546,7 @@ Para funções simples de uma única linha, a Arrow Function omite a palavra `fu
 
 ---
 
-## 12. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Sintaxe de Função:** `function nome(p1, p2) { return p1 + p2; }`
 * **Interromper Loop:** `break;`
