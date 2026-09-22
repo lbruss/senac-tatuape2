@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Controle de fluxo - continue</title>
+</head>
+<body>
+	<h1>Controle de fluxo - continue</h1>
+	<p id="teste"></p>
+
+	<script>
+	//Criando as variáveis
+	var resposta='';
+	var cont=0;
+
+	//Criando o laço de repetição
+	for(cont=0;cont<=10;cont++){
+		if(cont===8){
+			continue;
+			/*
+			Quando o cont chega a 8,
+			o comando continue não encerra o laço,
+			pula essa interação.
+			Ou seja, o código dentro do laço, não é
+			executado para o valor 8, mas o loop
+			segue normalmente para 9 e 10.
+			*/
+		}
+		resposta+='Valor da variável é: '+cont+'<br/>';
+	}
+	document.getElementById('teste').innerHTML=resposta
+	/*
+	Diferença entre o break e o continue
+	*break -> interrompe o laço completamente
+	*continue -> apenas pula a execução daquela volta, mas
+	o laço continua normalmente
+	*/
+	</script>
+</body>
+</html>

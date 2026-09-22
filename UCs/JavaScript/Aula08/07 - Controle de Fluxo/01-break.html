@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Controle de fluxo - break</title>
+</head>
+<body>
+	<h1>Controle de fluxo - break</h1>
+	<p id="teste"></p>
+
+	<script>
+	//Criando variáveis
+	var resposta = '';
+	//Criando uma variável do tipo string
+	var cont = 0;
+	//Contador para ser usado no laço de repetição
+
+	//Criando o laço de repetição
+	for(cont = 0; cont<= 10; cont++){
+		if(cont === 8){
+			break;
+		}
+		resposta +='Valor da variável é: ' + cont + '<br/>'
+	}
+	document.getElementById('teste').innerHTML = resposta;
+	</script>
+</body>
+</html>

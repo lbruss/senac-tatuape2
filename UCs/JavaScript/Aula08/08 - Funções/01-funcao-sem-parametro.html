@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Função sem parâmetro</title>
+</head>
+<body>
+	<h1>Função sem parâmetro</h1>
+	<p id="teste"></p>
+
+	<button type="button" onclick="mostraTexto();">Mostra</button>
+
+	<script>
+	//Declarando uma função
+	function mostraTexto(){
+		//Declarando as variáveis
+		var texto = 'Linguagem JavaScript<br/>';
+		//Guarda a string 'Linguagem JavaScript'
+		var media = (2+5+8)/3 + '<br/>';
+		/*
+		Calcula a média dos valores declarados e o resultado 
+		é convertido em string porque esta concatenado com o '<br>'
+		*/
+		var resposta = true;
+		//Guarda o valor booleano true.
+		document.getElementById('teste').innerHTML =texto+media+resposta;
+		//Inserido dentro do paragráfo teste a soma das três variáveis. 
+	}
+
+	/*
+	Conceito importarnte
+
+	> Função sem parâmetro: não recebe valores externos,
+	apenas executa o que está definido dentro dela.
+	> Se fosse com parâmetro, poderíamos passar valores
+	diferentes para calcular ou exibir,
+	tornando a função mais flexível.
+	*/
+	</script>
+
+</body>
+</html>
