@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, iniciei meus estudos em **Java**, uma das linguagens de programação mais populares, robustas e utilizadas no mercado de tecnologia em todo o mundo.
 
@@ -12,19 +12,23 @@ Anos mais tarde, a *Sun Microsystems* foi adquirida pela **Oracle**, que é a re
 
 O grande diferencial do Java é o seu slogan **WORA** (*"Write Once, Run Anywhere"* — "Escreva uma vez, execute em qualquer lugar"). Isso significa que um programa escrito em Java pode rodar em praticamente qualquer sistema operacional sem precisar ter seu código reescrito.
 
-### Onde o Java é utilizado hoje?
+**Onde o Java é utilizado hoje?**
 
 * **Back-end de Aplicações Web:** Muito forte no mercado corporativo e bancário (usando frameworks modernos e tecnologias tradicionais como Servlets e JSP).
+* 
 * **Desenvolvimento Android:** Linguagem base nativa para criação de aplicativos móveis para Android.
+* 
 * **Sistemas Desktop:** Softwares locais corporativos (como o programa oficial de declaração do Imposto de Renda no Brasil).
+* 
 * **Games:** Jogos de grande porte (o exemplo mais famoso feito em Java é o *Minecraft*).
+* 
 * **Dispositivos Embarcados e Robótica:** Utilizado em cartões inteligentes (*Smartcards*), robôs, sistemas de som e até em sondas espaciais da NASA.
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A Arquitetura do Java e a JVM
+## A Arquitetura do Java e a JVM
 
 Entendi que o grande segredo do slogan *WORA* está na camada intermediária que o Java utiliza entre o nosso código e o sistema operacional: a **JVM (Java Virtual Machine — Máquina Virtual Java)**.
 
@@ -48,13 +52,15 @@ No Java, o processo funciona em duas etapas:
 
 ```
 
-💡 **Analogia do Tradutor Universal:** Imagine que você escreve um livro em um idioma neutro universal (o *Bytecode*). Em vez de reescrever o livro para o espanhol, francês ou japonês, você apenas contrata um tradutor nativo de cada país (a *JVM* de cada Sistema Operacional) para ler aquele livro universal para a plateia local. O seu texto original nunca precisa mudar.
+> Analogia do Tradutor Universal:
+
+Imagine que você escreve um livro em um idioma neutro universal (o *Bytecode*). Em vez de reescrever o livro para o espanhol, francês ou japonês, você apenas contrata um tradutor nativo de cada país (a *JVM* de cada Sistema Operacional) para ler aquele livro universal para a plateia local. O seu texto original nunca precisa mudar.
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### JDK vs. JVM vs. IDE
+**JDK vs. JVM vs. IDE**
 
 Para começar a programar em Java, preciso entender a diferença entre as ferramentas do ecossistema:
 
@@ -64,7 +70,7 @@ Para começar a programar em Java, preciso entender a diferença entre as ferram
 
 ---
 
-### Variáveis e Tipos de Dados
+## Variáveis e Tipos de Dados
 
 Em Java, uma **variável** é um espaço reservado na memória RAM do computador para armazenar uma informação que pode mudar durante a execução do programa.
 
@@ -91,7 +97,7 @@ Como o Java é uma linguagem **fortemente tipada**, sou obrigado a declarar o **
 
 ---
 
-### Regras para Nomear Variáveis (Boas Práticas e Clean Code)
+## Regras para Nomear Variáveis (Boas Práticas e Clean Code)
 
 Para evitar erros de compilação e manter o código legível:
 
@@ -103,9 +109,9 @@ Para evitar erros de compilação e manter o código legível:
 
 ---
 
-## 4. Códigos / Exemplos Práticos
+### Códigos / Exemplos Práticos
 
-### Exemplo 1: Primeiro Programa em Java (`Hello.java`)
+**Exemplo 1: Primeiro Programa em Java (`Hello.java`)**
 
 ```java
 /**
@@ -123,7 +129,7 @@ public class Hello {
 
 ---
 
-### Exemplo 2: Estrutura Padrão com Pacote no Eclipse (`Hello.java`)
+**Exemplo 2: Estrutura Padrão com Pacote no Eclipse (`Hello.java`)**
 
 ```java
 package cursojava;
@@ -143,7 +149,7 @@ public class Hello {
 
 ---
 
-### Exemplo 3: Trabalhando com Variáveis de Texto e Atribuições (`Fundamentos.java`)
+**Exemplo 3: Trabalhando com Variáveis de Texto e Atribuições (`Fundamentos.java`)**
 
 ```java
 package cursojava;
@@ -167,7 +173,7 @@ public class Fundamentos {
 
 ---
 
-### Exemplo 4: Manipulação de Múltiplos Tipos de Dados (`FundamentosTipos.java`)
+**Exemplo 4: Manipulação de Múltiplos Tipos de Dados (`FundamentosTipos.java`)**
 
 ```java
 package cursojava;
@@ -194,7 +200,7 @@ public class FundamentosTipos {
 
 ---
 
-### Exemplo 5: Operadores Aritméticos, Atribuição e Incremento (`Operadores.java`)
+**Exemplo 5: Operadores Aritméticos, Atribuição e Incremento (`Operadores.java`)**
 
 ```java
 package cursojava;
@@ -238,7 +244,7 @@ public class Operadores {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 Vamos entender por dentro como funciona o esqueleto básico do Java, desmontando a estrutura do `Hello World!`:
 
@@ -276,9 +282,9 @@ public class Hello {
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo 1: Compilando e Executando Java Manualmente (Terminal / VS Code)
+**Passo a Passo 1: Compilando e Executando Java Manualmente (Terminal / VS Code)**
 
 Para fixar como o Java funciona por baixo dos panos sem a "mágica" das IDEs, fiz o processo completo pelo terminal:
 
@@ -311,11 +317,9 @@ Para fixar como o Java funciona por baixo dos panos sem a "mágica" das IDEs, fi
 * O que acontece: A JVM é chamada, lê o bytecode `Hello.class` e executa o método `main`.
 * **Atenção:** No comando `java`, **não** adicionamos a extensão `.class`, apenas o nome da classe.
 
-
-
 ---
 
-### Passo a Passo 2: Criando um Projeto Java do Zero no Eclipse
+**Passo a Passo 2: Criando um Projeto Java do Zero no Eclipse**
 
 1. **Abrir o Eclipse e fechar a tela de Welcome.**
 2. **Ajustar a perspectiva de trabalho:**
@@ -345,13 +349,11 @@ Para fixar como o Java funciona por baixo dos panos sem a "mágica" das IDEs, fi
 6. **Executar o Código:**
 * Clicar no botão verde de **Play** (ou pressionar `Ctrl + F11`). O resultado aparecerá na aba *Console* na parte inferior da tela.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Tipos de Operadores em Java
+**Tipos de Operadores em Java**
 
 | Categoria | Operadores | Função Principal | Exemplo |
 | --- | --- | --- | --- |
@@ -363,7 +365,7 @@ Para fixar como o Java funciona por baixo dos panos sem a "mágica" das IDEs, fi
 
 ---
 
-### 2. Tabela Verdade dos Operadores Lógicos (`&&`, `||`, `!`)
+**Tabela Verdade dos Operadores Lógicos (`&&`, `||`, `!`)**
 
 Os operadores lógicos servem para tomar decisões baseadas em múltiplas condições:
 
@@ -380,9 +382,9 @@ Os operadores lógicos servem para tomar decisões baseadas em múltiplas condi�
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Aglutinação de Palavras Reservadas (Erro de Digitação)
+**Aglutinação de Palavras Reservadas (Erro de Digitação)**
 
 Acontece quando esquecemos de dar espaço entre os comandos. O Java não consegue interpretar as palavras juntas.
 
@@ -401,7 +403,7 @@ public class Operadores {
 
 ---
 
-### 2. Confusão entre Aspas Duplas e Aspas Simples
+**Confusão entre Aspas Duplas e Aspas Simples**
 
 * **Aspas Duplas (`" "`):** Usadas exclusivamente para cadeias de caracteres (`String`).
 * **Aspas Simples (`' '`):** Usadas exclusivamente para um único caractere primitivo (`char`).
@@ -419,7 +421,7 @@ String nome = "Bruss";
 
 ---
 
-### 3. Divergência de Nomes de Arquivo e Classe
+**Divergência de Nomes de Arquivo e Classe**
 
 Se o seu arquivo se chama `Hello.java`, a classe pública dentro dele **deve** ser `public class Hello`.
 
@@ -436,19 +438,9 @@ public class Hello { ... }
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho da aula, apliquei as seguintes correções técnicas silenciosas no código para que fossem compiláveis:
-
-1. **Separação de Palavras Reservadas:** No meu rascunho, diversas palavras chave estavam grudadas (exemplo: `publicclass`, `publicstaticvoidmain`, `Stringnome`). Adicionei os espaços obrigatórios da sintaxe Java em todos os blocos de código.
-2. **Correção das Tags de Javadoc:** A anotação `@autor` estava grafada em português no rascunho. A tag oficial do Javadoc da linguagem Java é escrita em inglês: `@author`.
-3. **Padrão de Nomenclatura de Pacotes:** O nome do pacote no rascunho estava como `CursoJaca` (com erro de digitação e letra maiúscula). Corrigi para `cursojava` para respeitar as convenções oficiais do Java (pacotes inteiramente em letras minúsculas sem erros de digitação).
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### A Diferença entre JDK, JRE e JVM (Visão Completa)
+**A Diferença entre JDK, JRE e JVM (Visão Completa)**
 
 Para nunca mais confundir os componentes do Java, vale a pena entender a relação de "bonecas russas" que existe entre eles:
 
@@ -462,7 +454,7 @@ $$\text{JRE} = \text{JVM} + \text{Bibliotecas Padrão (Java API)}$$
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O Java foi criado nos anos 90 pela Sun Microsystems e atualmente pertence à Oracle.
 2. Seu grande diferencial é o slogan WORA: *"Write Once, Run Anywhere"* (portabilidade total).
@@ -479,18 +471,18 @@ $$\text{JRE} = \text{JVM} + \text{Bibliotecas Padrão (Java API)}$$
 
 ## Guia Rápido de Memorização
 
-### Comandos do Terminal
+**Comandos do Terminal**
 
 * `javac Arquivo.java` ➔ Compila o código-fonte humano e gera o bytecode `Arquivo.class`.
 * `java Arquivo` ➔ Executa a classe no ambiente da JVM (sem a extensão `.class`).
 
-### Convenções de Nomenclatura
+**Convenções de Nomenclatura**
 
 * **Classes:** `PascalCase` (primeira letra de cada palavra maiúscula, ex: `MinhaClasse`).
 * **Variáveis e Métodos:** `camelCase` (primeira letra minúscula, próximas palavras maiúsculas, ex: `meuNome`).
 * **Pacotes:** `lowercase` (tudo minúsculo, sem acentos, ex: `meupacote`).
 
-### Atribuições e Incremento
+**Atribuições e Incremento**
 
 * `i = i + 1` ➔ `i += 1` ➔ `i++` (Aumenta 1 unidade)
 * `i = i - 1` ➔ `i -= 1` ➔ `i--` (Diminui 1 unidade)
