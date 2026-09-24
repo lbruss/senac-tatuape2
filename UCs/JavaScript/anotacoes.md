@@ -1,14 +1,17 @@
-# Caderno de Estudos: Funções com Lógica Condicional, Validação de Formulários no DOM e Objetos em JavaScript
+# Funções com Lógica Condicional, Validação de Formulários no DOM e Objetos em JavaScript
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei significativamente na construção de aplicações web interativas e seguras. O foco esteve em três pilares do desenvolvimento Front-end: **tomada de decisão dentro de funções**, **validação de formulários no DOM antes do envio de dados** e **criação de Objetos em JavaScript** agrupando propriedades e métodos.
 
 * **O que é:**
+
 * *Funções com Condicionais:* Funções que processam informações e retornam respostas diferentes de acordo com regras de negócio (`if/else`).
+
 * *Validação de Formulários:* Interceptação do envio de dados de um formulário HTML via JavaScript para verificar se todos os campos foram preenchidos corretamente.
+
 * *Objetos:* Estrutura de dados que agrupa variáveis (propriedades) e funções (métodos) relacionadas a uma mesma entidade em um único bloco.
 
 
@@ -22,9 +25,9 @@ Nesta aula, avancei significativamente na construção de aplicações web inter
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Validação de Formulários no DOM
+## Validação de Formulários no DOM
 
 Quando o usuário clica no botão "Enviar" de um formulário, o navegador tenta disparar uma requisição HTTP (`POST` ou `GET`). Com o JavaScript, nós colocamos um "guarda de trânsito" no evento `onsubmit` do formulário.
 
@@ -47,7 +50,7 @@ Quando o usuário clica no botão "Enviar" de um formulário, o navegador tenta 
 
 ```
 
-### B. Objetos em JavaScript (Propriedades e Métodos)
+## Objetos em JavaScript (Propriedades e Métodos)
 
 Em vez de ter 15 variáveis soltas no código (`nome`, `sobrenome`, `idade`, `cidade`...), agrupamos tudo em uma única variável complexa chamada **Objeto**.
 
@@ -63,16 +66,17 @@ Objeto: 'pessoa'
 
 ```
 
-### 💡 Analogia do Cotidiano
+> Analogia do Cotidiano
 
 * **Validação de Formulário:** Pense no **portão de embarque de um aeroporto**. O funcionário checa seu documento. Se faltar a passagem ou a identidade (`campo vazio`), ele te avisa (`alert`), aponta onde você deve ir (`focus`) e **não deixa você passar** (`return false`). Se estiver tudo certo, ele libera a sua entrada (`return true`).
+
 * **Objetos:** Pense no seu **documento de identidade (RG)**. O papel é o Objeto. Nome, data de nascimento e CPF são as **propriedades**. A foto e a assinatura digitalizada que confirmam quem você é funcionam como **métodos**.
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### A. Funções com Retorno Condicional
+**Funções com Retorno Condicional**
 
 Uma função pode conter estruturas `if/else` internas para determinar qual valor será devolvido pelo `return`.
 
@@ -80,14 +84,20 @@ Uma função pode conter estruturas `if/else` internas para determinar qual valo
 
 ---
 
-### B. Interceptação e Validação de Formulários (`onsubmit`)
+**Interceptação e Validação de Formulários (`onsubmit`)**
 
 * **`onsubmit="return MinhaFuncao(this);"`**: Evento do HTML disparado ao enviar o formulário. A palavra `this` envia a referência do próprio elemento `<form>` como argumento para o JavaScript.
+
 * **`return false;`**: Comando essencial que **cancela o envio padrão do formulário**. Se a função retornar `false`, a página não recarrega e os dados não são enviados.
+
 * **`return true;`**: Permite que o formulário continue o seu fluxo normal de envio.
+
 * **`.focus()`**: Método que coloca o cursor piscando diretamente dentro do campo que precisa ser corrigido pelo usuário.
+
 * **Validando Radio Buttons e Checkboxes:**
+
 * Botões Radio usam um array de elementos (`frm.sexo[0]`, `frm.sexo[1]`). Checamos a propriedade `.checked` (`true` ou `false`).
+
 * Checkboxes também usam a propriedade `.checked` para verificar se foram marcadas pelo usuário.
 
 
@@ -95,7 +105,7 @@ Uma função pode conter estruturas `if/else` internas para determinar qual valo
 
 ---
 
-### C. Estrutura de Objetos e a Palavra-Chave `this`
+**Estrutura de Objetos e a Palavra-Chave `this`**
 
 * **Objeto Literal:** Criado utilizando chaves `{}` com pares de `chave: valor`.
 * **Propriedades:** São as variáveis pertencentes ao objeto.
@@ -107,11 +117,11 @@ Uma função pode conter estruturas `if/else` internas para determinar qual valo
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Função de Média com Decisão de Aprovado/Reprovado
+**Exemplo 1: Função de Média com Decisão de Aprovado/Reprovado**
 
-#### Arquivo HTML (`funcao-com-parametros.html`):
+**Arquivo HTML (`funcao-com-parametros.html`):**
 
 ```html
 <!DOCTYPE html>
@@ -131,7 +141,7 @@ Uma função pode conter estruturas `if/else` internas para determinar qual valo
 
 ```
 
-#### Arquivo JS (`05-funcao-com-parametros.js`):
+**Arquivo JS (`05-funcao-com-parametros.js`):**
 
 ```javascript
 // Declaração da função com parâmetros e lógica condicional interna
@@ -165,9 +175,9 @@ document.getElementById('teste').innerHTML += 'O(a) aluno(a) ' + nome + ' está 
 
 ---
 
-### Exemplo 2: Validação Completa de Formulário no DOM
+**Exemplo 2: Validação Completa de Formulário no DOM**
 
-#### Arquivo HTML (`validacao-formulario.html`):
+**Arquivo HTML (`validacao-formulario.html`):**
 
 ```html
 <!DOCTYPE html>
@@ -222,7 +232,7 @@ document.getElementById('teste').innerHTML += 'O(a) aluno(a) ' + nome + ' está 
 
 ```
 
-#### Arquivo JS (`06-funcao-com-parametros.js`):
+**Arquivo JS (`06-funcao-com-parametros.js`):**
 
 ```javascript
 // Função de validação que recebe o formulário 'frm' como parâmetro
@@ -283,7 +293,7 @@ function VerificaForm(frm) {
 
 ---
 
-### Exemplo 3: Criação e Manipulação de Objetos em JavaScript (`objeto.html`)
+**Exemplo 3: Criação e Manipulação de Objetos em JavaScript (`objeto.html`)**
 
 ```html
 <!DOCTYPE html>
@@ -338,54 +348,63 @@ function VerificaForm(frm) {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Validação `onsubmit="return VerificaForm(this);"`:
+**Desmontando a Validação `onsubmit="return VerificaForm(this);"`:**
 
 1. `onsubmit`: É o gatilho de evento ativado no instante em que o formulário tenta ser enviado.
+
 2. `this`: Passa o elemento `<form>` inteiro com todas as suas marcas internas como um objeto manipulável (`frm`) para a função JS.
+
 3. `return VerificaForm(...)`: Recebe o resultado booleano da função.
+
 * Se a função encontrar algum erro e executar `return false`, o evento `onsubmit` recebe `return false`, cancelando o recarregamento e o envio do formulário.
 
 
 
 ---
 
-### B. Desmontando o Uso de `this` no Objeto `pessoa`:
+**Desmontando o Uso de `this` no Objeto `pessoa`:
 
 ```javascript
 nomeCompleto: function() {
-    return this.nome + ' ' + this.sobrenome;
+    return this.nome + ' ' + this.sobrenome;**
 }
 
 ```
 
 * Se escrevêssemos apenas `return nome + ' ' + sobrenome;`, o JavaScript procuraria por variáveis globais chamadas `nome` e `sobrenome` fora do objeto, resultando em erro (`ReferenceError`).
+
 * A instrução **`this.nome`** instrui expressamente o motor do JavaScript: *"Acesse a propriedade 'nome' registrada DENTRO deste objeto 'pessoa' em que o método está inserido"*.
 
 ---
 
-## 6. Passo a Passo: Fluxo de Execução da Validação de Formulário
+**Passo a Passo: Fluxo de Execução da Validação de Formulário**
 
 ```
 1. O usuário preenche os campos do formulário na página HTML.
+
 2. O usuário clica no botão <input type="submit">.
+
 3. O evento onsubmit captura o clique e chama a função VerificaForm(this).
+
 4. O JavaScript avalia os campos em ordem sequencial:
    a. Testa se o campo de texto está vazio com frm.campo.value === ''.
    b. Se estiver vazio: exibe alert(), coloca o foco no campo com .focus() e para a função com `return false`.
    c. Testa se Radio/Checkbox estão desmarcados com !frm.campo.checked.
    d. Testa se a caixa Select está na opção inicial com frm.select.value === 'Selecione'.
+
 5. Se NENHUMA das condições de erro for disparada, a função atinge a última linha: `return true`.
+
 6. O navegador recebe 'true' do evento onsubmit e realiza o envio do formulário para o servidor.
 
 ```
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Como Acessar e Validar Cada Tipo de Input do HTML no JavaScript
+**Como Acessar e Validar Cada Tipo de Input do HTML no JavaScript**
 
 | Tipo de Elemento HTML | Como acessar o elemento? | Como verificar se está preenchido/válido? |
 | --- | --- | --- |
@@ -396,7 +415,7 @@ nomeCompleto: function() {
 
 ---
 
-### Propriedades vs. Métodos em Objetos JavaScript
+**Propriedades vs. Métodos em Objetos JavaScript**
 
 | Conceito | O que é? | Sintaxe no Objeto | Como Chamar? |
 | --- | --- | --- | --- |
@@ -405,21 +424,21 @@ nomeCompleto: function() {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Esquecer a Palavra `return` no Evento `onsubmit`
+**Esquecer a Palavra `return` no Evento `onsubmit`**
 
 * **Incorreto:** `onsubmit="VerificaForm(this);"`
 * **O que acontece:** A função executa a validação e exibe os alertas, mas mesmo que ela retorne `false`, **o formulário é enviado assim mesmo**!
 * **Correto:** `onsubmit="return VerificaForm(this);"`
 
-### 2. Tentar Acessar o Conteúdo de Radios ou Checkboxes via `.value` para Saber se Estão Marcados
+**Tentar Acessar o Conteúdo de Radios ou Checkboxes via `.value` para Saber se Estão Marcados**
 
 * **Incorreto:** `if (frm.sexo[0].value === '')`
 * **O que acontece:** A propriedade `.value` do botão radio sempre retornará a palavra fixa atribuída no HTML (ex: `'masculino'`), independentemente de o botão estar marcado ou não.
 * **Correto:** Usar a propriedade booleana `.checked` (`if (!frm.sexo[0].checked)`).
 
-### 3. Esquecer os Parênteses ao Invocar um Método de Objeto
+**Esquecer os Parênteses ao Invocar um Método de Objeto**
 
 * **Incorreto:** `document.write(pessoa.nomeCompleto);`
 * **Resultado:** O JavaScript imprime o código-fonte da função inteira impresso como texto, em vez de executar o código do método!
@@ -427,20 +446,9 @@ nomeCompleto: function() {
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas
 
-Foram feitas as seguintes correções diretas nos trechos fornecidos do rascunho original:
-
-1. **Separação de Palavras-Chave Unidas:** Corrigidos erros de digitação como `functionVerificaForm` ➔ `function VerificaForm`, `returnfalse` ➔ `return false`, e `returnVerificaForm` ➔ `return VerificaForm`.
-2. **Conflito de Sobrescrita de Nome de Arquivo:** O rascunho atribuiu o nome `funcao-com-parametros.html` tanto para o exercício da Média quanto para o de Validação de Formulário. Para evitar que o segundo arquivo apague o primeiro no computador do aluno, ajustei o nome do exemplo de formulário para `validacao-formulario.html`.
-3. **Uso de `.trim()` na Validação de Texto:** Adicionei o método `.trim()` ao validar campos de texto (`value.trim() === ''`). Isso impede que o usuário "enganador" digite apenas espaços em branco para burlar a validação de campo obrigatório.
-4. **Condição Lógica dos Botões Radio e Checkbox:** No rascunho original constava `frm.sexo[0].checked==false&&frm.sexo[1].checked==false`. Atualizei para a sintaxe limpa e legível utilizando a negação booleana `!frm.sexo[0].checked && !frm.sexo[1].checked`.
-
----
-
-## 10. Aprofundamento e Boas Práticas
-
-### A. Validação JS vs. Validação Nativa HTML5
+**Validação JS vs. Validação Nativa HTML5**
 
 O HTML5 trouxe atributos nativos de validação como `required`, `type="email"`, `minlength="3"` e `pattern=""`.
 
@@ -448,7 +456,7 @@ O HTML5 trouxe atributos nativos de validação como `required`, `type="email"`,
 * **Validação JavaScript:** Necessária para regras complexas de negócios (como comparar se o campo "Confirmar Senha" é igual ao campo "Senha", validar CPF/CNPJ, ou verificar combinação de checkboxes).
 * **Boa Prática profissional:** Utilize a validação nativa do HTML5 como primeira camada e o JavaScript para validações avançadas.
 
-### B. Por que Evitar `document.write()` na Prática Profissional?
+**Por que Evitar `document.write()` na Prática Profissional?**
 
 No exercício do objeto `pessoa`, utilizamos `document.write()` para exibir os dados.
 
@@ -457,7 +465,7 @@ No exercício do objeto `pessoa`, utilizamos `document.write()` para exibir os d
 
 ---
 
-## 11. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Funções com `if/else` internos retornam resultados diferentes com base na lógica aplicada aos seus parâmetros.
 2. O evento `onsubmit` intercepta a tentativa de envio do formulário HTML via JavaScript.
@@ -472,7 +480,7 @@ No exercício do objeto `pessoa`, utilizamos `document.write()` para exibir os d
 
 ---
 
-## 12. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Bloquear Envio do Formulário:** `return false;`
 * **Focar no Campo com Erro:** `frm.campo.focus();`
