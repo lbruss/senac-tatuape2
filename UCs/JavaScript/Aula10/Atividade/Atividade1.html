@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exemplo de DOM - Atividade</title>
+    <style>
+    #quadrado{
+        width: 400px;
+        height: 400px;
+        position: relative;
+        background-color: #000000;
+        border: 1px solid #2f2930;
+        border-radius: 30px;
+    }
+    #bola{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: absolute;
+        background-color: #4c0d70;
+    }
+    </style>
+</head>
+<body>
+    <h1>setInterval() e clearInterval() - Atividade</h1>
+    <p><button type="button" onclick="Anima()">Anima</button></p>
+    <p><button type="button" onclick="Voltar()">Voltar</button></p>
+    <div id="quadrado">
+        <div id="bola"></div>
+    </div>
+    <script>
+        //Declarando a função (Ida)
+        function Anima(){
+            var elemento = document.getElementById('bola');
+            var posicao = 0;
+            var id = setInterval(Local,5);
+ 
+            //Declarando a função Local
+            function Local(){
+                if (posicao == 350){//Limite do Quadrado
+                    clearInterfal(id);
+                }else{
+                    posicao++;//Incrementata a posição
+                    elemento.style.top=posicao + 'px';//move para baixo
+                    elemento.style.left=posicao + 'px';//move para direita
+                }
+            }
+        }
+
+        //Declarando a função (Volta)
+        function Voltar(){
+            var elemento = document.getElementById('bola');
+            var posicao = 350;
+            var id=setInterval(Local,5);
+            var voltar=document.getElementById('bola');
+            var alto=0;
+ 
+            function Local(){
+                if (posicao == 0) {
+                    clearInterfal(id);  
+                }else {
+                    posicao--;
+                    elemento.style.top=posicao + 'px';
+                    elemento.style.left=posicao + 'px'; 
+                }
+               
+            }
+        }
+    </script>
+</body>
+</html>

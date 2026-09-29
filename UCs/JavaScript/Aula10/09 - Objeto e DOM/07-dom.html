@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exemplo de DOM</title>
+	<style>
+	#quadrado{
+		width: 400px;
+		height: 400px;
+		position: relative;
+		background-color: #000000;
+		border: 3px solid #2f2930;
+		border-radius: 30px;
+	}
+	#bola{
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		position: absolute;
+		background-color: #4c0d70;
+	}
+	</style>
+</head>
+<body>
+	<h1>Exemplo de setInterval() e clearInterval()</h1>
+	<p><button type="button" onclick="Anima()">Anima</button></p>
+	<p><button type="button" onclick="Anima()">Anima</button></p>
+	<div id="quadrado">
+		<div id="bola"></div>
+	</div>
+	<script>
+		//Declarando as função
+		function Anima(){
+			var elemento = document.getElementById('bola');
+			var posicao = 0;
+			var id = setInterval(Local,5);
+
+			//Declarando a função local
+			function Local(){
+				if(posicao == 350){//Limite do Quadrado
+					clearInterval(id);//Parar a animação
+				}else{
+					posicao++;//Incrementa a posição
+					elemento.style.top=posicao + 'px';//Move para baixo
+					elemento.style.left=posicao + 'px';//Move para direita
+				}
+			}
+		}
+	</script>
+</body>
+</html>
