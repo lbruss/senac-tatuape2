@@ -417,33 +417,22 @@ Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
 * **Sintoma:** O código executa, a variável `posicao` incrementa, mas a bola continua parada no canto da tela.
 * **Motivo:** No CSS, as propriedades `top`, `bottom`, `left` e `right` são **completamente ignoradas** em elementos com posicionamento padrão (`position: static`).
 
-### 3. Escrever Parênteses no Parâmetro do `setInterval`
+**Escrever Parênteses no Parâmetro do `setInterval`**
 
 * **Incorreto:** `setInterval(Local(), 5);`
 * **Correto:** `setInterval(Local, 5);`
 * **Motivo:** Passar `Local()` executa a função uma vez no ato e entrega o seu *retorno* para o temporizador. Passar apenas `Local` envia a **referência da função** para que o temporizador a invoque repetidamente a cada 5ms.
 
-### 4. Conectar o Mesmo Evento para Ações Opostas
+**Conectar o Mesmo Evento para Ações Opostas**
 
 * **Incorreto:** No código de troca do carro, atribuir a mesma imagem nos dois eventos ou trocar a ordem de `onmousedown` e `onmouseup`.
 * **Correto:** `onmousedown` deve chamar a ação de alteração inicial e `onmouseup` deve obrigatoriamente chamar a ação de restauração.
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas
 
-Foram feitas as seguintes correções diretas e silenciosas no código rascunhado para garantir execução perfeita:
-
-1. **Correção da Função `clearInterval`:** Na Atividade 1 do rascunho original, constava a palavra incorreta `clearInterfal(id);`. Foi corrigida para a sintaxe padrão `clearInterval(id);`.
-2. **Remoção de Variáveis Não Utilizadas:** Na função `Voltar()` do rascunho da Atividade 1, havia declarações desnecessárias e redundantes (`var voltar = document.getElementById('bola'); var alto = 0;`). As linhas foram limpas mantendo o código conciso e focado.
-3. **Formatação de Tags HTML e Espaçamento JS:** Corrigidas todas as palavras-chave coladas no rascunho, tais como `<!DOCTYPEhtml>` ➔ `<!DOCTYPE html>`, `functionAnima()` ➔ `function Anima()`, e `clearInterfal` ➔ `clearInterval`.
-4. **Logica de Alternância no Exercício do Carro:** Ajustei as chamadas de função da Atividade 2 para que a imagem original (`carro1.jpg`) seja substituída por `carro2.jpg` ao pressionar o mouse (`onmousedown`) e restaurada ao soltar o mouse (`onmouseup`), tornando a didática coerente com o exercício da Lâmpada.
-
----
-
-## 10. Aprofundamento e Boas Práticas
-
-### A. Animações Modernas de Alta Performance: `requestAnimationFrame()`
+**Animações Modernas de Alta Performance: `requestAnimationFrame()`**
 
 Embora o `setInterval()` seja excelente para entender temporizadores na lógica de programação, animações profissionais modernas para navegadores costumam utilizar o método **`requestAnimationFrame()`**.
 
@@ -466,7 +455,7 @@ requestAnimationFrame(mover);
 
 ```
 
-### B. Separação de Eventos JS do HTML (`addEventListener`)
+**Separação de Eventos JS do HTML (`addEventListener`)**
 
 Em vez de poluir a tag `<img>` ou `<button>` com atributos HTML inline (`onmousedown="..."`, `onclick="..."`), a boa prática moderna recomenda atribuir os escutadores de eventos (*Event Listeners*) via script:
 
@@ -481,7 +470,7 @@ lampada.addEventListener('mouseup', Apaga);
 
 ---
 
-## 11. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O método `setInterval(funcao, ms)` executa um bloco de código repetidamente em intervalos de tempo fixos.
 2. O método `clearInterval(id)` cancela a execução de um temporizador ativo usando seu identificador.
@@ -496,7 +485,7 @@ lampada.addEventListener('mouseup', Apaga);
 
 ---
 
-## 12. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Iniciar Temporizador:** `let id = setInterval(nomeFuncao, tempoEmMs);`
 * **Parar Temporizador:** `clearInterval(id);`
