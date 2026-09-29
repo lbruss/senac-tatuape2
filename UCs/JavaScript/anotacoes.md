@@ -1,299 +1,106 @@
-# Funções com Lógica Condicional, Validação de Formulários no DOM e Objetos em JavaScript
+# Caderno de Estudos: Animações no DOM com Temporizadores (`setInterval`/`clearInterval`) e Eventos de Mouse (`onmousedown`/`onmouseup`)
 
 ---
 
-**Visão Geral**
+## 1. Visão Geral
 
-Nesta aula, avancei significativamente na construção de aplicações web interativas e seguras. O foco esteve em três pilares do desenvolvimento Front-end: **tomada de decisão dentro de funções**, **validação de formulários no DOM antes do envio de dados** e **criação de Objetos em JavaScript** agrupando propriedades e métodos.
+Nesta aula, dei um passo importante na manipulação avançada do **DOM (Document Object Model)**. Aprendi a criar **animações dinâmicas via código** utilizando temporizadores em JavaScript, além de responder a interações físicas do usuário na tela através de **eventos de clique e pressão do mouse**.
 
-* **O que é:**
-
-* *Funções com Condicionais:* Funções que processam informações e retornam respostas diferentes de acordo com regras de negócio (`if/else`).
-
-* *Validação de Formulários:* Interceptação do envio de dados de um formulário HTML via JavaScript para verificar se todos os campos foram preenchidos corretamente.
-
-* *Objetos:* Estrutura de dados que agrupa variáveis (propriedades) e funções (métodos) relacionadas a uma mesma entidade em um único bloco.
+* **O que é:** * *Temporizadores (`setInterval`/`clearInterval`):* Funções nativas que executam um bloco de código repetidamente em intervalos fixos de tempo (em milissegundos).
+* *Eventos de Mouse (`onmousedown`/`onmouseup`):* Eventos do DOM disparados exatamente no momento em que o usuário pressiona ou solta o botão do mouse.
 
 
-* **Para que serve:**
-* Evita o envio de formulários incompletos ou com dados inválidos para o servidor, economizando reprocessamento e melhorando a experiência do usuário (*UX*).
-* Permite modelar coisas do mundo real no código (como uma Pessoa, Carro ou Produto) organizando dados e comportamentos juntos.
+* **Para que serve:** * Criar efeitos visuais, jogos, banners animados e contadores na tela.
+* Alterar elementos visuais (como trocar uma imagem ou mudar cores) enquanto o usuário mantém o botão do mouse pressionado.
 
 
-* **Por que é importante:** Todo site moderno possui formulários (cadastro, login, checkout) e utiliza objetos para manipular dados complexos. Dominar a validação e a manipulação de objetos é requisito básico no mercado de TI.
-* **Ideia principal da aula:** Aprender a usar o parâmetro `this` para passar o formulário inteiro para uma função de validação, entender o papel do `return false` para bloquear envios incorretos e dominar a criação de objetos literais com o uso da palavra-chave `this`.
+* **Por que é importante:** A Web moderna é rica em microinterações e elementos visuais responsivos. Saber manipular estilos e atributos dinamicamente em relação ao tempo e ao comportamento do mouse torna nossas páginas vivas e atraentes.
+* **Ideia principal da aula:** Entender a relação indispensável entre o **CSS (`position: relative` / `position: absolute`)** e o **JavaScript (`element.style.top` / `element.style.left`)** para mover objetos na tela, controlar o ciclo de execução de temporizadores com `clearInterval()` e trocar atributos HTML (`src`) em tempo de execução.
 
 ---
 
-**Entendendo o Conceito**
+## 2. Entendendo o Conceito
 
-## Validação de Formulários no DOM
+### A. Como Funciona a Animação por Código?
 
-Quando o usuário clica no botão "Enviar" de um formulário, o navegador tenta disparar uma requisição HTTP (`POST` ou `GET`). Com o JavaScript, nós colocamos um "guarda de trânsito" no evento `onsubmit` do formulário.
+Uma animação em tela nada mais é do que uma **sequência de fotos paradas exibidas rapidamente**, onde a posição do elemento muda ligeiramente a cada quadro (*frame*).
 
 ```
-[ Usuário clica em 'Enviar' ] ───► [ evento onsubmit dispara ]
-                                                │
-                                                ▼
-                                    [ Função VerificaForm() ]
-                                                │
-                          ┌─────────────────────┴─────────────────────┐
-                          ▼                                           ▼
-                 (Campos Inválidos)                           (Campos Validos)
-                          │                                           │
-             [ alert() + field.focus() ]                     [ return true ]
-                          │                                           │
-                   [ return false ]                                   ▼
-                          │                                [ Formulário Enviado ]
-                          ▼
-             [ Envio BLOQUEADO pelo JS ]
+   [ Posição: 0px ] ──► (Espera 5ms) ──► [ Posição: 1px ] ──► (Espera 5ms) ──► [ Posição: 2px ] ...
 
 ```
 
-## Objetos em JavaScript (Propriedades e Métodos)
+1. Definimos o ponto de partida (`posicao = 0`).
+2. O `setInterval()` dispara uma função de deslocamento a cada X milissegundos.
+3. A função incrementa a variável (`posicao++`) e aplica o novo valor no CSS do elemento (`elemento.style.top = posicao + 'px'`).
+4. Quando atinge o limite do contêiner, o `clearInterval()` cancela o temporizador para interromper o movimento.
 
-Em vez de ter 15 variáveis soltas no código (`nome`, `sobrenome`, `idade`, `cidade`...), agrupamos tudo em uma única variável complexa chamada **Objeto**.
+---
+
+### B. Eventos de Clique Continuado (`mousedown` vs `mouseup`)
+
+Diferente do evento `onclick` (que só dispara quando o clique é completo — apertar + soltar), dividimos essa ação em duas etapas:
+
+* **`onmousedown`:** Dispara no exato milissegundo em que o botão do mouse é **pressionado** para baixo.
+* **`onmouseup`:** Dispara no exato momento em que o botão do mouse é **solto**.
 
 ```
-Objeto: 'pessoa'
- ├── Propriedades (Características / Variáveis):
- │    ├── nome: 'Jorge'
- │    ├── idade: 34
- │    └── cidade: 'São Paulo'
- └── Métodos (Ações / Funções internas):
-      ├── nomeCompleto() ──► Junta nome + sobrenome
-      └── endCompleto()  ──► Formata o endereço completo
-
-```
-
-> Analogia do Cotidiano
-
-* **Validação de Formulário:** Pense no **portão de embarque de um aeroporto**. O funcionário checa seu documento. Se faltar a passagem ou a identidade (`campo vazio`), ele te avisa (`alert`), aponta onde você deve ir (`focus`) e **não deixa você passar** (`return false`). Se estiver tudo certo, ele libera a sua entrada (`return true`).
-
-* **Objetos:** Pense no seu **documento de identidade (RG)**. O papel é o Objeto. Nome, data de nascimento e CPF são as **propriedades**. A foto e a assinatura digitalizada que confirmam quem você é funcionam como **métodos**.
-
----
-
-## Conceitos Fundamentais
-
-**Funções com Retorno Condicional**
-
-Uma função pode conter estruturas `if/else` internas para determinar qual valor será devolvido pelo `return`.
-
-* Assim que a execução atinge uma linha `return`, a função é **encerrada imediatamente**, ignorando qualquer código abaixo.
-
----
-
-**Interceptação e Validação de Formulários (`onsubmit`)**
-
-* **`onsubmit="return MinhaFuncao(this);"`**: Evento do HTML disparado ao enviar o formulário. A palavra `this` envia a referência do próprio elemento `<form>` como argumento para o JavaScript.
-
-* **`return false;`**: Comando essencial que **cancela o envio padrão do formulário**. Se a função retornar `false`, a página não recarrega e os dados não são enviados.
-
-* **`return true;`**: Permite que o formulário continue o seu fluxo normal de envio.
-
-* **`.focus()`**: Método que coloca o cursor piscando diretamente dentro do campo que precisa ser corrigido pelo usuário.
-
-* **Validando Radio Buttons e Checkboxes:**
-
-* Botões Radio usam um array de elementos (`frm.sexo[0]`, `frm.sexo[1]`). Checamos a propriedade `.checked` (`true` ou `false`).
-
-* Checkboxes também usam a propriedade `.checked` para verificar se foram marcadas pelo usuário.
-
-
-* **Validando Caixas de Seleção (`<select>`):** Checamos se o `.value` do campo continua igual à opção padrão desabilitada (ex: `'Selecione'`).
-
----
-
-**Estrutura de Objetos e a Palavra-Chave `this`**
-
-* **Objeto Literal:** Criado utilizando chaves `{}` com pares de `chave: valor`.
-* **Propriedades:** São as variáveis pertencentes ao objeto.
-* **Métodos:** São funções escritas dentro do objeto.
-* **Palavra-chave `this` dentro de Objetos:** Refere-se **ao próprio objeto** onde o código está sendo executado.
-* Para acessar a propriedade `nome` dentro do método `nomeCompleto()`, escrevemos `this.nome`.
-
-
-
----
-
-### Código / Exemplos Práticos
-
-**Exemplo 1: Função de Média com Decisão de Aprovado/Reprovado**
-
-**Arquivo HTML (`funcao-com-parametros.html`):**
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Função com Parâmetros e Decisão</title>
-</head>
-<body>
-    <h1>Média e Situação do Aluno</h1>
-    <p id="teste">O resultado é: </p>
-
-    <script src="05-funcao-com-parametros.js"></script>
-</body>
-</html>
+[ Pressionou o botão ] ──► Evento onmousedown  ──► [ Executa Acende() / Carro1() ]
+[ Soltou o botão ]     ──► Evento onmouseup    ──► [ Executa Apaga() / Carro2() ]
 
 ```
 
-**Arquivo JS (`05-funcao-com-parametros.js`):**
+### 💡 Analogia do Cotidiano
+
+* **Animação com Temporizador:** Pense em uma **esteira rolante com um cronômetro de precisão**. A cada bipe do relógio (`setInterval`), a esteira anda 1 milímetro. Quando o pacote chega ao fim da esteira (`limite == 350`), o sensor desliga o motor (`clearInterval`).
+* **Eventos `mousedown`/`mouseup`:** Pense na **campainha de uma casa ou na buzina de um carro**. Enquanto você mantém a mão pressionando o botão (`mousedown`), o som toca/a luz acende. No momento em que você tira o dedo (`mouseup`), o som para/a luz apaga.
+
+---
+
+## 3. Conceitos Fundamentais
+
+### A. O Papel do CSS no Movimento com JS
+
+Para que o JavaScript consiga mover um elemento usando as propriedades `style.top` e `style.left`, a estrutura do CSS **deve obrigatoriamente** definir o posicionamento:
+
+* **Contêiner Pai (`#quadrado`):** Deve ter `position: relative`. Ele serve como o mapa/fronteira de referência.
+* **Elemento Filho (`#bola`):** Deve ter `position: absolute`. Isso permite que ele flutue e se desloque livremente dentro dos limites do pai a partir das coordenadas `top` (topo) e `left` (esquerda).
+
+---
+
+### B. Os Métodos de Temporização
+
+#### 1. `setInterval(funcao, tempoEmMs)`
+
+Executa a função passada repetidamente a cada intervalo de tempo especificado em milissegundos ($1 \text{ segundo} = 1000 \text{ ms}$). Retorna um número identificador (**ID**) do temporizador.
 
 ```javascript
-// Declaração da função com parâmetros e lógica condicional interna
-function Media(a, b, c, d) {
-    let media = (a + b + c + d) / 4;
-
-    if (media >= 7) {
-        return 'Aprovado(a) com a média: ' + media.toFixed(1);
-    } else {
-        return 'Reprovado(a) com a média: ' + media.toFixed(1);
-    }
-}
-
-// Declaração de variáveis
-let nome = '';
-let nota1 = 0, nota2 = 0, nota3 = 0, nota4 = 0;
-
-// Solicitação de dados ao usuário
-nome = prompt('Digite o nome do(a) aluno(a):', '');
-alert('Informe as 4 notas do(a) aluno(a)');
-
-nota1 = parseFloat(prompt('Digite a primeira nota:', '0')) || 0;
-nota2 = parseFloat(prompt('Digite a segunda nota:', '0')) || 0;
-nota3 = parseFloat(prompt('Digite a terceira nota:', '0')) || 0;
-nota4 = parseFloat(prompt('Digite a quarta nota:', '0')) || 0;
-
-// Injeção do resultado processado no DOM
-document.getElementById('teste').innerHTML += 'O(a) aluno(a) ' + nome + ' está ' + Media(nota1, nota2, nota3, nota4);
+let id = setInterval(Local, 5); // Executa a função Local() a cada 5 milissegundos
 
 ```
+
+#### 2. `clearInterval(idDoTemporizador)`
+
+Interrompe e cancela a execução do temporizador associado ao ID informado. É essencial para impedir que o elemento continue se movendo infinitamente para fora da tela.
 
 ---
 
-**Exemplo 2: Validação Completa de Formulário no DOM**
+### C. Manipulação de Atributos com o DOM (`.src`)
 
-**Arquivo HTML (`validacao-formulario.html`):**
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Validação de Formulário</title>
-</head>
-<body>
-    <h1>Validação de Formulário com JavaScript</h1>
-
-    <!-- O onsubmit chama a função enviando 'this' (o formulário) e aguarda o retorno booleano -->
-    <form name="form1" action="#" method="post" onsubmit="return VerificaForm(this);">
-
-        <label for="nome">Nome:</label><br>
-        <input type="text" name="nome" id="nome"><br><br>
-
-        <label for="email">E-mail:</label><br>
-        <input type="email" name="email" id="email"><br><br>
-
-        <label for="fone">Fone:</label><br>
-        <input type="text" name="fone" id="fone"><br><br>
-
-        <label>Sexo:</label><br>
-        <input type="radio" name="sexo" value="masculino"> Masculino
-        <input type="radio" name="sexo" value="feminino"> Feminino<br><br>
-
-        <label>Software que conhece:</label><br>
-        <input type="checkbox" name="soft1" value="Sublime"> Sublime<br>
-        <input type="checkbox" name="soft2" value="Brackets"> Brackets<br>
-        <input type="checkbox" name="soft3" value="Dreamweaver"> Dreamweaver<br><br>
-
-        <label for="navegador">Navegador preferido:</label><br>
-        <select name="navegador" id="navegador">
-            <option value="Selecione">Selecione</option>
-            <option value="IE">Internet Explorer</option>
-            <option value="Safari">Safari</option>
-            <option value="Firefox">Firefox</option>
-            <option value="Chrome">Chrome</option>
-        </select><br><br>
-
-        <label for="comentario">Comentário:</label><br>
-        <textarea name="comentario" id="comentario" rows="5"></textarea><br><br>
-
-        <input type="submit" name="enviar" value="Enviar Dados">
-    </form>
-
-    <script src="06-funcao-com-parametros.js"></script>
-</body>
-</html>
-
-```
-
-**Arquivo JS (`06-funcao-com-parametros.js`):**
+Podemos alterar qualquer atributo de uma tag HTML diretamente via JavaScript. Para trocar o caminho de uma imagem dinamizada por eventos de mouse, basta reatribuir a propriedade `.src` do elemento capturado:
 
 ```javascript
-// Função de validação que recebe o formulário 'frm' como parâmetro
-function VerificaForm(frm) {
-    // 1. Validação do Campo Nome
-    if (frm.nome.value.trim() === '') {
-        alert('O campo Nome é obrigatório!');
-        frm.nome.focus();
-        return false; // Cancela o envio
-    }
-
-    // 2. Validação do Campo E-mail
-    if (frm.email.value.trim() === '') {
-        alert('O campo E-mail é obrigatório!');
-        frm.email.focus();
-        return false;
-    }
-
-    // 3. Validação do Campo Telefone
-    if (frm.fone.value.trim() === '') {
-        alert('O campo Telefone é obrigatório!');
-        frm.fone.focus();
-        return false;
-    }
-
-    // 4. Validação dos Botões Radio (Sexo)
-    if (!frm.sexo[0].checked && !frm.sexo[1].checked) {
-        alert('Por favor, selecione o Sexo!');
-        return false;
-    }
-
-    // 5. Validação das Checkboxes (Softwares)
-    if (!frm.soft1.checked && !frm.soft2.checked && !frm.soft3.checked) {
-        alert('Selecione pelo menos um software que você conhece!');
-        return false;
-    }
-
-    // 6. Validação do Caixa de Seleção (Select)
-    if (frm.navegador.value === 'Selecione') {
-        alert('Selecione um navegador preferido!');
-        frm.navegador.focus();
-        return false;
-    }
-
-    // 7. Validação da Caixa de Texto (Textarea)
-    if (frm.comentario.value.trim() === '') {
-        alert('O campo Comentário é obrigatório!');
-        frm.comentario.focus();
-        return false;
-    }
-
-    // Se passou por todas as verificações, autoriza o envio
-    alert('Formulário preenchido com sucesso! Enviando dados...');
-    return true;
-}
+document.getElementById('lampada').src = 'luz-acesa.gif';
 
 ```
 
 ---
 
-**Exemplo 3: Criação e Manipulação de Objetos em JavaScript (`objeto.html`)**
+## 4. Código / Exemplos Práticos
+
+### Exemplo 1: Animação Diagonal Simples (`animacao-simples.html`)
+
+Animação onde uma bola desliza na diagonal do canto superior esquerdo $(0,0)$ até o limite inferior direito $(350,350)$ do quadrado.
 
 ```html
 <!DOCTYPE html>
@@ -301,45 +108,55 @@ function VerificaForm(frm) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Objeto em JavaScript</title>
+    <title>Exemplo de DOM - Animação Simples</title>
+    <style>
+        #quadrado {
+            width: 400px;
+            height: 400px;
+            position: relative; /* Define o limite para o elemento filho */
+            background-color: #F5DEB3;
+            border: 1px solid #333;
+            border-radius: 30px;
+        }
+
+        #bola {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute; /* Permite movimentação via top e left */
+            background-color: #A52A2A;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Objeto em JavaScript</h1>
+    <h1>Exemplo de setInterval() e clearInterval()</h1>
+    <p><button type="button" onclick="Anima();">Anima</button></p>
+
+    <div id="quadrado">
+        <div id="bola"></div>
+    </div>
 
     <script>
-        // Criando um Objeto Literal com Propriedades e Métodos
-        let pessoa = {
-            nome: 'Jorge',
-            sobrenome: 'Savarel',
-            idade: 34,
-            olhos: 'Azul',
-            peso: 79,
-            altura: 1.81,
-            fone: '(11) 98765-4321',
-            endereco: 'Avenida Penha de França',
-            numero: 67,
-            cidade: 'São Paulo',
-            bairro: 'Penha',
-            estado: 'SP',
-            cep: '12345-678',
+        function Anima() {
+            let elemento = document.getElementById('bola');
+            let posicao = 0;
+            
+            // Dispara a função Local() a cada 5ms e guarda o ID do timer
+            let id = setInterval(Local, 5);
 
-            // Método que utiliza a palavra-chave 'this' para acessar as propriedades do próprio objeto
-            nomeCompleto: function() {
-                return this.nome + ' ' + this.sobrenome;
-            },
-
-            // Método para formatar o endereço completo em HTML
-            endCompleto: function() {
-                return this.endereco + ', ' + this.numero + '<br>' +
-                       this.bairro + '<br>' +
-                       this.cidade + ' - ' + this.estado + '<br>' +
-                       'CEP: ' + this.cep;
+            function Local() {
+                // Largura do Quadrado (400px) - Largura da Bola (50px) = 350px (Limite)
+                if (posicao >= 350) {
+                    clearInterval(id); // Para a animação ao atingir o limite
+                } else {
+                    posicao++; // Incrementa a posição
+                    elemento.style.top = posicao + 'px';  // Move para baixo
+                    elemento.style.left = posicao + 'px'; // Move para a direita
+                }
             }
-        };
-
-        // Exibindo os retornos dos métodos do objeto na página
-        document.write('<strong>Nome Completo:</strong> ' + pessoa.nomeCompleto() + '<br/><br/>');
-        document.write('<strong>Endereço Completo:</strong><br/>' + pessoa.endCompleto());
+        }
     </script>
 </body>
 </html>
@@ -348,143 +165,350 @@ function VerificaForm(frm) {
 
 ---
 
-**Desmontando o Código**
+### Exemplo 2: Interação com Imagem e Eventos de Mouse (`lampada.html`)
 
-**Desmontando a Validação `onsubmit="return VerificaForm(this);"`:**
+Efeito de acender uma lâmpada ao pressionar o botão do mouse e apagar ao soltar.
 
-1. `onsubmit`: É o gatilho de evento ativado no instante em que o formulário tenta ser enviado.
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exemplo de DOM - Eventos de Mouse</title>
+</head>
+<body>
+    <h1>Eventos onmousedown e onmouseup</h1>
 
-2. `this`: Passa o elemento `<form>` inteiro com todas as suas marcas internas como um objeto manipulável (`frm`) para a função JS.
+    <img src="luz-apagada.gif" alt="Lâmpada" title="Lâmpada" id="lampada"
+         onmousedown="Acende();" onmouseup="Apaga();">
 
-3. `return VerificaForm(...)`: Recebe o resultado booleano da função.
+    <p>Clique na lâmpada e mantenha o botão do mouse pressionado.</p>
 
-* Se a função encontrar algum erro e executar `return false`, o evento `onsubmit` recebe `return false`, cancelando o recarregamento e o envio do formulário.
+    <script>
+        // Função para acender a lâmpada (disparada ao pressionar o botão)
+        function Acende() {
+            document.getElementById('lampada').src = 'luz-acesa.gif';
+        }
 
+        // Função para apagar a lâmpada (disparada ao soltar o botão)
+        function Apaga() {
+            document.getElementById('lampada').src = 'luz-apagada.gif';
+        }
+    </script>
+</body>
+</html>
 
+```
 
 ---
 
-**Desmontando o Uso de `this` no Objeto `pessoa`:
+### Exemplo 3: Atividade Prática 1 — Animação com Botões de Ida e Volta
+
+Aprimoramento da animação adicionando controle completo de ida e retorno da bola ao ponto de origem $(0,0)$.
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exemplo de DOM - Atividade Animação Completa</title>
+    <style>
+        #quadrado {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background-color: #000000;
+            border: 1px solid #2f2930;
+            border-radius: 30px;
+        }
+
+        #bola {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #4c0d70;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>setInterval() e clearInterval() - Controle de Ida e Volta</h1>
+    <p>
+        <button type="button" onclick="Anima();">Avançar (Ida)</button>
+        <button type="button" onclick="Voltar();">Retornar (Volta)</button>
+    </p>
+
+    <div id="quadrado">
+        <div id="bola"></div>
+    </div>
+
+    <script>
+        // Função para mover a bola para frente (Ida)
+        function Anima() {
+            let elemento = document.getElementById('bola');
+            let posicao = 0;
+            let id = setInterval(Local, 5);
+
+            function Local() {
+                if (posicao >= 350) {
+                    clearInterval(id);
+                } else {
+                    posicao++;
+                    elemento.style.top = posicao + 'px';
+                    elemento.style.left = posicao + 'px';
+                }
+            }
+        }
+
+        // Função para retornar a bola para a origem (Volta)
+        function Voltar() {
+            let elemento = document.getElementById('bola');
+            let posicao = 350; // Começa na posição máxima
+            let id = setInterval(Local, 5);
+
+            function Local() {
+                if (posicao <= 0) {
+                    clearInterval(id); // Para ao atingir a origem 0px
+                } else {
+                    posicao--; // Decrementa a posição
+                    elemento.style.top = posicao + 'px';
+                    elemento.style.left = posicao + 'px';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+```
+
+---
+
+### Exemplo 4: Atividade Prática 2 — Troca de Imagem Dinâmica (Carro)
+
+Exercício praticando a substituição de imagens dinâmicas sob controle do mouse.
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exemplo de DOM - Atividade Troca de Carro</title>
+</head>
+<body>
+    <h1>Atividade: Manipulação de Imagem com Mouse</h1>
+
+    <img src="carro1.jpg" alt="Carro" title="Clique para alterar" id="carro"
+         onmousedown="MudaCarro();" onmouseup="RestauraCarro();">
+
+    <p>Clique na imagem do carro e mantenha o mouse pressionado.</p>
+
+    <script>
+        // Exibe a imagem secundária enquanto pressionado
+        function MudaCarro() {
+            document.getElementById('carro').src = 'carro2.jpg';
+        }
+
+        // Restaura a imagem original ao soltar o botão
+        function RestauraCarro() {
+            document.getElementById('carro').src = 'carro1.jpg';
+        }
+    </script>
+</body>
+</html>
+
+```
+
+---
+
+## 5. Desmontando o Código
+
+### A. Desmontando o Cálculo de Limite da Animação: `posicao == 350`
+
+Por que o limite é $350\text{px}$ e não $400\text{px}$ (largura do quadrado)?
+
+$$\text{Espaço Livre Múltiplo} = \text{Largura do Contêiner} - \text{Largura do Elemento}$$
+
+$$\text{Espaço Livre Múltiplo} = 400\text{px} - 50\text{px} = 350\text{px}$$
+
+Se permitíssemos `posicao` chegar a $400\text{px}$, a bola ultrapassaria e sairia para fora da borda do quadrado pai!
+
+---
+
+### B. Desmontando a Concatenação de Unidades CSS: `elemento.style.top = posicao + 'px';`
+
+O JavaScript manipula valores numéricos puros (ex: `10`, `11`, `12`). No entanto, regras de estilo CSS exigem **unidades de medida** obrigatórias (como `px`, `%`, `rem`).
+
+* Portanto, devemos sempre concatenar o valor numérico com a string `'px'`.
+* Sem a inclusão da string `'px'`, a propriedade do CSS simplesmente ignora a instrução e o objeto não se move.
+
+---
+
+### C. Desmontando a Função Interna (*Closure/Scope*): `setInterval(Local, 5)`
+
+Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
+
+* Isso garante que a função de deslocamento tenha acesso direto às variáveis `elemento`, `posicao` e `id` declaradas na função pai.
+* O primeiro parâmetro do `setInterval` recebe apenas o **nome da função** `Local` (sem parênteses `()`). Se colocássemos `Local()`, a função seria executada imediatamente uma única vez, em vez de ser agendada pelo temporizador.
+
+---
+
+## 6. Passo a Passo: Construindo Animações com DOM e CSS
+
+```
+1. Montar a Estrutura HTML:
+   Crie uma <div> pai (caixa) e uma <div> filho (objeto a mover) com IDs únicos.
+
+2. Configurar o Posicionamento CSS:
+   Aplique `position: relative` na <div> pai e `position: absolute` com `top: 0` e `left: 0` na <div> filho.
+
+3. Mapear o Elemento no JavaScript:
+   Capture a div filho usando `document.getElementById('objeto')`.
+
+4. Inicializar Temporizador:
+   Crie uma variável de controle (`posicao = 0`) e chame `let id = setInterval(funcaoCallback, tempoMs)`.
+
+5. Atualizar Posição na Callback:
+   A cada ciclo, altere `posicao++` (ou `posicao--`) e injete no CSS com `elemento.style.top = posicao + 'px'`.
+
+6. Validar Ponto de Parada:
+   Verifique se atingiu o limite pretendido com `if` e cancele o temporizador imediatamente com `clearInterval(id)`.
+
+```
+
+---
+
+## 7. Tabelas Comparativas
+
+### Eventos de Clique e Mouse no DOM
+
+| Evento HTML | Quando Dispara? | Exemplo Prático |
+| --- | --- | --- |
+| **`onclick`** | Ao completar a ação inteira de clicar (pressionar + soltar). | Botões de formulário, links, confirmações. |
+| **`onmousedown`** | No exato milissegundo em que o botão do mouse é **pressionado**. | Mirar em jogos, dar zoom visual, acender luzes. |
+| **`onmouseup`** | No exato instante em que o botão do mouse é **solto**. | Soltar itens arrastados (*Drag & Drop*), apagar luzes. |
+
+---
+
+### Temporizadores em JavaScript
+
+| Método | Funcionamento | Como Interromper? |
+| --- | --- | --- |
+| **`setInterval(fn, ms)`** | Executa a função **repetidamente em loop** a cada intervalo de tempo. | `clearInterval(id)` |
+| **`setTimeout(fn, ms)`** | Executa a função **uma única vez** após aguardar o tempo estipulado. | `clearTimeout(id)` |
+
+---
+
+## 8. Erros Comuns e Cuidados
+
+### 1. Erro de Digitação no Nome do Método de Limpeza (`clearInterfal`)
+
+* **Incorreto:** `clearInterfal(id);`
+* **Correto:** `clearInterval(id);`
+* **Sintoma:** O navegador lança um erro `Uncaught TypeError: clearInterfal is not a function` e a animação **não para nunca**, ultrapassando as bordas da página.
+
+### 2. Esquecer de Definir `position: absolute` no CSS
+
+* **Sintoma:** O código executa, a variável `posicao` incrementa, mas a bola continua parada no canto da tela.
+* **Motivo:** No CSS, as propriedades `top`, `bottom`, `left` e `right` são **completamente ignoradas** em elementos com posicionamento padrão (`position: static`).
+
+### 3. Escrever Parênteses no Parâmetro do `setInterval`
+
+* **Incorreto:** `setInterval(Local(), 5);`
+* **Correto:** `setInterval(Local, 5);`
+* **Motivo:** Passar `Local()` executa a função uma vez no ato e entrega o seu *retorno* para o temporizador. Passar apenas `Local` envia a **referência da função** para que o temporizador a invoque repetidamente a cada 5ms.
+
+### 4. Conectar o Mesmo Evento para Ações Opostas
+
+* **Incorreto:** No código de troca do carro, atribuir a mesma imagem nos dois eventos ou trocar a ordem de `onmousedown` e `onmouseup`.
+* **Correto:** `onmousedown` deve chamar a ação de alteração inicial e `onmouseup` deve obrigatoriamente chamar a ação de restauração.
+
+---
+
+## 9. Correções Técnicas das Minhas Anotações
+
+Foram feitas as seguintes correções diretas e silenciosas no código rascunhado para garantir execução perfeita:
+
+1. **Correção da Função `clearInterval`:** Na Atividade 1 do rascunho original, constava a palavra incorreta `clearInterfal(id);`. Foi corrigida para a sintaxe padrão `clearInterval(id);`.
+2. **Remoção de Variáveis Não Utilizadas:** Na função `Voltar()` do rascunho da Atividade 1, havia declarações desnecessárias e redundantes (`var voltar = document.getElementById('bola'); var alto = 0;`). As linhas foram limpas mantendo o código conciso e focado.
+3. **Formatação de Tags HTML e Espaçamento JS:** Corrigidas todas as palavras-chave coladas no rascunho, tais como `<!DOCTYPEhtml>` ➔ `<!DOCTYPE html>`, `functionAnima()` ➔ `function Anima()`, e `clearInterfal` ➔ `clearInterval`.
+4. **Logica de Alternância no Exercício do Carro:** Ajustei as chamadas de função da Atividade 2 para que a imagem original (`carro1.jpg`) seja substituída por `carro2.jpg` ao pressionar o mouse (`onmousedown`) e restaurada ao soltar o mouse (`onmouseup`), tornando a didática coerente com o exercício da Lâmpada.
+
+---
+
+## 10. Aprofundamento e Boas Práticas
+
+### A. Animações Modernas de Alta Performance: `requestAnimationFrame()`
+
+Embora o `setInterval()` seja excelente para entender temporizadores na lógica de programação, animações profissionais modernas para navegadores costumam utilizar o método **`requestAnimationFrame()`**.
+
+* **Por que usar `requestAnimationFrame`?**
+* O `setInterval(..., 5)` tenta rodar o código rigidamente mesmo se a aba do navegador estiver minimizada, consumindo bateria e processamento à toa.
+* O `requestAnimationFrame()` sincroniza os quadros da animação diretamente com a taxa de atualização do monitor do usuário (ex: 60Hz / 120Hz), produzindo movimentos **muito mais suaves** e economizando memória RAM.
+
+
 
 ```javascript
-nomeCompleto: function() {
-    return this.nome + ' ' + this.sobrenome;**
+// Exemplo conceitual moderno com requestAnimationFrame:
+function mover() {
+    if (posicao < 350) {
+        posicao++;
+        elemento.style.left = posicao + 'px';
+        requestAnimationFrame(mover); // Chama o próximo quadro sincronizado com o monitor
+    }
 }
+requestAnimationFrame(mover);
 
 ```
 
-* Se escrevêssemos apenas `return nome + ' ' + sobrenome;`, o JavaScript procuraria por variáveis globais chamadas `nome` e `sobrenome` fora do objeto, resultando em erro (`ReferenceError`).
+### B. Separação de Eventos JS do HTML (`addEventListener`)
 
-* A instrução **`this.nome`** instrui expressamente o motor do JavaScript: *"Acesse a propriedade 'nome' registrada DENTRO deste objeto 'pessoa' em que o método está inserido"*.
+Em vez de poluir a tag `<img>` ou `<button>` com atributos HTML inline (`onmousedown="..."`, `onclick="..."`), a boa prática moderna recomenda atribuir os escutadores de eventos (*Event Listeners*) via script:
 
----
+```javascript
+const lampada = document.getElementById('lampada');
 
-**Passo a Passo: Fluxo de Execução da Validação de Formulário**
-
-```
-1. O usuário preenche os campos do formulário na página HTML.
-
-2. O usuário clica no botão <input type="submit">.
-
-3. O evento onsubmit captura o clique e chama a função VerificaForm(this).
-
-4. O JavaScript avalia os campos em ordem sequencial:
-   a. Testa se o campo de texto está vazio com frm.campo.value === ''.
-   b. Se estiver vazio: exibe alert(), coloca o foco no campo com .focus() e para a função com `return false`.
-   c. Testa se Radio/Checkbox estão desmarcados com !frm.campo.checked.
-   d. Testa se a caixa Select está na opção inicial com frm.select.value === 'Selecione'.
-
-5. Se NENHUMA das condições de erro for disparada, a função atinge a última linha: `return true`.
-
-6. O navegador recebe 'true' do evento onsubmit e realiza o envio do formulário para o servidor.
+// Adiciona os escutadores sem mexer no arquivo HTML
+lampada.addEventListener('mousedown', Acende);
+lampada.addEventListener('mouseup', Apaga);
 
 ```
 
 ---
 
-## Tabelas Comparativas
+## 11. Resumo Relâmpago — 10 Linhas
 
-**Como Acessar e Validar Cada Tipo de Input do HTML no JavaScript**
-
-| Tipo de Elemento HTML | Como acessar o elemento? | Como verificar se está preenchido/válido? |
-| --- | --- | --- |
-| **Texto / Email / Textarea** | `frm.nomeCampo` | `frm.nomeCampo.value.trim() === ''` |
-| **Radio Button (Grupo)** | `frm.nomeGrupo[0]`, `[1]` | `!frm.nomeGrupo[0].checked && !frm.nomeGrupo[1].checked` |
-| **Checkbox (Caixa única)** | `frm.nomeBox` | `frm.nomeBox.checked === false` |
-| **Select (Lista suspensa)** | `frm.nomeSelect` | `frm.nomeSelect.value === 'ValorDefault'` |
-
----
-
-**Propriedades vs. Métodos em Objetos JavaScript**
-
-| Conceito | O que é? | Sintaxe no Objeto | Como Chamar? |
-| --- | --- | --- | --- |
-| **Propriedade** | Uma característica / dado armazenado. | `chave: valor` | `objeto.propriedade` (Sem parênteses) |
-| **Método** | Uma ação / função interna. | `chave: function() { ... }` | `objeto.metodo()` (**Com parênteses**) |
+1. O método `setInterval(funcao, ms)` executa um bloco de código repetidamente em intervalos de tempo fixos.
+2. O método `clearInterval(id)` cancela a execução de um temporizador ativo usando seu identificador.
+3. Para movimentar elementos via JavaScript, o contêiner deve ser `position: relative` e o elemento `position: absolute`.
+4. As coordenadas de deslocamento são aplicadas alterando propriedades do DOM como `style.top` e `style.left`.
+5. Valores atribuídos ao CSS pelo JavaScript devem ser sempre concatenados com a unidade de medida `'px'`.
+6. O evento `onmousedown` dispara no instante em que o botão do mouse é pressionado para baixo.
+7. O evento `onmouseup` dispara no momento em que o botão do mouse é solto pelo usuário.
+8. A propriedade `.src` do DOM permite substituir o caminho e o arquivo de uma imagem dinamicamente.
+9. Passar parênteses ao definir o nome da callback em `setInterval(Local, 5)` é um erro comum de sintaxe.
+10. O cálculo de limites de animação deve considerar a largura total do contêiner menos a largura do elemento animado.
 
 ---
 
-## Erros Comuns e Cuidados
+## 12. Guia Rápido de Memorização
 
-**Esquecer a Palavra `return` no Evento `onsubmit`**
+* **Iniciar Temporizador:** `let id = setInterval(nomeFuncao, tempoEmMs);`
+* **Parar Temporizador:** `clearInterval(id);`
+* **Mover Elemento para Baixo:** `elemento.style.top = posicao + 'px';`
+* **Mover Elemento para Direita:** `elemento.style.left = posicao + 'px';`
+* **Pressionar Botão do Mouse:** `onmousedown="Funcao()"`
+* **Soltar Botão do Mouse:** `onmouseup="Funcao()"`
+* **Trocar Imagem via DOM:** `document.getElementById('id').src = 'nova-imagem.jpg';`
+* **CSS Obrigatório para Animação:**
 
-* **Incorreto:** `onsubmit="VerificaForm(this);"`
-* **O que acontece:** A função executa a validação e exibe os alertas, mas mesmo que ela retorne `false`, **o formulário é enviado assim mesmo**!
-* **Correto:** `onsubmit="return VerificaForm(this);"`
+```css
+  #conteiner { position: relative; }
+  #objetoAnimado { position: absolute; top: 0px; left: 0px; }
 
-**Tentar Acessar o Conteúdo de Radios ou Checkboxes via `.value` para Saber se Estão Marcados**
-
-* **Incorreto:** `if (frm.sexo[0].value === '')`
-* **O que acontece:** A propriedade `.value` do botão radio sempre retornará a palavra fixa atribuída no HTML (ex: `'masculino'`), independentemente de o botão estar marcado ou não.
-* **Correto:** Usar a propriedade booleana `.checked` (`if (!frm.sexo[0].checked)`).
-
-**Esquecer os Parênteses ao Invocar um Método de Objeto**
-
-* **Incorreto:** `document.write(pessoa.nomeCompleto);`
-* **Resultado:** O JavaScript imprime o código-fonte da função inteira impresso como texto, em vez de executar o código do método!
-* **Correto:** `document.write(pessoa.nomeCompleto());`
-
----
-
-## Aprofundamento e Boas Práticas
-
-**Validação JS vs. Validação Nativa HTML5**
-
-O HTML5 trouxe atributos nativos de validação como `required`, `type="email"`, `minlength="3"` e `pattern=""`.
-
-* **Validação HTML5:** Mais fácil e rápida de implementar diretamente na tag HTML.
-* **Validação JavaScript:** Necessária para regras complexas de negócios (como comparar se o campo "Confirmar Senha" é igual ao campo "Senha", validar CPF/CNPJ, ou verificar combinação de checkboxes).
-* **Boa Prática profissional:** Utilize a validação nativa do HTML5 como primeira camada e o JavaScript para validações avançadas.
-
-**Por que Evitar `document.write()` na Prática Profissional?**
-
-No exercício do objeto `pessoa`, utilizamos `document.write()` para exibir os dados.
-
-* Em código profissional moderno, evita-se o uso de `document.write()`, pois se executado após o carregamento da página, ele **apaga todo o HTML existente** e o substitui do zero.
-* **Boa Prática:** Crie elementos HTML com `id` e atualize o conteúdo com `.innerHTML` ou `.textContent`.
-
----
-
-**Resumo Relâmpago**
-
-1. Funções com `if/else` internos retornam resultados diferentes com base na lógica aplicada aos seus parâmetros.
-2. O evento `onsubmit` intercepta a tentativa de envio do formulário HTML via JavaScript.
-3. A instrução `return false` cancela o envio do formulário quando dados inválidos são identificados.
-4. O método `.focus()` coloca o cursor do teclado diretamente sobre o campo que precisa ser preenchido.
-5. O atributo `this` dentro do evento `onsubmit="return fn(this)"` envia a referência do formulário para o JS.
-6. A propriedade `.checked` verifica se botões Radio e Checkboxes estão selecionados (`true` ou `false`).
-7. Objetos em JavaScript agrupam propriedades (características) e métodos (funções) sob um mesmo nome.
-8. A palavra-chave `this` dentro de um objeto faz referência às próprias propriedades daquele objeto.
-9. Métodos de objetos precisam ser invocados obrigatoriamente com parênteses ao final: `objeto.metodo()`.
-10. Utilizar `.trim()` em campos de texto evita que o preenchimento apenas com espaços burle a validação.
-
----
-
-## Guia Rápido de Memorização
-
-* **Bloquear Envio do Formulário:** `return false;`
-* **Focar no Campo com Erro:** `frm.campo.focus();`
-* **Verificar se Checkbox/Radio está Marcado:** `if (!frm.campo.checked)`
-* **Limpar Espaços em Branco de Texto:** `frm.campo.value.trim()`
-* **Sintaxe de Objeto Literal:** `let obj = { chave: 'valor', metodo: function() { return this.chave; } };`
-* **Chamar Método de Objeto:** `obj.metodo()`
+```
