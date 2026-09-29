@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei nos fundamentos do Java aprendendo a controlar o fluxo de execução dos programas através de **Estruturas Condicionais** e **Laços de Repetição (Loops)**, além de aplicar tudo isso em exercícios práticos do mundo real.
 
@@ -15,32 +15,36 @@ Também fiz exercícios práticos focados em lógica de programação: conversã
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### 1. Estruturas Condicionais (Decisão)
+## Estruturas Condicionais (Decisão)
 
 Servem para mudar o caminho que o programa vai seguir com base em testes lógicos.
 
-💡 **Analogia da Estrada:** Imagine que você está dirigindo em uma rodovia. Chegando a uma bifurcação, existe uma placa: *"Se a sua carteira for categoria B, dobre à direita; caso contrário, siga em frente"*. A estrutura condicional faz exatamente essa checagem antes de decidir qual caminho o programa deve tomar.
+> **Analogia da Estrada:**
 
-### 2. Laços de Repetição (Iteração)
+Imagine que você está dirigindo em uma rodovia. Chegando a uma bifurcação, existe uma placa: *"Se a sua carteira for categoria B, dobre à direita; caso contrário, siga em frente"*. A estrutura condicional faz exatamente essa checagem antes de decidir qual caminho o programa deve tomar.
+
+## Laços de Repetição (Iteração)
 
 Servem para automatizar processos repetitivos.
 
-💡 **Analogia da Corrida:** Imagine um atleta correndo em uma pista circular. O treinador diz: *"Dê 10 voltas na pista"*. O atleta corre a primeira volta, conta 1, corre a segunda, conta 2... até chegar na 10ª volta e parar. O laço `for` funciona exatamente assim quando sabemos o número exato de repetições. Já o laço `while` seria como: *"Continue correndo enquanto você não estiver cansado"*.
+> **Analogia da Corrida:**
+
+Imagine um atleta correndo em uma pista circular. O treinador diz: *"Dê 10 voltas na pista"*. O atleta corre a primeira volta, conta 1, corre a segunda, conta 2... até chegar na 10ª volta e parar. O laço `for` funciona exatamente assim quando sabemos o número exato de repetições. Já o laço `while` seria como: *"Continue correndo enquanto você não estiver cansado"*.
 
 ---
 
-## 3. Conceitos Fundamentais
+# Conceitos Fundamentais
 
-### A. Condicionais
+**Condicionais**
 
 * **`if` (Se):** Avalia uma expressão booleana. Se for `true`, executa o bloco interno.
 * **`else if` (Senão se):** Avalia uma nova condição caso o `if` anterior tenha sido `false`. Permite testar múltiplas opções em sequência.
 * **`else` (Senão):** Bloco executado como "recurso final" quando nenhuma das condições anteriores for verdadeira.
 * **`switch-case`:** Estrutura de escolha múltipla ideal para testar o valor exato de uma única variável (como menus de opções). Utiliza o comando `break` para interromper a execução e não invadir o caso seguinte, e o `default` para tratar opções inválidas.
 
-### B. Laços de Repetição
+**Laços de Repetição**
 
 * **`for`:** Ideal quando sabemos previamente **quantas vezes** o bloco deve ser repetido. Possui três partes na sua declaração: `(inicialização; condição_de_parada; incremento)`.
 * **`while` (Enquanto):** Testa a condição **antes** de executar o bloco. Se a condição for falsa logo de início, o bloco **nunca** é executado.
@@ -48,9 +52,9 @@ Servem para automatizar processos repetitivos.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Estruturas Condicionais (`Condicional.java`)
+**Exemplo 1: Estruturas Condicionais (`Condicional.java`)**
 
 ```java
 package cursojava;
@@ -111,7 +115,7 @@ public class Condicional {
 
 ---
 
-### Exemplo 2: Laços de Repetição (`LacoRepeticao.java`)
+**Exemplo 2: Laços de Repetição (`LacoRepeticao.java`)**
 
 ```java
 package cursojava;
@@ -172,7 +176,7 @@ public class LacoRepeticao {
 
 ---
 
-### Exemplo 3: Exercícios Práticos Resolvidos (`Atividades.java`)
+**Exemplo 3: Exercícios Práticos Resolvidos (`Atividades.java`)**
 
 ```java
 package aula02;
@@ -252,9 +256,9 @@ public class Atividades {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Tabuada com Laços Encadeados (`for` dentro de `for`)
+**A. Desmontando a Tabuada com Laços Encadeados (`for` dentro de `for`)**
 
 ```java
 for (int tab = 0; tab <= 10; tab++) {
@@ -272,7 +276,7 @@ for (int tab = 0; tab <= 10; tab++) {
 
 ---
 
-### B. Desmontando a Saída Formatada (`System.out.printf`)
+**Desmontando a Saída Formatada (`System.out.printf`)**
 
 ```java
 System.out.printf("Temperatura em Celsius: %.2f%n", c);
@@ -291,7 +295,7 @@ System.out.printf("Temperatura em Celsius: %.2f%n", c);
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
 ### Como Estruturar uma Cadeia de Decisão Encadeada (`if / else if / else`)
 
@@ -315,9 +319,9 @@ Ao resolver o problema do cálculo do IMC, segui estes passos de raciocínio ló
 
 ---
 
-## 7. Tabelas Comparativas
+# Tabelas Comparativas
 
-### 1. Comparativo das Estruturas de Repetição em Java
+**Comparativo das Estruturas de Repetição em Java**
 
 | Estrutura | Momento do Teste Condicional | Mínimo de Execuções | Quando Utilizar? |
 | --- | --- | --- | --- |
@@ -327,7 +331,7 @@ Ao resolver o problema do cálculo do IMC, segui estes passos de raciocínio ló
 
 ---
 
-### 2. `if-else` vs. `switch-case`
+**`if-else` vs. `switch-case`**
 
 | Recurso | `if-else` | `switch-case` |
 | --- | --- | --- |
@@ -337,9 +341,9 @@ Ao resolver o problema do cálculo do IMC, segui estes passos de raciocínio ló
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Esquecer o `break` no `switch-case` (Efeito Fall-Through)
+**Esquecer o `break` no `switch-case` (Efeito Fall-Through)**
 
 Se esquecer a palavra `break` ao final de um `case`, o Java continuará executando **todos os cases seguintes** de forma ininterrupta até encontrar um `break` ou o fim do bloco!
 
@@ -367,7 +371,7 @@ switch (opcao) {
 
 ---
 
-### 2. Comparar Strings com o Operador `==` em vez de `.equals()`
+**Comparar Strings com o Operador `==` em vez de `.equals()`**
 
 Em Java, usar `==` para comparar textos (`String`) compara a **referência de memória** dos objetos, e não o conteúdo do texto em si. Isso pode gerar erros difíceis de encontrar.
 
@@ -384,7 +388,7 @@ while (sinal.equals("verde")) { ... }
 
 ---
 
-### 3. Escrever Laços Infinitos no `while`
+**Escrever Laços Infinitos no `while`**
 
 Esquecer de atualizar/incrementar a variável de controle dentro do corpo do `while` fará com que o teste condicional seja sempre verdadeiro, travando a aplicação ou consumindo 100% da CPU.
 
@@ -406,24 +410,13 @@ while (cont <= 10) {
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão e estruturação do meu rascunho de aula, fiz as seguintes correções técnicas silenciosas no código:
-
-1. **Separação de Palavras Reservadas:** Corrigi palavras grudadas em todas as classes (ex: `publicclassCondicional` para `public class Condicional`, `publicstaticvoidmain` para `public static void main`, `publicclassLacoRepeticao` para `public class LacoRepeticao`).
-2. **Nomenclatura de Pacotes:** Padronizei os pacotes para usar letras minúsculas (`cursojava` e `aula02`), alinhando com a convenção do Java.
-3. **Comparação de Strings:** No exemplo do semáforo dentro do `do-while`, a anotação trazia `sinal == "verde"`. Substituí pelo método `.equals("verde")`, que é a boa prática correta para comparação de Strings em Java.
-4. **Correção de Ortografia em Mensagem de Saída:** Corrigi o erro de digitação da palavra `"vanjatosa"` para `"vantajosa"` no texto do exercício do Álcool vs Gasolina.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Aprofundando a Formatação com `System.out.printf()`
+**Aprofundando a Formatação com `System.out.printf()`**
 
 O uso do `printf` é essencial quando precisamos exibir valores financeiros ou medições científicas sem que o Java exiba dízimas infinitas (como `21.11111111111111` no cálculo do Celsius).
 
-#### Principais Especificadores de Formato em Java:
+**Principais Especificadores de Formato em Java:**
 
 * **`%s`**: Substitui por textos (`String`).
 * **`%d`**: Substitui por números inteiros (`byte`, `short`, `int`, `long`).
@@ -446,7 +439,7 @@ System.out.printf("Item: %s | Qtd: %d | Preço Un: R$ %.2f%n", produto, quantida
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Estruturas de controle alteram o fluxo sequencial básico de execução de um programa.
 2. A condicional `if` testa uma expressão booleana e executa um bloco se o resultado for verdadeiro.
@@ -463,7 +456,7 @@ System.out.printf("Item: %s | Qtd: %d | Preço Un: R$ %.2f%n", produto, quantida
 
 ## Guia Rápido de Memorização
 
-### Estruturas Condicionais
+**Estruturas Condicionais**
 
 ```java
 // Se / Senão se / Senão
@@ -479,7 +472,7 @@ switch (variavel) {
 
 ```
 
-### Laços de Repetição
+**Laços de Repetição**
 
 ```java
 // FOR (Início; Fim; Passo)
