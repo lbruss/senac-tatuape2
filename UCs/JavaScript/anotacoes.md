@@ -1,8 +1,8 @@
-# Caderno de Estudos: Animações no DOM com Temporizadores (`setInterval`/`clearInterval`) e Eventos de Mouse (`onmousedown`/`onmouseup`)
+# Animações no DOM com Temporizadores (`setInterval`/`clearInterval`) e Eventos de Mouse (`onmousedown`/`onmouseup`)
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei um passo importante na manipulação avançada do **DOM (Document Object Model)**. Aprendi a criar **animações dinâmicas via código** utilizando temporizadores em JavaScript, além de responder a interações físicas do usuário na tela através de **eventos de clique e pressão do mouse**.
 
@@ -19,9 +19,9 @@ Nesta aula, dei um passo importante na manipulação avançada do **DOM (Documen
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Como Funciona a Animação por Código?
+**Como Funciona a Animação por Código?**
 
 Uma animação em tela nada mais é do que uma **sequência de fotos paradas exibidas rapidamente**, onde a posição do elemento muda ligeiramente a cada quadro (*frame*).
 
@@ -37,7 +37,7 @@ Uma animação em tela nada mais é do que uma **sequência de fotos paradas exi
 
 ---
 
-### B. Eventos de Clique Continuado (`mousedown` vs `mouseup`)
+## Eventos de Clique Continuado (`mousedown` vs `mouseup`)
 
 Diferente do evento `onclick` (que só dispara quando o clique é completo — apertar + soltar), dividimos essa ação em duas etapas:
 
@@ -50,16 +50,16 @@ Diferente do evento `onclick` (que só dispara quando o clique é completo — a
 
 ```
 
-### 💡 Analogia do Cotidiano
+> Analogia do Cotidiano
 
 * **Animação com Temporizador:** Pense em uma **esteira rolante com um cronômetro de precisão**. A cada bipe do relógio (`setInterval`), a esteira anda 1 milímetro. Quando o pacote chega ao fim da esteira (`limite == 350`), o sensor desliga o motor (`clearInterval`).
 * **Eventos `mousedown`/`mouseup`:** Pense na **campainha de uma casa ou na buzina de um carro**. Enquanto você mantém a mão pressionando o botão (`mousedown`), o som toca/a luz acende. No momento em que você tira o dedo (`mouseup`), o som para/a luz apaga.
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### A. O Papel do CSS no Movimento com JS
+**O Papel do CSS no Movimento com JS**
 
 Para que o JavaScript consiga mover um elemento usando as propriedades `style.top` e `style.left`, a estrutura do CSS **deve obrigatoriamente** definir o posicionamento:
 
@@ -68,9 +68,9 @@ Para que o JavaScript consiga mover um elemento usando as propriedades `style.to
 
 ---
 
-### B. Os Métodos de Temporização
+**Os Métodos de Temporização**
 
-#### 1. `setInterval(funcao, tempoEmMs)`
+**`setInterval(funcao, tempoEmMs)`**
 
 Executa a função passada repetidamente a cada intervalo de tempo especificado em milissegundos ($1 \text{ segundo} = 1000 \text{ ms}$). Retorna um número identificador (**ID**) do temporizador.
 
@@ -79,13 +79,13 @@ let id = setInterval(Local, 5); // Executa a função Local() a cada 5 milissegu
 
 ```
 
-#### 2. `clearInterval(idDoTemporizador)`
+**`clearInterval(idDoTemporizador)`**
 
 Interrompe e cancela a execução do temporizador associado ao ID informado. É essencial para impedir que o elemento continue se movendo infinitamente para fora da tela.
 
 ---
 
-### C. Manipulação de Atributos com o DOM (`.src`)
+**Manipulação de Atributos com o DOM (`.src`)**
 
 Podemos alterar qualquer atributo de uma tag HTML diretamente via JavaScript. Para trocar o caminho de uma imagem dinamizada por eventos de mouse, basta reatribuir a propriedade `.src` do elemento capturado:
 
@@ -96,9 +96,9 @@ document.getElementById('lampada').src = 'luz-acesa.gif';
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Animação Diagonal Simples (`animacao-simples.html`)
+**Exemplo 1: Animação Diagonal Simples (`animacao-simples.html`)**
 
 Animação onde uma bola desliza na diagonal do canto superior esquerdo $(0,0)$ até o limite inferior direito $(350,350)$ do quadrado.
 
@@ -165,7 +165,7 @@ Animação onde uma bola desliza na diagonal do canto superior esquerdo $(0,0)$ 
 
 ---
 
-### Exemplo 2: Interação com Imagem e Eventos de Mouse (`lampada.html`)
+**Exemplo 2: Interação com Imagem e Eventos de Mouse (`lampada.html`)**
 
 Efeito de acender uma lâmpada ao pressionar o botão do mouse e apagar ao soltar.
 
@@ -203,7 +203,7 @@ Efeito de acender uma lâmpada ao pressionar o botão do mouse e apagar ao solta
 
 ---
 
-### Exemplo 3: Atividade Prática 1 — Animação com Botões de Ida e Volta
+**Exemplo 3: Atividade Prática 1 — Animação com Botões de Ida e Volta**
 
 Aprimoramento da animação adicionando controle completo de ida e retorno da bola ao ponto de origem $(0,0)$.
 
@@ -288,7 +288,7 @@ Aprimoramento da animação adicionando controle completo de ida e retorno da bo
 
 ---
 
-### Exemplo 4: Atividade Prática 2 — Troca de Imagem Dinâmica (Carro)
+**Exemplo 4: Atividade Prática 2 — Troca de Imagem Dinâmica (Carro)**
 
 Exercício praticando a substituição de imagens dinâmicas sob controle do mouse.
 
@@ -326,9 +326,9 @@ Exercício praticando a substituição de imagens dinâmicas sob controle do mou
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Cálculo de Limite da Animação: `posicao == 350`
+**Desmontando o Cálculo de Limite da Animação: `posicao == 350`**
 
 Por que o limite é $350\text{px}$ e não $400\text{px}$ (largura do quadrado)?
 
@@ -340,7 +340,7 @@ Se permitíssemos `posicao` chegar a $400\text{px}$, a bola ultrapassaria e sair
 
 ---
 
-### B. Desmontando a Concatenação de Unidades CSS: `elemento.style.top = posicao + 'px';`
+**Desmontando a Concatenação de Unidades CSS: `elemento.style.top = posicao + 'px';`**
 
 O JavaScript manipula valores numéricos puros (ex: `10`, `11`, `12`). No entanto, regras de estilo CSS exigem **unidades de medida** obrigatórias (como `px`, `%`, `rem`).
 
@@ -349,7 +349,7 @@ O JavaScript manipula valores numéricos puros (ex: `10`, `11`, `12`). No entant
 
 ---
 
-### C. Desmontando a Função Interna (*Closure/Scope*): `setInterval(Local, 5)`
+**Desmontando a Função Interna (*Closure/Scope*): `setInterval(Local, 5)`**
 
 Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
 
@@ -358,7 +358,7 @@ Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
 
 ---
 
-## 6. Passo a Passo: Construindo Animações com DOM e CSS
+**Passo a Passo: Construindo Animações com DOM e CSS**
 
 ```
 1. Montar a Estrutura HTML:
@@ -383,9 +383,9 @@ Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Eventos de Clique e Mouse no DOM
+**Eventos de Clique e Mouse no DOM**
 
 | Evento HTML | Quando Dispara? | Exemplo Prático |
 | --- | --- | --- |
@@ -395,7 +395,7 @@ Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
 
 ---
 
-### Temporizadores em JavaScript
+**Temporizadores em JavaScript**
 
 | Método | Funcionamento | Como Interromper? |
 | --- | --- | --- |
@@ -404,15 +404,15 @@ Reparou que a função `Local()` foi declarada **dentro** da função `Anima()`?
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Erro de Digitação no Nome do Método de Limpeza (`clearInterfal`)
+**Erro de Digitação no Nome do Método de Limpeza (`clearInterfal`)**
 
 * **Incorreto:** `clearInterfal(id);`
 * **Correto:** `clearInterval(id);`
 * **Sintoma:** O navegador lança um erro `Uncaught TypeError: clearInterfal is not a function` e a animação **não para nunca**, ultrapassando as bordas da página.
 
-### 2. Esquecer de Definir `position: absolute` no CSS
+**Esquecer de Definir `position: absolute` no CSS**
 
 * **Sintoma:** O código executa, a variável `posicao` incrementa, mas a bola continua parada no canto da tela.
 * **Motivo:** No CSS, as propriedades `top`, `bottom`, `left` e `right` são **completamente ignoradas** em elementos com posicionamento padrão (`position: static`).
