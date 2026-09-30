@@ -373,7 +373,7 @@ meuCarro.acelerar();
 
 ## Conteúdo Complementar e Aprofundamento
 
-**Alocação de Memória no Java: A Memória *Stack* e a Memória *Heap* **
+**Alocação de Memória no Java: A Memória *Stack* e a Memória *Heap***
 
 Para entender a POO no nível do sistema operacional, precisamos saber como a JVM lida com as variáveis e objetos na memória RAM:
 
