@@ -2,13 +2,13 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, iniciei a transição da Programação Estruturada para a **Programação Orientada a Objetos (POO)**.
 
 A POO é um paradigma de programação que revolucioneu a forma como criamos softwares, pois nos permite modelar programas de forma muito mais próxima da vida real. Em vez de pensar apenas em funções e sequências de comandos isolados, passamos a estruturar o sistema em **objetos** que possuem características (dados) e comportamentos (ações).
 
-### Os 4 Pilares da POO
+## Os 4 Pilares da POO
 
 Toda a base da orientação a objetos se sustenta em quatro pilares fundamentais:
 
@@ -22,20 +22,22 @@ Toda a base da orientação a objetos se sustenta em quatro pilares fundamentais
 4. **Polimorfismo**
 
 
-### Vantagens de utilizar a POO
+**Vantagens de utilizar a POO**
 
 * **Aproximação do Mundo Real:** Facilita a tradução de problemas do cotidiano para a lógica de código.
 
 
 * **Reutilização de Código:** Evita a necessidade de reescrever a mesma lógica várias vezes.
+
 * **Organização e Modularidade:** Cada parte do sistema tem uma responsabilidade bem definida, facilitando a manutenção e a detecção de erros.
+
 * **Escalabilidade:** Permite criar projetos grandes e complexos com estrutura limpa e sustentável.
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A Abstração e o Conceito de Classe vs. Objeto
+## A Abstração e o Conceito de Classe vs. Objeto
 
 A **Abstração** consiste em isolar do mundo real apenas as características e comportamentos essenciais para o nosso sistema, ignorando detalhes irrelevantes.
 
@@ -63,38 +65,36 @@ Para aplicar a abstração no Java, usamos duas estruturas chave:
 
 ```
 
-💡 **Analogia da Patente do LEGO:**
+> **Analogia da Patente do LEGO:**
+
 Imagine o desenho técnico ou a patente de fabricação de um bloco de LEGO. Essa planta descreve exatamente as dimensões do bloco e como os pinos se encaixam, mas você não pode brincar com a planta em si. A planta é a **Classe**. Quando a fábrica injeta plástico no molde e produz a peça física amarela ou vermelha, cada pecinha gerada é um **Objeto**.
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### 1. Atributos (Características / Variáveis)
+**Atributos (Características / Variáveis)**
 
 São as propriedades que definem o estado de um objeto. Dentro da classe, são representados por variáveis.
 
 * Exemplo na classe `Carro`: `int ano;`, `String cor;`.
 
 
-
-### 2. Métodos (Comportamentos / Ações)
+**Métodos (Comportamentos / Ações)**
 
 São as funções associadas à classe que definem o que o objeto pode fazer.
 
 * Exemplo na classe `Carro`: `ligar()`, `desligar()`, `acelerar()`.
 
-
-
-### 3. Instanciação (`new`)
+**Instanciação (`new`)**
 
 É o ato de criar um objeto real na memória RAM a partir da classe modelo. Utilizamos a palavra reservada `new`.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Criando a Classe Modelo (`Carro.java`)
+**Exemplo 1: Criando a Classe Modelo (`Carro.java`)**
 
 ```java
 package aula03poo;
@@ -128,7 +128,7 @@ public class Carro {
 
 ---
 
-### Exemplo 2: Instanciando um Objeto Ferrari (`Ferrari.java`)
+**Exemplo 2: Instanciando um Objeto Ferrari** (`Ferrari.java`)
 
 ```java
 package aula03poo;
@@ -157,7 +157,7 @@ public class Ferrari {
 
 ---
 
-### Exemplo 3: Instanciando um Objeto Fusca (`Fusca.java`)
+**Exemplo 3: Instanciando um Objeto Fusca (`Fusca.java`)**
 
 ```java
 package aula03poo;
@@ -186,9 +186,7 @@ public class Fusca {
 
 ---
 
-### Exemplo 4: Modelando Elementos do Minecraft (`Minecraft.java` e `Steve.java`)
-
-
+**Exemplo 4: Modelando Elementos do Minecraft (`Minecraft.java` e `Steve.java`)**
 
 **Classe Modelo (`Minecraft.java`):**
 
@@ -249,7 +247,7 @@ public class Steve {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 Analisando a linha de criação de um objeto para entender como o Java opera na memória:
 
@@ -271,43 +269,32 @@ Para acessar ou modificar os dados do objeto instanciado, utilizamos o **operado
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Como Criar e Utilizar uma Estrutura Orientada a Objetos em Java
+**Como Criar e Utilizar uma Estrutura Orientada a Objetos em Java**
 
 1. **Passo 1: Criar o Pacote Dedicado:**
 * Crie um pacote (ex: `aula03poo`) para agrupar as classes relacionadas.
-
-
-
 
 2. **Passo 2: Criar a Classe Modelo (Blueprint):**
 * Crie uma classe simples **sem o método `main**` (ex: `Carro`).
 * Declare os atributos (variáveis de instância).
 
-
 * Escreva os métodos com as ações que essa entidade poderá realizar.
-
-
-
 
 3. **Passo 3: Criar a Classe Executável:**
 * Crie uma nova classe contendo a opção `public static void main(String[] args)`.
 
-
 4. **Passo 4: Instanciar e Usar:**
 * Crie o objeto com a sintaxe `NomeDaClasse nomeDoObjeto = new NomeDaClasse();`.
 
-
 * Manipule os valores e invoque os métodos usando `nomeDoObjeto.atributo` e `nomeDoObjeto.metodo()`.
-
-
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Classe vs. Objeto
+**Classe vs. Objeto**
 
 | Característica | Classe | Objeto |
 | --- | --- | --- |
@@ -322,7 +309,7 @@ Para acessar ou modificar os dados do objeto instanciado, utilizamos o **operado
 
 ---
 
-### 2. Atributo vs. Método
+**Atributo vs. Método**
 
 | Característica | Atributo | Método |
 | --- | --- | --- |
@@ -341,9 +328,9 @@ Para acessar ou modificar os dados do objeto instanciado, utilizamos o **operado
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Não Respeitar as Convenções do Java (*PascalCase* e *camelCase*)
+**Não Respeitar as Convenções do Java (*PascalCase* e *camelCase*)**
 
 Nomes de classes devem sempre iniciar com **letra maiúscula** usando o padrão *PascalCase*.
 
@@ -358,7 +345,7 @@ public class Minecraft { ... }
 
 ---
 
-### 2. Tentar Executar uma Classe Modelo sem o Método `main`
+**Tentar Executar uma Classe Modelo sem o Método `main`**
 
 Se você tentar rodar a classe `Carro.java` diretamente no Eclipse, ele apresentará uma mensagem de erro informando que o método `main` não foi encontrado.
 
@@ -366,7 +353,7 @@ Se você tentar rodar a classe `Carro.java` diretamente no Eclipse, ele apresent
 
 ---
 
-### 3. Tentar Acessar Membros de uma Classe sem Instanciá-la
+**Tentar Acessar Membros de uma Classe sem Instanciá-la**
 
 Variáveis e métodos de instância pertencem ao objeto, não à classe abstrata.
 
@@ -384,21 +371,9 @@ meuCarro.acelerar();
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho, apliquei as seguintes correções silenciosas:
-
-1. **Correção de Nomenclatura da Classe `Minecraft`:** A classe no meu rascunho estava escrita em letras minúsculas (`minecraft`). Ajustei para `Minecraft` para seguir a norma padrão da linguagem Java (*PascalCase* em classes).
-2. **Aglutinações de Código:** Corrigi todos os comandos e declarações que estavam sem espaçamento devido a erros de digitação (ex: `publicclassCarro` para `public class Carro`, `newCarro()` para `new Carro()`).
-3. **Padronização de Pacotes:** Organizei o nome do pacote para `aula03poo` inteiramente em letras minúsculas, conforme manda a boa prática do Java.
-
-
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Alocação de Memória no Java: A Memória *Stack* e a Memória *Heap*
+**Alocação de Memória no Java: A Memória *Stack* e a Memória *Heap* **
 
 Para entender a POO no nível do sistema operacional, precisamos saber como a JVM lida com as variáveis e objetos na memória RAM:
 
@@ -423,7 +398,7 @@ Para entender a POO no nível do sistema operacional, precisamos saber como a JV
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. A Programação Orientada a Objetos (POO) modela softwares baseando-se em entidades do mundo real.
 
@@ -456,7 +431,7 @@ Para entender a POO no nível do sistema operacional, precisamos saber como a JV
 
 ## Guia Rápido de Memorização
 
-### Estrutura de uma Classe Modelo
+**Estrutura de uma Classe Modelo**
 
 ```java
 public class NomeDaClasse {
@@ -471,7 +446,7 @@ public class NomeDaClasse {
 
 ```
 
-### Instanciação e Acesso a Objeto
+**Instanciação e Acesso a Objeto**
 
 ```java
 // Criar o objeto na memória
