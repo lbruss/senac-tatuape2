@@ -1,113 +1,155 @@
-# Estruturas de Controle (Condicionais e Laços de Repetição) e Exercícios Práticos em Java
+# Introdução à Programação Orientada a Objetos (POO): Abstração, Classes e Objetos em Java
 
 ---
 
-**Visão Geral**
+## 1. Visão Geral
 
-Nesta aula, avancei nos fundamentos do Java aprendendo a controlar o fluxo de execução dos programas através de **Estruturas Condicionais** e **Laços de Repetição (Loops)**, além de aplicar tudo isso em exercícios práticos do mundo real.
+Nesta aula, iniciei a transição da Programação Estruturada para a **Programação Orientada a Objetos (POO)**.
 
-Até agora, meus códigos executavam de forma estritamente sequencial (linha após linha, de cima para baixo). Com as estruturas de controle, meus programas ganham "inteligência" para:
+A POO é um paradigma de programação que revolucioneu a forma como criamos softwares, pois nos permite modelar programas de forma muito mais próxima da vida real. Em vez de pensar apenas em funções e sequências de comandos isolados, passamos a estruturar o sistema em **objetos** que possuem características (dados) e comportamentos (ações).
 
-1. **Tomar decisões:** Executar determinados blocos de código apenas se uma condição for verdadeira (`if`, `else-if`, `else`, `switch-case`).
-2. **Repetir tarefas:** Executar um mesmo bloco de código várias vezes enquanto uma condição for atendida (`for`, `while`, `do-while`), sem precisar duplicar linhas de código.
+### Os 4 Pilares da POO
 
-Também fiz exercícios práticos focados em lógica de programação: conversão de unidades de temperatura (Fahrenheit para Celsius), cálculo de viabilidade de combustível (Álcool vs. Gasolina) e cálculo de Índice de Massa Corporal (IMC) com formatação de saída.
+Toda a base da orientação a objetos se sustenta em quatro pilares fundamentais:
 
----
+1. **Abstração** (Foco da aula de hoje)
 
-**Entendendo o Conceito**
 
-## Estruturas Condicionais (Decisão)
+2. **Encapsulamento**
 
-Servem para mudar o caminho que o programa vai seguir com base em testes lógicos.
+3. **Herança**
 
-> **Analogia da Estrada:**
+4. **Polimorfismo**
 
-Imagine que você está dirigindo em uma rodovia. Chegando a uma bifurcação, existe uma placa: *"Se a sua carteira for categoria B, dobre à direita; caso contrário, siga em frente"*. A estrutura condicional faz exatamente essa checagem antes de decidir qual caminho o programa deve tomar.
 
-## Laços de Repetição (Iteração)
+### Vantagens de utilizar a POO
 
-Servem para automatizar processos repetitivos.
+* **Aproximação do Mundo Real:** Facilita a tradução de problemas do cotidiano para a lógica de código.
 
-> **Analogia da Corrida:**
 
-Imagine um atleta correndo em uma pista circular. O treinador diz: *"Dê 10 voltas na pista"*. O atleta corre a primeira volta, conta 1, corre a segunda, conta 2... até chegar na 10ª volta e parar. O laço `for` funciona exatamente assim quando sabemos o número exato de repetições. Já o laço `while` seria como: *"Continue correndo enquanto você não estiver cansado"*.
+* **Reutilização de Código:** Evita a necessidade de reescrever a mesma lógica várias vezes.
+* **Organização e Modularidade:** Cada parte do sistema tem uma responsabilidade bem definida, facilitando a manutenção e a detecção de erros.
+* **Escalabilidade:** Permite criar projetos grandes e complexos com estrutura limpa e sustentável.
 
 ---
 
-# Conceitos Fundamentais
+## 2. Entendendo o Conceito
 
-**Condicionais**
+### A Abstração e o Conceito de Classe vs. Objeto
 
-* **`if` (Se):** Avalia uma expressão booleana. Se for `true`, executa o bloco interno.
-* **`else if` (Senão se):** Avalia uma nova condição caso o `if` anterior tenha sido `false`. Permite testar múltiplas opções em sequência.
-* **`else` (Senão):** Bloco executado como "recurso final" quando nenhuma das condições anteriores for verdadeira.
-* **`switch-case`:** Estrutura de escolha múltipla ideal para testar o valor exato de uma única variável (como menus de opções). Utiliza o comando `break` para interromper a execução e não invadir o caso seguinte, e o `default` para tratar opções inválidas.
+A **Abstração** consiste em isolar do mundo real apenas as características e comportamentos essenciais para o nosso sistema, ignorando detalhes irrelevantes.
 
-**Laços de Repetição**
+Para aplicar a abstração no Java, usamos duas estruturas chave:
 
-* **`for`:** Ideal quando sabemos previamente **quantas vezes** o bloco deve ser repetido. Possui três partes na sua declaração: `(inicialização; condição_de_parada; incremento)`.
-* **`while` (Enquanto):** Testa a condição **antes** de executar o bloco. Se a condição for falsa logo de início, o bloco **nunca** é executado.
-* **`do-while` (Faça... Enquanto):** Executa o bloco de código **pelo menos uma vez** e só depois testa a condição no final. É perfeito para menus interativos ou situações onde a primeira execução é obrigatória.
+* **Classe:** É o **modelo** (blueprint/planta baixa). Ela não é o objeto em si, mas sim a instrução de como um objeto deve ser criado.
+
+
+* **Objeto:** É a **instância** (a concretização) criada a partir do modelo da classe.
+
+
+
+```
++-----------------------------------+
+|         CLASSE (Modelo)           |  <--- Define os atributos (dados) e métodos (ações)
+|        public class Carro         |
++-----------------------------------+
+                  |
+                  |  Instanciação (operador 'new')
+                  v
++-----------------------------------+      +-----------------------------------+
+|        OBJETO 1 (Instância)       |      |        OBJETO 2 (Instância)       |
+|    ferrari (cor: Roxo, ano: 2026) |      |    fusca (cor: Amarelo, ano: 1967) |
++-----------------------------------+      +-----------------------------------+
+
+```
+
+💡 **Analogia da Patente do LEGO:**
+Imagine o desenho técnico ou a patente de fabricação de um bloco de LEGO. Essa planta descreve exatamente as dimensões do bloco e como os pinos se encaixam, mas você não pode brincar com a planta em si. A planta é a **Classe**. Quando a fábrica injeta plástico no molde e produz a peça física amarela ou vermelha, cada pecinha gerada é um **Objeto**.
 
 ---
 
-### Código / Exemplos Práticos
+## 3. Conceitos Fundamentais
 
-**Exemplo 1: Estruturas Condicionais (`Condicional.java`)**
+### 1. Atributos (Características / Variáveis)
+
+São as propriedades que definem o estado de um objeto. Dentro da classe, são representados por variáveis.
+
+* Exemplo na classe `Carro`: `int ano;`, `String cor;`.
+
+
+
+### 2. Métodos (Comportamentos / Ações)
+
+São as funções associadas à classe que definem o que o objeto pode fazer.
+
+* Exemplo na classe `Carro`: `ligar()`, `desligar()`, `acelerar()`.
+
+
+
+### 3. Instanciação (`new`)
+
+É o ato de criar um objeto real na memória RAM a partir da classe modelo. Utilizamos a palavra reservada `new`.
+
+---
+
+## 4. Código / Exemplos Práticos
+
+### Exemplo 1: Criando a Classe Modelo (`Carro.java`)
 
 ```java
-package cursojava;
+package aula03poo;
 
-public class Condicional {
+/**
+ * Classe modelo que abstrai as características e ações de um carro.
+ * 
+ * @author Bruss Loza
+ */
+public class Carro {
+    
+    // Atributos (Variáveis da classe)
+    int ano;
+    String cor;
+
+    // Métodos (Ações que o carro pode realizar)
+    void ligar() {
+        System.out.println("Engine ON..........");
+    }
+
+    void desligar() {
+        System.out.println("Engine OFF.........");
+    }
+
+    void acelerar() {
+        System.out.println("Vrummmmm...........");
+    }
+}
+
+```
+
+---
+
+### Exemplo 2: Instanciando um Objeto Ferrari (`Ferrari.java`)
+
+```java
+package aula03poo;
+
+public class Ferrari {
     public static void main(String[] args) {
-        char sexo = 'M';
-        int idade = 19;
+        // Instanciação do objeto 'ferrari' baseado na classe Carro
+        Carro ferrari = new Carro();
 
-        System.out.println("Estrutura de Controle Condicional\n");
+        // Atribuindo valores aos atributos do objeto
+        ferrari.ano = 2026;
+        ferrari.cor = "Roxo";
 
-        // Exemplo 1: Uso do if simples
-        System.out.println("Exemplo 1: uso do if");
-        if (sexo == 'M') {
-            System.out.println("Alistamento militar obrigatório!");
-        }
+        // Exibindo os atributos
+        System.out.println("Carro Ferrari");
+        System.out.println("Ano: " + ferrari.ano);
+        System.out.println("Cor: " + ferrari.cor);
 
-        System.out.println("\nExemplo 2: uso do if-else");
-        if (idade < 18) {
-            System.out.println("Você é menor de idade!");
-        } else {
-            System.out.println("Você é maior de idade");
-        }
-
-        System.out.println("\nExemplo 3: uso do else-if");
-        if (idade < 16) {
-            System.out.println("Proibido votar!");
-        } else if (idade >= 18 && idade <= 70) {
-            System.out.println("Obrigatório votar!");
-        } else {
-            System.out.println("Voto facultativo!");
-        }
-
-        System.out.println("\nExemplo 4: uso do Switch case");
-        System.out.println("1 - Cadastro de clientes");
-        System.out.println("2 - Cadastro de usuários");
-        System.out.println("3 - Relatórios");
-        
-        int opcao = 1;
-        switch (opcao) {
-            case 1:
-                System.out.println("Clientes");
-                break;
-            case 2:
-                System.out.println("Usuários");
-                break;
-            case 3:
-                System.out.println("Relatórios");
-                break;
-            default:
-                System.out.println("Opção inválida!");
-                break;
-        }
+        // Executando os métodos do objeto
+        ferrari.ligar();
+        ferrari.acelerar();
     }
 }
 
@@ -115,60 +157,28 @@ public class Condicional {
 
 ---
 
-**Exemplo 2: Laços de Repetição (`LacoRepeticao.java`)**
+### Exemplo 3: Instanciando um Objeto Fusca (`Fusca.java`)
 
 ```java
-package cursojava;
+package aula03poo;
 
-public class LacoRepeticao {
+public class Fusca {
     public static void main(String[] args) {
-        System.out.println("Estrutura de Repetição");
-        
-        // Uso do FOR - Decremento
-        System.out.println("Uso do FOR (Contagem regressiva / Repetição)");
-        for (int i = 10; i > 0; i--) {
-            System.out.println("Hello, Bruss");
-        }
+        // Instanciação de outro objeto 'fusca' independente a partir da mesma classe Carro
+        Carro fusca = new Carro();
 
-        // Uso do FOR - Contagem progressiva
-        System.out.println("\nContagem de 0 até 10");
-        for (int j = 0; j <= 10; j++) {
-            System.out.println(j);
-        }
+        // Atribuindo valores específicos para este objeto
+        fusca.ano = 1967;
+        fusca.cor = "Amarelo";
 
-        // Uso do FOR Encadeado - Tabuada Completa (0 a 10)
-        System.out.println("\nTabuada");
-        for (int tab = 0; tab <= 10; tab++) {
-            System.out.println("");
-            for (int valor = 0; valor <= 10; valor++) {
-                System.out.println(tab + " x " + valor + " = " + (tab * valor));
-            }
-        }
+        // Exibindo atributos e executando ações
+        System.out.println("Carro Fusca");
+        System.out.println("Ano: " + fusca.ano);
+        System.out.println("Cor: " + fusca.cor);
 
-        // Uso do WHILE
-        System.out.println("\nExemplo 2: Uso do WHILE");
-        int cont = 1;
-        while (cont <= 10) {
-            System.out.println(cont);
-            cont++; // Incremento fundamental para evitar loop infinito
-        }
-
-        // Uso do DO-WHILE
-        System.out.println("\nExemplo 3: Uso do DO-WHILE");
-        char novoJogo = 'n';
-        do {
-            System.out.println("Deseja jogar novamente [s/n]?");
-            novoJogo = 'n';
-        } while (novoJogo == 's');
-        System.out.println("Game Over");
-
-        System.out.println("");
-        String sinal = "verde";
-        do {
-            System.out.println("O sinal está " + sinal);
-            sinal = "vermelho";
-        } while (sinal.equals("verde")); // Uso de .equals() para comparar Strings
-        System.out.println("O sinal mudou. Pare!");
+        fusca.ligar();
+        fusca.acelerar();
+        fusca.desligar();
     }
 }
 
@@ -176,79 +186,62 @@ public class LacoRepeticao {
 
 ---
 
-**Exemplo 3: Exercícios Práticos Resolvidos (`Atividades.java`)**
+### Exemplo 4: Modelando Elementos do Minecraft (`Minecraft.java` e `Steve.java`)
+
+
+
+**Classe Modelo (`Minecraft.java`):**
 
 ```java
-package aula02;
+package aula03poo;
 
-public class Atividades {
+/**
+ * Classe modelo que representa um bloco/mecanismo do jogo Minecraft.
+ */
+public class Minecraft {
+    
+    // Atributos do elemento
+    int resistencia;
+    String textura;
+
+    // Ações que podem ser executadas
+    void construir() {
+        System.out.println("Construindo.......");
+    }
+
+    void minerar() {
+        System.out.println("Minerando........");
+    }
+
+    void craftar() {
+        System.out.println("Criando o item...");
+    }
+}
+
+```
+
+**Classe Principal de Execução (`Steve.java`):**
+
+```java
+package aula03poo;
+
+public class Steve {
     public static void main(String[] args) {
-        /*
-         * ATIVIDADE 1: Conversão de Fahrenheit para Celsius
-         * Fórmula: C = (5 * (F - 32)) / 9
-         */
-        System.out.println("Atividade 1");
-        System.out.println("Conversão de Fahrenheit para Celsius\n");
-        
-        double f = 100.0;
-        double c = (5 * (f - 32)) / 9;
-        
-        System.out.println("Temperatura em Fahrenheit: " + f);
-        // Formatação com printf: %.2f limita a duas casas decimais e %n pula linha
-        System.out.printf("Temperatura em Celsius: %.2f%n", c);
+        // Instanciando o objeto 'steve' a partir da classe Minecraft
+        Minecraft steve = new Minecraft();
 
-        /*
-         * ATIVIDADE 2: Calculadora Flex (Álcool vs. Gasolina)
-         * Regra: Álcool é vantajoso se custar até 70% (0.70) do preço da gasolina.
-         */
-        System.out.println("\n----------------------------------------");
-        System.out.println("Atividade 2");
-        System.out.println("Qual é mais vantajoso: Álcool x Gasolina\n");
-        
-        double alcool = 3.50;  // Preço do litro do álcool
-        double gasolina = 5.80; // Preço do litro da gasolina
-        
-        System.out.println("Preço do Álcool: R$ " + alcool);
-        System.out.println("Preço da Gasolina: R$ " + gasolina);
-        
-        if (alcool < 0.7 * gasolina) {
-            System.out.println("Resultado: O Álcool é mais vantajoso!");
-        } else {
-            System.out.println("Resultado: A Gasolina é mais vantajosa!");
-        }
+        // Definindo as propriedades
+        steve.resistencia = 1000000;
+        steve.textura = "Cúbica";
 
-        /*
-         * ATIVIDADE 3: Cálculo e Classificação de IMC
-         * Fórmula: IMC = Peso / (Altura * Altura)
-         */
-        System.out.println("\n----------------------------------------");
-        System.out.println("Atividade 3");
-        System.out.println("Calcular valor IMC\n");
-        
-        double peso = 75.0;
-        double altura = 1.75;
-        String classificacao;
-        
-        double imc = peso / (altura * altura);
+        System.out.println("Personagem: Steve");
+        System.out.println("Resistência: " + steve.resistencia);
+        System.out.println("Textura: " + steve.textura);
 
-        if (imc < 18.5) {
-            classificacao = "Abaixo do peso";
-        } else if (imc <= 24.9) {
-            classificacao = "Peso ideal";
-        } else if (imc <= 29.9) {
-            classificacao = "Levemente acima do peso";
-        } else if (imc <= 34.9) {
-            classificacao = "Obesidade grau I";
-        } else if (imc <= 39.9) {
-            classificacao = "Obesidade grau II (severa)";
-        } else {
-            classificacao = "Obesidade grau III (mórbida)";
-        }
-
-        System.out.println("Peso: " + peso + " kg");
-        System.out.println("Altura: " + altura + " m");
-        System.out.printf("IMC: %.2f%n", imc);
-        System.out.println("Classificação: " + classificacao);
+        // Chamando as ações
+        steve.construir();
+        steve.minerar();
+        steve.craftar();
     }
 }
 
@@ -256,232 +249,238 @@ public class Atividades {
 
 ---
 
-**Desmontando o Código**
+## 5. Desmontando o Código
 
-**A. Desmontando a Tabuada com Laços Encadeados (`for` dentro de `for`)**
+Analisando a linha de criação de um objeto para entender como o Java opera na memória:
 
 ```java
-for (int tab = 0; tab <= 10; tab++) {
-    for (int valor = 0; valor <= 10; valor++) {
-        System.out.println(tab + " x " + valor + " = " + (tab * valor));
-    }
-}
+Carro ferrari = new Carro();
 
 ```
 
-1. **Primeira linha (`for` externo):** Cria a variável `tab` começando em 0. Esse laço controla **qual tabuada** estamos calculando no momento (Tabuada do 0, do 1, do 2...).
-2. **Segunda linha (`for` interno):** Cria a variável `valor` começando em 0. Para **CADA** rodada do laço externo, o laço interno executa **todas as suas 11 repetições** (de 0 até 10).
-3. **Terceira linha (`println`):** Imprime a multiplicação do número da tabuada atual pelo valor do multiplicador.
-4. **Fluxo:** `tab=0` roda `valor` de 0 a 10 ➔ Termina o interno ➔ `tab` vira 1 ➔ `valor` roda de 0 a 10 novamente... e assim sucessivamente até `tab=10`.
+1. **`Carro` (Tipo de Referência):** Informa ao Java que a variável `ferrari` será utilizada para fazer referência a um objeto criado a partir da classe `Carro`.
+2. **`ferrari` (Nome do Objeto):** É a variável que guarda o endereço de memória onde o objeto real foi alocado.
+3. **`=` (Atribuição):** Associa a variável ao objeto recém-criado na memória.
+4. **`new` (Operador de Instanciação):** Comando crucial que solicita ao Java que reserve um espaço na memória RAM (**Heap**) para construir a nova estrutura.
+5. **`Carro()` (Construtor):** Método especial que executa a inicialização do novo objeto.
+
+Para acessar ou modificar os dados do objeto instanciado, utilizamos o **operador ponto (`.`)**:
+
+* `ferrari.ano = 2026;` ➔ Acessa a variável de instância `ano` do objeto `ferrari` e atribui o valor 2026.
+* `ferrari.ligar();` ➔ Executa o método `ligar()` pertencente exclusivamente ao objeto `ferrari`.
 
 ---
 
-**Desmontando a Saída Formatada (`System.out.printf`)**
+## 6. Passo a Passo
 
-```java
-System.out.printf("Temperatura em Celsius: %.2f%n", c);
+### Como Criar e Utilizar uma Estrutura Orientada a Objetos em Java
 
-```
-
-1. **`System.out.printf`**: O `f` vem de *formatted* (formatado). Permite estruturar textos com marcadores de posição para variáveis.
-2. **`%.2f`**: É um **especificador de formato**:
-* `%`: Indica onde a variável será inserida.
-* `.2`: Determina o número exato de casas decimais após a vírgula (arredondando o valor se necessário).
-* `f`: Significa que o dado recebido é um número de ponto flutuante (`float` ou `double`).
+1. **Passo 1: Criar o Pacote Dedicado:**
+* Crie um pacote (ex: `aula03poo`) para agrupar as classes relacionadas.
 
 
-3. **`%n`**: Especificador universal para quebra de linha (equivalente ao `\n`, mas garantido de funcionar em qualquer sistema operacional).
-4. **`, c`**: Passa a variável `c` cujo valor preencherá o marcador `%.2f`.
-
----
-
-**Passo a Passo**
-
-### Como Estruturar uma Cadeia de Decisão Encadeada (`if / else if / else`)
-
-Ao resolver o problema do cálculo do IMC, segui estes passos de raciocínio lógico:
-
-1. **Entrada de Dados e Cálculo Base:**
-* Armazenar peso e altura em variáveis do tipo `double`.
-* Calcular o IMC primeiro: $IMC = \frac{\text{peso}}{\text{altura}^2}$.
 
 
-2. **Organização da Lógica por Faixas Crescentes:**
-* Começar do menor valor limite de corte (< 18.5).
-* Como o `else if` só é avaliado se a condição anterior for falsa, não preciso testar se `imc >= 18.5 && imc <= 24.9`. Basta colocar `else if (imc <= 24.9)`!
-* Motivo: Se o fluxo chegou no primeiro `else if`, é **garantido** que o IMC já é maior ou igual a 18.5. Isso simplifica o código e reduz erros.
+2. **Passo 2: Criar a Classe Modelo (Blueprint):**
+* Crie uma classe simples **sem o método `main**` (ex: `Carro`).
+* Declare os atributos (variáveis de instância).
 
 
-3. **Fechamento Genérico com `else`:**
-* O último caso (caso o IMC seja maior que 39.9) não precisa de um teste `else if (imc > 39.9)`. Usamos apenas o `else`, pois se o valor não caiu em nenhuma faixa anterior, ele só pode ser Obesidade III.
+* Escreva os métodos com as ações que essa entidade poderá realizar.
+
+
+
+
+3. **Passo 3: Criar a Classe Executável:**
+* Crie uma nova classe contendo a opção `public static void main(String[] args)`.
+
+
+4. **Passo 4: Instanciar e Usar:**
+* Crie o objeto com a sintaxe `NomeDaClasse nomeDoObjeto = new NomeDaClasse();`.
+
+
+* Manipule os valores e invoque os métodos usando `nomeDoObjeto.atributo` e `nomeDoObjeto.metodo()`.
 
 
 
 ---
 
-# Tabelas Comparativas
+## 7. Tabelas Comparativas
 
-**Comparativo das Estruturas de Repetição em Java**
+### 1. Classe vs. Objeto
 
-| Estrutura | Momento do Teste Condicional | Mínimo de Execuções | Quando Utilizar? |
-| --- | --- | --- | --- |
-| **`for`** | No início (antes de entrar no bloco) | 0 vezes | Quando você **sabe exatamente o número de repetições** prévio (ex: de 1 a 10). |
-| **`while`** | No início (antes de entrar no bloco) | 0 vezes | Quando você **não sabe quantas vezes** o bloco rodará e a execução depende de uma condição. |
-| **`do-while`** | No final (após executar o bloco) | **1 vez** | Quando o código precisa ser executado **obrigatoriamente ao menos uma vez** antes da checagem. |
-
----
-
-**`if-else` vs. `switch-case`**
-
-| Recurso | `if-else` | `switch-case` |
+| Característica | Classe | Objeto |
 | --- | --- | --- |
-| **Tipo de Avaliação** | Aceita intervalos, expressões complexas e operadores lógicos (`>`, `<`, `&&`, ` |  |
-| **Tipos Suportados** | Todos os tipos (booleanos, números, textos, objetos). | Inteiros (`byte`, `short`, `int`), `char`, `String` e Enums. |
-| **Readabilidade** | Pode ficar poluído se houver muitos `else if` aninhados. | Extremamente limpo e organizado para menus e seleções de opções. |
+| **Definição** | Modelo / Planta baixa / Blueprint.
+
+ | Instância concreta do modelo na memória.
+
+ |
+| **Existência na Memória** | Existe apenas como definição estática de código. | Ocupa espaço real alocado na memória RAM. |
+| **Quantidade** | É única por arquivo/projeto. | Podem ser criados **infinitos** objetos a partir de uma só classe. |
+| **Exemplo** | `Carro`<br> | `ferrari`, `fusca`<br> |
 
 ---
 
-## Erros Comuns e Cuidados
+### 2. Atributo vs. Método
 
-**Esquecer o `break` no `switch-case` (Efeito Fall-Through)**
+| Característica | Atributo | Método |
+| --- | --- | --- |
+| **Representa** | O que o objeto **é** / tem (estado/característica).
 
-Se esquecer a palavra `break` ao final de um `case`, o Java continuará executando **todos os cases seguintes** de forma ininterrupta até encontrar um `break` ou o fim do bloco!
+ | O que o objeto **faz** (comportamento/ação).
+
+ |
+| **Estrutura no Código** | Variável declarada dentro da classe.
+
+ | Bloco de código com parênteses `()`.
+
+ |
+| **Sintaxe de Chamada** | `objeto.atributo = valor;` | `objeto.metodo();` |
+| **Exemplo** | `cor = "Roxo";`<br> | `acelerar();`<br> |
+
+---
+
+## 8. Erros Comuns e Cuidados
+
+### 1. Não Respeitar as Convenções do Java (*PascalCase* e *camelCase*)
+
+Nomes de classes devem sempre iniciar com **letra maiúscula** usando o padrão *PascalCase*.
 
 ```java
-// ❌ INCORRETO (Efeito Colateral):
-switch (opcao) {
-    case 1:
-        System.out.println("Clientes"); // Esqueceu o break!
-    case 2:
-        System.out.println("Usuários"); // Essa linha TAMBÉM será executada se opcao == 1
-        break;
-}
+// ❌ INCORRETO:
+public class minecraft { ... }
 
 // ✅ CORRETO:
-switch (opcao) {
-    case 1:
-        System.out.println("Clientes");
-        break; // Interrompe o switch imediatamente
-    case 2:
-        System.out.println("Usuários");
-        break;
-}
+public class Minecraft { ... }
 
 ```
 
 ---
 
-**Comparar Strings com o Operador `==` em vez de `.equals()`**
+### 2. Tentar Executar uma Classe Modelo sem o Método `main`
 
-Em Java, usar `==` para comparar textos (`String`) compara a **referência de memória** dos objetos, e não o conteúdo do texto em si. Isso pode gerar erros difíceis de encontrar.
+Se você tentar rodar a classe `Carro.java` diretamente no Eclipse, ele apresentará uma mensagem de erro informando que o método `main` não foi encontrado.
+
+* **Cuidado:** Classes modelos **não** precisam de `main`. O `main` fica em uma classe executável à parte (como `Ferrari.java` ou `Fusca.java`).
+
+---
+
+### 3. Tentar Acessar Membros de uma Classe sem Instanciá-la
+
+Variáveis e métodos de instância pertencem ao objeto, não à classe abstrata.
 
 ```java
-String sinal = "verde";
+// ❌ INCORRETO (Tentando usar direto da classe):
+Carro.cor = "Vermelho"; 
+Carro.acelerar();
 
-// ❌ NÃO RECOMENDADO (Pode falhar dependendo de como a String foi criada na memória):
-while (sinal == "verde") { ... }
-
-// ✅ CORRETO E SEGURO (Compara o CONTEÚDO do texto):
-while (sinal.equals("verde")) { ... }
-
-```
-
----
-
-**Escrever Laços Infinitos no `while`**
-
-Esquecer de atualizar/incrementar a variável de controle dentro do corpo do `while` fará com que o teste condicional seja sempre verdadeiro, travando a aplicação ou consumindo 100% da CPU.
-
-```java
-int cont = 1;
-
-// ❌ INCORRETO (Loop Infinito):
-while (cont <= 10) {
-    System.out.println(cont); // A variável 'cont' nunca muda, o loop rodará para sempre!
-}
-
-// ✅ CORRETO:
-while (cont <= 10) {
-    System.out.println(cont);
-    cont++; // Garante que em algum momento cont será 11 e o loop encerrará
-}
+// ✅ CORRETO (Criando o objeto com 'new' primeiro):
+Carro meuCarro = new Carro();
+meuCarro.cor = "Vermelho";
+meuCarro.acelerar();
 
 ```
 
 ---
 
-## Conteúdo Complementar e Aprofundamento
+## 9. Correções Técnicas das Minhas Anotações
 
-**Aprofundando a Formatação com `System.out.printf()`**
+Durante a revisão do meu rascunho, apliquei as seguintes correções silenciosas:
 
-O uso do `printf` é essencial quando precisamos exibir valores financeiros ou medições científicas sem que o Java exiba dízimas infinitas (como `21.11111111111111` no cálculo do Celsius).
+1. **Correção de Nomenclatura da Classe `Minecraft`:** A classe no meu rascunho estava escrita em letras minúsculas (`minecraft`). Ajustei para `Minecraft` para seguir a norma padrão da linguagem Java (*PascalCase* em classes).
+2. **Aglutinações de Código:** Corrigi todos os comandos e declarações que estavam sem espaçamento devido a erros de digitação (ex: `publicclassCarro` para `public class Carro`, `newCarro()` para `new Carro()`).
+3. **Padronização de Pacotes:** Organizei o nome do pacote para `aula03poo` inteiramente em letras minúsculas, conforme manda a boa prática do Java.
 
-**Principais Especificadores de Formato em Java:**
 
-* **`%s`**: Substitui por textos (`String`).
-* **`%d`**: Substitui por números inteiros (`byte`, `short`, `int`, `long`).
-* **`%f`**: Substitui por números decimais (`float`, `double`).
-* **`%.2f`**: Substitui por número decimal formatado com **2 casas após a vírgula**.
-* **`%.1f`**: Substitui por número decimal formatado com **1 casa após a vírgula**.
-* **`%n`**: Insere uma quebra de linha independente do sistema operacional (Windows/Linux/Mac).
 
-**Exemplo prático combinado:**
+---
 
-```java
-String produto = "Caneta";
-int quantidade = 5;
-double preco = 2.508;
+## 10. Conteúdo Complementar e Aprofundamento
 
-System.out.printf("Item: %s | Qtd: %d | Preço Un: R$ %.2f%n", produto, quantidade, preco);
-// Saída no console: Item: Caneta | Qtd: 5 | Preço Un: R$ 2,51
+### Alocação de Memória no Java: A Memória *Stack* e a Memória *Heap*
+
+Para entender a POO no nível do sistema operacional, precisamos saber como a JVM lida com as variáveis e objetos na memória RAM:
+
+1. **Memória Stack (Pilha):** Armazena as chamadas de métodos e as variáveis locais/referências. Quando declaramos `Carro ferrari`, o ponteiro chamado `ferrari` fica salvo na memória **Stack**.
+2. **Memória Heap (Monte):** É a região da memória onde os objetos reais vivem. Quando executamos `new Carro()`, a JVM aloca espaço na **Heap** para guardar todos os atributos daquele objeto específico.
+
+```
+       [ MEMÓRIA STACK ]                 [ MEMÓRIA HEAP ]
++------------------------------+     +-------------------------------+
+|  ferrari (Ponteiro/Endereço) | --> | Objeto Carro                  |
++------------------------------+     |  - ano: 2026                  |
+|  fusca   (Ponteiro/Endereço) | --\ |  - cor: "Roxo"                |
++------------------------------+   | +-------------------------------+
+                                   | 
+                                   | +-------------------------------+
+                                   \-> Objeto Carro                  |
+                                     |  - ano: 1967                  |
+                                     |  - cor: "Amarelo"             |
+                                     +-------------------------------+
 
 ```
 
 ---
 
-**Resumo Relâmpago**
+## Resumo Relâmpago — 10 Linhas
 
-1. Estruturas de controle alteram o fluxo sequencial básico de execução de um programa.
-2. A condicional `if` testa uma expressão booleana e executa um bloco se o resultado for verdadeiro.
-3. O `else if` permite testar múltiplas condições em sequência e o `else` captura todos os casos restantes.
-4. O `switch-case` é ideal para testar valores exatos de uma variável e exige o `break` em cada caso.
-5. O laço `for` é recomendado para repetições com número de iterações previamente definido.
-6. O laço `while` testa a condição no início e pode rodar 0 ou mais vezes.
-7. O laço `do-while` executa o bloco obrigatoriamente 1 vez antes de testar a condição no final.
-8. Sempre use `.equals()` em vez de `==` para comparar o conteúdo de variáveis do tipo `String`.
-9. Um laço `while` exige a atualização interna da variável de controle para evitar loops infinitos.
-10. O método `System.out.printf()` com o marcador `%.2f` arredonda e limita números decimais no console.
+1. A Programação Orientada a Objetos (POO) modela softwares baseando-se em entidades do mundo real.
+
+
+2. Os quatro pilares da POO são Abstração, Encapsulamento, Herança e Polimorfismo.
+
+
+3. Abstração é o pilar que modela e isola apenas as características essenciais de um objeto.
+
+
+4. Uma classe funciona como o modelo ou planta baixa (*blueprint*) de uma estrutura.
+
+
+5. Um objeto é uma instância real e concreta criada na memória a partir do modelo de uma classe.
+
+
+6. Atributos representam as características ou dados guardados dentro de um objeto.
+
+
+7. Métodos representam os comportamentos e as ações que um objeto pode executar.
+
+
+8. A palavra reservada `new` é utilizada para instanciar e alocar um objeto na memória RAM.
+
+
+9. O operador ponto (`.`) permite acessar e alterar atributos ou disparar métodos de um objeto.
+10. Nomes de classes em Java devem obrigatoriamente seguir a convenção *PascalCase* (ex: `Minecraft`).
 
 ---
 
 ## Guia Rápido de Memorização
 
-**Estruturas Condicionais**
+### Estrutura de uma Classe Modelo
 
 ```java
-// Se / Senão se / Senão
-if (condicao1) { ... } 
-else if (condicao2) { ... } 
-else { ... }
-
-// Escolha Múltipla
-switch (variavel) {
-    case valor1: ... break;
-    default: ... break;
+public class NomeDaClasse {
+    // Atributos
+    tipo atributo1;
+    
+    // Métodos
+    void nomeDoMetodo() {
+        // Código do método
+    }
 }
 
 ```
 
-**Laços de Repetição**
+### Instanciação e Acesso a Objeto
 
 ```java
-// FOR (Início; Fim; Passo)
-for (int i = 0; i < 10; i++) { ... }
+// Criar o objeto na memória
+NomeDaClasse objeto = new NomeDaClasse();
 
-// WHILE (Checa no Início)
-while (condicao) { ... incremento; }
+// Atribuir valor
+objeto.atributo1 = valor;
 
-// DO-WHILE (Checa no Fim - Roda ao menos 1x)
-do { ... incremento; } while (condicao);
+// Executar ação
+objeto.nomeDoMetodo();
 
 ```
