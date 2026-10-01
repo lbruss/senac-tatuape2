@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exercício 2</title>
+</head>
+<body>
+	<h1>Calcular média</h1>
+	<p id="media">Média é: </p>
+
+	<script>
+
+    function calcularMedia(nota1, nota2){
+    return (nota1+nota2)/2;
+    }
+
+    var nota1=8,nota2=6;
+
+    document.getElementById('media').innerHTML += calcularMedia(nota1,nota2);
+    </script>
+</body>
+</html>

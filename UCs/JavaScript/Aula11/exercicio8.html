@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Objeto em JavaScript</title>
+</head>
+<body>
+    <h1>Objeto em JavaScript</h1>
+    <script>
+    var pessoa = {
+        nome:'Bruss',
+        sobrenome:'Loza',
+        idade:19,
+        curso:'TI',
+        cidade:'São Paulo',
+        nomeCompleto:function(){
+            return this.nome + ' ' +this.sobrenome;
+        },
+        endCompleto:function(){
+            return this.nomeCompleto +',',
+                   this.curso +'<br>'+
+                   this.cidade +'<br>';
+        }
+    }
+    document.write(pessoa.nomeCompleto()+'<br>');
+    document.write(pessoa.endCompleto());
+    </script>
+</body>
+</html>
+ 
+ 

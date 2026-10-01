@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 12</title>
+</head>
+<body>
+    <h1>Semáforo</h1>
+
+    <img id="semaforo" src="Vermelho.jpg" alt="Semáforo" width="200"><br><br>
+
+    <button onclick="vermelho()">Vermelho</button>
+    <button onclick="amarelo()">Amarelo</button>
+    <button onclick="verde()">Verde</button>
+
+    <script>
+        function vermelho() {
+            document.getElementById('semaforo').src = 'Vermelho.jpg';
+        }
+
+        function amarelo() {
+            document.getElementById('semaforo').src = 'Amarelo.jpg';
+        }
+
+        function verde() {
+            document.getElementById('semaforo').src = 'Verde.jpg';
+        }
+    </script>
+</body>
+</html>

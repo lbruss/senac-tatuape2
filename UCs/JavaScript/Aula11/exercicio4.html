@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 4</title>
+</head>
+<body>
+ 
+    <h1>Verificar maior número</h1>
+    <p id="quadrado">O quadrado de 5 é: </p>
+    <p id="cubo">O cubo de 5 é: </p>
+    <script>
+    function quadrado(numero){
+        return numero ** 2;
+    }
+    
+    function cubo(numero){
+        return numero ** 3;
+    }
+
+    var num=5;
+    
+    document.getElementById('quadrado').innerHTML += quadrado(num);
+    document.getElementById('cubo').innerHTML += cubo(num);
+    </script>
+</body>
+</html>

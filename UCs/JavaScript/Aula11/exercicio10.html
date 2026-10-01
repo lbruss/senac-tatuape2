@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 10</title>
+</head>
+<body>
+    <h1>Objeto Funcionário</h1>
+    <p id="resultado"></p>
+
+    <script>
+        var funcionario = {
+            nome: "João",
+            cargo: "Analista",
+            salario: 2500,
+            aumento: function(percentual) {
+                return this.salario + (this.salario * percentual / 100);
+            }
+        };
+        var percentual = 15;
+        var novoSalario = funcionario.aumento(percentual);
+
+        document.getElementById('resultado').innerHTML = "Nome: " + funcionario.nome + "<br>" + "Cargo: " +
+        funcionario.cargo + "<br>" + "Salário atual: R$ " + funcionario.salario + "<br>" + "Novo salário com " +
+        percentual + "% de aumento: R$ " + novoSalario;
+    </script>
+</body>
+</html>

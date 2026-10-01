@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 7</title>
+</head>
+<body>
+    <h1>Conversor de Temperatura</h1>
+    <p id="temp">O Fahrenheit é de: </p>
+
+    <script>
+    function celsiusParaFahrenheit(celsius){
+    var fahrenheit = (celsius * 9/5) + 32;
+        return(celsius * 9 / 5) + 32;
+    }
+    var celsius = 30;
+
+    document.getElementById('temp').innerHTML += celsiusParaFahrenheit(celsius);
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exercício 6</title>
+</head>
+<body>
+<h1>Cálculo de Desconto</h1>
+<script>
+    function calcularDesconto(valorProduto, percentual) {
+        var desconto = valorProduto * percentual / 100;
+        return valorProduto - desconto;
+    }
+    var valor = Number(prompt("Digite o valor do produto:"));
+    var percentual = Number(prompt("Digite o percentual de desconto:"));
+    var resultado = calcularDesconto(valor, percentual);
+ 
+    document.write("Valor final: R$ " + resultado);
+</script>
+</body>
+</html>

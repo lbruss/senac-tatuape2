@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exercício 3</title>
+</head>
+<body>
+ 
+    <h1>Verificar maior número</h1>
+    <p id="num">O maior número é: </p>
+    <script>
+    function maiorNumero(a, b) {
+        if (a > b) {
+            resposta = a + ' é o maior número.';
+        } else if (b > a) {
+            resposta = b + ' é o maior número.';
+        }
+            return resposta;
+        }
+ 
+        var x = 0, y = 0;
+        x = parseInt(prompt('Digite o 1º número:'));
+        y = parseInt(prompt('Digite o 2º número:'));
+ 
+        document.getElementById('num').innerHTML += maiorNumero(x, y);
+    </script>
+</body>
+</html>
