@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, entendi como a infraestrutura da Internet surgiu e evoluiu até se transformar no ecossistema atual de desenvolvimento web. Compreendi a diferença crucial entre a **Internet** (a rede física global de computadores interconectados) e a **World Wide Web (WWW)** (o sistema de documentos e sistemas interligados que rodam sobre essa rede).
 
@@ -10,9 +10,9 @@ Esse conhecimento é a base necessária para o meu desenvolvimento em **HTML, CS
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A Grande Diferença: Internet vs. Web
+## A Grande Diferença: Internet vs. Web
 
 * **Internet**: É a infraestrutura física e de rede global.
 
@@ -31,7 +31,7 @@ Esse conhecimento é a base necessária para o meu desenvolvimento em **HTML, CS
 
 
 
-### O HTML NÃO é uma Linguagem de Programação
+**O HTML NÃO é uma Linguagem de Programação**
 
 Um ponto fundamental que fixa a base do desenvolvimento front-end:
 
@@ -42,9 +42,9 @@ Um ponto fundamental que fixa a base do desenvolvimento front-end:
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### 3.1. História da Internet e da Web
+**História da Internet e da Web**
 
 * **Guerra Fria e ARPANET**: A Internet nasceu em meio ao contexto de rivalidade da Guerra Fria entre EUA e URSS. Após o lançamento do satélite soviético *Sputnik-1* (1957), o governo americano criou a **ARPA/DARPA**. Em 29 de outubro de 1969, nasceu a **ARPANET**, a primeira rede de computadores em pacotes, interligando inicialmente 4 nós (UCLA, Stanford, UCSB e Utah).
 
@@ -93,7 +93,7 @@ Um ponto fundamental que fixa a base do desenvolvimento front-end:
 
 ---
 
-### 3.2. As Eras da Web (1.0, 2.0 e 3.0)
+**As Eras da Web (1.0, 2.0 e 3.0)**
 
 A evolução da Web não é apenas tecnológica, mas principalmente comportamental de como os usuários interagem com a informação:
 
@@ -133,7 +133,7 @@ A evolução da Web não é apenas tecnológica, mas principalmente comportament
 
 ---
 
-### 3.3. Serviços Web e Arquitetura de Comunicação
+## Serviços Web e Arquitetura de Comunicação
 
 Os **Web Services** são soluções que permitem a interoperabilidade: a comunicação entre sistemas diferentes construídos em linguagens distintas.
 
@@ -176,7 +176,7 @@ Os **Web Services** são soluções que permitem a interoperabilidade: a comunic
 
 ---
 
-### 3.4. Classificação dos Websites
+## Classificação dos Websites
 
 Os sites são categorizados de acordo com seu objetivo e estrutura principal:
 
@@ -216,13 +216,13 @@ Os sites são categorizados de acordo com seu objetivo e estrutura principal:
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Comparativo de Estruturas: XML vs. JSON
+**Comparativo de Estruturas: XML vs. JSON**
 
 Para entender como dados são transmitidos entre cliente e servidor, vejamos como a mesma informação de um aluno é representada nos dois formatos principais:
 
-#### Exemplo em XML
+**Exemplo em XML**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -235,7 +235,7 @@ Para entender como dados são transmitidos entre cliente e servidor, vejamos com
 
 ```
 
-#### Exemplo em JSON
+**Exemplo em JSON**
 
 ```json
 {
@@ -249,9 +249,9 @@ Para entender como dados são transmitidos entre cliente e servidor, vejamos com
 
 ---
 
-## 5. Desmontando o Código e Estruturas
+**Desmontando o Código e Estruturas**
 
-### Desmontando a Estrutura de uma URL
+**Desmontando a Estrutura de uma URL**
 
 Uma URL completa pode ser fatiada nas seguintes partes:
 
@@ -264,7 +264,7 @@ Uma URL completa pode ser fatiada nas seguintes partes:
 5. `?id=15` → **Query String**: Parâmetros de busca passados no formato `chave=valor`.
 6. `#conceito` → **Âncora (Fragment)**: Aponta para uma seção específica dentro da própria página.
 
-### Análise Comparativa XML vs. JSON
+**Análise Comparativa XML vs. JSON**
 
 * No **XML**, cada dado precisa de uma tag de abertura (`<nome>`) e uma de fechamento (`</nome>`), gerando um arquivo mais pesado e verboso.
 
@@ -275,7 +275,7 @@ Uma URL completa pode ser fatiada nas seguintes partes:
 
 ---
 
-## 6. Passo a Passo: O Ciclo de uma Requisição Web (Cliente-Servidor)
+**Passo a Passo: O Ciclo de uma Requisição Web (Cliente-Servidor)**
 
 Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seguinte sequência de eventos:
 
@@ -296,9 +296,9 @@ Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seg
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Evolução da Web
+**Tabela 1: Evolução da Web**
 
 | Era | Nome Principal | Foco da Interação | Tecnologias Chave |
 | --- | --- | --- | --- |
@@ -306,7 +306,7 @@ Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seg
 | **Web 2.0**<br> | Web Colaborativa | Leitura e Escrita (Interativa) | AJAX, Redes Sociais, Blogs, SaaS |
 | **Web 3.0**<br> | Web Semântica / Inteligente | Dados interligados e IA | Machine Learning, Ontologias, Blockchain, IoT |
 
-### Tabela 2: Formatos de Troca de Dados (XML vs. JSON)
+**Tabela 2: Formatos de Troca de Dados (XML vs. JSON)**
 
 | Característica | XML| JSON |
 | --- | --- | --- |
@@ -315,7 +315,7 @@ Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seg
 | **Leitura por JS** | Requer parse de documento DOM | Nativo do JavaScript (`JSON.parse()`) |
 | **Uso Principal** | Sistemas legados, SOAP, NFe | APIs RESTful modernas, aplicações Web/Mobile |
 
-### Tabela 3: SOAP vs. REST
+**Tabela 3: SOAP vs. REST**
 
 | Padrão | Tipo | Formato de Dados | Complexidade |
 | --- | --- | --- | --- |
@@ -324,7 +324,7 @@ Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seg
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Classificar HTML como linguagem de programação**:
 * ❌ *Incorreto*: "Criei uma lógica de decisão usando a linguagem de programação HTML."
@@ -341,39 +341,24 @@ Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seg
 3. **Tratar URI e URL como conceitos opostos**:
 * Entendi que toda URL é uma URI, pois a URL é apenas uma das formas existentes de identificar um recurso através de sua localização na rede.
 
-
-
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Diferenciação TCP vs. IP**: Ajustada a definição para deixar claro que o **TCP** cuida da quebra de dados em pacotes e garante a entrega sem erros, enquanto o **IP** cuida de rotear esses pacotes até o endereço do destinatário.
-
-
-* **Natureza do REST**: Ajustado para explicitar que REST é um *estilo arquitetural* de projeto de APIs e não um protocolo de comunicação como o SOAP.
-
-
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### O Papel dos Servidores Web e Portas Padrão
+**O Papel dos Servidores Web e Portas Padrão**
 
 Quando desenvolvemos páginas web, elas são armazenadas em **Servidores Web** (como Apache, Nginx ou IIS). Esses servidores rodam processos escutando portas de rede específicas:
 
 * **Porta 80**: Utilizada para tráfego web não criptografado via **HTTP**.
 * **Porta 443**: Utilizada para tráfego seguro criptografado via **HTTPS** (*HTTP + TLS/SSL*).
 
-### O Padrão W3C
+**O Padrão W3C**
 
 Seguir as diretrizes do **W3C** garante que o código HTML/CSS funcione de forma consistente em diferentes navegadores (Chrome, Firefox, Safari, Edge) e atenda a critérios universais de **Acessibilidade Web (WCAG)**.
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **TCP/IP**: Base de conexões de toda a Internet (TCP fatiou, IP endereçou).
 
@@ -402,33 +387,24 @@ Seguir as diretrizes do **W3C** garante que o código HTML/CSS funcione de forma
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. A Internet é a infraestrutura física de rede global; a Web (WWW) é o sistema de hipertextos que trafega sobre ela.
 
-
 2. A ARPANET surgiu em 1969 na Guerra Fria e originou a Internet com o protocolo TCP/IP criado por Bob Kahn e Vint Cerf.
-
 
 3. Tim Berners-Lee criou a World Wide Web (WWW), o protocolo HTTP, a linguagem HTML e o primeiro navegador em 1989-1990.
 
-
 4. HTML é uma linguagem de marcação estrutural de texto e conteúdo, não uma linguagem de programação.
-
 
 5. A Web 1.0 era focada apenas em leitura com páginas estáticas em HTML.
 
-
 6. A Web 2.0 trouxe dinamismo, redes sociais e produção colaborativa de conteúdo pelos próprios usuários.
-
 
 7. A Web 3.0 integra Web Semântica, inteligência artificial, dados estruturados e descentralização.
 
-
 8. APIs permitem a comunicação entre aplicações diferentes, utilizando formatos de troca de dados como XML e JSON.
 
-
 9. Uma URL é o localizador exato de um recurso na web, composto por protocolo, domínio, porta, caminho e parâmetros.
-
 
 10. REST é o estilo arquitetural moderno mais usado em web services, preferindo conexões HTTP e payloads leves em JSON.
