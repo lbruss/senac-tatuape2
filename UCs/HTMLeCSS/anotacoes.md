@@ -302,67 +302,25 @@ Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seg
 
 | Era | Nome Principal | Foco da Interação | Tecnologias Chave |
 | --- | --- | --- | --- |
-| **Web 1.0**<br> | Web da Informação
-
- | Leitura (Estática)
-
- | HTML Simples, Portais estáticos
-
- |
-| **Web 2.0**<br> | Web Colaborativa
-
- | Leitura e Escrita (Interativa)
-
- | AJAX, Redes Sociais, Blogs, SaaS
-
- |
-| **Web 3.0**<br> | Web Semântica / Inteligente
-
- | Dados interligados e IA
-
- | Machine Learning, Ontologias, Blockchain, IoT
-
- |
+| **Web 1.0**<br> | Web da Informação | Leitura (Estática) | HTML Simples, Portais estáticos |
+| **Web 2.0**<br> | Web Colaborativa | Leitura e Escrita (Interativa) | AJAX, Redes Sociais, Blogs, SaaS |
+| **Web 3.0**<br> | Web Semântica / Inteligente | Dados interligados e IA | Machine Learning, Ontologias, Blockchain, IoT |
 
 ### Tabela 2: Formatos de Troca de Dados (XML vs. JSON)
 
-| Característica | XML
-
- | JSON
-
- |
+| Característica | XML| JSON |
 | --- | --- | --- |
-| **Sintaxe** | Baseada em tags (`<tag>`)
-
- | Baseada em pares `chave: valor`<br> |
-| **Peso / Tamanho** | Mais pesado / verboso
-
- | Mais leve e compacto
-
- |
-| **Leitura por JS** | Requer parse de documento DOM | Nativo do JavaScript (`JSON.parse()`)
-
- |
-| **Uso Principal** | Sistemas legados, SOAP, NFe
-
- | APIs RESTful modernas, aplicações Web/Mobile
-
- |
+| **Sintaxe** | Baseada em tags (`<tag>`) | Baseada em pares `chave: valor`<br> |
+| **Peso / Tamanho** | Mais pesado / verboso | Mais leve e compacto |
+| **Leitura por JS** | Requer parse de documento DOM | Nativo do JavaScript (`JSON.parse()`) |
+| **Uso Principal** | Sistemas legados, SOAP, NFe | APIs RESTful modernas, aplicações Web/Mobile |
 
 ### Tabela 3: SOAP vs. REST
 
 | Padrão | Tipo | Formato de Dados | Complexidade |
 | --- | --- | --- | --- |
-| **SOAP**<br> | Protocolo rígido
-
- | Apenas XML
-
- | Alta (Contratos estritos) |
-| **REST**<br> | Estilo Arquitetural
-
- | JSON (preferencial), XML, HTML, Texto
-
- | Baixa / Flexível |
+| **SOAP**<br> | Protocolo rígido | Apenas XML | Alta (Contratos estritos) |
+| **REST**<br> | Estilo Arquitetural | JSON (preferencial), XML, HTML, Texto | Baixa / Flexível |
 
 ---
 
