@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei meus primeiros passos práticos na criação de páginas web e entendi a estrutura fundamental do **HTML** (*HyperText Markup Language*). Compreendi que o HTML é uma **linguagem de marcação** responsável pela estrutura e organização dos conteúdos na Web, servindo como o esqueleto de qualquer site.
 
@@ -36,9 +36,9 @@ As **tags** (etiquetas) são os comandos envolvidos por sinais de menor `<` e ma
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que são Tags e Atributos?
+**O que são Tags e Atributos?**
 
 * **Conceito simples**: As tags funcionam como etiquetas demarcadoras. Elas avisam o navegador onde um elemento começa e onde ele termina.
 * **Definição técnica**: Um elemento HTML é composto por uma **tag de abertura** (`<tag>`), o conteúdo interno, e uma **tag de fechamento** (`</tag>`). Alguns elementos possuem **atributos**, que são parâmetros adicionais colocados na tag de abertura no formato `nome="valor"`, fornecendo instruções extras ao navegador.
@@ -55,9 +55,9 @@ As **tags** (etiquetas) são os comandos envolvidos por sinais de menor `<` e ma
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Declaração e Estrutura Principal
+## Declaração e Estrutura Principal
 
 * `<!DOCTYPE html>`: Avisa ao navegador que o documento utiliza o padrão **HTML5** moderno.
 * `<html>`: Tag raiz que envolve todo o documento HTML.
@@ -67,14 +67,14 @@ As **tags** (etiquetas) são os comandos envolvidos por sinais de menor `<` e ma
 
 
 
-### 3.2. Hierarquia de Títulos (`<h1>` a `<h6>`)
+## Hierarquia de Títulos (`<h1>` a `<h6>`)
 
 Os cabeçalhos (*headings*) organizam a importância da informação na página:
 
 * `<h1>`: Título principal (o mais importante). Deve existir idealmente apenas um `<h1>` por página para boa prática de SEO.
 * `<h2>` a `<h6>`: Subtítulos e seções secundárias em ordem decrescente de importância.
 
-### 3.3. Elementos Semânticos de Bloco
+## Elementos Semânticos de Bloco
 
 A semântica ajuda os navegadores e motores de busca (como o Google) a entenderem o significado das partes da página:
 
@@ -84,7 +84,7 @@ A semântica ajuda os navegadores e motores de busca (como o Google) a entendere
 * `<nav>`: Agrupa links de navegação do site.
 * `<footer>`: Rodapé da página ou de uma seção.
 
-### 3.4. Formatação de Texto, Listas e Mídia
+## Formatação de Texto, Listas e Mídia
 
 * `<p>`: Define um parágrafo de texto.
 * `<b>` e `<i>`: Aplicam negrito (*bold*) e itálico (*italic*) visualmente.
@@ -98,11 +98,11 @@ A semântica ajuda os navegadores e motores de busca (como o Google) a entendere
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida e padronizada.
 
-### Arquivo 1: `primeiroarquivo.html`
+**Arquivo 1: `primeiroarquivo.html`**
 
 ```html
 <!DOCTYPE html>
@@ -137,7 +137,7 @@ Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida 
 
 ---
 
-### Arquivo 2: `segundoarquivo.html`
+**Arquivo 2: `segundoarquivo.html`**
 
 ```html
 <!DOCTYPE html>
@@ -176,7 +176,7 @@ Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida 
 
 ---
 
-### Arquivo 3: `terceiroarquivo.html`
+**Arquivo 3: `terceiroarquivo.html`**
 
 ```html
 <!DOCTYPE html>
@@ -221,7 +221,7 @@ Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida 
 
 ---
 
-### Arquivo 4: `quartoarquivo.html`
+**Arquivo 4: `quartoarquivo.html`**
 
 ```html
 <!DOCTYPE html>
@@ -272,16 +272,16 @@ Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida 
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise do `primeiroarquivo.html`
+**Análise do `primeiroarquivo.html`**
 
 * `<!DOCTYPE html>`: Define a versão moderna do HTML5.
 * `<title>`: Fica dentro do `<head>`. Não é exibido no corpo da página, mas nomeia a aba da janela do navegador.
 * `<h1>` até `<h3>`: Demonstram a hierarquia lógica dos títulos. O `<h1>` é o título geral da página, `<h2>` são os tópicos principais e `<h3>` são os subtopicos do `<h2>`.
 * `<footer>`: Fica obrigatoriamente dentro da tag `<body>` para fechar a estrutura visível da página.
 
-### Análise do `terceiroarquivo.html`
+**Análise do `terceiroarquivo.html`**
 
 * `<img src="bolinFUBA.jpg" alt="..." width="100" height="100">`:
 * `src`: Aponta o nome do arquivo da imagem local na mesma pasta.
@@ -291,7 +291,7 @@ Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida 
 
 * `<ul>` vs `<ol>`: A lista de ingredientes usa `<ul>` porque a ordem não altera o resultado. A lista de modo de preparo usa `<ol>` porque os passos precisam seguir uma sequência cronológica exata.
 
-### Análise do `quartoarquivo.html`
+**Análise do `quartoarquivo.html`**
 
 * `<aside>` + `<nav>`: Estrutura o menu lateral de navegação semântica.
 * `<a href="#introducao">`: Link **interno**. O `#` indica que o link deve rolar a tela até o elemento que possui `id="introducao"`.
@@ -299,7 +299,7 @@ Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida 
 
 ---
 
-## 6. Passo a Passo: Configuração do Ambiente no VS Code
+**Passo a Passo: Configuração do Ambiente no VS Code**
 
 Para organizar os projetos no computador, segui as etapas abaixo:
 
@@ -326,9 +326,9 @@ Para organizar os projetos no computador, segui as etapas abaixo:
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Tags de Organização Semântica
+**Tabela 1: Tags de Organização Semântica**
 
 | Tag | Significado | Quando Usar? |
 | --- | --- | --- |
@@ -338,14 +338,14 @@ Para organizar os projetos no computador, segui as etapas abaixo:
 | `<nav>` | Navegação | Para blocos de links principais de navegação do site. |
 | `<footer>` | Rodapé | Na parte inferior do site para contatos, cópias e direitos autorais. |
 
-### Tabela 2: Listas em HTML (`<ul>` vs `<ol>`)
+**Tabela 2: Listas em HTML (`<ul>` vs `<ol>`)**
 
 | Tipo de Lista | Tag Principal | Item da Lista | Marcador Padrão | Caso de Uso Típico |
 | --- | --- | --- | --- | --- |
 | **Não Ordenada** | `<ul>` | `<li>` | Bolinhas (*bullets*) | Ingredientes, categorias, características. |
 | **Ordenada** | `<ol>` | `<li>` | Números (`1, 2, 3...`) | Passo a passo, receitas, tutorias, rankings. |
 
-### Tabela 3: Formatação Estética vs. Semântica
+**Tabela 3: Formatação Estética vs. Semântica**
 
 | Tag Estética (Antiga) | Tag Semântica (Moderna) | Resultado Visual | Diferença Técnica |
 | --- | --- | --- | --- |
@@ -354,14 +354,14 @@ Para organizar os projetos no computador, segui as etapas abaixo:
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Escrever tags e atributos grudados**:
 * ❌ *Incorreto*: `<imgsrc="bolo.jpg">` ou `<ahref="#menu">`
 * ✔️ *Correto*: `<img src="bolo.jpg">` e `<a href="#menu">` (deve haver espaço entre a tag e o atributo).
 
 
-2. **Colocar o `<footer>` fora do `<body>**`:
+2. **Colocar o `<footer>` fora do `<body>**`**:
 * ❌ *Incorreto*: Posicionar a tag `<footer>` depois do fechamento de `</body>`.
 * ✔️ *Correto*: Todo elemento visível ao usuário deve ficar dentro de `<body>...</body>`.
 
@@ -375,20 +375,11 @@ Para organizar os projetos no computador, segui as etapas abaixo:
 * Sem o atributo `alt`, leitores de tela para pessoas com deficiência visual não conseguirão descrever o que a imagem representa.
 
 
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Atributo Obsoleto (`<a name="...">`)**: Nos rascunhos originais da aula, o professor utilizou `<a name="ingredientes">` para criar pontos de âncora. O atributo `name` em tags de âncora é considerado **obsoleto no HTML5**. A boa prática moderna é colocar o atributo `id` diretamente no título ou elemento de destino (ex: `<h3 id="ingredientes">`).
-* **Tags Grudadas**: Corrigi todas as ocorrências onde os atributos estavam colados nas tags (`<!DOCTYPEhtml>`, `<imgsrc=`, `<aname=`, `<ahref=`).
-* **Posicionamento do `<title>**`: O texto do título estava solto dentro do `<head>` no primeiro rascunho. O texto deve estar envolto na tag `<title>Minha Primeira Página</title>`.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Caminhos Relativos vs. Caminhos Absolutos
+**Caminhos Relativos vs. Caminhos Absolutos**
 
 Ao inserir mídias ou criar links, compreendi como funcionam os caminhos:
 
@@ -402,13 +393,13 @@ Ao inserir mídias ou criar links, compreendi como funcionam os caminhos:
 
 
 
-### Acessibilidade (WCAG)
+**Acessibilidade (WCAG)**
 
 Escrever HTML semântico com tags adequadas (`<main>`, `<nav>`, `<footer>`) e preencher o atributo `alt` em imagens não serve apenas para organização, mas permite que softwares leitores de tela naveguem pela página com facilidade.
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Estrutura Base**: `<!DOCTYPE html>` → `<html>` → `<head>` (configurações) + `<body>` (conteúdo).
 
@@ -423,14 +414,10 @@ Escrever HTML semântico com tags adequadas (`<main>`, `<nav>`, `<footer>`) e pr
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O HTML é a linguagem de marcação que define a estrutura bruta e o conteúdo de uma página web.
-
-
 2. A analogia do corpo humano divide a página em `<html>` (corpo), `<head>` (cabeça), `<body>` (tronco visível) e `<footer>` (pé).
-
-
 3. O comando `<!DOCTYPE html>` indica ao navegador que a página utiliza o padrão moderno HTML5.
 4. As tags funcionam como etiquetas demarcadoras que envolvem o conteúdo com abertura `<tag>` e fechamento `</tag>`.
 5. A hierarquia de títulos vai de `<h1>` (mais importante) até `<h6>` (subtítulo de menor peso).
