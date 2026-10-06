@@ -1,410 +1,441 @@
-# Fundamentos da Web, História da Internet e Serviços Web
+# Introdução ao HTML: Estrutura Básica, Elementos Semânticos, Listas, Imagens e Navegação
 
 ---
 
-**Visão Geral**
+## 1. Visão Geral
 
-Nesta aula, entendi como a infraestrutura da Internet surgiu e evoluiu até se transformar no ecossistema atual de desenvolvimento web. Compreendi a diferença crucial entre a **Internet** (a rede física global de computadores interconectados) e a **World Wide Web (WWW)** (o sistema de documentos e sistemas interligados que rodam sobre essa rede).
+Nesta aula, dei meus primeiros passos práticos na criação de páginas web e entendi a estrutura fundamental do **HTML** (*HyperText Markup Language*). Compreendi que o HTML é uma **linguagem de marcação** responsável pela estrutura e organização dos conteúdos na Web, servindo como o esqueleto de qualquer site.
 
-Esse conhecimento é a base necessária para o meu desenvolvimento em **HTML, CSS e JavaScript**, pois me ajuda a entender onde essas tecnologias são executadas, como os navegadores interpretam os dados e como as aplicações web modernas se comunicam com servidores através de APIs e serviços web.
+Para fixar a estrutura, entendi duas analogias muito úteis:
 
----
-
-**Entendendo o Conceito**
-
-## A Grande Diferença: Internet vs. Web
-
-* **Internet**: É a infraestrutura física e de rede global.
+1. **Analogia do Corpo Humano**:
+* `<html>`: O corpo inteiro (o organismo da página).
+* `<head>`: A **cabeça**. Contém as configurações, metadados, título da guia e instruções que o navegador lê, mas que não aparecem diretamente na área visível do site.
+* `<body>`: O **corpo** visível. Onde ficam todos os textos, imagens, títulos, listas, botões e elementos com os quais o usuário interage.
 
 
-* *Analogia*: Pense na Internet como uma grande rede de estradas e rodovias espalhadas pelo mundo.
+* `<footer>`: O **pé** (rodapé). Fica na parte inferior do corpo e guarda informações de direitos autorais, contatos ou créditos.
+
+
+2. **Analogia da Casa** (conforme vimos na introdução):
+
+
+* **HTML** é a **estrutura bruta** da casa (paredes, portas, janelas e teto).
+
+
+* **CSS** é a **decoração** (cores de tinta, pisos, móveis e acabamento).
+
+
+* **JavaScript** é a **funcionalidade** (fiação elétrica, lâmpadas, portão automático e sensores).
 
 
 
 
-* **Web (WWW)**: É um serviço que utiliza essa infraestrutura para transportar e visualizar dados em forma de páginas e hipertextos.
 
-
-* *Analogia*: A Web são os caminhões e carros de entrega que trafegam por essas estradas levando encomendas (documentos, vídeos, sites) de um ponto a outro.
-
-
-
-
-
-**O HTML NÃO é uma Linguagem de Programação**
-
-Um ponto fundamental que fixa a base do desenvolvimento front-end:
-
-* **HTML (Hypertext Markup Language)** é uma **linguagem de marcação**. Ela serve para estruturar e dar significado ao conteúdo de uma página (títulos, parágrafos, imagens, formulários).
-
-
-* Ela não possui lógica de programação, como estruturas condicionais (`if/else`), laços de repetição (`loops`) ou cálculos complexos. A lógica de programação na Web fica a cargo do **JavaScript**.
+As **tags** (etiquetas) são os comandos envolvidos por sinais de menor `<` e maior `>`. Elas dizem ao navegador como apresentar e interpretar cada pedaço do documento.
 
 ---
 
-## Conceitos Fundamentais
-
-**História da Internet e da Web**
-
-* **Guerra Fria e ARPANET**: A Internet nasceu em meio ao contexto de rivalidade da Guerra Fria entre EUA e URSS. Após o lançamento do satélite soviético *Sputnik-1* (1957), o governo americano criou a **ARPA/DARPA**. Em 29 de outubro de 1969, nasceu a **ARPANET**, a primeira rede de computadores em pacotes, interligando inicialmente 4 nós (UCLA, Stanford, UCSB e Utah).
-
-
-* **Do NCP ao TCP/IP**:
-* O primeiro protocolo usado foi o **NCP** (*Network Control Protocol*), mas ele travava a comunicação quando uma transferência estava em andamento, permitindo pouca simultaneidade.
-
-
-* Em 1972, **Robert (Bob) Kahn** desenvolveu o protocolo **TCP** (fatiamento e controle de pacotes).
-
-
-* **Vinton (Vint) Cerf** desenvolveu o protocolo **IP** (endereçamento dos pontos na rede). A união **TCP/IP** tornou-se o padrão universal de comunicação até hoje.
-
-
-
-
-* **A Criação da WWW e das Tecnologias Web**:
-* Em 1989/1990, no CERN, **Tim Berners-Lee** (com ajuda de Robert Cailliau) criou a **World Wide Web (WWW)**.
-
-
-* Tim Berners-Lee é responsável por uma tríade fundamental para a Web:
-
-
-1. **HTTP**: Protocolo de transferência de hipertexto.
-
-
-2. **HTML**: Linguagem de marcação de páginas.
-
-
-3. **Navegador/Editor (WorldWideWeb)**: O primeiro software para visualizar páginas web.
-
-
-
-
-* Ele também fundou o **W3C** (*World Wide Web Consortium*), órgão que padroniza as normas da Web.
-
-
-
-
-* **Chegada da Internet no Brasil**:
-* As primeiras conexões acadêmicas ocorreram em **1989** entre o LNCC (Laboratório Nacional de Computação Científica) e a Universidade de Maryland (EUA). O registro de domínios `.br` foi estruturado sob responsabilidade da FAPESP.
-
-
-
-
-
----
-
-**As Eras da Web (1.0, 2.0 e 3.0)**
-
-A evolução da Web não é apenas tecnológica, mas principalmente comportamental de como os usuários interagem com a informação:
-
-1. **Web 1.0 (Web da Informação / Estática)**:
-
-
-* *Período*: ~1990 a 2000.
-
-
-* *Características*: Páginas estáticas em HTML simples, comunicação unidirecional (apenas leitura). O usuário consumia o conteúdo sem produzir interações complexas.
-
-
-
-
-2. **Web 2.0 (Web Colaborativa / Social)**:
-
-
-* *Período*: ~2000 a 2010.
-
-
-* *Características*: Foco na interatividade, leitura e escrita, redes sociais, blogs, fóruns e conteúdo gerado pelo próprio usuário (UGC). Termo popularizado por Tom O'Reilly.
-
-
-
-
-3. **Web 3.0 (Web Semântica e Inteligente)**:
-
-
-* *Período*: ~2010 até o presente.
-
-
-* *Características*: Dados conectados e interpretáveis por máquinas (Web Semântica), uso de Inteligência Artificial, Machine Learning, personalização de experiências, aplicações descentralizadas (Blockchain) e IoT.
-
-
-
-
-
----
-
-## Serviços Web e Arquitetura de Comunicação
-
-Os **Web Services** são soluções que permitem a interoperabilidade: a comunicação entre sistemas diferentes construídos em linguagens distintas.
-
-* **API (Application Programming Interface)**: Interface que funciona como intermediária, permitindo que dois softwares troquem dados de forma segura e padronizada.
-
-
-* **HTTP (Hypertext Transfer Protocol)**: Protocolo da camada de aplicação do modelo cliente-servidor usado para transferência de dados na Web.
-
-
-* **URI vs. URL**:
-* **URI (Uniform Resource Identifier)**: Identificador genérico que nomeia ou localiza um recurso na rede.
-
-
-* **URL (Uniform Resource Locator)**: Um tipo específico de URI que informa o endereço exato e o protocolo de acesso a um recurso (ex: `[https://site.com/pagina.html](https://site.com/pagina.html)`).
-
-
-
-
-* **Formatos de Troca de Dados**:
-* **XML (Extensible Markup Language)**: Linguagem de marcação baseada em tags personalizadas, estruturada e autocontida.
-
-
-* **JSON (JavaScript Object Notation)**: Formato leve de representação de dados em pares `chave: valor`, nativo da estrutura de objetos do JavaScript e amplamente usado em APIs modernas.
-
-
-
-
-* **Estilos e Protocolos de Integração**:
-* **RPC (Remote Procedure Call)**: Permite que um programa execute um procedimento/função em um computador remoto.
-
-
-* **SOAP (Simple Object Access Protocol)**: Protocolo rígido de mensagens baseado em XML e HTTP.
-
-
-* **REST (Representational State Transfer)**: Estilo arquitetural flexível que utiliza os métodos nativos do HTTP (GET, POST, PUT, DELETE) para manipulação de recursos, sendo muito utilizado junto com JSON.
-
-
-
-
-
----
-
-## Classificação dos Websites
-
-Os sites são categorizados de acordo com seu objetivo e estrutura principal:
-
-* **Portais Web**: Agrupam conteúdos heterogêneos de diversas fontes em um só lugar (ex: G1, UOL).
-
-
-* **Buscadores**: Ferramentas focadas na indexação e pesquisa de conteúdo por palavras-chave (ex: Google, Bing).
-
-
-* **Sites Corporativos**: Paginas institucionais que mostram a história, serviços e contatos de uma empresa.
-
-
-* **Sites Educativos**: Plataformas focadas no ensino e EAD (ex: portais escolares, plataformas de cursos).
-
-
-* **Redes Sociais**: Focados na conexão interpessoal e compartilhamento de mídia.
-
-
-* **Blogs**: Publicações cronológicas de artigos e opiniões.
-
-
-* **Sites da Imprensa**: Versões digitais de jornais e revistas com atualizações em tempo real.
-
-
-* **Sites Bancários**: Plataformas de serviços financeiros com camadas reforçadas de segurança.
-
-
-* **E-commerce**: Lojas virtuais voltadas para a compra e venda de produtos/serviços.
-
-
-* **Aplicativos Web (Web Apps / SaaS)**: Softwares executados diretamente no navegador sem necessidade de instalação local (ex: Google Docs, Canva).
-
-
-* **Sites Multimídia**: Focados no consumo de áudio e vídeo em fluxo contínuo ou sob demanda (ex: YouTube, Spotify).
-
-
-
----
-
-### Código / Exemplos Práticos
-
-**Comparativo de Estruturas: XML vs. JSON**
-
-Para entender como dados são transmitidos entre cliente e servidor, vejamos como a mesma informação de um aluno é representada nos dois formatos principais:
-
-**Exemplo em XML**
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<aluno>
-    <id>101</id>
-    <nome>Bruss Loza</nome>
-    <curso>Técnico em Informática</curso>
-    <ativo>true</ativo>
-</aluno>
-
-```
-
-**Exemplo em JSON**
-
-```json
-{
-  "id": 101,
-  "nome": "Bruss Loza",
-  "curso": "Técnico em Informática",
-  "ativo": true
-}
+## 2. Entendendo o Conceito
+
+### O que são Tags e Atributos?
+
+* **Conceito simples**: As tags funcionam como etiquetas demarcadoras. Elas avisam o navegador onde um elemento começa e onde ele termina.
+* **Definição técnica**: Um elemento HTML é composto por uma **tag de abertura** (`<tag>`), o conteúdo interno, e uma **tag de fechamento** (`</tag>`). Alguns elementos possuem **atributos**, que são parâmetros adicionais colocados na tag de abertura no formato `nome="valor"`, fornecendo instruções extras ao navegador.
+* **Analogia**: Pense em etiquetar caixas em uma mudança. Quando coloco uma etiqueta dizendo `"Livros de TI"`, a pessoa que está carregando sabe exatamente o tipo de conteúdo dentro daquela caixa e como deve manuseá-la.
+
+```html
+<p class="introducao">Este é o conteúdo do parágrafo.</p>
+│       │                 │                          │
+│       │                 └─ Conteúdo visível        └─ Tag de fechamento
+│       └─ Atributo e valor
+└─ Tag de abertura
 
 ```
 
 ---
 
-**Desmontando o Código e Estruturas**
+## 3. Conceitos Fundamentais
 
-**Desmontando a Estrutura de uma URL**
+### 3.1. Declaração e Estrutura Principal
 
-Uma URL completa pode ser fatiada nas seguintes partes:
-
-`[https://www.exemplo.com.br:443/cursos/aula?id=15#conceito](https://www.exemplo.com.br:443/cursos/aula?id=15#conceito)`
-
-1. `https://` → **Protocolo**: Especifica a regra de comunicação segura (*HTTP + SSL/TLS*).
-2. `[www.exemplo.com](https://www.exemplo.com).br` → **Domínio / Host**: O nome amigável mapeado para o endereço IP do servidor.
-3. `:443` → **Porta**: A porta de comunicação do servidor (443 é a padrão do HTTPS; 80 é a do HTTP).
-4. `/cursos/aula` → **Caminho (Path)**: Indica o recurso ou pasta dentro do servidor.
-5. `?id=15` → **Query String**: Parâmetros de busca passados no formato `chave=valor`.
-6. `#conceito` → **Âncora (Fragment)**: Aponta para uma seção específica dentro da própria página.
-
-**Análise Comparativa XML vs. JSON**
-
-* No **XML**, cada dado precisa de uma tag de abertura (`<nome>`) e uma de fechamento (`</nome>`), gerando um arquivo mais pesado e verboso.
+* `<!DOCTYPE html>`: Avisa ao navegador que o documento utiliza o padrão **HTML5** moderno.
+* `<html>`: Tag raiz que envolve todo o documento HTML.
+* `<head>`: Agrupa informações técnicas (metadados, título da guia e links para arquivos de estilo).
+* `<title>`: Define o título que aparece na aba/guia do navegador.
+* `<body>`: Contém todo o conteúdo visível para o usuário.
 
 
-* No **JSON**, a estrutura utiliza chaves `{}` e o padrão `"chave": valor`, resultando em uma sintaxe mais limpa, mais rápida para transmitir na rede e fácil de ler via JavaScript.
+
+### 3.2. Hierarquia de Títulos (`<h1>` a `<h6>`)
+
+Os cabeçalhos (*headings*) organizam a importância da informação na página:
+
+* `<h1>`: Título principal (o mais importante). Deve existir idealmente apenas um `<h1>` por página para boa prática de SEO.
+* `<h2>` a `<h6>`: Subtítulos e seções secundárias em ordem decrescente de importância.
+
+### 3.3. Elementos Semânticos de Bloco
+
+A semântica ajuda os navegadores e motores de busca (como o Google) a entenderem o significado das partes da página:
+
+* `<main>`: Delimita o conteúdo principal e único da página.
+* `<section>`: Agrupa conteúdos relacionados em blocos temáticos.
+* `<aside>`: Conteúdo de suporte ou lateral (menus laterais, avisos, links adicionais).
+* `<nav>`: Agrupa links de navegação do site.
+* `<footer>`: Rodapé da página ou de uma seção.
+
+### 3.4. Formatação de Texto, Listas e Mídia
+
+* `<p>`: Define um parágrafo de texto.
+* `<b>` e `<i>`: Aplicam negrito (*bold*) e itálico (*italic*) visualmente.
+* `<img>`: Insere uma imagem na página (tag auto-fechável).
+* Atributo `src`: Indica o caminho do arquivo de imagem.
+* Atributo `alt`: Texto alternativo lido por leitores de tela para acessibilidade e exibido caso a imagem falhe.
+
+
+* `<ul>` e `<ol>`: Criam listas **não ordenadas** (com marcadores) e **ordenadas** (numeradas), respectivamente. Cada item é inserido com a tag `<li>` (*list item*).
+* `<a>`: Tag de âncora usada para criar **links** (para outras páginas ou para seções da própria página usando o atributo `href`).
+
+---
+
+## 4. Código / Exemplos Práticos
+
+Abaixo estão os quatro arquivos desenvolvidos na aula, com a sintaxe corrigida e padronizada.
+
+### Arquivo 1: `primeiroarquivo.html`
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Primeira Página</title>
+</head>
+<body>
+    <h1>Meu Site de Exemplo</h1>
+    <p>Este é um parágrafo de introdução, explicando o propósito da página.</p>
+
+    <h2>Seção 1: Sobre mim</h2>
+    <p>Aqui você pode escrever informações pessoais, como hobbies e interesses.</p>
+
+    <h3>Detalhes adicionais</h3>
+    <p>Este parágrafo traz informações mais específicas, como experiências ou projetos.</p>
+
+    <h2>Seção 2: Contato</h2>
+    <p>Você pode incluir um e-mail ou telefone para contato.</p>
+
+    <h2>Seção 3: Conclusão</h2>
+    <p>Um resumo final ou mensagem de despedida para os visitantes.</p>
+
+    <footer>
+        <p>Conteúdo criado por mim!</p>
+    </footer>
+</body>
+</html>
+
+```
+
+---
+
+### Arquivo 2: `segundoarquivo.html`
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 2 - História da Tecnologia</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>Introdução</h1>
+            <p>A tecnologia é o uso do conhecimento para inventar novos <i>dispositivos</i> ou <i>ferramentas</i>. Ao longo da história, a tecnologia vem facilitando a nossa vida.</p>
+        </section>
+
+        <section>
+            <h1>Tecnologia na Antiguidade</h1>
+            <p>Ao aprender a dominar o fogo, os seres <b>humanos primitivos</b> se diferenciaram dos outros animais. Há cerca de 2 milhões de anos, começaram a usar pedras como armas e ferramentas, dando início ao período conhecido como Idade da Pedra. Nessa época, também aprenderam a fazer cerâmica usando barro.</p>
+        </section>
+
+        <section>
+            <h1>A tecnologia na Idade Média</h1>
+            <p>O período da história conhecido como <b>Idade Média</b> começou pouco antes do século VI d.C. e durou até perto do século XVI. Ao longo dessa época, as inovações surgiram em diferentes regiões - como a China, o Império Bizantino, a Pérsia, a Índia e os países muçulmanos.</p>
+        </section>
+
+        <section>
+            <h1>Revolução Industrial</h1>
+            <h2>Ferro, carvão e vapor</h2>
+            <p>No início do <b>século XVIII</b>, dois inventores ingleses criaram as condições para o nascimento da Revolução Industrial, um período em que a produção das manufaturas teve um grande crescimento. Abraham Darby descobriu o coque, um tipo de carvão que produzia um ferro de melhor qualidade. Thomas Newcomen inventou uma bomba para drenar água das minas de carvão que era acionada por um motor a vapor.</p>
+        </section>
+    </main>
+</body>
+</html>
+
+```
+
+---
+
+### Arquivo 3: `terceiroarquivo.html`
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Receita de Bolo de Fubá</title>
+</head>
+<body>
+    <h1>Receita</h1>
+    <h2>Bolo de Fubá</h2>
+
+    <p>
+        <img src="bolinFUBA.jpg" alt="Fatia de bolo de fubá fofinho" width="100" height="100">
+    </p>
+
+    <h3 id="ingredientes">Ingredientes</h3>
+    <ul>
+        <li>3 ovos inteiros</li>
+        <li>2 xícaras (chá) de açúcar</li>
+        <li>2 xícaras (chá) de fubá</li>
+        <li>3 colheres (sopa) de farinha de trigo</li>
+        <li>1/2 copo (americano) de óleo</li>
+        <li>1 copo (americano) de leite</li>
+        <li>1 colher (sopa) de fermento em pó</li>
+    </ul>
+
+    <h3 id="mododepreparo">Modo de preparo</h3>
+    <ol>
+        <li>Bata todos os ingredientes no liquidificador até a massa ficar homogênea.</li>
+        <li>Despeje em uma forma untada e polvilhada.</li>
+        <li>Leve ao forno médio (180°C) por 40 minutos.</li>
+    </ol>
+
+    <footer>
+        <p>Contato: (11) 99999-8888</p>
+    </footer>
+</body>
+</html>
+
+```
+
+---
+
+### Arquivo 4: `quartoarquivo.html`
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Navegação e História da Tecnologia</title>
+</head>
+<body>
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#antiguidade">Tecnologia na Antiguidade</a></li>
+                <li><a href="#industrial">Revolução Industrial</a></li>
+                <li>
+                    <a href="terceiroarquivo.html">Receita de Bolo de Fubá</a>
+                    <ul>
+                        <li><a href="terceiroarquivo.html#ingredientes">Ingredientes</a></li>
+                        <li><a href="terceiroarquivo.html#mododepreparo">Modo de Preparo</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <section>
+            <h1 id="introducao">Introdução</h1>
+            <p>A tecnologia é o uso do conhecimento para inventar novos <i>dispositivos</i> ou <i>ferramentas</i>. Ao longo da história, a tecnologia vem facilitando a nossa vida.</p>
+        </section>
+
+        <section>
+            <h1 id="antiguidade">Tecnologia na Antiguidade</h1>
+            <p>Ao aprender a dominar o fogo, os seres <b>humanos primitivos</b> se diferenciaram dos outros animais. Há cerca de 2 milhões de anos, começaram a usar pedras como armas e ferramentas, dando início ao período conhecido como Idade da Pedra. Nessa época, também aprenderam a fazer cerâmica usando barro.</p>
+        </section>
+
+        <section>
+            <h1 id="industrial">Revolução Industrial</h1>
+            <h2>Ferro, carvão e vapor</h2>
+            <p>No início do <b>século XVIII</b>, dois inventores ingleses criaram as condições para o nascimento da Revolução Industrial, um período em que a produção das manufaturas teve um grande crescimento. Abraham Darby descobriu o coque, um tipo de carvão que produzia um ferro de melhor qualidade. Thomas Newcomen inventou uma bomba para drenar água das minas de carvão que era acionada por um motor a vapor.</p>
+        </section>
+    </main>
+</body>
+</html>
+
+```
+
+---
+
+## 5. Desmontando o Código
+
+### Análise do `primeiroarquivo.html`
+
+* `<!DOCTYPE html>`: Define a versão moderna do HTML5.
+* `<title>`: Fica dentro do `<head>`. Não é exibido no corpo da página, mas nomeia a aba da janela do navegador.
+* `<h1>` até `<h3>`: Demonstram a hierarquia lógica dos títulos. O `<h1>` é o título geral da página, `<h2>` são os tópicos principais e `<h3>` são os subtopicos do `<h2>`.
+* `<footer>`: Fica obrigatoriamente dentro da tag `<body>` para fechar a estrutura visível da página.
+
+### Análise do `terceiroarquivo.html`
+
+* `<img src="bolinFUBA.jpg" alt="..." width="100" height="100">`:
+* `src`: Aponta o nome do arquivo da imagem local na mesma pasta.
+* `alt`: Descreve a imagem para leitores de tela e acessibilidade.
+* `width` e `height`: Definem a largura e altura da imagem em pixels.
+
+
+* `<ul>` vs `<ol>`: A lista de ingredientes usa `<ul>` porque a ordem não altera o resultado. A lista de modo de preparo usa `<ol>` porque os passos precisam seguir uma sequência cronológica exata.
+
+### Análise do `quartoarquivo.html`
+
+* `<aside>` + `<nav>`: Estrutura o menu lateral de navegação semântica.
+* `<a href="#introducao">`: Link **interno**. O `#` indica que o link deve rolar a tela até o elemento que possui `id="introducao"`.
+* `<a href="terceiroarquivo.html#ingredientes">`: Link **misto**. Abre o arquivo `terceiroarquivo.html` e pula direto para o ponto com `id="ingredientes"`.
+
+---
+
+## 6. Passo a Passo: Configuração do Ambiente no VS Code
+
+Para organizar os projetos no computador, segui as etapas abaixo:
+
+1. **Criar a pasta do projeto**:
+* Criei uma pasta chamada `projetos-html` em um local fácil de encontrar (como a Área de Trabalho ou Documentos).
+
+
+2. **Abrir a pasta no Visual Studio Code**:
+* Abri o VS Code, fui no menu superior em **File > Open Folder** (Arquivo > Abrir Pasta) e selecionei a pasta `projetos-html`.
+
+
+3. **Criar os arquivos HTML**:
+* No painel esquerdo (*Explorer*), cliquei no ícone de **New File** (Novo Arquivo) e criei sequencialmente: `primeiroarquivo.html`, `segundoarquivo.html`, `terceiroarquivo.html` e `quartoarquivo.html`.
+
+
+4. **Adicionar a imagem da receita**:
+* Baixei uma imagem de bolo de fubá, nomeei para `bolinFUBA.jpg` e salvei dentro da mesma pasta `projetos-html`.
+
+
+5. **Executar no Navegador**:
+* Dê dois cliques no arquivo `.html` dentro da pasta do computador ou utilize a extensão *Live Server* do VS Code para visualizar a página rodando no navegador.
 
 
 
 ---
 
-**Passo a Passo: O Ciclo de uma Requisição Web (Cliente-Servidor)**
+## 7. Tabelas Comparativas
 
-Quando um usuário digita uma URL no navegador e pressiona `Enter`, ocorre a seguinte sequência de eventos:
+### Tabela 1: Tags de Organização Semântica
 
-1. **Resolução de Nome (DNS)**: O navegador solicita ao servidor DNS que converta o endereço de texto (ex: `google.com`) no endereço IP numérico do servidor de hospedagem.
-2. **Estabelecimento de Conexão (TCP/IP)**: É aberta uma conexão de rede segura entre o computador do cliente e o servidor de destino através do protocolo TCP/IP.
-
-
-3. **Requisição HTTP (Request)**: O navegador envia uma mensagem HTTP (método `GET`) solicitando o arquivo da página.
-
-
-4. **Processamento no Servidor**: O servidor processa a solicitação, busca os arquivos no banco de dados ou no disco local e prepara a resposta.
-5. **Resposta HTTP (Response)**: O servidor envia uma resposta com um código de status (ex: `200 OK`) acompanhada dos dados em HTML, CSS, JavaScript ou JSON.
-
-
-6. **Renderização no Navegador**: O navegador lê os arquivos recebidos, interpreta a marcação HTML, aplica os estilos CSS, executa os scripts JavaScript e desenha a interface na tela para o usuário.
-
-
-
----
-
-## Tabelas Comparativas
-
-**Tabela 1: Evolução da Web**
-
-| Era | Nome Principal | Foco da Interação | Tecnologias Chave |
-| --- | --- | --- | --- |
-| **Web 1.0**<br> | Web da Informação | Leitura (Estática) | HTML Simples, Portais estáticos |
-| **Web 2.0**<br> | Web Colaborativa | Leitura e Escrita (Interativa) | AJAX, Redes Sociais, Blogs, SaaS |
-| **Web 3.0**<br> | Web Semântica / Inteligente | Dados interligados e IA | Machine Learning, Ontologias, Blockchain, IoT |
-
-**Tabela 2: Formatos de Troca de Dados (XML vs. JSON)**
-
-| Característica | XML| JSON |
+| Tag | Significado | Quando Usar? |
 | --- | --- | --- |
-| **Sintaxe** | Baseada em tags (`<tag>`) | Baseada em pares `chave: valor`<br> |
-| **Peso / Tamanho** | Mais pesado / verboso | Mais leve e compacto |
-| **Leitura por JS** | Requer parse de documento DOM | Nativo do JavaScript (`JSON.parse()`) |
-| **Uso Principal** | Sistemas legados, SOAP, NFe | APIs RESTful modernas, aplicações Web/Mobile |
+| `<main>` | Conteúdo Principal | Apenas uma vez por página, envolvendo o assunto central. |
+| `<section>` | Seção Temática | Para agrupar capítulos, blocos de assuntos ou módulos relacionados. |
+| `<aside>` | Conteúdo Lateral / Suporte | Para menus laterais, painéis de links, avisos ou biografias do autor. |
+| `<nav>` | Navegação | Para blocos de links principais de navegação do site. |
+| `<footer>` | Rodapé | Na parte inferior do site para contatos, cópias e direitos autorais. |
 
-**Tabela 3: SOAP vs. REST**
+### Tabela 2: Listas em HTML (`<ul>` vs `<ol>`)
 
-| Padrão | Tipo | Formato de Dados | Complexidade |
+| Tipo de Lista | Tag Principal | Item da Lista | Marcador Padrão | Caso de Uso Típico |
+| --- | --- | --- | --- | --- |
+| **Não Ordenada** | `<ul>` | `<li>` | Bolinhas (*bullets*) | Ingredientes, categorias, características. |
+| **Ordenada** | `<ol>` | `<li>` | Números (`1, 2, 3...`) | Passo a passo, receitas, tutorias, rankings. |
+
+### Tabela 3: Formatação Estética vs. Semântica
+
+| Tag Estética (Antiga) | Tag Semântica (Moderna) | Resultado Visual | Diferença Técnica |
 | --- | --- | --- | --- |
-| **SOAP**<br> | Protocolo rígido | Apenas XML | Alta (Contratos estritos) |
-| **REST**<br> | Estilo Arquitetural | JSON (preferencial), XML, HTML, Texto | Baixa / Flexível |
+| `<b>` | `<strong>` | **Texto em negrito** | `<strong>` indica importância/urgência para leitores de tela. |
+| `<i>` | `<em>` | *Texto em itálico* | `<em>` indica ênfase no significado da palavra. |
 
 ---
 
-## Erros Comuns e Cuidados
+## 8. Erros Comuns e Cuidados
 
-1. **Classificar HTML como linguagem de programação**:
-* ❌ *Incorreto*: "Criei uma lógica de decisão usando a linguagem de programação HTML."
-* ✔️ *Correto*: "Estruturei os elementos do meu formulário utilizando a linguagem de marcação HTML."
-
-
-2. **Confundir a criação da Internet com a criação da Web**:
-* ❌ *Incorreto*: "Tim Berners-Lee criou a Internet durante a Guerra Fria em 1969."
-* ✔️ *Correto*: "A Internet (infraestrutura física) nasceu com a ARPANET no contexto da Guerra Fria (1969). Tim Berners-Lee criou a World Wide Web (WWW) em 1989 no CERN."
+1. **Escrever tags e atributos grudados**:
+* ❌ *Incorreto*: `<imgsrc="bolo.jpg">` ou `<ahref="#menu">`
+* ✔️ *Correto*: `<img src="bolo.jpg">` e `<a href="#menu">` (deve haver espaço entre a tag e o atributo).
 
 
+2. **Colocar o `<footer>` fora do `<body>**`:
+* ❌ *Incorreto*: Posicionar a tag `<footer>` depois do fechamento de `</body>`.
+* ✔️ *Correto*: Todo elemento visível ao usuário deve ficar dentro de `<body>...</body>`.
 
 
-3. **Tratar URI e URL como conceitos opostos**:
-* Entendi que toda URL é uma URI, pois a URL é apenas uma das formas existentes de identificar um recurso através de sua localização na rede.
-
----
-
-## Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-**O Papel dos Servidores Web e Portas Padrão**
-
-Quando desenvolvemos páginas web, elas são armazenadas em **Servidores Web** (como Apache, Nginx ou IIS). Esses servidores rodam processos escutando portas de rede específicas:
-
-* **Porta 80**: Utilizada para tráfego web não criptografado via **HTTP**.
-* **Porta 443**: Utilizada para tráfego seguro criptografado via **HTTPS** (*HTTP + TLS/SSL*).
-
-**O Padrão W3C**
-
-Seguir as diretrizes do **W3C** garante que o código HTML/CSS funcione de forma consistente em diferentes navegadores (Chrome, Firefox, Safari, Edge) e atenda a critérios universais de **Acessibilidade Web (WCAG)**.
-
----
-
-## Guia Rápido de Memorização
-
-* **TCP/IP**: Base de conexões de toda a Internet (TCP fatiou, IP endereçou).
+3. **Erros de digitação nas tags de fechamento**:
+* ❌ *Incorreto*: `<./p>` ou `<p\>`
+* ✔️ *Correto*: `</p>` (a barra é sempre para frente `/`).
 
 
-* **Tríade do Tim Berners-Lee**: HTTP (transporte), HTML (estrutura), WWW (o ecossistema).
-
-
-* **Web 1.0**: Leitura (Estática).
-
-
-* **Web 2.0**: Leitura + Escrita (Social/Interativa).
-
-
-* **Web 3.0**: Semântica + Dados Conectados + IA.
-
-
-* **API**: A ponte de comunicação entre sistemas.
-
-
-* **JSON**: Formato leve de dados em pares `chave: valor`.
-
-
-* **URL**: O endereço completo de localização de um recurso na Web.
+4. **Não especificar o atributo `alt` em imagens**:
+* Sem o atributo `alt`, leitores de tela para pessoas com deficiência visual não conseguirão descrever o que a imagem representa.
 
 
 
 ---
 
-**Resumo Relâmpago**
+## 9. Correções Técnicas das Minhas Anotações
 
-1. A Internet é a infraestrutura física de rede global; a Web (WWW) é o sistema de hipertextos que trafega sobre ela.
+* **Atributo Obsoleto (`<a name="...">`)**: Nos rascunhos originais da aula, o professor utilizou `<a name="ingredientes">` para criar pontos de âncora. O atributo `name` em tags de âncora é considerado **obsoleto no HTML5**. A boa prática moderna é colocar o atributo `id` diretamente no título ou elemento de destino (ex: `<h3 id="ingredientes">`).
+* **Tags Grudadas**: Corrigi todas as ocorrências onde os atributos estavam colados nas tags (`<!DOCTYPEhtml>`, `<imgsrc=`, `<aname=`, `<ahref=`).
+* **Posicionamento do `<title>**`: O texto do título estava solto dentro do `<head>` no primeiro rascunho. O texto deve estar envolto na tag `<title>Minha Primeira Página</title>`.
 
-2. A ARPANET surgiu em 1969 na Guerra Fria e originou a Internet com o protocolo TCP/IP criado por Bob Kahn e Vint Cerf.
+---
 
-3. Tim Berners-Lee criou a World Wide Web (WWW), o protocolo HTTP, a linguagem HTML e o primeiro navegador em 1989-1990.
+## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-4. HTML é uma linguagem de marcação estrutural de texto e conteúdo, não uma linguagem de programação.
+### Caminhos Relativos vs. Caminhos Absolutos
 
-5. A Web 1.0 era focada apenas em leitura com páginas estáticas em HTML.
+Ao inserir mídias ou criar links, compreendi como funcionam os caminhos:
 
-6. A Web 2.0 trouxe dinamismo, redes sociais e produção colaborativa de conteúdo pelos próprios usuários.
+* **Caminho Relativo**: Aponta para um arquivo dentro da própria estrutura do projeto.
+* `src="bolinFUBA.jpg"` → Arquivo na mesma pasta.
+* `src="imagens/bolinFUBA.jpg"` → Arquivo dentro da subpasta `imagens`.
 
-7. A Web 3.0 integra Web Semântica, inteligência artificial, dados estruturados e descentralização.
 
-8. APIs permitem a comunicação entre aplicações diferentes, utilizando formatos de troca de dados como XML e JSON.
+* **Caminho Absoluto**: Aponta para um endereço completo na web.
+* `src="[https://site.com/imagens/bolo.png](https://site.com/imagens/bolo.png)"`
 
-9. Uma URL é o localizador exato de um recurso na web, composto por protocolo, domínio, porta, caminho e parâmetros.
 
-10. REST é o estilo arquitetural moderno mais usado em web services, preferindo conexões HTTP e payloads leves em JSON.
+
+### Acessibilidade (WCAG)
+
+Escrever HTML semântico com tags adequadas (`<main>`, `<nav>`, `<footer>`) e preencher o atributo `alt` em imagens não serve apenas para organização, mas permite que softwares leitores de tela naveguem pela página com facilidade.
+
+---
+
+## 11. Guia Rápido de Memorização
+
+* **Estrutura Base**: `<!DOCTYPE html>` → `<html>` → `<head>` (configurações) + `<body>` (conteúdo).
+
+
+* **Título da Guia**: `<title>Título</title>` (fica dentro de `<head>`).
+* **Títulos de Conteúdo**: `<h1>` (principal) até `<h6>` (menor).
+* **Parágrafo**: `<p>Texto</p>`.
+* **Imagem**: `<img src="caminho.jpg" alt="Descrição">`.
+* **Lista sem Ordem**: `<ul>` com itens `<li>`.
+* **Lista com Ordem**: `<ol>` com itens `<li>`.
+* **Link Externo / Interno**: `<a href="destino">Texto</a>`.
+
+---
+
+## 12. Resumo Relâmpago — 10 Linhas
+
+1. O HTML é a linguagem de marcação que define a estrutura bruta e o conteúdo de uma página web.
+
+
+2. A analogia do corpo humano divide a página em `<html>` (corpo), `<head>` (cabeça), `<body>` (tronco visível) e `<footer>` (pé).
+
+
+3. O comando `<!DOCTYPE html>` indica ao navegador que a página utiliza o padrão moderno HTML5.
+4. As tags funcionam como etiquetas demarcadoras que envolvem o conteúdo com abertura `<tag>` e fechamento `</tag>`.
+5. A hierarquia de títulos vai de `<h1>` (mais importante) até `<h6>` (subtítulo de menor peso).
+6. Tags semânticas como `<main>`, `<section>`, `<aside>` e `<nav>` dão significado estrutural ao documento.
+7. A tag `<img>` insere imagens usando o atributo `src` para o caminho e `alt` para a descrição acessível.
+8. Listas não ordenadas usam `<ul>` (marcadores), enquanto listas ordenadas usam `<ol>` (números sequenciais).
+9. A tag de âncora `<a>` utiliza o atributo `href` para criar links entre páginas ou seções com `id`.
+10. O atributo `id` substituiu o uso obsoleto de `name` para mapear âncoras internas em HTML5.
