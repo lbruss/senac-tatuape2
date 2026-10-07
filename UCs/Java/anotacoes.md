@@ -16,31 +16,37 @@ Nesta aula, avancei significativamente no estudo da **Programação Orientada a 
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### 1. Construtores
+## Construtores
 
 O **construtor** é um bloco especial de código executado automaticamente no momento exato em que o objeto nasce (quando usamos a palavra `new`).
 
-💡 **Analogia da Certidão de Nascimento:** Quando um bebê nasce, ele precisa sair do hospital com um registro inicial (nome, data, número de registro). O construtor funciona como esse registro de fábrica do objeto: ele garante que o objeto não nascerá "vazio" ou sem configurações essenciais.
+> **Analogia da Certidão de Nascimento:**
 
-### 2. Herança (`extends`)
+Quando um bebê nasce, ele precisa sair do hospital com um registro inicial (nome, data, número de registro). O construtor funciona como esse registro de fábrica do objeto: ele garante que o objeto não nascerá "vazio" ou sem configurações essenciais.
+
+## Herança (`extends`)
 
 Permite criar novas classes baseando-se em classes já existentes, aproveitando todo o código já escrito.
 
-💡 **Analogia da Genética:** Um filho herda a cor dos olhos e a altura dos pais (atributos), além do talento para cozinhar (métodos). Porém, o filho também pode desenvolver características próprias (novos atributos) ou aprender habilidades exclusivas (novos métodos). Na POO, a classe `Aviao` herda características de um veículo genérico (`Carro`), mas adiciona asas (`envergadura`) e a capacidade de pousar (`aterrizar`).
+> **Analogia da Genética:**
 
-### 3. Polimorfismo (Sobrescrevida / *Overriding*)
+Um filho herda a cor dos olhos e a altura dos pais (atributos), além do talento para cozinhar (métodos). Porém, o filho também pode desenvolver características próprias (novos atributos) ou aprender habilidades exclusivas (novos métodos). Na POO, a classe `Aviao` herda características de um veículo genérico (`Carro`), mas adiciona asas (`envergadura`) e a capacidade de pousar (`aterrizar`).
+
+## Polimorfismo (Sobrescrevida / *Overriding*)
 
 A palavra "polimorfismo" significa "muitas formas". Na prática, permite que um método herdado se comporte de maneira totalmente diferente na classe filha.
 
-💡 **Analogia do Acelerar:** Tanto um Carro quanto um Avião podem executar a ação de **acelerar**. Porém, no Carro isso significa injetar combustível para girar as rodas ("Vrummmmm..."), enquanto no Avião significa dar potência às turbinas para ganhar velocidade na pista e decolar ("_______-------"). A ação tem o mesmo nome, mas o comportamento é diferente.
+> **Analogia do Acelerar:**
 
-### 4. Modificadores de Acesso
+Tanto um Carro quanto um Avião podem executar a ação de **acelerar**. Porém, no Carro isso significa injetar combustível para girar as rodas ("Vrummmmm..."), enquanto no Avião significa dar potência às turbinas para ganhar velocidade na pista e decolar ("_______-------"). A ação tem o mesmo nome, mas o comportamento é diferente.
+
+## Modificadores de Acesso
 
 Servem para definir o nível de visibilidade e proteção de cada membro (variável ou método) da classe.
 
-💡 **Analogia da Casa e do Condomínio:**
+> **Analogia da Casa e do Condomínio:**
 
 * `private`: Os seus objetos pessoais dentro do seu quarto (só você acessa).
 * *default* (sem modificador): A área comum do seu apartamento (visível para quem mora no mesmo pacote/casa).
@@ -49,15 +55,15 @@ Servem para definir o nível de visibilidade e proteção de cada membro (variá
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### A. Construtores em Java
+## Construtores em Java
 
 * Têm **obrigatoriamente o mesmo nome exato da classe**.
 * **Não possuem tipo de retorno** (nem mesmo `void`).
 * Podem ser **sobrecarregados** (*Constructor Overloading*): podemos criar um construtor sem parâmetros e outro com parâmetros na mesma classe.
 
-### B. A Palavra-chave `this`
+## A Palavra-chave `this`
 
 Dentro de um método ou construtor, a palavra `this` faz referência ao **atributo do próprio objeto atual**. É usada para eliminar ambiguidades quando o parâmetro do construtor tem o mesmo nome do atributo da classe.
 
@@ -66,11 +72,11 @@ this.ano = ano; // 'this.ano' é o atributo da classe; 'ano' é o parâmetro rec
 
 ```
 
-### C. A Classe `java.util.Random`
+## A Classe `java.util.Random`
 
 É uma classe utilitária do Java usada para gerar números aleatórios. O método `nextInt(1000)` gera um número inteiro sorteado entre `0` e `999`.
 
-### D. A Palavra-chave `extends` (Herança)
+## A Palavra-chave `extends` (Herança)
 
 Indica que uma classe é filha de outra.
 
@@ -83,9 +89,9 @@ Ocorre quando a classe filha reescreve o corpo de um método idêntico ao da cla
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Classe Modelo com Construtores e Random (`Carro.java`)
+**Exemplo 1: Classe Modelo com Construtores e Random (`Carro.java`)**
 
 ```java
 package aula04;
@@ -147,7 +153,7 @@ public class Carro {
 
 ---
 
-### Exemplo 2: Instanciando com Construtor Parametrizado (`Brasilia.java`)
+**Exemplo 2: Instanciando com Construtor Parametrizado (`Brasilia.java`)**
 
 ```java
 package aula04;
@@ -172,7 +178,7 @@ public class Brasilia {
 
 ---
 
-### Exemplo 3: Herança e Polimorfismo (`Aviao.java`)
+**Exemplo 3: Herança e Polimorfismo (`Aviao.java`)**
 
 ```java
 package aula04;
@@ -205,7 +211,7 @@ public class Aviao extends Carro {
 
 ---
 
-### Exemplo 4: Testando a Subclasse e o Polimorfismo (`Embraer.java`)
+**Exemplo 4: Testando a Subclasse e o Polimorfismo (`Embraer.java`)**
 
 ```java
 package aula04;
@@ -239,9 +245,9 @@ public class Embraer {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Construtor Parametrizado e o `this`
+**A. Desmontando o Construtor Parametrizado e o `this`**
 
 ```java
 public Carro(int ano, String cor) {
@@ -261,7 +267,7 @@ public Carro(int ano, String cor) {
 
 ---
 
-### B. Desmontando a Declaração de Herança
+**Desmontando a Declaração de Herança**
 
 ```java
 public class Aviao extends Carro { ... }
@@ -274,9 +280,9 @@ public class Aviao extends Carro { ... }
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo 1: Organizando Imports Automaticamente no Eclipse
+**Passo a Passo 1: Organizando Imports Automaticamente no Eclipse**
 
 Quando digitamos `Random` pela primeira vez em uma classe, o Java acusa erro porque não conhece a classe utilitária de forma nativa.
 
@@ -286,11 +292,9 @@ Quando digitamos `Random` pela primeira vez em uma classe, o Java acusa erro por
 * **O que acontece:** O Eclipse analisa todas as classes não reconhecidas no arquivo e adiciona automaticamente a instrução de importação no topo do arquivo: `import java.util.Random;`.
 * Se houver mais de uma opção com o mesmo nome, o Eclipse abrirá uma janela para você selecionar a biblioteca oficial do Java (`java.util`).
 
-
-
 ---
 
-### Passo a Passo 2: Criando a Estrutura do Novo Projeto "Agência Bancária"
+**Passo a Passo 2: Criando a Estrutura do Novo Projeto "Agência Bancária"**
 
 Para praticar Encapsulamento e Modificadores de Acesso na próxima etapa, preparei o novo projeto no Eclipse:
 
@@ -304,9 +308,9 @@ Para praticar Encapsulamento e Modificadores de Acesso na próxima etapa, prepar
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Matriz de Visibilidade dos Modificadores de Acesso em Java
+**Matriz de Visibilidade dos Modificadores de Acesso em Java**
 
 Esta é uma das tabelas mais importantes de toda a orientação a objetos em Java:
 
@@ -319,9 +323,9 @@ Esta é uma das tabelas mais importantes de toda a orientação a objetos em Jav
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Tentar Colocar Tipo de Retorno em Construtores
+**Tentar Colocar Tipo de Retorno em Construtores**
 
 Se você adicionar um tipo de retorno (como `void` ou `int`) antes do nome do construtor, o Java **não gerará erro de compilação**, mas transformará a estrutura em um **método comum**. Como resultado, o construtor não será executado no `new`!
 
@@ -340,7 +344,7 @@ public Carro() {
 
 ---
 
-### 2. Esquecer a Anotação `@Override` no Polimorfismo
+**Esquecer a Anotação `@Override` no Polimorfismo**
 
 Se você cometer um erro de digitação ao tentar sobrescrever um método (ex: escrever `acelera()` em vez de `acelerar()`), sem o `@Override`, o Java entenderá que você está criando um **método novo** em vez de sobrescrever o método da classe mãe.
 
@@ -356,19 +360,9 @@ void acelerar() { ... } // O compilador avisa imediatamente se o nome estiver er
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho de aula, realizei as seguintes correções silenciosas:
-
-1. **Anotação de Polimorfismo (`@Override`):** Incluí a anotação `@Override` na classe `Aviao.java` no método `acelerar()`. Isso garante que o compilador verifique se o método realmente pertence à superclasse.
-2. **Nomenclatura de Pacotes:** Padronizei os nomes dos pacotes para letras minúsculas (`aula04`, `contas` e `seguros`), alinhando com a convenção da linguagem Java.
-3. **Erros de Digitação e Espaçamento:** Corrigi aglutinações de palavras reservadas no código (ex: `publicclassCarro` para `public class Carro`, `publicclassAviaoextendsCarro` para `public class Aviao extends Carro`).
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Herança Simples no Java (Por que não existe `extends` múltiplo?)
+**Herança Simples no Java (Por que não existe `extends` múltiplo?)**
 
 Diferente de linguagens como C++, a linguagem Java **não suporta herança múltipla** de classes. Ou seja, uma subclasse só pode ter **uma única superclasse direta** na instrução `extends`.
 
@@ -388,7 +382,7 @@ Para evitar o famoso *"Problema do Diamante"* (*Diamond Problem*), que ocorre qu
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Construtores são métodos especiais com o mesmo nome da classe, executados na criação do objeto (`new`).
 2. A sobrecarga de construtores permite instanciar objetos com ou sem parâmetros iniciais.
@@ -405,12 +399,12 @@ Para evitar o famoso *"Problema do Diamante"* (*Diamond Problem*), que ocorre qu
 
 ## Guia Rápido de Memorização
 
-### Atalhos no Eclipse
+**Atalhos no Eclipse**
 
 * **`Ctrl + Shift + O`** ➔ Importa bibliotecas ausentes e limpa imports não utilizados.
 * **`Ctrl + F11`** ➔ Executa a aplicação Java ativa.
 
-### Sintaxe de Herança e Sobrescrevida
+**Sintaxe de Herança e Sobrescrevida**
 
 ```java
 // Classe Mãe (Superclasse)
@@ -428,7 +422,7 @@ public class Carro extends Veiculo {
 
 ```
 
-### Regra dos Modificadores de Acesso
+**Regra dos Modificadores de Acesso**
 
 * **`private`:** Só a **própria classe** enxerga.
 * ***default*:** Só quem está no **mesmo pacote** enxerga.
