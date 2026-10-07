@@ -1,116 +1,135 @@
-# Introdução à Programação Orientada a Objetos (POO): Abstração, Classes e Objetos em Java
+# Construtores, Herança, Polimorfismo e Modificadores de Acesso em Java (Aula 04)
 
 ---
 
-**Visão Geral**
+## 1. Visão Geral
 
-Nesta aula, iniciei a transição da Programação Estruturada para a **Programação Orientada a Objetos (POO)**.
+Nesta aula, avancei significativamente no estudo da **Programação Orientada a Objetos (POO)** em Java. Explorei recursos essenciais para a construção de sistemas reais e profissionais:
 
-A POO é um paradigma de programação que revolucioneu a forma como criamos softwares, pois nos permite modelar programas de forma muito mais próxima da vida real. Em vez de pensar apenas em funções e sequências de comandos isolados, passamos a estruturar o sistema em **objetos** que possuem características (dados) e comportamentos (ações).
-
-## Os 4 Pilares da POO
-
-Toda a base da orientação a objetos se sustenta em quatro pilares fundamentais:
-
-1. **Abstração** (Foco da aula de hoje)
-
-
-2. **Encapsulamento**
-
-3. **Herança**
-
-4. **Polimorfismo**
-
-
-**Vantagens de utilizar a POO**
-
-* **Aproximação do Mundo Real:** Facilita a tradução de problemas do cotidiano para a lógica de código.
-
-
-* **Reutilização de Código:** Evita a necessidade de reescrever a mesma lógica várias vezes.
-
-* **Organização e Modularidade:** Cada parte do sistema tem uma responsabilidade bem definida, facilitando a manutenção e a detecção de erros.
-
-* **Escalabilidade:** Permite criar projetos grandes e complexos com estrutura limpa e sustentável.
+1. **Métodos Construtores:** Como inicializar objetos com estado padrão ou valores obrigatórios logo no momento de sua criação (`new`).
+2. **Uso da palavra-chave `this`:** Como diferenciar atributos do objeto de parâmetros locais.
+3. **Inclusão da biblioteca `Random`:** Uso da classe nativa `java.util.Random` para gerar dados automáticos (como números de chassi).
+4. **Herança (`extends`):** O segundo pilar da POO. Permite reutilizar atributos e métodos de uma classe mãe (superclasse) em uma classe filha (subclasse).
+5. **Polimorfismo (Sobrescrevida de Método):** O terceiro pilar da POO. Permite redefinir e customizar o comportamento de um método herdado para que ele funcione de forma específica na subclasse.
+6. **Modificadores de Acesso (`private`, *default*, `protected`, `public`):** A base do quarto pilar (Encapsulamento), controlando quais classes podem enxergar ou alterar atributos e métodos.
+7. **Estruturação do Projeto "Agência Bancária":** Início da criação de uma nova estrutura de projeto organizada em múltiplos pacotes (`contas` e `seguros`).
 
 ---
 
-**Entendendo o Conceito**
+## 2. Entendendo o Conceito
 
-## A Abstração e o Conceito de Classe vs. Objeto
+### 1. Construtores
 
-A **Abstração** consiste em isolar do mundo real apenas as características e comportamentos essenciais para o nosso sistema, ignorando detalhes irrelevantes.
+O **construtor** é um bloco especial de código executado automaticamente no momento exato em que o objeto nasce (quando usamos a palavra `new`).
 
-Para aplicar a abstração no Java, usamos duas estruturas chave:
+💡 **Analogia da Certidão de Nascimento:** Quando um bebê nasce, ele precisa sair do hospital com um registro inicial (nome, data, número de registro). O construtor funciona como esse registro de fábrica do objeto: ele garante que o objeto não nascerá "vazio" ou sem configurações essenciais.
 
-* **Classe:** É o **modelo** (blueprint/planta baixa). Ela não é o objeto em si, mas sim a instrução de como um objeto deve ser criado.
+### 2. Herança (`extends`)
 
+Permite criar novas classes baseando-se em classes já existentes, aproveitando todo o código já escrito.
 
-* **Objeto:** É a **instância** (a concretização) criada a partir do modelo da classe.
+💡 **Analogia da Genética:** Um filho herda a cor dos olhos e a altura dos pais (atributos), além do talento para cozinhar (métodos). Porém, o filho também pode desenvolver características próprias (novos atributos) ou aprender habilidades exclusivas (novos métodos). Na POO, a classe `Aviao` herda características de um veículo genérico (`Carro`), mas adiciona asas (`envergadura`) e a capacidade de pousar (`aterrizar`).
 
+### 3. Polimorfismo (Sobrescrevida / *Overriding*)
 
+A palavra "polimorfismo" significa "muitas formas". Na prática, permite que um método herdado se comporte de maneira totalmente diferente na classe filha.
 
-```
-+-----------------------------------+
-|         CLASSE (Modelo)           |  <--- Define os atributos (dados) e métodos (ações)
-|        public class Carro         |
-+-----------------------------------+
-                  |
-                  |  Instanciação (operador 'new')
-                  v
-+-----------------------------------+      +-----------------------------------+
-|        OBJETO 1 (Instância)       |      |        OBJETO 2 (Instância)       |
-|    ferrari (cor: Roxo, ano: 2026) |      |    fusca (cor: Amarelo, ano: 1967) |
-+-----------------------------------+      +-----------------------------------+
+💡 **Analogia do Acelerar:** Tanto um Carro quanto um Avião podem executar a ação de **acelerar**. Porém, no Carro isso significa injetar combustível para girar as rodas ("Vrummmmm..."), enquanto no Avião significa dar potência às turbinas para ganhar velocidade na pista e decolar ("_______-------"). A ação tem o mesmo nome, mas o comportamento é diferente.
 
-```
+### 4. Modificadores de Acesso
 
-> **Analogia da Patente do LEGO:**
+Servem para definir o nível de visibilidade e proteção de cada membro (variável ou método) da classe.
 
-Imagine o desenho técnico ou a patente de fabricação de um bloco de LEGO. Essa planta descreve exatamente as dimensões do bloco e como os pinos se encaixam, mas você não pode brincar com a planta em si. A planta é a **Classe**. Quando a fábrica injeta plástico no molde e produz a peça física amarela ou vermelha, cada pecinha gerada é um **Objeto**.
+💡 **Analogia da Casa e do Condomínio:**
+
+* `private`: Os seus objetos pessoais dentro do seu quarto (só você acessa).
+* *default* (sem modificador): A área comum do seu apartamento (visível para quem mora no mesmo pacote/casa).
+* `protected`: O salão de festas do condomínio (acessível por vizinhos e por parentes/herdeiros, mesmo que morem fora).
+* `public`: A calçada da rua (qualquer pessoa que passar pode ver e usar).
 
 ---
 
-## Conceitos Fundamentais
+## 3. Conceitos Fundamentais
 
-**Atributos (Características / Variáveis)**
+### A. Construtores em Java
 
-São as propriedades que definem o estado de um objeto. Dentro da classe, são representados por variáveis.
+* Têm **obrigatoriamente o mesmo nome exato da classe**.
+* **Não possuem tipo de retorno** (nem mesmo `void`).
+* Podem ser **sobrecarregados** (*Constructor Overloading*): podemos criar um construtor sem parâmetros e outro com parâmetros na mesma classe.
 
-* Exemplo na classe `Carro`: `int ano;`, `String cor;`.
+### B. A Palavra-chave `this`
 
-
-**Métodos (Comportamentos / Ações)**
-
-São as funções associadas à classe que definem o que o objeto pode fazer.
-
-* Exemplo na classe `Carro`: `ligar()`, `desligar()`, `acelerar()`.
-
-**Instanciação (`new`)**
-
-É o ato de criar um objeto real na memória RAM a partir da classe modelo. Utilizamos a palavra reservada `new`.
-
----
-
-### Código / Exemplos Práticos
-
-**Exemplo 1: Criando a Classe Modelo (`Carro.java`)**
+Dentro de um método ou construtor, a palavra `this` faz referência ao **atributo do próprio objeto atual**. É usada para eliminar ambiguidades quando o parâmetro do construtor tem o mesmo nome do atributo da classe.
 
 ```java
-package aula03poo;
+this.ano = ano; // 'this.ano' é o atributo da classe; 'ano' é o parâmetro recebido
+
+```
+
+### C. A Classe `java.util.Random`
+
+É uma classe utilitária do Java usada para gerar números aleatórios. O método `nextInt(1000)` gera um número inteiro sorteado entre `0` e `999`.
+
+### D. A Palavra-chave `extends` (Herança)
+
+Indica que uma classe é filha de outra.
+
+* Syntax: `public class Aviao extends Carro`
+* A classe `Aviao` passa a ter acesso a todos os atributos e métodos não-privados de `Carro`.
+
+### E. Polimorfismo por Sobrescrevida (*Method Overriding*)
+
+Ocorre quando a classe filha reescreve o corpo de um método idêntico ao da classe mãe. É altamente recomendado utilizar a anotação `@Override` acima do método sobrescrito para indicar a alteração ao compilador.
+
+---
+
+## 4. Código / Exemplos Práticos
+
+### Exemplo 1: Classe Modelo com Construtores e Random (`Carro.java`)
+
+```java
+package aula04;
+
+import java.util.Random;
 
 /**
- * Classe modelo que abstrai as características e ações de um carro.
+ * Classe modelo 'Carro' demonstrando o uso de Construtores e da classe Random.
  * 
  * @author Bruss Loza
  */
 public class Carro {
     
-    // Atributos (Variáveis da classe)
+    // Atributos
     int ano;
     String cor;
 
-    // Métodos (Ações que o carro pode realizar)
+    /**
+     * Construtor Padrão (Sem parâmetros).
+     * Executado quando fazemos: new Carro();
+     */
+    public Carro() {
+        Random gerador = new Random();
+        int chassi = gerador.nextInt(1000); // Gera um número aleatório entre 0 e 999
+        System.out.println("Chassi: " + chassi);
+    }
+
+    /**
+     * Construtor Sobregado (Com parâmetros).
+     * Executado quando fazemos: new Carro(1988, "Roxo");
+     * 
+     * @param ano Ano de fabricação do veículo
+     * @param cor Cor do veículo
+     */
+    public Carro(int ano, String cor) {
+        this.ano = ano; // Uso do 'this' para atribuir o parâmetro ao atributo
+        this.cor = cor;
+        
+        Random gerador = new Random();
+        int chassi = gerador.nextInt(1000);
+        System.out.println("Chassi: " + chassi);
+    }
+
+    // Métodos de comportamento
     void ligar() {
         System.out.println("Engine ON..........");
     }
@@ -128,28 +147,24 @@ public class Carro {
 
 ---
 
-**Exemplo 2: Instanciando um Objeto Ferrari** (`Ferrari.java`)
+### Exemplo 2: Instanciando com Construtor Parametrizado (`Brasilia.java`)
 
 ```java
-package aula03poo;
+package aula04;
 
-public class Ferrari {
+public class Brasilia {
     public static void main(String[] args) {
-        // Instanciação do objeto 'ferrari' baseado na classe Carro
-        Carro ferrari = new Carro();
+        // Chamada direta do construtor com parâmetros de inicialização
+        Carro brasilia = new Carro(1988, "Roxo");
 
-        // Atribuindo valores aos atributos do objeto
-        ferrari.ano = 2026;
-        ferrari.cor = "Roxo";
+        System.out.println("Carro Brasília");
+        System.out.println("Ano: " + brasilia.ano);
+        System.out.println("Cor: " + brasilia.cor);
 
-        // Exibindo os atributos
-        System.out.println("Carro Ferrari");
-        System.out.println("Ano: " + ferrari.ano);
-        System.out.println("Cor: " + ferrari.cor);
-
-        // Executando os métodos do objeto
-        ferrari.ligar();
-        ferrari.acelerar();
+        // Executando métodos herdados/padrão
+        brasilia.ligar();
+        brasilia.acelerar();
+        brasilia.desligar();
     }
 }
 
@@ -157,89 +172,66 @@ public class Ferrari {
 
 ---
 
-**Exemplo 3: Instanciando um Objeto Fusca (`Fusca.java`)**
+### Exemplo 3: Herança e Polimorfismo (`Aviao.java`)
 
 ```java
-package aula03poo;
-
-public class Fusca {
-    public static void main(String[] args) {
-        // Instanciação de outro objeto 'fusca' independente a partir da mesma classe Carro
-        Carro fusca = new Carro();
-
-        // Atribuindo valores específicos para este objeto
-        fusca.ano = 1967;
-        fusca.cor = "Amarelo";
-
-        // Exibindo atributos e executando ações
-        System.out.println("Carro Fusca");
-        System.out.println("Ano: " + fusca.ano);
-        System.out.println("Cor: " + fusca.cor);
-
-        fusca.ligar();
-        fusca.acelerar();
-        fusca.desligar();
-    }
-}
-
-```
-
----
-
-**Exemplo 4: Modelando Elementos do Minecraft (`Minecraft.java` e `Steve.java`)**
-
-**Classe Modelo (`Minecraft.java`):**
-
-```java
-package aula03poo;
+package aula04;
 
 /**
- * Classe modelo que representa um bloco/mecanismo do jogo Minecraft.
+ * Classe 'Aviao' que herda (extends) todas as características de 'Carro'.
  */
-public class Minecraft {
+public class Aviao extends Carro {
     
-    // Atributos do elemento
-    int resistencia;
-    String textura;
+    // Atributo específico de Aviao
+    double envergadura;
 
-    // Ações que podem ser executadas
-    void construir() {
-        System.out.println("Construindo.......");
+    // Método específico de Aviao
+    void aterrizar() {
+        System.out.println("------_____");
     }
 
-    void minerar() {
-        System.out.println("Minerando........");
-    }
-
-    void craftar() {
-        System.out.println("Criando o item...");
+    /**
+     * POLIMORFISMO (Sobrescrevida de Método):
+     * O método acelerar() foi herdado da classe Carro, mas aqui ganha
+     * um comportamento específico para aviões (decolagem).
+     */
+    @Override
+    void acelerar() {
+        System.out.println("_______-------");
     }
 }
 
 ```
 
-**Classe Principal de Execução (`Steve.java`):**
+---
+
+### Exemplo 4: Testando a Subclasse e o Polimorfismo (`Embraer.java`)
 
 ```java
-package aula03poo;
+package aula04;
 
-public class Steve {
+public class Embraer {
     public static void main(String[] args) {
-        // Instanciando o objeto 'steve' a partir da classe Minecraft
-        Minecraft steve = new Minecraft();
+        // Instanciação da subclasse Aviao
+        Aviao embraer = new Aviao();
 
-        // Definindo as propriedades
-        steve.resistencia = 1000000;
-        steve.textura = "Cúbica";
+        // Atributos herdados da classe Carro
+        embraer.ano = 2000;
+        embraer.cor = "Amarelo";
+        
+        // Atributo próprio da classe Aviao
+        embraer.envergadura = 11;
 
-        System.out.println("Personagem: Steve");
-        System.out.println("Resistência: " + steve.resistencia);
-        System.out.println("Textura: " + steve.textura);
+        System.out.println("Avião Embraer");
+        System.out.println("Ano: " + embraer.ano);
+        System.out.println("Cor: " + embraer.cor);
+        System.out.println("Envergadura: " + embraer.envergadura + "m");
 
-        // Chamando as ações
-        steve.construir();
-        steve.minerar();
-        steve.craftar();
+        // Métodos
+        embraer.ligar();      // Herdado da classe Carro
+        embraer.acelerar();   // Sobrescrito (Polimorfismo)! Imprime: _______-------
+        embraer.aterrizar();  // Próprio da classe Aviao
+        embraer.desligar();   // Herdado da classe Carro
     }
 }
 
@@ -247,215 +239,198 @@ public class Steve {
 
 ---
 
-**Desmontando o Código**
+## 5. Desmontando o Código
 
-Analisando a linha de criação de um objeto para entender como o Java opera na memória:
-
-```java
-Carro ferrari = new Carro();
-
-```
-
-1. **`Carro` (Tipo de Referência):** Informa ao Java que a variável `ferrari` será utilizada para fazer referência a um objeto criado a partir da classe `Carro`.
-2. **`ferrari` (Nome do Objeto):** É a variável que guarda o endereço de memória onde o objeto real foi alocado.
-3. **`=` (Atribuição):** Associa a variável ao objeto recém-criado na memória.
-4. **`new` (Operador de Instanciação):** Comando crucial que solicita ao Java que reserve um espaço na memória RAM (**Heap**) para construir a nova estrutura.
-5. **`Carro()` (Construtor):** Método especial que executa a inicialização do novo objeto.
-
-Para acessar ou modificar os dados do objeto instanciado, utilizamos o **operador ponto (`.`)**:
-
-* `ferrari.ano = 2026;` ➔ Acessa a variável de instância `ano` do objeto `ferrari` e atribui o valor 2026.
-* `ferrari.ligar();` ➔ Executa o método `ligar()` pertencente exclusivamente ao objeto `ferrari`.
-
----
-
-**Passo a Passo**
-
-**Como Criar e Utilizar uma Estrutura Orientada a Objetos em Java**
-
-1. **Passo 1: Criar o Pacote Dedicado:**
-* Crie um pacote (ex: `aula03poo`) para agrupar as classes relacionadas.
-
-2. **Passo 2: Criar a Classe Modelo (Blueprint):**
-* Crie uma classe simples **sem o método `main**` (ex: `Carro`).
-* Declare os atributos (variáveis de instância).
-
-* Escreva os métodos com as ações que essa entidade poderá realizar.
-
-3. **Passo 3: Criar a Classe Executável:**
-* Crie uma nova classe contendo a opção `public static void main(String[] args)`.
-
-4. **Passo 4: Instanciar e Usar:**
-* Crie o objeto com a sintaxe `NomeDaClasse nomeDoObjeto = new NomeDaClasse();`.
-
-* Manipule os valores e invoque os métodos usando `nomeDoObjeto.atributo` e `nomeDoObjeto.metodo()`.
-
----
-
-## Tabelas Comparativas
-
-**Classe vs. Objeto**
-
-| Característica | Classe | Objeto |
-| --- | --- | --- |
-| **Definição** | Modelo / Planta baixa / Blueprint.
-
- | Instância concreta do modelo na memória.
-
- |
-| **Existência na Memória** | Existe apenas como definição estática de código. | Ocupa espaço real alocado na memória RAM. |
-| **Quantidade** | É única por arquivo/projeto. | Podem ser criados **infinitos** objetos a partir de uma só classe. |
-| **Exemplo** | `Carro`<br> | `ferrari`, `fusca`<br> |
-
----
-
-**Atributo vs. Método**
-
-| Característica | Atributo | Método |
-| --- | --- | --- |
-| **Representa** | O que o objeto **é** / tem (estado/característica).
-
- | O que o objeto **faz** (comportamento/ação).
-
- |
-| **Estrutura no Código** | Variável declarada dentro da classe.
-
- | Bloco de código com parênteses `()`.
-
- |
-| **Sintaxe de Chamada** | `objeto.atributo = valor;` | `objeto.metodo();` |
-| **Exemplo** | `cor = "Roxo";`<br> | `acelerar();`<br> |
-
----
-
-## Erros Comuns e Cuidados
-
-**Não Respeitar as Convenções do Java (*PascalCase* e *camelCase*)**
-
-Nomes de classes devem sempre iniciar com **letra maiúscula** usando o padrão *PascalCase*.
+### A. Desmontando o Construtor Parametrizado e o `this`
 
 ```java
-// ❌ INCORRETO:
-public class minecraft { ... }
-
-// ✅ CORRETO:
-public class Minecraft { ... }
+public Carro(int ano, String cor) {
+    this.ano = ano;
+    this.cor = cor;
+}
 
 ```
 
+1. **`public Carro`**: Construtor público. Tem o nome idêntico ao da classe.
+2. **`(int ano, String cor)`**: Parâmetros recebidos de fora no momento da instanciação `new Carro(1988, "Roxo")`.
+3. **`this.ano = ano;`**:
+* **`this.ano`**: Refere-se à variável de instância (o atributo `int ano` declarado na classe).
+* **`= ano`**: Atribui o valor da variável local recebida pelo parâmetro ao atributo do objeto.
+
+
+
 ---
 
-**Tentar Executar uma Classe Modelo sem o Método `main`**
-
-Se você tentar rodar a classe `Carro.java` diretamente no Eclipse, ele apresentará uma mensagem de erro informando que o método `main` não foi encontrado.
-
-* **Cuidado:** Classes modelos **não** precisam de `main`. O `main` fica em uma classe executável à parte (como `Ferrari.java` ou `Fusca.java`).
-
----
-
-**Tentar Acessar Membros de uma Classe sem Instanciá-la**
-
-Variáveis e métodos de instância pertencem ao objeto, não à classe abstrata.
+### B. Desmontando a Declaração de Herança
 
 ```java
-// ❌ INCORRETO (Tentando usar direto da classe):
-Carro.cor = "Vermelho"; 
-Carro.acelerar();
+public class Aviao extends Carro { ... }
 
-// ✅ CORRETO (Criando o objeto com 'new' primeiro):
-Carro meuCarro = new Carro();
-meuCarro.cor = "Vermelho";
-meuCarro.acelerar();
+```
+
+1. **`public class Aviao`**: Nome da nova classe.
+2. **`extends`**: Palavra reservada que estabelece o vínculo de herança.
+3. **`Carro`**: A superclasse (classe mãe). Significa que `Aviao` herdará de forma automática `ano`, `cor`, `ligar()`, `desligar()` e `acelerar()`.
+
+---
+
+## 6. Passo a Passo
+
+### Passo a Passo 1: Organizando Imports Automaticamente no Eclipse
+
+Quando digitamos `Random` pela primeira vez em uma classe, o Java acusa erro porque não conhece a classe utilitária de forma nativa.
+
+1. Digite a palavra `Random gerador = new Random();`.
+2. O Eclipse exibirá uma linha vermelha ondulada abaixo da palavra `Random`.
+3. Pressione a combinação de teclas **`Ctrl + Shift + O`**:
+* **O que acontece:** O Eclipse analisa todas as classes não reconhecidas no arquivo e adiciona automaticamente a instrução de importação no topo do arquivo: `import java.util.Random;`.
+* Se houver mais de uma opção com o mesmo nome, o Eclipse abrirá uma janela para você selecionar a biblioteca oficial do Java (`java.util`).
+
+
+
+---
+
+### Passo a Passo 2: Criando a Estrutura do Novo Projeto "Agência Bancária"
+
+Para praticar Encapsulamento e Modificadores de Acesso na próxima etapa, preparei o novo projeto no Eclipse:
+
+1. Vá em `File` ➔ `New` ➔ `Java Project`.
+2. Nomeie o projeto como `AgenciaBancaria`.
+3. Desmarque a caixa *Create module-info.java* e clique em **Finish**.
+4. Expanda o projeto, clique com o botão direito na pasta `src` ➔ `New` ➔ `Package`.
+5. Nomeie o primeiro pacote como `contas` e clique em **Finish**.
+6. Clique com o botão direito na pasta `src` novamente ➔ `New` ➔ `Package`.
+7. Nomeie o segundo pacote como `seguros` e clique em **Finish**.
+
+---
+
+## 7. Tabelas Comparativas
+
+### Matriz de Visibilidade dos Modificadores de Acesso em Java
+
+Esta é uma das tabelas mais importantes de toda a orientação a objetos em Java:
+
+| Modificador de Acesso | Própria Classe | Classes do Mesmo Pacote | Subclasses em Outros Pacotes (Herança) | Qualquer Classe do Projeto |
+| --- | --- | --- | --- | --- |
+| **`private`** | Sim | ❌ Não | ❌ Não | ❌ Não |
+| ***default*** *(Sem modificador)* | Sim | Sim | ❌ Não | ❌ Não |
+| **`protected`** | Sim | Sim | Sim | ❌ Não |
+| **`public`** | Sim | Sim | Sim | Sim |
+
+---
+
+## 8. Erros Comuns e Cuidados
+
+### 1. Tentar Colocar Tipo de Retorno em Construtores
+
+Se você adicionar um tipo de retorno (como `void` ou `int`) antes do nome do construtor, o Java **não gerará erro de compilação**, mas transformará a estrutura em um **método comum**. Como resultado, o construtor não será executado no `new`!
+
+```java
+// ❌ INCORRETO (O Java interpreta isso como um método comum, NÃO como construtor):
+public void Carro() {
+    System.out.println("Criando carro...");
+}
+
+// ✅ CORRETO (Construtor sem tipo de retorno):
+public Carro() {
+    System.out.println("Criando carro...");
+}
 
 ```
 
 ---
 
-## Conteúdo Complementar e Aprofundamento
+### 2. Esquecer a Anotação `@Override` no Polimorfismo
 
-**Alocação de Memória no Java: A Memória *Stack* e a Memória *Heap***
+Se você cometer um erro de digitação ao tentar sobrescrever um método (ex: escrever `acelera()` em vez de `acelerar()`), sem o `@Override`, o Java entenderá que você está criando um **método novo** em vez de sobrescrever o método da classe mãe.
 
-Para entender a POO no nível do sistema operacional, precisamos saber como a JVM lida com as variáveis e objetos na memória RAM:
+```java
+// ❌ RISCO DE ERRO (Sem anotação):
+void acelera() { ... } // Não sobrescreve 'acelerar()', cria um método diferente!
 
-1. **Memória Stack (Pilha):** Armazena as chamadas de métodos e as variáveis locais/referências. Quando declaramos `Carro ferrari`, o ponteiro chamado `ferrari` fica salvo na memória **Stack**.
-2. **Memória Heap (Monte):** É a região da memória onde os objetos reais vivem. Quando executamos `new Carro()`, a JVM aloca espaço na **Heap** para guardar todos os atributos daquele objeto específico.
-
-```
-       [ MEMÓRIA STACK ]                 [ MEMÓRIA HEAP ]
-+------------------------------+     +-------------------------------+
-|  ferrari (Ponteiro/Endereço) | --> | Objeto Carro                  |
-+------------------------------+     |  - ano: 2026                  |
-|  fusca   (Ponteiro/Endereço) | --\ |  - cor: "Roxo"                |
-+------------------------------+   | +-------------------------------+
-                                   | 
-                                   | +-------------------------------+
-                                   \-> Objeto Carro                  |
-                                     |  - ano: 1967                  |
-                                     |  - cor: "Amarelo"             |
-                                     +-------------------------------+
+// ✅ SEGURO (Com anotação):
+@Override
+void acelerar() { ... } // O compilador avisa imediatamente se o nome estiver errado
 
 ```
 
 ---
 
-**Resumo Relâmpago**
+## 9. Correções Técnicas das Minhas Anotações
 
-1. A Programação Orientada a Objetos (POO) modela softwares baseando-se em entidades do mundo real.
+Durante a revisão do meu rascunho de aula, realizei as seguintes correções silenciosas:
 
+1. **Anotação de Polimorfismo (`@Override`):** Incluí a anotação `@Override` na classe `Aviao.java` no método `acelerar()`. Isso garante que o compilador verifique se o método realmente pertence à superclasse.
+2. **Nomenclatura de Pacotes:** Padronizei os nomes dos pacotes para letras minúsculas (`aula04`, `contas` e `seguros`), alinhando com a convenção da linguagem Java.
+3. **Erros de Digitação e Espaçamento:** Corrigi aglutinações de palavras reservadas no código (ex: `publicclassCarro` para `public class Carro`, `publicclassAviaoextendsCarro` para `public class Aviao extends Carro`).
 
-2. Os quatro pilares da POO são Abstração, Encapsulamento, Herança e Polimorfismo.
+---
 
+## 10. Conteúdo Complementar e Aprofundamento
 
-3. Abstração é o pilar que modela e isola apenas as características essenciais de um objeto.
+### Herança Simples no Java (Por que não existe `extends` múltiplo?)
 
+Diferente de linguagens como C++, a linguagem Java **não suporta herança múltipla** de classes. Ou seja, uma subclasse só pode ter **uma única superclasse direta** na instrução `extends`.
 
-4. Uma classe funciona como o modelo ou planta baixa (*blueprint*) de uma estrutura.
+```java
+// ❌ PROIBIDO EM JAVA:
+public class Aviao extends Carro, VeiculoAereo { ... }
 
+// ✅ PERMITIDO (Cadeia de Herança Linear):
+public class Veiculo { ... }
+public class Carro extends Veiculo { ... }
+public class Aviao extends Carro { ... }
 
-5. Um objeto é uma instância real e concreta criada na memória a partir do modelo de uma classe.
+```
 
+**Por que essa limitação existe?**
+Para evitar o famoso *"Problema do Diamante"* (*Diamond Problem*), que ocorre quando duas superclasses possuem métodos com o mesmo nome e o compilador não sabe qual deles a classe filha deve herdar. Para resolver cenários em que uma classe precisa ter múltiplos comportamentos, o Java utiliza **Interfaces** (conceito que estudaremos mais adiante).
 
-6. Atributos representam as características ou dados guardados dentro de um objeto.
+---
 
+## Resumo Relâmpago — 10 Linhas
 
-7. Métodos representam os comportamentos e as ações que um objeto pode executar.
-
-
-8. A palavra reservada `new` é utilizada para instanciar e alocar um objeto na memória RAM.
-
-
-9. O operador ponto (`.`) permite acessar e alterar atributos ou disparar métodos de um objeto.
-10. Nomes de classes em Java devem obrigatoriamente seguir a convenção *PascalCase* (ex: `Minecraft`).
+1. Construtores são métodos especiais com o mesmo nome da classe, executados na criação do objeto (`new`).
+2. A sobrecarga de construtores permite instanciar objetos com ou sem parâmetros iniciais.
+3. A palavra-chave `this` diferencia atributos da classe de variáveis locais/parâmetros com nomes idênticos.
+4. A classe `java.util.Random` é utilizada para geração de números aleatórios em aplicações Java.
+5. Herança (`extends`) permite que uma subclasse reaproveite atributos e métodos de uma superclasse.
+6. Em Java, cada classe só pode herdar diretamente de uma única superclasse (Herança Simples).
+7. Polimorfismo por sobrescrevida permite alterar o comportamento de um método herdado na classe filha.
+8. A anotação `@Override` informa ao compilador que um método herdado está sendo redefinido.
+9. Os modificadores de acesso controlam a visibilidade de membros: `private`, *default*, `protected` e `public`.
+10. O atalho `Ctrl + Shift + O` no Eclipse organiza e insere as importações de bibliotecas automaticamente.
 
 ---
 
 ## Guia Rápido de Memorização
 
-**Estrutura de uma Classe Modelo**
+### Atalhos no Eclipse
+
+* **`Ctrl + Shift + O`** ➔ Importa bibliotecas ausentes e limpa imports não utilizados.
+* **`Ctrl + F11`** ➔ Executa a aplicação Java ativa.
+
+### Sintaxe de Herança e Sobrescrevida
 
 ```java
-public class NomeDaClasse {
-    // Atributos
-    tipo atributo1;
-    
-    // Métodos
-    void nomeDoMetodo() {
-        // Código do método
+// Classe Mãe (Superclasse)
+public class Veiculo {
+    void mover() { ... }
+}
+
+// Classe Filha (Subclasse)
+public class Carro extends Veiculo {
+    @Override
+    void mover() {
+        // Novo comportamento para Carro
     }
 }
 
 ```
 
-**Instanciação e Acesso a Objeto**
+### Regra dos Modificadores de Acesso
 
-```java
-// Criar o objeto na memória
-NomeDaClasse objeto = new NomeDaClasse();
-
-// Atribuir valor
-objeto.atributo1 = valor;
-
-// Executar ação
-objeto.nomeDoMetodo();
-
-```
+* **`private`:** Só a **própria classe** enxerga.
+* ***default*:** Só quem está no **mesmo pacote** enxerga.
+* **`protected`:** Mesmo pacote + **subclasses** de outros pacotes.
+* **`public`:** **Todo o projeto** enxerga.
