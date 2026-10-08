@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Imagens</title>
+    </head>
+    <body>
+        <figure>
+            <img src="recursos/pizza_sm.jpg" alt="imagem de uma pizza"
+            srcset="recursos/pizza_sm.jpg 680w,
+                    recursos/pizza_md.jpg 1280w,
+                    recursos/pizza_lg.jpg 1920w"
+                    height="500"
+                    width="700"
+                    name="pizza"/>
+            <!--
+                <figure> Agrupa a imagem e a sua legenda
+                <img> Exibe a imagem
+                src -> Caminho padrão da imagem
+                alt -> Texto alternativo, importante para acessibilidade e SEO
+                srcset -> Lista de diferentes versões da imagem com tamanhos distintos, onde:
+                680w -> versão pequenas para telas até 680px de largura
+                1280w -> versão média para telas até 1280px
+                1920w -> versão grande para telas maiores
+                Obs.: O navegador escolhe automáticamente a melhor versão conforme o tamanho da tela
+                height e width -> Eles definem dimensões fixas da imagem exibida-->
+                <figcaption>Deliciosa pizza de tomates com manjericão.</figcaption>
+                <!--Legenda da imagem, descrevendo o conteúdo:
+                "Deliciosa pizza de tomates com manjericão."-->
+        </figure>
+    </body>
+</html>
