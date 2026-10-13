@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei em dois pilares fundamentais do desenvolvimento web: a construção de **tabelas estruturadas** em HTML e os primeiros passos na estilização visual utilizando **CSS (Cascading Style Sheets)**.
 
@@ -10,9 +10,9 @@ Aprendi a criar tabelas completas organizadas semanticamente em cabeçalho (`<th
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que são Tabelas e CSS?
+##O que são Tabelas e CSS?
 
 * **Tabela HTML**: É uma grade bidimensional usada para exibir dados estruturados em linhas e colunas.
 * *Analogia*: Funciona como uma planilha do Excel incorporada na página.
