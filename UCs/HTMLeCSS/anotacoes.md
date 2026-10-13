@@ -12,7 +12,7 @@ Aprendi a criar tabelas completas organizadas semanticamente em cabeçalho (`<th
 
 **Entendendo o Conceito**
 
-##O que são Tabelas e CSS?
+## Tabelas e CSS
 
 * **Tabela HTML**: É uma grade bidimensional usada para exibir dados estruturados em linhas e colunas.
 * *Analogia*: Funciona como uma planilha do Excel incorporada na página.
@@ -23,7 +23,7 @@ Aprendi a criar tabelas completas organizadas semanticamente em cabeçalho (`<th
 
 
 
-### Como o CSS Interage com o HTML?
+### Interação do CSS com o HTML
 
 O CSS funciona com um sistema de **Regra e Seletor**:
 
@@ -39,9 +39,9 @@ seletor {
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Estrutura de Tabelas em HTML
+## Estrutura de Tabelas em HTML
 
 * `<table>`: Container principal da tabela.
 * `<thead>`: Agrupa os títulos e o cabeçalho das colunas.
@@ -52,12 +52,12 @@ seletor {
 * `rowspan`: Atributo aplicado a uma célula (`<td>` ou `<th>`) para fazer com que ela se expanda e ocupe verticalmente múltiplas linhas.
 * `colspan`: Atributo usado para expandir uma célula horizontalmente por múltiplas colunas.
 
-### 3.2. Formas de Incluir CSS na Página
+## Formas de Incluir CSS na Página
 
 1. **CSS Interno**: Escrito dentro da tag `<style>` dentro do `<head>` da própria página HTML. Ideal para testes rápidos ou páginas únicas.
 2. **CSS Externo**: Escrito em um arquivo separado `.css` (ex: `index.css`) e vinculado ao HTML através da tag `<link rel="stylesheet" href="index.css">` no `<head>`. É o padrão profissional da indústria.
 
-### 3.3. Seletores e Pseudo-classes Utilizados
+## Seletores e Pseudo-classes Utilizados
 
 * **Seletor Universal (`*`)**: Seleciona absolutamente todos os elementos da página.
 * **Seletor de Classe (`.nome-da-classe`)**: Aplica estilos a qualquer elemento que possua o atributo `class="nome-da-classe"`.
@@ -69,9 +69,9 @@ seletor {
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: `quintoarquivo.html` (Tabela com Mesclagem)
+**Arquivo 1: `quintoarquivo.html` (Tabela com Mesclagem)**
 
 ```html
 <!DOCTYPE html>
@@ -128,7 +128,7 @@ seletor {
 
 ---
 
-### Arquivo 2: `basico.html` (Primeiros Passos com CSS Interno)
+**Arquivo 2: `basico.html` (Primeiros Passos com CSS Interno)**
 
 *(Nota: Ajustado o nome do arquivo para sem acento `basico.html` para seguir as melhores práticas do ecossistema web)*.
 
@@ -158,7 +158,7 @@ seletor {
 
 ---
 
-### Arquivo 3: `receitadebolo.html` (Integração com CSS Externo)
+**Arquivo 3: `receitadebolo.html` (Integração com CSS Externo)**
 
 ```html
 <!DOCTYPE html>
@@ -222,7 +222,7 @@ seletor {
 
 ---
 
-### Arquivo 4: `index.css` (Estilos Externos)
+**Arquivo 4: `index.css` (Estilos Externos)**
 
 ```css
 /* Aplicar a mesma família de fontes para todos os elementos da página */
@@ -273,17 +273,17 @@ input[type="checkbox"]:checked + p {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise de `quintoarquivo.html` (Mesclagem com `rowspan`)
+**Análise de `quintoarquivo.html` (Mesclagem com `rowspan`)**
 
 * `<td rowspan="3">Alanis Morissette</td>`: O atributo `rowspan="3"` manda essa célula se estender verticalmente por **3 linhas**. Por causa disso, nas duas linhas seguintes (`<tr>`), **não** criamos as células da artista nem da imagem, pois o espaço delas já está sendo ocupado por este `rowspan`.
 
-### Análise de `basico.html` (Sintaxe CSS Interna)
+**Análise de `basico.html` (Sintaxe CSS Interna)**
 
 * `.destaque`: O ponto `.` antes do nome indica que se trata de uma **Classe CSS**. Qualquer elemento do HTML com `class="destaque"` herdará o texto na cor `#b73011` e a fonte Arial.
 
-### Análise do Conjunto `receitadebolo.html` + `index.css`
+**Análise do Conjunto `receitadebolo.html` + `index.css`**
 
 * `<link rel="stylesheet" href="index.css">`: Faz a ponte de ligação entre o arquivo de marcação HTML e o arquivo de estilos CSS.
 * `display: inline;`: Por padrão, a tag `<p>` é um elemento de bloco (*block element*), ocupando 100% da largura e empurrando o próximo elemento para a linha de baixo. Ao alterar para `display: inline`, o texto do parágrafo fica na mesma linha do botão checkbox.
@@ -292,13 +292,11 @@ input[type="checkbox"]:checked + p {
 * `:checked`: Aplica a regra somente quando o usuário clica e marca a caixa.
 * `+ p`: O símbolo `+` (seletor irmão adjacente) pega o parágrafo `<p>` que vem exatamente após a caixa marcada e aplica `text-decoration: line-through;` (efeito tachado/riscado).
 
-
-
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Como Construir uma Tabela com Células Mescladas (`rowspan`)
+**Como Construir uma Tabela com Células Mescladas (`rowspan`)**
 
 1. **Definir a estrutura padrão**: Abra a tag `<table>`, insira o `<thead>` para os títulos das colunas e o `<tbody>` para as informações.
 2. **Identificar a repetição**: Perceba se haverá dados repetidos nas linhas consecutivas (ex: o mesmo nome do artista para 3 músicas).
@@ -307,9 +305,9 @@ input[type="checkbox"]:checked + p {
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Tags de Estruturação de Tabelas HTML
+**Tabela 1: Tags de Estruturação de Tabelas HTML**
 
 | Tag | Nome | Função | Estilo Padrão no Navegador |
 | --- | --- | --- | --- |
@@ -320,7 +318,7 @@ input[type="checkbox"]:checked + p {
 | `<th>` | Célula Cabeçalho | Identifica a coluna | Texto **negrito** e **centralizado**. |
 | `<td>` | Célula de Dado | Insere a informação | Texto normal alinhado à esquerda. |
 
-### Tabela 2: Formas de Aplicação de CSS
+**Tabela 2: Formas de Aplicação de CSS**
 
 | Método | Como é feito? | Vantagens | Desvantagens |
 | --- | --- | --- | --- |
@@ -328,7 +326,7 @@ input[type="checkbox"]:checked + p {
 | **Interno** | Tag `<style>` no `<head>` | Não precisa de arquivo extra. | Vale apenas para aquela página específica. |
 | **Externo** | Arquivo `.css` separado via `<link>` | **Padrão de mercado**. Reutilizável em todo o site. | Requer o carregamento de um arquivo a mais. |
 
-### Tabela 3: Combinadores e Seletores CSS Utilizados
+**Tabela 3: Combinadores e Seletores CSS Utilizados**
 
 | Seletor / Combinador | Exemplo | O que ele seleciona? |
 | --- | --- | --- |
@@ -339,7 +337,7 @@ input[type="checkbox"]:checked + p {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Esquecer de abrir o `<body>` ao criar tabelas**:
 * ❌ *Incorreto*: Inserir a tag `<table>` diretamente após o fechamento do `</head>`.
@@ -359,27 +357,15 @@ input[type="checkbox"]:checked + p {
 * ❌ *Incorreto*: Salvar como `básico.html`.
 * ✔️ *Correto*: Salvar como `basico.html` (evita falhas de links e incompatibilidade em servidores Linux).
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Estrutura Ausente em `quintoarquivo.html**`: A anotação original colocava a tag `<table>` fora do `<body>`. Corrigi adicionando o `<body>` de forma limpa e semântica.
-* **Atributos Colados**: Ajustei todas as ocorrências onde atributos estavam sem espaço (`<imgsrc=`, `<tdrowspan=`, `<metacharset=`, `<linkrel=`, `<inputtype=`, `<ulstyle=`).
-* **Tag de Link Vazia em `quintoarquivo.html**`: No rascunho da aula, o 4º item da tabela continha a tag `<ahref="..."></a>` sem texto interno, deixando o link invisível na página. Adicionei o texto `Ouça agora`.
-* **Erros de Digitação**: Corrigi `Red Host` para `Red Hot Chili Peppers`, e `Ingrendientes` para `Ingredientes`.
-* **Sintaxe do Checkbox**: Ajustei o fechamento do `<input type="checkbox"/>` para o padrão moderno HTML5 `<input type="checkbox">`.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### O Perigo do `!important`
+**O Perigo do `!important`**
 
 No arquivo `index.css`, utilizamos `color: black !important;`. O `!important` força a regra a se sobressair sobre todas as outras. Em projetos profissionais, **evite abusar do `!important**`, pois ele quebra a cascata natural do CSS e torna a manutenção e sobrescrita de estilos extremamente difícil conforme o projeto cresce.
 
-### Bordas em Tabelas via CSS
+**Bordas em Tabelas via CSS**
 
 No arquivo HTML utilizamos `border="1"`. Esse atributo visual é considerado **antigo/obsoleto no HTML5**. A forma moderna recomendada para adicionar bordas em tabelas é via CSS:
 
@@ -393,7 +379,7 @@ table, th, td {
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Tabela Básica**: `<table>` → `<thead>` (`<tr>` + `<th>`) → `<tbody>` (`<tr>` + `<td>`).
 * **Mesclar Linhas Verticalmente**: `<td rowspan="3">`.
@@ -404,7 +390,7 @@ table, th, td {
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Tabelas HTML organizam dados em linhas (`<tr>`) e colunas com cabeçalhos (`<th>`) e células (`<td>`).
 2. As tags `<thead>` e `<tbody>` agrupam respectivamente o cabeçalho e os dados principais de uma tabela.
