@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei um grande passo no desenvolvimento orientado a objetos aplicando conceitos em um projeto prático do mundo real: o sistema de uma **Agência Bancária**.
 
@@ -17,13 +17,15 @@ Principais aprendizados da aula:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. O Pilar do Encapsulamento
+## O Pilar do Encapsulamento
 
 Encapsular significa **proteger os dados internos de um objeto** contra acessos não autorizados ou alterações indevidas feitas por outras partes do sistema.
 
-💡 **Analogia do Cofre Eletrônico:** Imagine um cofre de banco. O dinheiro (`saldo`) fica trancado dentro dele (`private`). Você não pode simplesmente enfiar a mão dentro do cofre para pegar o dinheiro ou colocar notas falsas. Para interagir com o cofre, você precisa usar o painel eletrônico (`getSaldo()`, `depositar()`, `sacar()`). O painel valida a operação antes de mexer no dinheiro que está lá dentro.
+> **Analogia do Cofre Eletrônico:**
+
+Imagine um cofre de banco. O dinheiro (`saldo`) fica trancado dentro dele (`private`). Você não pode simplesmente enfiar a mão dentro do cofre para pegar o dinheiro ou colocar notas falsas. Para interagir com o cofre, você precisa usar o painel eletrônico (`getSaldo()`, `depositar()`, `sacar()`). O painel valida a operação antes de mexer no dinheiro que está lá dentro.
 
 ```
 +-------------------------------------------------------------+
@@ -44,15 +46,17 @@ Encapsular significa **proteger os dados internos de um objeto** contra acessos 
 
 ---
 
-### B. Interação Entre Objetos (Transferência)
+## Interação Entre Objetos (Transferência)
 
 Na POO, métodos podem receber **variáveis primitivas** (como `double valor`) e também **objetos inteiros** (como `Conta destino`). Isso permite que dois objetos do sistema conversem diretamente entre si.
 
-💡 **Analogia do Pix:** Quando você faz um Pix, a sua conta (`this`) executa a ação de **sacar** o valor, e em seguida chama a conta do seu amigo (`destino`) para **depositar** aquele mesmo valor.
+> **Analogia do Pix:**
+
+Quando você faz um Pix, a sua conta (`this`) executa a ação de **sacar** o valor, e em seguida chama a conta do seu amigo (`destino`) para **depositar** aquele mesmo valor.
 
 ---
 
-### C. A Jornada dos Modificadores de Acesso Entre Pacotes
+## A Jornada dos Modificadores de Acesso Entre Pacotes
 
 Durante os testes da aula, observei o comportamento dos modificadores ao tentar acessar a classe `Conta` (do pacote `contas`) a partir da classe `SeguroPessoaFisica` (do pacote `seguros`):
 
@@ -63,27 +67,27 @@ Durante os testes da aula, observei o comportamento dos modificadores ao tentar 
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Métodos Getters e Setters
+## Métodos Getters e Setters
 
 São métodos públicos criados para permitir a leitura e a escrita controlada de atributos privados:
 
 * **Getter (`get...`):** Método de leitura. **Retorna** o valor atual do atributo.
 * **Setter (`set...`):** Método de modificação. **Recebe um parâmetro** e atualiza o valor do atributo (usando o `this`).
 
-### 2. Métodos sem Retorno (`void`) vs. Métodos com Retorno
+## Métodos sem Retorno (`void`) vs. Métodos com Retorno
 
 * **`void`:** Significa "vazio". O método executa uma instrução (ex: imprimir no console ou alterar uma variável) e **não devolve nenhum valor** para quem o chamou.
 * **Com Retorno (ex: `double`, `String`, `int`):** O método faz um cálculo ou processamento e **obrigatoriamente devolve um resultado** através da instrução `return`.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo está o código completo, estruturado e corrigido do sistema bancário após a aplicação do **Encapsulamento** e dos novos métodos.
 
-### Arquivo 1: `Conta.java` (Pacote `contas`)
+**Arquivo 1: `Conta.java` (Pacote `contas`)**
 
 ```java
 package contas;
@@ -173,7 +177,7 @@ public class Conta {
 
 ---
 
-### Arquivo 2: `PessoaFisica.java` (Pacote `contas`)
+**Arquivo 2: `PessoaFisica.java` (Pacote `contas`)**
 
 ```java
 package contas;
@@ -238,7 +242,7 @@ public class PessoaFisica {
 
 ---
 
-### Arquivo 3: `SeguroPessoaFisica.java` (Pacote `seguros`)
+**Arquivo 3: `SeguroPessoaFisica.java` (Pacote `seguros`)**
 
 ```java
 package seguros;
@@ -267,9 +271,9 @@ public class SeguroPessoaFisica extends Conta {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Método de Transferência (`transferir`)
+**Desmontando o Método de Transferência (`transferir`)**
 
 ```java
 void transferir(Conta destino, double valor) {
@@ -287,7 +291,7 @@ void transferir(Conta destino, double valor) {
 
 ---
 
-### B. Desmontando um Método com Retorno (`soma`)
+**Desmontando um Método com Retorno (`soma`)**
 
 ```java
 double soma(double cc1, double cc2) {
@@ -304,7 +308,7 @@ double soma(double cc1, double cc2) {
 
 ---
 
-### C. Desmontando Getters e Setters
+**Desmontando Getters e Setters**
 
 ```java
 public double getSaldo() {
@@ -322,9 +326,9 @@ public void setSaldo(double saldo) {
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo: Refatorando uma Classe para o Padrão Encapsulado
+**Passo a Passo: Refatorando uma Classe para o Padrão Encapsulado**
 
 Quando precisamos transformar um código antigo em um código profissional e seguro com encapsulamento, seguimos estes passos:
 
@@ -342,15 +346,13 @@ Quando precisamos transformar um código antigo em um código profissional e seg
 
 
 4. **Passo 4: Atualizar a Leitura de Valores (Exibição):**
-* Onde tínhamos `System.out.println(cc1.clientes);`, alteramos para `System.out.println(cc1.getClientes());`.
-
-
+* Onde tínhamos `System.out.println(cc1.clientes);`, alteramos para `System.out.println(cc1.getClientes());`.
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Resumo dos Modificadores de Acesso Testados no Projeto
+**Resumo dos Modificadores de Acesso Testados no Projeto**
 
 | Modificador | Na Própria Classe (`Conta`) | No Mesmo Pacote (`PessoaFisica`) | Em Outro Pacote via Herança (`SeguroPessoaFisica`) | Em Outro Pacote Sem Herança |
 | --- | --- | --- | --- | --- |
@@ -361,7 +363,7 @@ Quando precisamos transformar um código antigo em um código profissional e seg
 
 ---
 
-### 2. Métodos `void` vs. Métodos com Retorno
+**Métodos `void` vs. Métodos com Retorno**
 
 | Característica | Métodos `void` | Métodos com Retorno (`double`, `String`, etc.) |
 | --- | --- | --- |
@@ -371,9 +373,9 @@ Quando precisamos transformar um código antigo em um código profissional e seg
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Tentar Acessar Atributos Privados Diretamene
+**Tentar Acessar Atributos Privados Diretamene**
 
 Ao mudar um atributo para `private`, qualquer tentativa de acesso direto por outra classe gerará erro de compilação.
 
@@ -388,7 +390,7 @@ cc1.setSaldo(5000);
 
 ---
 
-### 2. Esquecer a Instrução `return` em Métodos Não-`void`
+**Esquecer a Instrução `return` em Métodos Não-`void`**
 
 Se um método declara um tipo de retorno diferente de `void`, o compilador exige que todas as rotas do código terminem com a palavra `return`.
 
@@ -409,7 +411,7 @@ double soma(double a, double b) {
 
 ---
 
-### 3. Inverter a Ordem no `this` dentro do Setter
+**Inverter a Ordem no `this` dentro do Setter**
 
 Atribuir a variável na ordem invertida faz com que o atributo privado continue com o valor padrão/nulo.
 
@@ -428,19 +430,9 @@ public void setClientes(String clientes) {
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Aglutinações de Código:** Corrigi dezenas de comandos que vieram agrupados sem espaçamento no rascunho (ex: `publicclassConta` ➔ `public class Conta`, `Contacc1=newConta();` ➔ `Conta cc1 = new Conta();`, `publicclassSeguroPessoaFisicaextendsConta` ➔ `public class SeguroPessoaFisica extends Conta`).
-2. **Correção do Nome da Classe `Conta`:** No rascunho da primeira parte da anotação, o texto dizia *"crie uma class chamada Contas"*, mas o código criava a classe `Conta` no singular. Padronizei para **`Conta`** (no singular) em todas as seções e arquivos para manter o código compilável.
-3. **Nomenclatura de Pacotes:** Garanti que os nomes dos pacotes fossem grafados inteiramente em letras minúsculas (`contas` e `seguros`).
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### A. Anatomia Completa da Linha `public static void main(String[] args)`
+**Anatomia Completa da Linha `public static void main(String[] args)`**
 
 Durante a aula, mencionei que os métodos possuem palavras reservadas como `main`, `static` e `void`. Vamos abrir a "caixa-preta" dessa linha histórica do Java:
 
@@ -452,7 +444,7 @@ Durante a aula, mencionei que os métodos possuem palavras reservadas como `main
 
 ---
 
-### B. A Verdadeira Força do Encapsulamento: Validação nos Setters
+**A Verdadeira Força do Encapsulamento: Validação nos Setters**
 
 A verdadeira vantagem de não deixar o atributo `public` é que podemos impedir dados incorretos ou criminosos dentro do método `set`:
 
@@ -472,7 +464,7 @@ Se a variável fosse `public`, qualquer um poderia fazer `cc1.saldo = -50000;` s
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O projeto bancário dividiu as classes nos pacotes `contas` e `seguros` para testar acessibilidade.
 2. Atributos sem modificador (*default*) só podem ser acessados por classes do mesmo pacote.
@@ -489,7 +481,7 @@ Se a variável fosse `public`, qualquer um poderia fazer `cc1.saldo = -50000;` s
 
 ## Guia Rápido de Memorização
 
-### Padrão de Encapsulamento em Java
+**Padrão de Encapsulamento em Java**
 
 ```java
 public class Exemplo {
@@ -509,7 +501,7 @@ public class Exemplo {
 
 ```
 
-### Regra de Ouro dos Modificadores
+**Regra de Ouro dos Modificadores**
 
 * **`private`** ➔ Somente a **própria classe**.
 * ***default*** ➔ Somente o **mesmo pacote**.
