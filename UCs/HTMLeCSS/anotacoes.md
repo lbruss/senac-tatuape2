@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, evolui a estrutura da página de receita de bolo adicionando elementos de **galeria visual** e aprendi a utilizar o modelo de layout **Flexbox** no CSS.
 
@@ -10,9 +10,9 @@ Entendi que, até então, o HTML organizava todos os elementos um abaixo do outr
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que é o CSS Flexbox?
+## CSS Flexbox
 
 * **Conceito simples**: O Flexbox funciona como uma "caixa organizadora elástica". Quando colocamos itens dentro dela, ela calcula e ajusta o espaço entre eles automaticamente, permitindo alinhar coisas lado a lado com facilidade.
 * **Definição técnica**: O **Flexbox (Flexible Box Layout Module)** é um modelo de layout unidimensional do CSS3 projetado para distribuir o espaço entre itens em uma interface e alinhar elementos em linhas ou colunas, lidando dinamicamente com o tamanho dos contêineres.
@@ -32,16 +32,16 @@ Entendi que, até então, o HTML organizava todos os elementos um abaixo do outr
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. A Relação Pai e Filho (Container e Item)
+## A Relação Pai e Filho (Container e Item)
 
 Para o Flexbox funcionar, é obrigatório entender essa hierarquia:
 
 * **Elemento Pai (`.container`)**: É a div que envolve os itens. É nela que aplicamos o `display: flex`. Ela dita as regras do jogo (como os filhos vão se comportar, se vão ficar em linha, qual o espaçamento entre eles).
 * **Elementos Filhos (`.box`)**: São os elementos diretamente dentro do pai. Eles obedecem às regras ditadas pelo pai e podem ter propriedades individuais (como ocupar o mesmo tamanho na tela).
 
-### 3.2. Novas Propriedades CSS Aprendidas
+**Novas Propriedades CSS Aprendidas**
 
 * `background-color`: Define a cor de fundo de um elemento (ex: `bisque` no título e `lightblue` nas caixas).
 * `display: flex`: Liga o "modo flexível" no elemento pai. Por padrão, organiza todos os filhos diretos em uma única linha horizontal.
@@ -53,11 +53,11 @@ Para o Flexbox funcionar, é obrigatório entender essa hierarquia:
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os arquivos do projeto completamente corrigidos e prontos para execução na pasta `nova`.
 
-### Arquivo 1: `receitabolo.html`
+**Arquivo 1: `receitabolo.html`**
 
 ```html
 <!DOCTYPE html>
@@ -136,7 +136,7 @@ Abaixo estão os arquivos do projeto completamente corrigidos e prontos para exe
 
 ---
 
-### Arquivo 2: `index.css`
+**Arquivo 2: `index.css`**
 
 ```css
 /* Aplicar a mesma fonte para todos os elementos da página */
@@ -212,14 +212,14 @@ li > p {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise da Estrutura HTML (`.container` e `.box`)
+**Análise da Estrutura HTML (`.container` e `.box`)**
 
 * `<div class="container">`: Funciona como o envelope geral da galeria. Sem ele, não teríamos onde aplicar o `display: flex`.
 * `<div class="box">`: São as 3 subdivisões individuais. Cada uma guarda uma imagem diferente (`bolo1.jpg`, `bolo2.jpg`, `bolo3.jpg`).
 
-### Análise das Regras CSS de Flexbox
+**Análise das Regras CSS de Flexbox**
 
 * `display: flex;`:
 * *O que faz*: Altera o contexto de renderização da `.container` de Bloco para Flex.
@@ -243,7 +243,7 @@ li > p {
 
 ---
 
-## 6. Passo a Passo: Montando a Galeria Flexbox no VS Code
+**Passo a Passo: Montando a Galeria Flexbox no VS Code**
 
 1. **Criar a pasta do projeto**:
 * Crie uma pasta chamada `nova` no seu computador e abra-a dentro do Visual Studio Code (**File > Open Folder**).
@@ -272,9 +272,9 @@ li > p {
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Propriedades do Flex Container (Pai) vs. Flex Items (Filhos)
+**Tabela 1: Propriedades do Flex Container (Pai) vs. Flex Items (Filhos)**
 
 | Onde se aplica? | Propriedade | Para que serve? | Exemplo no Código |
 | --- | --- | --- | --- |
@@ -283,7 +283,7 @@ li > p {
 | **No Pai (`.container`)** | `justify-content` | Alinha os filhos no eixo horizontal (início, centro, fim). | `justify-content: flex-start;` |
 | **No Filho (`.box`)** | `flex` | Define a capacidade do item crescer e ocupar espaço. | `flex: 1;` |
 
-### Tabela 2: Opções da Propriedade `justify-content`
+**Tabela 2: Opções da Propriedade `justify-content`**
 
 | Valor | Comportamento Visável |
 | --- | --- |
@@ -295,7 +295,7 @@ li > p {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Confundir o nome do arquivo CSS nas anotações**:
 * ❌ *Incorreto*: Criar o código CSS dentro de um arquivo chamado `index.html`.
@@ -314,22 +314,11 @@ li > p {
 4. **Imagens maiores que a caixa `.box**`:
 * Se as imagens tiverem alta resolução, elas podem ultrapassar os limites da `.box`. A solução é adicionar `.box img { max-width: 100%; }` no CSS.
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas
 
-* **Correção de Nome de Arquivo**: Na anotação original, estava escrito *"crie o arquivo index.html e escreva o seguinte [código CSS]"*. Corrigi silenciosamente no material para `index.css`, que é o arquivo correto para folhas de estilo.
-* **Erros de Digitação**: Corrigi termos como `Ingrendientes` para `Ingredientes`, `fuba` para `fubá` e `açucar` para `açúcar`.
-* **Sintaxe de Tags e Propriedades**: Separei todas as tags e atributos que estavam colados (`<divclass=`, `<ulstyle=`, `<inputtype=`, `display:flex`, `padding:10px`).
-* **Fechamento Incorreto de Lista**: A tag `<li style="color:red;">` final no HTML estava sem a tag correspondente de fechamento no lugar correto. Ajustei para manter o HTML válido.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Responsividade com `flex-wrap`
+**Responsividade com `flex-wrap`**
 
 Por padrão, o Flexbox tenta espremer todos os itens em uma única linha (`flex-wrap: nowrap`). Em telas de celular muito pequenas, 3 caixas de `100px` podem ficar esmagadas.
 
@@ -346,7 +335,7 @@ Para resolver isso de forma profissional, adicionamos a propriedade `flex-wrap: 
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Ativar Flexbox no Pai**: `.container { display: flex; }`
 * **Espaço entre Caixas**: `.container { gap: 10px; }`
@@ -357,7 +346,7 @@ Para resolver isso de forma profissional, adicionamos a propriedade `flex-wrap: 
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O Flexbox é um modelo de layout unidimensional do CSS que facilita o alinhamento de elementos lado a lado.
 2. O elemento pai (`.container`) recebe a regra `display: flex` para ativar o comportamento flexível nos seus filhos.
