@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, aprendi a integrar o Java diretamente com um hardware do mundo real: uma **impressora térmica não-fiscal de cupom** (do tipo utilizado em caixas de supermercado, farmácias e restaurantes em sistemas de PDV — Ponto de Venda).
 
@@ -12,45 +12,46 @@ Nesta prática, conectei a aplicação Java à impressora pelo seu endereço de 
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Comunicação via Sockets TCP/IP
+## Comunicação via Sockets TCP/IP
 
 Um **Socket** é a representação de um canal de comunicação de rede bidirecional entre duas máquinas.
 
 * O **computador (software Java)** atua como o cliente que solicita a conexão.
 * A **impressora térmica** atua como o servidor que escuta requisições em uma porta específica (geralmente a **porta 9100**, padrão da indústria para impressão *RAW/JetDirect*).
 
-### B. O Protocolo e Linguagem ESC/POS
+## O Protocolo e Linguagem ESC/POS
 
 As impressoras térmicas utilizam um padrão de comandos chamado **ESC/POS** (desenvolvido originalmente pela Epson e adotado por marcas como Bematech, Daruma, Elgin e Diebold).
 
 Esses comandos não são textos comuns, mas sim **sequências de bytes hexadecimais** iniciados quase sempre pelo caractere *Escape* (`0x1B` em hexa) ou *Group Separator* (`0x1D` em hexa). Ao receber esses bytes, a impressora intercepta o sinal e altera suas configurações físicas (ex: liga o negrito, gira a guilhotina ou altera o tamanho do caractere).
 
-💡 **Analogia da Chamada Telefônica:**
+> **Analogia da Chamada Telefônica:**
+
 Imagine que abrir um `Socket` é o mesmo que fazer uma ligação telefônica para o IP da impressora. Assim que ela "atende" no ramal 9100, nós não falamos português puro; enviamos pequenos "códigos Morse" (bytes ESC/POS) para comandar o hardware: um código para ajustar a máquina, o texto do cupom e um código final que aciona a lâmina para cortar o papel.
 
 ---
 
-## 3. Conceitos Fundamentais
+## Conceitos Fundamentais
 
-### 1. `java.net.Socket`
+**`java.net.Socket`**
 
 Classe nativa do Java usada para estabelecer a conexão de rede TCP/IP com a impressora.
 
 * **Sintaxe:** `Socket impressora = new Socket("IP_DA_IMPRESSORA", PORTA);`
 
-### 2. `java.io.OutputStream`
+**`java.io.OutputStream`**
 
 Fluxo de saída de dados associado ao Socket. É o "cano" por onde enviamos os arrays de bytes para a impressora.
 
 * **Sintaxe:** `OutputStream saida = impressora.getOutputStream();`
 
-### 3. Tabela de Codificação de Caracteres (`CP850`)
+**Tabela de Codificação de Caracteres (`CP850`)**
 
 Impressoras térmicas não utilizam o padrão moderno `UTF-8` por padrão para acentuação brasileira. Elas trabalham com tabelas de páginas de código (*Code Pages*). A tabela **`CP850`** (ou `IBM850`) é a utilizada no Brasil para garantir que letras com acento (á, é, ç, ã) e caracteres especiais sejam impressos corretamente sem virar símbolos estranhos.
 
-### 4. API de Data e Hora Moderna (`java.time`)
+## API de Data e Hora Moderna (`java.time`)
 
 Para imprimir o momento exato da venda, utilizei as classes da API nativa do Java 8+:
 
@@ -59,9 +60,9 @@ Para imprimir o momento exato da venda, utilizei as classes da API nativa do Jav
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Código Completo e Corrigido (`Impressora.java`)
+**Código Completo e Corrigido (`Impressora.java`)**
 
 Abaixo está o código final ajustado, com o tratamento de exceção adequado, padrão de pacotes em letras minúsculas e espaçamentos corrigidos.
 
@@ -149,7 +150,7 @@ public class Impressora {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 Vamos entender os comandos hexadecimais em nível de hardware que enviamos dentro do array de bytes `saida.write(new byte[]{...})`:
 
@@ -189,9 +190,9 @@ Vamos entender os comandos hexadecimais em nível de hardware que enviamos dentr
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Roteiro de Execução e Teste de Impressão Térmica em Rede
+**Roteiro de Execução e Teste de Impressão Térmica em Rede**
 
 1. **Passo 1: Descobrir/Confirmar o IP da Impressora:**
 * Imprima o teste de autodiagnostico da própria impressora (geralmente segurando o botão *FEED* enquanto liga a impressora) para ver o IP fixado nela (ex: `10.26.45.49`).
@@ -223,9 +224,9 @@ Vamos entender os comandos hexadecimais em nível de hardware que enviamos dentr
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Dicionário de Comandos ESC/POS Fundamentais
+**Dicionário de Comandos ESC/POS Fundamentais**
 
 | Comando ESC/POS | Representação em Bytes (Hex) | Função / Efeito no Hardware |
 | --- | --- | --- |
@@ -240,7 +241,7 @@ Vamos entender os comandos hexadecimais em nível de hardware que enviamos dentr
 
 ---
 
-### 2. Tabela de Opções de Alinhamento (ESC a n)
+**Tabela de Opções de Alinhamento (ESC a n)**
 
 | Byte de Parâmetro | Posição do Alinhamento |
 | --- | --- |
@@ -250,21 +251,21 @@ Vamos entender os comandos hexadecimais em nível de hardware que enviamos dentr
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Falha na Conexão (`java.net.ConnectException` / Timeout)
+**Falha na Conexão (`java.net.ConnectException` / Timeout)**
 
 Ocorre quando o computador não consegue alcançar a impressora.
 
 * **Causa:** O IP informado no código está errado, o cabo de rede está desconectado ou o computador está em um Wi-Fi/Rede diferente da impressora.
 * **Solução:** Faça o teste do `ping IP` no CMD antes de rodar o programa Java.
 
-### 2. Esquecer de Colocar o `\n` ao Final das Frases
+**Esquecer de Colocar o `\n` ao Final das Frases**
 
 * **Problema:** O texto é enviado, o programa finaliza sem erros, mas **nada é impresso no papel**.
 * **Causa:** A impressora térmica aguarda o caractere de fim de linha (`\n`) para descarregar o texto da memória e queimar o papel.
 
-### 3. Acentos Virando Símbolos Estranhos
+**Acentos Virando Símbolos Estranhos**
 
 * **Problema:** A palavra `"SÃO PAULO"` imprime como `"S├âO PAULO"`.
 * **Causa:** Enviar os bytes usando a codificação padrão `UTF-8`.
@@ -272,19 +273,9 @@ Ocorre quando o computador não consegue alcançar a impressora.
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Aglutinações de Código:** Corrigi todos os comandos agrupados por erros de digitação (ex: `publicclassImpressora` ➔ `public class Impressora`, `OutputStreamsaida=impressora.getOutputStream();` ➔ `OutputStream saida = impressora.getOutputStream();`).
-2. **Correção de Caixa dos Valores Hexadecimais:** No rascunho, o valor `0X22` veio digitado com 'X' maiúsculo. Padronizei todos os numerais hexadecimais no padrão Java minúsculo (ex: `0x22`, `0x01`).
-3. **Nomenclatura do Pacote:** Ajustei o pacote de `Impressora` (com maiúscula) para `impressora` (tudo em minúsculas), respeitando as convenções oficiais do Java.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Garantindo o Fechamento de Recursos com `try-with-resources`
+**Garantindo o Fechamento de Recursos com `try-with-resources`**
 
 No código da aula, abrimos o `Socket` e o `OutputStream` dentro do bloco `try` e fechamos manualmente no final com `close()`. Se ocorresse um erro no meio da impressão, o código pularia direto para o `catch` e deixaria a porta da impressora presa/aberta na memória!
 
@@ -307,7 +298,7 @@ try (Socket impressora = new Socket("10.26.45.49", 9100);
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago — 10 Linhas**
 
 1. Impressoras térmicas de PDV podem ser controladas via rede TCP/IP através da classe `Socket`.
 2. A porta padrão de comunicação RAW para impressoras térmicas na rede é a 9100.
@@ -324,7 +315,7 @@ try (Socket impressora = new Socket("10.26.45.49", 9100);
 
 ## Guia Rápido de Memorização
 
-### Sequência do Cupom Térmico em Java
+**Sequência do Cupom Térmico em Java**
 
 ```java
 // 1. Abrir Canal
