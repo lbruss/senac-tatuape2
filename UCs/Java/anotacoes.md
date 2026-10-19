@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, aprofundei os conhecimentos em impressão térmica para PDV, focando no **posicionamento e alinhamento visual dos dados no cupom**.
 
@@ -12,9 +12,9 @@ Além disso, atualizamos o endereço de IP da impressora do laboratório para `1
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Como a Impressora Trata os Alinhamentos (`ESC a n`)
+## Como a Impressora Trata os Alinhamentos (`ESC a n`)
 
 A impressora térmica processa informações **linha por linha**. Quando enviamos um comando de alinhamento, como o `ESC a n`, a impressora altera a posição de todo o texto que vier a seguir, até que outro comando de alinhamento seja enviado.
 
@@ -22,22 +22,22 @@ A impressora térmica processa informações **linha por linha**. Quando enviamo
 * **Centro (`0x01`):** Centraliza o texto no meio da largura do papel.
 * **Direita (`0x02`):** Empurra o texto para colar na margem direita.
 
-### B. O Desafio da "Linha Única com Duas Colunas"
+**O Desafio da "Linha Única com Duas Colunas"**
 
 Um dos maiores aprendizados desta aula foi perceber a limitação do comando de alinhamento por hardware: **ele afeta a linha inteira, e não palavras isoladas.**
 
 Se eu tentar alinhar a palavra "Cliente" à esquerda e a palavra "SENAC" à direita usando dois comandos `ESC/POS` na mesma linha, o segundo comando vai sobresscrever o primeiro e empurrar a linha **inteira** para a direita!
 
-💡 **Analogia da Máquina de Escrever:**
+> **Analogia da Máquina de Escrever:**
 Imagine uma máquina de escrever antiga. Se você ajusta a margem para a direita, todo o texto que você digitar naquela linha irá para a direita. Para colocar um texto no canto esquerdo e outro no canto direito da **mesma linha**, você precisa colocar a margem na esquerda, digitar a primeira palavra, apertar a barra de espaço várias vezes até o carrinho chegar no canto direito e, só então, digitar a segunda palavra.
 
 Fizemos exatamente isso em Java: configuramos o alinhamento para a esquerda e preenchemos o meio do texto com **espaços em branco manuais** até empurrar a segunda informação para a borda direita da bobina.
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Parâmetros do Comando `ESC a n` (Alinhamento)
+## Parâmetros do Comando `ESC a n` (Alinhamento)
 
 O comando hexadecimal para alterar o alinhamento é `0x1B, 0x61, n`, onde o último byte `n` define a posição:
 
@@ -45,7 +45,7 @@ O comando hexadecimal para alterar o alinhamento é `0x1B, 0x61, n`, onde o últ
 * `0x01`: Alinhamento centralizado (*Center*).
 * `0x02`: Alinhamento à direita (*Right*).
 
-### 2. Formatação por Espaçamento Manual (Colunas na Mesma Linha)
+## Formatação por Espaçamento Manual (Colunas na Mesma Linha)
 
 Para criar o efeito de tabela/colunas (por exemplo, `Nome do Produto` na esquerda e `Preço` na direita):
 
@@ -57,9 +57,9 @@ Para criar o efeito de tabela/colunas (por exemplo, `Nome do Produto` na esquerd
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Código Completo e Atualizado (`Impressora.java`)
+**Código Completo e Atualizado (`Impressora.java`)**
 
 ```java
 package impressora;
@@ -152,11 +152,11 @@ public class Impressora {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
 Analisando especificamente os novos trechos de código adicionados nesta aula:
 
-### 1. Mudança para Alinhamento à Esquerda
+**Mudança para Alinhamento à Esquerda**
 
 ```java
 saida.write(new byte[] {0x1B, 0x61, 0x00});
@@ -169,7 +169,7 @@ saida.write("Bruss Loza\n".getBytes("CP850"));
 
 ---
 
-### 2. Mudança para Alinhamento à Direita
+**Mudança para Alinhamento à Direita**
 
 ```java
 saida.write(new byte[] {0x1B, 0x61, 0x02});
@@ -182,7 +182,7 @@ saida.write("SENAC Tatuapé\n".getBytes("CP850"));
 
 ---
 
-### 3. Simulando Duas Colunas na Mesma Linha (Truque do Espaçamento)
+**Simulando Duas Colunas na Mesma Linha (Truque do Espaçamento)**
 
 ```java
 saida.write(new byte[] {0x1B, 0x61, 0x00});
@@ -198,9 +198,9 @@ saida.write("Bruss Loza                        SENAC Tatuapé\n".getBytes("CP850
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Como Criar um Layout de Duas Colunas Alinhadas sem Quebrar a Linha
+**Como Criar um Layout de Duas Colunas Alinhadas sem Quebrar a Linha**
 
 Para montar uma linha estilo recibo (Exemplo: `Produto` de um lado e `Preço` do outro), siga esta sequência lógica:
 
@@ -224,9 +224,9 @@ Para montar uma linha estilo recibo (Exemplo: `Produto` de um lado e `Preço` do
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Guia dos Bytes de Alinhamento `ESC a n` (`0x1B, 0x61, n`)
+**Guia dos Bytes de Alinhamento `ESC a n` (`0x1B, 0x61, n`)**
 
 | Byte do Parâmetro (`n`) | Tipo de Alinhamento | Efeito no Papel | Uso Comum |
 | --- | --- | --- | --- |
@@ -236,7 +236,7 @@ Para montar uma linha estilo recibo (Exemplo: `Produto` de um lado e `Preço` do
 
 ---
 
-### 2. Alinhamento via Hardware vs. Alinhamento via String (Espaços)
+**Alinhamento via Hardware vs. Alinhamento via String (Espaços)**
 
 | Método | Como Funciona | Vantagem | Limitação |
 | --- | --- | --- | --- |
@@ -245,22 +245,22 @@ Para montar uma linha estilo recibo (Exemplo: `Produto` de um lado e `Preço` do
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Tentar Usar `ESC a 0x02` na Metade de Uma Linha
+**Tentar Usar `ESC a 0x02` na Metade de Uma Linha**
 
 Se você escrever `"Bruss Loza"`, mandar o comando `0x02` e depois escrever `"SENAC"`, a impressora não vai colocar a primeira palavra na esquerda e a segunda na direita. Ela vai empurrar **a linha inteira** para a direita!
 
 * **Solução:** Use o truque de manter o alinhamento à esquerda (`0x00`) e inserir os espaços no meio da String.
 
-### 2. Exceder o Limite de Caracteres da Linha
+**Exceder o Limite de Caracteres da Linha**
 
 Se a sua impressora aceita 48 caracteres por linha e a sua String concatenada com espaços tiver 52 caracteres:
 
 * A impressora cortará a palavra no final e jogará o restante para a **linha de baixo**, destruindo o visual do cupom.
 * **Cuidado:** Sempre meça ou valide o tamanho total das Strings antes de imprimir.
 
-### 3. Grafia de Numerais Hexadecimais no Java
+**Grafia de Numerais Hexadecimais no Java**
 
 No rascunho original, alguns bytes vieram escritos como `0X22` ou `0X01` (com 'X' maiúsculo).
 
@@ -268,19 +268,9 @@ No rascunho original, alguns bytes vieram escritos como `0X22` ou `0X01` (com 'X
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho de aula, realizei as seguintes correções silenciosas:
-
-1. **Nomenclatura do Pacote:** Ajustei a declaração `package Impressora;` para `package impressora;` em letras minúsculas, conforme as convenções oficiais do Java.
-2. **Formatação de Hexadecimais:** Padronizei todos os numerais de bytes para `0x` minúsculo (ex: `0x22`, `0x01`, `0x00`, `0x02`).
-3. **Formatação da String de Data:** No rascunho original, a variável trazia `"Data"` sem espaço ou dois-pontos no final, resultando em algo grudado como `"Data23/10/26"`. Ajustei para `"Data: "` para melhorar a apresentação visual no papel.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Gerando Colunas Perfeitas Dinamicamente com `String.format()` em Java
+**Gerando Colunas Perfeitas Dinamicamente com `String.format()` em Java**
 
 Fazer o espaçamento "na raça" digitando vários espaços manualmente dentro da aspas (`"Bruss Loza                        SENAC Tatuapé"`) funciona para testes rápidos, mas é ruim em sistemas reais, pois se o nome do cliente for maior, o alinhamento quebra!
 
@@ -310,7 +300,7 @@ saida.write(linhaFormatada.getBytes("CP850"));
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O IP da impressora do laboratório foi atualizado no código para `10.26.45.41`.
 2. O comando `0x1B, 0x61, 0x00` redefine o alinhamento da impressora para a margem esquerda.
@@ -327,13 +317,13 @@ saida.write(linhaFormatada.getBytes("CP850"));
 
 ## Guia Rápido de Memorização
 
-### Tabela Rápida de Bytes de Alinhamento
+**Tabela Rápida de Bytes de Alinhamento**
 
 * **`0x1B, 0x61, 0x00`** ➔ Esquerda (*Left*)
 * **`0x1B, 0x61, 0x01`** ➔ Centro (*Center*)
 * **`0x1B, 0x61, 0x02`** ➔ Direita (*Right*)
 
-### Fórmula da Linha com Duas Colunas
+**Fórmula da Linha com Duas Colunas**
 
 ```
 [Texto Esquerda] + [Espaços em Branco para Preencher] + [Texto Direita] + "\n"
