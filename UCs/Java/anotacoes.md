@@ -296,9 +296,9 @@ Para economizar memória RAM e evitar poluição no painel *Package Explorer*:
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Erro de Índice Fora dos Limites (`ArrayIndexOutOfBoundsException` / `IndexOutOfBoundsException`)
+**Erro de Índice Fora dos Limites (`ArrayIndexOutOfBoundsException` / `IndexOutOfBoundsException`)**
 
 Ocorre quando tentamos acessar uma posição de índice que não existe na estrutura.
 
@@ -315,7 +315,7 @@ System.out.println(carros[carros.length - 1]);
 
 ---
 
-### 2. Erro de Parênteses no Casting de `Math.random()`
+**Erro de Parênteses no Casting de `Math.random()`**
 
 Esquecer de isolar a multiplicação nos parênteses fará o *casting* zerar a expressão antes de multiplicar!
 
@@ -330,7 +330,7 @@ int indice = (int) (Math.random() * 4);
 
 ---
 
-### 3. Tentar Acessar Posições do `ArrayList` com Colchetes
+**Tentar Acessar Posições do `ArrayList` com Colchetes**
 
 A sintaxe de colchetes `[]` é exclusiva de arrays estáticos. Em `ArrayList`, usar colchetes gera erro de compilação.
 
@@ -348,20 +348,9 @@ System.out.println(contatos.get(0));
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão e estruturação do meu rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Ortografia em Nomes de Vetores:** Corrigi erros de digitação presentes no rascunho (ex: `"combi"` para `"Kombi"`, `"porche"` para `"Porsche"`, `"Az"` para `"Ás"`, `"Valente"` para `"Valete"`).
-2. **E-mail de Teste:** Corrigi o erro de digitação da String `"bruasssloza@email.com"` para `"brussloza@email.com"`.
-3. **Convenção de Nomenclatura de Pacotes:** Corrigi o nome do pacote `Vetor` (com maiúscula) para `vetor` em letras minúsculas, alinhando com a convenção oficial do Java.
-4. **Detalhamento do `flatlaf.jar`:** Adicionei a explicação de que a biblioteca *FlatLaf* atua como um *Look and Feel* gráfico, detalhando o porquê de realizarmos a adição no *Build Path*.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### A. Percorrendo Arrays com o Laço For-Each (*Enhanced For*)
+**Percorrendo Arrays com o Laço For-Each (*Enhanced For*)**
 
 Além do laço `for` tradicional com variável contadora `i`, o Java possui uma sintaxe muito mais limpa para percorrer todos os elementos de um Array ou `ArrayList` quando não precisamos controlar o número do índice:
 
@@ -377,7 +366,7 @@ for (String carro : carros) {
 
 ---
 
-### B. Aplicando o Tema FlatLaf no Código Java Swing
+**Aplicando o Tema FlatLaf no Código Java Swing**
 
 Para que a biblioteca `flatlaf.jar` que adicionamos à pasta `lib` realmente altere o visual da janela `JFrame` ao rodar a aplicação, adicionamos a seguinte linha de instrução logo no início do método `main`:
 
@@ -401,7 +390,7 @@ public static void main(String[] args) {
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Arrays são estruturas de dados indexadas e de tamanho fixo alocadas na memória.
 2. Todo array em Java inicia seu primeiro elemento no índice 0 e vai até o índice `length - 1`.
@@ -418,7 +407,7 @@ public static void main(String[] args) {
 
 ## Guia Rápido de Memorização
 
-### Sintaxe de Arrays vs. ArrayList
+**Sintaxe de Arrays vs. ArrayList**
 
 ```java
 // ARRAY ESTÁTICO
