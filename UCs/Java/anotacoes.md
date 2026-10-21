@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, explorei o armazenamento e a manipulação de dados em memória através das estruturas de **Arrays (Vetores)** e **ArrayLists (Vetores Dinâmicos)** em Java.
 
@@ -12,30 +12,30 @@ Na segunda parte da aula, fechei os projetos anteriores para manter a área de t
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Array Estático (Vetor) vs. Array Dinâmico (ArrayList)
+## Array Estático (Vetor) vs. Array Dinâmico (ArrayList)
 
 Um **Array (Vetor)** é uma estrutura de dados **indexada**, sequencial e de **tamanho fixo**. No momento em que um array estático é criado na memória RAM, precisamos definir exatamente quantas posições ele terá, e esse limite não pode ser alterado durante a execução do programa.
 
 Por outro lado, o **ArrayList** é uma classe nativa do Java (`java.util.ArrayList`) que implementa um vetor **dinâmico**. Ele permite adicionar, remover e pesquisar elementos sem que seja necessário definir um limite máximo de tamanho previamente.
 
-💡 **Analogia da Caixa de Ovos vs. Mochila Expansível:**
+> **Analogia da Caixa de Ovos vs. Mochila Expansível:**
 
 * **Array Estático:** É como uma caixa de ovos de papelão com 6 compartimentos fixos. Cada posição tem um número (índice de $0$ a $5$). Você não pode colocar o 7º ovo na mesma caixa sem rasgá-la; se precisar de mais espaço, terá que comprar uma caixa inteira nova.
 * **ArrayList:** É como uma mochila expansível inteligente. À medida que você vai colocando objetos dentro dela, ela se estica automaticamente para abrir mais espaço; se você tirar itens, ela encolhe.
 
 ---
 
-### B. Interface Gráfica (Swing e WindowBuilder)
+## Interface Gráfica (Swing e WindowBuilder)
 
 Até agora, nossas aplicações rodavam e exibiam resultados apenas através do terminal (console). Com a biblioteca **Java Swing** e a ferramenta **WindowBuilder**, passamos a construir janelas visuais com botões, campos de texto, ícones e menus editáveis de forma drag-and-drop (arrastar e soltar).
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Índices e Posições em Arrays
+## Índices e Posições em Arrays
 
 Toda estrutura indexada em Java é **baseada em zero (zero-indexed)**. Isso significa que:
 
@@ -43,12 +43,12 @@ Toda estrutura indexada em Java é **baseada em zero (zero-indexed)**. Isso sign
 * O segundo elemento fica no índice `1`.
 * O último elemento de um array de tamanho $N$ fica no índice $N - 1$.
 
-### 2. Atributo `.length` vs. Método `.size()`
+## Atributo `.length` vs. Método `.size()`
 
 * **`array.length`**: É uma **propriedade/atributo** de arrays estáticos que informa a quantidade total de posições reservadas.
 * **`list.size()`**: É um **método** de coleções dinâmicas (`ArrayList`) que retorna a quantidade atual de elementos armazenados na lista.
 
-### 3. Sorteios Aleatórios com `Math.random()`
+## Sorteios Aleatórios com `Math.random()`
 
 O método `Math.random()` gera um número decimal do tipo `double` dentro do intervalo de $0.0$ até $0.999...$ (maior ou igual a 0.0 e estritamente menor que 1.0).
 Para sortear um índice válido de um array:
@@ -56,16 +56,16 @@ Para sortear um índice válido de um array:
 1. Multiplicamos o resultado pelo tamanho do array.
 2. Fazemos o *casting* explícito para `(int)`, descartando as casas decimais.
 
-### 4. Componentes da Interface Gráfica (`JFrame` e `FlatLaf`)
+## Componentes da Interface Gráfica (`JFrame` e `FlatLaf`)
 
 * **`JFrame`**: Classe do Java Swing que representa a janela principal de uma aplicação desktop (com barra de título, botões de fechar, minimizar e redimensionar).
 * **`flatlaf.jar`**: Biblioteca externa (*Look and Feel*) moderna para Java Swing. Por padrão, a interface nativa do Swing tem um visual antigo; o FlatLaf aplica temas visuais limpos e modernos aos componentes.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Manipulação de Vetores Estáticos (`Vetor1.java`)
+**Exemplo 1: Manipulação de Vetores Estáticos (`Vetor1.java`)**
 
 ```java
 package vetor;
@@ -106,7 +106,7 @@ public class Vetor1 {
 
 ---
 
-### Exemplo 2: Sorteador de Cartas com `Math.random()` (`JogoCarta.java`)
+**Exemplo 2: Sorteador de Cartas com `Math.random()` (`JogoCarta.java`)**
 
 ```java
 package vetor;
@@ -136,7 +136,7 @@ public class JogoCarta {
 
 ---
 
-### Exemplo 3: Manipulação de Vetores Dinâmicos com `ArrayList` (`ArrayLista.java`)
+**Exemplo 3: Manipulação de Vetores Dinâmicos com `ArrayList` (`ArrayLista.java`)**
 
 ```java
 package vetor;
@@ -189,9 +189,9 @@ public class ArrayLista {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Sorteio de Índice em `JogoCarta.java`
+**Desmontando o Sorteio de Índice em `JogoCarta.java`**
 
 ```java
 String face = faces[(int) (Math.random() * faces.length)];
@@ -213,7 +213,7 @@ $$\text{Resultado Inteiro} = 9$$
 
 ---
 
-### B. Desmontando a Busca em `ArrayLista.java`
+**Desmontando a Busca em `ArrayLista.java`**
 
 ```java
 System.out.println(contatos.get(5));
@@ -229,9 +229,9 @@ System.out.println(contatos.get(5));
 
 ---
 
-## 6. Passo a Passo
+## Passo a Passo
 
-### Passo a Passo 1: Como Fechar Projetos Inativos no Eclipse
+**Passo a Passo 1: Como Fechar Projetos Inativos no Eclipse**
 
 Para economizar memória RAM e evitar poluição no painel *Package Explorer*:
 
@@ -241,7 +241,7 @@ Para economizar memória RAM e evitar poluição no painel *Package Explorer*:
 
 ---
 
-### Passo a Passo 2: Configuração Inicial da Interface Gráfica no Eclipse (Projeto `blpvd`)
+**Passo a Passo 2: Configuração Inicial da Interface Gráfica no Eclipse (Projeto `blpvd`)**
 
 1. **Criar o Projeto e Pacote:**
 * Crie um novo projeto Java (`File` ➔ `New` ➔ `Java Project`) chamado `blpvd`.
@@ -269,15 +269,11 @@ Para economizar memória RAM e evitar poluição no painel *Package Explorer*:
 * Procure a propriedade `resizable` e altere para **`false`** (impede que o usuário desfigure a tela redimensionando-a).
 * Procure a propriedade `iconImage`, clique no botão de três pontos (`...`), selecione a opção de imagem do projeto e escolha o arquivo de ícone de **64x64** pixels.
 
-
-
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Array Estático vs. ArrayList (Vetor Dinâmico)
+**Array Estático vs. ArrayList (Vetor Dinâmico)**
 
 | Recurso / Operação | Array Estático (`String[]`) | ArrayList Dinâmico (`ArrayList<String>`) |
 | --- | --- | --- |
@@ -290,7 +286,7 @@ Para economizar memória RAM e evitar poluição no painel *Package Explorer*:
 
 ---
 
-### 2. Leitura de Tamanho e Acesso por Estrutura
+**Leitura de Tamanho e Acesso por Estrutura**
 
 | Estrutura de Dado | Como Saber o Tamanho? | Como Acessar um Elemento por Índice? |
 | --- | --- | --- |
