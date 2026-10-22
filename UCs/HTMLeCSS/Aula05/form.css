@@ -1,0 +1,38 @@
+/* Seletor Universal - seleciona todos os elementos da página */
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form{
+    width: 90%; /*O formulário vai ocupar 90% da tela*/
+    max-width: 500px; /*Define a largura máxima*/
+    margin: 0 auto; /*Serve para centralizar horizontalmente o formulário*/
+}
+
+div{
+    margin-bottom: 20px; /*Adiciona espaço abaixo da div*/
+    display: flex; /*Transforma a div em um container que permite alinhas os elementos horizontalmente*/
+    justify-content: space-between; /*Coloca os elementos nas extremidades*/
+    align-items: center;
+    gap: 5px;
+}
+
+label, input, select, textarea, button{
+    font-size: 14px;
+    line-height: 1.5; /*Espaçamento de 1.5 entre as linhas*/
+}
+
+label{
+    text-align: right; /*Alinhas a direita*/
+    width: 30%; /*O label ocupa 30% da linha*/
+    margin-right: 2%; /*Cria o espaço entre o label e o campo*/
+}
+
+input, select, textarea{
+    flex: auto; /*Faz os campos crescerem e ocuparem o espaço restante*/
+}
+
+button{
+    margin: 50%;
+    margin: 0 auto;
+}
