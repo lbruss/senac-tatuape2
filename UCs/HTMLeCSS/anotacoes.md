@@ -1,8 +1,6 @@
 # Formulários em HTML5: Campos de Entrada, Seleção, Validação e Estilização com Flexbox
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, aprendi a construir e estilizar **formulários interativos em HTML5**, compreendendo a estrutura necessária para coletar dados do usuário de maneira acessível e organizada.
 
@@ -10,9 +8,9 @@ Entendi que os formulários são a principal porta de entrada para a interação
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que é um Formulário HTML e a Meta Viewport?
+## Formulário HTML e a Meta Viewport
 
 * **Formulário HTML (`<form>`)**: É um contêiner que agrupa diferentes tipos de controles visuais (caixas de texto, botões de opção, listas suspensas) com o objetivo de capturar dados digitados pelo usuário e prepará-los para envio.
 * **Meta Tag Viewport**: É uma instrução inserida no cabeçalho `<head>` da página que ajusta a área de exibição visível do site (*viewport*) ao tamanho real da tela do dispositivo utilizado (smartphone, tablet ou desktop).
@@ -37,9 +35,9 @@ Entendi que os formulários são a principal porta de entrada para a interação
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. A Meta Tag Viewport
+## A Meta Tag Viewport
 
 * `<meta name="viewport" content="width=device-width, initial-scale=1.0">`:
 * `name="viewport"`: Avisa ao navegador que a regra se aplica à janela de visualização.
@@ -48,12 +46,12 @@ Entendi que os formulários são a principal porta de entrada para a interação
 
 
 
-### 3.2. Estrutura do Formulário e Rótulos Acessíveis
+## Estrutura do Formulário e Rótulos Acessíveis
 
 * `<form>`: Tag pai que envolve todos os campos.
 * `<label for="ID_DO_CAMPO">`: Rotula um campo de entrada. O atributo `for` deve corresponder exatamente ao `id` do campo correspondente. Isso melhora a acessibilidade (leitores de tela) e permite que o usuário clique no texto do rótulo para ativar o campo.
 
-### 3.3. Tipos de Campos de Entrada (`<input>`)
+## Tipos de Campos de Entrada (`<input>`)
 
 * `type="text"`: Campo simples para texto de linha única.
 * `type="password"`: Mascara os caracteres digitados por questões de privacidade.
@@ -64,7 +62,7 @@ Entendi que os formulários são a principal porta de entrada para a interação
 * `type="submit"`: Botão que envia os dados do formulário.
 * `type="reset"`: Botão que limpa todos os campos, retornando-os aos valores iniciais.
 
-### 3.4. Elementos Seletores e Caixas de Texto
+## Elementos Seletores e Caixas de Texto
 
 * `<select>` e `<option>`: Cria uma caixa de seleção suspensa (*dropdown*).
 * Atributo `multiple`: Permite selecionar mais de uma opção pressionando `Ctrl` ou `Shift`.
@@ -76,11 +74,11 @@ Entendi que os formulários são a principal porta de entrada para a interação
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os arquivos do projeto com a sintaxe corrigida, validados e prontos para execução na pasta `formulario`.
 
-### Arquivo 1: `formulario.html`
+**Arquivo 1: `formulario.html`**
 
 ```html
 <!DOCTYPE html>
@@ -169,7 +167,7 @@ Abaixo estão os arquivos do projeto com a sintaxe corrigida, validados e pronto
 
 ---
 
-### Arquivo 2: `form.css`
+**Arquivo 2: `form.css`**
 
 ```css
 /* Seletor Universal - aplica a família de fontes para todos os elementos */
@@ -237,9 +235,9 @@ input[type="reset"] {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise do `formulario.html`
+**Análise do `formulario.html`**
 
 * `<meta name="viewport" content="width=device-width, initial-scale=1.0">`: Corrige a renderização em telas de celular.
 * `<input type="number" min="0" max="54" step="6" value="0">`:
@@ -252,7 +250,7 @@ input[type="reset"] {
 * `<optgroup label="Mamíferos">`: Organiza as opções em categorias dentro do menu suspenso `<select>`.
 * `disabled` na `<option value="hamster">`: Desabilita visualmente a opção, impedindo que o usuário a selecione.
 
-### Análise do `form.css`
+**Análise do `form.css`**
 
 * `form { width: 90%; max-width: 500px; margin: 20px auto; }`: Técnica clássica de **layout responsivo**. Em telas menores que `500px`, o formulário se ajusta dinamicamente a 90% da tela; em monitores grandes, ele para de crescer ao atingir `500px` e fica perfeitamente centralizado.
 * `div { display: flex; justify-content: space-between; align-items: center; }`: Transforma cada grupo de campos em um container flexível horizontal, onde o rótulo fica de um lado e o campo do outro.
@@ -260,7 +258,7 @@ input[type="reset"] {
 
 ---
 
-## 6. Passo a Passo: Criando o Formulário no VS Code
+**Passo a Passo: Criando o Formulário no VS Code**
 
 1. **Criar a pasta e abrir no editor**:
 * Crie uma pasta chamada `formulario` no computador e abra-a no Visual Studio Code (**File > Open Folder**).
@@ -281,13 +279,11 @@ input[type="reset"] {
 5. **Estilizar e testar**:
 * Abra o arquivo `formulario.html` no navegador e teste as validações nativas (como tentar enviar um e-mail sem o `@` ou tentar enviar o formulário sem preencher os campos `required`).
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Tipos de Inputs e suas Aplicações
+**Tabela 1: Tipos de Inputs e suas Aplicações**
 
 | Tipo (`type`) | Descrição e Comportamento | Validação Nativa do Navegador |
 | --- | --- | --- |
@@ -300,7 +296,7 @@ input[type="reset"] {
 | `submit` | Botão de submissão dos dados do formulário. | Dispara o evento de envio do `<form>`. |
 | `reset` | Botão de restauração do formulário. | Reseta todos os campos para seus valores padrão. |
 
-### Tabela 2: Checkbox vs. Radio Button
+**Tabela 2: Checkbox vs. Radio Button**
 
 | Característica | Checkbox (`type="checkbox"`) | Radio Button (`type="radio"`) |
 | --- | --- | --- |
@@ -310,7 +306,7 @@ input[type="reset"] {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Sintaxe incorreta na Meta Tag Viewport**:
 * ❌ *Incorreto*: `content="=width=device=width, initial-scale=1.0"` (sinais de igual duplicados e errados).
@@ -330,23 +326,11 @@ input[type="reset"] {
 4. **Redundância de declaração no CSS**:
 * ❌ *Incorreto*: Escrever `button { margin: 50%; margin: 0 auto; }`. O segundo valor sobrescreve o primeiro completamente.
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Correção na Meta Viewport**: Ajustada a sintaxe quebrada do rascunho original (`=width=device=width`) para a norma padrão HTML5 (`width=device-width`).
-* **Botões de Rádio Duplicados com `checked**`: No rascunho original, tanto a opção "Sim" quanto a "Não" estavam marcadas como `checked`. Mantive o `checked` apenas na primeira opção ("Sim").
-* **Atributo `for` e `id` nos Inputs**: Corrigido o primeiro campo que usava `id="text"` para `id="nome"`, tornando o código semanticamente correto.
-* **Opção Padrão no Select**: Na lista de espécies, ajustei o valor da opção inicial `-- Selecione um ou mais --` de `value="nome"` para `value=""` com os atributos `disabled selected`.
-* **Redundância no CSS**: Removi as linhas duplicadas de `margin` no seletor do botão no arquivo CSS.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Os Atributos `action` e `method` do `<form>`
+**Os Atributos `action` e `method` do `<form>`**
 
 Embora não tenham sido detalhados nesta aula visual, a tag `<form>` aceita dois atributos vitais para a integração com servidores e back-end:
 
@@ -355,11 +339,9 @@ Embora não tenham sido detalhados nesta aula visual, a tag `<form>` aceita dois
 * `GET`: Anexa os dados do formulário diretamente na URL (não recomendado para senhas ou dados sensíveis).
 * `POST`: Envia os dados ocultos no corpo da requisição HTTP (padrão seguro para formulários de cadastro e login).
 
-
-
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Meta Viewport**: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
 * **Campo Obrigatório**: Adicionar o atributo `required` na tag do `<input>`.
@@ -370,7 +352,7 @@ Embora não tenham sido detalhados nesta aula visual, a tag `<form>` aceita dois
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O elemento `<form>` é o contêiner HTML usado para agrupar e enviar dados do usuário para um servidor.
 2. A meta tag viewport configura a escala inicial e garante a adaptação da tela em navegadores de celulares.
