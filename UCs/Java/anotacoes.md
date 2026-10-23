@@ -1,103 +1,150 @@
-# Estruturas de Dados em Java (Arrays e ArrayList) e Introdução a Interfaces Gráficas com Swing e WindowBuilder
+# Integrando Java com MySQL via JDBC e Indicador de Status Visual no Java Swing (Projeto BL-PDV)
 
 ---
 
-**Visão Geral**
+## 1. Visão Geral
 
-Nesta aula, explorei o armazenamento e a manipulação de dados em memória através das estruturas de **Arrays (Vetores)** e **ArrayLists (Vetores Dinâmicos)** em Java.
+Nesta aula, dei um dos passos mais importantes no desenvolvimento do sistema **BL-PDV**: integrei a aplicação Java Swing a um banco de dados relacional **MySQL** através do **JDBC** (*Java Database Connectivity*).
 
-Aprendi a diferença fundamental entre gerenciar coleções de tamanho fixo na memória e trabalhar com coleções flexíveis que crescem dinamicamente conforme a necessidade da aplicação. Para praticar, desenvolvi um exemplo de manipulação de vetores, um sorteador aleatório de cartas de baralho e um cadastro dinâmico de contatos.
+Para realizar essa ponte entre o código Java e o banco de dados, utilizei o driver oficial **MySQL Connector/J 8.4.0**, adicionando-o à pasta `lib` e ao *Build Path* do projeto.
 
-Na segunda parte da aula, fechei os projetos anteriores para manter a área de trabalho do Eclipse organizada e iniciei a construção de uma **Interface Gráfica (GUI)** para um sistema de Ponto de Venda (PDV - `blpvd`). Configurei a ferramenta visual **WindowBuilder**, criei uma janela `JFrame` customizada e importei a biblioteca externa **FlatLaf** (`flatlaf.jar`) para aplicar um visual moderno aos componentes gráficos.
+Em seguida:
 
----
-
-**Entendendo o Conceito**
-
-## Array Estático (Vetor) vs. Array Dinâmico (ArrayList)
-
-Um **Array (Vetor)** é uma estrutura de dados **indexada**, sequencial e de **tamanho fixo**. No momento em que um array estático é criado na memória RAM, precisamos definir exatamente quantas posições ele terá, e esse limite não pode ser alterado durante a execução do programa.
-
-Por outro lado, o **ArrayList** é uma classe nativa do Java (`java.util.ArrayList`) que implementa um vetor **dinâmico**. Ele permite adicionar, remover e pesquisar elementos sem que seja necessário definir um limite máximo de tamanho previamente.
-
-> **Analogia da Caixa de Ovos vs. Mochila Expansível:**
-
-* **Array Estático:** É como uma caixa de ovos de papelão com 6 compartimentos fixos. Cada posição tem um número (índice de $0$ a $5$). Você não pode colocar o 7º ovo na mesma caixa sem rasgá-la; se precisar de mais espaço, terá que comprar uma caixa inteira nova.
-* **ArrayList:** É como uma mochila expansível inteligente. À medida que você vai colocando objetos dentro dela, ela se estica automaticamente para abrir mais espaço; se você tirar itens, ela encolhe.
+1. criei o banco de dados `blpdv` e a tabela `fornecedores` no **MySQL Workbench**;
+2. desenvolvi a classe `Database.java` com métodos para estabelecer a conexão e realizar o teste de disponibilidade (*status*) da base;
+3. construí visualmente no **WindowBuilder** um rodapé dinâmico no `Main.java` com ícones, labels e um indicador colorido (`•`) que altera sua cor para **verde** (conectado) ou **vermelho** (desconectado) em tempo real ao iniciar o sistema;
+4. iniciei a montagem do cabeçalho adicionando os componentes visuais para data (`lblCalendario` e `lblData`).
 
 ---
 
-## Interface Gráfica (Swing e WindowBuilder)
+## 2. Entendendo o Conceito
 
-Até agora, nossas aplicações rodavam e exibiam resultados apenas através do terminal (console). Com a biblioteca **Java Swing** e a ferramenta **WindowBuilder**, passamos a construir janelas visuais com botões, campos de texto, ícones e menus editáveis de forma drag-and-drop (arrastar e soltar).
+### A. O que é JDBC e como funciona a conexão com MySQL?
 
----
+O **JDBC** é a especificação padrão da linguagem Java para execução de instruções SQL e integração com Banco de Dados Relacionais. Como o Java é neutro e não conhece as particularidades de cada banco por padrão, precisamos de um **Driver JDBC** específico (fornecido pelo fabricante do banco, no nosso caso o `mysql-connector-j-8.4.0.jar`).
 
-**Conceitos Fundamentais**
-
-## Índices e Posições em Arrays
-
-Toda estrutura indexada em Java é **baseada em zero (zero-indexed)**. Isso significa que:
-
-* O primeiro elemento sempre fica no índice `0`.
-* O segundo elemento fica no índice `1`.
-* O último elemento de um array de tamanho $N$ fica no índice $N - 1$.
-
-## Atributo `.length` vs. Método `.size()`
-
-* **`array.length`**: É uma **propriedade/atributo** de arrays estáticos que informa a quantidade total de posições reservadas.
-* **`list.size()`**: É um **método** de coleções dinâmicas (`ArrayList`) que retorna a quantidade atual de elementos armazenados na lista.
-
-## Sorteios Aleatórios com `Math.random()`
-
-O método `Math.random()` gera um número decimal do tipo `double` dentro do intervalo de $0.0$ até $0.999...$ (maior ou igual a 0.0 e estritamente menor que 1.0).
-Para sortear um índice válido de um array:
-
-1. Multiplicamos o resultado pelo tamanho do array.
-2. Fazemos o *casting* explícito para `(int)`, descartando as casas decimais.
-
-## Componentes da Interface Gráfica (`JFrame` e `FlatLaf`)
-
-* **`JFrame`**: Classe do Java Swing que representa a janela principal de uma aplicação desktop (com barra de título, botões de fechar, minimizar e redimensionar).
-* **`flatlaf.jar`**: Biblioteca externa (*Look and Feel*) moderna para Java Swing. Por padrão, a interface nativa do Swing tem um visual antigo; o FlatLaf aplica temas visuais limpos e modernos aos componentes.
+💡 **Analogia da Tomada e do Adaptador:**
+Imagine que o seu código Java é um aparelho eletrônico fabricado no padrão brasileiro e o MySQL é uma tomada da parede do modelo europeu. O JDBC é o padrão elétrico interno do seu aparelho, e o arquivo `.jar` do driver funciona como o **adaptador físico** perfeito que permite ligar o aparelho na tomada sem queimá-lo.
 
 ---
 
-### Código / Exemplos Práticos
+### B. O Indicador Visual de Status da Conexão
 
-**Exemplo 1: Manipulação de Vetores Estáticos (`Vetor1.java`)**
+Em sistemas comerciais de Ponto de Venda (PDV), o operador precisa saber instantaneamente se o sistema está comunicando com o banco de dados antes de iniciar uma venda.
+
+Se o banco estiver operacional, o método `testarConexao()` abre uma sessão rápida, fecha em seguida, retorna `true` e a interface altera a cor do componente gráfico para **verde** exibindo `"MySQL Conectado"`. Caso o serviço do MySQL esteja desligado, a tentativa gera uma exceção, o método retorna `false` e a interface exibe `"MySQL Desconectado"` com o ponto em **vermelho**.
+
+---
+
+## 3. Conceitos Fundamentais
+
+### 1. As 4 Classes e Interfaces Principais do JDBC
+
+* **`DriverManager`:** Classe utilitária que gerencia os drivers instalados e tenta estabelecer a conexão com a URL informada.
+* **`Connection`:** Interface que representa a sessão ativa de comunicação entre o Java e o banco de dados.
+* **`Statement` / `PreparedStatement`:** Interfaces para enviar e executar comandos SQL (SELECT, INSERT, UPDATE, DELETE).
+* **`ResultSet`:** Objeto que guarda a tabela de resultados devolvida por uma consulta `SELECT`.
+
+### 2. URL de Conexão JDBC (`url`)
+
+A String de conexão especifica o protocolo, o driver, o host e o nome da base de dados:
+
+
+$$\text{jdbc:mysql://localhost/blpdv}$$
+
+* **`jdbc:mysql://`**: Protocolo de comunicação.
+* **`localhost`**: Endereço do servidor onde o MySQL está rodando (máquina local).
+* **`blpdv`**: Nome exato da base de dados criada no MySQL Workbench.
+
+### 3. Absolute Layout no WindowBuilder (`setLayout(null)`)
+
+Para desenhar componentes no rodapé e no cabeçalho com posições exatas pixel a pixel, alteramos o layout do `contentPane` para **Absolute Layout**. Isso nos permite definir manualmente as coordenadas $(X, Y)$ e o tamanho $(\text{largura}, \text{altura})$ de cada `JLabel` via método `setBounds()`.
+
+---
+
+## 4. Código / Exemplos Práticos
+
+### Arquivo 1: Script de Criação da Base no MySQL Workbench (`script_blpdv.sql`)
+
+```sql
+-- Criação do Banco de Dados com suporte a caracteres acentuados (UTF-8)
+CREATE DATABASE blpdv
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+
+USE blpdv;
+
+-- Criação da tabela de Fornecedores
+CREATE TABLE fornecedores (
+    idFornecedor INT AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    fone VARCHAR(20) NOT NULL,
+    email VARCHAR(50),
+    site VARCHAR(100),
+    PRIMARY KEY (idFornecedor)
+) DEFAULT CHARSET = utf8;
+
+```
+
+---
+
+### Arquivo 2: Classe de Conexão e Teste de Status (`Database.java`)
 
 ```java
-package vetor;
+package database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
- * Exemplo prático de criação, leitura, alteração e iteração em Vetor Estático.
+ * Classe responsável pelo gerenciamento da conexão com o banco de dados MySQL.
  * 
  * @author Bruss Loza
  */
-public class Vetor1 {
+public class Database {
 
-    public static void main(String[] args) {
-        // Declaração e inicialização direta de um array de Strings com 6 posições (índices 0 a 5)
-        String[] carros = {"Ferrari", "Camaro", "Fusca", "Kombi", "Brasília", "Porsche"};
+    // Informações de acesso ao banco de dados MySQL
+    private String driver = "com.mysql.cj.jdbc.Driver";
+    private String url = "jdbc:mysql://localhost/blpdv";
+    private String user = "root";
+    private String password = ""; // Senha padrão do XAMPP/Workbench é vazia
 
-        // Exibe o tamanho total reservado no array (.length)
-        System.out.println("Tamanho do array: " + carros.length);
+    /**
+     * Estabelece e retorna uma conexão ativa com o banco de dados.
+     * 
+     * @return Objeto Connection ou null em caso de falha
+     */
+    public Connection conectar() {
+        try {
+            // Carrega dinamicamente a classe do Driver JDBC do MySQL na memória
+            Class.forName(driver);
+            // Solicita a conexão ao DriverManager
+            return DriverManager.getConnection(url, user, password);
+            
+        } catch (Exception e) {
+            System.err.println("Erro ao conectar ao banco: " + e.getMessage());
+            return null;
+        }
+    }
 
-        // Acessa e exibe o elemento na posição de índice 3 ("Kombi")
-        System.out.println("Carro na posição 3: " + carros[3]);
-
-        // Modifica o valor armazenado na posição 3
-        carros[3] = "Gol";
-        System.out.println("Carro alterado na posição 3: " + carros[3]);
-
-        System.out.println("\n-------------------");
-        System.out.println("Lista Completa de Carros:");
-        System.out.println("-------------------");
-
-        // Laço de repetição for tradicional para percorrer todo o vetor do índice 0 até length - 1
-        for (int i = 0; i < carros.length; i++) {
-            System.out.println("Índice " + i + ": " + carros[i]);
+    /**
+     * Método utilitário para testar o status da conexão sem manter o canal aberto.
+     * 
+     * @return true se o banco estiver online; false caso contrário.
+     */
+    public boolean testarConexao() {
+        Connection con = conectar();
+        
+        if (con == null) {
+            return false;
+        }
+        
+        try {
+            con.close(); // Fecha a conexão de teste imediatamente para não vazar recursos
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao fechar conexão de teste: " + e.getMessage());
+            return false;
         }
     }
 }
@@ -106,81 +153,116 @@ public class Vetor1 {
 
 ---
 
-**Exemplo 2: Sorteador de Cartas com `Math.random()` (`JogoCarta.java`)**
+### Arquivo 3: Interface Principal com Status Visual (`Main.java`)
 
 ```java
-package vetor;
+package view;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatLightLaf;
+import database.Database;
 
 /**
- * Aplicação que utiliza arrays e geração de números aleatórios para sortear uma carta de baralho.
+ * Janela Principal da Aplicação BL-PDV.
  */
-public class JogoCarta {
+public class Main extends JFrame {
 
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+
+    // Instanciação do objeto da camada de banco de dados
+    private Database db = new Database();
+
+    /**
+     * Ponto de entrada do programa.
+     */
     public static void main(String[] args) {
-        // Vetores com os elementos do baralho
-        String[] nipes = {"Ouros", "Copas", "Espadas", "Paus"};
-        String[] faces = {"Ás", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valete", "Dama", "Rei"};
+        // Aplica o visual moderno do Swing via FlatLaf
+        FlatLightLaf.setup();
 
-        // Sorteia um índice válido para os nipes (entre 0 e 3)
-        String nipe = nipes[(int) (Math.random() * nipes.length)];
-
-        // Sorteia um índice válido para as faces (entre 0 e 12)
-        String face = faces[(int) (Math.random() * faces.length)];
-
-        // Exibe a carta sorteada
-        System.out.println("Carta sorteada: " + face + " de " + nipe);
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Main frame = new Main();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-}
 
-```
+    /**
+     * Construtor do Frame Principal.
+     */
+    public Main() {
+        // Configurações Globais da Janela Principal
+        setTitle("BL-PDV");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/img/blpvd.png")));
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 800, 600);
 
----
+        // Painel de Conteúdo com Layout Absoluto
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-**Exemplo 3: Manipulação de Vetores Dinâmicos com `ArrayList` (`ArrayLista.java`)**
+        // --- RODAPÉ: COMPONENTES DE STATUS DO BANCO DE DADOS ---
 
-```java
-package vetor;
+        // Ícone do Banco de Dados (16x16)
+        JLabel lblDataBase = new JLabel("");
+        lblDataBase.setIcon(new ImageIcon(Main.class.getResource("/img/banco.png")));
+        lblDataBase.setBounds(10, 530, 16, 23);
+        contentPane.add(lblDataBase);
 
-import java.util.ArrayList; // Importação obrigatória para usar a coleção dinânica
+        // Label de Texto para o Status da Conexão
+        JLabel lblMysql = new JLabel("");
+        lblMysql.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblMysql.setBounds(32, 533, 130, 18);
+        contentPane.add(lblMysql);
 
-/**
- * Exemplo prático de criação, adição, contagem e busca com ArrayList.
- */
-public class ArrayLista {
+        // Ponto Indicador Colorido (Status em Verde ou Vermelho)
+        JLabel lblStatus = new JLabel("•");
+        lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStatus.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblStatus.setBounds(165, 533, 15, 18);
+        contentPane.add(lblStatus);
 
-    public static void main(String[] args) {
-        // Criação de um ArrayList que aceita apenas objetos do tipo String (Generics)
-        ArrayList<String> contatos = new ArrayList<>();
+        // --- CABEÇALHO: COMPONENTES DE DATA E CALENDÁRIO ---
 
-        // Adicionando dados dinamicamente usando o método .add()
-        contatos.add("Bruss Loza");
-        contatos.add("11 1234-5678");
-        contatos.add("brussloza@email.com");
+        // Ícone do Calendário (24x24)
+        JLabel lblCalendario = new JLabel("");
+        lblCalendario.setIcon(new ImageIcon(Main.class.getResource("/img/calendario.png")));
+        lblCalendario.setBounds(620, 15, 24, 24);
+        contentPane.add(lblCalendario);
 
-        contatos.add("Sirlene Sanches");
-        contatos.add("11 1234-1234");
-        contatos.add("sirlenesanches@email.com");
+        // Label de Texto para Exibição da Data Formatada
+        JLabel lblData = new JLabel("");
+        lblData.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblData.setBounds(650, 18, 120, 18);
+        contentPane.add(lblData);
 
-        contatos.add("Leandro Ramos");
-        contatos.add("11 8765-4321");
-        contatos.add("ramos@email.com");
-
-        // Exibe a quantidade de itens atualmente armazenados (.size())
-        System.out.println("Tamanho do ArrayList: " + contatos.size());
-        
-        // Exibe a representação textual completa do ArrayList
-        System.out.println("Conteúdo bruto: " + contatos);
-
-        // Acessa um elemento específico pelo seu índice usando o método .get(index)
-        System.out.println("\nE-mail da Sirlene Sanches (índice 5): " + contatos.get(5));
-
-        System.out.println("\n===============================");
-        System.out.println("Iteração Completa do ArrayList:");
-        System.out.println("===============================");
-        
-        // Laço for para percorrer a lista do índice 0 até size() - 1
-        for (int i = 0; i < contatos.size(); i++) {
-            System.out.println("Posição [" + i + "]: " + contatos.get(i));
+        // --- TESTE LÓGICO DE CONEXÃO AO INICIALIZAR A JANELA ---
+        if (db.testarConexao()) {
+            System.out.println("Banco de Dados Conectado com Sucesso!");
+            lblMysql.setText("MySQL Conectado");
+            lblStatus.setForeground(new Color(0, 150, 0)); // Verde
+        } else {
+            System.err.println("Erro ao Conectar com o Banco de Dados!");
+            lblMysql.setText("MySQL Desconectado");
+            lblStatus.setForeground(Color.RED); // Vermelho
         }
     }
 }
@@ -189,237 +271,225 @@ public class ArrayLista {
 
 ---
 
-**Desmontando o Código**
+## 5. Desmontando o Código
 
-**Desmontando o Sorteio de Índice em `JogoCarta.java`**
+### A. Desmontando a Classe `Database.java`
 
 ```java
-String face = faces[(int) (Math.random() * faces.length)];
+Class.forName(driver);
+return DriverManager.getConnection(url, user, password);
 
 ```
 
-1. **`Math.random()`**: Devolve um número decimal no intervalo $[0.0, 1.0)$. Suponha que sorteou $0.725$.
-2. **`* faces.length`**: Multiplica pelo tamanho do array `faces` ($13$ elementos).
-
-$$\text{Resultado} = 0.725 \times 13 = 9.425$$
-
-
-3. **`(int) (...)`**: Faz o *casting* (conversão forçada) cortando toda a parte decimal.
-
-$$\text{Resultado Inteiro} = 9$$
-
-
-4. **`faces[9]`**: Acessa o 10º elemento do array `faces` (que corresponde ao valor `"10"`).
+1. **`Class.forName("com.mysql.cj.jdbc.Driver")`**: Força o Java a carregar na memória a classe do driver MySQL vindo do arquivo `.jar`.
+2. **`DriverManager.getConnection(...)`**: Solicita ao gerenciador do Java que abra o canal TCP com o MySQL no endereço `jdbc:mysql://localhost/blpdv`. Se a porta, usuário ou senha estiverem errados, o método dispara uma exceção `SQLException`.
 
 ---
 
-**Desmontando a Busca em `ArrayLista.java`**
+### B. Desmontando o Teste de Conexão Segura (`testarConexao()`)
 
 ```java
-System.out.println(contatos.get(5));
-
-```
-
-1. **`contatos`**: Nome da variável que faz referência à instância de `ArrayList`.
-2. **`.get(5)`**: Método utilizado para resgatar o dado presente no índice $5$.
-* Em arrays estáticos, usaríamos colchetes: `array[5]`.
-* Em `ArrayList`, é **obrigatório** utilizar o método `.get(5)`.
-
-
-
----
-
-## Passo a Passo
-
-**Passo a Passo 1: Como Fechar Projetos Inativos no Eclipse**
-
-Para economizar memória RAM e evitar poluição no painel *Package Explorer*:
-
-1. Clique com o **botão direito** sobre a pasta do projeto que deseja fechar.
-2. Selecione a opção **Close Project**.
-3. O ícone da pasta do projeto ficará cinza/fechado, liberando recursos do ambiente de desenvolvimento.
-
----
-
-**Passo a Passo 2: Configuração Inicial da Interface Gráfica no Eclipse (Projeto `blpvd`)**
-
-1. **Criar o Projeto e Pacote:**
-* Crie um novo projeto Java (`File` ➔ `New` ➔ `Java Project`) chamado `blpvd`.
-* Crie um pacote chamado `view` dentro da pasta `src`.
-
-
-2. **Criar a Janela `JFrame` com WindowBuilder:**
-* Clique com o botão direito no pacote `view` ➔ `New` ➔ `Other...`.
-* Expanda a pasta **WindowBuilder** ➔ **Swing Designer** ➔ selecione **JFrame** e clique em **Next**.
-* Nomeie a classe como `Main` (com M maiúsculo) e clique em **Finish**.
-
-
-3. **Adicionar a Biblioteca Externa (`flatlaf.jar`):**
-* Clique com o botão direito na raiz do projeto `blpvd` ➔ `New` ➔ `Folder` ➔ nomeie como `lib` e clique em **Finish**.
-* Arraste o arquivo `flatlaf.jar` baixado no computador para dentro da pasta `lib` recém-criada no Eclipse.
-* Clique com o botão direito sobre o arquivo `flatlaf.jar` dentro da pasta `lib` ➔ selecione **Build Path** ➔ **Add to Build Path**.
-* *(O Eclipse criará uma pasta chamada "Referenced Libraries" confirmando a importação).*
-
-
-4. **Configurar as Propriedades do `JFrame` no Modo Design:**
-* Alterne para a aba **Design** na parte inferior do editor do Eclipse.
-* Clique na estrutura `javax.swing.JFrame` no painel *Components*.
-* Na aba **Properties** (lado esquerdo):
-* Altere os valores de dimensão da janela para **800 x 600** pixels.
-* Procure a propriedade `resizable` e altere para **`false`** (impede que o usuário desfigure a tela redimensionando-a).
-* Procure a propriedade `iconImage`, clique no botão de três pontos (`...`), selecione a opção de imagem do projeto e escolha o arquivo de ícone de **64x64** pixels.
-
----
-
-## Tabelas Comparativas
-
-**Array Estático vs. ArrayList (Vetor Dinâmico)**
-
-| Recurso / Operação | Array Estático (`String[]`) | ArrayList Dinâmico (`ArrayList<String>`) |
-| --- | --- | --- |
-| **Tamanho** | Fixo (definido no momento da criação). | Dinâmico (cresce e encolhe automaticamente). |
-| **Performance** | Levemente mais rápido e consome menos memória. | Adiciona pequena sobrecarga por usar objetos internos. |
-| **Adicionar Item** | `array[posicao] = valor;` | `list.add(valor);` |
-| **Ler Item** | `array[index]` | `list.get(index)` |
-| **Saber o Tamanho** | Propriedade `.length` | Método `.size()` |
-| **Tipos Suportados** | Aceita tipos Primitivos (`int`, `double`) e Objetos. | Aceita **apenas Objetos** (requer *Wrapper Classes* para primitivos). |
-
----
-
-**Leitura de Tamanho e Acesso por Estrutura**
-
-| Estrutura de Dado | Como Saber o Tamanho? | Como Acessar um Elemento por Índice? |
-| --- | --- | --- |
-| **Array Estático** | `array.length` *(Atributo sem parênteses)* | `array[index]` |
-| **`ArrayList`** | `list.size()` *(Método com parênteses)* | `list.get(index)` |
-| **`String`** | `texto.length()` *(Método com parênteses)* | `texto.charAt(index)` |
-
----
-
-## Erros Comuns e Cuidados
-
-**Erro de Índice Fora dos Limites (`ArrayIndexOutOfBoundsException` / `IndexOutOfBoundsException`)**
-
-Ocorre quando tentamos acessar uma posição de índice que não existe na estrutura.
-
-```java
-String[] carros = {"Ferrari", "Camaro"}; // Possui 2 elementos (índices 0 e 1)
-
-// ❌ INCORRETO (Gera ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2):
-System.out.println(carros[2]); 
-
-// ✅ CORRETO (O último elemento sempre fica em length - 1):
-System.out.println(carros[carros.length - 1]);
-
-```
-
----
-
-**Erro de Parênteses no Casting de `Math.random()`**
-
-Esquecer de isolar a multiplicação nos parênteses fará o *casting* zerar a expressão antes de multiplicar!
-
-```java
-// ❌ INCORRETO (O casting para int ocorre PRIMEIRO no Math.random(), resultando em 0 * 4 = 0 SEMPRE):
-int indice = (int) Math.random() * 4; 
-
-// ✅ CORRETO (A multiplicação é feita primeiro, e o resultado final é convertido em int):
-int indice = (int) (Math.random() * 4);
-
-```
-
----
-
-**Tentar Acessar Posições do `ArrayList` com Colchetes**
-
-A sintaxe de colchetes `[]` é exclusiva de arrays estáticos. Em `ArrayList`, usar colchetes gera erro de compilação.
-
-```java
-ArrayList<String> contatos = new ArrayList<>();
-contatos.add("Bruss");
-
-// ❌ INCORRETO (Erro de compilação):
-System.out.println(contatos[0]);
-
-// ✅ CORRETO:
-System.out.println(contatos.get(0));
-
-```
-
----
-
-## Conteúdo Complementar e Aprofundamento
-
-**Percorrendo Arrays com o Laço For-Each (*Enhanced For*)**
-
-Além do laço `for` tradicional com variável contadora `i`, o Java possui uma sintaxe muito mais limpa para percorrer todos os elementos de um Array ou `ArrayList` quando não precisamos controlar o número do índice:
-
-```java
-String[] carros = {"Ferrari", "Camaro", "Fusca"};
-
-// Sintaxe do For-Each: para cada 'carro' do tipo String contido no vetor 'carros'
-for (String carro : carros) {
-    System.out.println("Carro: " + carro);
-}
-
-```
-
----
-
-**Aplicando o Tema FlatLaf no Código Java Swing**
-
-Para que a biblioteca `flatlaf.jar` que adicionamos à pasta `lib` realmente altere o visual da janela `JFrame` ao rodar a aplicação, adicionamos a seguinte linha de instrução logo no início do método `main`:
-
-```java
-import com.formdev.flatlaf.FlatDarkLaf;
-
-public static void main(String[] args) {
+public boolean testarConexao() {
+    Connection con = conectar();
+    if (con == null) return false;
     try {
-        // Ativa o tema escuro moderno do FlatLaf na interface Swing
-        FlatDarkLaf.setup();
+        con.close();
+        return true;
     } catch (Exception e) {
-        e.printStackTrace();
+        return false;
     }
-
-    // Inicializa a janela JFrame
-    Main frame = new Main();
-    frame.setVisible(true);
 }
+
+```
+
+1. **`Connection con = conectar();`**: Chama o método principal de conexão.
+2. **`if (con == null)`**: Se a conexão falhou, retorna `false` imediatamente.
+3. **`con.close();`**: **Essencial.** Fecha a conexão de teste imediatamente após confirmar que o banco está vivo. Se não fecharmos a conexão de teste, o banco esgotará o número máximo de conexões permitidas (*Connection Leak*).
+
+---
+
+### C. Desmontando a Troca Dinâmica de Cores no Swing
+
+```java
+if (db.testarConexao()) {
+    lblMysql.setText("MySQL Conectado");
+    lblStatus.setForeground(new Color(0, 150, 0));
+} else {
+    lblMysql.setText("MySQL Desconectado");
+    lblStatus.setForeground(Color.RED);
+}
+
+```
+
+* **`lblMysql.setText(...)`**: Altera a legenda textual dinamicamente durante a execução.
+* **`lblStatus.setForeground(...)`**: Altera a cor de primeiro plano do caractere `•`. Usamos `new Color(0, 150, 0)` para um verde escuro legível ou `Color.RED` para falhas.
+
+---
+
+## 6. Passo a Passo
+
+### Passo a Passo 1: Download e Importação do Driver MySQL no Eclipse
+
+1. Acesse o site oficial do MySQL e navegue até a opção **Connector/J**.
+2. Selecione a versão **8.4.0**, plataforma **Independent**, e baixe o arquivo `.zip`.
+3. Extraia o pacote e localize o arquivo compilado **`mysql-connector-j-8.4.0.jar`**.
+4. No Eclipse, abra a estrutura do projeto `blpvd`.
+5. Arraste o arquivo `mysql-connector-j-8.4.0.jar` para dentro da pasta **`lib`**.
+6. Clique com o botão direito no arquivo `.jar` ➔ **Build Path** ➔ **Add to Build Path**.
+
+---
+
+### Passo a Passo 2: Construção da Base no MySQL Workbench
+
+1. Abra o **MySQL Workbench** e conecte-se à sua instância local (`Local instance 3306`).
+2. Abra uma nova aba de Query e execute o script SQL:
+* `CREATE DATABASE blpdv DEFAULT CHARACTER SET utf8;`
+* `USE blpdv;`
+* `CREATE TABLE fornecedores (...);`
+
+
+3. Pressione `Ctrl + Shift + Enter` para rodar todas as instruções e confirme a criação no painel *Schemas*.
+
+---
+
+### Passo a Passo 3: Desenhando o Rodapé de Status no WindowBuilder
+
+1. No Eclipse, abra a classe `Main.java` e alterne para a aba **Design**.
+2. Clique no `contentPane`, vá na aba *Properties*, selecione `Layout` e mude para **`Absolute Layout`** (ou `null`).
+3. **Ícone do Banco:**
+* Na paleta de componentes, selecione `JLabel`, clique no rodapé esquerdo da tela.
+* Na propriedade `variable`, renomeie para `lblDataBase`.
+* Na propriedade `icon`, selecione a imagem `banco.png` (16x16) da pasta `img`. Apague o texto do label.
+
+
+4. **Legenda do Banco:**
+* Insira uma nova `JLabel` ao lado do ícone.
+* Na propriedade `variable`, renomeie para `lblMysql`. Deixe o texto vazio no design.
+
+
+5. **Ponto de Status:**
+* Insira uma terceira `JLabel` ao lado da legenda.
+* Na propriedade `variable`, renomeie para `lblStatus`.
+* Na propriedade `text`, digite o caractere `•` (`Alt + 7` do teclado numérico).
+* Altere a fonte para **Tahoma, Bold, 20** e o alinhamento horizontal para `Center`.
+
+
+6. **Salvamento:**
+* Salve o arquivo (`Ctrl + S`) e alterne para a aba **Source** para validar as condicionais.
+
+
+
+---
+
+## 7. Tabelas Comparativas
+
+### 1. Resumo das Ferramentas da Arquitetura JDBC
+
+| Componente JDBC | Função na Aplicação | Arquivo / Classe Utilizada |
+| --- | --- | --- |
+| **Driver JDBC** | Biblioteca externa que traduz o código Java para o MySQL. | `mysql-connector-j-8.4.0.jar` |
+| **Driver Class Name** | Nome da classe carregada via `Class.forName()`. | `com.mysql.cj.jdbc.Driver` |
+| **Connection String (URL)** | Endereço de rede e porta de escuta da base de dados. | `jdbc:mysql://localhost/blpdv` |
+| **Connection Object** | Objeto da sessão ativa usado para enviar queries ao MySQL. | `java.sql.Connection` |
+
+---
+
+### 2. Estados do Indicador de Conexão na Interface Swing
+
+| Condição Lógica | Retorno de `testarConexao()` | Texto exibido na `lblMysql` | Cor da `lblStatus` (`•`) |
+| --- | --- | --- | --- |
+| **MySQL Rodando (Porta 3306)** | `true` | `"MySQL Conectado"` | **Verde** (`#009600`) |
+| **MySQL Parado / Senha Errada** | `false` | `"MySQL Desconectado"` | **Vermelho** (`Color.RED`) |
+
+---
+
+## 8. Erros Comuns e Cuidados
+
+### 1. Erro `ClassNotFoundException: com.mysql.cj.jdbc.Driver`
+
+Ocorre quando tentamos executar o método `Class.forName()` sem ter adicionado o arquivo `.jar` do MySQL ao *Build Path*.
+
+* **Solução:** Verifique se o arquivo `mysql-connector-j-8.4.0.jar` está dentro da pasta `Referenced Libraries` do projeto no Eclipse.
+
+---
+
+### 2. Erro de Texto Cortado na `JLabel` no Swing (`setBounds`)
+
+Ao alterar o texto da `lblMysql` via código de `""` para `"MySQL Desconectado"`, se a largura configurada no `setBounds()` for muito pequena (ex: 26 pixels), a palavra ficará cortada ou invisível na tela.
+
+* **Solução:** Na criação do componente, defina uma largura suficiente (mínimo de 120 pixels) no quarto parâmetro do `setBounds(X, Y, Largura, Altura)`.
+
+---
+
+### 3. Esqueceu de Criar o Banco no MySQL Workbench
+
+Se a classe `Database.java` tentar conectar em `jdbc:mysql://localhost/blpdv` e o banco `blpdv` ainda não tiver sido criado no MySQL, o Java retornará a exceção `Unknown database 'blpdv'`.
+
+* **Solução:** Execute o comando `CREATE DATABASE blpdv;` no MySQL Workbench antes de testar a aplicação Java.
+
+---
+
+## 9. Correções Técnicas das Minhas Anotações
+
+Durante a revisão do meu rascunho de aula, apliquei as seguintes correções silenciosas para garantir que o projeto seja executável e siga as boas práticas:
+
+1. **Correção de Dimensão no Swing (`setBounds`):** No rascunho original, a `lblMysql` foi configurada com o tamanho `(26, 538, 26, 8)`. Essa largura de 26 pixels impedia a exibição da frase `"MySQL Conectado"`. Corrigi a largura para **130 pixels** (`32, 533, 130, 18`) para exibir o texto completo sem cortes.
+2. **Nomenclatura de Pacotes:** Ajustei as declarações para usar letras minúsculas em todos os pacotes (`package database;` e `package view;`).
+3. **Fechamento de Conexão de Teste:** O rascunho trazia a instrução `con.close()` dentro do método `testarConexao()`. Garanti que a chamada estivesse protegida por um bloco `try-catch` para evitar que exceções no fechamento da porta travassem o sistema.
+
+---
+
+## 10. Conteúdo Complementar e Aprofundamento
+
+### Exibindo a Data Atual dinamicamente no Cabeçalho (`lblData`)
+
+Para preencher a `lblData` do cabeçalho que criamos junto com o ícone do calendário, podemos adicionar o código de formatação de data direto dentro do construtor da classe `Main.java`:
+
+```java
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+// Trecho para incluir dentro do construtor do Main.java:
+LocalDateTime hoje = LocalDateTime.now();
+DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+// Atualiza a Label da data criada no WindowBuilder
+lblData.setText(hoje.format(formatoData));
 
 ```
 
 ---
 
-**Resumo Relâmpago**
+## Resumo Relâmpago — 10 Linhas
 
-1. Arrays são estruturas de dados indexadas e de tamanho fixo alocadas na memória.
-2. Todo array em Java inicia seu primeiro elemento no índice 0 e vai até o índice `length - 1`.
-3. O atributo `.length` informa o número total de posições de um array estático.
-4. O método `Math.random()` gera decimais entre $0.0$ e $0.999...$ e exige conversão explícita `(int)`.
-5. O `ArrayList` é uma coleção dinâmica que ajusta seu tamanho automaticamente ao adicionar elementos.
-6. Em um `ArrayList`, utilizamos o método `.add()` para inserir e `.get(index)` para recuperar dados.
-7. O método `.size()` retorna a quantidade atual de elementos presentes em um `ArrayList`.
-8. Janelas gráficas em Java utilizam a classe `JFrame` pertencente à biblioteca Java Swing.
-9. O WindowBuilder é um construtor visual para arrastar e configurar componentes de interface gráfica.
-10. A biblioteca `flatlaf.jar` é adicionada ao *Build Path* para aplicar um visual moderno (*Look & Feel*) ao Swing.
+1. O JDBC possibilita a integração nativa entre aplicações Java e Bancos de Dados Relacionais.
+2. O driver `mysql-connector-j-8.4.0.jar` precisa ser adicionado à pasta `lib` e ao *Build Path*.
+3. A URL de conexão `jdbc:mysql://localhost/blpdv` define a tecnologia, o host e a base de dados.
+4. O método `Class.forName()` carrega a classe do driver do MySQL na memória RAM do Java.
+5. O método `DriverManager.getConnection()` realiza a autenticação e abre a sessão com o banco.
+6. A função `testarConexao()` abre e fecha uma sessão rápida para verificar a disponibilidade do banco.
+7. O layout do `contentPane` deve ser configurado como Absolute (`null`) para posicionamento exato.
+8. Componentes `JLabel` com ícones (16x16 e 24x24) são adicionados ao rodapé e cabeçalho da janela.
+9. A cor e o texto do ponto indicador (`•`) alternam dinamicamente entre verde (online) e vermelho (offline).
+10. É indispensável definir uma largura adequada no `setBounds()` para evitar que mensagens de status sejam cortadas.
 
 ---
 
 ## Guia Rápido de Memorização
 
-**Sintaxe de Arrays vs. ArrayList**
+### Estrutura Base de Conexão JDBC
 
 ```java
-// ARRAY ESTÁTICO
-String[] vetor = new String[5];        // Criação com tamanho fixo
-String[] nomes = {"A", "B", "C"};     // Inicialização direta
-int tam = nomes.length;               // Tamanho
-String item = nomes[0];                // Leitura
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost/nome_banco", "usuario", "senha");
 
-// ARRAYLIST DINÂMICO
-ArrayList<String> lista = new ArrayList<>(); // Criação
-lista.add("A");                              // Inserção
-int tam = lista.size();                      // Tamanho
-String item = lista.get(0);                  // Leitura
+```
+
+### Script Básico de Banco MySQL
+
+```sql
+CREATE DATABASE blpdv DEFAULT CHARACTER SET utf8;
+USE blpdv;
+CREATE TABLE tabela ( id INT AUTO_INCREMENT PRIMARY KEY );
 
 ```
