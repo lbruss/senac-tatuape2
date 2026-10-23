@@ -400,9 +400,9 @@ if (db.testarConexao()) {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Erro `ClassNotFoundException: com.mysql.cj.jdbc.Driver`
+**Erro `ClassNotFoundException: com.mysql.cj.jdbc.Driver`**
 
 Ocorre quando tentamos executar o método `Class.forName()` sem ter adicionado o arquivo `.jar` do MySQL ao *Build Path*.
 
@@ -410,7 +410,7 @@ Ocorre quando tentamos executar o método `Class.forName()` sem ter adicionado o
 
 ---
 
-### 2. Erro de Texto Cortado na `JLabel` no Swing (`setBounds`)
+**Erro de Texto Cortado na `JLabel` no Swing (`setBounds`)**
 
 Ao alterar o texto da `lblMysql` via código de `""` para `"MySQL Desconectado"`, se a largura configurada no `setBounds()` for muito pequena (ex: 26 pixels), a palavra ficará cortada ou invisível na tela.
 
@@ -418,7 +418,7 @@ Ao alterar o texto da `lblMysql` via código de `""` para `"MySQL Desconectado"`
 
 ---
 
-### 3. Esqueceu de Criar o Banco no MySQL Workbench
+**Esqueceu de Criar o Banco no MySQL Workbench**
 
 Se a classe `Database.java` tentar conectar em `jdbc:mysql://localhost/blpdv` e o banco `blpdv` ainda não tiver sido criado no MySQL, o Java retornará a exceção `Unknown database 'blpdv'`.
 
@@ -426,19 +426,9 @@ Se a classe `Database.java` tentar conectar em `jdbc:mysql://localhost/blpdv` e 
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho de aula, apliquei as seguintes correções silenciosas para garantir que o projeto seja executável e siga as boas práticas:
-
-1. **Correção de Dimensão no Swing (`setBounds`):** No rascunho original, a `lblMysql` foi configurada com o tamanho `(26, 538, 26, 8)`. Essa largura de 26 pixels impedia a exibição da frase `"MySQL Conectado"`. Corrigi a largura para **130 pixels** (`32, 533, 130, 18`) para exibir o texto completo sem cortes.
-2. **Nomenclatura de Pacotes:** Ajustei as declarações para usar letras minúsculas em todos os pacotes (`package database;` e `package view;`).
-3. **Fechamento de Conexão de Teste:** O rascunho trazia a instrução `con.close()` dentro do método `testarConexao()`. Garanti que a chamada estivesse protegida por um bloco `try-catch` para evitar que exceções no fechamento da porta travassem o sistema.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Exibindo a Data Atual dinamicamente no Cabeçalho (`lblData`)
+**Exibindo a Data Atual dinamicamente no Cabeçalho (`lblData`)**
 
 Para preencher a `lblData` do cabeçalho que criamos junto com o ícone do calendário, podemos adicionar o código de formatação de data direto dentro do construtor da classe `Main.java`:
 
@@ -457,7 +447,7 @@ lblData.setText(hoje.format(formatoData));
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O JDBC possibilita a integração nativa entre aplicações Java e Bancos de Dados Relacionais.
 2. O driver `mysql-connector-j-8.4.0.jar` precisa ser adicionado à pasta `lib` e ao *Build Path*.
@@ -474,7 +464,7 @@ lblData.setText(hoje.format(formatoData));
 
 ## Guia Rápido de Memorização
 
-### Estrutura Base de Conexão JDBC
+**Estrutura Base de Conexão JDBC**
 
 ```java
 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -482,7 +472,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost/nome_banco"
 
 ```
 
-### Script Básico de Banco MySQL
+**Script Básico de Banco MySQL**
 
 ```sql
 CREATE DATABASE blpdv DEFAULT CHARACTER SET utf8;
