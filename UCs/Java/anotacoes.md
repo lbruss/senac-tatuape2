@@ -1,8 +1,6 @@
-# Integrando Java com MySQL via JDBC e Indicador de Status Visual no Java Swing (Projeto BL-PDV)
+# Integrando Java com MySQL via JDBC e Indicador de Status Visual no Java Swing (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei um dos passos mais importantes no desenvolvimento do sistema **BL-PDV**: integrei a aplicação Java Swing a um banco de dados relacional **MySQL** através do **JDBC** (*Java Database Connectivity*).
 
@@ -17,18 +15,19 @@ Em seguida:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. O que é JDBC e como funciona a conexão com MySQL?
+## JDBC e funcionamento da conexão com MySQL
 
 O **JDBC** é a especificação padrão da linguagem Java para execução de instruções SQL e integração com Banco de Dados Relacionais. Como o Java é neutro e não conhece as particularidades de cada banco por padrão, precisamos de um **Driver JDBC** específico (fornecido pelo fabricante do banco, no nosso caso o `mysql-connector-j-8.4.0.jar`).
 
-💡 **Analogia da Tomada e do Adaptador:**
+> **Analogia da Tomada e do Adaptador:**
+
 Imagine que o seu código Java é um aparelho eletrônico fabricado no padrão brasileiro e o MySQL é uma tomada da parede do modelo europeu. O JDBC é o padrão elétrico interno do seu aparelho, e o arquivo `.jar` do driver funciona como o **adaptador físico** perfeito que permite ligar o aparelho na tomada sem queimá-lo.
 
 ---
 
-### B. O Indicador Visual de Status da Conexão
+## O Indicador Visual de Status da Conexão
 
 Em sistemas comerciais de Ponto de Venda (PDV), o operador precisa saber instantaneamente se o sistema está comunicando com o banco de dados antes de iniciar uma venda.
 
@@ -36,16 +35,16 @@ Se o banco estiver operacional, o método `testarConexao()` abre uma sessão rá
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. As 4 Classes e Interfaces Principais do JDBC
+## As 4 Classes e Interfaces Principais do JDBC
 
 * **`DriverManager`:** Classe utilitária que gerencia os drivers instalados e tenta estabelecer a conexão com a URL informada.
 * **`Connection`:** Interface que representa a sessão ativa de comunicação entre o Java e o banco de dados.
 * **`Statement` / `PreparedStatement`:** Interfaces para enviar e executar comandos SQL (SELECT, INSERT, UPDATE, DELETE).
 * **`ResultSet`:** Objeto que guarda a tabela de resultados devolvida por uma consulta `SELECT`.
 
-### 2. URL de Conexão JDBC (`url`)
+## URL de Conexão JDBC (`url`)
 
 A String de conexão especifica o protocolo, o driver, o host e o nome da base de dados:
 
@@ -56,15 +55,15 @@ $$\text{jdbc:mysql://localhost/blpdv}$$
 * **`localhost`**: Endereço do servidor onde o MySQL está rodando (máquina local).
 * **`blpdv`**: Nome exato da base de dados criada no MySQL Workbench.
 
-### 3. Absolute Layout no WindowBuilder (`setLayout(null)`)
+## Absolute Layout no WindowBuilder (`setLayout(null)`)
 
 Para desenhar componentes no rodapé e no cabeçalho com posições exatas pixel a pixel, alteramos o layout do `contentPane` para **Absolute Layout**. Isso nos permite definir manualmente as coordenadas $(X, Y)$ e o tamanho $(\text{largura}, \text{altura})$ de cada `JLabel` via método `setBounds()`.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Script de Criação da Base no MySQL Workbench (`script_blpdv.sql`)
+**Arquivo 1: Script de Criação da Base no MySQL Workbench (`script_blpdv.sql`)**
 
 ```sql
 -- Criação do Banco de Dados com suporte a caracteres acentuados (UTF-8)
@@ -88,7 +87,7 @@ CREATE TABLE fornecedores (
 
 ---
 
-### Arquivo 2: Classe de Conexão e Teste de Status (`Database.java`)
+**Arquivo 2: Classe de Conexão e Teste de Status (`Database.java`)**
 
 ```java
 package database;
@@ -153,7 +152,7 @@ public class Database {
 
 ---
 
-### Arquivo 3: Interface Principal com Status Visual (`Main.java`)
+**Arquivo 3: Interface Principal com Status Visual (`Main.java`)**
 
 ```java
 package view;
@@ -271,9 +270,9 @@ public class Main extends JFrame {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Classe `Database.java`
+**Desmontando a Classe `Database.java`**
 
 ```java
 Class.forName(driver);
@@ -286,7 +285,7 @@ return DriverManager.getConnection(url, user, password);
 
 ---
 
-### B. Desmontando o Teste de Conexão Segura (`testarConexao()`)
+**Desmontando o Teste de Conexão Segura** (`testarConexao()`)
 
 ```java
 public boolean testarConexao() {
@@ -308,7 +307,7 @@ public boolean testarConexao() {
 
 ---
 
-### C. Desmontando a Troca Dinâmica de Cores no Swing
+**Desmontando a Troca Dinâmica de Cores no Swing**
 
 ```java
 if (db.testarConexao()) {
@@ -326,9 +325,9 @@ if (db.testarConexao()) {
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo 1: Download e Importação do Driver MySQL no Eclipse
+**Passo a Passo 1: Download e Importação do Driver MySQL no Eclipse**
 
 1. Acesse o site oficial do MySQL e navegue até a opção **Connector/J**.
 2. Selecione a versão **8.4.0**, plataforma **Independent**, e baixe o arquivo `.zip`.
@@ -339,7 +338,7 @@ if (db.testarConexao()) {
 
 ---
 
-### Passo a Passo 2: Construção da Base no MySQL Workbench
+**Passo a Passo 2: Construção da Base no MySQL Workbench**
 
 1. Abra o **MySQL Workbench** e conecte-se à sua instância local (`Local instance 3306`).
 2. Abra uma nova aba de Query e execute o script SQL:
@@ -352,7 +351,7 @@ if (db.testarConexao()) {
 
 ---
 
-### Passo a Passo 3: Desenhando o Rodapé de Status no WindowBuilder
+**Passo a Passo 3: Desenhando o Rodapé de Status no WindowBuilder**
 
 1. No Eclipse, abra a classe `Main.java` e alterne para a aba **Design**.
 2. Clique no `contentPane`, vá na aba *Properties*, selecione `Layout` e mude para **`Absolute Layout`** (ou `null`).
@@ -377,13 +376,11 @@ if (db.testarConexao()) {
 6. **Salvamento:**
 * Salve o arquivo (`Ctrl + S`) e alterne para a aba **Source** para validar as condicionais.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Resumo das Ferramentas da Arquitetura JDBC
+**Resumo das Ferramentas da Arquitetura JDBC**
 
 | Componente JDBC | Função na Aplicação | Arquivo / Classe Utilizada |
 | --- | --- | --- |
@@ -394,7 +391,7 @@ if (db.testarConexao()) {
 
 ---
 
-### 2. Estados do Indicador de Conexão na Interface Swing
+**Estados do Indicador de Conexão na Interface Swing**
 
 | Condição Lógica | Retorno de `testarConexao()` | Texto exibido na `lblMysql` | Cor da `lblStatus` (`•`) |
 | --- | --- | --- | --- |
