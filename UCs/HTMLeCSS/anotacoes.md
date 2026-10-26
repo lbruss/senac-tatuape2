@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei para técnicas mais complexas de UI (Interface do Usuário) e estruturação de dados. Explorei a criação de **menus suspensos e gavetas laterais (Off-Canvas)** utilizando exclusivamente HTML5 e CSS3 puro, sem a necessidade de JavaScript para controlar animações ou visibilidade.
 
@@ -15,13 +15,15 @@ Compreendi dois conceitos práticos fundamentais:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### Menus Off-Canvas e Unidades Viewport
+## Menus Off-Canvas e Unidades Viewport
 
 * **Conceito simples**: Um menu Off-Canvas é como uma gaveta secreta na lateral do site. Ela fica recolhida para fora da tela e só aparece quando você precisa dela.
 * **Definição técnica**: É um padrão de navegação onde o contêiner de menu é posicionado de forma fixa (`position: fixed`) fora da janela de exibição (*viewport*) com coordenadas negativas (`left: -60vw`). Ao disparar o estado `:hover` no elemento pai, a coordenada é alterada para `left: 0`, e o CSS interpola o movimento ao longo do tempo especificado na propriedade `transition`.
-* **Analogia**: Pense na porta de correr de um guarda-roupa planejado. A porta fica guardada no canto; quando você puxa o puxador (passa o mouse), ela desliza suavemente sobre o trilho até cobrir o espaço desejado.
+
+> **Analogia**:
+> Pense na porta de correr de um guarda-roupa planejado. A porta fica guardada no canto; quando você puxa o puxador (passa o mouse), ela desliza suavemente sobre o trilho até cobrir o espaço desejado.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -40,30 +42,30 @@ Compreendi dois conceitos práticos fundamentais:
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Unidades de Medida Relativas ao Viewport (`vw` e `vh`)
+## Unidades de Medida Relativas ao Viewport (`vw` e `vh`)
 
 * `1vw` (Viewport Width): Equivale a 1% da largura total da janela visível do navegador. `100vw` ocupa 100% da largura da tela.
 * `1vh` (Viewport Height): Equivale a 1% da altura total da janela visível do navegador. `100vh` faz com que o elemento ocupe exatamente toda a altura da tela.
 
-### 3.2. Transições em CSS (`transition`)
+## Transições em CSS (`transition`)
 
 A propriedade `transition` permite definir a animação suave de transição entre dois estados de um elemento (por exemplo, do estado normal para o estado `:hover`).
 
 * **Sintaxe**: `transition: [propriedade] [duração] [função-de-tempo];`
 * Exemplo: `transition: left 1s;` faz a coordenada `left` demorar 1 segundo para deslizar da posição original até a nova posição.
 
-### 3.3. Posicionamento Fixo (`position: fixed`)
+## Posicionamento Fixo (`position: fixed`)
 
 Aplica o posicionamento do elemento em relação à janela do navegador (*viewport*), desvinculando-o do fluxo comum da página. O elemento permanece parado no mesmo lugar mesmo quando a página é rolada.
 
-### 3.4. Combinador de Filhos Diretos (`>`) e Pseudoclasse `:hover`
+## Combinador de Filhos Diretos (`>`) e Pseudoclasse `:hover`
 
 * `>`: Garante que o CSS aplique a regra **apenas** nos elementos que são filhos imediatos do pai, sem afetar subníveis aninhados.
 * `:hover`: Pseudoclasse acionada no momento exato em que o cursor do mouse é posicionado sobre o elemento.
 
-### 3.5. Meta Tags de SEO e Favicon
+## Meta Tags de SEO e Favicon
 
 * `<meta name="description" content="...">`: Resumo da página lido pelos motores de busca (como o Google) para exibir nos resultados de pesquisa.
 * `<meta name="keywords" content="...">`: Palavras-chave relacionadas ao tema do site.
@@ -71,13 +73,13 @@ Aplica o posicionamento do elemento em relação à janela do navegador (*viewpo
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os códigos desenvolvidos em aula, divididos por pasta e com todas as inconsistências de sintaxe corrigidas.
 
-### Projeto 1: Menu Off-Canvas (Pasta `documento/`)
+**Projeto 1: Menu Off-Canvas (Pasta `documento/`)**
 
-#### Arquivo: `menu.html`
+**Arquivo: `menu.html`**
 
 ```html
 <!DOCTYPE html>
@@ -116,7 +118,7 @@ Abaixo estão os códigos desenvolvidos em aula, divididos por pasta e com todas
 
 ```
 
-#### Arquivo: `menus.css`
+**Arquivo: `menus.css`**
 
 ```css
 /* Resete básico e definição da família de fontes */
@@ -202,9 +204,9 @@ ul > li:hover > ul > li {
 
 ---
 
-### Projeto 2: Tabela Linux Estilizada (Pasta `tabelalinux/`)
+**Projeto 2: Tabela Linux Estilizada (Pasta `tabelalinux/`)**
 
-#### Arquivo: `tabelalinux.html`
+**Arquivo: `tabelalinux.html`**
 
 ```html
 <!DOCTYPE html>
@@ -281,7 +283,7 @@ ul > li:hover > ul > li {
 
 ```
 
-#### Arquivo: `estilo.css`
+**Arquivo: `estilo.css`**
 
 ```css
 @charset "UTF-8";
@@ -347,9 +349,9 @@ tr.yellow a:hover {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise do Menu Off-Canvas (`menus.css`)
+**Análise do Menu Off-Canvas (`menus.css`)**
 
 * `.main > ul > li > ul.sidebar`:
 * `position: fixed`: Retira o menu do fluxo comum e prende-o na janela do navegador.
@@ -362,14 +364,14 @@ tr.yellow a:hover {
 
 
 
-### Análise da Tabela Linux (`tabelalinux.html`)
+**Análise da Tabela Linux (`tabelalinux.html`)**
 
 * `<td colspan="3" rowspan="4">`: Esta única célula mescla **3 colunas no sentido horizontal** e **4 linhas no sentido vertical**. Isso permite que a imagem do Ubuntu ocupe um grande bloco à esquerda enquanto quatro linhas com os nomes das distribuições são organizadas perfeitamente ao seu lado.
 * `border-spacing: 0px;`: Elimina o espaço duplo padrão que os navegadores colocam entre as bordas de tabelas normais.
 
 ---
 
-## 6. Passo a Passo: Construindo a Animação Off-Canvas
+**Passo a Passo: Construindo a Animação Off-Canvas**
 
 1. **Estruturar o HTML com aninhamento**:
 * Crie uma lista principal `<ul>` e adicione uma sublista `<ul class="sidebar">` dentro de um dos itens `<li>`.
@@ -390,13 +392,11 @@ tr.yellow a:hover {
 5. **Adicionar a transição suave**:
 * No bloco principal da `.sidebar`, insira `transition: left 1s;`. Ao passar o mouse sobre o elemento pai, o menu deslizará suavemente.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Unidades de Medida CSS (`vw`/`vh` vs. `%` vs. `px`)
+**Tabela 1: Unidades de Medida CSS (`vw`/`vh` vs. `%` vs. `px`)**
 
 | Unidade | Tipo | Referência de Cálculo | Caso de Uso Ideal |
 | --- | --- | --- | --- |
@@ -404,7 +404,7 @@ tr.yellow a:hover {
 | **`%`** | Relativa | Tamanho do **elemento pai direto**. | Colunas de grid e layouts fluidos internos. |
 | **`vw` / `vh**` | Relativa | Tamanho total da **janela do navegador (Viewport)**. | Menus Off-Canvas, modais, seções Hero de tela cheia. |
 
-### Tabela 2: Posicionamentos CSS (`position`)
+**Tabela 2: Posicionamentos CSS (`position`)**
 
 | Valor | Em relação a quê? | Permite `top`, `left`, `right`, `bottom`? | Sai do fluxo da página? |
 | --- | --- | --- | --- |
@@ -415,7 +415,7 @@ tr.yellow a:hover {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Cálculo incorreto nas anotações sobre porcentagem**:
 * ❌ *Incorreto*: "Se o contêiner pai tiver uma largura de 1000px, o elemento filho com `20%` terá uma largura de `200%`."
@@ -436,23 +436,11 @@ tr.yellow a:hover {
 * ❌ *Incorreto*: `vertical-align: center;` (o valor `center` não existe para esta propriedade).
 * ✔️ *Correto*: `vertical-align: middle;`.
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Erro de Cálculo em Comentário**: Corrigi o comentário no código `menus.css` onde estava escrito que `20%` de `1000px` resultaria em `200%`. Ajustei para a explicação matemática correta: **`200px`**.
-* **Sintaxe do Meta Viewport**: Corrigi os sinais de igual em excesso no arquivo `menu.html` (`=width=device=width`).
-* **Propriedade Inexistente no CSS**: A regra `vertical-align: center` no arquivo `estilo.css` foi corrigida para `vertical-align: middle`.
-* **Largura em Linhas de Tabela**: Removi o atributo `width: 292px` do seletor `tr.yellow`, pois a especificação do CSS define que o dimensionamento deve ser feito nas células `<td>` ou no contêiner `<table>`.
-* **Links na Tabela Linux**: Adicionei as tags de âncora `<a>` que faltavam na linha amarela de navegação para que todas as distribuições Linux apontassem para seus respectivos sites oficiais.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Acessibilidade em Menus Apenas com CSS (`:hover`)
+**Acessibilidade em Menus Apenas com CSS (`:hover`)**
 
 Menus acionados exclusivamente por `:hover` possuem uma limitação séria: **não funcionam em dispositivos móveis touch screen** (como celulares e tablets), pois não existe ponteiro de mouse para flutuar sobre o item.
 
@@ -466,7 +454,7 @@ No passado (anos 1990 e início dos anos 2000), tabelas HTML eram usadas incorre
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Largura da Tela**: `100vw` (100% do viewport width).
 * **Altura da Tela**: `100vh` (100% do viewport height).
@@ -479,7 +467,7 @@ No passado (anos 1990 e início dos anos 2000), tabelas HTML eram usadas incorre
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. As unidades `vw` e `vh` medem porcentagens diretas da largura e altura da janela visível do navegador.
 2. O posicionamento `position: fixed` fixa um elemento em relação à tela, retirando-o do fluxo normal da página.
