@@ -1,7 +1,5 @@
 # Menus Off-Canvas Interativos e Tabelas Avançadas em HTML5 e CSS3
 
----
-
 **Visão Geral**
 
 Nesta aula, avancei para técnicas mais complexas de UI (Interface do Usuário) e estruturação de dados. Explorei a criação de **menus suspensos e gavetas laterais (Off-Canvas)** utilizando exclusivamente HTML5 e CSS3 puro, sem a necessidade de JavaScript para controlar animações ou visibilidade.
