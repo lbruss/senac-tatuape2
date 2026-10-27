@@ -1,8 +1,6 @@
-# Painel Lateral de Navegação, Refatoração de Escopo e Janelas Secundárias com `JDialog` (Projeto BL-PDV)
+# Painel Lateral de Navegação, Refatoração de Escopo e Janelas Secundárias com `JDialog` (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, continuei a evolução da interface gráfica do sistema **BL-PDV**, avançando na organização estrutural e no design visual do programa.
 
@@ -14,9 +12,9 @@ Três grandes frentes foram trabalhadas nesta etapa:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Escopo de Variáveis em Interfaces Gráficas (Local vs. Atributo)
+## Escopo de Variáveis em Interfaces Gráficas (Local vs. Atributo)
 
 Quando um componente visual (como um `JLabel` ou `JTextField`) é declarado **dentro do construtor**, ele é uma **variável local**. Isso significa que ele só existe enquanto o construtor estiver sendo executado. Se tentarmos criar um método fora do construtor (como o `atualizarData()`) para modificar o texto desse rótulo, o Java não encontrará a variável.
 
@@ -43,27 +41,28 @@ Para resolver isso, **promovemos a variável a um atributo de classe** (`private
 
 ---
 
-### B. `JFrame` vs. `JDialog`
+## `JFrame` vs. `JDialog`
 
 * **`JFrame` (Janela Principal):** É a janela dona da aplicação. Possui botões de minimizar, maximizar e fechar, e representa a tela principal do sistema.
 * **`JDialog` (Janela de Diálogo / Secundária):** É uma janela auxiliar projetada para exibir mensagens, confirmações, sobrevisos ou formulários curtos. Geralmente não possui botão de minimizar e pode ser configurada como **modal** (bloqueia a interação com a janela principal até que seja fechada).
 
-💡 **Analogia da Casa e da Janela Pop-up:**
+> **Analogia da Casa e da Janela Pop-up:**
+
 O `JFrame` é a estrutura da sua casa inteira (a tela do PDV onde as vendas acontecem). O `JDialog` é um aviso de recado colado na porta de entrada (a tela "Sobre" ou uma caixa de confirmação de exclusão): ele aparece para passar uma informação rápida e depois é dispensado (`dispose()`).
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Promoção de Escopo de Componentes
+## Promoção de Escopo de Componentes
 
 Sempre que um componente Swing precisar ter seu valor alterado dinamicamente durante a execução (via eventos de botão, banco de dados ou relógios), ele **deve ser declarado como atributo de instância** no topo da classe.
 
-### 2. O Atributo `borderPainted(false)` em `JButton`
+## O Atributo `borderPainted(false)` em `JButton`
 
 Por padrão, o Swing desenha uma borda cinza elevada em volta dos botões. Para criar botões com design plano moderno (*flat design*), definimos a propriedade `borderPainted` para `false`. O botão passa a exibir apenas o ícone, o texto e a cor de fundo limpa.
 
-### 3. A Classe `JDialog`
+## A Classe `JDialog`
 
 Classe do pacote `javax.swing` especializada em janelas secundárias.
 
