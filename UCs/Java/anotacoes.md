@@ -70,9 +70,9 @@ Classe do pacote `javax.swing` especializada em janelas secundárias.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Classe Principal com Painel Lateral e Data (`Main.java`)
+**Arquivo 1: Classe Principal com Painel Lateral e Data (`Main.java`)**
 
 ```java
 package view;
@@ -253,7 +253,7 @@ public class Main extends JFrame {
 
 ---
 
-### Arquivo 2: Janela de Diálogo "Sobre" (`Sobre.java`)
+**Arquivo 2: Janela de Diálogo "Sobre" (`Sobre.java`)**
 
 ```java
 package view;
@@ -335,9 +335,9 @@ public class Sobre extends JDialog {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Método `atualizarData()`
+**Desmontando o Método `atualizarData()`**
 
 ```java
 private void atualizarData() {
@@ -355,7 +355,7 @@ private void atualizarData() {
 
 ---
 
-### B. Desmontando a Janela `Sobre.java` (`JDialog`)
+**Desmontando a Janela `Sobre.java` (`JDialog`)**
 
 ```java
 public class Sobre extends JDialog { ... }
@@ -368,9 +368,9 @@ public class Sobre extends JDialog { ... }
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo 1: Construindo o Painel Lateral (`panelLateral`) no WindowBuilder
+**Passo a Passo 1: Construindo o Painel Lateral (`panelLateral`) no WindowBuilder"**
 
 1. No Eclipse, abra a classe `Main.java` e alterne para a aba **Design**.
 2. Na paleta *Containers*, selecione **`JPanel`** e clique dentro do `contentPane`.
@@ -399,11 +399,9 @@ public class Sobre extends JDialog { ... }
 * Insira uma `JLabel` com uma sequência de traços (`------------------`) próximo ao rodapé do painel.
 * Insira outro `JButton` abaixo da linha com o texto `"Sobre"`, ícone `sobre.png` (32x32), e também com `borderPainted = false`.
 
-
-
 ---
 
-### Passo a Passo 2: Criando a Janela `JDialog` (`Sobre.java`) no Eclipse
+**Passo a Passo 2: Criando a Janela `JDialog` (`Sobre.java`) no Eclipse**
 
 1. Clique com o botão direito no pacote `view` ➔ **New** ➔ **Other...**.
 2. Expanda **WindowBuilder** ➔ **Swing Designer** ➔ selecione **JDialog** e clique em **Next**.
@@ -426,9 +424,9 @@ public class Sobre extends JDialog { ... }
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. `JFrame` vs. `JDialog`
+**`JFrame` vs. `JDialog`**
 
 | Característica | `JFrame` | `JDialog` |
 | --- | --- | --- |
@@ -439,7 +437,7 @@ public class Sobre extends JDialog { ... }
 
 ---
 
-### 2. Variável Local vs. Atributo de Classe em GUIs
+**Variável Local vs. Atributo de Classe em GUIs**
 
 | Característica | Variável Local (Dentro do Construtor) | Atributo de Classe (`private`) |
 | --- | --- | --- |
@@ -449,9 +447,9 @@ public class Sobre extends JDialog { ... }
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Tentar Acessar uma Label em Outro Método sem Promovê-la a Atributo
+**Tentar Acessar uma Label em Outro Método sem Promovê-la a Atributo**
 
 Se você tentar escrever `lblData.setText("...")` dentro de `atualizarData()` mantendo `JLabel lblData` como variável local do construtor, o compilador exibirá o erro:
 
@@ -460,7 +458,7 @@ Se você tentar escrever `lblData.setText("...")` dentro de `atualizarData()` ma
 
 ---
 
-### 2. Esquecer de Remover os Botões Padrão do `JDialog`
+**Esquecer de Remover os Botões Padrão do `JDialog`**
 
 O WindowBuilder cria uma barra inferior (`buttonPane`) com os botões `OK` e `Cancel` por padrão ao gerar um `JDialog`.
 
@@ -468,7 +466,7 @@ O WindowBuilder cria uma barra inferior (`buttonPane`) com os botões `OK` e `Ca
 
 ---
 
-### 3. Não Configurar a Janela Secundária como Modal
+**Não Configurar a Janela Secundária como Modal**
 
 Se você abrir a janela `Sobre` sem definir `setModal(true)`, o usuário poderá clicar na janela principal do PDV atrás dela. A janela de diálogo ficará escondida atrás do programa principal, causando confusão.
 
