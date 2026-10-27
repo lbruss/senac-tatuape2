@@ -472,19 +472,9 @@ Se você abrir a janela `Sobre` sem definir `setModal(true)`, o usuário poderá
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho da aula, apliquei as seguintes correções silenciosas:
-
-1. **Correção Ortográfica do Nome do Autor:** No rascunho da aula, o texto do rótulo veio digitado com erro como `"Autor: Bruss Liza"`. Corrigi o valor do texto para **`"Autor: Bruss Loza"`**.
-2. **Correção de Nome de Componente:** O rascunho citava a seleção da opção `"Jpane"` na paleta Containers. Corrigi a nomenclatura para a classe oficial da API Java Swing: **`JPanel`**.
-3. **Ajuste na Posição dos Componentes de Rodapé:** Com a criação do `panelLateral` cobrindo a faixa de $X=0$ até $X=196$, reajustei o posicionamento do ícone de banco (`lblDataBase`), legenda (`lblMysql`) e ponto de status (`lblStatus`) para começarem a partir da posição $X=206$, evitando que fossem cobertos pelo painel lateral.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Ligando o Botão "Sobre" da Tela Principal à Abertura do `JDialog`
+**Ligando o Botão "Sobre" da Tela Principal à Abertura do `JDialog`**
 
 Para fazer com que a janela `Sobre.java` abra automaticamente quando o usuário clicar no botão `btnSobre` da tela `Main.java`, adicionamos um evento de clique (**`ActionListener`**) ao botão:
 
@@ -503,7 +493,7 @@ btnSobre.addActionListener(new java.awt.event.ActionListener() {
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Promover um componente a atributo (`private JLabel lblData`) permite alterá-lo em qualquer método da classe.
 2. O método `atualizarData()` utiliza `LocalDate.now()` e `DateTimeFormatter` para capturar a data do sistema.
@@ -520,7 +510,7 @@ btnSobre.addActionListener(new java.awt.event.ActionListener() {
 
 ## Guia Rápido de Memorização
 
-### Capturando e Formatando Data Atual
+**Capturando e Formatando Data Atual**
 
 ```java
 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -529,7 +519,7 @@ lblData.setText(dataHoje);
 
 ```
 
-### Abrindo um JDialog a partir de um Evento de Botão
+**Abrindo um JDialog a partir de um Evento de Botão**
 
 ```java
 Sobre tela = new Sobre();
