@@ -78,7 +78,7 @@ Para permitir que o JavaScript insira eventos e manipule dados futuramente, inse
 
 Abaixo estão os arquivos corrigidos e validados do projeto na pasta `bibliotecasenac`.
 
-### Arquivo 1: `bibliotecasenac.html`
+**Arquivo 1: `bibliotecasenac.html`**
 
 ```html
 <!DOCTYPE html>
@@ -174,7 +174,7 @@ Abaixo estão os arquivos corrigidos e validados do projeto na pasta `biblioteca
 
 ---
 
-### Arquivo 2: `style.css`
+**Arquivo 2: `style.css`**
 
 ```css
 /* Configuração Global */
@@ -340,9 +340,9 @@ footer {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise da Estrutura do Modal (`.modal` e `.modal-content`)
+**Análise da Estrutura do Modal (`.modal` e `.modal-content`)**
 
 * `display: none;`:
 * *O que faz*: Oculta a janela completamente do fluxo de tela no carregamento inicial da página.
@@ -362,7 +362,7 @@ footer {
 
 
 
-### Análise do Calendário em CSS Grid (`.cal-grid`)
+**Análise do Calendário em CSS Grid (`.cal-grid`)**
 
 * `display: grid;`:
 * *O que faz*: Habilita o contexto de grid no container da agenda.
@@ -371,11 +371,9 @@ footer {
 * `grid-template-columns: repeat(7, 1fr);`:
 * *O que faz*: Divide a largura total disponível do calendário em **7 colunas idênticas**. É o padrão perfeito para mapear os dias da semana (Domingo a Sábado).
 
-
-
 ---
 
-## 6. Passo a Passo: Configuração do Projeto no VS Code
+**Passo a Passo: Configuração do Projeto no VS Code**
 
 1. **Criar a pasta do projeto**:
 * Crie a pasta `bibliotecasenac` e abra-a no Visual Studio Code.
@@ -395,13 +393,11 @@ footer {
 * No `<head>` de `bibliotecasenac.html`, confirme o vínculo do CSS via `<link rel="stylesheet" href="style.css">`.
 * Antes do fechamento de `</body>`, confirme o vínculo do script via `<script src="script.js"></script>`.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Modelos de Layout no CSS (Grid vs. Flexbox)
+**Tabela 1: Modelos de Layout no CSS (Grid vs. Flexbox)**
 
 | Critério | CSS Grid (`display: grid`) | CSS Flexbox (`display: flex`) |
 | --- | --- | --- |
@@ -409,7 +405,7 @@ footer {
 | **Direcionamento do Design** | *Grid-first* (Ideal para criar a estrutura antes do conteúdo). | *Content-first* (Ideal para alinhar elementos dinâmicos). |
 | **Melhor Aplicação no Projeto** | Montar a grade de 7 colunas do calendário (`.cal-grid`). | Alinhar os links da barra de navegação (`nav ul`) e cabeçalho (`header`). |
 
-### Tabela 2: Camadas de Exibição no Front-End
+**Tabela 2: Camadas de Exibição no Front-End**
 
 | Estrutura | Propriedade CSS Chave | Posição no Documento | Função Principal |
 | --- | --- | --- | --- |
@@ -418,7 +414,7 @@ footer {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Confundir a propriedade de exibição CSS `display` com o valor de alinhamento Flexbox**:
 * ❌ *Incorreto*: `header { display: space-between; }` (`space-between` não é um tipo válido de `display`).
@@ -433,21 +429,11 @@ footer {
 3. **Esquecer o `z-index` na declaração de Modais**:
 * Se o `.modal` não tiver um `z-index` maior do que os outros elementos da página com `position: relative` ou `fixed`, o conteúdo da página poderá vazar e cobrir o modal.
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Atributo `for` nos Labels**: No formulário de indicações do arquivo original, o código usava `form="nome"` e `form="livro"`. O atributo padrão W3C para vincular um `<label>` a um `<input>` é `for="id_do_input"`. A correção foi feita diretamente no HTML.
-* **Propriedade Inexistente em `header**`: No arquivo CSS original, constava a linha `display: space-between;`. Ajustei para o padrão correto de Flexbox: `display: flex; justify-content: space-between; align-items: center;`.
-* **Organização do Cabeçalho**: Agrupei a imagem e o título `<h1>` em uma div container (`.logo-container`) para que a imagem do Senac e o texto fiquem perfeitamente alinhados na horizontal.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Preparando o DOM para o JavaScript
+**Preparando o DOM para o JavaScript**
 
 Nesta aula, construímos a base de marcação HTML e os estilos CSS. Para que o JavaScript funcione na próxima etapa, garantimos que os elementos possuam **IDs exclusivos** onde a manipulação de DOM acontecerá:
 
@@ -457,7 +443,7 @@ Nesta aula, construímos a base de marcação HTML e os estilos CSS. Para que o 
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Criar Calendário de 7 Colunas**: `.grade { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }`
 * **Criar Fundo de Modal**: `.modal { display: none; position: fixed; z-index: 1000; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }`
@@ -467,7 +453,7 @@ Nesta aula, construímos a base de marcação HTML e os estilos CSS. Para que o 
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O projeto da Biblioteca Senac integra recursos semânticos do HTML5 com layouts modernos em CSS.
 2. O CSS Grid é ativado com `display: grid` e é o modelo ideal para organizar a estrutura bidimensional do calendário.
