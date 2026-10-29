@@ -1,8 +1,6 @@
 # Projeto Biblioteca Senac: Interface Web Integrada, CSS Grid para Calendários e Estrutura de Modais
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, desenvolvi a estrutura completa de front-end para a landing page da **Biblioteca Senac Tatuapé**. O objetivo foi construir um portal moderno que agrupa recursos disponíveis, agenda de atividades interativa, sistema de recomendação de livros e agendamento de espaços.
 
@@ -10,9 +8,9 @@ Aprendi a utilizar o **CSS Grid** para criar layouts bidimensionais complexos (c
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que é um Modal e como funciona o CSS Grid em Calendários?
+## Modal e funcionamento do CSS Grid em Calendários
 
 * **Conceito simples**:
 * O **Modal** é como uma "janela pop-up" interna que aparece por cima do site sem recarregar a página, escurecendo o fundo para chamar a atenção do usuário para um detalhe específico.
@@ -51,22 +49,22 @@ Aprendi a utilizar o **CSS Grid** para criar layouts bidimensionais complexos (c
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Estrutura do Modal em HTML5
+## Estrutura do Modal em HTML5
 
 Para criar uma caixa de diálogo sobreposta, dividimos a estrutura em duas partes principais:
 
 1. **Container de Fundo (`.modal`)**: Responsável por cobrir toda a tela com um fundo semitransparente escuro (`background: rgba(0, 0, 0, 0.5)`).
 2. **Conteúdo do Modal (`.modal-content`)**: A caixa branca centralizada contendo os dados, o botão de fechar (`<span class="close">&times;</span>`) e os textos dinâmicos.
 
-### 3.2. Configuração de Calendário com CSS Grid
+## Configuração de Calendário com CSS Grid
 
 * `display: grid`: Ativa o modelo de grade de duas dimensões.
 * `grid-template-columns: repeat(7, 1fr)`: Cria automaticamente 7 colunas de largura rigorosamente igual (`1fr` = 1 fração do espaço disponível).
 * `gap: 5px`: Define o espaçamento uniforme entre os dias do calendário.
 
-### 3.3. Preparação para Injeção Dinâmica via JavaScript (IDs de Gancho)
+## Preparação para Injeção Dinâmica via JavaScript (IDs de Gancho)
 
 Para permitir que o JavaScript insira eventos e manipule dados futuramente, inseri identificadores únicos (`id`):
 
@@ -76,7 +74,7 @@ Para permitir que o JavaScript insira eventos e manipule dados futuramente, inse
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os arquivos corrigidos e validados do projeto na pasta `bibliotecasenac`.
 
