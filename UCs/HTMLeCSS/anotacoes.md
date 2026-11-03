@@ -1,8 +1,6 @@
 # JavaScript Dinâmico: Manipulação do DOM, Eventos, Calendário Interativo e Modais no Projeto Biblioteca Senac
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei vida à interface da **Biblioteca Senac Tatuapé** que estruturamos em HTML e CSS nas aulas anteriores. Utilizando o **JavaScript (JS)**, transformei elementos estáticos em uma aplicação web interativa e funcional.
 
@@ -10,9 +8,9 @@ Aprendi a capturar o envio de formulários sem recarregar a página, a manipular
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que é Manipulação do DOM e Manipulação de Eventos?
+## Manipulação do DOM e Manipulação de Eventos
 
 * **Conceito simples**: Se o HTML é a estrutura da página e o CSS é a pintura, o JavaScript é o motor de controle. Ele escuta as ações do usuário (como cliques e envios de formulário) e altera o texto, as cores ou insere novos elementos na tela em tempo real.
 * **Definição técnica**: O **DOM (Document Object Model)** é uma interface de programação que representa o documento HTML como uma árvore de objetos. O JavaScript utiliza essa estrutura para escutar eventos (`addEventListener`), ler valores de campos (`value`), criar novos nós (`createElement`) e alterar propriedades visuais sem a necessidade de recarregar o navegador.
@@ -34,9 +32,9 @@ Aprendi a capturar o envio de formulários sem recarregar a página, a manipular
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Captura e Manipulação do DOM
+## Captura e Manipulação do DOM
 
 * `document.getElementById("id")`: Busca e seleciona um elemento do HTML pelo seu atributo de identificação único.
 * `.addEventListener("submit", function(e) { ... })`: Registra um "ouvinte" que dispara uma função quando o evento especificado (no caso, o envio de um formulário) acontece.
@@ -44,7 +42,7 @@ Aprendi a capturar o envio de formulários sem recarregar a página, a manipular
 * `document.createElement("tag")`: Cria um novo elemento HTML na memória do navegador.
 * `container.appendChild(novoElemento)`: Insere o elemento criado na memória como filho final do container selecionado no HTML.
 
-### 3.2. Manipulação de Datas em JavaScript (`Date`)
+## Manipulação de Datas em JavaScript (`Date`)
 
 O objeto nativo `Date` gerencia operações com datas e horários:
 
@@ -53,18 +51,18 @@ O objeto nativo `Date` gerencia operações com datas e horários:
 * `new Date(ano, mes + 1, 0).getDate()`: **Truque do último dia**: ao passar o dia `0` do mês seguinte, o JS calcula automaticamente o último dia do mês atual (ex: 28, 30 ou 31).
 * `String(valor).padStart(2, "0")`: Preenche uma string à esquerda com o caractere especificado até atingir o tamanho desejado (ex: transforma o número `5` na string `"05"`).
 
-### 3.3. Iteração e Seleção de Dados em Arrays
+## Iteração e Seleção de Dados em Arrays
 
 * Array de Objetos: Guarda coleções estruturadas contendo chave e valor (ex: `{ data: "2027-02-15", titulo: "...", descricao: "..." }`).
 * `.find(condicao)`: Percorre a lista e retorna o primeiro elemento que atende à condição de busca (usado para verificar se o dia da grade possui um evento correspondente).
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo está o arquivo `script.js` completo, corrigido, formatado e com todos os recursos de interatividade devidamente integrados.
 
-### Arquivo: `script.js`
+**Arquivo: `script.js`**
 
 ```javascript
 /* =================================================== */
@@ -259,9 +257,9 @@ gerarCalendario(mesAtual, anoAtual);
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise do Cadastro de Indicações (`form-indicacao`)
+**Análise do Cadastro de Indicações (`form-indicacao`)**
 
 * `e.preventDefault()`:
 * *O que faz*: Bloqueia a ação padrão do evento `submit`.
@@ -271,9 +269,7 @@ gerarCalendario(mesAtual, anoAtual);
 * `document.createElement("li")` e `lista.appendChild(item)`:
 * *O que faz*: Fabrica uma nova tag `<li>` no motor do JS, adiciona o texto descritivo e a anexa como um elemento visível dentro da `<ul>` do HTML.
 
-
-
-### Análise do Gerador do Calendário (`gerarCalendario`)
+**Análise do Gerador do Calendário (`gerarCalendario`)**
 
 * `const primeiroDia = new Date(ano, mes, 1).getDay()`:
 * *O que faz*: Descobre o dia da semana em que o dia 1 cai (ex: se o dia 1 for uma quarta-feira, `getDay()` retorna `3`).
@@ -291,11 +287,9 @@ gerarCalendario(mesAtual, anoAtual);
 * `cell.addEventListener("click", () => abrirModal(evento))`:
 * *O que faz*: Conecta a célula do dia no calendário à função `abrirModal`, repassando o objeto do evento correspondente quando o usuário clica sobre ela.
 
-
-
 ---
 
-## 6. Passo a Passo: Funcionamento da Renderização do Calendário
+**Passo a Passo: Funcionamento da Renderização do Calendário**
 
 1. **Reset do Container**: A função inicia executando `calendario.innerHTML = ""` para limpar qualquer mês que estivesse desenhado anteriormente.
 2. **Cálculo da Data**: Obtém o dia da semana inicial (`primeiroDia`) e o total de dias do mês (`diasNoMes`).
@@ -306,14 +300,13 @@ gerarCalendario(mesAtual, anoAtual);
 * A cada dia, monta a string da data e busca no array `eventos2027` via `.find()`.
 * Se um evento for encontrado, aplica a classe `.evento` (que deixa a caixa amarela) e registra a função de clique para abrir o Modal.
 
-
 6. **Inserção no DOM**: Conecta a grade gerada dentro da `<div id="calendar">` na tela.
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Métodos de Manipulação do DOM
+**Tabela 1: Métodos de Manipulação do DOM**
 
 | Método | Para que serve? | Retorno / Resultado |
 | --- | --- | --- |
@@ -323,7 +316,7 @@ gerarCalendario(mesAtual, anoAtual);
 | `elemento.textContent` | Altera ou lê apenas o texto interno do elemento. | Texto puro sem interpretar tags HTML. |
 | `elemento.innerHTML` | Altera ou lê todo a marcação HTML interna. | Interpreta e desenha tags HTML passadas em string. |
 
-### Tabela 2: Métodos do Objeto `Date` em JavaScript
+**Tabela 2: Métodos do Objeto `Date` em JavaScript**
 
 | Método | O que retorna? | Exemplo de Retorno |
 | --- | --- | --- |
@@ -335,7 +328,7 @@ gerarCalendario(mesAtual, anoAtual);
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Não utilizar `e.preventDefault()` em formulários**:
 * ❌ *Incorreto*: Processar o formulário diretamente no `submit` sem o parâmetro e a instrução de cancelamento. A página recarrega e a indicação inserida é perdida imediatamente.
@@ -355,22 +348,11 @@ gerarCalendario(mesAtual, anoAtual);
 4. **Não limpar o container ao redesenhar o calendário**:
 * Se a instrução `calendario.innerHTML = ""` for omitida na função `gerarCalendario()`, o novo mês renderizado será colado abaixo do mês antigo em vez de substituí-lo.
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Inconsistência de Dados no Modal (`descricao`)**: No rascunho original, a função `abrirModal` tentava exibir `evento.descricao`, mas os objetos do array `eventos2027` continham apenas as chaves `data` e `titulo`. Adicionei silenciosamente a propriedade `descricao` em cada objeto do array.
-* **Falta de Evento de Clique nos Dias com Eventos**: No rascunho original, as células com eventos recebiam o destaque visual (`classList.add("evento")`), mas a função `abrirModal()` nunca era chamada. Adicionei o escutador de eventos `cell.addEventListener("click", ...)` diretamente na construção de cada célula.
-* **Formatação e Organização do Código**: Ajustei identações quebradas e reuni escopos de funções que estavam misturados ou mal fechados nas anotações originais (como a função `mudarMes` colada ao final de `gerarCalendario`).
-* **Melhoria de Usabilidade**: Adicionei a instrução `document.getElementById("form-indicacao").reset()` para limpar as caixas de texto após a adição de um novo livro na lista.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Fechando o Modal ao Clicar Fora da Caixa
+**Fechando o Modal ao Clicar Fora da Caixa**
 
 Uma boa prática universal de UX (Experiência do Usuário) em Modais é permitir que o usuário feche a janela não apenas clicando no botão `[X]`, mas também clicando em qualquer lugar do fundo escuro transparente. Podemos adicionar essa funcionalidade com o seguinte trecho:
 
@@ -385,13 +367,13 @@ window.addEventListener("click", function(e) {
 
 ```
 
-### Template Literals (Interpolação de Strings)
+**Template Literals (Interpolação de Strings)**
 
 O uso de crases (```) em vez de aspas permite interpolar variáveis diretamente no texto usando a sintaxe `${variavel}`, além de permitir a escrita de código HTML em múltiplas linhas, mantendo a leitura limpa e moderna.
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Cancelar Recarregamento de Formulário**: `e.preventDefault()`.
 * **Criar Elemento em Memória**: `document.createElement("tag")`.
@@ -404,7 +386,7 @@ O uso de crases (```) em vez de aspas permite interpolar variáveis diretamente 
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O JavaScript é a linguagem responsável por adicionar interatividade e lógica dinâmica ao HTML e CSS.
 2. O método `addEventListener` registra escutadores de eventos como envios de formulários e cliques de mouse.
