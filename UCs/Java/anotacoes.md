@@ -1,8 +1,6 @@
-# Eventos de Interface, Integração com o Sistema Operacional, Formulário de Fornecedores e Padrão Model (Projeto BL-PDV)
+# Eventos de Interface, Integração com o Sistema Operacional, Formulário de Fornecedores e Padrão Model (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei significativamente na interatividade da interface gráfica e na arquitetura do sistema **BL-PDV**.
 
@@ -17,9 +15,9 @@ Na segunda metade da aula, dei início ao módulo de cadastros do sistema:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Programação Orientada a Eventos (Event-Driven Programming)
+## Programação Orientada a Eventos (Event-Driven Programming)
 
 Em interfaces gráficas, o código não roda de forma sequencial do início ao fim. O sistema entra em estado de espera (*Event Loop*) aguardando uma ação do usuário (clique do mouse, digitação no teclado, movimento da janela).
 
@@ -30,15 +28,15 @@ Quando o usuário clica em um componente, um **Evento** é disparado. Para respo
 
 ---
 
-### B. Integração com a Área de Trabalho (`java.awt.Desktop`)
+## Integração com a Área de Trabalho (`java.awt.Desktop`)
 
 A classe `Desktop` do Java permite que a aplicação interaja diretamente com os aplicativos nativos do sistema operacional do cliente (navegador web padrão, leitor de e-mail ou gerenciador de arquivos).
 
-💡 **Analogia da Secretária:** Imagine que sua aplicação Java é um executivo em uma reunião. Quando ele precisa abrir uma página da web, ele não constrói um navegador dentro da sua sala; ele apenas pede para a secretária (`Desktop.getDesktop()`) abrir o navegador que já está instalado no computador e navegar até o endereço desejado (`browse(uri)`).
+> **Analogia da Secretária:** Imagine que sua aplicação Java é um executivo em uma reunião. Quando ele precisa abrir uma página da web, ele não constrói um navegador dentro da sua sala; ele apenas pede para a secretária (`Desktop.getDesktop()`) abrir o navegador que já está instalado no computador e navegar até o endereço desejado (`browse(uri)`).
 
 ---
 
-### C. A Camada Model no Padrão MVC
+## A Camada Model no Padrão MVC
 
 O pacote `model` representa a camada de dados da aplicação. A classe `Fornecedor.java` é um **JavaBean** ou **DTO (Data Transfer Object)**. Ela não possui inteligência visual nem código de banco de dados; ela serve unicamente como um "container" trancado (atributos privados com Getters e Setters) para transportar as informações de um fornecedor entre a tela visual (`view`) e o banco de dados (`database`).
 
@@ -57,30 +55,30 @@ O pacote `model` representa a camada de dados da aplicação. A classe `Forneced
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. O Método `dispose()`
+## O Método `dispose()`
 
 Diferente de `System.exit(0)` (que encerra todo o programa Java e fecha todas as janelas), o método `dispose()` libera os recursos gráficos da janela atual e fecha **apenas a janela especificada**, mantendo as demais telas ativas.
 
-### 2. O Método `setLocationRelativeTo(null)`
+## O Método `setLocationRelativeTo(null)`
 
 Quando inserido no construtor de uma janela (`JFrame` ou `JDialog`), este comando instrui o sistema operacional a calcular as dimensões do monitor e posicionar a janela **exatamente no centro da tela**.
 
-### 3. As Classes `java.awt.Desktop` e `java.net.URI`
+## As Classes `java.awt.Desktop` e `java.net.URI`
 
 * **`URI` (Uniform Resource Identifier):** Representa e valida a sintaxe do endereço web (ex: `"[https://github.com/lbruss](https://github.com/lbruss)"`).
 * **`Desktop.getDesktop().browse(uri)`:** Abre o navegador web padrão do SO e carrega a URI informada.
 
-### 4. Campos Desabilitados em Formulários (`setEnabled(false)`)
+## Campos Desabilitados em Formulários (`setEnabled(false)`)
 
 No formulário `FrmFornecedor`, o campo `textID` e seu rótulo foram configurados com `setEnabled(false)`. Isso impede que o operador digite um código manualmente, pois a chave primária (`idFornecedor`) é gerada automaticamente pelo banco de dados via `AUTO_INCREMENT`.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Exemplo 1: Janela de Diálogo Interativa (`Sobre.java`)
+**Exemplo 1: Janela de Diálogo Interativa (`Sobre.java`)**
 
 ```java
 package view;
@@ -218,7 +216,7 @@ public class Sobre extends JDialog {
 
 ---
 
-### Exemplo 2: Atualização da Tela Principal com Evento (`Main.java`)
+**Exemplo 2: Atualização da Tela Principal com Evento (`Main.java`)**
 
 ```java
 package view;
@@ -385,7 +383,7 @@ public class Main extends JFrame {
 
 ---
 
-### Exemplo 3: Formulário de Cadastro de Fornecedores (`FrmFornecedor.java`)
+**Exemplo 3: Formulário de Cadastro de Fornecedores (`FrmFornecedor.java`)**
 
 ```java
 package view;
@@ -495,7 +493,7 @@ public class FrmFornecedor extends JDialog {
 
 ---
 
-### Exemplo 4: Classe de Modelo de Dados (`Fornecedor.java`)
+**Exemplo 4: Classe de Modelo de Dados (`Fornecedor.java`)**
 
 ```java
 package model;
@@ -561,9 +559,9 @@ public class Fornecedor {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Abertura de Link Web (`link(String url)`)
+**Desmontando a Abertura de Link Web (`link(String url)`)**
 
 ```java
 private void link(String url) {
@@ -585,7 +583,7 @@ private void link(String url) {
 
 ---
 
-### B. Desmontando o Fechamento da Janela com `dispose()`
+**Desmontando o Fechamento da Janela com `dispose()`**
 
 ```java
 btnOK.addActionListener(new ActionListener() {
@@ -602,9 +600,9 @@ btnOK.addActionListener(new ActionListener() {
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo 1: Adicionando Evento de Mouse no Rótulo do GitHub no WindowBuilder
+**Passo a Passo 1: Adicionando Evento de Mouse no Rótulo do GitHub no WindowBuilder**
 
 1. Na aba **Design** do arquivo `Sobre.java`, selecione o rótulo `lblRepositorio`.
 2. Clique com o botão direito sobre ele ➔ **Add event handler** ➔ **mouse** ➔ **mouseClicked**.
@@ -613,7 +611,7 @@ btnOK.addActionListener(new ActionListener() {
 
 ---
 
-### Passo a Passo 2: Criando o Formulário `FrmFornecedor` no Eclipse
+**Passo a Passo 2: Criando o Formulário `FrmFornecedor` no Eclipse**
 
 1. Clique com o botão direito no pacote `view` ➔ **New** ➔ **Other...** ➔ **WindowBuilder** ➔ **Swing Designer** ➔ **JDialog**.
 2. Defina o nome como `FrmFornecedor` (seguindo a convenção *PascalCase*).
@@ -627,11 +625,9 @@ btnOK.addActionListener(new ActionListener() {
 * Adicione `lblID` e `textID`. Selecione ambos e marque a propriedade `enabled` como **`false`**.
 * Adicione os pares de `JLabel` e `JTextField` para: `Nome`, `Fone`, `Email` e `Site`.
 
-
-
 ---
 
-### Passo a Passo 3: Criando a Camada Model (`Fornecedor.java`)
+**Passo a Passo 3: Criando a Camada Model (`Fornecedor.java`)**
 
 1. No painel *Package Explorer*, clique com o botão direito na pasta `src` ➔ **New** ➔ **Package**.
 2. Nomeie o pacote como **`model`**.
@@ -642,9 +638,9 @@ btnOK.addActionListener(new ActionListener() {
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. `ActionListener` vs. `MouseAdapter`
+**`ActionListener` vs. `MouseAdapter`**
 
 | Recurso | `ActionListener` | `MouseAdapter` / `MouseListener` |
 | --- | --- | --- |
@@ -654,7 +650,7 @@ btnOK.addActionListener(new ActionListener() {
 
 ---
 
-### 2. Ações de Encerramento de Janela
+**Ações de Encerramento de Janela**
 
 | Comando | O que faz no Sistema? | Aplicação Ideal |
 | --- | --- | --- |
@@ -664,16 +660,16 @@ btnOK.addActionListener(new ActionListener() {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Nomenclatura de Classes Java (`frmFornecedor` vs `FrmFornecedor`)
+**Nomenclatura de Classes Java (`frmFornecedor` vs `FrmFornecedor`)**
 
 Na convenção oficial da linguagem Java, todas as classes devem começar obrigatoriamente com **letra maiúscula** (*PascalCase*).
 
 * **Incorreto:** `public class frmFornecedor extends JDialog`
 * **Correto:** `public class FrmFornecedor extends JDialog`
 
-### 2. Esquecer de Tratar Exceções ao Usar `Desktop.getDesktop()`
+**Esquecer de Tratar Exceções ao Usar `Desktop.getDesktop()`**
 
 Tentar abrir uma URL sem o bloco `try-catch` gerará erro de compilação, pois o método `.browse()` dispara exceções checadas (`IOException` e `URISyntaxException`).
 
