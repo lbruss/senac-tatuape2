@@ -671,23 +671,13 @@ Na convenção oficial da linguagem Java, todas as classes devem começar obriga
 
 **Esquecer de Tratar Exceções ao Usar `Desktop.getDesktop()`**
 
-Tentar abrir uma URL sem o bloco `try-catch` gerará erro de compilação, pois o método `.browse()` dispara exceções checadas (`IOException` e `URISyntaxException`).
+Tentar abrir uma URL sem o bloco `try-catch` gerará erro de compilação, pois o método `.browse()` dispara exceções checadas (`IOException` e `URISyntaxException`).
 
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+##  Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Nomenclatura da Classe `FrmFornecedor`:** No rascunho original, a classe do formulário foi grafada com inicial minúscula (`frmFornecedor`). Ajustei o nome da classe para **`FrmFornecedor`** (em *PascalCase*), alinhando com as convenções da linguagem Java.
-2. **Extensões de Imagem na Pasta `img`:** No rascunho original, os arquivos de imagem variavam entre `.jpg` e `.png`. Padronizei as referências de código para buscar as imagens oficiais com a extensão `.png`.
-3. **Nomenclatura de Pacotes:** Garanti a consistência de todos os pacotes em letras minúsculas (`view`, `database` e `model`).
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Aprofundando a Arquitetura MVC (Model-View-Controller)
+**Aprofundando a Arquitetura MVC (Model-View-Controller)**
 
 Com a criação do pacote `model`, iniciamos a estruturação de um sistema profissional em **camadas**:
 
@@ -699,7 +689,7 @@ Essa separação impede que o código de banco de dados fique misturado com os b
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O método `dispose()` fecha e libera os recursos da janela atual sem encerrar o programa.
 2. O comando `setLocationRelativeTo(null)` centraliza a janela no meio da tela do monitor.
@@ -716,21 +706,21 @@ Essa separação impede que o código de banco de dados fique misturado com os b
 
 ## Guia Rápido de Memorização
 
-### Abrir URL Externa no Navegador
+**Abrir URL Externa no Navegador**
 
 ```java
 Desktop.getDesktop().browse(new URI("https://github.com/lbruss"));
 
 ```
 
-### Fechar Janela Secundária
+**Fechar Janela Secundária**
 
 ```java
 dispose();
 
 ```
 
-### Centralizar Janela na Tela
+**Centralizar Janela na Tela**
 
 ```java
 setLocationRelativeTo(null);
