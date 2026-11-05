@@ -72,7 +72,7 @@ Todos os scripts inline utilizam o evento `DOMContentLoaded`. Isso garante que o
 
 Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleStore**, com todas as correções técnicas de caminhos, links ativos, nomes de arquivos e chamadas de scripts devidamente padronizados.
 
-### Arquivo 1: `index.html` (Página Principal)
+**Arquivo 1: `index.html` (Página Principal)**
 
 ```html
 <!DOCTYPE html>
@@ -167,7 +167,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-### Arquivo 2: `feminina.html` (Coleção Feminina)
+**Arquivo 2: `feminina.html` (Coleção Feminina)**
 
 ```html
 <!DOCTYPE html>
@@ -242,7 +242,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-### Arquivo 3: `masculina.html` (Coleção Masculina)
+**Arquivo 3: `masculina.html` (Coleção Masculina)**
 
 ```html
 <!DOCTYPE html>
@@ -317,7 +317,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-### Arquivo 4: `infantil.html` (Coleção Infantil)
+**Arquivo 4: `infantil.html` (Coleção Infantil)**
 
 ```html
 <!DOCTYPE html>
@@ -392,7 +392,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-### Arquivo 5: `cliente.html` (Portal do Consumidor)
+**Arquivo 5: `cliente.html` (Portal do Consumidor)**
 
 ```html
 <!DOCTYPE html>
@@ -484,7 +484,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-### Arquivo 6: `vendedor.html` (Módulo Administrativo)
+**Arquivo 6: `vendedor.html` (Módulo Administrativo)**
 
 ```html
 <!DOCTYPE html>
@@ -591,28 +591,26 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise dos Carrosséis e Eventos Inline (`index.html`)
+**Análise dos Carrosséis e Eventos Inline (`index.html`)**
 
 * `onmouseenter="pausarCarrossel()"` e `onmouseleave="iniciarCarrosselAuto()"`:
 * *O que faz*: O `onmouseenter` detecta quando o ponteiro do mouse entra na área da `<section>`, disparando uma função JS que pausa o temporizador (`clearInterval`). O `onmouseleave` faz o oposto, reativando o `setInterval`.
 * *Por que está ali*: Garante acessibilidade e usabilidade para que o cliente consiga ler o conteúdo dos banners sem que o slide mude involuntariamente.
 
-
-
-### Análise da Chamada de Scripts e Funções Específicas por Página
+**Análise da Chamada de Scripts e Funções Específicas por Página**
 
 * Em `index.html`: Chamo `renderizarDestaques()`, preenchendo a div `#grid-destaque`.
 * Em `feminina.html`, `masculina.html` e `infantil.html`: Substituí a chamada genérica de destaques por `renderizarCategoria('nome_da_categoria')`. Isso orienta a função JS a filtrar a base de dados de produtos e injetar o HTML apenas dos itens pertencentes àquela categoria no contêiner correspondente (`#grid-feminina`, `#grid-masculina`, `#grid-infantil`).
 
-### Análise da Estrutura da Área Administrativa (`vendedor.html`)
+**Análise da Estrutura da Área Administrativa (`vendedor.html`)**
 
 * `<section id="area-relatorio-impressao">`: Agrupa a tabela e o cabeçalho oficial de relatórios. Essa estrutura com ID dedicado é fundamental para que, ao disparar a função `exportarPDF()`, a biblioteca de geração selecione apenas esse bloco da tela, ignorando os botões de navegação e menus do site.
 
 ---
 
-## 6. Passo a Passo: Estruturação Inicial do Projeto no VS Code
+**Passo a Passo: Estruturação Inicial do Projeto no VS Code**
 
 1. **Criar a estrutura de diretórios pelo terminal ou interface**:
 * Crie uma pasta principal chamada `loja`.
@@ -633,13 +631,11 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 * No `<head>` de cada arquivo HTML, insira o link do CSS: `<link rel="stylesheet" href="css/style.css">`.
 * Antes do fechamento da tag `</body>`, insira o script principal: `<script src="js/main.js"></script>`.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Estrutura das Páginas do E-Commerce StyleStore
+**Tabela 1: Estrutura das Páginas do E-Commerce StyleStore**
 
 | Arquivo HTML | Função Principal | Elementos Chave | Chamadas no `DOMContentLoaded` |
 | --- | --- | --- | --- |
@@ -650,7 +646,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 | `cliente.html` | Autenticação e acompanhamento de compras | Formulário de Login + Tabela de Pedidos | `verificarSessaoCliente()` |
 | `vendedor.html` | Dashboard gerencial e emissão de dados | Login + Tabela Geral + Botões CSV/Excel/PDF | `verificarSessaoVendedor()` |
 
-### Tabela 2: Tipos de Formatos de Exportação do Painel do Vendedor
+**Tabela 2: Tipos de Formatos de Exportação do Painel do Vendedor**
 
 | Formato | Botão / Evento | Tipo de Dado Gerado | Vantagem de Uso |
 | --- | --- | --- | --- |
@@ -660,7 +656,7 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Erro de digitação no evento de carregamento do DOM**:
 * ❌ *Incorreto*: `document.addEventListener('DOMAContentLoader', ...)` (Palavra chave totalmente inválida).
@@ -681,27 +677,11 @@ Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleSto
 * ❌ *Incorreto*: Criar o arquivo físico como `femenina.html` e referenciar `<a href="feminina.html">`.
 * ✔️ *Correto*: Garantir que os nomes dos arquivos no sistema operacional coincidam 100% com os links definidos na tag `href`.
 
-
-
 ---
 
-## 9. Correções Técnicas das Minhas Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Correção Crítica no `vendedor.html**`: O rascunho original continha o erro `DOMAContentLoader`. Corrigi para o padrão correto do navegador `DOMContentLoaded`.
-* **Ajuste da Classe `active` na Navegação**: Em todos os rascunhos fornecidos (como `feminina.html`, `masculina.html`, `cliente.html`), a classe `active` estava fixada na opção "Home". Corrigi silenciosamente a marcação HTML para que a classe `active` fique no link correspondente à própria página.
-* **Correção de Nomenclatura das Funções JS**:
-* Ajustei a função `renderizarDestaqes()` para `renderizarDestaques()`.
-* Ajustei as chamadas `VerificarSessaoCliente()` e `VerificarSessaoVendedor()` para o padrão *camelCase*: `verificarSessaoCliente()` e `verificarSessaoVendedor()`.
-* Nas páginas de categorias específicas (`feminina.html`, `masculina.html`, `infantil.html`), substituí a chamada incorreta de destaques da Home pela chamada contextualizada `renderizarCategoria('nome')`.
-
-
-* **Inclusão do Rótulo `for` nos Formulários**: Adicionei os atributos `for` nas tags `<label>` apontando para os `id`s dos campos de entrada nas telas de login do cliente e do vendedor para garantir total acessibilidade.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Persistência de Dados com `localStorage`
+**Persistência de Dados com `localStorage`**
 
 Em aplicações MPA (Multi-Page Applications), quando mudamos de página (ex: de `index.html` para `feminina.html`), o navegador zera as variáveis da memória RAM. Para evitar que o carrinho de compras se esvazie ao trocar de página, a biblioteca em `main.js` deve utilizar o `localStorage`:
 
@@ -714,13 +694,13 @@ const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinhoStyleStore')) || 
 
 ```
 
-### Acessibilidade em Botões de Controle (`aria-label`)
+**Acessibilidade em Botões de Controle (`aria-label`)**
 
 No componente do carrossel (`index.html`), o uso do atributo `aria-label="Slide Anterior"` nos botões que possuem apenas caracteres especiais (como `&#10094;`) é fundamental para que softwares leitores de tela consigam explicar a função do botão para usuários com deficiência visual.
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Evento de Carregamento Seguro do DOM**: `document.addEventListener('DOMContentLoaded', () => { ... });`
 * **Vincular CSS na Subpasta**: `<link rel="stylesheet" href="css/style.css">`
@@ -732,7 +712,7 @@ No componente do carrossel (`index.html`), o uso do atributo `aria-label="Slide 
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. A StyleStore foi estruturada como uma aplicação web de e-commerce multi-páginas (*MPA*) organizada na pasta `loja`.
 2. A separação dos arquivos em pastas (`css/`, `img/`, `js/`) garante a organização modular dos recursos do projeto.
