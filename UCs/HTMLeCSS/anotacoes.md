@@ -1,8 +1,6 @@
 # E-Commerce Multi-páginas: Estrutura HTML5, Componentes Globais, Vitrines Temáticas e Painéis de Gestão
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, avancei para o desenvolvimento de uma aplicação web completa de e-commerce multi-páginas: a **StyleStore**. Desenvolvi a arquitetura front-end de uma loja virtual moderna, dividida em páginas públicas de navegação (Home, Feminina, Masculina e Infantil) e áreas restritas com controle de sessão (Área do Cliente e Painel do Vendedor).
 
@@ -10,9 +8,9 @@ Compreendi como estruturar componentes reaproveitáveis (como o cabeçalho globa
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que é uma Arquitetura de E-Commerce Multi-páginas (MPA)?
+## Arquitetura de E-Commerce Multi-páginas (MPA)
 
 * **Conceito simples**: É a estrutura tradicional de uma loja online em que cada seção principal (capa, roupas femininas, roupas masculinas, área de login) possui seu próprio arquivo HTML. No entanto, o visual e as funcionalidades essenciais (como o carrinho de compras) continuam funcionando da mesma forma em todas as telas.
 * **Definição técnica**: Em uma aplicação multi-páginas (*Multi-Page Application - MPA*), o navegador realiza uma requisição HTTP para carregar um novo documento HTML a cada mudança de rota no menu de navegação. Para garantir a continuidade da experiência, os scripts globais (`main.js`) e as folhas de estilo universais (`style.css`) são compartilhados por todos os arquivos HTML, mantendo dados persistentes (como itens do carrinho ou estado da sessão) via armazenamento local do navegador (*LocalStorage*).
@@ -39,9 +37,9 @@ Compreendi como estruturar componentes reaproveitáveis (como o cabeçalho globa
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Organização de Arquivos e Pastas do Projeto
+## Organização de Arquivos e Pastas do Projeto
 
 Para garantir a manutenibilidade do código em projetos de médio e grande porte, dividi os ativos em diretórios bem definidos dentro da pasta raiz `loja/`:
 
@@ -49,28 +47,28 @@ Para garantir a manutenibilidade do código em projetos de médio e grande porte
 * `js/`: Armazena a lógica de negócios, manipuladores de eventos e funções auxiliares (`main.js`).
 * `img/`: Armazena os banners publicitários e imagens de produtos da loja.
 
-### 3.2. Indicador de Página Ativa (`class="active"`)
+## Indicador de Página Ativa (`class="active"`)
 
 Nos links de navegação dentro do `<header>`, utilizou-se a classe `active` para indicar ao cliente exatamente em qual seção da loja ele se encontra. Isso melhora a usabilidade e a experiência do usuário (UX).
 
-### 3.3. Componente de Carrossel de Banners (`onmouseenter` e `onmouseleave`)
+## Componente de Carrossel de Banners (`onmouseenter` e `onmouseleave`)
 
 Na página principal (`index.html`), o banner promocional possui manipuladores de eventos inline para controle da temporização do carrossel:
 
 * `onmouseenter="pausarCarrossel()"`: Pausa a rotação automática de slides quando o usuário passa o ponteiro do mouse sobre o banner para ler uma promoção.
 * `onmouseleave="iniciarCarrosselAuto()"`: Retoma a transição automática assim que o mouse sai da área do banner.
 
-### 3.4. Controle de Exibição de Painéis por Autenticação
+## Controle de Exibição de Painéis por Autenticação
 
 Nas telas `cliente.html` e `vendedor.html`, os formulários de login (`#box-login`) e os painéis administrativos (`#painel-cliente` e `#painel-vendedor`) coexistem no mesmo arquivo HTML. Inicialmente, o painel recebe a classe CSS `painel-escondido` (`display: none`). Após a validação das credenciais pelo JavaScript, o formulário é ocultado e o painel torna-se visível.
 
-### 3.5. Ciclo de Vida da Página (`DOMContentLoaded`)
+## Ciclo de Vida da Página (`DOMContentLoaded`)
 
 Todos os scripts inline utilizam o evento `DOMContentLoaded`. Isso garante que o JavaScript só tente buscar elementos no DOM (como contêineres de produtos ou botões) após todo o HTML da página ter sido completamente lido e construído pela árvore do navegador.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os 6 arquivos HTML que compõem a estrutura completa da **StyleStore**, com todas as correções técnicas de caminhos, links ativos, nomes de arquivos e chamadas de scripts devidamente padronizados.
 
