@@ -1,8 +1,6 @@
 # Validação de Campos (PlainDocument), Camada Controller (CRUD) e Inserção de Dados via JDBC (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei um salto fundamental na arquitetura do sistema **BL-PDV**: implementei a camada de negócio (**Controller**) e conectei o formulário de fornecedores ao banco de dados MySQL para realizar a primeira operação de um **CRUD** (Create, Read, Update, Delete) — a **inserção de dados (Create)**.
 
@@ -18,20 +16,20 @@ Além disso:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Validação de Entrada com `PlainDocument`
+## Validação de Entrada com `PlainDocument`
 
 No Java Swing, o comportamento padrão de um `JTextField` permite que o usuário digite quantos caracteres quiser. Se o campo de telefone no banco de dados suporta no máximo 20 caracteres e o usuário digitar 25, o banco disparará uma exceção de estouro de limite (*Data truncation*).
 
 Para evitar isso, usamos a classe `PlainDocument`. Ela intercepta cada caractere **antes** de ele ser desenhado na tela.
 
-💡 **Analogia da Catraca Inteligente:**
+> **Analogia da Catraca Inteligente:**
 O `PlainDocument` funciona como uma catraca com contador e detector de metal na entrada de um evento. Se a catraca atingir o limite de pessoas (número máximo de caracteres) ou detectar um item não permitido (letras onde só deveriam entrar números), a catraca simplesmente não gira e a entrada é bloqueada na hora.
 
 ---
 
-### B. O Padrão MVC em Ação (Model-View-Controller)
+## O Padrão MVC em Ação (Model-View-Controller)
 
 Nesta aula, a arquitetura em três camadas do sistema ficou totalmente funcional:
 
@@ -57,42 +55,42 @@ Nesta aula, a arquitetura em três camadas do sistema ficou totalmente funcional
 
 ---
 
-### C. Segurança no Banco com `PreparedStatement`
+## Segurança no Banco com `PreparedStatement`
 
 Em vez de concatenar Strings diretamente no SQL (ex: `"INSERT INTO ... VALUES ('" + nome + "')"`), utilizamos a interface **`PreparedStatement`** com curingas (`?`).
 
-💡 **Analogia dos Envelopes Numerados:**
+> **Analogia dos Envelopes Numerados:**
 Imaginar a instrução SQL com `?` é como enviar uma carta para o banco de dados com envelopes numerados lacrados (`?1`, `?2`, `?3`, `?4`). O banco compila o comando SQL primeiro e só depois insere o conteúdo dos envelopes nas posições certas. Isso impede que comandos maliciosos digitados pelo usuário sejam executados como código SQL (**Prevenção contra SQL Injection**).
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Interceptação via `insertString()`
+## Interceptação via `insertString()`
 
 O método `insertString(int ofs, String str, AttributeSet a)` da classe `PlainDocument` é disparado sempre que um novo caractere é inserido no campo. Se chamarmos `super.insertString()`, o texto é aceito e exibido; se dermos um `return` antecipado, o caractere é descartado.
 
-### 2. Expressões Regulares (RegEx) para Filtros
+## Expressões Regulares (RegEx) para Filtros
 
 Utilizamos expressões regulares no `Validador` para verificar a validade da digitação:
 
 * **`str.matches("[0-9]+")`**: Permite apenas números inteiros de 0 a 9.
 * **`novoTexto.matches("[0-9]*([,.][0-9]*)?")`**: Permite apenas números com no máximo um separador decimal (ponto ou vírgula).
 
-### 3. Validação com `isBlank()` e `requestFocus()`
+## Validação com `isBlank()` e `requestFocus()`
 
 * **`text.getText().isBlank()`**: Verifica se o campo está vazio ou se contém apenas espaços em branco (recurso do Java 11+).
 * **`text.requestFocus()`**: Coloca o cursor de digitação piscando diretamente dentro do campo incorreto, melhorando a agilidade do operador.
 
-### 4. Janelas Modais (`setModal(true)`)
+## Janelas Modais (`setModal(true)`)
 
 Ao definir `setModal(true)` em um `JDialog`, a janela assume controle total. O usuário fica impossibilitado de clicar na janela principal (`Main`) atrás dela até que a janela modal seja fechada.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Classe Utilitária de Validação de Campos (`Validador.java`)
+**Arquivo 1: Classe Utilitária de Validação de Campos (`Validador.java`)**
 
 ```java
 package utils;
@@ -174,7 +172,7 @@ public class Validador extends PlainDocument {
 
 ---
 
-### Arquivo 2: Camada Controller do Fornecedor (`FornecedorController.java`)
+**Arquivo 2: Camada Controller do Fornecedor (`FornecedorController.java`)**
 
 ```java
 package controller;
@@ -238,7 +236,7 @@ public class FornecedorController {
 
 ---
 
-### Arquivo 3: Formulário de Cadastro de Fornecedor (`FrmFornecedor.java`)
+**Arquivo 3: Formulário de Cadastro de Fornecedor (`FrmFornecedor.java`)**
 
 ```java
 package view;
@@ -409,7 +407,7 @@ public class FrmFornecedor extends JDialog {
 
 ---
 
-### Arquivo 4: Janela Principal com Integração do Menu (`Main.java`)
+**Arquivo 4: Janela Principal com Integração do Menu (`Main.java`)**
 
 ```java
 package view;
@@ -587,9 +585,9 @@ public class Main extends JFrame {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o `PreparedStatement` no `FornecedorController`
+**Desmontando o `PreparedStatement` no `FornecedorController`**
 
 ```java
 String sql = "INSERT INTO fornecedores (nome, fone, email, site) VALUES (?, ?, ?, ?)";
@@ -611,7 +609,7 @@ stmt.executeUpdate();
 
 ---
 
-### B. Desmontando o Evento do Botão Adicionar em `FrmFornecedor`
+**Desmontando o Evento do Botão Adicionar em `FrmFornecedor`**
 
 ```java
 if (textNome.getText().isBlank()) {
@@ -634,9 +632,9 @@ if (textNome.getText().isBlank()) {
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo: Teste Completo de Inserção e Verificação no Workbench
+**Passo a Passo: Teste Completo de Inserção e Verificação no Workbench**
 
 1. **Passo 1: Executar a Aplicação no Eclipse:**
 * Abra a classe `Main.java` e pressione `Ctrl + F11`.
@@ -675,9 +673,9 @@ if (textNome.getText().isBlank()) {
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Tipos de Validação Suportados pela Classe `Validador`
+**Tipos de Validação Suportados pela Classe `Validador`**
 
 | Tipo Configurado | RegEx Utilizada | Comportamento no Campo de Texto |
 | --- | --- | --- |
@@ -687,7 +685,7 @@ if (textNome.getText().isBlank()) {
 
 ---
 
-### 2. `executeUpdate()` vs. `executeQuery()` em JDBC
+**`executeUpdate()` vs. `executeQuery()` em JDBC**
 
 | Método JDBC | Para quais comandos SQL serve? | O que retorna? |
 | --- | --- | --- |
@@ -696,9 +694,9 @@ if (textNome.getText().isBlank()) {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Erro de Índice em `PreparedStatement` (`SQLIndexOutOfBoundsException`)
+**Erro de Índice em `PreparedStatement` (`SQLIndexOutOfBoundsException`)**
 
 No JDBC, a contagem dos parâmetros `?` começa em **1** (e não em 0, como nos vetores do Java).
 
@@ -713,7 +711,7 @@ stmt.setString(1, fornecedor.getNome());
 
 ---
 
-### 2. Esquecer de Tratar o Tratamento de Erros no Catch do Controller
+**Esquecer de Tratar o Tratamento de Erros no Catch do Controller**
 
 No rascunho original, o bloco `catch` trazia a instrução `System.out.println(2);`. Em ambientes reais, isso esconde a falha do desenvolvedor.
 
@@ -721,7 +719,7 @@ No rascunho original, o bloco `catch` trazia a instrução `System.out.println(2
 
 ---
 
-### 3. Falha de Extensão das Imagens (`.jpg` vs `.png`)
+**Falha de Extensão das Imagens (`.jpg` vs `.png`)**
 
 Ao carregar imagens via `getResource("/img/adicionar.jpg")`, se a imagem gravada na pasta `img` for `.png`, o Java não encontrará o arquivo e o botão ficará sem ícone.
 
@@ -729,19 +727,9 @@ Ao carregar imagens via `getResource("/img/adicionar.jpg")`, se a imagem gravada
 
 ---
 
-## 9. Correções Técnicas Das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do meu rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Nomenclatura da Classe `FrmFornecedor` e Método Controller:** Padronizei a classe do formulário para **`FrmFornecedor`** (em *PascalCase*) e o método da camada controller para **`adicionar`** (em *camelCase*), alinhando com a convenção oficial da linguagem Java.
-2. **Tratamento de Exceções no Controller:** Substiui a instrução genérica `System.out.println(2);` presente no `catch` da classe `FornecedorController` por `e.printStackTrace();` para imprimir o rastreamento real de exceções do banco de dados.
-3. **Padronização de Imagens para `.png`:** Ajustei as chamadas de ícones (`adicionar.png`, `fornecedor.png`, `sobre.png`, `banco.png`, `calendario.png`) para manter a consistência de transparência gráfica no FlatLaf.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Limpando os Campos da Tela Após o Cadastro
+**Limpando os Campos da Tela Após o Cadastro**
 
 Após salvar um fornecedor com sucesso, uma excelente prática de usabilidade (UX) é **limpar todos os campos de texto** e reposicionar o foco no campo `textNome` para permitir um novo cadastro sem ter que apagar o texto antigo manualmente:
 
@@ -765,7 +753,7 @@ limparCampos(); // Limpa a tela para o próximo cadastro
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. A classe `Validador` estende `PlainDocument` para limitar caracteres e filtrar tipos em `JTextFields`.
 2. A interceptação de caracteres ocorre no método `insertString()` antes da exibição na tela.
@@ -782,7 +770,7 @@ limparCampos(); // Limpa a tela para o próximo cadastro
 
 ## Guia Rápido de Memorização
 
-### Inserção de Dados via JDBC (`PreparedStatement`)
+**Inserção de Dados via JDBC (`PreparedStatement`)**
 
 ```java
 String sql = "INSERT INTO tabela (c1, c2) VALUES (?, ?)";
@@ -794,7 +782,7 @@ stmt.close();
 
 ```
 
-### Aplicando Validação no `JTextField`
+**Aplicando Validação no `JTextField`**
 
 ```java
 // Limita a 50 caracteres do tipo texto
