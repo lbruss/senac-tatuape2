@@ -1,8 +1,6 @@
-# Operações CRUD: Pesquisa (Read), Edição (Update) e Limpeza de Formulário em Java Swing (Projeto BL-PDV)
+# Operações CRUD: Pesquisa (Read), Edição (Update) e Limpeza de Formulário em Java Swing (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, dei continuidade à construção do módulo de fornecedores do **BL-PDV**, avançando na implementação dos métodos **Read (Leitura/Busca)** e **Update (Atualização/Edição)** do ciclo **CRUD**.
 
@@ -15,9 +13,9 @@ Foram integradas as seguintes funcionalidades à aplicação:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. O Ciclo de Vida dos Estados do Formulário (Inserção vs. Edição)
+## O Ciclo de Vida dos Estados do Formulário (Inserção vs. Edição)
 
 Em formulários de cadastro comerciais, a interface deve alternar dinamicamente entre dois modos de operação para evitar erros do usuário:
 
@@ -44,7 +42,7 @@ Em formulários de cadastro comerciais, a interface deve alternar dinamicamente 
 
 ---
 
-### B. Pesquisa Flexível com o Operador SQL `LIKE`
+## Pesquisa Flexível com o Operador SQL `LIKE`
 
 Em vez de exigir que o usuário digite o nome exato e completo do fornecedor, utilizamos o operador SQL `LIKE ?` concatenado com o caractere coringa `%`.
 
@@ -52,7 +50,7 @@ Isso permite localizar fornecedores mesmo que o operador digite apenas parte do 
 
 ---
 
-### C. A Interface `ResultSet` (Navegação de Resultados)
+## A Interface `ResultSet` (Navegação de Resultados)
 
 Quando executamos um `SELECT` no banco através do método `stmt.executeQuery()`, o MySQL devolve uma tabela temporária de resultados encapsulada no objeto **`ResultSet`**.
 
@@ -63,26 +61,26 @@ O método `rs.next()` desloca o ponteiro da tabela para a primeira linha encontr
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Associação da Tecla Enter via `getRootPane().setDefaultButton()`
+## Associação da Tecla Enter via `getRootPane().setDefaultButton()`
 
 Permite configurar um botão padrão para ser acionado automaticamente quando o usuário pressionar a tecla **Enter** em qualquer campo do formulário `JDialog`.
 
-### 2. O Método SQL `UPDATE` com Filtro `WHERE`
+## O Método SQL `UPDATE` com Filtro `WHERE`
 
 A instrução SQL para alteração de dados **exige obrigatoriamente** a cláusula `WHERE idFornecedor = ?`. Sem a cláusula `WHERE`, o banco de dados atualizará **todos os registros da tabela** indiscriminadamente.
 
-### 3. Conversão de Tipos com `Integer.parseInt()` e `String.valueOf()`
+## Conversão de Tipos com `Integer.parseInt()` e `String.valueOf()`
 
 * **`String.valueOf(int)`:** Converte o ID numérico vindo do banco em `String` para exibição no `JTextField`.
 * **`Integer.parseInt(String)`:** Converte o ID textual da tela de volta para `int` antes de enviá-lo à instrução SQL do Controller.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Camada Controller Atualizada (`FornecedorController.java`)
+**Arquivo 1: Camada Controller Atualizada (`FornecedorController.java`)**
 
 ```java
 package controller;
@@ -214,7 +212,7 @@ public class FornecedorController {
 
 ---
 
-### Arquivo 2: Formulário Modal de Fornecedores (`FrmFornecedor.java`)
+**Arquivo 2: Formulário Modal de Fornecedores (`FrmFornecedor.java`)**
 
 ```java
 package view;
@@ -472,9 +470,9 @@ public class FrmFornecedor extends JDialog {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Busca com `ResultSet` em `FornecedorController`
+**Desmontando a Busca com `ResultSet` em `FornecedorController`**
 
 ```java
 stmt.setString(1, "%" + nome + "%");
@@ -495,7 +493,7 @@ if (rs.next()) {
 
 ---
 
-### B. Desmontando a Edição SQL (`editarFornecedor`)
+**Desmontando a Edição SQL (`editarFornecedor`)**
 
 ```java
 String sql = "UPDATE fornecedores SET nome = ?, fone = ?, email = ?, site = ? WHERE idFornecedor = ?";
@@ -523,9 +521,9 @@ stmt.executeUpdate();
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo: Testando o Ciclo de Busca, Edição e Limpeza
+**Passo a Passo: Testando o Ciclo de Busca, Edição e Limpeza**
 
 1. **Passo 1: Iniciar a Aplicação e Abrir o Cadastro:**
 * Execute `Main.java` e clique no botão **Fornecedores**.
@@ -560,9 +558,9 @@ stmt.executeUpdate();
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Métodos CRUD Implementados até o Momento
+**Métodos CRUD Implementados até o Momento**
 
 | Operação CRUD | Comando SQL | Método no Controller | Método no JDBC | Ação na Interface |
 | --- | --- | --- | --- | --- |
@@ -572,7 +570,7 @@ stmt.executeUpdate();
 
 ---
 
-### 2. Controle de Interface Conforme o Estado da Busca
+**Controle de Interface Conforme o Estado da Busca**
 
 | Estado da Tela | `textID` | `btnAdicionar` | Botão `btnEditar` / `btnLimpar` |
 | --- | --- | --- | --- |
@@ -581,9 +579,9 @@ stmt.executeUpdate();
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Esquecer a Cláusula `WHERE` no SQL de Update
+**Esquecer a Cláusula `WHERE` no SQL de Update**
 
 ```sql
 -- ❌ PERIGO EXTREMO (Atualiza TODOS os fornecedores da base com os mesmos dados!):
@@ -596,7 +594,7 @@ UPDATE fornecedores SET nome = ?, fone = ? WHERE idFornecedor = ?;
 
 ---
 
-### 2. Erro de Conversão `NumberFormatException` na Edição
+**Erro de Conversão `NumberFormatException` na Edição**
 
 Se o usuário tentar clicar no botão **Editar** com o formulário em branco (sem ter feito uma busca prévia), o campo `textID` estará vazio. Ao tentar executar `Integer.parseInt(textID.getText())`, o Java disparará a exceção `NumberFormatException`.
 
@@ -604,7 +602,7 @@ Se o usuário tentar clicar no botão **Editar** com o formulário em branco (se
 
 ---
 
-### 3. Falha de Extensão das Imagens dos Botões
+**Falha de Extensão das Imagens dos Botões**
 
 No rascunho original, as imagens oscilavam entre `.jpg` e `.png` (ex: `limpeza.jpg` vs `limpar.jpg`).
 
@@ -612,19 +610,9 @@ No rascunho original, as imagens oscilavam entre `.jpg` e `.png` (ex: `limpeza.j
 
 ---
 
-## 9. Correções Técnicas Das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Conclusão do Trecho Incompleto em `FrmFornecedor`:** No rascunho enviado, a declaração da imagem do botão editar estava cortada (`btnEditar.setIcon(new ImageIcon(frmFornecedor<`). Completei a instrução corretamente no código final: `btnEditar.setIcon(new ImageIcon(FrmFornecedor.class.getResource("/img/editar.png")));`.
-2. **Nomenclatura das Classes e Métodos:** Mantive a classe do formulário como **`FrmFornecedor`** (em *PascalCase*) e os métodos do Controller em *camelCase* (`adicionar`, `buscar`, `editarFornecedor`).
-3. **Redirecionamento do Foco Visual:** Adicionei a chamada `textNome.requestFocus()` dentro do método `limparCampos()` para que o cursor volte a piscar no primeiro campo da tela após o formulário ser resetado.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Exibindo Mensagem Específica Quando a Busca Encontra Múltiplos Registros
+**Exibindo Mensagem Específica Quando a Busca Encontra Múltiplos Registros**
 
 O operador `LIKE "%" + nome + "%"` pode retornar mais de um fornecedor caso haja nomes parecidos na base (ex: `"Distribuidora A"` e `"Distribuidora B"`).
 
@@ -632,7 +620,7 @@ Atualmente, o laço `if (rs.next())` pega apenas o **primeiro** registro retorna
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O método `limparCampos()` apaga os textos do formulário e reabilita o botão `btnAdicionar`.
 2. A busca utiliza o operador SQL `LIKE ?` concatenado com `%` para pesquisas parciais.
@@ -649,7 +637,7 @@ Atualmente, o laço `if (rs.next())` pega apenas o **primeiro** registro retorna
 
 ## Guia Rápido de Memorização
 
-### Consulta SQL Parcial (Read)
+**Consulta SQL Parcial (Read)**
 
 ```java
 String sql = "SELECT * FROM fornecedores WHERE nome LIKE ?";
@@ -659,7 +647,7 @@ if (rs.next()) { /* Carrega dados */ }
 
 ```
 
-### Alteração SQL por ID (Update)
+**Alteração SQL por ID (Update)**
 
 ```java
 String sql = "UPDATE fornecedores SET nome=?, fone=?, email=?, site=? WHERE idFornecedor=?";
