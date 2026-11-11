@@ -1,8 +1,6 @@
-# Conclusão do CRUD: Exclusão de Registros (Delete) com Confirmação Visual em Java Swing (Projeto BL-PDV)
+# Conclusão do CRUD: Exclusão de Registros (Delete) com Confirmação Visual em Java Swing (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, finalizei o ciclo completo do **CRUD** (Create, Read, Update, Delete) no cadastro de fornecedores do **BL-PDV** ao implementar a funcionalidade de **Exclusão de Registros (Delete)**.
 
@@ -14,9 +12,9 @@ Com este avanço:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Operações Destrutivas e Caixas de Confirmação
+## Operações Destrutivas e Caixas de Confirmação
 
 No desenvolvimento de sistemas de gestão, a exclusão física de um registro da base de dados é uma ação **irreversível**. Se o operador clicar no botão "Excluir" por engano, os dados serão perdidos permanentemente caso não haja uma camada de segurança.
 
@@ -24,12 +22,13 @@ Por esse motivo, **nunca devemos executar um `DELETE` diretamente ao clicar no b
 
 Utilizamos uma caixa de diálogo de confirmação visual (`showConfirmDialog`). O sistema só envia a instrução ao banco se o usuário clicar explicitamente na opção **SIM** (`YES_OPTION`).
 
-💡 **Analogia da Lixeira do Sistema Operacional:**
+> **Analogia da Lixeira do Sistema Operacional:**
+
 Imagine que você selecionou um arquivo importante no seu computador. Quando você aperta a tecla *Delete*, o sistema operacional exibe a pergunta: *"Tem certeza que deseja mover este arquivo para a lixeira?"*. A caixa `JOptionPane.showConfirmDialog` funciona exatamente como esse aviso de confirmação.
 
 ---
 
-### B. O Ciclo Completo do CRUD no Projeto BL-PDV
+## O Ciclo Completo do CRUD no Projeto BL-PDV
 
 Com a adição da funcionalidade de exclusão, o padrão de arquitetura em 3 camadas do módulo de fornecedores atinge sua forma completa:
 
@@ -61,16 +60,16 @@ btnAdicionar         btnBuscar           btnEditar           btnExcluir         
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. `JOptionPane.showConfirmDialog()`
+## `JOptionPane.showConfirmDialog()`
 
 Método estático do Swing responsável por exibir uma janela pop-up de confirmação contendo botões como "Sim", "Não" e "Cancelar".
 
 * **Sintaxe:** `JOptionPane.showConfirmDialog(parent, mensagem, titulo, tipoDeOpcao)`
 * **Retorno:** Retorna um valor inteiro representando a escolha do usuário (`JOptionPane.YES_OPTION`, `JOptionPane.NO_OPTION` ou `JOptionPane.CANCEL_OPTION`).
 
-### 2. A Instrução SQL `DELETE FROM` com `WHERE`
+## `DELETE FROM` com `WHERE`
 
 Comando da linguagem SQL para remoção de linhas em tabelas relacioanais:
 
@@ -79,15 +78,15 @@ $$\text{DELETE FROM fornecedores WHERE idFornecedor = ?}$$
 
 * **Atenção Crítica:** A inclusão do filtro `WHERE idFornecedor = ?` é estritamente obrigatória. Omitir a cláusula `WHERE` provocará o apagamento de **todos os registros** contidos na tabela.
 
-### 3. Captura do ID para Exclusão
+## Captura do ID para Exclusão
 
 Diferente da busca que utiliza o campo textual do nome, o processo de exclusão deve ser realizado **exclusivamente através da chave primária (`idFornecedor`)**, garantindo que apenas o registro exato carregado na tela seja removido da base.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Camada Controller com CRUD Completo (`FornecedorController.java`)
+**Arquivo 1: Camada Controller com CRUD Completo (`FornecedorController.java`)**
 
 ```java
 package controller;
@@ -243,7 +242,7 @@ public class FornecedorController {
 
 ---
 
-### Arquivo 2: Formulário Modal de Fornecedores (`FrmFornecedor.java`)
+**Arquivo 2: Formulário Modal de Fornecedores (`FrmFornecedor.java`)**
 
 ```java
 package view;
@@ -530,9 +529,9 @@ public class FrmFornecedor extends JDialog {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Evento de Confirmação e Exclusão (`btnExcluir`)
+**Desmontando o Evento de Confirmação e Exclusão (`btnExcluir`)**
 
 ```java
 int idFornecedor = Integer.parseInt(textID.getText());
@@ -560,7 +559,7 @@ if (resposta == JOptionPane.YES_OPTION) {
 
 ---
 
-### B. Desmontando a Instrução SQL de Deleção em `FornecedorController`
+**Desmontando a Instrução SQL de Deleção em `FornecedorController`**
 
 ```java
 String sql = "DELETE FROM fornecedores WHERE idFornecedor = ?";
