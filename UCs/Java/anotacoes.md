@@ -676,23 +676,13 @@ Se o usuário clicar no botão **Excluir** sem antes buscar um fornecedor, o cam
 
 Tratar a resposta com números fixos (ex: `if (resposta == 0)`) torna o código frágil, pois a ordem das opções pode variar dependendo do sistema operacional ou da versão do Java.
 
-* **Solução:** Use sempre a constante oficial `JOptionPane.YES_OPTION`.
+* **Solução:** Use sempre a constante oficial `JOptionPane.YES_OPTION`.
 
 ---
 
-## 9. Correções Técnicas Das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho de aula, apliquei as seguintes correções silenciosas:
-
-1. **Correção de Erro de Digitação na Mensagem:** No rascunho original, a String da caixa de confirmação trazia uma barra indevida: `"Deseja realmente excluir/este fornecedor?"`. Ajustei a frase para `"Deseja realmente excluir este fornecedor?"`.
-2. **Nomenclatura das Classes e Métodos:** Mantive a classe do formulário como **`FrmFornecedor`** (em *PascalCase*) e os métodos em *camelCase* (`adicionar`, `buscar`, `editarFornecedor`, `excluir`).
-3. **Melhoria no Log de Exceções:** Substiui as chamadas de exceção genéricas `System.out.println(e);` e `System.out.println(2);` por `e.printStackTrace();` nos blocos `catch` do Controller.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Exclusão Física (*Hard Delete*) vs. Exclusão Lógica (*Soft Delete*)
+**Exclusão Física (*Hard Delete*) vs. Exclusão Lógica (*Soft Delete*)**
 
 Neste módulo, implementamos a **Exclusão Física (*Hard Delete*)**, na qual a linha é removida de fato do disco rígido do servidor MySQL através do comando `DELETE`.
 
@@ -704,7 +694,7 @@ Em sistemas corporativos avançados, é comum adotar a **Exclusão Lógica (*Sof
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O ciclo CRUD foi concluído com a adição do método de exclusão (`Delete`).
 2. A exclusão exige o uso de caixas de confirmação (`JOptionPane.showConfirmDialog`).
@@ -721,7 +711,7 @@ Em sistemas corporativos avançados, é comum adotar a **Exclusão Lógica (*Sof
 
 ## Guia Rápido de Memorização
 
-### Exclusão SQL com PreparedStatement
+**Exclusão SQL com PreparedStatement**
 
 ```java
 String sql = "DELETE FROM fornecedores WHERE idFornecedor = ?";
@@ -732,7 +722,7 @@ stmt.close();
 
 ```
 
-### Caixa de Confirmação em Java Swing
+**Caixa de Confirmação em Java Swing**
 
 ```java
 int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir?", "Atenção", JOptionPane.YES_NO_OPTION);
