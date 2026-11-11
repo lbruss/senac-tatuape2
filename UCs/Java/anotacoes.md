@@ -580,9 +580,9 @@ con.close();
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo: Testando a Exclusão Completa de um Fornecedor
+**Passo a Passo: Testando a Exclusão Completa de um Fornecedor**
 
 1. **Passo 1: Iniciar o Sistema:**
 * Execute a classe `Main.java` no Eclipse (`Ctrl + F11`) e clique no botão **Fornecedores**.
@@ -626,9 +626,9 @@ con.close();
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Quadro Resumo do CRUD Completo do Projeto BL-PDV
+**Quadro Resumo do CRUD Completo do Projeto BL-PDV**
 
 | Operação | Método no Controller | Comando SQL Utilizado | Método JDBC | Ação Visual na View |
 | --- | --- | --- | --- | --- |
@@ -639,7 +639,7 @@ con.close();
 
 ---
 
-### 2. Tipos de Caixas de Mensagem da Classe `JOptionPane`
+**Tipos de Caixas de Mensagem da Classe `JOptionPane`**
 
 | Método | Objetivo | Retorno |
 | --- | --- | --- |
@@ -649,9 +649,9 @@ con.close();
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Executar `DELETE` Sem a Cláusula `WHERE`
+**Executar `DELETE` Sem a Cláusula `WHERE`**
 
 ```sql
 -- ❌ ERRO GRAVÍSSIMO (Elimina permanentemente TODOS os registros do banco):
@@ -664,7 +664,7 @@ DELETE FROM fornecedores WHERE idFornecedor = ?;
 
 ---
 
-### 2. Tentar Excluir com o Campo ID Vazio
+**Tentar Excluir com o Campo ID Vazio**
 
 Se o usuário clicar no botão **Excluir** sem antes buscar um fornecedor, o campo `textID` estará vazio. Tentar executar `Integer.parseInt(textID.getText())` resultará em uma exceção `NumberFormatException`.
 
@@ -672,7 +672,7 @@ Se o usuário clicar no botão **Excluir** sem antes buscar um fornecedor, o cam
 
 ---
 
-### 3. Escrever `JOptionPane.YES_OPTION` de Forma Incorreta no `if`
+**Escrever `JOptionPane.YES_OPTION` de Forma Incorreta no `if`**
 
 Tratar a resposta com números fixos (ex: `if (resposta == 0)`) torna o código frágil, pois a ordem das opções pode variar dependendo do sistema operacional ou da versão do Java.
 
