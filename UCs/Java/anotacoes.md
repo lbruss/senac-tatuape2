@@ -1,8 +1,6 @@
-# Integração Web, Geração de Relatórios PDF com OpenPDF e Início do Módulo de Produtos (Projeto BL-PDV)
+# Integração Web, Geração de Relatórios PDF com OpenPDF e Início do Módulo de Produtos (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, expandi os recursos profissionais do sistema **BL-PDV**, finalizando funcionalidades avançadas no módulo de fornecedores e dando início ao módulo de gerenciamento de **Produtos**.
 
@@ -14,9 +12,9 @@ As principais entregas desta etapa foram:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Integração com Aplicativos Nativos (`Desktop`) para URLs e Arquivos
+## Integração com Aplicativos Nativos (`Desktop`) para URLs e Arquivos
 
 A classe `java.awt.Desktop` atua como uma ponte entre a aplicação Java e o sistema operacional do usuário. Nesta aula, ela foi utilizada para duas finalidades distintas:
 
@@ -25,7 +23,7 @@ A classe `java.awt.Desktop` atua como uma ponte entre a aplicação Java e o sis
 
 ---
 
-### B. Geração Programática de Documentos PDF com OpenPDF
+## Geração Programática de Documentos PDF com OpenPDF
 
 A biblioteca **OpenPDF** (`com.lowagie.text`) permite criar arquivos PDF linha por linha através de objetos Java, funcionando como uma linha de montagem editorial:
 
@@ -38,7 +36,7 @@ A biblioteca **OpenPDF** (`com.lowagie.text`) permite criar arquivos PDF linha p
 
 ```
 
-💡 **Analogia da Gráfica:**
+> **Analogia da Gráfica:**
 
 * O objeto `Document` é a folha de papel A4 em branco colocada sobre a mesa.
 * O `PdfWriter` é a impressora conectada ao arquivo `fornecedor.pdf` no disco rígido.
@@ -46,34 +44,34 @@ A biblioteca **OpenPDF** (`com.lowagie.text`) permite criar arquivos PDF linha p
 
 ---
 
-### C. Relacionamento Visual com `JComboBox`
+## Relacionamento Visual com `JComboBox`
 
 No formulário `FrmProduto`, introduzimos o componente **`JComboBox`** (`cboFornecedor`). Em bancos de dados relacionais, um produto pertence a um fornecedor (chave estrangeira). Em vez de obrigar o operador a decorar o número de ID do fornecedor, a caixa de seleção permite escolher o fornecedor pelo nome em uma lista suspensa.
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Classes Principais da Biblioteca OpenPDF (`com.lowagie.text`)
+## Classes Principais da Biblioteca OpenPDF (`com.lowagie.text`)
 
 * **`Document`:** Representa o arquivo PDF em memória e define suas dimensões (`PageSize.A4`).
 * **`PdfWriter`:** Vincula o `Document` a um fluxo de saída de arquivo (`FileOutputStream`), gravando os bytes no disco.
 * **`Paragraph`:** Bloco de texto com suporte a alinhamento (`Element.ALIGN_CENTER`, `Element.ALIGN_RIGHT`) e fontes customizadas (`Font`).
 * **`PdfPTable`:** Estrutura de grade tabular para exibir registros do banco de dados organizados em colunas proporcionais (`setWidths`).
 
-### 2. Espaçamento de Botões com `setIconTextGap()`
+## Espaçamento de Botões com `setIconTextGap()`
 
 Nos botões do menu lateral (`btnFornecedores` e `btnProdutos`), utilizamos `setIconTextGap(12)` para definir uma margem exata de 12 pixels entre o ícone de 32x32 e o rótulo de texto, melhorando o alinhamento visual do menu.
 
-### 3. Tratamento de URLs Malformadas
+## Tratamento de URLs Malformadas
 
 O construtor `new URI(url)` exige que a String contenha o protocolo completo (ex: `[https://www.site.com.br](https://www.site.com.br)`). Caso o usuário digite apenas `[www.site.com](https://www.site.com).br` ou deixe o campo em branco, o Java lança uma exceção capturada pelo bloco `catch`, alertando o usuário com um exemplo válido.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Controller com Geração de Relatório PDF (`FornecedorController.java`)
+**Arquivo 1: Controller com Geração de Relatório PDF (`FornecedorController.java`)**
 
 ```java
 package controller;
@@ -321,7 +319,7 @@ public class FornecedorController {
 
 ---
 
-### Arquivo 2: Formulário de Fornecedores Atualizado (`FrmFornecedor.java`)
+**Arquivo 2: Formulário de Fornecedores Atualizado (`FrmFornecedor.java`)**
 
 ```java
 package view;
@@ -653,7 +651,7 @@ public class FrmFornecedor extends JDialog {
 
 ---
 
-### Arquivo 3: Tela Principal com Botão de Produtos (`Main.java`)
+**Arquivo 3: Tela Principal com Botão de Produtos (`Main.java`)**
 
 ```java
 package view;
@@ -852,7 +850,7 @@ public class Main extends JFrame {
 
 ---
 
-### Arquivo 4: Estrutura Visual Inicial de Produtos (`FrmProduto.java`)
+**Arquivo 4: Estrutura Visual Inicial de Produtos (`FrmProduto.java`)**
 
 ```java
 package view;
@@ -1008,9 +1006,9 @@ public class FrmProduto extends JDialog {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando a Tabela Dinâmica no OpenPDF (`PdfPTable`)
+**Desmontando a Tabela Dinâmica no OpenPDF (`PdfPTable`)**
 
 ```java
 PdfPTable tabela = new PdfPTable(4);
@@ -1035,7 +1033,7 @@ documento.add(tabela);
 
 ---
 
-### B. Desmontando a Abertura Automática do PDF
+**Desmontando a Abertura Automática do PDF**
 
 ```java
 documento.close();
@@ -1050,9 +1048,9 @@ Desktop.getDesktop().open(arquivo);
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo 1: Importando a Biblioteca OpenPDF no Eclipse
+**Passo a Passo 1: Importando a Biblioteca OpenPDF no Eclipse**
 
 1. Acesse o repositório Maven Central (`central.sonatype.com`) e baixe o arquivo **`openpdf-2.2.5.jar`**.
 2. Arraste o arquivo `.jar` para dentro da pasta **`lib`** do projeto `blpvd` no Eclipse.
@@ -1061,7 +1059,7 @@ Desktop.getDesktop().open(arquivo);
 
 ---
 
-### Passo a Passo 2: Testando o Relatório PDF e Acesso Web
+**Passo a Passo 2: Testando o Relatório PDF e Acesso Web**
 
 1. Execute a aplicação pela classe `Main.java` (`Ctrl + F11`) e abra **Fornecedores**.
 2. **Teste do Botão Acessar:**
@@ -1077,9 +1075,9 @@ Desktop.getDesktop().open(arquivo);
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Principais Classes do OpenPDF (`com.lowagie.text`)
+**Principais Classes do OpenPDF (`com.lowagie.text`)**
 
 | Classe | Papel na Geração do PDF | Exemplo de Uso |
 | --- | --- | --- |
@@ -1090,7 +1088,7 @@ Desktop.getDesktop().open(arquivo);
 
 ---
 
-### 2. Métodos da Classe `java.awt.Desktop`
+**Métodos da Classe `java.awt.Desktop`**
 
 | Método | Parâmetro | O que executa no Sistema Operacional? |
 | --- | --- | --- |
@@ -1099,9 +1097,9 @@ Desktop.getDesktop().open(arquivo);
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Abrir URL sem o Protocolo `http://` ou `https://`
+**Abrir URL sem o Protocolo `http://` ou `https://`**
 
 Ao clicar no botão `btnAcessar`, se o campo `textSite` contiver apenas `"[www.empresa.com](https://www.empresa.com).br"`, a classe `URI` ou o método `desktop.browse()` lançará uma exceção, pois o sistema operacional não sabe qual protocolo usar.
 
@@ -1109,7 +1107,7 @@ Ao clicar no botão `btnAcessar`, se o campo `textSite` contiver apenas `"[www.e
 
 ---
 
-### 2. `FileNotFoundException` ao Gerar Relatório com PDF Aberto
+**`FileNotFoundException` ao Gerar Relatório com PDF Aberto**
 
 Se você gerar o relatório `fornecedor.pdf` uma vez, deixá-lo aberto no seu leitor de PDF (como Adobe Reader) e clicar novamente em **Gerar Relatório**, o Windows bloqueará a sobrescrita do arquivo e o Java lançará `FileNotFoundException (O arquivo já está sendo usado por outro processo)`.
 
@@ -1117,7 +1115,7 @@ Se você gerar o relatório `fornecedor.pdf` uma vez, deixá-lo aberto no seu le
 
 ---
 
-### 3. Importar a Classe `Font` Errada no `FornecedorController`
+**Importar a Classe `Font` Errada no `FornecedorController`**
 
 Existem duas classes chamadas `Font` disponíveis no Java:
 
@@ -1127,22 +1125,9 @@ Existem duas classes chamadas `Font` disponíveis no Java:
 
 ---
 
-## 9. Correções Técnicas Das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho de aula, apliquei as seguintes correções silenciosas para garantir que o projeto compile sem erros:
-
-1. **Nomenclatura do Campo de Preço de Venda em `FrmProduto`:** No rascunho, o `JTextField` correspondente ao rótulo `"Venda"` foi nomeado como `lblPrecoCusto`. Corrigi o nome da variável para **`textPrecoVenda`**, diferenciando-o do campo de custo (`textPrecoCusto`).
-2. **Tipo e Grafia de `textIDFornecedor` e `lblIDFornecedor`:** O rascunho indicava dois `JLabel` (`textIDForecedor` e `lblIDFornecedore`). Ajustei para o par padrão **`lblIDFornecedor`** (`JLabel`) e **`textIDFornecedor`** (`JTextField` desabilitado com `setEnabled(false)`).
-3. **Ortografia de "Estoque Mínimo":** Corrigi a grafia de `lblEstoqueMinino`, `textEstoqueMinino` e `"Estoque minino"` para **`lblEstoqueMinimo`**, **`textEstoqueMinimo`** e **`"Estoque mínimo"`**.
-4. **Rótulo de Descrição em `FrmProduto`:** Adicionei o **`lblDescricao` (`"Descrição"`)** para acompanhar o campo `textDescricao` mencionado no rascunho.
-5. **Ortografia no Rodapé do Relatório PDF:** Corrigi `"Total de fonecedores: "` para **`"Total de fornecedores: "`**.
-6. **Padronização de Nomenclatura Java:** Mantive as classes em *PascalCase* (`FrmFornecedor`, `FrmProduto`) e os métodos em *camelCase* (`adicionar`).
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Preparando a Tabela `produtos` no MySQL Workbench
+**Preparando a Tabela `produtos` no MySQL Workbench**
 
 Como iniciamos a interface gráfica `FrmProduto`, o próximo passo natural no banco de dados `blpdv` será criar a tabela `produtos` relacionada à tabela `fornecedores` através de uma **Chave Estrangeira (`FOREIGN KEY`)**:
 
@@ -1167,7 +1152,7 @@ CREATE TABLE produtos (
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O botão `btnAcessar` utiliza `Desktop.getDesktop().browse(new URI(url))` para abrir o site no navegador.
 2. URLs abertas via `java.awt.Desktop` exigem o protocolo completo (`https://`) para não gerar exceção.
@@ -1184,7 +1169,7 @@ CREATE TABLE produtos (
 
 ## Guia Rápido de Memorização
 
-### Estrutura Básica de Geração de PDF (OpenPDF)
+**Estrutura Básica de Geração de PDF (OpenPDF)**
 
 ```java
 Document doc = new Document(PageSize.A4);
@@ -1196,7 +1181,7 @@ Desktop.getDesktop().open(new File("relatorio.pdf"));
 
 ```
 
-### Abrir Link Externo com Tratamento de Erro
+**Abrir Link Externo com Tratamento de Erro**
 
 ```java
 try {
