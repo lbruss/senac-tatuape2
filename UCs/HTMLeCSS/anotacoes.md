@@ -76,7 +76,7 @@ Para fazer slides passarem lado a lado dentro de uma janela fixa:
 
 Abaixo está o arquivo `style.css` completo da pasta `css/`, com todas as classes sincronizadas com os arquivos HTML do projeto, e com os erros de sintaxe, transformações e seletores corrigidos.
 
-### Arquivo: `css/style.css`
+**Arquivo: `css/style.css`**
 
 ```css
 /* =================================================== */
@@ -712,7 +712,7 @@ Além do efeito `:hover` (usado com o mouse), é uma boa prática adicionar o es
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Declarar Variável CSS**: `:root { --nome-cor: #1a1a2e; }`
 * **Usar Variável CSS**: `color: var(--nome-cor);`
@@ -725,7 +725,7 @@ Além do efeito `:hover` (usado com o mouse), é uma boa prática adicionar o es
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. A pseudo-classe `:root` centraliza variáveis CSS globais de cores para facilitar a manutenção do tema visual.
 2. O reset universal com `box-sizing: border-box` padroniza o cálculo de larguras e bordas em todos os navegadores.
