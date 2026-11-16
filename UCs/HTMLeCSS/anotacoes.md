@@ -1,8 +1,6 @@
 # Arquitetura CSS Avançada: Variáveis, Carrossel Animado, Glassmorphism, Grid Responsivo e Regras de Impressão
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, construí toda a folha de estilos global (`style.css`) do projeto **StyleStore**. Essa etapa eleva o visual das seis páginas HTML que estruturamos anteriormente para um nível profissional de interface moderna.
 
@@ -10,9 +8,9 @@ Aprendi a centralizar a identidade visual do sistema utilizando **Variáveis CSS
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que são Variáveis CSS (`:root`), Glassmorphism e Media Queries de Impressão?
+## Variáveis CSS (`:root`), Glassmorphism e Media Queries de Impressão
 
 * **Variáveis CSS (`:root`)**:
 * *Conceito simples*: Funcionam como uma paleta de tintas nomeadas. Em vez de decorar códigos hexadecimais de cores e repeti-los centenas de vezes, damos um nome amigável a cada cor no topo do arquivo. Se precisarmos mudar a cor da loja inteira depois, alteramos em um único lugar.
@@ -41,16 +39,16 @@ Aprendi a centralizar a identidade visual do sistema utilizando **Variáveis CSS
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Reset Global e `box-sizing: border-box`
+## Reset Global e `box-sizing: border-box`
 
 Por padrão, os navegadores adicionam margens e espaçamentos internos diferentes em cada tag, além de somarem o `padding` e a `border` à largura declarada do elemento (fazendo uma caixa de `200px` ficar maior do que deveria).
 
 * O seletor universal `*` zera `margin` e `padding`.
 * `box-sizing: border-box` força o navegador a incluir bordas e preenchimentos internos dentro da medida total de largura e altura, mantendo o cálculo de layout previsível.
 
-### 3.2. Sticky Footer com Flexbox no `<body>`
+## Sticky Footer com Flexbox no `<body>`
 
 Para evitar que o rodapé (`<footer>`) suba e fique flutuando no meio da tela em páginas com pouco conteúdo (como a tela de login), aplicamos três regras combinadas:
 
@@ -58,7 +56,7 @@ Para evitar que o rodapé (`<footer>`) suba e fique flutuando no meio da tela em
 2. No `.container` (`<main>`): `flex: 1;` (cresce dinamicamente para ocupar todo o espaço livre).
 3. Resultado: O rodapé é empurrado automaticamente para o final da janela.
 
-### 3.3. O Segredo do Carrossel Horizontal
+## O Segredo do Carrossel Horizontal
 
 Para fazer slides passarem lado a lado dentro de uma janela fixa:
 
@@ -66,17 +64,15 @@ Para fazer slides passarem lado a lado dentro de uma janela fixa:
 * `.carrossel-wrapper`: Usa `display: flex` para colocar todos os slides em uma fila horizontal contínua e utiliza `transition: transform 0.6s` para deslizar suavemente quando o JavaScript alterar o eixo `translateX`.
 * `.carrossel-slide`: Recebe `min-width: 100%` para que cada slide ocupe exatamente a largura inteira do banner por vez.
 
-### 3.4. Grid de Produtos Totalmente Responsivo
+## Grid de Produtos Totalmente Responsivo
 
 * `grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))`:
 * `minmax(250px, 1fr)`: Cada cartão de produto terá **no mínimo** `250px` de largura e crescerá proporcionalmente (`1fr`) até preencher o espaço.
 * `auto-fill`: O navegador calcula automaticamente quantas colunas de `250px` cabem na tela atual. Se a tela diminuir (celular), as colunas quebram para a linha de baixo sem precisar de Media Queries extras.
 
-
-
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo está o arquivo `style.css` completo da pasta `css/`, com todas as classes sincronizadas com os arquivos HTML do projeto, e com os erros de sintaxe, transformações e seletores corrigidos.
 
@@ -626,9 +622,9 @@ footer {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise do Centralizador Matemático (`transform`)
+**Análise do Centralizador Matemático (`transform`)**
 
 Nos botões do carrossel e nos indicadores (dots), utilizamos posicionamento absoluto combinado com deslocamento de eixo para centralização exata:
 
@@ -640,9 +636,7 @@ Nos botões do carrossel e nos indicadores (dots), utilizamos posicionamento abs
 * **Centralização Horizontal (`.carrossel-indicadores`)**:
 * `left: 50%` + `transform: translateX(-50%)`: Empurra a barra de bolinhas até o meio da tela e puxa metade da sua largura para a esquerda, centralizando-a perfeitamente.
 
-
-
-### Análise da Regra de Impressão (`@media print`)
+**Análise da Regra de Impressão (`@media print`)**
 
 * `body * { visibility: hidden; }`: Torna invisível absolutamente tudo na tela durante o modo de impressão, mas mantém os espaços reservados na estrutura.
 * `#area-relatorio-impressao, #area-relatorio-impressao * { visibility: visible; }`: Reativa a visibilidade apenas para a seção da tabela de vendas e seus elementos filhos.
@@ -650,30 +644,25 @@ Nos botões do carrossel e nos indicadores (dots), utilizamos posicionamento abs
 
 ---
 
-## 6. Passo a Passo: Vinculando e Validando os Estilos
+**Passo a Passo: Vinculando e Validando os Estilos**
 
 1. **Criar o arquivo de estilos**:
 * Na subpasta `css/` do projeto `loja`, crie o arquivo `style.css`.
 
-
 2. **Definir o design system no topo**:
 * Adicione o bloco `:root` com as variáveis de cores para padronizar todos os botões, cabeçalhos e alertas.
-
 
 3. **Configurar os layouts de grade**:
 * Aplique o modelo Flexbox para alinhamentos lineares (cabeçalho, itens do carrinho, botões) e o modelo CSS Grid para a vitrine responsiva (`.grid-produtos`).
 
-
 4. **Conferir a integração com o HTML**:
 * Abra as páginas HTML (`index.html`, `cliente.html`, `vendedor.html`) no navegador usando a extensão *Live Server* e verifique se o cabeçalho azul-marinho e as regras de alinhamento foram carregados corretamente.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Funções de Transformação CSS (`translate`, `translateX`, `translateY`)
+**Tabela 1: Funções de Transformação CSS (`translate`, `translateX`, `translateY`)**
 
 | Função CSS | Eixo de Movimento | Comportamento | Caso de Uso no Projeto |
 | --- | --- | --- | --- |
@@ -681,7 +670,7 @@ Nos botões do carrossel e nos indicadores (dots), utilizamos posicionamento abs
 | `translateX(valor)` | Apenas Horizontal (X) | Valor positivo vai para a direita; negativo para a esquerda. | Centralizar os indicadores de bolinha (`translateX(-50%)`). |
 | `translateY(valor)` | Apenas Vertical (Y) | Valor positivo desce; valor negativo sobe o elemento. | Efeito de elevação ao passar o mouse no card (`translateY(-6px)`). |
 
-### Tabela 2: Unidades de Medida Utilizadas no Projeto
+**Tabela 2: Unidades de Medida Utilizadas no Projeto**
 
 | Unidade | Tipo | Base de Cálculo | Onde foi usada? |
 | --- | --- | --- | --- |
@@ -692,51 +681,32 @@ Nos botões do carrossel e nos indicadores (dots), utilizamos posicionamento abs
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Confundir `translate(-6px)` com `translateY(-6px)**`:
 * ❌ *Incorreto*: Escrever `transform: translate(-6px)` esperando que o botão ou card suba. Quando passamos apenas 1 parâmetro para `translate()`, o CSS entende que é o **eixo X (horizontal)**, empurrando o elemento para a esquerda!
 * ✔️ *Correto*: Usar explicitamente `transform: translateY(-6px)` para movimentar no eixo vertical (subir/descer) e `translateX(-50%)` para o eixo horizontal.
 
-
 2. **Incompatibilidade de nomes de classes entre o HTML e o CSS**:
 * Se no arquivo HTML a classe foi escrita no plural (`class="grid-produtos"`, `class="card-relatorio"`, `class="cabecalhos-relatorio-pdf"`) e no CSS foi escrita no singular (`.grid-produto`, `.card-relatorios`, `.cabecalho-relatorio-pdf`), o navegador ignorará totalmente o estilo daquela seção.
-
 
 3. **Esquecer de estilizar a classe base `.modal**`:
 * No arquivo HTML, o carrinho de compras utiliza `<div id="modal-carrinho" class="modal">`. Se a classe `.modal` não for declarada no `style.css` com `display: none; position: fixed;`, o carrinho aparecerá aberto e quebrado no final da página logo ao abrir o site.
 
-
-
 ---
-
-## 9. Correções Técnicas das Minhas Anotações
-
-* **Eixos das Funções `transform` Corrigidos**:
-* Nos botões de banner e cards de produto, substituí `transform: translate(-2px)` e `translate(-6px)` por **`translateY(-2px)`** e **`translateY(-6px)`** para produzir o efeito correto de elevação vertical.
-* Nos botões laterais do carrossel, substituí `translate(-50%)` por **`translateY(-50%)`** para centralização vertical.
-* Nos indicadores de bolinhas do carrossel, substituí `translate(-50%)` por **`translateX(-50%)`** para centralização horizontal.
-
-
-* **Sincronização de Nomes de Classes com o HTML**:
-* `.grid-produto` corrigido para **`.grid-produtos`** (para casar com `<div class="grid-produtos">`).
-* `.btn.block` corrigido para **`.btn-block`** (o ponto no meio selecionava duas classes diferentes em vez de uma única classe composta).
-* `.card-relatorios` corrigido para **`.card-relatorio`**.
-* `.cabecalho-relatorio-pdf` corrigido para **`.cabecalhos-relatorio-pdf`**.
-
 
 * **Adição da Classe `.modal` Ausente**: No rascunho da aula, o estilo do `.modal-content` estava presente, mas a regra principal da janela `.modal` (responsável pelo fundo escuro transparente e por manter o carrinho fechado inicialmente com `display: none`) havia sido omitida. Adicionei a regra completa ao código.
 * **Suavização de Sombras**: Ajustei a opacidade exagerada de `rgba(0,0,0, 0.8)` e `0.5` nos formulários e cards de produtos para sombras mais suaves e modernas (`0.1` e `0.08`).
 
 ---
 
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-### Nomenclatura de Variáveis CSS
+**Nomenclatura de Variáveis CSS**
 
 No arquivo original da aula, a variável principal foi nomeada com um erro de grafia em inglês: `--prymary-color`. Embora o navegador aceite qualquer nome definido pelo desenvolvedor desde que seja chamado da mesma forma no `var()`, a boa prática profissional é manter a ortografia correta em inglês (`--primary-color`) para facilitar a leitura em equipes de desenvolvimento e evitar erros de digitação.
 
-### Acessibilidade e Foco no Teclado (`:focus`)
+**Acessibilidade e Foco no Teclado (`:focus`)**
 
 Além do efeito `:hover` (usado com o mouse), é uma boa prática adicionar o estado `:focus-visible` em botões e links de navegação para que usuários que navegam utilizando a tecla `Tab` do teclado consigam visualizar em qual elemento da loja estão posicionados.
 
