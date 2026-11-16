@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleStore - Área do cliente</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho Principal com Navegação -->
+    <header>
+        <div class="header-container">
+            <h1>Style Store</h1>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="feminina.html">Feminina</a>
+                <a href="masculina.html">Masculina</a>
+                <a href="infantil.html">Infantil</a>
+                <a href="cliente.html">Área do cliente</a>
+                <a href="vendedor.html">Área do vendedor</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+    <!-- Formulário de Autenticação -->
+     <div id="box-login" class="card-form">
+        <h2>Login do Cliente</h2>
+        <form onsubmit="realizarLoginCliente(event)">
+            <div class="form-group">
+                <label>E-mail:</label>
+                <input type="email" id="cliente-email" required placeholder="seuemail@exemplo.com">
+            </div>
+            <div class="form-group">
+                <label>Senha:</label>
+                <input type="password" id="cliente-senha" required placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn-primary btn-block">Entrar</button>
+        </form>
+     </div>
+
+    <!-- Painel de Acompanhamento de Painel (Exibido após Login) -->
+     <div id="painel-cliente" class="painel-escondido">
+        <div class="topo-painel">
+            <h2>Bem-vindo(a), <span id="nome-usuario-logado">Cliente</span>!</h2>
+            <button class="btn-secundario" onclick="realizarLogout()">Sair</button>
+        </div>
+
+        <h3 class="subtitulo-painel">Meus Pedidos Realizados</h3>
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº Pedido</th>
+                        <th>Data</th>
+                        <th>Item(s)</th>
+                        <th>Total</th>
+                        <th>Status de Acompanhamento</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-pedidos-cliente"></tbody>
+            </table>
+        </div>
+     </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 StyleStore - Área do Cliente</p>
+     </footer>
+    
+    <!-- Script JavaScript Principal -->
+     <script src="js/main.js"></script> 
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            VerificarSessaoCliente();
+        });
+     </script>
+
+</body>
+</html>
