@@ -1,8 +1,6 @@
-# Validação Avançada de Produtos, Arquitetura MVC para Estoque e Carregamento Dinâmico de `JComboBox` (Projeto BL-PDV)
+# Validação Avançada de Produtos, Arquitetura MVC para Estoque e Carregamento Dinâmico de `JComboBox` (Projeto BL-PDV)
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta aula, estruturei a arquitetura completa em três camadas (**MVC**) para o módulo de **Produtos** do sistema **BL-PDV** e integrei o formulário `FrmProduto.java` ao banco de dados para carregar dinamicamente a lista de fornecedores cadastrados.
 
@@ -15,9 +13,9 @@ As principais evoluções realizadas nesta etapa foram:
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### A. Relacionamento Visual entre Tabelas (`JComboBox` + Chave Estrangeira)
+## Relacionamento Visual entre Tabelas (`JComboBox` + Chave Estrangeira)
 
 Em um banco de dados relacional, a tabela `produtos` não armazena o nome completo do fornecedor; ela armazena apenas o código identificador dele (**Chave Estrangeira / `idFornecedor**`). Porém, para o operador do PDV, decorar números de ID é inviável.
 
@@ -38,12 +36,12 @@ Para resolver esse problema de usabilidade, criamos uma ponte visual entre o **n
 
 ```
 
-💡 **Analogia da Etiqueta com Código de Barras:**
+> **Analogia da Etiqueta com Código de Barras:**
 O `JComboBox` funciona como a prateleira de uma loja onde o cliente escolhe o produto olhando para o nome impresso na embalagem (`"3 - Distribuidora X"`). Por baixo dos panos, o leitor `.split(" - ")[0]` lê apenas o código numérico (`"3"`) e o envia para o caixa (`textIDFornecedor`) registrar a operação no sistema.
 
 ---
 
-### B. Manipulação de Strings com `.split()`
+## Manipulação de Strings com `.split()`
 
 O método `String.split(separador)` divide um texto em várias partes sempre que encontra o padrão delimitador informado, devolvendo um **Array estático (`String[]`)** com os pedaços recortados:
 
@@ -53,13 +51,11 @@ O método `String.split(separador)` divide um texto em várias partes sempre que
 * Índice `[0]` ➔ `"15"` (O ID que vai para `textIDFornecedor`)
 * Índice `[1]` ➔ `"Atacadão São Paulo"` (O nome do fornecedor)
 
-
-
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 1. Regras de Validação no Cadastro de Produtos
+## Regras de Validação no Cadastro de Produtos
 
 Cada tipo de dado de um produto exige uma regra de negócio específica na interface gráfica:
 
@@ -67,19 +63,19 @@ Cada tipo de dado de um produto exige uma regra de negócio específica na inter
 * **`new Validador(10, "decimal")`**: Usado em `textPrecoCusto` e `textPrecoVenda`, permitindo apenas números e um único separador decimal (ponto ou vírgula).
 * **`new Validador(10, "inteiro")`**: Usado em `textQuantidade` e `textEstoqueMinimo`, bloqueando letras, sinais negativos ou números fracionados.
 
-### 2. Coleções Dinâmicas no Retorno de Consultas (`ArrayList<Fornecedor>`)
+## Coleções Dinâmicas no Retorno de Consultas (`ArrayList<Fornecedor>`)
 
 Quando uma consulta SQL retorna múltiplas linhas (como todos os fornecedores cadastrados), não sabemos previamente quantos registros existem na tabela. Por isso, o método `listarFornecedores()` instancia um `ArrayList<Fornecedor>`, percorre o `ResultSet` com um laço `while (rs.next())` e adiciona cada objeto à lista dinâmica.
 
-### 3. Encapsulamento na Classe Model `Produto`
+## Encapsulamento na Classe Model `Produto`
 
 A classe `Produto.java` reúne todos os atributos de uma mercadoria (incluindo `codigoBarras`, `precoCusto`, `precoVenda`, `quantidade`, `estoqueMinimo` e `idFornecedor`), utilizando modificadores `private` e métodos públicos `get` e `set` para trafegar dados com segurança entre a `View` e o `Controller`.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
-### Arquivo 1: Modelo de Dados de Produto (`Produto.java`)
+**Arquivo 1: Modelo de Dados de Produto (`Produto.java`)**
 
 ```java
 package model;
@@ -181,7 +177,7 @@ public class Produto {
 
 ---
 
-### Arquivo 2: Controller Inicial de Produtos (`ProdutoController.java`)
+**Arquivo 2: Controller Inicial de Produtos (`ProdutoController.java`)**
 
 ```java
 package controller;
@@ -205,7 +201,7 @@ public class ProdutoController {
 
 ---
 
-### Arquivo 3: Controller de Fornecedores com Listagem (`FornecedorController.java`)
+**Arquivo 3: Controller de Fornecedores com Listagem (`FornecedorController.java`)**
 
 ```java
 package controller;
@@ -476,7 +472,7 @@ public class FornecedorController {
 
 ---
 
-### Arquivo 4: Formulário de Cadastro de Produtos (`FrmProduto.java`)
+**Arquivo 4: Formulário de Cadastro de Produtos (`FrmProduto.java`)**
 
 ```java
 package view;
@@ -737,9 +733,9 @@ public class FrmProduto extends JDialog {
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### A. Desmontando o Carregamento Dinâmico (`carregarFornecedor()`)
+**Desmontando o Carregamento Dinâmico (`carregarFornecedor()`)**
 
 ```java
 cboFornecedor.removeAllItems();
@@ -759,7 +755,7 @@ for (Fornecedor fornecedor : lista) {
 
 ---
 
-### B. Desmontando a Extração do ID com `.split()`
+**Desmontando a Extração do ID com `.split()`**
 
 ```java
 String selecionado = (String) cboFornecedor.getSelectedItem();
@@ -779,9 +775,9 @@ if (selecionado != null && !selecionado.equals("Selecione")) {
 
 ---
 
-## 6. Passo a Passo
+**Passo a Passo**
 
-### Passo a Passo: Testando o Vínculo Dinâmico de Fornecedores em `FrmProduto`
+**Passo a Passo: Testando o Vínculo Dinâmico de Fornecedores em `FrmProduto`**
 
 1. **Passo 1: Iniciar a Aplicação:**
 * No Eclipse, abra `Main.java` e execute (`Ctrl + F11`).
@@ -806,13 +802,11 @@ if (selecionado != null && !selecionado.equals("Selecione")) {
 5. **Passo 5: Testar as Validações dos Campos:**
 * Tente digitar letras nos campos **Custo**, **Venda**, **Quantidade** ou **Estoque Mínimo** e confirme que a classe `Validador` bloqueia os caracteres inválidos.
 
-
-
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### 1. Configuração dos Validadores em `FrmProduto.java`
+**Configuração dos Validadores em `FrmProduto.java`**
 
 | Campo (`JTextField`) | Configuração do `Validador` | O que aceita? | O que bloqueia? |
 | --- | --- | --- | --- |
@@ -825,7 +819,7 @@ if (selecionado != null && !selecionado.equals("Selecione")) {
 
 ---
 
-### 2. Métodos de Execução de Queries no JDBC
+**Métodos de Execução de Queries no JDBC**
 
 | Método na Interface `Connection` | Finalidade | Uso Recomendado |
 | --- | --- | --- |
@@ -834,9 +828,9 @@ if (selecionado != null && !selecionado.equals("Selecione")) {
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
-### 1. Loop Infinito (`StackOverflowError`) por Chamada Recursiva Acidental
+**Loop Infinito (`StackOverflowError`) por Chamada Recursiva Acidental**
 
 No final do método `listarFornecedores()`, escrever `return listarFornecedores();` em vez de `return lista;` faz com que o método chame a si mesmo infinitamente até estourar a memória da pilha de execução do Java:
 
@@ -859,7 +853,7 @@ public ArrayList<Fornecedor> listarFornecedores() {
 
 ---
 
-### 2. Inconsistência de Texto na Verificação do `JComboBox`
+**Inconsistência de Texto na Verificação do `JComboBox`**
 
 Se o método `carregarFornecedor()` adiciona o item `"Selecione"`, mas o evento `ActionListener` verifica `!selecionado.equals("Selecionado")`, a condição será sempre verdadeira quando o usuário voltar para a opção padrão, fazendo o `.split(" - ")[0]` escrever a palavra `"Selecione"` dentro do campo numérico `textIDFornecedor`!
 
