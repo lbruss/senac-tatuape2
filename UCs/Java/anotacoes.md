@@ -857,24 +857,13 @@ public ArrayList<Fornecedor> listarFornecedores() {
 
 Se o método `carregarFornecedor()` adiciona o item `"Selecione"`, mas o evento `ActionListener` verifica `!selecionado.equals("Selecionado")`, a condição será sempre verdadeira quando o usuário voltar para a opção padrão, fazendo o `.split(" - ")[0]` escrever a palavra `"Selecione"` dentro do campo numérico `textIDFornecedor`!
 
-* **Solução:** Garanta que a String comparada no `if` seja exatamente idêntica à String adicionada no início da lista (`"Selecione"`).
+* **Solução:** Garanta que a String comparada no `if` seja exatamente idêntica à String adicionada no início da lista (`"Selecione"`).
 
 ---
 
-## 9. Correções Técnicas Das Minhas Anotações
+## Conteúdo Complementar e Aprofundamento
 
-Durante a revisão do rascunho de aula, identifiquei e corrigi os seguintes pontos críticos para garantir que a aplicação funcione sem falhas em tempo de execução:
-
-1. **Correção de Recursão Infinita em `FornecedorController.java`:** No final do código completo do rascunho, o método `listarFornecedores()` terminava com `return listarFornecedores();`, o que causaria um `StackOverflowError` imediato ao abrir a tela de produtos. Corrigi o retorno para **`return lista;`**.
-2. **Correção do Filtro de Texto no `cboFornecedor` (`FrmProduto.java`):** O rascunho verificava `!selecionado.equals("Selecionado")`, enquanto o método `carregarFornecedor()` adicionava `"Selecione"`. Ajustei a verificação para **`!selecionado.equals("Selecione")`** para evitar que a palavra `"Selecione"` fosse inserida no campo `textIDFornecedor`.
-3. **Uso de `prepareStatement` em `listarFornecedores()`:** Substituí `con.prepareCall(sql)` por **`con.prepareStatement(sql)`**, que é a interface correta do JDBC para consultas `SELECT`.
-4. **Ortografia na Classe Model `Produto.java` e na Tela `FrmProduto.java`:** Corrigi a grafia do atributo `quatidade` para **`quantidade`** (e seus respectivos `getQuantidade()` / `setQuantidade()`), além de padronizar **`textEstoqueMinimo`**, o rótulo **`"Estoque Mínimo"`** e o nome da classe **`FrmProduto`** em *PascalCase*.
-
----
-
-## 10. Conteúdo Complementar e Aprofundamento
-
-### Preparando o Banco de Dados para o CRUD de Produtos
+**Preparando o Banco de Dados para o CRUD de Produtos**
 
 Com a classe `Produto.java` modelada contendo o atributo `codigoBarras`, vale atualizar a estrutura da tabela `produtos` no **MySQL Workbench** para incluir essa coluna antes de programarmos o método `adicionar()` no `ProdutoController`:
 
@@ -899,7 +888,7 @@ CREATE TABLE produtos (
 
 ---
 
-## Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. Os campos de `FrmProduto` receberam instâncias da classe `Validador` para restringir tamanhos e tipos.
 2. Preços (`textPrecoCusto` e `textPrecoVenda`) utilizam a validação `"decimal"`, enquanto estoques utilizam `"inteiro"`.
@@ -916,7 +905,7 @@ CREATE TABLE produtos (
 
 ## Guia Rápido de Memorização
 
-### Preencher `JComboBox` a partir de um `ArrayList`
+**Preencher `JComboBox` a partir de um `ArrayList`**
 
 ```java
 cboFornecedor.removeAllItems();
@@ -927,7 +916,7 @@ for (Fornecedor f : controllerFornecedor.listarFornecedores()) {
 
 ```
 
-### Extrair ID de um Item `"ID - Nome"` no `JComboBox`
+**Extrair ID de um Item `"ID - Nome"` no `JComboBox`**
 
 ```java
 String selecionado = (String) cboFornecedor.getSelectedItem();
