@@ -1,6 +1,6 @@
-# 📚 Java — BL-PDV: Data do sistema, menu lateral e janela Sobre
+# BL-PDV: Data do sistema, menu lateral e janela Sobre
 
-## 1. Atualizando a data do sistema na janela principal
+**Atualizando a data do sistema na janela principal**
 
 Na classe `Main.java`, vamos adicionar comandos para obter a data atual do sistema operacional e exibi-la na interface gráfica.
 
@@ -9,7 +9,7 @@ Para isso, utilizaremos duas classes:
 - `LocalDate`: obtém e trabalha com uma data, sem horário.
 - `DateTimeFormatter`: permite definir o formato em que a data será exibida.
 
-### Importando as classes
+**Importando as classes**
 
 ```java
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 Essas importações permitem trabalhar com datas de forma moderna, utilizando a API de datas do Java.
 
-### Criando a variável JLabel
+**Criando a variável JLabel**
 
 Dentro da classe `Main`, adicionamos:
 
@@ -32,7 +32,7 @@ O `private` significa que essa variável só poderá ser acessada diretamente de
 
 ---
 
-## 2. Criando o método atualizarData()
+## Criando o método atualizarData()
 
 Dentro da classe `Main`, criamos o método:
 
@@ -48,7 +48,7 @@ private void atualizarData() {
 }
 ```
 
-### Explicando cada parte
+**Explicando cada parte**
 
 **1. Criando o formato da data**
 
@@ -106,7 +106,7 @@ Isso faz com que o método seja executado quando a janela principal é criada.
 
 ---
 
-## 3. Código final da classe Main.java
+### Código final da classe Main.java
 
 ```java
 package view;
@@ -237,11 +237,11 @@ public class Main extends JFrame {
 
 ---
 
-# 4. Criando o painel lateral (JPanel)
+**Criando o painel lateral (JPanel)**
 
 Agora vamos começar a montagem visual do sistema através do **Design do WindowBuilder**.
 
-### Passo a passo
+**Passo a passo**
 
 1. Abra `Main.java`.
 2. Clique na aba **Design**.
@@ -250,7 +250,7 @@ Agora vamos começar a montagem visual do sistema através do **Design do Window
 5. Selecione `JPanel`.
 6. Desenhe um retângulo no lado esquerdo da janela.
 
-### Configurando o painel
+**Configurando o painel**
 
 Nas propriedades do painel, configure:
 
@@ -269,7 +269,7 @@ A propriedade `Bounds` controla as dimensões e a posição do componente.
 - `width`: largura.
 - `height`: altura.
 
-### O que é JPanel?
+**O que é JPanel?**
 
 O `JPanel` é um contêiner utilizado para agrupar componentes da interface gráfica.
 
@@ -283,7 +283,7 @@ Podemos colocar dentro dele:
 
 No projeto, ele será utilizado para criar a barra lateral, agrupando o logo, o nome do sistema e os botões.
 
-### Layout Absolute
+**Layout Absolute**
 
 O layout `absolute` permite posicionar os componentes manualmente através de coordenadas e dimensões.
 
@@ -295,9 +295,9 @@ Isso significa que podemos definir exatamente onde cada componente ficará.
 
 ---
 
-# 5. Criando a logo e o nome do sistema
+**Criando a logo e o nome do sistema**
 
-## JLabel da logo
+**JLabel da logo**
 
 Dentro do painel lateral, adicione um `JLabel`.
 
@@ -309,7 +309,7 @@ Configure:
 
 A imagem será utilizada como logo do sistema.
 
-## JLabel BL-PDV
+**JLabel BL-PDV**
 
 Adicione outro `JLabel` ao lado da logo.
 
@@ -324,7 +324,7 @@ Configure:
 | `foreground` | Cor desejada |
 | `variable` | `lblBLPDV` |
 
-### Font
+**Font**
 
 A propriedade `Font` define a aparência do texto.
 
@@ -340,7 +340,7 @@ Ela permite configurar:
 
 ---
 
-## JLabel Sistema de PDV
+**JLabel Sistema de PDV**
 
 Adicione outro `JLabel` logo abaixo do nome BL-PDV.
 
@@ -353,13 +353,13 @@ Esse componente servirá como subtítulo da logo.
 
 ---
 
-# 6. Criando o botão Fornecedores
+## Criando o botão Fornecedores
 
 No painel lateral, procure por `JButton` e adicione o componente abaixo da logo.
 
 O botão será utilizado posteriormente para abrir a tela de cadastro e gerenciamento de fornecedores.
 
-### Preparando o ícone
+**Preparando o ícone**
 
 1. Procure uma imagem de fornecedor com dimensão de 32 × 32 pixels.
 2. Salve o arquivo com o nome `fornecedor`.
@@ -367,7 +367,7 @@ O botão será utilizado posteriormente para abrir a tela de cadastro e gerencia
 4. Selecione o JButton no Design.
 5. Na propriedade `icon`, selecione a imagem do fornecedor.
 
-### Configurando o botão
+**Configurando o botão**
 
 | Propriedade | Valor |
 |---|---|
@@ -379,7 +379,7 @@ O botão será utilizado posteriormente para abrir a tela de cadastro e gerencia
 | `variable` | `btnFornecedores` |
 | `icon` | Ícone fornecedor |
 
-### O que é JButton?
+**O que é JButton?**
 
 O `JButton` é um botão que permite ao usuário executar uma ação ao clicar nele.
 
@@ -395,7 +395,7 @@ Por enquanto, estamos apenas criando e configurando o botão visualmente. A aç�
 
 ---
 
-# 7. Removendo a borda do botão
+## Removendo a borda do botão
 
 Selecione o botão `btnFornecedores`.
 
@@ -403,7 +403,7 @@ Selecione o botão `btnFornecedores`.
 2. Procure a propriedade `borderPainted`.
 3. Desmarque a opção, definindo como `false`.
 
-### O que significa borderPainted?
+**O que significa borderPainted?**
 
 Essa propriedade determina se a borda do botão será desenhada.
 
@@ -414,9 +414,9 @@ Isso permite criar botões com uma aparência mais limpa, combinando com o desig
 
 ---
 
-# 8. Criando a separação e o botão Sobre
+**Criando a separação e o botão Sobre**
 
-## JLabel de separação
+**JLabel de separação**
 
 Adicione um novo `JLabel` no painel lateral.
 
@@ -426,7 +426,7 @@ Posicione o componente próximo à parte inferior do painel, deixando um espaço
 
 Essa linha servirá como uma divisão visual entre os botões principais e o botão Sobre.
 
-## JButton Sobre
+**JButton Sobre**
 
 Adicione outro `JButton` abaixo da linha de separação.
 
@@ -441,7 +441,7 @@ Configure:
 | `icon` | Ícone Sobre de 32 × 32 |
 | `variable` | Definir variável para o botão |
 
-### Adicionando o ícone
+**Adicionando o ícone**
 
 1. Procure uma imagem relacionada à opção Sobre, com tamanho 32 × 32 pixels.
 2. Salve a imagem.
@@ -453,11 +453,11 @@ O botão terá a função de abrir uma janela com informações sobre o sistema.
 
 ---
 
-# 9. Criando a janela Sobre (JDialog)
+**Criando a janela Sobre (JDialog)**
 
 Agora criaremos uma janela separada para apresentar as informações do BL-PDV.
 
-### Criando a classe
+**Criando a classe**
 
 No Eclipse:
 
@@ -473,7 +473,7 @@ No Eclipse:
 
 Será criada a classe `Sobre.java`.
 
-### O que é JDialog?
+**O que é JDialog?**
 
 O `JDialog` é um componente Swing utilizado para criar janelas de diálogo.
 
@@ -487,7 +487,7 @@ Ele pode ser utilizado para:
 
 Neste projeto, o JDialog será usado para exibir informações do BL-PDV.
 
-### JFrame x JDialog
+## JFrame x JDialog
 
 | JFrame | JDialog |
 |---|---|
@@ -497,17 +497,17 @@ Neste projeto, o JDialog será usado para exibir informações do BL-PDV.
 
 ---
 
-# 10. Configurando a janela Sobre
+## Configurando a janela Sobre
 
 Abra `Sobre.java` e clique na aba `Design`.
 
-### Removendo os botões padrão
+**Removendo os botões padrão**
 
 Caso o WindowBuilder tenha criado os botões `OK` e `Cancel`, selecione-os e exclua.
 
 Eles não serão necessários nesta janela.
 
-### Configurando o tamanho
+**Configurando o tamanho**
 
 Selecione o componente principal `javax.swing.JDialog`.
 
@@ -523,7 +523,7 @@ Configure:
 
 A janela terá dimensões de 270 × 370 pixels.
 
-### Configurando o ícone da janela
+**Configurando o ícone da janela**
 
 Na propriedade `iconImage`, selecione a imagem do ícone Sobre que foi adicionada anteriormente à pasta `img`.
 
@@ -531,7 +531,7 @@ Essa imagem será exibida na barra de título da janela.
 
 ---
 
-# 11. JLabel BL-PDV na janela Sobre
+**JLabel BL-PDV na janela Sobre**
 
 Adicione um `JLabel` à janela.
 
@@ -546,7 +546,7 @@ Configure:
 | `size` | 15 |
 | `variable` | `lblBLPDV` |
 
-### horizontalAlignment
+**horizontalAlignment**
 
 Essa propriedade determina o alinhamento horizontal do texto dentro do JLabel.
 
@@ -558,7 +558,7 @@ Nesse caso, utilizaremos `Center` para deixar o nome BL-PDV centralizado na jane
 
 ---
 
-# 12. JLabel da descrição do sistema
+**JLabel da descrição do sistema**
 
 Adicione outro `JLabel` abaixo do nome BL-PDV.
 
@@ -577,7 +577,7 @@ Esse texto explica brevemente a finalidade do sistema.
 
 ---
 
-# 13. JLabel do autor
+**JLabel do autor**
 
 Adicione outro `JLabel`.
 
@@ -592,7 +592,7 @@ Esse componente exibirá a identificação do autor do projeto.
 
 ---
 
-# 14. JLabel da versão
+**JLabel da versão**
 
 Adicione outro `JLabel`.
 
@@ -615,7 +615,7 @@ Essa numeração é uma convenção de versionamento e pode ser definida pelo de
 
 ---
 
-## 🧠 Guia rápido de memorização
+## Guia rápido de memorização
 
 | Componente / método | Função |
 |---|---|
@@ -636,7 +636,7 @@ Essa numeração é uma convenção de versionamento e pode ser definida pelo de
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. `LocalDate.now()` obtém a data atual do sistema.
 2. `DateTimeFormatter` define o formato de apresentação da data.
