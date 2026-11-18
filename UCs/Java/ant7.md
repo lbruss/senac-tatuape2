@@ -1116,5 +1116,3 @@ Conjunto das quatro operações fundamentais de manipulação de dados:
 8. O botão Produtos abre a janela `frmProduto` por meio de um novo objeto.
 9. A tela `frmProduto` começa a ser construída com campos de descrição, categoria, fornecedor e preços.
 10. Os campos de quantidade e estoque mínimo serão utilizados no controle de estoque do BL-PDV.
-
-**Próxima etapa:** continuar a montagem da tela `frmProduto` e desenvolver a estrutura de cadastro de produtos no banco de dados.
