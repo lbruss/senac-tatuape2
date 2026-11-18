@@ -9,7 +9,7 @@ Com isso, começamos a implementar operações de **CRUD** na parte de produtos,
 
 ---
 
-# 1. Adicionando os componentes de código de barras no frmProduto
+## Adicionando os componentes de código de barras no frmProduto
 
 Primeiro, abra a classe `frmProduto` no Eclipse e entre na aba **Design** do WindowBuilder.
 
@@ -45,11 +45,11 @@ blpvd
 
 ---
 
-# 2. Implementando a validação e o cadastro de produtos
+## Implementando a validação e o cadastro de produtos
 
 Agora, dê dois cliques no botão de adicionar produto (`btnAdicionarProduto`) e implemente as validações dentro do evento `actionPerformed`.
 
-## 2.1. Validando os campos obrigatórios
+## Validando os campos obrigatórios
 
 Antes de cadastrar um produto, precisamos verificar se os campos necessários foram preenchidos.
 
@@ -89,7 +89,7 @@ if(textBarcode.getText().isBlank()) {
 }
 ```
 
-### Como funciona?
+**Como funciona?**
 
 A estrutura `if / else if` verifica as condições em sequência.
 
@@ -106,7 +106,7 @@ Já o método `requestFocus()` direciona o foco do teclado para o componente ind
 
 Porque queremos identificar o primeiro campo inválido e interromper as verificações seguintes. Assim, o usuário corrige um problema de cada vez.
 
-## 2.2. Transferindo os dados para o objeto Produto
+## Transferindo os dados para o objeto Produto
 
 Se todas as validações forem aprovadas, os valores digitados serão transferidos para os atributos do objeto `produto`.
 
@@ -129,7 +129,7 @@ produto.setEstoqueMinimo(Integer.parseInt(textEstoqueMinimo.getText()));
 produto.setIdFornecedor(Integer.parseInt(textIDFornecedor.getText()));
 ```
 
-### Entendendo as conversões
+**Entendendo as conversões**
 
 Os componentes `JTextField` armazenam os valores como texto (`String`). Entretanto, os atributos numéricos da classe `Produto` precisam receber valores numéricos.
 
@@ -142,7 +142,7 @@ Por isso, precisamos converter os dados.
 | `Integer.parseInt()`   | Converte String para int              |
 | `replace(",", ".")`    | Substitui vírgula por ponto           |
 
-### Por que substituir a vírgula por ponto?
+**Por que substituir a vírgula por ponto?**
 
 No Brasil, normalmente utilizamos vírgula para representar casas decimais:
 
@@ -180,7 +180,7 @@ Resultado:
 
 O valor continua representando quinze reais e noventa centavos. A diferença está apenas na forma como o número é armazenado e exibido.
 
-## 2.3. Chamando o método adicionar()
+**Chamando o método adicionar()**
 
 Depois de transferir os dados para o objeto `produto`, chamamos o método `adicionar()` da classe `ProdutoController`.
 
@@ -203,7 +203,7 @@ if(sucesso == true) {
 }
 ```
 
-### Entendendo o retorno boolean
+**Entendendo o retorno boolean**
 
 O método `adicionar()` retorna um valor do tipo `boolean`, ou seja, pode retornar apenas:
 
@@ -220,7 +220,7 @@ Caso contrário, apresentamos uma mensagem de erro e limpamos o código de barra
 
 ---
 
-# 3. Criando o método limparCampos()
+## Criando o método limparCampos()
 
 Para evitar repetir comandos de limpeza em vários eventos, criamos um método específico.
 
@@ -242,7 +242,7 @@ void limparCampos() {
 }
 ```
 
-### Explicação
+**Explicação**
 
 | Comando                        | Finalidade                              |
 | ------------------------------ | --------------------------------------- |
@@ -257,7 +257,7 @@ O método também é importante porque, quando localizarmos um produto existente
 
 ---
 
-# 4. Código SQL — Criando a tabela produtos
+## Código SQL — Criando a tabela produtos
 
 Agora, abra o MySQL Workbench e selecione o banco de dados `blpdv`.
 
@@ -284,7 +284,7 @@ CREATE TABLE produtos (
 ) DEFAULT CHARSET = utf8;
 ```
 
-## 4.1. Entendendo a estrutura da tabela
+**Entendendo a estrutura da tabela**
 
 | Campo           | Tipo          | Finalidade                  |
 | --------------- | ------------- | --------------------------- |
@@ -298,7 +298,7 @@ CREATE TABLE produtos (
 | `estoqueMinimo` | INT           | Limite mínimo de estoque    |
 | `idFornecedor`  | INT           | Identificador do fornecedor |
 
-### Restrições importantes
+**Restrições importantes**
 
 **PRIMARY KEY**
 
@@ -348,7 +348,7 @@ Cria um relacionamento entre as tabelas `produtos` e `fornecedores`.
 
 Isso significa que cada produto precisa estar associado a um fornecedor que já exista na tabela `fornecedores`.
 
-### Entendendo o relacionamento
+**Entendendo o relacionamento**
 
 A relação entre essas tabelas é de **um para muitos (1\:N)**:
 
@@ -359,13 +359,13 @@ O campo `idFornecedor` da tabela `produtos` é uma chave estrangeira que referen
 
 ---
 
-# 5. Implementando o ProdutoController — CRUD Create
+## Implementando o ProdutoController — CRUD Create
 
 Agora, abra a classe `ProdutoController`.
 
 Vamos implementar o método responsável por inserir os produtos no banco de dados.
 
-## 5.1. Imports necessários
+**Imports necessários**
 
 ```java
 import java.sql.Connection;
@@ -382,7 +382,7 @@ Essas classes permitem:
 - `Database`: utilizar a classe responsável pela conexão.
 - `Produto`: acessar os dados do produto.
 
-## 5.2. Método adicionar()
+**Método adicionar()**
 
 ```java
 // ADICIONAR PRODUTO - CRUD CREATE
@@ -434,7 +434,7 @@ public boolean adicionar(Produto produto) {
 }
 ```
 
-## 5.3. Entendendo o PreparedStatement
+**Entendendo o PreparedStatement**
 
 Observe o comando SQL:
 
@@ -471,7 +471,7 @@ Depois, utilizamos os métodos `setString()`, `setDouble()` e `setInt()` para pr
 
 **Atenção:** a numeração dos parâmetros começa em 1, não em 0.
 
-## 5.4. Verificando o código de barras
+## Verificando o código de barras
 
 ```java
 if(produto.getCodigoBarras().isBlank()) {
@@ -490,7 +490,7 @@ O método `setNull()` permite enviar um valor nulo ao banco de dados.
 
 **Observação importante:** no formulário desenvolvido nesta aula, o código de barras é obrigatório. Portanto, essa verificação funciona como uma proteção adicional no Controller. Além disso, o campo SQL permite `NULL` porque não possui `NOT NULL`.
 
-## 5.5. Executando a inserção
+**Executando a inserção**
 
 ```java
 stmt.executeUpdate();
@@ -510,7 +510,7 @@ Se ocorrer algum erro, o `catch` captura a exceção e retorna `false`.
 
 ---
 
-# 6. Testando o cadastro de produtos
+**Testando o cadastro de produtos**
 
 Com a tabela criada e o método `adicionar()` implementado:
 
@@ -539,7 +539,7 @@ SELECT * FROM produtos;
 
 ---
 
-# 7. Implementando a busca pelo código de barras
+## Implementando a busca pelo código de barras
 
 Agora vamos implementar uma funcionalidade de consulta.
 
@@ -552,7 +552,7 @@ O sistema pesquisará o produto no banco de dados.
 
 Essa operação corresponde ao **CRUD Read (leitura/consulta)**.
 
-## 7.1. Criando o evento keyPressed
+## Criando o evento keyPressed
 
 No Eclipse:
 
@@ -571,7 +571,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 ```
 
-## 7.2. Verificando se a tecla pressionada foi Enter
+**Verificando se a tecla pressionada foi Enter**
 
 ```java
 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -585,7 +585,7 @@ A constante `KeyEvent.VK_ENTER` representa a tecla Enter.
 
 Portanto, o bloco só será executado quando o usuário pressionar Enter.
 
-## 7.3. Capturando o código de barras
+**Capturando o código de barras**
 
 ```java
 String barcode = textBarcode.getText();
@@ -604,7 +604,7 @@ Essa variável poderá conter:
 - Um objeto `Produto`, se o registro for encontrado.
 - `null`, se nenhum produto corresponder ao código informado.
 
-## 7.4. Preenchendo os campos automaticamente
+**Preenchendo os campos automaticamente**
 
 Se o produto existir:
 
@@ -635,7 +635,7 @@ textIDProduto.setText(String.valueOf(id));
 
 O número `10` é convertido para `"10"` antes de ser colocado no campo.
 
-## 7.5. Selecionando automaticamente o fornecedor
+## Selecionando automaticamente o fornecedor
 
 Além de preencher os campos, precisamos localizar o fornecedor correspondente no `JComboBox`.
 
@@ -649,7 +649,7 @@ for(int i = 0; i < cboFornecedor.getItemCount(); i++) {
 }
 ```
 
-### Entendendo o funcionamento
+**Entendendo o funcionamento**
 
 **`getItemCount()`**
 
@@ -688,7 +688,7 @@ Quando encontra, seleciona automaticamente:
 2 - Fornecedor B
 ```
 
-## 7.6. Desabilitando o botão de adicionar
+**Desabilitando o botão de adicionar**
 
 ```java
 btnAdicionarProduto.setEnabled(false);
@@ -704,7 +704,7 @@ Para voltar a habilitá-lo, utilizamos o método `limparCampos()`:
 btnAdicionarProduto.setEnabled(true);
 ```
 
-## 7.7. Quando o produto não existe
+**Quando o produto não existe**
 
 Se a consulta retornar `null`, significa que não foi encontrado nenhum produto com aquele código de barras.
 
@@ -740,13 +740,13 @@ Se escolher Sim, o cursor será direcionado para o campo de descrição, permiti
 
 ---
 
-# 8. Implementando o método buscarCodigoBarras() no ProdutoController
+## Implementando o método buscarCodigoBarras() no ProdutoController
 
 Agora precisamos criar o método que realmente consulta o banco de dados.
 
 Abra a classe `ProdutoController`.
 
-## 8.1. Adicionando o import
+**Adicionando o import**
 
 ```java
 import java.sql.ResultSet;
@@ -756,7 +756,7 @@ O `ResultSet` representa o conjunto de resultados retornado por uma consulta SQL
 
 Ele permite percorrer e recuperar os registros encontrados.
 
-## 8.2. Criando o método de consulta
+## Criando o método de consulta
 
 ```java
 public Produto buscarCodigoBarras(String codigoBarras) {
@@ -804,7 +804,7 @@ public Produto buscarCodigoBarras(String codigoBarras) {
 }
 ```
 
-## 8.3. Entendendo a consulta SQL
+**Entendendo a consulta SQL**
 
 ```sql
 SELECT idProduto, descricao, categoria, precoCusto,
@@ -833,7 +833,7 @@ Assim, o banco procura um registro cujo código de barras seja igual ao valor re
 
 Porque podemos selecionar somente as colunas necessárias para a operação. Isso deixa a consulta mais explícita e facilita a manutenção.
 
-## 8.4. Entendendo o ResultSet
+**Entendendo o ResultSet**
 
 ```java
 ResultSet rs = stmt.executeQuery();
@@ -854,7 +854,7 @@ O método `next()` avança para o próximo registro do resultado.
 
 Como o código de barras foi definido como `UNIQUE`, a consulta deverá encontrar no máximo um produto.
 
-## 8.5. Criando e preenchendo o objeto
+**Criando e preenchendo o objeto**
 
 ```java
 produto = new Produto();
@@ -877,7 +877,7 @@ Nesse caso:
 
 O mesmo processo é utilizado para os demais campos.
 
-## 8.6. Retornando o resultado
+**Retornando o resultado**
 
 ```java
 return produto;
@@ -897,7 +897,7 @@ Essa é a informação que permite ao formulário identificar se o produto já e
 
 ---
 
-# 9. Fluxo completo da busca e do cadastro
+## Fluxo completo da busca e do cadastro
 
 Veja como as classes trabalham juntas:
 
@@ -950,7 +950,7 @@ Essa separação de responsabilidades é importante:
 
 ---
 
-# 10. Código completo atualizado do ProdutoController
+### Código completo atualizado do ProdutoController
 
 Depois das implementações, a classe `ProdutoController` ficará assim:
 
@@ -1064,7 +1064,7 @@ public class ProdutoController {
 
 ---
 
-# 11. Testando a busca pelo código de barras
+**Testando a busca pelo código de barras**
 
 Agora execute o `main` do projeto.
 
@@ -1091,9 +1091,9 @@ O sistema deverá perguntar se deseja cadastrar o produto.
 
 ---
 
-# 12. Observações técnicas e melhorias importantes
+**Observações técnicas e melhorias importantes**
 
-### 12.1. Corrigir a comparação do ComboBox
+**Corrigir a comparação do ComboBox**
 
 No código da aula aparece:
 
@@ -1115,7 +1115,7 @@ if(selecionado != null && !selecionado.equals("Selecione")) {
 
 Caso contrário, o programa poderá tentar interpretar `"Selecione"` como se fosse um ID de fornecedor.
 
-### 12.2. Corrigir o nome do método no comentário
+**Corrigir o nome do método no comentário**
 
 No código da aula, o método de busca foi identificado como:
 
@@ -1136,7 +1136,7 @@ Isso porque:
 - `UPDATE`: atualização de registros.
 - `DELETE`: exclusão de registros.
 
-### 12.3. Cuidado com o objeto Produto dentro do evento
+**Cuidado com o objeto Produto dentro do evento**
 
 Na classe `frmProduto`, já existe um atributo:
 
@@ -1162,7 +1162,7 @@ Produto produtoEncontrado = controllerProduto.buscarCodigoBarras(barcode);
 
 E utilizar `produtoEncontrado` nas verificações e preenchimentos daquele evento.
 
-### 12.4. Melhorando o fechamento da conexão
+**Melhorando o fechamento da conexão**
 
 Na aula, os recursos são fechados manualmente:
 
@@ -1191,7 +1191,7 @@ Quando houver um `ResultSet`, ele também poderá ser incluído nos recursos ger
 
 Essa melhoria pode ser aplicada posteriormente ao Controller.
 
-### 12.5. Atenção ao tratamento de erros
+**Atenção ao tratamento de erros##
 
 O método `adicionar()` retorna `false` para qualquer exceção.
 
@@ -1205,7 +1205,7 @@ Isso significa que o formulário não consegue distinguir se houve:
 
 A mensagem de código de barras duplicado é uma simplificação da aula. Em uma versão mais completa, podemos identificar especificamente a violação da restrição `UNIQUE` e apresentar mensagens diferentes para cada situação.
 
-### 12.6. Atenção ao campo preço
+**Atenção ao campo preço**
 
 O projeto utiliza `double` para representar os preços:
 
@@ -1219,7 +1219,7 @@ O MySQL já utiliza `DECIMAL(10,2)`, que é apropriado para armazenar valores mo
 
 ---
 
-# 13. O que foi implementado nesta aula?
+**O que foi implementado nesta aula?**
 
 | Funcionalidade                | Classe ou local     | Operação               |
 | ----------------------------- | ------------------- | ---------------------- |
@@ -1236,7 +1236,7 @@ O MySQL já utiliza `DECIMAL(10,2)`, que é apropriado para armazenar valores mo
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. O `textBarcode` recebe o código de barras do produto.
 2. Os campos obrigatórios são verificados com `isBlank()`.
@@ -1248,5 +1248,4 @@ O MySQL já utiliza `DECIMAL(10,2)`, que é apropriado para armazenar valores mo
 8. O evento `keyPressed` identifica quando a tecla Enter é pressionada.
 9. O método `buscarCodigoBarras()` realiza uma consulta SQL e retorna um objeto `Produto` ou `null`.
 10. Se o produto existir, os campos são preenchidos automaticamente; caso contrário, o sistema oferece a opção de cadastrá-lo.
-
-**Próxima etapa:** implementar a edição e a atualização dos produtos encontrados, avançando para a operação CRUD Update.
+
