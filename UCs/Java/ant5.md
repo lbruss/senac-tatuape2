@@ -1,8 +1,6 @@
-# PADRÃO DEFINITIVO DAS MINHAS ANOTAÇÕES DE TI
+# BL-PDV: Validação de campos e cadastro de fornecedores
 
-# Java — BL-PDV: Validação de campos e cadastro de fornecedores
-
-## 1. Criando a classe Validador
+**Criando a classe Validador**
 
 Nesta etapa, vamos criar uma classe responsável por controlar o que o usuário pode digitar nos campos de texto do sistema.
 
@@ -15,7 +13,7 @@ Por exemplo, podemos definir que:
 
 Essa validação ajuda a evitar que o usuário digite informações fora do padrão esperado.
 
-### 1.1. Criando o package utils
+## Criando o package utils
 
 Dentro da pasta `src`:
 
@@ -34,7 +32,7 @@ src
     └── Validador.java
 ```
 
-### 1.2. Código da classe Validador
+### Código da classe Validador
 
 ```java
 package utils;
@@ -107,7 +105,7 @@ public class Validador extends PlainDocument {
 }
 ```
 
-### 1.3. Entendendo a classe Validador
+**Entendendo a classe Validador**
 
 **Herança de PlainDocument**
 
@@ -206,7 +204,7 @@ A palavra `throws` indica que o método pode lançar uma exceção chamada `BadL
 
 Como estamos sobrescrevendo um método herdado de `PlainDocument`, podemos controlar o que acontece durante a inserção de conteúdo.
 
-### 1.4. Verificando se o texto é nulo
+## Verificando se o texto é nulo
 
 ```java
 if (str == null) {
@@ -220,7 +218,7 @@ Se for, o método utiliza `return` para interromper sua execução.
 
 Isso evita tentar processar uma informação inexistente.
 
-### 1.5. Limitando a quantidade de caracteres
+## Limitando a quantidade de caracteres
 
 ```java
 if (getLength() + str.length() > limite) {
@@ -240,7 +238,7 @@ Se o limite for 50 e o campo já tiver 45 caracteres, não será possível inser
 
 O `return` impede a inserção quando o limite é ultrapassado.
 
-### 1.6. Validando texto
+## Validando texto
 
 ```java
 if (tipo.equals("texto")) {
@@ -254,7 +252,7 @@ O método `equals()` compara o conteúdo de duas Strings.
 
 Já `super.insertString()` chama o método original da classe `PlainDocument`, realizando a inserção no campo.
 
-### 1.7. Validando números inteiros
+## Validando números inteiros
 
 ```java
 else if (tipo.equals("inteiro")) {
@@ -292,7 +290,7 @@ Exemplos:
 
 Essa validação não permite números negativos, pois o sinal de menos não faz parte da expressão.
 
-### 1.8. Validando números decimais
+## Validando números decimais
 
 ```java
 else if (tipo.equals("decimal")) {
@@ -364,7 +362,7 @@ Exemplos:
 
 **Observação importante:** essa expressão também permite estados intermediários, como uma String vazia ou apenas um separador decimal. Isso pode ser útil durante a digitação, mas a validação final do valor deve ser feita antes de salvar os dados.
 
-### 1.9. Como utilizar a classe Validador
+## Como utilizar a classe Validador
 
 Depois de criar a classe, podemos utilizá-la em qualquer `JTextField`.
 
@@ -392,7 +390,7 @@ textPreco.setDocument(new Validador(10, "decimal"));
 
 ---
 
-## 2. Criando a classe FornecedorController
+## Criando a classe FornecedorController
 
 Agora vamos criar a classe responsável por fazer a comunicação entre a aplicação Java e o banco de dados.
 
@@ -404,7 +402,7 @@ Até aqui, temos três partes importantes:
 
 Essa organização segue a ideia do padrão arquitetural MVC (*Model-View-Controller*).
 
-### 2.1. Criando o package controller
+## Criando o package controller
 
 Dentro da pasta `src`:
 
@@ -433,7 +431,7 @@ src
     └── frmFornecedor.java
 ```
 
-### 2.2. Código da classe FornecedorController
+### Código da classe FornecedorController
 
 ```java
 package controller;
@@ -487,7 +485,7 @@ public class FornecedorController {
 }
 ```
 
-### 2.3. Entendendo a classe FornecedorController
+**Entendendo a classe FornecedorController**
 
 **Importando as classes necessárias**
 
@@ -650,7 +648,7 @@ catch (Exception e) {
 
 Assim, o Eclipse apresenta detalhes da exceção no console.
 
-### 2.4. Entendendo o CRUD
+## Entendendo o CRUD
 
 CRUD é uma sigla formada pelas quatro operações básicas utilizadas para manipular dados em um banco de dados.
 
@@ -667,13 +665,13 @@ As demais operações serão implementadas posteriormente.
 
 ---
 
-## 3. Integrando o Controller à tela frmFornecedor
+## Integrando o Controller à tela frmFornecedor
 
 Agora vamos conectar a interface gráfica à classe responsável por salvar os dados no banco.
 
 Para isso, precisamos criar dois objetos dentro do construtor de `frmFornecedor`.
 
-### 3.1. Importando as classes
+**Importando as classes**
 
 No início do arquivo `frmFornecedor.java`, adicione:
 
@@ -685,7 +683,7 @@ import utils.Validador;
 
 Essas importações permitem utilizar o Controller, o Model e a classe de validação.
 
-### 3.2. Criando os objetos
+## Criando os objetos
 
 Dentro do construtor `frmFornecedor()`, adicione:
 
@@ -749,7 +747,7 @@ Como estamos utilizando o construtor que recebe somente o limite, os campos util
 
 **Observação:** apesar de o campo Telefone normalmente receber números, nesta configuração ele ainda aceita texto, pois estamos utilizando `new Validador(20)`, que define o tipo padrão como `"texto"`.
 
-### 3.4. Código da primeira versão de frmFornecedor
+### Código da primeira versão de frmFornecedor
 
 Nesta primeira etapa, a tela já possui os campos e suas respectivas validações, mas ainda não possui o botão de cadastro.
 
@@ -891,11 +889,11 @@ public class frmFornecedor extends JDialog {
 
 ---
 
-## 4. Configurando o botão Adicionar
+## Configurando o botão Adicionar
 
 Agora vamos adicionar um botão responsável por cadastrar os fornecedores.
 
-### 4.1. Adicionando o botão pelo WindowBuilder
+**Adicionando o botão pelo WindowBuilder**
 
 Abra `frmFornecedor.java` e vá para a aba **Design**.
 
@@ -923,7 +921,7 @@ O `toolTipText` mostra uma pequena descrição quando o usuário posiciona o mou
 
 O `HAND_CURSOR` altera o cursor para o formato de uma mão, indicando que o componente pode ser clicado.
 
-### 4.2. Entendendo o ActionListener
+**Entendendo o ActionListener**
 
 Para fazer o botão executar uma ação, precisamos adicionar um evento.
 
@@ -955,7 +953,7 @@ Portanto, tudo que estiver dentro dele será executado quando o usuário clicar 
 
 ---
 
-## 5. Configurando o botão Fornecedores e o botão Sobre no Main.java
+## Configurando o botão Fornecedores e o botão Sobre no Main.java
 
 Agora vamos melhorar a interação dos botões da tela principal.
 
@@ -977,7 +975,7 @@ Faça o mesmo com o botão Sobre:
 
 Assim, os dois botões terão o mesmo comportamento visual de interação.
 
-### 5.1. Criando o evento do botão Fornecedores
+## Criando o evento do botão Fornecedores
 
 Clique com o botão direito no botão Fornecedores.
 
@@ -1011,7 +1009,7 @@ Torna a janela visível para o usuário.
 
 Assim, quando o usuário clicar no botão Fornecedores da tela principal, a janela de cadastro será aberta.
 
-### 5.2. Código completo de Main.java
+### Código completo de Main.java
 
 ```java
 package view;
@@ -1234,7 +1232,7 @@ public class Main extends JFrame {
 }
 ```
 
-### 5.3. Entendendo o evento do botão Fornecedores
+**Entendendo o evento do botão Fornecedores**
 
 O trecho principal é:
 
@@ -1259,7 +1257,7 @@ O botão Sobre utiliza a mesma lógica, mas cria um objeto da classe `Sobre`.
 
 ---
 
-## 6. Configurando a janela frmFornecedor como modal
+## Configurando a janela frmFornecedor como modal
 
 Agora vamos alterar uma propriedade da janela de fornecedores.
 
@@ -1277,7 +1275,7 @@ O Eclipse deverá adicionar a seguinte linha ao construtor:
 setModal(true);
 ```
 
-### 6.1. O que significa uma janela modal?
+**O que significa uma janela modal?**
 
 Uma janela modal impede que o usuário interaja com outras janelas da mesma aplicação enquanto ela estiver aberta.
 
@@ -1296,7 +1294,7 @@ No projeto BL-PDV, a janela de fornecedores será modal.
 
 ---
 
-## 7. Configurando a validação do campo Nome
+## Configurando a validação do campo Nome
 
 Agora vamos modificar a linha de validação do campo Nome.
 
@@ -1320,7 +1318,7 @@ O resultado continua sendo um campo de texto com limite de 50 caracteres.
 
 ---
 
-## 8. Programando o botão Adicionar
+## Programando o botão Adicionar
 
 Agora vamos implementar a parte mais importante desta etapa: o cadastro de fornecedores.
 
@@ -1332,7 +1330,7 @@ O objetivo é fazer com que o botão:
 4. Envie o objeto ao `FornecedorController`.
 5. Mostre uma mensagem de confirmação.
 
-### 8.1. Importando as classes necessárias
+**Importando as classes necessárias**
 
 No início de `frmFornecedor.java`, adicione:
 
@@ -1357,7 +1355,7 @@ Essas classes são utilizadas para criar o botão, configurar seu comportamento 
 | `ActionListener` | Escutar eventos de ação. |
 | `ActionEvent` | Representar o evento ocorrido. |
 
-### 8.2. Criando a variável do botão
+## Criando a variável do botão
 
 Na declaração dos atributos da classe, adicione:
 
@@ -1367,7 +1365,7 @@ private JButton btnAdicionar;
 
 Essa variável representa o botão Adicionar.
 
-### 8.3. Criando o evento do botão
+## Criando o evento do botão
 
 Dentro do construtor `frmFornecedor()`, depois da criação dos campos de texto, adicione:
 
@@ -1430,7 +1428,7 @@ btnAdicionar.setBounds(29, 338, 89, 73);
 getContentPane().add(btnAdicionar);
 ```
 
-### 8.4. Entendendo a validação dos campos
+**Entendendo a validação dos campos**
 
 **Verificando o nome**
 
@@ -1484,7 +1482,7 @@ Caso esteja, apresenta a mensagem:
 
 O `else if` significa que essa segunda condição somente será verificada se a primeira condição for falsa.
 
-### 8.5. Transferindo os dados da tela para o objeto
+## Transferindo os dados da tela para o objeto
 
 Se o nome e o telefone estiverem preenchidos, o programa executará:
 
@@ -1521,7 +1519,7 @@ Imagine que o usuário digitou:
 
 Depois dos comandos `set`, o objeto `fornecedor` terá essas informações armazenadas em seus atributos.
 
-### 8.6. Enviando o objeto para o Controller
+## Enviando o objeto para o Controller
 
 ```java
 controller.Adicionar(fornecedor);
@@ -1549,7 +1547,7 @@ Tabela fornecedores
 
 Essa separação permite que a interface gráfica não precise executar diretamente os comandos SQL.
 
-### 8.7. Exibindo a mensagem de confirmação
+## Exibindo a mensagem de confirmação
 
 ```java
 JOptionPane.showMessageDialog(
@@ -1564,7 +1562,7 @@ Depois da chamada ao Controller, o programa apresenta uma mensagem informando qu
 
 ---
 
-## 9. Código completo atualizado de frmFornecedor.java
+### Código completo atualizado de frmFornecedor.java
 
 Abaixo está o código reunindo a janela, os campos, as validações e o evento do botão Adicionar.
 
@@ -1779,18 +1777,18 @@ public class frmFornecedor extends JDialog {
 
 ---
 
-## 10. Testando o cadastro de fornecedores
+**Testando o cadastro de fornecedores**
 
 Agora que a interface e o Controller estão conectados, vamos testar se os dados estão sendo gravados corretamente no banco de dados.
 
-### 10.1. Executando o sistema
+**Executando o sistema**
 
 1. Abra `Main.java`.
 2. Clique com o botão direito no arquivo.
 3. Selecione **Run As → Java Application**.
 4. Aguarde a abertura da tela principal do BL-PDV.
 
-### 10.2. Abrindo a tela de fornecedores
+**Abrindo a tela de fornecedores**
 
 Na tela principal:
 
@@ -1812,7 +1810,7 @@ Se o nome ou telefone estiver vazio, o sistema deverá apresentar uma mensagem s
 
 Se os dois campos obrigatórios estiverem preenchidos, o sistema enviará os dados para o Controller.
 
-### 10.3. Verificando os dados no MySQL Workbench
+## Verificando os dados no MySQL Workbench
 
 Agora vamos conferir se o fornecedor realmente foi cadastrado.
 
@@ -1847,7 +1845,7 @@ Exemplo de resultado esperado:
 
 O valor de `idFornecedor` é preenchido automaticamente pelo banco de dados, pois a coluna foi criada com `AUTO_INCREMENT`.
 
-### 10.4. Entendendo o caminho completo do cadastro
+**Entendendo o caminho completo do cadastro**
 
 Essa etapa é importante porque conecta praticamente todas as partes do projeto.
 
@@ -1893,9 +1891,9 @@ Cada classe possui uma responsabilidade:
 
 ---
 
-## 11. Observações importantes e boas práticas
+**Observações importantes e boas práticas**
 
-### 11.1. A mensagem de sucesso não garante que o cadastro foi realizado
+**A mensagem de sucesso não garante que o cadastro foi realizado**
 
 No código atual, temos:
 
@@ -1921,7 +1919,7 @@ Em uma evolução futura, o método poderá retornar um valor booleano:
 
 Assim, a interface poderá apresentar a mensagem correta.
 
-### 11.2. Melhorando o tratamento de erros
+**Melhorando o tratamento de erros**
 
 Atualmente, o Controller utiliza:
 
@@ -1943,7 +1941,7 @@ catch (Exception e) {
 
 Isso permite visualizar a exceção e sua origem no console do Eclipse.
 
-### 11.3. Utilizando try-with-resources
+**Utilizando try-with-resources**
 
 Uma boa prática em JDBC é utilizar `try-with-resources` para fechar automaticamente os recursos utilizados.
 
@@ -1984,7 +1982,7 @@ public boolean adicionar(Fornecedor fornecedor) {
 
 O importante é entender que `try-with-resources` fecha automaticamente os recursos quando o bloco termina, mesmo se acontecer uma exceção.
 
-### 11.4. Limitações da validação atual
+**Limitações da validação atual**
 
 A classe `Validador` foi criada para controlar a inserção de texto, mas existem alguns detalhes importantes:
 
@@ -1998,7 +1996,7 @@ Essas melhorias podem ser implementadas em etapas posteriores.
 
 ---
 
-## 12. Guia rápido de memorização
+## Guia rápido de memorização
 
 | Recurso | Para que serve |
 |---|---|
@@ -2022,7 +2020,7 @@ Essas melhorias podem ser implementadas em etapas posteriores.
 
 ---
 
-## Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. A classe `Validador` herda de `PlainDocument` e controla o conteúdo digitado nos campos de texto.
 2. O Validador permite estabelecer limites de caracteres e regras para texto, números inteiros e decimais.
