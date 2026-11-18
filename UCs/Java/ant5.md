@@ -2032,5 +2032,3 @@ Essas melhorias podem ser implementadas em etapas posteriores.
 8. O botão Adicionar utiliza `ActionListener` para validar os campos e executar o cadastro.
 9. O botão Fornecedores do `Main.java` abre a tela de cadastro, que foi configurada como modal.
 10. O cadastro é conferido no MySQL Workbench utilizando `USE blpdv;` e `SELECT * FROM fornecedores;`.
-
-**Próxima etapa do projeto:** implementar a consulta dos fornecedores (`SELECT`) para exibir os registros cadastrados na interface do BL-PDV.
