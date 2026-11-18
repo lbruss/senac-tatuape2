@@ -1,6 +1,6 @@
-# Java — JDBC, MySQL e Interface Gráfica (BL-PDV)
+# JDBC, MySQL e Interface Gráfica (BL-PDV)
 
-# 1. Configurando o título da janela
+**Configurando o título da janela**
 
 Continuando a configuração do `JFrame` no WindowBuilder:
 
@@ -19,9 +19,9 @@ A propriedade `title` define o título que será exibido na barra superior da ja
 
 ---
 
-# 2. JDBC — Conexão entre Java e Banco de Dados
+# JDBC — Conexão entre Java e Banco de Dados
 
-## O que é JDBC?
+**O que é JDBC?**
 
 **JDBC (Java Database Connectivity)** é uma API do Java que permite que aplicações Java se comuniquem com bancos de dados.
 
@@ -37,7 +37,7 @@ Por meio do JDBC, um programa Java pode:
 
 Por exemplo, um sistema de ponto de venda (PDV) pode utilizar Java para cadastrar produtos, consultar preços, registrar vendas e armazenar informações no MySQL.
 
-### Como funciona a comunicação?
+**Como funciona a comunicação?**
 
 <box border radius="lg" padding={3} gap={1}>
   <box background="#DCEBFA" theme="light" padding={2} radius="md" align="center">
@@ -77,9 +77,9 @@ Esses componentes serão utilizados conforme o sistema for desenvolvido.
 
 ---
 
-# 3. Instalando o MySQL Connector/J
+## Instalando o MySQL Connector/J
 
-## O que é MySQL Connector/J?
+**O que é MySQL Connector/J?**
 
 O **MySQL Connector/J** é o driver JDBC oficial para comunicação entre aplicações Java e bancos de dados MySQL.
 
@@ -89,7 +89,7 @@ Pense no JDBC como uma linguagem comum de comunicação e no Connector/J como o 
 
 ## Passo a passo da instalação
 
-### 1. Acessar o site do MySQL
+**Acessar o site do MySQL**
 
 No navegador:
 
@@ -98,7 +98,7 @@ No navegador:
 3. Selecione `MySQL Community (GPL)`.
 4. Procure por `Connector/J`.
 
-### 2. Selecionar a versão
+**Selecionar a versão**
 
 Na aula, foi utilizada a versão:
 
@@ -114,7 +114,7 @@ Platform Independent
 
 Essa opção permite baixar o pacote que não está limitado a um sistema operacional específico.
 
-### 3. Baixar e extrair
+**Baixar e extrair**
 
 Baixe o arquivo ZIP e extraia seu conteúdo.
 
@@ -126,7 +126,7 @@ mysql-connector-j-8.4.0.jar
 
 A extensão `.jar` representa um pacote Java que contém classes e recursos necessários para a biblioteca.
 
-### 4. Mostrar as extensões de arquivos no Windows
+**Mostrar as extensões de arquivos no Windows**
 
 Caso o Windows não esteja mostrando `.jar`:
 
@@ -137,7 +137,7 @@ Caso o Windows não esteja mostrando `.jar`:
 
 Assim será possível identificar o arquivo correto.
 
-### 5. Adicionar o Connector/J ao projeto
+## Adicionar o Connector/J ao projeto
 
 No Eclipse:
 
@@ -149,7 +149,7 @@ No Eclipse:
 
 O driver passará a fazer parte das bibliotecas utilizadas pelo projeto.
 
-### Estrutura atual do projeto
+## Estrutura atual do projeto
 
 ```text
 blpvd
@@ -169,13 +169,13 @@ blpvd
 
 ---
 
-# 4. Criando o banco de dados no MySQL Workbench
+## Criando o banco de dados no MySQL Workbench
 
 Agora vamos preparar o banco de dados que será utilizado pelo sistema Java.
 
 Abra o MySQL Workbench e conecte-se à conexão que já estava sendo utilizada nas aulas.
 
-## 4.1 Criando o banco
+**Criando o banco**
 
 Execute o comando:
 
@@ -185,7 +185,7 @@ DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 ```
 
-### Explicação
+**Explicação**
 
 - `CREATE DATABASE`: cria um banco de dados.
 - `blpdv`: nome do banco de dados.
@@ -196,7 +196,7 @@ A collation `utf8_general_ci` é uma configuração que permite comparações de
 
 > **Atenção ao nome:** mantenha o nome do banco exatamente igual em todos os lugares. Nesta aula, utilizaremos `blpdv` no SQL e na URL do Java.
 
-## 4.2 Selecionando o banco
+**Selecionando o banco**
 
 ```sql
 USE blpdv;
@@ -208,7 +208,7 @@ Assim, não será necessário escrever o nome do banco antes de cada tabela.
 
 ---
 
-# 5. Criando a tabela fornecedores
+## Criando a tabela fornecedores
 
 Execute:
 
@@ -223,7 +223,7 @@ CREATE TABLE fornecedores (
 ) DEFAULT CHARSET = utf8;
 ```
 
-## Entendendo a estrutura da tabela
+**Entendendo a estrutura da tabela**
 
 | Campo | Tipo | Descrição |
 |---|---|---|
@@ -233,11 +233,11 @@ CREATE TABLE fornecedores (
 | `email` | `VARCHAR(50)` | E-mail do fornecedor. |
 | `site` | `VARCHAR(100)` | Endereço do site do fornecedor. |
 
-### `INT`
+**`INT`**
 
 Armazena números inteiros.
 
-### `AUTO_INCREMENT`
+**`AUTO_INCREMENT`**
 
 Faz o MySQL gerar automaticamente um novo número para o identificador conforme os registros são inseridos.
 
@@ -251,7 +251,7 @@ Exemplo:
 
 Não precisamos inserir manualmente o identificador em cada cadastro.
 
-### `VARCHAR(n)`
+**`VARCHAR(n)`**
 
 Armazena textos com tamanho variável, limitado ao número definido.
 
@@ -263,7 +263,7 @@ nome VARCHAR(50)
 
 Permite armazenar um texto com até 50 caracteres.
 
-### `NOT NULL`
+**`NOT NULL`**
 
 Indica que o campo precisa receber um valor, não podendo ficar nulo.
 
@@ -274,7 +274,7 @@ Na tabela:
 - `email` pode ficar sem valor.
 - `site` pode ficar sem valor.
 
-### `PRIMARY KEY`
+**`PRIMARY KEY`**
 
 Define a chave primária da tabela.
 
@@ -282,11 +282,11 @@ O campo `idFornecedor` identifica cada fornecedor de forma única. Dois forneced
 
 ---
 
-# 6. Criando a classe Database
+## Criando a classe Database
 
 Agora voltaremos ao Eclipse para criar a classe responsável pela conexão com o banco de dados.
 
-## Passo a passo
+**Passo a passo**
 
 1. Abra o projeto `blpvd`.
 2. Dentro de `src`, crie um Package chamado:
@@ -303,7 +303,7 @@ Database
 
 Essa classe será responsável por centralizar as informações e os métodos de conexão com o MySQL.
 
-## Código inicial
+### Código inicial
 
 ```java
 package database;
@@ -334,28 +334,28 @@ public class Database {
 
 ---
 
-# 7. Entendendo o código Database
+**Entendendo o código Database**
 
-## 7.1 Importando as classes
+**Importando as classes**
 
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
 ```
 
-### `Connection`
+**`Connection`**
 
 Representa a conexão com o banco de dados.
 
 Quando a conexão é estabelecida, podemos utilizá-la para realizar operações SQL.
 
-### `DriverManager`
+**`DriverManager`**
 
 É uma classe responsável por gerenciar os drivers JDBC e fornecer conexões com bancos de dados.
 
 ---
 
-## 7.2 Informações de conexão
+**Informações de conexão**
 
 ```java
 private String driver = "com.mysql.cj.jdbc.Driver";
@@ -410,7 +410,7 @@ Em outros ambientes, o usuário pode possuir uma senha, e ela deverá ser inform
 
 ---
 
-# 8. Método `conectar()`
+## Método `conectar()`
 
 ```java
 public Connection conectar() {
@@ -427,7 +427,7 @@ public Connection conectar() {
 
 Esse método tenta estabelecer uma conexão com o banco de dados.
 
-## 8.1 `public Connection conectar()`
+**`public Connection conectar()`**
 
 - `public`: permite que outras classes acessem o método.
 - `Connection`: define o tipo de retorno.
@@ -439,7 +439,7 @@ Se ocorrer uma falha, retorna `null`.
 
 ---
 
-## 8.2 Bloco `try`
+## Bloco `try`
 
 ```java
 try {
@@ -451,7 +451,7 @@ Como a conexão depende de várias condições, como banco ativo, driver instala
 
 ---
 
-## 8.3 Carregando o driver
+## Carregando o driver
 
 ```java
 Class.forName(driver);
@@ -471,7 +471,7 @@ Essa classe pertence ao MySQL Connector/J.
 
 ---
 
-## 8.4 Estabelecendo a conexão
+## Estabelecendo a conexão
 
 ```java
 return DriverManager.getConnection(url, user, password);
@@ -489,7 +489,7 @@ Esse objeto representa a conexão que poderá ser utilizada pela aplicação.
 
 ---
 
-## 8.5 Tratando erros
+**Tratando erros**
 
 ```java
 catch (Exception e) {
@@ -517,7 +517,7 @@ Exemplos de problemas:
 
 ---
 
-# 9. Criando o método testarConexao()
+## Criando o método testarConexao()
 
 Agora vamos adicionar um método que verifica se a conexão com o MySQL está funcionando.
 
@@ -568,7 +568,7 @@ public class Database {
 }
 ```
 
-## 9.1 Criando a conexão
+## Criando a conexão
 
 ```java
 Connection con = conectar();
@@ -582,7 +582,7 @@ Se falhar, `con` receberá `null`.
 
 ---
 
-## 9.2 Verificando se a conexão falhou
+## Verificando se a conexão falhou
 
 ```java
 if (con == null) {
@@ -604,7 +604,7 @@ O método termina imediatamente, sem tentar fechar uma conexão inexistente.
 
 ---
 
-## 9.3 Fechando a conexão
+## Fechando a conexão
 
 ```java
 con.close();
@@ -618,7 +618,7 @@ Fechar conexões evita desperdício de recursos.
 
 ---
 
-## 9.4 Retornando `true`
+## Retornando `true`
 
 ```java
 return true;
@@ -630,7 +630,7 @@ Neste exercício, isso representa que o teste de conexão foi bem-sucedido.
 
 ---
 
-## 9.5 Tratando erros ao fechar
+## Tratando erros ao fechar
 
 ```java
 catch (Exception e) {
@@ -644,7 +644,7 @@ Caso ocorra um erro durante o fechamento da conexão:
 - O erro é exibido.
 - O método retorna `false`.
 
-### Resumo do funcionamento
+**Resumo do funcionamento**
 
 | Situação | Retorno |
 |---|---|
@@ -654,11 +654,11 @@ Caso ocorra um erro durante o fechamento da conexão:
 
 ---
 
-# 10. Atualizando a classe Main
+## Atualizando a classe Main
 
 Agora vamos utilizar o método `testarConexao()` na interface gráfica para mostrar o status do banco de dados.
 
-## Código completo atualizado
+### Código completo atualizado
 
 ```java
 package view;
@@ -769,9 +769,9 @@ public class Main extends JFrame {
 
 ---
 
-# 11. Entendendo as alterações da Main
+**Entendendo as alterações da Main**
 
-## 11.1 Importando os componentes
+**Importando os componentes**
 
 ```java
 import javax.swing.JLabel;
@@ -793,7 +793,7 @@ Essas importações permitem utilizar os novos elementos visuais.
 
 ---
 
-## 11.2 Criando o objeto Database
+## Criando o objeto Database
 
 ```java
 Database db = new Database();
@@ -819,7 +819,7 @@ A variável `db` será utilizada para verificar o estado da conexão com o banco
 
 ---
 
-## 11.3 Configurando o FlatLaf
+## Configurando o FlatLaf
 
 ```java
 FlatLightLaf.setup();
@@ -833,7 +833,7 @@ Esse comando é executado antes da criação da janela.
 
 ---
 
-## 11.4 Criando a janela
+**Criando a janela**
 
 ```java
 Main frame = new Main();
@@ -848,7 +848,7 @@ Sem `setVisible(true)`, a janela seria criada, mas não apareceria na tela.
 
 ---
 
-## 11.5 Configurando o título
+**Configurando o título**
 
 ```java
 setTitle("BL-PDV");
@@ -858,7 +858,7 @@ Define o título da janela.
 
 ---
 
-## 11.6 Configurando o ícone da janela
+**Configurando o ícone da janela**
 
 ```java
 setIconImage(
@@ -870,7 +870,7 @@ setIconImage(
 
 Esse comando utiliza a imagem armazenada no projeto para definir o ícone da janela.
 
-### `Toolkit`
+**`Toolkit`**
 
 ```java
 Toolkit.getDefaultToolkit()
@@ -878,7 +878,7 @@ Toolkit.getDefaultToolkit()
 
 Obtém o Toolkit padrão do ambiente gráfico, que fornece funcionalidades relacionadas ao sistema de interface.
 
-### `getImage()`
+**`getImage()`**
 
 ```java
 .getImage(...)
@@ -886,7 +886,7 @@ Obtém o Toolkit padrão do ambiente gráfico, que fornece funcionalidades relac
 
 Obtém uma imagem a partir do caminho informado.
 
-### `Main.class.getResource()`
+**`Main.class.getResource()`**
 
 ```java
 Main.class.getResource("/img/blpvd.png")
@@ -904,7 +904,7 @@ indica que a imagem está dentro da pasta `img`, localizada na raiz dos recursos
 
 ---
 
-# 12. Criando o painel principal
+## Criando o painel principal
 
 ```java
 contentPane = new JPanel();
@@ -914,19 +914,19 @@ setContentPane(contentPane);
 contentPane.setLayout(null);
 ```
 
-## `JPanel`
+**`JPanel`**
 
 O `JPanel` é um painel utilizado para organizar e agrupar componentes dentro da janela.
 
 É nele que serão colocados os Labels, botões, campos de texto e outros elementos.
 
-## `setForeground(Color.RED)`
+**`setForeground(Color.RED)`**
 
 Define a cor de primeiro plano do painel.
 
 No caso de um painel sem texto, essa configuração pode não produzir uma alteração visual perceptível.
 
-## `EmptyBorder`
+**`EmptyBorder`**
 
 ```java
 new EmptyBorder(5, 5, 5, 5)
@@ -942,17 +942,17 @@ topo, esquerda, inferior, direita
 
 Neste exemplo, são cinco pixels em cada lado.
 
-## `setContentPane(contentPane)`
+**`setContentPane(contentPane)`**
 
 Define o painel como o conteúdo principal da janela.
 
-## `setLayout(null)`
+**`setLayout(null)`**
 
 Desativa o gerenciador de layout do painel.
 
 Nesse modo, os componentes são posicionados manualmente utilizando coordenadas e dimensões com `setBounds()`.
 
-### Cuidado
+**Cuidado**
 
 Utilizar `setLayout(null)` pode facilitar a montagem inicial pelo WindowBuilder, mas torna a interface mais dependente das posições e dimensões fixas.
 
@@ -960,9 +960,9 @@ Em projetos maiores, gerenciadores de layout costumam facilitar a adaptação da
 
 ---
 
-# 13. Criando o indicador visual do banco
+## Criando o indicador visual do banco
 
-## 13.1 JLabel para o ícone
+**JLabel para o ícone**
 
 ```java
 JLabel lblDataBase = new JLabel("");
@@ -970,7 +970,7 @@ JLabel lblDataBase = new JLabel("");
 
 Cria um Label vazio, que será utilizado para exibir o ícone do banco de dados.
 
-### `JLabel`
+**`JLabel`**
 
 Um JLabel é um componente Swing utilizado para exibir textos, imagens ou ambos.
 
@@ -1013,7 +1013,7 @@ Sem essa linha, o componente não seria incluído na janela.
 
 ---
 
-# 14. JLabel para o texto MySQL
+**JLabel para o texto MySQL**
 
 ```java
 JLabel lblMysql = new JLabel("Bruss");
@@ -1032,7 +1032,7 @@ Define as dimensões e adiciona o componente à interface.
 
 ---
 
-# 15. JLabel para o indicador de status
+**JLabel para o indicador de status**
 
 ```java
 JLabel lblStatus = new JLabel("•");
@@ -1042,7 +1042,7 @@ Cria um Label contendo um pequeno ponto.
 
 Esse ponto será utilizado como indicador visual da conexão.
 
-### Cor vermelha
+**Cor vermelha**
 
 ```java
 lblStatus.setForeground(Color.RED);
@@ -1052,7 +1052,7 @@ Define a cor do texto como vermelho.
 
 Inicialmente, o indicador está vermelho, representando visualmente uma conexão não confirmada.
 
-### Centralização
+**Centralização**
 
 ```java
 lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1060,7 +1060,7 @@ lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
 
 Centraliza horizontalmente o conteúdo dentro do JLabel.
 
-### Fonte
+**Fonte**
 
 ```java
 lblStatus.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -1072,7 +1072,7 @@ Define a fonte utilizada.
 - `Font.PLAIN`: estilo normal.
 - `16`: tamanho da fonte.
 
-### Posicionamento
+**Posicionamento**
 
 ```java
 lblStatus.setBounds(56, 538, 7, 8);
@@ -1082,7 +1082,7 @@ Define a posição e o tamanho do ponto na janela.
 
 ---
 
-# 16. Testando a conexão com o MySQL
+**Testando a conexão com o MySQL**
 
 Esse é o trecho principal da nova funcionalidade:
 
@@ -1103,7 +1103,7 @@ if (db.testarConexao() == true) {
 }
 ```
 
-## 16.1 Chamando o método
+**Chamando o método**
 
 ```java
 db.testarConexao()
@@ -1116,7 +1116,7 @@ Ele retorna um valor booleano:
 - `true`: teste bem-sucedido.
 - `false`: teste falhou.
 
-## 16.2 Condição `if`
+**Condição `if`**
 
 ```java
 if (db.testarConexao() == true)
@@ -1126,7 +1126,7 @@ Se o resultado for verdadeiro, o programa executará o bloco do `if`.
 
 Se for falso, executará o bloco do `else`.
 
-### Quando conectado
+**Quando conectado**
 
 ```java
 System.out.println("Banco Conectado");
@@ -1146,7 +1146,7 @@ lblStatus.setForeground(Color.GREEN);
 
 Altera a cor do ponto para verde.
 
-### Quando desconectado
+**Quando desconectado**
 
 ```java
 System.out.println("Erro na Conexão");
@@ -1166,7 +1166,7 @@ lblStatus.setForeground(Color.RED);
 
 Mantém o indicador visual vermelho.
 
-### Fluxo da lógica
+**Fluxo da lógica**
 
 ```mermaid
 flowchart TD
@@ -1180,11 +1180,11 @@ flowchart TD
 
 ---
 
-# 17. Ajustando o Design da interface
+**Ajustando o Design da interface**
 
 Agora vamos organizar os elementos visualmente.
 
-## 17.1 Removendo o texto inicial
+**Removendo o texto inicial**
 
 Na aba `Design`:
 
@@ -1197,7 +1197,7 @@ O texto inicial ficará vazio, mas será atualizado pelo código quando a conex�
 
 ---
 
-## 17.2 Criando o indicador de conexão
+**Criando o indicador de conexão**
 
 A interface terá:
 
@@ -1222,11 +1222,11 @@ Quando ocorrer uma falha, o ponto ficará vermelho.
 
 ---
 
-# 18. Adicionando o ícone de calendário
+**Adicionando o ícone de calendário**
 
 Agora vamos começar a adicionar informações de data à interface.
 
-## Passo 1 — Procurar a imagem
+**Passo 1 — Procurar a imagem**
 
 Procure um ícone de calendário com tamanho aproximado de:
 
@@ -1236,7 +1236,7 @@ Procure um ícone de calendário com tamanho aproximado de:
 
 Coloque a imagem na pasta `img` do projeto, junto das imagens utilizadas anteriormente.
 
-## Passo 2 — Criar um JLabel
+**Passo 2 — Criar um JLabel**
 
 Na aba `Design`:
 
@@ -1250,13 +1250,13 @@ lblCalendario
 
 O nome da variável permite identificar o componente no código Java.
 
-## Passo 3 — Remover o texto
+**Passo 3 — Remover o texto**
 
 Na propriedade `text`, apague o texto existente.
 
 O Label será utilizado para exibir somente a imagem.
 
-## Passo 4 — Configurar o ícone
+**Passo 4 — Configurar o ícone**
 
 Na propriedade `icon`:
 
@@ -1265,13 +1265,13 @@ Na propriedade `icon`:
 3. Localize a imagem do calendário na pasta `img`.
 4. Confirme.
 
-## Passo 5 — Posicionar
+**Passo 5 — Posicionar**
 
 Arraste o ícone para o canto superior direito da janela.
 
 ---
 
-# 19. Criando o JLabel da data
+**Criando o JLabel da data**
 
 Agora crie outro JLabel.
 
@@ -1291,7 +1291,7 @@ Esse componente será utilizado para exibir a data ou a data e hora do sistema n
 
 ---
 
-# 20. Estrutura atual do projeto
+**Estrutura atual do projeto**
 
 ```text
 blpvd
@@ -1325,7 +1325,7 @@ Essa separação facilita a manutenção do projeto.
 
 ---
 
-# 21. Executando e testando o projeto
+**Executando e testando o projeto**
 
 No Eclipse:
 
@@ -1356,7 +1356,7 @@ Erro na Conexão
 
 E o indicador deverá ficar vermelho.
 
-## O que verificar caso apareça desconectado?
+**O que verificar caso apareça desconectado?**
 
 - O MySQL está iniciado?
 - O banco `blpdv` foi criado?
@@ -1369,13 +1369,13 @@ E o indicador deverá ficar vermelho.
 
 ---
 
-# 22. Aprofundamento — Melhorias importantes para o projeto
+**Aprofundamento — Melhorias importantes para o projeto**
 
-### 1. O método `testarConexao()` fecha a conexão
+**1. O método `testarConexao()` fecha a conexão**
 
 Isso é adequado para um teste simples. Porém, o sistema precisará abrir conexões novamente quando for realizar operações no banco.
 
-### 2. A conexão está sendo testada ao construir a janela
+**2. A conexão está sendo testada ao construir a janela**
 
 O código realiza o teste dentro do construtor `Main()`.
 
@@ -1383,7 +1383,7 @@ Isso significa que o teste ocorre quando a janela é criada. Não é um monitora
 
 Se o MySQL desconectar depois que a janela foi aberta, o indicador não será atualizado automaticamente.
 
-### 3. `== true` é redundante
+**3. `== true` é redundante**
 
 A condição:
 
@@ -1401,17 +1401,17 @@ Ambas funcionam, pois o método retorna `boolean`.
 
 A segunda forma é mais comum em Java.
 
-### 4. O status verde representa um teste bem-sucedido
+**4. O status verde representa um teste bem-sucedido**
 
 O indicador verde mostra que o teste de conexão realizado naquele momento foi bem-sucedido. Ele não garante que o banco permanecerá conectado para sempre.
 
-### 5. A senha do banco
+**5. A senha do banco**
 
 Em projetos reais, devemos evitar deixar credenciais expostas no código-fonte. A forma de armazenamento depende do ambiente e da configuração da aplicação.
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. JDBC é uma API Java utilizada para comunicação com bancos de dados.
 2. `DriverManager` auxilia na obtenção de conexões.
