@@ -1,10 +1,10 @@
-# 📚 Java — BL-PDV: Janela Sobre, Cadastro de Fornecedores e Model
+# BL-PDV: Janela Sobre, Cadastro de Fornecedores e Model
 
-# 1. Finalizando a janela Sobre
+**Finalizando a janela Sobre**
 
 Na classe `Sobre.java`, vamos adicionar informações complementares do projeto, como o ícone da licença MIT, o ícone do GitHub, o endereço do repositório e um botão para fechar a janela.
 
-## 1.1 JLabel da licença MIT
+**JLabel da licença MIT**
 
 Adicione um novo `JLabel` na janela Sobre.
 
@@ -18,7 +18,7 @@ Procure um ícone relacionado à licença MIT com dimensão de 32 × 32 pixels, 
 
 A propriedade `text` deve permanecer vazia.
 
-### O que é a licença MIT?
+**O que é a licença MIT?**
 
 A MIT License é uma licença de software livre e de código aberto que permite, de forma ampla, utilizar, modificar e distribuir o software, inclusive comercialmente, desde que suas condições sejam respeitadas.
 
@@ -26,7 +26,7 @@ A MIT License é uma licença de software livre e de código aberto que permite,
 
 ---
 
-## 1.2 JLabel do GitHub
+**JLabel do GitHub**
 
 Adicione outro `JLabel`.
 
@@ -46,7 +46,7 @@ Esse JLabel será utilizado apenas para exibir o ícone do GitHub.
 
 ---
 
-## 1.3 JLabel do repositório
+**JLabel do repositório**
 
 Adicione outro JLabel.
 
@@ -63,7 +63,7 @@ Posteriormente, vamos adicionar um evento de clique para abrir o endereço no na
 
 ---
 
-## 1.4 JButton OK
+**JButton OK**
 
 Adicione um `JButton`.
 
@@ -78,7 +78,7 @@ Esse botão será responsável por fechar a janela Sobre.
 
 ---
 
-# 2. Código inicial da classe Sobre.java
+## Código inicial da classe Sobre.java
 
 Depois de adicionar os componentes no Design, o código fica assim:
 
@@ -185,7 +185,7 @@ public class Sobre extends JDialog {
 }
 ```
 
-### Observação sobre os blocos entre chaves
+**Observação sobre os blocos entre chaves**
 
 Você verá alguns trechos assim:
 
@@ -205,11 +205,11 @@ Também permitem que variáveis locais criadas dentro desses blocos tenham um es
 
 ---
 
-# 3. Adicionando o evento ao botão OK
+## Adicionando o evento ao botão OK
 
 Agora vamos fazer o botão funcionar.
 
-### Procedimento no WindowBuilder
+## Procedimento no WindowBuilder
 
 1. Abra `Sobre.java`.
 2. Clique em `Design`.
@@ -227,7 +227,7 @@ Dentro dele, adicionamos:
 dispose();
 ```
 
-### O que é dispose()?
+**O que é dispose()?**
 
 O método `dispose()` fecha e libera os recursos gráficos utilizados pela janela.
 
@@ -245,7 +245,7 @@ btnOK.addActionListener(new ActionListener() {
 });
 ```
 
-### O que é ActionListener?
+**O que é ActionListener?**
 
 `ActionListener` é uma interface utilizada para receber e tratar eventos de ação.
 
@@ -257,7 +257,7 @@ Um evento de ação pode ocorrer quando:
 
 O método `actionPerformed()` é chamado quando a ação é disparada.
 
-### O que é ActionEvent?
+**O que é ActionEvent?**
 
 O `ActionEvent` representa o evento de ação que aconteceu.
 
@@ -271,7 +271,7 @@ O parâmetro `e` contém informações sobre o evento recebido.
 
 ---
 
-## 3.1 Centralizando a janela
+## Centralizando a janela
 
 Dentro do construtor `Sobre()`, adicione:
 
@@ -287,7 +287,7 @@ Isso evita que a janela apareça em uma posição aleatória definida pelos valo
 
 ---
 
-# 4. Código da janela Sobre com botão funcional
+### Código da janela Sobre com botão funcional
 
 ```java
 package view;
@@ -409,7 +409,7 @@ public class Sobre extends JDialog {
 
 ---
 
-# 5. Transformando o endereço do GitHub em um link
+## Transformando o endereço do GitHub em um link
 
 Agora vamos permitir que o usuário clique no endereço do repositório para abrir o GitHub no navegador padrão.
 
@@ -421,7 +421,7 @@ Para isso, utilizaremos:
 - `Desktop`: permite interagir com recursos do sistema operacional.
 - `URI`: representa um endereço de recurso.
 
-## 5.1 Importando as classes
+**Importando as classes**
 
 Adicione:
 
@@ -432,7 +432,7 @@ import java.awt.event.MouseEvent;
 import java.net.URI;
 ```
 
-## 5.2 Adicionando o evento ao JLabel
+**Adicionando o evento ao JLabel**
 
 No Design:
 
@@ -458,7 +458,7 @@ lblRepositorio.addMouseListener(new MouseAdapter() {
 });
 ```
 
-### Explicando
+**Explicando**
 
 `addMouseListener()` adiciona um ouvinte de eventos de mouse ao JLabel.
 
@@ -476,7 +476,7 @@ Esse comando chama o método `link()` que criamos para abrir o endereço.
 
 ---
 
-# 6. Criando o método link()
+## Criando o método link()
 
 No final da classe `Sobre`, mas fora do construtor, adicione:
 
@@ -503,9 +503,9 @@ private void link(String url) {
 }
 ```
 
-## Explicação detalhada
+**Explicação detalhada**
 
-### 1. Criando o método
+**Criando o método**
 
 ```java
 private void link(String url)
@@ -524,7 +524,7 @@ link("https://github.com/lbruss");
 
 O endereço é enviado para o método através do parâmetro `url`.
 
-### 2. Obtendo o Desktop
+## Obtendo o Desktop
 
 ```java
 Desktop desktop = Desktop.getDesktop();
@@ -539,7 +539,7 @@ Por exemplo:
 - Abrir e-mails;
 - Abrir outros recursos suportados pelo sistema.
 
-### 3. Criando uma URI
+## Criando uma URI
 
 ```java
 URI uri = new URI(url);
@@ -555,7 +555,7 @@ https://github.com/lbruss
 
 A URI será utilizada para indicar ao sistema operacional qual endereço deverá ser aberto.
 
-### 4. Abrindo o navegador
+**Abrindo o navegador**
 
 ```java
 desktop.browse(uri);
@@ -563,7 +563,7 @@ desktop.browse(uri);
 
 Esse comando solicita ao sistema operacional que abra o endereço utilizando o navegador padrão.
 
-### 5. Tratando erros
+**Tratando erros**
 
 ```java
 catch (Exception e) {
@@ -579,7 +579,7 @@ Podem ocorrer erros se o ambiente não permitir abrir o navegador ou se o endere
 
 ---
 
-# 7. Código final da classe Sobre.java
+### Código final da classe Sobre.java
 
 ```java
 package view;
@@ -739,11 +739,11 @@ public class Sobre extends JDialog {
 
 ---
 
-# 8. Integrando a janela Sobre à Main.java
+## Integrando a janela Sobre à Main.java
 
 Agora vamos fazer o botão Sobre da janela principal abrir a classe `Sobre`.
 
-## 8.1 Criando o evento
+**Criando o evento**
 
 No Eclipse:
 
@@ -756,13 +756,13 @@ No Eclipse:
 
 O Eclipse adicionará os imports e o código necessário para tratar o clique.
 
-## 8.2 Convert Field to Local
+## Convert Field to Local
 
 Selecione o botão Sobre no Design.
 
 Nas propriedades, utilize a opção **Convert Field to Local**.
 
-### O que significa?
+**O que significa?**
 
 Uma variável de campo pertence à classe e pode ser acessada por diferentes métodos da classe, dependendo de sua visibilidade.
 
@@ -774,7 +774,7 @@ O Eclipse faz essa conversão para reduzir a quantidade de variáveis de campo d
 
 ---
 
-## 8.3 Código do evento do botão Sobre
+## Código do evento do botão Sobre
 
 ```java
 // EVENTO BOTÃO SOBRE
@@ -790,7 +790,7 @@ btnNewButton.addActionListener(new ActionListener() {
 });
 ```
 
-### Explicação
+**Explicação**
 
 ```java
 Sobre sobre = new Sobre();
@@ -806,7 +806,7 @@ Torna a janela visível.
 
 Quando o usuário clicar no botão Sobre da janela principal, uma nova janela Sobre será criada e exibida.
 
-### Fluxo da execução
+**Fluxo da execução**
 
 ```text
 Main.java
@@ -827,7 +827,7 @@ Janela Sobre aberta
 
 ---
 
-# 9. Código atualizado da Main.java
+### Código atualizado da Main.java
 
 ```java
 package view;
@@ -1028,11 +1028,11 @@ public class Main extends JFrame {
 
 ---
 
-# 10. Criando a janela de fornecedores
+## Criando a janela de fornecedores
 
 Agora vamos criar uma nova janela para cadastrar e futuramente gerenciar os fornecedores do BL-PDV.
 
-## Criando a classe frmFornecedor
+**Criando a classe frmFornecedor**
 
 No Eclipse:
 
@@ -1049,7 +1049,7 @@ A classe será criada no pacote `view`.
 
 ---
 
-## 10.1 Configurando o Design
+**Configurando o Design**
 
 Na aba Design:
 
@@ -1062,7 +1062,7 @@ Na aba Design:
 - Selecione o `getContentPane`.
 - Configure `layout` para `absolute`.
 
-### resizable
+**resizable**
 
 Determina se o usuário poderá redimensionar a janela.
 
@@ -1071,7 +1071,7 @@ Determina se o usuário poderá redimensionar a janela.
 
 ---
 
-# 11. Criando os componentes do cadastro
+**Criando os componentes do cadastro**
 
 O formulário será composto por campos para armazenar informações de fornecedores.
 
@@ -1083,7 +1083,7 @@ Os dados serão:
 - E-mail;
 - Site.
 
-## 11.1 JLabel ID
+**JLabel ID**
 
 Adicione um JLabel.
 
@@ -1097,7 +1097,7 @@ Configure:
 
 Depois, utilize `Convert Field to Local` conforme a orientação da aula.
 
-## 11.2 JTextField ID
+**JTextField ID**
 
 Adicione um `JTextField`.
 
@@ -1114,7 +1114,7 @@ Como o ID será gerado automaticamente pelo banco de dados, o usuário não deve
 
 ---
 
-## 11.3 JLabel Nome
+**JLabel Nome**
 
 Adicione um JLabel.
 
@@ -1126,7 +1126,7 @@ Configure:
 | `text` | Nome |
 | `enable` | `false` |
 
-## 11.4 JTextField Nome
+**JTextField Nome**
 
 Adicione um `JTextField`.
 
@@ -1140,7 +1140,7 @@ Esse campo permitirá digitar o nome do fornecedor.
 
 ---
 
-## 11.5 Telefone
+**Telefone**
 
 Adicione um JTextField:
 
@@ -1158,7 +1158,7 @@ Adicione também um JLabel:
 
 ---
 
-## 11.6 E-mail
+**E-mail**
 
 Adicione um JTextField:
 
@@ -1176,7 +1176,7 @@ Adicione um JLabel:
 
 ---
 
-## 11.7 Site
+**Site**
 
 Adicione um JTextField:
 
@@ -1194,7 +1194,7 @@ Adicione um JLabel:
 
 ---
 
-# 12. O que é JTextField?
+**O que é JTextField?**
 
 O `JTextField` é um componente Swing utilizado para receber ou exibir textos em uma única linha.
 
@@ -1207,7 +1207,7 @@ Exemplos:
 - Código;
 - Site.
 
-### Exemplo
+**Exemplo**
 
 ```java
 JTextField textNome = new JTextField();
@@ -1233,7 +1233,7 @@ Para limpar:
 textNome.setText("");
 ```
 
-### columns
+**columns**
 
 ```java
 textNome.setColumns(10);
@@ -1251,7 +1251,7 @@ a largura e a altura reais do componente são definidas pelo `setBounds()`.
 
 ---
 
-# 13. Código final da classe frmFornecedor.java
+### Código final da classe frmFornecedor.java
 
 ```java
 package view;
@@ -1374,7 +1374,7 @@ public class frmFornecedor extends JDialog {
 
 ---
 
-# 14. Criando o pacote model
+## Criando o pacote model
 
 Agora vamos criar um novo pacote dentro do `src`.
 
@@ -1388,7 +1388,7 @@ No Eclipse:
 
 O pacote `model` será responsável por armazenar as classes que representam os dados do sistema.
 
-## O que é Model?
+**O que é Model?**
 
 Em aplicações organizadas em camadas, o Model representa os dados e as regras relacionadas a esses dados.
 
@@ -1406,7 +1406,7 @@ Essa organização facilita manutenção, compreensão e evolução do projeto.
 
 ---
 
-# 15. Criando a classe Fornecedor
+## Criando a classe Fornecedor
 
 Dentro do pacote `model`:
 
@@ -1418,7 +1418,7 @@ Dentro do pacote `model`:
 
 A classe `Fornecedor` será responsável por representar os dados de um fornecedor.
 
-## 15.1 Atributos
+**Atributos**
 
 ```java
 private int idFornecedor;
@@ -1438,7 +1438,7 @@ Esses atributos correspondem às informações da tabela `fornecedores` criada a
 | `email` | `email` | VARCHAR |
 | `site` | `site` | VARCHAR |
 
-### Por que os atributos são private?
+**Por que os atributos são private?**
 
 Utilizamos `private` para impedir que outras classes acessem diretamente os atributos.
 
@@ -1448,11 +1448,11 @@ Em vez de acessar diretamente os atributos, outras classes utilizam métodos pú
 
 ---
 
-# 16. Getters e Setters
+## Getters e Setters
 
 A classe `Fornecedor` possui métodos chamados getters e setters.
 
-## Getter
+**Getter**
 
 O Getter permite obter o valor armazenado em um atributo.
 
@@ -1474,7 +1474,7 @@ fornecedor.getNome();
 
 ela recebe o valor armazenado no atributo `nome`.
 
-## Setter
+**Setter**
 
 O Setter permite alterar o valor de um atributo.
 
@@ -1486,7 +1486,7 @@ public void setNome(String nome) {
 }
 ```
 
-### Entendendo o this
+**Entendendo o this**
 
 No código:
 
@@ -1505,7 +1505,7 @@ Assim, o valor recebido pelo parâmetro é armazenado no atributo da classe.
 
 ---
 
-# 17. Código completo da classe Fornecedor.java
+### Código completo da classe Fornecedor.java
 
 ```java
 package model;
@@ -1564,7 +1564,7 @@ public class Fornecedor {
 
 ---
 
-# 18. Utilizando a classe Fornecedor
+## Utilizando a classe Fornecedor
 
 A classe criada ainda não está conectada diretamente ao banco de dados.
 
@@ -1572,7 +1572,7 @@ Ela apenas representa os dados de um fornecedor dentro do Java.
 
 Podemos criar um objeto e armazenar informações nele.
 
-### Exemplo
+**Exemplo**
 
 ```java
 Fornecedor fornecedor = new Fornecedor();
@@ -1594,7 +1594,7 @@ System.out.println(fornecedor.getEmail());
 System.out.println(fornecedor.getSite());
 ```
 
-### Resultado
+**Resultado**
 
 ```text
 Loja ABC
@@ -1607,7 +1607,7 @@ O atributo `idFornecedor` não foi definido manualmente nesse exemplo. Quando o 
 
 ---
 
-# 19. Relação entre View, Model e Database
+**Relação entre View, Model e Database**
 
 Neste projeto, estamos começando a separar responsabilidades.
 
@@ -1645,23 +1645,7 @@ Posteriormente, essas partes serão integradas para que os dados digitados no fo
 
 ---
 
-## ⚠️ Observações importantes sobre o código da aula
-
-### 1. Nome da classe `frmFornecedor`
-
-Na aula, a classe foi criada com o nome `frmFornecedor`.
-
-O Java permite esse nome, porém a convenção de nomenclatura recomenda nomes de classes começando com letra maiúscula e utilizando CamelCase.
-
-Exemplo de nomenclatura convencional:
-
-```java
-FrmFornecedor
-```
-
-Como estamos acompanhando o projeto e o nome definido na aula, mantivemos `frmFornecedor`.
-
-### 2. JLabel desabilitados
+**JLabel desabilitados**
 
 No código, os labels recebem:
 
@@ -1673,7 +1657,7 @@ Isso pode fazer com que o texto fique visualmente desabilitado, dependendo do Lo
 
 Um JLabel normalmente não precisa ser desabilitado para impedir edição, porque ele não é um campo editável.
 
-### 3. Centralização das janelas
+**Centralização das janelas**
 
 Tanto `Sobre` quanto `frmFornecedor` utilizam:
 
@@ -1683,7 +1667,7 @@ setLocationRelativeTo(null);
 
 Isso centraliza as janelas na tela.
 
-### 4. O cadastro ainda não grava no banco
+**O cadastro ainda não grava no banco**
 
 A janela `frmFornecedor` possui os campos visuais, mas ainda não realiza operações SQL.
 
@@ -1698,7 +1682,7 @@ O próximo passo será integrar esses componentes para realizar operações de c
 
 ---
 
-# 🧠 Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 | Código / conceito | Função |
 |---|---|
@@ -1723,7 +1707,7 @@ O próximo passo será integrar esses componentes para realizar operações de c
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. `dispose()` fecha a janela atual e libera recursos gráficos.
 2. `ActionListener` trata eventos de ação, como cliques em botões.
