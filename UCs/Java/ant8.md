@@ -8,7 +8,7 @@ Também vamos aprender a preencher um `JComboBox` com os fornecedores cadastrado
 
 ---
 
-# 1. Criando a tela de produtos (`frmProduto`)
+## Criando a tela de produtos (`frmProduto`)
 
 Primeiro, vamos criar a interface gráfica que será utilizada para cadastrar produtos.
 
@@ -20,7 +20,7 @@ frmProduto
 
 Essa classe será responsável pela tela de cadastro de produtos e utilizará `JDialog`, assim como a tela de fornecedores.
 
-## 1.1. Adicionando o botão de cadastrar produto
+## Adicionando o botão de cadastrar produto
 
 Na pasta `img` do projeto, coloque um ícone de adicionar produto com tamanho de **64 × 64 pixels**.
 
@@ -69,7 +69,7 @@ getContentPane().add(btnAdicionarProduto);
 
 **Observação:** o caminho `/img/addproduto.jpg` precisa corresponder exatamente ao nome e à extensão do arquivo colocado na pasta `img`.
 
-## 1.2. Configurando o FlatLaf e a posição da janela
+**Configurando o FlatLaf e a posição da janela**
 
 No método `main`, utilizamos:
 
@@ -89,7 +89,7 @@ Essa instrução centraliza a janela na tela.
 
 Atenção à sintaxe: o correto é `setLocationRelativeTo(null);`, sem parênteses adicionais no final.
 
-## 1.3. Configurando os validadores dos campos
+## Configurando os validadores dos campos
 
 Vamos utilizar a classe `Validador`, criada anteriormente, para limitar a quantidade de caracteres e controlar quais tipos de dados podem ser digitados.
 
@@ -124,7 +124,7 @@ Entenda o funcionamento:
 
 Outro detalhe: o validador de texto não impede que o usuário digite números. Ele apenas limita o tamanho do conteúdo.
 
-## 1.4. Estrutura dos campos da tela
+**Estrutura dos campos da tela**
 
 A tela terá os seguintes campos:
 
@@ -146,7 +146,7 @@ O `JComboBox` será utilizado para selecionar um fornecedor existente, evitando 
 
 ---
 
-# 2. Criando a classe Model `Produto`
+## Criando a classe Model `Produto`
 
 Agora vamos criar a classe responsável por representar os produtos dentro do sistema.
 
@@ -158,7 +158,7 @@ Produto
 
 Essa classe armazenará os atributos de um produto e disponibilizará métodos getters e setters para acessar e modificar seus valores.
 
-## 2.1. Código da classe Produto
+### Código da classe Produto
 
 ```java
 package model;
@@ -252,7 +252,7 @@ public class Produto {
 
 **Correção de nomenclatura:** no código original, o atributo estava escrito como `quatidade`. O correto é `quantidade`, assim como o método `getQuantidade()`.
 
-## 2.2. Entendendo os atributos
+**Entendendo os atributos**
 
 | Atributo | Tipo | Significado |
 |---|---|---|
@@ -274,7 +274,7 @@ Além disso, pode começar com zero. Se utilizássemos `int`, os zeros à esquer
 
 Por isso, `String` é mais adequado.
 
-## 2.3. Por que utilizamos getters e setters?
+**Por que utilizamos getters e setters?**
 
 Os atributos são `private`, portanto não podem ser acessados diretamente de outras classes.
 
@@ -294,7 +294,7 @@ Isso faz parte do princípio de **encapsulamento** da Programação Orientada a 
 
 ---
 
-# 3. Criando a classe ProdutoController
+## Criando a classe ProdutoController
 
 Agora vamos criar a classe responsável por controlar as operações relacionadas aos produtos.
 
@@ -318,7 +318,7 @@ public class ProdutoController {
 }
 ```
 
-## 3.1. Entendendo o código
+**Entendendo o código**
 
 ```java
 import database.Database;
@@ -338,7 +338,7 @@ Com esse objeto, futuramente poderemos utilizar os métodos de conexão para exe
 
 ---
 
-# 4. Conectando as classes à tela frmProduto
+## Conectando as classes à tela frmProduto
 
 Agora precisamos fazer a tela de produtos ter acesso às classes que criamos.
 
@@ -364,7 +364,7 @@ Fornecedor fornecedor = new Fornecedor();
 Produto produto = new Produto();
 ```
 
-## 4.1. Qual é a função de cada objeto?
+**Qual é a função de cada objeto?**
 
 | Objeto | Classe | Responsabilidade |
 |---|---|---|
@@ -383,13 +383,13 @@ Esse tipo de organização facilita a manutenção e a evolução do sistema.
 
 ---
 
-# 5. Preenchendo o JComboBox com os fornecedores
+## Preenchendo o JComboBox com os fornecedores
 
 Agora vamos implementar uma funcionalidade importante: carregar automaticamente os fornecedores cadastrados no banco de dados dentro do `JComboBox`.
 
 Assim, ao cadastrar um produto, poderemos selecionar qual fornecedor está relacionado a ele.
 
-## 5.1. Importando ArrayList
+**Importando ArrayList**
 
 No início de `frmProduto`, adicione:
 
@@ -401,7 +401,7 @@ O `ArrayList` permite armazenar uma coleção de objetos em uma lista dinâmica.
 
 Neste caso, ele será utilizado para receber todos os fornecedores retornados pelo Controller.
 
-## 5.2. Criando o evento do JComboBox
+## Criando o evento do JComboBox
 
 No WindowBuilder:
 
@@ -428,7 +428,7 @@ if (selecionado != null && !selecionado.equals("Selecione")) {
 }
 ```
 
-## 5.3. Entendendo o evento
+**Entendendo o evento**
 
 Primeiro, recuperamos o item selecionado:
 
@@ -520,7 +520,7 @@ O campo `ID Fornecedor` será preenchido automaticamente com:
 
 Isso permite que o sistema associe o produto ao fornecedor correto utilizando o identificador dele.
 
-## 5.4. Criando o método carregarFornecedor()
+## Criando o método carregarFornecedor()
 
 Agora precisamos criar um método que consulte os fornecedores no banco de dados e preencha o `JComboBox`.
 
@@ -546,7 +546,7 @@ private void carregarFornecedor() {
 }
 ```
 
-### Entendendo o método
+**Entendendo o método**
 
 **1. Remover os itens existentes**
 
@@ -607,7 +607,7 @@ Selecione
 3 - Tech Solutions
 ```
 
-## 5.5. Chamando o método no construtor
+## Chamando o método no construtor
 
 Dentro do construtor `frmProduto()`, depois de criar os componentes da interface, adicione:
 
@@ -621,7 +621,7 @@ Assim, quando a tela for aberta, o sistema executará o método e carregará aut
 
 ---
 
-# 6. Criando o método listarFornecedores() no FornecedorController
+## Criando o método listarFornecedores() no FornecedorController
 
 O método `carregarFornecedor()` depende de uma operação que ainda não existe no `FornecedorController`.
 
@@ -638,7 +638,7 @@ import java.util.ArrayList;
 
 Alguns desses imports já podem existir na classe por causa dos métodos anteriores.
 
-## 6.1. Código do método listarFornecedores()
+### Código do método listarFornecedores()
 
 Adicione dentro da classe `FornecedorController`:
 
@@ -697,9 +697,9 @@ return lista;
 
 Assim, o método devolve a lista que acabou de preencher.
 
-## 6.2. Entendendo o método passo a passo
+**Entendendo o método passo a passo**
 
-### Criando a lista
+## Criando a lista
 
 ```java
 ArrayList<Fornecedor> lista = new ArrayList<>();
@@ -709,7 +709,7 @@ Cria uma lista vazia que armazenará objetos da classe `Fornecedor`.
 
 O tipo `Fornecedor` indica que essa lista armazenará somente objetos dessa classe.
 
-### Preparando a consulta SQL
+**Preparando a consulta SQL**
 
 ```sql
 select idFornecedor, nome
@@ -726,7 +726,7 @@ O comando `ORDER BY nome` organiza os resultados em ordem alfabética crescente,
 
 Não precisamos consultar telefone, e-mail ou site porque a tela de produtos precisa apenas do ID e do nome para preencher o `JComboBox`.
 
-### Abrindo a conexão
+**Abrindo a conexão**
 
 ```java
 Connection con = database.conectar();
@@ -734,7 +734,7 @@ Connection con = database.conectar();
 
 Solicita uma conexão com o banco de dados por meio da classe `Database`.
 
-### Preparando a instrução SQL
+**Preparando a instrução SQL**
 
 ```java
 PreparedStatement stmt = con.prepareStatement(sql);
@@ -744,7 +744,7 @@ Prepara a consulta SQL para ser executada.
 
 **Observação:** no código original foi utilizado `prepareCall(sql)`. Para uma consulta SQL comum como essa, o mais adequado é `prepareStatement(sql)`. O método `prepareCall()` é destinado principalmente a chamadas de procedimentos armazenados (*stored procedures*).
 
-### Executando a consulta
+**Executando a consulta**
 
 ```java
 ResultSet rs = stmt.executeQuery();
@@ -754,7 +754,7 @@ Executa o `SELECT` e recebe os registros encontrados em um objeto `ResultSet`.
 
 O `ResultSet` permite percorrer os resultados retornados pelo banco.
 
-### Percorrendo os registros
+**Percorrendo os registros**
 
 ```java
 while (rs.next()) {
@@ -766,7 +766,7 @@ O `while` continuará executando enquanto houver registros.
 
 Diferentemente de um `if`, que executa seu bloco apenas uma vez, o `while` permite processar todos os fornecedores encontrados.
 
-### Criando um objeto Fornecedor
+## Criando um objeto Fornecedor
 
 ```java
 Fornecedor fornecedor = new Fornecedor();
@@ -785,7 +785,7 @@ fornecedor.setNome(rs.getString("nome"));
 - `getInt()` recupera um valor numérico inteiro.
 - `getString()` recupera um valor textual.
 
-### Adicionando o objeto à lista
+**Adicionando o objeto à lista**
 
 ```java
 lista.add(fornecedor);
@@ -795,7 +795,7 @@ Adiciona o fornecedor atual à lista.
 
 O processo se repete até que todos os registros sejam percorridos.
 
-### Fechando as conexões
+**Fechando as conexões**
 
 ```java
 rs.close();
@@ -819,7 +819,7 @@ Devolve a lista preenchida para quem chamou o método.
 
 ---
 
-# 7. Entendendo a comunicação entre as classes
+**Entendendo a comunicação entre as classes**
 
 Agora temos uma sequência de comunicação entre três partes do sistema.
 
@@ -900,13 +900,13 @@ No código original, a comparação estava com `"Selecionado"`, o que é diferen
 
 Se os textos não forem iguais, a condição poderá interpretar a opção padrão como se fosse um fornecedor válido.
 
-## 8.2. Ordem de inicialização dos componentes
+**Ordem de inicialização dos componentes**
 
 O `textIDFornecedor` precisa existir antes de o evento do `cboFornecedor` tentar utilizá-lo.
 
 No código da aula, o método `carregarFornecedor()` é chamado no final do construtor, depois da criação dos campos. Isso evita que o carregamento inicial tente acessar um campo ainda não inicializado.
 
-## 8.3. Tratamento de erros na conexão
+**Tratamento de erros na conexão**
 
 O método `listarFornecedores()` captura exceções e imprime o erro no console:
 
@@ -920,7 +920,7 @@ Isso ajuda a identificar problemas durante o desenvolvimento, mas não apresenta
 
 Em uma evolução futura, podemos implementar um tratamento de erros mais completo e utilizar `try-with-resources` para garantir o fechamento dos recursos mesmo quando ocorre uma exceção.
 
-## 8.4. O campo ID Fornecedor não deve ser digitado manualmente
+**O campo ID Fornecedor não deve ser digitado manualmente**
 
 O campo:
 
@@ -934,21 +934,21 @@ Isso é adequado porque o ID deve corresponder ao fornecedor realmente seleciona
 
 ---
 
-# 9. Testando a funcionalidade
+**Testando a funcionalidade**
 
 Agora vamos verificar se a integração entre a tela de produtos e o cadastro de fornecedores está funcionando.
 
-### Passo 1 — Verificar os fornecedores
+**Passo 1 — Verificar os fornecedores**
 
 Abra o `Main.java` e execute o sistema.
 
 Entre na opção **Fornecedores** e confira se os fornecedores cadastrados aparecem corretamente.
 
-### Passo 2 — Abrir a tela de produtos
+**Passo 2 — Abrir a tela de produtos**
 
 Volte à tela principal e clique em **Produtos**.
 
-### Passo 3 — Verificar o JComboBox
+**Passo 3 — Verificar o JComboBox**
 
 Na tela de produtos, abra a lista de fornecedores.
 
@@ -963,7 +963,7 @@ Selecione
 3 - Tech Solutions
 ```
 
-### Passo 4 — Testar a seleção
+**Passo 4 — Testar a seleção**
 
 Selecione um fornecedor.
 
@@ -977,7 +977,7 @@ Exemplo:
 | `2 - Informática Brasil` | `2` |
 | `3 - Tech Solutions` | `3` |
 
-### Passo 5 — Testar a opção padrão
+**Passo 5 — Testar a opção padrão**
 
 Selecione novamente a opção `Selecione`.
 
@@ -987,7 +987,7 @@ O campo `ID Fornecedor` deverá ficar vazio.
 
 ---
 
-# 10. Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. A classe `frmProduto` representa a interface gráfica do cadastro de produtos.
 2. O FlatLaf permite utilizar um tema escuro nos componentes Swing.
@@ -1001,5 +1001,3 @@ O campo `ID Fornecedor` deverá ficar vazio.
 10. O evento `actionPerformed` recupera o ID do fornecedor selecionado e preenche o campo correspondente.
 
 ---
-
-**Próxima etapa:** implementar o cadastro de produtos no banco de dados, utilizando os dados da tela `frmProduto`, a classe `Produto` e o `ProdutoController`.
