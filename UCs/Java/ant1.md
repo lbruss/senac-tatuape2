@@ -1,7 +1,5 @@
 # Arrays (Vetores), ArrayList e Interface Gráfica (Swing) (Indrodução do Projeto BL-PDV)
 
-# Array (Vetor)
-
 **O que é um Array?**
 
 Um **Array**, também chamado de vetor, é uma estrutura de dados que permite armazenar vários valores em uma única variável, organizados por posições chamadas **índices**.
