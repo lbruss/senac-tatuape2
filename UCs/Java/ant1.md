@@ -1,10 +1,8 @@
-# PADRÃO DEFINITIVO DAS MINHAS ANOTAÇÕES DE TI
+# Arrays (Vetores), ArrayList e Interface Gráfica (Swing) (Indrodução do Projeto BL-PDV)
 
-# Java — Arrays (Vetores), ArrayList e Interface Gráfica (Swing)
+# Array (Vetor)
 
-# 1. Array (Vetor)
-
-## O que é um Array?
+**O que é um Array?**
 
 Um **Array**, também chamado de vetor, é uma estrutura de dados que permite armazenar vários valores em uma única variável, organizados por posições chamadas **índices**.
 
@@ -26,7 +24,7 @@ String[] carros = {"Ferrari", "Camaro", "Fusca"};
 
 Assim, vários valores são armazenados dentro de uma única estrutura chamada `carros`.
 
-### Características do Array
+**Características do Array**
 
 - Armazena vários valores.
 - Possui índices numéricos.
@@ -34,7 +32,7 @@ Assim, vários valores são armazenados dentro de uma única estrutura chamada `
 - Seu tamanho é definido na criação e não pode ser aumentado ou diminuído posteriormente.
 - Os elementos armazenados possuem um tipo definido.
 
-### Tipos de estruturas vistos na aula
+**Tipos de estruturas vistos na aula**
 
 | Estrutura | Característica |
 |---|---|
@@ -44,7 +42,7 @@ Assim, vários valores são armazenados dentro de uma única estrutura chamada `
 
 ---
 
-# 2. Criando o projeto Vetor no Eclipse
+## Criando o projeto Vetor no Eclipse
 
 Antes de começar:
 
@@ -54,7 +52,7 @@ Antes de começar:
 
 Fechar projetos que não estão sendo utilizados ajuda a organizar o ambiente de trabalho.
 
-### Criando o projeto
+**Criando o projeto**
 
 1. Crie um novo `Java Project`.
 2. Coloque o nome `Vetor`.
@@ -64,9 +62,9 @@ Fechar projetos que não estão sendo utilizados ajuda a organizar o ambiente de
 
 ---
 
-# 3. Classe Vetor1 — Trabalhando com Arrays
+**Classe Vetor1 — Trabalhando com Arrays**
 
-## Código completo
+### Código completo
 
 ```java
 package Vetor;
@@ -107,7 +105,7 @@ public class Vetor1 {
 }
 ```
 
-## 3.1 Criando o Array
+**Criando o Array**
 
 ```java
 String[] carros = {
@@ -131,7 +129,7 @@ Vamos destrinchar:
 
 O Array foi criado contendo seis carros.
 
-### Visualizando os índices
+**Visualizando os índices**
 
 | Índice | Valor |
 |---:|---|
@@ -148,7 +146,7 @@ Por isso, um Array com seis elementos possui índices de `0` até `5`.
 
 ---
 
-## 3.2 Descobrindo o tamanho do Array
+**Descobrindo o tamanho do Array**
 
 ```java
 System.out.println("Tamanho do array: " + carros.length);
@@ -170,7 +168,7 @@ Resultado:
 Tamanho do array: 6
 ```
 
-### Diferença importante
+## Diferença importante
 
 No Array, utilizamos:
 
@@ -188,7 +186,7 @@ O Array utiliza o atributo `length`, enquanto o ArrayList utiliza o método `siz
 
 ---
 
-## 3.3 Acessando um elemento pelo índice
+**Acessando um elemento pelo índice**
 
 ```java
 System.out.println("Carro: " + carros[3]);
@@ -204,7 +202,7 @@ Portanto, o resultado será:
 Carro: combi
 ```
 
-### Como acessar cada posição?
+**Como acessar cada posição?**
 
 ```java
 carros[0] // ferrari
@@ -219,7 +217,7 @@ O índice permite acessar diretamente um elemento sem precisar percorrer todos o
 
 ---
 
-## 3.4 Modificando um elemento do Array
+**Modificando um elemento do Array**
 
 ```java
 carros[3] = "gol";
@@ -249,7 +247,7 @@ Resultado:
 Carro: gol
 ```
 
-### Atenção
+**Atenção**
 
 Modificar um elemento não significa adicionar um novo elemento.
 
@@ -257,7 +255,7 @@ O Array continua tendo o mesmo tamanho. Estamos apenas substituindo um valor já
 
 ---
 
-## 3.5 Percorrendo o Array com `for`
+## Percorrendo o Array com `for`
 
 ```java
 for (int i = 0; i < carros.length; i++) {
@@ -267,7 +265,7 @@ for (int i = 0; i < carros.length; i++) {
 
 Esse `for` permite percorrer todas as posições do Array e imprimir os valores armazenados.
 
-### Entendendo cada parte
+**Entendendo cada parte**
 
 ```java
 int i = 0;
@@ -303,7 +301,7 @@ System.out.println(carros[i]);
 
 Imprime o elemento correspondente à posição atual.
 
-### Visualização das repetições
+## Visualização das repetições
 
 | Repetição | `i` | Elemento exibido |
 |---:|---:|---|
@@ -316,7 +314,7 @@ Imprime o elemento correspondente à posição atual.
 
 ---
 
-## 3.6 Resultado completo
+**Resultado completo**
 
 ```text
 Tamanho do array: 6
@@ -338,11 +336,11 @@ O primeiro `Carro: combi` aparece antes da alteração. O segundo `Carro: gol` a
 
 ---
 
-# 4. Exercício — Jogo de Carta
+# Exercício — Jogo de Carta
 
 Agora vamos utilizar Arrays para sortear uma carta de um baralho.
 
-## Código completo
+### Código completo
 
 ```java
 package Vetor;
@@ -385,7 +383,7 @@ public class JogoCarta {
 
 <text color="success" weight="medium">Correção de nomenclatura:</text> na lista original estava `Valente`. O nome tradicional da carta é `Valete`, então foi corrigido no código.
 
-## 4.1 Criando os Arrays
+**Criando os Arrays**
 
 ```java
 String[] nipes = {"Ouros", "Copas", "Espadas", "Paus"};
@@ -413,7 +411,7 @@ São treze valores: o Ás, os números de 2 a 10 e as três figuras.
 
 ---
 
-## 4.2 Entendendo `Math.random()`
+## Entendendo `Math.random()`
 
 ```java
 Math.random()
@@ -432,7 +430,7 @@ Exemplos possíveis:
 
 O valor `1.0` não é incluído.
 
-### Multiplicando por 4
+**Multiplicando por 4**
 
 ```java
 Math.random() * 4
@@ -451,7 +449,7 @@ Por exemplo:
 
 ---
 
-## 4.3 Convertendo para inteiro com `(int)`
+**Convertendo para inteiro com `(int)`**
 
 ```java
 (int) (Math.random() * 4)
@@ -474,7 +472,7 @@ Dessa forma, conseguimos gerar índices entre `0` e `3`, que são as posições 
 
 ---
 
-## 4.4 Sorteando o naipe
+**Sorteando o naipe**
 
 ```java
 String nipe = nipes[(int) (Math.random() * 4)];
@@ -504,7 +502,7 @@ O valor encontrado é armazenado na variável `nipe`.
 
 ---
 
-## 4.5 Sorteando a face
+**Sorteando a face**
 
 ```java
 String face = faces[(int) (Math.random() * faces.length)];
@@ -530,7 +528,7 @@ Essa é uma prática melhor do que deixar o número fixo.
 
 ---
 
-## 4.6 Exibindo a carta sorteada
+**Exibindo a carta sorteada**
 
 ```java
 System.out.println(face + " de " + nipe);
@@ -555,7 +553,7 @@ Valete de Copas
 
 A cada execução, a carta pode ser diferente.
 
-### Observação importante
+**Observação importante**
 
 Esse código sorteia uma face e um naipe de maneira independente. Portanto, ele pode gerar qualquer combinação de 52 cartas.
 
@@ -563,15 +561,15 @@ Porém, se fizermos vários sorteios consecutivos, uma mesma carta poderá apare
 
 ---
 
-# 5. ArrayList — Vetor Dinâmico
+# ArrayList — Vetor Dinâmico
 
-## O que é ArrayList?
+**O que é ArrayList?**
 
 O `ArrayList` é uma estrutura de dados da linguagem Java que permite armazenar vários elementos e alterar seu tamanho dinamicamente.
 
 Diferentemente do Array tradicional, ele pode crescer ou diminuir conforme adicionamos ou removemos elementos.
 
-### Comparação
+## Comparação
 
 | Array | ArrayList |
 |---|---|
@@ -588,7 +586,7 @@ O ArrayList é útil quando a quantidade de elementos pode variar, como listas d
 
 ---
 
-# 6. Criando o projeto ArrayLista
+**Criando o projeto ArrayLista**
 
 No Eclipse:
 
@@ -597,7 +595,7 @@ No Eclipse:
 3. Importe a biblioteca `ArrayList`.
 4. Escreva o código abaixo.
 
-## Código completo
+### Código completo
 
 ```java
 package Vetor;
@@ -644,7 +642,7 @@ public class ArrayLista {
 
 ---
 
-## 6.1 Importando a biblioteca
+**Importando a biblioteca**
 
 ```java
 import java.util.ArrayList;
@@ -656,7 +654,7 @@ O `import` permite utilizar a classe `ArrayList` no código sem precisar escreve
 
 ---
 
-## 6.2 Criando o ArrayList
+**Criando o ArrayList**
 
 ```java
 ArrayList<String> contatos = new ArrayList<>();
@@ -675,7 +673,7 @@ Neste caso, a lista armazenará textos.
 
 ---
 
-## 6.3 Adicionando dados com `add()`
+**Adicionando dados com `add()`**
 
 ```java
 contatos.add("Bruss Loza");
@@ -717,7 +715,7 @@ No final, o ArrayList contém nove elementos.
 
 ---
 
-## 6.4 Descobrindo o tamanho com `size()`
+**Descobrindo o tamanho com `size()`**
 
 ```java
 System.out.println("Tamanho do array: " + contatos.size());
@@ -731,7 +729,7 @@ Como foram adicionados nove elementos:
 Tamanho do array: 9
 ```
 
-### Diferença entre `length` e `size()`
+**Diferença entre `length` e `size()`**
 
 ```java
 carros.length
@@ -749,7 +747,7 @@ Não devemos confundir os dois.
 
 ---
 
-## 6.5 Exibindo o ArrayList inteiro
+**Exibindo o ArrayList inteiro**
 
 ```java
 System.out.println(contatos);
@@ -767,7 +765,7 @@ Essa forma é útil para visualizar rapidamente todos os elementos, mas não é 
 
 ---
 
-## 6.6 Encontrando um elemento com `get()`
+**Encontrando um elemento com `get()`**
 
 ```java
 contatos.get(5)
@@ -794,7 +792,7 @@ Resultado:
 Email -> Sirlene Sanches: (índice[5]) sirlenesanches@email.com
 ```
 
-### Cuidado com os índices
+**Cuidado com os índices**
 
 Se tentarmos acessar uma posição que não existe, ocorrerá um erro chamado:
 
@@ -808,7 +806,7 @@ Acessar `contatos.get(9)` provocará um erro.
 
 ---
 
-## 6.7 Percorrendo o ArrayList com `for`
+## Percorrendo o ArrayList com `for`
 
 ```java
 for (int i = 0; i < contatos.size(); i++) {
@@ -843,9 +841,9 @@ ramos@email.com
 
 ---
 
-# 7. Outros métodos importantes do ArrayList
+## Outros métodos importantes do ArrayList
 
-### Adicionar
+**Adicionar**
 
 ```java
 contatos.add("Novo contato");
@@ -853,7 +851,7 @@ contatos.add("Novo contato");
 
 Adiciona um elemento ao final da lista.
 
-### Consultar
+**Consultar**
 
 ```java
 contatos.get(0);
@@ -861,7 +859,7 @@ contatos.get(0);
 
 Retorna o elemento que está no índice zero.
 
-### Modificar
+**Modificar**
 
 ```java
 contatos.set(0, "Novo nome");
@@ -869,7 +867,7 @@ contatos.set(0, "Novo nome");
 
 Substitui o elemento que está no índice zero.
 
-### Remover
+**Remover**
 
 ```java
 contatos.remove(0);
@@ -877,7 +875,7 @@ contatos.remove(0);
 
 Remove o elemento que está no índice zero.
 
-### Verificar quantidade
+**Verificar quantidade**
 
 ```java
 contatos.size();
@@ -885,7 +883,7 @@ contatos.size();
 
 Retorna a quantidade de elementos.
 
-### Verificar se existe um elemento
+**Verificar se existe um elemento**
 
 ```java
 contatos.contains("Bruss Loza");
@@ -897,7 +895,7 @@ Esses métodos são fundamentais para trabalhar com listas dinâmicas em Java.
 
 ---
 
-# 8. Encerrando o projeto Vetor
+**Encerrando o projeto Vetor**
 
 Depois de finalizar os exercícios:
 
@@ -908,13 +906,13 @@ Agora será iniciado outro projeto, voltado para interface gráfica e futurament
 
 ---
 
-# 9. Introdução ao projeto BLPVD
+# Introdução ao projeto BLPVD
 
 Nesta etapa da aula, vamos criar um novo projeto Java chamado `blpvd`.
 
 O objetivo inicial é criar uma janela gráfica utilizando o **Swing**, com auxílio do **WindowBuilder**, e instalar a biblioteca **FlatLaf** para personalização visual.
 
-### Tecnologias utilizadas
+**Tecnologias utilizadas**
 
 | Tecnologia | Função |
 |---|---|
@@ -926,9 +924,9 @@ O objetivo inicial é criar uma janela gráfica utilizando o **Swing**, com aux�
 
 ---
 
-# 10. Criando o projeto BLPVD no Eclipse
+## Criando o projeto BLPVD no Eclipse
 
-## Passo 1 — Criar um Java Project
+**Passo 1 — Criar um Java Project**
 
 No Eclipse:
 
@@ -943,7 +941,7 @@ blpvd
 
 ---
 
-## Passo 2 — Criar o Package `view`
+**Passo 2 — Criar o Package `view`**
 
 Dentro do projeto `blpvd`, crie um Package chamado:
 
@@ -957,11 +955,11 @@ O nome `view` significa visualização.
 
 ---
 
-# 11. Criando a janela com WindowBuilder
+**Criando a janela com WindowBuilder**
 
 O WindowBuilder permite criar interfaces gráficas utilizando uma ferramenta visual, facilitando a construção de janelas e componentes.
 
-### Passos
+**Passos**
 
 1. Clique com o botão direito no Package `view`.
 2. Selecione `New`.
@@ -980,7 +978,7 @@ A classe será criada com o nome `Main`.
 
 O Eclipse gerará uma estrutura de código para a janela.
 
-### O que é JFrame?
+**O que é JFrame?**
 
 O `JFrame` é uma classe do Swing utilizada para criar uma janela principal de uma aplicação desktop.
 
@@ -996,20 +994,20 @@ Exemplos de aplicações que podem utilizar JFrame:
 
 ---
 
-# 12. Alternando entre Source e Design
+**Alternando entre Source e Design**
 
 Na parte inferior do editor, haverá opções como:
 
 - `Source`
 - `Design`
 
-### Source
+**Source**
 
 Exibe o código Java da interface.
 
 É onde podemos visualizar e modificar a programação da janela.
 
-### Design
+**Design**
 
 Exibe a interface gráfica visualmente.
 
@@ -1019,9 +1017,9 @@ O WindowBuilder trabalha com essas duas visualizações, permitindo que as alter
 
 ---
 
-# 13. Instalando a biblioteca FlatLaf
+# Instalando a biblioteca FlatLaf
 
-## O que é FlatLaf?
+**O que é FlatLaf?**
 
 O FlatLaf é uma biblioteca que permite modificar a aparência dos componentes Swing, proporcionando uma interface mais moderna.
 
@@ -1039,7 +1037,7 @@ flatlaf.jar
 
 Um arquivo `.jar` é um pacote utilizado no Java para reunir classes, recursos e componentes que podem ser utilizados em aplicações.
 
-## Passo 2 — Criar a pasta `lib`
+**Passo 2 — Criar a pasta `lib`**
 
 No Eclipse:
 
@@ -1056,7 +1054,7 @@ lib
 
 A pasta `lib` será utilizada para armazenar bibliotecas externas do projeto.
 
-## Passo 3 — Colocar o FlatLaf na pasta
+**Passo 3 — Colocar o FlatLaf na pasta**
 
 Arraste o arquivo `flatlaf.jar` para dentro da pasta `lib`.
 
@@ -1073,7 +1071,7 @@ blpvd
     └── flatlaf.jar
 ```
 
-## Passo 4 — Adicionar ao Build Path
+**Passo 4 — Adicionar ao Build Path**
 
 1. Clique com o botão direito no arquivo `flatlaf.jar`.
 2. Selecione `Build Path`.
@@ -1081,7 +1079,7 @@ blpvd
 
 O Eclipse adicionará a biblioteca ao caminho de compilação do projeto.
 
-### O que é Build Path?
+**O que é Build Path?**
 
 O Build Path define quais bibliotecas e recursos o projeto Java pode utilizar durante a compilação e execução.
 
@@ -1091,7 +1089,7 @@ Quando adicionamos o FlatLaf ao Build Path, o Java passa a reconhecer suas class
 
 ---
 
-# 14. Configurando o tamanho da janela
+**Configurando o tamanho da janela**
 
 Na visualização `Design`, clique no `JFrame` principal.
 
@@ -1111,7 +1109,7 @@ Uma janela de 800 × 600 possui:
 
 ---
 
-# 15. Desativando o redimensionamento
+**Desativando o redimensionamento**
 
 Nas propriedades do `JFrame`, procure:
 
@@ -1127,7 +1125,7 @@ false
 
 Isso impede que o usuário altere manualmente o tamanho da janela arrastando suas bordas.
 
-### Comparação
+**Comparação**
 
 | Valor | Comportamento |
 |---|---|
@@ -1136,11 +1134,11 @@ Isso impede que o usuário altere manualmente o tamanho da janela arrastando sua
 
 ---
 
-# 16. Adicionando um ícone à janela
+**Adicionando um ícone à janela**
 
 Agora vamos configurar um ícone para a janela da aplicação.
 
-## Passos
+**Passos**
 
 1. Procure uma imagem com resolução de `64 × 64` pixels.
 2. Clique no `JFrame` na visualização Design.
@@ -1155,7 +1153,7 @@ iconImage
 6. Procure e selecione a imagem.
 7. Confirme clicando em `OK`.
 
-### O que é `iconImage`?
+**O que é `iconImage`?**
 
 É a propriedade que define a imagem utilizada como ícone da janela.
 
@@ -1165,7 +1163,7 @@ A imagem de 64 × 64 pixels é uma dimensão recomendada para o exercício, mas 
 
 ---
 
-# 17. Organização inicial do projeto BLPVD
+**Organização inicial do projeto BLPVD**
 
 Ao final dessa etapa, a estrutura do projeto deve estar semelhante a:
 
@@ -1193,7 +1191,7 @@ A pasta `lib` armazena a biblioteca externa.
 
 ---
 
-# 18. O que será desenvolvido posteriormente?
+**O que será desenvolvido posteriormente?**
 
 A aula está preparando o ambiente para um sistema Java com interface gráfica e conexão com banco de dados.
 
@@ -1217,7 +1215,7 @@ Ainda não foi realizada a conexão com o banco de dados neste trecho da aula. A
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. Array é uma estrutura que armazena vários valores e possui tamanho fixo.
 2. Os índices de Arrays e ArrayLists começam em `0`.
