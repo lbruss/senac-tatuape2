@@ -1,6 +1,4 @@
-# PADRÃO DEFINITIVO DAS MINHAS ANOTAÇÕES DE TI
-
-# Java — BL-PDV: Acesso a sites, geração de relatórios em PDF e início da tela de produtos
+# BL-PDV: Acesso a sites, geração de relatórios em PDF e início da tela de produtos
 
 Nesta aula, continuamos o desenvolvimento do sistema **BL-PDV**, utilizando Java, Swing, Eclipse WindowBuilder, MySQL e bibliotecas externas.
 
@@ -8,11 +6,11 @@ O objetivo foi adicionar novas funcionalidades à tela de fornecedores, gerar re
 
 ---
 
-# 1. Botão Acessar — Abrindo sites pelo Java
+## Botão Acessar — Abrindo sites pelo Java
 
 Na tela `frmFornecedor`, vamos adicionar um botão que permite abrir o site cadastrado para determinado fornecedor diretamente no navegador padrão do computador.
 
-## 1.1. Criando o botão
+**Criando o botão**
 
 No Eclipse:
 
@@ -30,7 +28,7 @@ No Eclipse:
 
 Depois, dê dois cliques no botão para criar o evento `actionPerformed`.
 
-## 1.2. Código do evento
+**Código do evento**
 
 Dentro do evento do botão, adicione:
 
@@ -47,7 +45,7 @@ link(site);
 
 O método `link()` recebe o endereço como parâmetro.
 
-## 1.3. Criando o método `link()`
+## Criando o método `link()`
 
 Adicione o método abaixo dentro da classe `frmFornecedor`, mas fora do construtor:
 
@@ -71,7 +69,7 @@ private void link(String url) {
 }
 ```
 
-### Entendendo cada parte
+**Entendendo cada parte**
 
 **1. Criando o objeto Desktop**
 
@@ -128,7 +126,7 @@ textSite.requestFocus();
 
 Devolve o foco ao campo de site, permitindo que o usuário corrija o endereço.
 
-### Imports necessários
+**Imports necessários**
 
 No início de `frmFornecedor.java`, precisamos importar:
 
@@ -137,7 +135,7 @@ import java.awt.Desktop;
 import java.net.URI;
 ```
 
-### Observação importante
+**Observação importante**
 
 Para abrir um endereço corretamente, normalmente devemos informar o protocolo, como `https://`.
 
@@ -151,11 +149,11 @@ O método apresentado trata exceções, mas não verifica se o campo está vazio
 
 ---
 
-# 2. Biblioteca OpenPDF — Gerando arquivos PDF
+## Biblioteca OpenPDF — Gerando arquivos PDF
 
 Agora vamos adicionar ao projeto uma biblioteca externa chamada **OpenPDF**, utilizada para criar documentos PDF por meio do Java.
 
-## 2.1. Baixando a biblioteca
+**Baixando a biblioteca**
 
 Acesse o endereço indicado na aula:
 
@@ -169,7 +167,7 @@ openpdf-2.2.5.jar
 
 O arquivo `.jar` contém classes Java compiladas que podem ser utilizadas em outros projetos.
 
-### Adicionando ao Eclipse
+## Adicionando ao Eclipse
 
 1. Abra o projeto `blpvd`.
 2. Localize a pasta `lib`.
@@ -180,7 +178,7 @@ O arquivo `.jar` contém classes Java compiladas que podem ser utilizadas em out
 
 Depois disso, o Eclipse poderá reconhecer as classes da biblioteca no projeto.
 
-### O que é OpenPDF?
+**O que é OpenPDF?**
 
 A OpenPDF é uma biblioteca Java utilizada para criar e manipular documentos PDF.
 
@@ -195,11 +193,11 @@ No nosso sistema, ela será utilizada para gerar um relatório com os fornecedor
 
 ---
 
-# 3. Botão Relatório — Gerando o PDF de fornecedores
+## Botão Relatório — Gerando o PDF de fornecedores
 
 Vamos adicionar um botão na tela `frmFornecedor` para gerar um relatório contendo os fornecedores cadastrados.
 
-## 3.1. Criando o botão
+**Criando o botão**
 
 Na aba **Design** de `frmFornecedor`:
 
@@ -220,7 +218,7 @@ Configure o ícone do botão para utilizar:
 /img/pdf.jpg
 ```
 
-## 3.2. Evento do botão
+## Evento do botão
 
 Dê dois cliques no botão e adicione:
 
@@ -234,7 +232,7 @@ Assim, a tela fica responsável por receber o clique do usuário, enquanto o Con
 
 ---
 
-# 4. Método gerarRelatorioFornecedores()
+## Método gerarRelatorioFornecedores()
 
 Agora vamos trabalhar na classe:
 
@@ -244,7 +242,7 @@ controller/FornecedorController.java
 
 Dentro dela, adicionaremos o método responsável por consultar os fornecedores no banco de dados, montar o documento PDF e abrir o arquivo gerado.
 
-## 4.1. Código completo do método
+### Código completo do método
 
 ```java
 public void gerarRelatorioFornecedores() {
@@ -337,7 +335,7 @@ public void gerarRelatorioFornecedores() {
 }
 ```
 
-## 4.2. Entendendo a consulta SQL
+**Entendendo a consulta SQL**
 
 ```java
 String sql = """
@@ -356,7 +354,7 @@ Essa consulta busca os dados dos fornecedores cadastrados.
 
 Não estamos utilizando `WHERE`, portanto a consulta retorna todos os fornecedores cadastrados.
 
-## 4.3. Executando a consulta
+**Executando a consulta**
 
 ```java
 Connection con = database.conectar();
@@ -373,7 +371,7 @@ Essas três linhas são responsáveis pela comunicação com o banco de dados.
 
 O método `executeQuery()` é utilizado para executar consultas SQL que retornam resultados, como `SELECT`.
 
-## 4.4. Criando o documento PDF
+## Criando o documento PDF
 
 ```java
 Document documento = new Document(PageSize.A4);
@@ -409,7 +407,7 @@ Abre o documento para receber os elementos.
 
 É importante chamar esse método antes de adicionar textos e tabelas.
 
-## 4.5. Criando o título
+**Criando o título**
 
 ```java
 Font fonteTitulo = new Font(Font.getFamilyIndex("Helvetica"), 16, Font.BOLD);
@@ -441,7 +439,7 @@ Adiciona o título ao documento PDF.
 
 **Importante:** criar um elemento não significa que ele já está no documento. É necessário utilizar `documento.add()` para adicioná-lo.
 
-## 4.6. Adicionando data e horário
+## Adicionando data e horário
 
 ```java
 DateTimeFormatter formatoDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -483,7 +481,7 @@ documento.add(data);
 
 Centraliza e adiciona o parágrafo ao PDF.
 
-## 4.7. Criando a tabela
+## Criando a tabela
 
 ```java
 PdfPTable tabela = new PdfPTable(4);
@@ -519,7 +517,7 @@ tabela.setWidthPercentage(100);
 
 Define que a tabela ocupará 100% da largura disponível na área do documento.
 
-## 4.8. Criando o cabeçalho
+## Criando o cabeçalho
 
 ```java
 tabela.addCell("Nome");
@@ -532,7 +530,7 @@ Cada chamada de `addCell()` adiciona uma célula à tabela.
 
 As primeiras quatro células formam o cabeçalho do relatório.
 
-## 4.9. Preenchendo a tabela com os fornecedores
+**Preenchendo a tabela com os fornecedores**
 
 ```java
 int quantidade = 0;
@@ -624,7 +622,7 @@ documento.add(total);
 
 Adiciona o total ao relatório.
 
-## 4.12. Finalizando o documento e abrindo o PDF
+## Finalizando o documento e abrindo o PDF
 
 ```java
 documento.close();
@@ -655,7 +653,7 @@ Desktop.getDesktop().open(arquivo);
 - `new File(caminho)`: cria uma referência ao PDF gerado.
 - `Desktop.getDesktop().open(arquivo)`: solicita ao sistema operacional que abra o arquivo no programa padrão para PDFs.
 
-### Imports necessários no FornecedorController
+**Imports necessários no FornecedorController**
 
 Adicione os imports utilizados pelo método:
 
@@ -678,7 +676,7 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 ```
 
-### Observações importantes sobre o relatório
+**Observações importantes sobre o relatório**
 
 - O nome do arquivo será `fornecedor.pdf`.
 - O arquivo é criado no diretório de trabalho do programa, não necessariamente dentro da pasta `src`.
@@ -689,11 +687,11 @@ import com.lowagie.text.pdf.PdfWriter;
 
 ---
 
-# 5. Atualizando o Main.java — Botão Produtos
+## Atualizando o Main.java — Botão Produtos
 
 Agora vamos melhorar o menu lateral da tela principal e adicionar uma nova opção chamada **Produtos**.
 
-## 5.1. Alterando o botão Fornecedores
+**Alterando o botão Fornecedores**
 
 No `Main.java`, acesse a aba **Design**.
 
@@ -706,7 +704,7 @@ Selecione o botão Fornecedores e altere:
 
 O `iconTextGap` define o espaço entre o ícone e o texto do botão.
 
-## 5.2. Criando o botão Produtos
+## Criando o botão Produtos
 
 Adicione um novo `JButton` ao painel lateral.
 
@@ -728,7 +726,7 @@ Configure o ícone para:
 /img/produtos.jpg
 ```
 
-## 5.3. Evento do botão Produtos
+## Evento do botão Produtos
 
 Dê dois cliques no botão e adicione:
 
@@ -755,11 +753,11 @@ Dessa forma, quando o usuário clicar em Produtos, o sistema abrirá a janela de
 
 ---
 
-# 6. Criando a janela frmProduto
+**Criando a janela frmProduto**
 
 Agora vamos criar uma nova janela para trabalhar com o cadastro de produtos.
 
-## 6.1. Criando um JDialog
+**Criando um JDialog**
 
 No Eclipse:
 
@@ -782,7 +780,7 @@ src
     └── frmProduto.java
 ```
 
-## 6.2. Configurando a janela
+**Configurando a janela**
 
 Abra `frmProduto.java` na aba **Design**.
 
@@ -810,13 +808,13 @@ O layout absoluto permite posicionar os componentes manualmente por meio de coor
 
 ---
 
-# 7. Montando os campos da tela de produtos
+**Montando os campos da tela de produtos**
 
 Agora vamos adicionar os componentes que formarão o formulário de cadastro.
 
 A tela terá informações como identificação, descrição, categoria, fornecedor, custo, preço de venda, quantidade e estoque mínimo.
 
-## 7.1. Campo ID do produto
+**Campo ID do produto**
 
 Adicione um `JLabel`:
 
@@ -836,7 +834,7 @@ Adicione um `JTextField`:
 
 O campo de ID ficará desabilitado porque a identificação do produto normalmente será gerada automaticamente pelo banco de dados.
 
-## 7.2. Campo Descrição
+**Campo Descrição**
 
 Adicione um `JTextField`:
 
@@ -852,7 +850,7 @@ Exemplo:
 Teclado USB
 ```
 
-## 7.3. Campo Categoria
+**Campo Categoria**
 
 Adicione um `JLabel`:
 
@@ -876,7 +874,7 @@ Exemplos:
 - Acessórios.
 - Eletrônicos.
 
-## 7.4. Campo Fornecedor
+**Campo Fornecedor**
 
 Adicione um `JLabel`:
 
@@ -899,7 +897,7 @@ Nesse caso, ele será utilizado para selecionar o fornecedor relacionado ao prod
 
 Isso evita que o usuário precise digitar novamente os dados de um fornecedor já existente.
 
-## 7.5. Campo Custo
+**Campo Custo**
 
 Adicione um `JLabel`:
 
@@ -922,7 +920,7 @@ Exemplo:
 50,00
 ```
 
-## 7.6. Campo Venda
+**Campo Venda**
 
 Adicione um `JLabel`:
 
@@ -941,7 +939,7 @@ textPrecoVenda
 
 Assim, evitamos confundir o preço de custo com o preço de venda.
 
-## 7.7. Campo ID Fornecedor
+**Campo ID Fornecedor**
 
 Adicione um `JLabel`:
 
@@ -963,7 +961,7 @@ Esse campo representa o identificador do fornecedor associado ao produto.
 
 O campo ficará desabilitado para impedir alterações manuais no identificador.
 
-## 7.8. Campo Quantidade
+**Campo Quantidade**
 
 Adicione um `JLabel`:
 
@@ -986,7 +984,7 @@ Exemplo:
 25
 ```
 
-## 7.9. Campo Estoque mínimo
+**Campo Estoque mínimo**
 
 Adicione um `JLabel`:
 
@@ -1015,7 +1013,7 @@ Se a quantidade disponível ficar abaixo desse valor, o sistema poderá futurame
 
 ---
 
-# 8. Organização dos componentes da tela frmProduto
+**Organização dos componentes da tela frmProduto**
 
 Até aqui, a estrutura dos componentes planejados é:
 
@@ -1043,45 +1041,45 @@ Até aqui, a estrutura dos componentes planejados é:
 
 ---
 
-# 9. Conceitos importantes aprendidos nesta aula
+## Conceitos importantes aprendidos nesta aula
 
-## Desktop
+**Desktop**
 
 Classe do Java utilizada para interagir com recursos do sistema operacional, como abrir páginas no navegador e arquivos.
 
-## URI
+**URI**
 
 Identificador utilizado para representar recursos. No exemplo, é utilizado para representar o endereço do site do fornecedor.
 
-## OpenPDF
+**OpenPDF**
 
 Biblioteca externa Java utilizada para criar documentos PDF.
 
-## Document
+**Document**
 
 Representa o documento PDF que receberá os conteúdos.
 
-## Paragraph
+**Paragraph**
 
 Representa um parágrafo de texto dentro do PDF.
 
-## PdfPTable
+**PdfPTable**
 
 Classe utilizada para construir tabelas dentro do documento PDF.
 
-## ResultSet
+**ResultSet**
 
 Objeto que armazena os resultados de uma consulta SQL e permite percorrer os registros retornados.
 
-## JComboBox
+**JComboBox**
 
 Componente Swing que apresenta uma lista suspensa de opções para o usuário selecionar.
 
-## JDialog
+**JDialog**
 
 Janela secundária do Swing. Pode ser modal, impedindo a interação com outras janelas do aplicativo enquanto estiver aberta.
 
-## CRUD
+**CRUD**
 
 Conjunto das quatro operações fundamentais de manipulação de dados:
 
@@ -1094,7 +1092,7 @@ Conjunto das quatro operações fundamentais de manipulação de dados:
 
 ---
 
-# 10. Observações técnicas para o desenvolvimento
+**Observações técnicas para o desenvolvimento**
 
 1. **Acesso a sites:** o método `Desktop.browse()` depende do suporte do sistema operacional e da disponibilidade de um navegador.
 2. **Geração de PDF:** a biblioteca OpenPDF precisa estar corretamente adicionada ao Build Path para que os imports sejam reconhecidos.
@@ -1107,8 +1105,7 @@ Conjunto das quatro operações fundamentais de manipulação de dados:
 
 ---
 
-# Resumo Relâmpago — 10 linhas
-
+**Resumo Relâmpago**
 1. O botão Acessar utiliza `Desktop` e `URI` para abrir sites no navegador padrão.
 2. O método `link()` recebe o endereço e tenta abri-lo, tratando possíveis exceções.
 3. A biblioteca OpenPDF permite criar documentos PDF utilizando Java.
