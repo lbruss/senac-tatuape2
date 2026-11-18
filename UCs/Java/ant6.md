@@ -1,6 +1,4 @@
-# PADRÃO DEFINITIVO DAS MINHAS ANOTAÇÕES DE TI
-
-# Java — Projeto BL-PDV: CRUD de Fornecedores (Limpar, Buscar e Editar)
+# Projeto BL-PDV: CRUD de Fornecedores (Limpar, Buscar e Editar)
 
 Nesta aula, continuamos o desenvolvimento do sistema **BL-PDV**, utilizando Java, Swing, MySQL e JDBC.
 
@@ -14,7 +12,7 @@ Essas funcionalidades fazem parte do conceito de **CRUD**, utilizado para realiz
 
 ---
 
-# 1. Relembrando o CRUD
+# Relembrando o CRUD
 
 CRUD é uma sigla formada pelas quatro operações fundamentais utilizadas em sistemas que trabalham com bancos de dados.
 
@@ -34,11 +32,11 @@ Nesta aula, trabalharemos principalmente com:
 - **Update:** será implementado pelo botão Editar.
 - **Delete:** ainda será desenvolvido em uma próxima etapa.
 
-# 2. Criando o botão Limpar
+## Criando o botão Limpar
 
 A primeira funcionalidade será permitir que o usuário apague rapidamente todas as informações preenchidas na tela de fornecedores.
 
-## 2.1. Adicionando o botão no WindowBuilder
+**Adicionando o botão no WindowBuilder**
 
 No Eclipse, abra a classe `frmFornecedor.java` e acesse a aba **Design**.
 
@@ -59,7 +57,7 @@ Em seguida:
 
 O cursor `HAND_CURSOR` altera o ponteiro do mouse para o formato de uma mão quando ele passa sobre o botão, indicando que o elemento pode ser clicado.
 
-## 2.2. Criando o evento do botão
+## Criando o evento do botão
 
 Clique com o botão direito no botão Limpar e acesse:
 
@@ -85,7 +83,7 @@ void limparCampos() {
 }
 ```
 
-## 2.3. Entendendo o método `limparCampos()`
+**Entendendo o método `limparCampos()`**
 
 O método `limparCampos()` centraliza a operação de limpeza da tela.
 
@@ -102,7 +100,7 @@ Quando buscamos um fornecedor, o botão Adicionar é desabilitado para evitar qu
 
 Ao limpar os campos, queremos retornar a tela ao estado inicial. Por isso, habilitamos novamente o botão.
 
-### Entendendo `setText(null)`
+**Entendendo `setText(null)`**
 
 O método `setText()` altera o conteúdo de um componente de texto.
 
@@ -118,7 +116,7 @@ textNome.setText(null);
 
 Apaga o conteúdo do campo.
 
-### Entendendo `setEnabled()`
+**Entendendo `setEnabled()`**
 
 O método `setEnabled()` habilita ou desabilita um componente.
 
@@ -134,7 +132,7 @@ btnAdicionar.setEnabled(true);
 
 Habilita o botão novamente.
 
-## 2.4. Integrando a limpeza ao cadastro
+## Integrando a limpeza ao cadastro
 
 Depois que um fornecedor for cadastrado com sucesso, também chamaremos o método `limparCampos()`.
 
@@ -154,13 +152,13 @@ Dessa forma, após o cadastro, os campos serão apagados automaticamente.
 
 ---
 
-# 3. Criando a funcionalidade Buscar — CRUD READ
+## Criando a funcionalidade Buscar — CRUD READ
 
 Agora vamos implementar a operação **Read**, responsável por consultar informações que já estão armazenadas no banco de dados.
 
 O usuário poderá informar o nome de um fornecedor e clicar no botão Buscar. O sistema fará uma consulta no MySQL e preencherá os campos da tela com os dados encontrados.
 
-## 3.1. Adicionando o botão Buscar
+## Adicionando o botão Buscar
 
 Na aba Design de `frmFornecedor.java`:
 
@@ -179,7 +177,7 @@ Na aba Design de `frmFornecedor.java`:
 
 O botão será utilizado para iniciar a pesquisa do fornecedor.
 
-## 3.2. Criando o evento do botão Buscar
+## Criando o evento do botão Buscar
 
 Clique com o botão direito no botão e acesse:
 
@@ -221,7 +219,7 @@ if(textNome.getText().isBlank()) {
 }
 ```
 
-## 3.3. Entendendo a validação
+**Entendendo a validação**
 
 Antes de realizar a pesquisa, precisamos verificar se o usuário informou algum nome.
 
@@ -247,7 +245,7 @@ textNome.requestFocus();
 
 O método `requestFocus()` coloca o foco no campo Nome, permitindo que o usuário digite sem precisar clicar novamente nele.
 
-## 3.4. Obtendo o nome para a pesquisa
+##  Obtendo o nome para a pesquisa
 
 ```java
 String nome = textNome.getText();
@@ -265,7 +263,7 @@ Chamamos o método `buscar()` da classe `FornecedorController`, enviando o nome 
 
 O método fará a consulta no banco de dados e retornará um objeto `Fornecedor`, caso encontre um resultado.
 
-## 3.5. Verificando se o fornecedor existe
+## Verificando se o fornecedor existe
 
 ```java
 if(fornecedor != null)
@@ -278,7 +276,7 @@ Essa condição verifica se o método retornou um objeto válido.
 
 Quando o fornecedor é encontrado, seus dados são colocados nos campos da tela.
 
-## 3.6. Preenchendo os campos automaticamente
+## Preenchendo os campos automaticamente
 
 ```java
 textID.setText(String.valueOf(fornecedor.getIdFornecedor()));
@@ -300,7 +298,7 @@ Isso acontece porque `getIdFornecedor()` retorna um número inteiro, enquanto `J
 
 O método `String.valueOf()` converte o valor numérico para texto.
 
-## 3.7. Desabilitando o botão Adicionar
+**Desabilitando o botão Adicionar**
 
 ```java
 btnAdicionar.setEnabled(false);
@@ -310,7 +308,7 @@ Quando encontramos um fornecedor, desabilitamos o botão Adicionar.
 
 Isso ajuda a evitar que o usuário cadastre novamente um fornecedor enquanto está consultando ou preparando a edição de um registro existente.
 
-## 3.8. Configurando a tecla Enter para buscar
+## Configurando a tecla Enter para buscar
 
 Adicione esta linha no construtor:
 
@@ -324,7 +322,7 @@ Assim, quando o usuário pressionar **Enter**, o evento do botão Buscar será e
 
 ---
 
-# 4. Implementando o método `buscar()` no FornecedorController
+## Implementando o método `buscar()` no FornecedorController
 
 Agora precisamos criar o método que realmente fará a consulta no banco de dados.
 
@@ -340,7 +338,7 @@ import java.sql.ResultSet;
 
 O `ResultSet` é utilizado para armazenar e percorrer os resultados retornados por uma consulta SQL.
 
-## 4.1. Código do método Buscar
+### Código do método Buscar
 
 ```java
 public Fornecedor buscar(String nome) {
@@ -390,7 +388,7 @@ public Fornecedor buscar(String nome) {
 }
 ```
 
-## 4.2. Entendendo a consulta SQL
+**Entendendo a consulta SQL**
 
 ```sql
 select idFornecedor, nome, fone, email, site
@@ -432,7 +430,7 @@ A pesquisa será feita considerando a coluna `nome`.
 
 O símbolo `?` representa um parâmetro que será preenchido pelo Java.
 
-## 4.3. Entendendo o operador LIKE
+**Entendendo o operador LIKE**
 
 O operador `LIKE` permite realizar pesquisas utilizando padrões de texto.
 
@@ -472,7 +470,7 @@ Outros exemplos:
 
 **Observação importante:** dependendo da configuração de comparação do MySQL, a pesquisa pode não diferenciar letras maiúsculas e minúsculas.
 
-## 4.4. Entendendo o PreparedStatement
+**Entendendo o PreparedStatement**
 
 ```java
 PreparedStatement stmt = con.prepareStatement(sql);
@@ -492,7 +490,7 @@ Esse recurso evita que seja necessário montar a consulta SQL concatenando diret
 
 Além disso, o uso de parâmetros ajuda a prevenir ataques de SQL Injection.
 
-## 4.5. Executando a consulta
+**Executando a consulta**
 
 ```java
 ResultSet rs = stmt.executeQuery();
@@ -522,7 +520,7 @@ O método `next()` movimenta o cursor do `ResultSet` para a próxima linha do re
 
 Como estamos verificando se há pelo menos um fornecedor encontrado, utilizamos `if`.
 
-## 4.7. Criando o objeto Fornecedor
+## Criando o objeto Fornecedor
 
 ```java
 fornecedor = new Fornecedor();
@@ -544,7 +542,7 @@ fornecedor.setSite(rs.getString("Site"));
 - `rs.getString()`: obtém um valor textual.
 - `setIdFornecedor()`, `setNome()` etc.: armazenam os valores nos atributos do objeto.
 
-## 4.8. Fechando as conexões
+## Fechando as conexões
 
 ```java
 rs.close();
@@ -560,7 +558,7 @@ Após utilizar os recursos do banco, precisamos fechá-los.
 
 Isso evita manter recursos ocupados desnecessariamente.
 
-## 4.9. Retornando o fornecedor
+**Retornando o fornecedor**
 
 ```java
 return fornecedor;
@@ -585,13 +583,13 @@ Se ocorrer uma exceção durante a consulta, o erro será apresentado no console
 
 ---
 
-# 5. Criando a funcionalidade Editar — CRUD UPDATE
+## Criando a funcionalidade Editar — CRUD UPDATE
 
 Agora vamos implementar a operação **Update**, utilizada para modificar informações de registros que já existem no banco de dados.
 
 No nosso sistema, o usuário primeiro buscará um fornecedor. Depois, poderá alterar seus dados e clicar no botão Editar para salvar as modificações.
 
-## 5.1. Adicionando o botão Editar
+## Adicionando o botão Editar
 
 Na aba Design de `frmFornecedor.java`:
 
@@ -614,7 +612,7 @@ Depois, clique com o botão direito no botão e acesse:
 
 **Add → Action → actionPerformed**
 
-## 5.2. Criando a validação dos campos
+## Criando a validação dos campos
 
 Dentro do evento, adicione:
 
@@ -659,7 +657,7 @@ if(textNome.getText().isBlank()) {
 }
 ```
 
-## 5.3. Entendendo as validações
+**Entendendo as validações**
 
 Antes de editar, verificamos se os campos obrigatórios estão preenchidos.
 
@@ -674,7 +672,7 @@ Se algum campo estiver vazio, o sistema apresenta uma mensagem e direciona o foc
 
 **Observação importante:** nessa implementação, e-mail e site também são tratados como obrigatórios, pois existe uma validação para impedir que esses campos fiquem vazios.
 
-## 5.4. Obtendo o ID do fornecedor
+## Obtendo o ID do fornecedor
 
 ```java
 fornecedor.setIdFornecedor(Integer.parseInt(textID.getText()));
@@ -706,7 +704,7 @@ int numero = Integer.parseInt(id);
 
 Agora, a variável `numero` possui o valor inteiro `15`.
 
-## 5.5. Transferindo os dados para o objeto
+## Transferindo os dados para o objeto
 
 ```java
 fornecedor.setNome(textNome.getText());
@@ -719,7 +717,7 @@ Essas linhas transferem os valores que estão na tela para o objeto `Fornecedor`
 
 Assim, o objeto passa a conter os dados atualizados que serão enviados ao Controller.
 
-## 5.6. Chamando o Controller
+## Chamando o Controller
 
 ```java
 controller.editarFornecedor(fornecedor);
@@ -731,7 +729,7 @@ O Controller será responsável por executar o comando SQL que atualizará o reg
 
 ---
 
-# 6. Implementando o método `editarFornecedor()` no Controller
+## Implementando o método `editarFornecedor()` no Controller
 
 Abra:
 
@@ -775,7 +773,7 @@ public void editarFornecedor(Fornecedor fornecedor) {
 }
 ```
 
-## 6.1. Entendendo o comando UPDATE
+**Entendendo o comando UPDATE**
 
 O comando SQL utilizado é:
 
@@ -817,7 +815,7 @@ WHERE idFornecedor = ?
 
 Essa condição identifica o fornecedor pelo seu ID.
 
-### Por que o WHERE é tão importante?
+**Por que o WHERE é tão importante?**
 
 Imagine que a tabela tenha estes registros:
 
@@ -833,7 +831,7 @@ Por isso, utilizamos o ID para indicar exatamente qual fornecedor deve ser modif
 
 **Regra importante:** em operações de atualização e exclusão, sempre confira a condição `WHERE` para evitar alterar ou remover registros indevidamente.
 
-## 6.2. Preenchendo os parâmetros do SQL
+**Preenchendo os parâmetros do SQL**
 
 ```java
 stmt.setString(1, fornecedor.getNome());
@@ -855,7 +853,7 @@ Cada comando `set` preenche um dos pontos de interrogação da consulta.
 
 Observe que o último parâmetro é o ID, utilizado na condição `WHERE`.
 
-## 6.3. Executando a atualização
+**Executando a atualização**
 
 ```java
 stmt.executeUpdate();
@@ -872,7 +870,7 @@ Por exemplo:
 - `1`: um registro foi atualizado.
 - `0`: nenhum registro foi alterado.
 
-## 6.4. Fechando os recursos
+**Fechando os recursos**
 
 ```java
 stmt.close();
@@ -885,7 +883,7 @@ Depois da atualização, fechamos o `PreparedStatement` e a conexão com o banco
 
 ---
 
-# 7. Código completo da classe FornecedorController
+### Código completo da classe FornecedorController
 
 Após implementar os métodos Adicionar, Buscar e Editar, a classe `FornecedorController` ficará assim:
 
@@ -1035,7 +1033,7 @@ public class FornecedorController {
 
 ---
 
-# 8. Entendendo o funcionamento completo do sistema
+**Entendendo o funcionamento completo do sistema**
 
 Agora temos três operações funcionando na estrutura do projeto:
 
@@ -1099,14 +1097,14 @@ SELECT * FROM fornecedores;
 
 Verifique se o fornecedor foi cadastrado.
 
-## Teste 2 — Limpar campos
+**Teste 2 — Limpar campos**
 
 1. Digite informações nos campos.
 2. Clique no botão Limpar.
 3. Verifique se todos os campos foram apagados.
 4. Confira se o botão Adicionar voltou a ficar habilitado.
 
-## Teste 3 — Buscar fornecedor
+**Teste 3 — Buscar fornecedor**
 
 1. Digite o nome de um fornecedor já cadastrado.
 2. Clique em Buscar.
@@ -1117,7 +1115,7 @@ Depois, pesquise um nome inexistente e verifique se aparece a mensagem:
 
 `Fornecedor não cadastrado`
 
-## Teste 4 — Editar fornecedor
+**Teste 4 — Editar fornecedor**
 
 1. Pesquise um fornecedor existente.
 2. Altere o nome, telefone, e-mail ou site.
@@ -1135,71 +1133,7 @@ Verifique se os dados foram atualizados e se o ID do registro permaneceu o mesmo
 
 ---
 
-# 10. Observações importantes sobre o código
-
-Alguns detalhes técnicos merecem atenção para evitar problemas durante o desenvolvimento.
-
-### 10.1. O código do botão Editar está incompleto no material da aula
-
-O trecho apresentado no material termina antes das configurações finais do botão `btnEditar`, como seu ícone, cursor, posição e inclusão na janela.
-
-Portanto, o código completo da tela `frmFornecedor` precisa manter a configuração visual do botão no construtor. Um exemplo de configuração é:
-
-```java
-btnEditar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-btnEditar.setToolTipText("Editar");
-btnEditar.setIcon(new ImageIcon(frmFornecedor.class.getResource("/img/update.jpg")));
-btnEditar.setBounds(0, 338, 89, 73);
-getContentPane().add(btnEditar);
-```
-
-O caminho `/img/update.jpg` e as coordenadas devem corresponder ao nome do arquivo e à posição escolhida no Design.
-
-### 10.2. Atenção ao objeto Fornecedor duplicado
-
-Na classe `frmFornecedor`, o objeto `Fornecedor fornecedor` já é criado no início do construtor.
-
-No evento Buscar, o material apresenta novamente:
-
-```java
-Fornecedor fornecedor = controller.buscar(nome);
-```
-
-Isso pode gerar um problema de escopo e variável local duplicada, dependendo de onde o código foi inserido.
-
-Para manter o mesmo objeto utilizado pelos outros eventos, uma alternativa é:
-
-```java
-fornecedor = controller.buscar(nome);
-```
-
-Assim, o resultado da pesquisa é armazenado no objeto já declarado no construtor.
-
-### 10.3. Mensagem de sucesso não confirma necessariamente a operação
-
-Nos métodos `Adicionar()` e `editarFornecedor()`, o retorno é `void`. Isso significa que a tela não recebe uma confirmação real de que o banco de dados concluiu a operação.
-
-Atualmente, a mensagem de sucesso pode aparecer mesmo quando ocorre uma falha na conexão ou na consulta.
-
-Uma melhoria futura será fazer os métodos retornarem `boolean`, indicando se a operação foi concluída corretamente.
-
-### 10.4. Melhorar o fechamento das conexões
-
-O material utiliza:
-
-```java
-rs.close();
-stmt.close();
-con.close();
-```
-
-Esse procedimento funciona quando o fluxo chega até essas linhas. Porém, se ocorrer uma exceção antes delas, algum recurso poderá permanecer aberto.
-
-Uma alternativa mais segura é utilizar `try-with-resources`, que fecha automaticamente os recursos.
-
----
-
-# 11. Guia Rápido de Memorização
+# Guia Rápido de Memorização
 
 | Código | Para que serve |
 |---|---|
@@ -1222,7 +1156,7 @@ Uma alternativa mais segura é utilizar `try-with-resources`, que fecha automati
 
 ---
 
-# Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. O CRUD possui quatro operações: Create, Read, Update e Delete.
 2. O botão Limpar utiliza `setText(null)` para apagar os campos.
