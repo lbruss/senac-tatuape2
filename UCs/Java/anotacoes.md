@@ -13,7 +13,7 @@ Essas operações completam as quatro ações básicas do CRUD:
 
 ---
 
-## Adicionando os botões Editar e Deletar
+# Adicionando os botões Editar e Deletar
 
 No Eclipse, abra o formulário `frmProduto` na aba **Design**.
 
