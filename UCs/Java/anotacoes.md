@@ -13,7 +13,7 @@ Essas operações completam as quatro ações básicas do CRUD:
 
 ---
 
-## 1. Adicionando os botões Editar e Deletar
+## Adicionando os botões Editar e Deletar
 
 No Eclipse, abra o formulário `frmProduto` na aba **Design**.
 
@@ -40,7 +40,7 @@ Os ícones ajudam o usuário a identificar rapidamente as ações disponíveis. 
 
 ---
 
-## 2. Implementando a edição de produtos no formulário
+## Implementando a edição de produtos no formulário
 
 A edição permite modificar as informações de um produto que já está cadastrado no banco de dados.
 
@@ -48,7 +48,7 @@ Para isso, precisamos recuperar o produto, alterar seus dados e enviar as novas 
 
 No botão `btnUpdate`, adicione um evento `ActionListener`.
 
-### 2.1. Validando os campos obrigatórios
+## Validando os campos obrigatórios
 
 Antes de atualizar o produto, precisamos verificar se os campos necessários foram preenchidos.
 
@@ -95,7 +95,7 @@ Cada condição verifica um campo. Caso esteja vazio, o sistema exibe uma mensag
 
 O `else` final é executado somente quando todas as validações são aprovadas.
 
-### 2.2. Transferindo os dados para o objeto Produto
+## Transferindo os dados para o objeto Produto
 
 Dentro do último `else`, precisamos atualizar os atributos do objeto `produto` com as informações digitadas no formulário.
 
@@ -130,7 +130,7 @@ produto.setIdFornecedor(Integer.parseInt(textIDFornecedor.getText()));
 - `setEstoqueMinimo()`: atualiza o limite mínimo de estoque.
 - `setIdFornecedor()`: informa o fornecedor relacionado ao produto.
 
-### 2.3. Chamando o método de edição
+## Chamando o método de edição
 
 Depois de preencher o objeto, chamamos o método `editar()` do controlador:
 
@@ -160,7 +160,7 @@ Se a edição for bem-sucedida, o formulário será limpo. Caso contrário, o si
 
 ---
 
-## 3. Implementando o método editar() no ProdutoController
+## Implementando o método editar() no ProdutoController
 
 Agora precisamos criar o método responsável por atualizar os dados diretamente no MySQL.
 
