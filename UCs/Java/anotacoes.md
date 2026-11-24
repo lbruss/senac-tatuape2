@@ -213,7 +213,7 @@ public boolean editar(Produto produto) {
 }
 ```
 
-### 3.1. Entendendo o comando SQL UPDATE
+**Entendendo o comando SQL UPDATE**
 
 O comando utilizado é:
 
@@ -238,7 +238,7 @@ O `UPDATE` modifica informações de um registro que já existe.
 
 **Atenção ao WHERE:** sem essa condição, o comando poderia atualizar todos os produtos da tabela, em vez de modificar apenas o produto selecionado.
 
-### 3.2. Entendendo os parâmetros do PreparedStatement
+**Entendendo os parâmetros do PreparedStatement**
 
 Os pontos de interrogação são parâmetros que recebem valores por meio dos métodos `setString()`, `setDouble()` e `setInt()`.
 
@@ -256,7 +256,7 @@ Os pontos de interrogação são parâmetros que recebem valores por meio dos m�
 
 O ID do produto ocupa o nono parâmetro porque é utilizado na condição `WHERE`.
 
-### 3.3. Por que utilizar setNull()?
+**Por que utilizar setNull()?**
 
 ```java
 stmt.setNull(1, java.sql.Types.VARCHAR);
@@ -276,7 +276,7 @@ Isso é importante porque a coluna `codigoBarras` foi criada permitindo valores 
 
 ---
 
-## 4. Implementando a exclusão de produtos
+## Implementando a exclusão de produtos
 
 O método `deletar()` também pertence ao `ProdutoController`.
 
@@ -312,7 +312,7 @@ public boolean deletar(int idProduto) {
 }
 ```
 
-### 4.1. Entendendo o comando SQL DELETE
+**Entendendo o comando SQL DELETE**
 
 ```sql
 DELETE FROM produtos
@@ -324,7 +324,7 @@ WHERE idProduto = ?;
 
 Assim como no `UPDATE`, a condição `WHERE` é essencial. Sem ela, todos os registros da tabela poderiam ser excluídos.
 
-### 4.2. Parâmetro do método
+## Parâmetro do método
 
 ```java
 public boolean deletar(int idProduto)
@@ -383,7 +383,7 @@ Esse evento solicita confirmação antes de excluir o registro. Se o usuário co
 
 ---
 
-## 5. Implementando a busca de produtos pela descrição
+# Implementando a busca de produtos pela descrição
 
 Além da pesquisa pelo código de barras, vamos adicionar uma segunda maneira de localizar produtos: pela descrição.
 
@@ -397,7 +397,7 @@ No `frmProduto`, abra a aba **Design** e adicione um `JButton` com as seguintes 
 
 Depois, clique duas vezes no botão para criar seu evento.
 
-### 5.1. Validando a descrição
+## Validando a descrição
 
 Primeiro, verificamos se o campo de descrição foi preenchido:
 
@@ -413,7 +413,7 @@ if(textDescricao.getText().isBlank()) {
 
 A busca só será executada quando o usuário informar uma descrição.
 
-### 5.2. Chamando o controlador
+## Chamando o controlador
 
 Dentro do `else`, capturamos o texto digitado e chamamos o método `buscarProduto()`:
 
@@ -425,7 +425,7 @@ Produto produto = controllerProduto.buscarProduto(descricao);
 
 O método recebe a descrição e retorna um objeto `Produto`, caso encontre um registro correspondente.
 
-### 5.3. Preenchendo os campos automaticamente
+## Preenchendo os campos automaticamente
 
 Se o produto existir, o sistema utiliza os métodos `setText()` para preencher os campos do formulário:
 
@@ -463,7 +463,7 @@ if(produto != null) {
 }
 ```
 
-### 5.4. Entendendo os comandos
+**Entendendo os comandos**
 
 **`String.valueOf()`**
 
@@ -511,7 +511,7 @@ Como os fornecedores são apresentados no formato `ID - Nome`, esse comando perm
 
 Seleciona o fornecedor encontrado no `JComboBox`.
 
-### 5.5. Controle dos botões
+## Controle dos botões
 
 Depois de encontrar um produto, precisamos impedir que o usuário tente cadastrá-lo novamente e liberar as opções de edição e exclusão.
 
@@ -528,7 +528,7 @@ O método `setEnabled()` controla se um componente pode ser utilizado:
 
 ---
 
-## 6. Criando o método buscarProduto() no ProdutoController
+## Criando o método buscarProduto() no ProdutoController
 
 Agora precisamos implementar a consulta no banco de dados.
 
@@ -585,7 +585,7 @@ public Produto buscarProduto(String descricao) {
 }
 ```
 
-### 6.1. Entendendo o SELECT
+**Entendendo o SELECT**
 
 ```sql
 SELECT idProduto, codigoBarras, descricao, categoria,
@@ -599,7 +599,7 @@ Esse comando consulta a tabela `produtos` e retorna as informações do registro
 
 O `WHERE descricao = ?` limita a busca à descrição recebida pelo método.
 
-### 6.2. Entendendo o ResultSet
+**Entendendo o ResultSet**
 
 ```java
 ResultSet rs = stmt.executeQuery();
@@ -644,7 +644,7 @@ Retornamos o objeto preenchido. Se nenhum produto for encontrado, o valor contin
 
 ---
 
-## 7. Diferença entre buscar pelo código de barras e pela descrição
+**Diferença entre buscar pelo código de barras e pela descrição**
 
 O projeto agora possui dois métodos de consulta.
 
@@ -675,7 +675,7 @@ Por exemplo, uma pesquisa por `café` poderia encontrar `Café em pó`, `Café s
 
 ---
 
-## 8. Fluxo de funcionamento do cadastro de produtos
+## Fluxo de funcionamento do cadastro de produtos
 
 Com as novas funcionalidades, o fluxo do formulário fica assim:
 
@@ -686,108 +686,23 @@ Com as novas funcionalidades, o fluxo do formulário fica assim:
 5. Os botões Editar e Deletar ficam disponíveis.
 6. Se o usuário editar, o método `editar()` atualiza o registro.
 7. Se o usuário excluir e confirmar, o método `deletar()` remove o registro.
-8. Depois de uma operação bem-sucedida, `limparCampos()` prepara o formulário para uma nova operação.
+8. Depois de uma operação bem-sucedida, `limparCampos()` prepara o formulário para uma nova operação.
 
 ---
 
-## 9. Observações importantes e correções
-
-### 9.1. Corrigir a opção padrão do JComboBox
-
-No código anterior, o item padrão do `JComboBox` foi definido como:
-
-```java
-cboFornecedor.addItem("Selecione");
-```
-
-Porém, no evento do componente, a comparação aparece como:
-
-```java
-!selecionado.equals("Selecionado")
-```
-
-Os textos são diferentes. A comparação correta é:
-
-```java
-if(selecionado != null && !selecionado.equals("Selecione")) {
-    String id = selecionado.split(" - ")[0];
-    textIDFornecedor.setText(id);
-
-}else {
-    textIDFornecedor.setText("");
-}
-```
-
-Assim, a opção padrão não será interpretada como um fornecedor válido.
-
-### 9.2. Cuidado com o botão Deletar
-
-O método `deletar()` já está implementado no controlador, mas ele só será executado quando o evento do botão `btnDelete` chamar esse método.
-
-Também é importante solicitar confirmação antes de excluir um produto, evitando exclusões acidentais.
-
-### 9.3. Atenção ao retorno booleano
-
-Nos métodos `adicionar()`, `editar()` e `deletar()`, o retorno `true` indica que a execução chegou ao final sem lançar uma exceção.
-
-Entretanto, o método `executeUpdate()` retorna um número que representa a quantidade de linhas afetadas. Uma atualização ou exclusão pode afetar zero linhas caso o ID não exista.
-
-Uma melhoria seria verificar esse retorno:
-
-```java
-int linhasAfetadas = stmt.executeUpdate();
-
-return linhasAfetadas > 0;
-```
-
-No método `editar()` e no `deletar()`, isso permite confirmar que algum registro realmente foi modificado ou removido.
-
-### 9.4. Melhor prática: try-with-resources
-
-Nos exemplos da aula, os recursos são fechados manualmente:
-
-```java
-rs.close();
-stmt.close();
-con.close();
-```
-
-Uma forma mais segura de trabalhar com JDBC é utilizar `try-with-resources`, que fecha automaticamente a conexão, o comando e o resultado mesmo quando ocorre uma exceção.
-
-Exemplo:
-
-```java
-try(Connection con = database.conectar();
-    PreparedStatement stmt = con.prepareStatement(sql)) {
-
-    // Executar a operação
-
-}
-```
-
-Essa é uma melhoria importante para evitar recursos abertos desnecessariamente.
-
-### 9.5. Atenção ao nome do atributo quantidade
-
-No código atual da aula, o atributo aparece como `quatidade`, com as letras invertidas.
-
-O nome correto é `quantidade`. Se futuramente corrigirmos esse atributo na classe `Produto`, também será necessário atualizar os métodos correspondentes, como `getQuatidade()` e `setQuatidade()`, para `getQuantidade()` e `setQuantidade()` em todo o projeto.
-
----
-
-## 10. Testes práticos
+**Testes práticos**
 
 Depois de implementar os métodos, execute o projeto e faça os seguintes testes:
 
-- [ ] Cadastre um produto.
-- [ ] Pesquise o produto pelo código de barras e pressione Enter.
-- [ ] Verifique se os campos são preenchidos automaticamente.
-- [ ] Pesquise o produto pela descrição utilizando o botão Buscar.
-- [ ] Verifique se o fornecedor correto é selecionado no `JComboBox`.
-- [ ] Edite o preço de um produto e confirme se a alteração foi salva.
-- [ ] Tente editar um produto com um código de barras já utilizado por outro.
-- [ ] Exclua um produto e confirme a operação.
-- [ ] Verifique no MySQL Workbench se as alterações foram realizadas.
+- Cadastre um produto.
+- Pesquise o produto pelo código de barras e pressione Enter.
+- Verifique se os campos são preenchidos automaticamente.
+- Pesquise o produto pela descrição utilizando o botão Buscar.
+- Verifique se o fornecedor correto é selecionado no `JComboBox`.
+- Edite o preço de um produto e confirme se a alteração foi salva.
+- Tente editar um produto com um código de barras já utilizado por outro.
+- Exclua um produto e confirme a operação.
+- Verifique no MySQL Workbench se as alterações foram realizadas.
 
 ---
 
@@ -810,7 +725,7 @@ Depois de implementar os métodos, execute o projeto e faça os seguintes testes
 | `startsWith()` | Verifica o início de uma String |
 | `setSelectedIndex()` | Seleciona um item do JComboBox |
 
-## Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. O CRUD é formado por Create, Read, Update e Delete.
 2. `adicionar()` cadastra novos produtos no banco de dados.
@@ -822,5 +737,4 @@ Depois de implementar os métodos, execute o projeto e faça os seguintes testes
 8. O PreparedStatement envia os parâmetros para os comandos SQL.
 9. O ResultSet permite acessar os dados retornados pelo SELECT.
 10. O formulário utiliza os controladores para realizar as operações no banco de dados.
-
-**Próxima etapa:** continuar a implementação do formulário de produtos, revisar os eventos dos botões e avançar para as próximas funcionalidades do BL-PDV.
+
