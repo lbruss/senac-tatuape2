@@ -1,1 +1,691 @@
+# Java — Projeto BL-PDV: Botões Limpar e Gerar Relatório de Produtos
 
+Nesta aula, adicionamos duas funcionalidades à tela `frmProduto`:
+
+1. **Limpar campos:** permite apagar os dados preenchidos no formulário e retornar ao estado inicial.
+2. **Gerar relatório:** consulta os produtos cadastrados no banco de dados e cria um arquivo PDF com as informações.
+
+Essas funcionalidades complementam o CRUD do módulo de produtos.
+
+---
+
+## 1. Botão Limpar Campos
+
+O primeiro botão será responsável por limpar todos os campos da tela de produtos.
+
+### 1.1. Criando o botão no WindowBuilder
+
+No Eclipse, abra `frmProduto.java` e acesse a aba **Design**.
+
+Adicione um componente `JButton` e configure:
+
+| Propriedade | Valor |
+|---|---|
+| Variable | `btnLimpar` |
+| ToolTipText | `Limpar` |
+| Text | Vazio |
+| Icon | `/img/limpar.jpg` |
+
+O `ToolTipText` é o texto exibido quando posicionamos o cursor do mouse sobre o botão.
+
+O ícone representa visualmente a função de limpeza.
+
+### 1.2. Adicionando o evento
+
+Clique duas vezes no botão para criar seu evento `ActionListener` e adicione:
+
+```java
+limparCampos();
+```
+
+O método `limparCampos()` já existe na classe `frmProduto`. Portanto, não precisamos criar outro método.
+
+Ele executa as seguintes operações:
+
+- Apaga o ID do produto.
+- Limpa o código de barras.
+- Limpa a descrição e a categoria.
+- Apaga os preços de custo e venda.
+- Limpa a quantidade e o estoque mínimo.
+- Limpa o ID do fornecedor.
+- Retorna o `JComboBox` para a opção `"Selecione"`.
+- Coloca o foco no campo de código de barras.
+- Habilita o botão Adicionar.
+- Desabilita os botões Editar e Deletar.
+
+**Importante:** o método também redefine o estado dos botões. Isso evita que o usuário tente editar ou excluir um produto depois de limpar os dados.
+
+### 1.3. Código do botão
+
+```java
+// BOTÃO LIMPAR CAMPOS
+btnLimpar = new JButton("");
+
+btnLimpar.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        limparCampos();
+    }
+});
+
+btnLimpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+btnLimpar.setToolTipText("Limpar campos");
+btnLimpar.setIcon(new ImageIcon(frmProduto.class.getResource("/img/limpar.jpg")));
+btnLimpar.setBounds(292, 338, 75, 73);
+getContentPane().add(btnLimpar);
+```
+
+---
+
+## 2. Botão Gerar Relatório
+
+O segundo botão será responsável por gerar um relatório dos produtos cadastrados no banco de dados.
+
+O relatório será criado em formato PDF, contendo:
+
+- Título centralizado e em negrito.
+- Data e horário de emissão.
+- Tabela com os produtos cadastrados.
+- Categoria de cada produto.
+- Preço de venda.
+- Quantidade em estoque.
+- Total de produtos listados.
+
+Para gerar o PDF, utilizaremos a biblioteca **OpenPDF**, que já foi utilizada anteriormente no projeto.
+
+### 2.1. Criando o botão no WindowBuilder
+
+Na aba **Design** de `frmProduto.java`, adicione outro `JButton`.
+
+Configure as propriedades:
+
+| Propriedade | Valor |
+|---|---|
+| Variable | `btnRelatorio` |
+| ToolTipText | `Gerar Relatório` |
+| Text | Vazio |
+| Icon | `/img/pdf.jpg` |
+
+### 2.2. Adicionando o evento
+
+Clique duas vezes no botão e adicione:
+
+```java
+controllerProduto.gerarRelatorioProdutos();
+```
+
+Esse comando chama o método `gerarRelatorioProdutos()` da classe `ProdutoController`.
+
+A partir daí, o controller será responsável por consultar o banco de dados, montar o documento PDF e abrir o arquivo gerado.
+
+### 2.3. Código do botão
+
+```java
+// BOTÃO RELATÓRIO DE PRODUTOS
+btnRelatorio = new JButton("");
+
+btnRelatorio.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        controllerProduto.gerarRelatorioProdutos();
+    }
+});
+
+btnRelatorio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+btnRelatorio.setToolTipText("Relatório de Produtos");
+btnRelatorio.setIcon(new ImageIcon(frmProduto.class.getResource("/img/pdf.jpg")));
+btnRelatorio.setBounds(377, 338, 75, 73);
+getContentPane().add(btnRelatorio);
+```
+
+---
+
+## 3. Método gerarRelatorioProdutos() — ProdutoController
+
+Agora vamos implementar a geração do relatório na classe `ProdutoController`.
+
+O método utiliza a biblioteca OpenPDF para criar o documento e o JDBC para buscar as informações no MySQL.
+
+### 3.1. Imports necessários
+
+No início de `ProdutoController.java`, precisamos das seguintes importações:
+
+```java
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+```
+
+Cada classe possui uma responsabilidade:
+
+| Classe | Finalidade |
+|---|---|
+| `Desktop` | Permite abrir arquivos utilizando os programas padrão do sistema. |
+| `File` | Representa um arquivo no computador. |
+| `FileOutputStream` | Permite gravar dados em um arquivo. |
+| `Connection` | Representa a conexão com o banco de dados. |
+| `PreparedStatement` | Executa comandos SQL preparados. |
+| `ResultSet` | Armazena os resultados de uma consulta SQL. |
+| `SimpleDateFormat` | Formata datas e horários. |
+| `Date` | Representa uma data e horário. |
+| `Document` | Representa o documento PDF. |
+| `Element` | Fornece constantes de alinhamento e outras propriedades. |
+| `Font` | Define a fonte, o tamanho e o estilo do texto. |
+| `Paragraph` | Representa um parágrafo no PDF. |
+| `PdfPCell` | Representa uma célula da tabela PDF. |
+| `PdfPTable` | Cria uma tabela dentro do PDF. |
+| `PdfWriter` | Escreve o documento no arquivo PDF. |
+
+### 3.2. Código completo do método
+
+Adicione o método dentro da classe `ProdutoController`:
+
+```java
+//====================================
+// GERAR RELATÓRIO DE PRODUTOS - PDF
+//====================================
+public void gerarRelatorioProdutos() {
+    Document document = new Document();
+
+    try {
+        // CRIAR O ARQUIVO PDF
+        PdfWriter.getInstance(document, new FileOutputStream("produtos.pdf"));
+        document.open();
+
+        // TÍTULO CENTRALIZADO E EM NEGRITO
+        Font fonteTitulo = new Font(Font.HELVETICA, 16, Font.BOLD);
+        Paragraph titulo = new Paragraph("RELATÓRIO DE PRODUTOS", fonteTitulo);
+        titulo.setAlignment(Element.ALIGN_CENTER);
+        document.add(titulo);
+
+        // DATA E HORA DE EMISSÃO CENTRALIZADA
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Paragraph dataEmissao = new Paragraph(
+            "Data de emissão: " + formatador.format(new Date())
+        );
+        dataEmissao.setAlignment(Element.ALIGN_CENTER);
+        document.add(dataEmissao);
+
+        // ESPAÇO ANTES DA TABELA
+        document.add(new Paragraph(" "));
+
+        // CRIAR TABELA (4 COLUNAS)
+        PdfPTable tabela = new PdfPTable(4);
+        tabela.setWidthPercentage(100);
+
+        // CABEÇALHO DA TABELA
+        PdfPCell col1 = new PdfPCell(new Paragraph("Produto"));
+        PdfPCell col2 = new PdfPCell(new Paragraph("Categoria"));
+        PdfPCell col3 = new PdfPCell(new Paragraph("Preço Venda"));
+        PdfPCell col4 = new PdfPCell(new Paragraph("Quantidade"));
+
+        tabela.addCell(col1);
+        tabela.addCell(col2);
+        tabela.addCell(col3);
+        tabela.addCell(col4);
+
+        // CONSULTA AO BANCO DE DADOS
+        String sql = """
+            select descricao, categoria, precoVenda, quantidade
+            from produtos
+            order by descricao
+            """;
+
+        Connection con = database.conectar();
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+        int total = 0;
+
+        while (rs.next()) {
+            tabela.addCell(rs.getString("descricao"));
+            tabela.addCell(rs.getString("categoria"));
+            tabela.addCell(rs.getString("precoVenda"));
+            tabela.addCell(rs.getString("quantidade"));
+            total++;
+        }
+
+        document.add(tabela);
+
+        // ESPAÇO APÓS A TABELA
+        document.add(new Paragraph(" "));
+
+        // TOTAL DE PRODUTOS ALINHADO À DIREITA
+        Font fonteTotal = new Font(Font.HELVETICA, 12, Font.BOLD);
+        Paragraph rodape = new Paragraph("Total de produtos: " + total, fonteTotal);
+        rodape.setAlignment(Element.ALIGN_RIGHT);
+        document.add(rodape);
+
+        rs.close();
+        stmt.close();
+        con.close();
+
+    } catch (Exception e) {
+        System.out.println("Erro ao gerar relatório: " + e);
+    } finally {
+        document.close();
+    }
+
+    // ABRIR O PDF NO LEITOR PADRÃO DO SISTEMA
+    try {
+        Desktop.getDesktop().open(new File("produtos.pdf"));
+    } catch (Exception e) {
+        System.out.println("Erro ao abrir o relatório: " + e);
+    }
+}
+```
+
+---
+
+## 4. Entendendo o funcionamento do relatório
+
+Vamos separar o método em etapas para entender como o PDF é construído.
+
+### 4.1. Criando o documento PDF
+
+```java
+Document document = new Document();
+```
+
+Cria um objeto `Document`, que representa o documento PDF que será montado.
+
+```java
+PdfWriter.getInstance(document, new FileOutputStream("produtos.pdf"));
+document.open();
+```
+
+- `FileOutputStream("produtos.pdf")`: cria ou abre o arquivo para gravação.
+- `PdfWriter.getInstance()`: associa o documento ao arquivo de saída.
+- `document.open()`: abre o documento para receber conteúdo.
+
+O arquivo será chamado `produtos.pdf`.
+
+**Observação importante:** como o caminho não foi especificado, o arquivo será criado no diretório de trabalho atual da aplicação, que normalmente é a pasta do projeto quando executado pelo Eclipse.
+
+### 4.2. Criando o título
+
+```java
+Font fonteTitulo = new Font(Font.HELVETICA, 16, Font.BOLD);
+```
+
+Define a formatação do título:
+
+- `Font.HELVETICA`: tipo de fonte.
+- `16`: tamanho da fonte.
+- `Font.BOLD`: texto em negrito.
+
+```java
+Paragraph titulo = new Paragraph("RELATÓRIO DE PRODUTOS", fonteTitulo);
+titulo.setAlignment(Element.ALIGN_CENTER);
+document.add(titulo);
+```
+
+Cria um parágrafo com o título, centraliza e adiciona ao documento.
+
+### 4.3. Inserindo a data e o horário
+
+```java
+SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+```
+
+Define como a data e o horário serão apresentados.
+
+| Símbolo | Significado |
+|---|---|
+| `dd` | Dia |
+| `MM` | Mês |
+| `yyyy` | Ano com quatro dígitos |
+| `HH` | Hora no formato de 24 horas |
+| `mm` | Minutos |
+
+```java
+formatador.format(new Date())
+```
+
+Obtém a data e o horário atuais e aplica a formatação definida.
+
+Exemplo:
+
+`25/11/2026 16:23`
+
+A data e o horário são inseridos em um parágrafo centralizado.
+
+### 4.4. Criando a tabela
+
+```java
+PdfPTable tabela = new PdfPTable(4);
+tabela.setWidthPercentage(100);
+```
+
+- `PdfPTable(4)`: cria uma tabela com quatro colunas.
+- `setWidthPercentage(100)`: faz a tabela ocupar 100% da largura disponível da página.
+
+As quatro colunas serão:
+
+1. Produto.
+2. Categoria.
+3. Preço Venda.
+4. Quantidade.
+
+Cada coluna é criada com `PdfPCell`, que representa uma célula da tabela.
+
+```java
+PdfPCell col1 = new PdfPCell(new Paragraph("Produto"));
+```
+
+Nesse exemplo, criamos uma célula contendo o texto `"Produto"`.
+
+Depois, usamos:
+
+```java
+tabela.addCell(col1);
+```
+
+Para adicionar essa célula à tabela.
+
+O mesmo procedimento é repetido para as outras três colunas.
+
+### 4.5. Consultando os produtos no banco de dados
+
+```java
+String sql = """
+    select descricao, categoria, precoVenda, quantidade
+    from produtos
+    order by descricao
+    """;
+```
+
+Essa consulta SQL seleciona quatro informações da tabela `produtos`:
+
+| Campo | Informação |
+|---|---|
+| `descricao` | Nome ou descrição do produto. |
+| `categoria` | Categoria do produto. |
+| `precoVenda` | Preço de venda. |
+| `quantidade` | Quantidade disponível. |
+
+O comando:
+
+```sql
+order by descricao
+```
+
+Organiza os produtos em ordem alfabética crescente pela descrição.
+
+Em seguida:
+
+```java
+Connection con = database.conectar();
+PreparedStatement stmt = con.prepareStatement(sql);
+ResultSet rs = stmt.executeQuery();
+```
+
+Estabelece a conexão, prepara a consulta e executa o SELECT.
+
+O resultado fica armazenado no objeto `ResultSet`.
+
+### 4.6. Percorrendo os resultados
+
+```java
+int total = 0;
+
+while (rs.next()) {
+    tabela.addCell(rs.getString("descricao"));
+    tabela.addCell(rs.getString("categoria"));
+    tabela.addCell(rs.getString("precoVenda"));
+    tabela.addCell(rs.getString("quantidade"));
+    total++;
+}
+```
+
+O `while` percorre os registros retornados pelo banco de dados.
+
+O método `rs.next()` avança para o próximo registro. Enquanto houver registros, o bloco será executado.
+
+Em cada repetição:
+
+- `rs.getString("descricao")`: obtém a descrição do produto.
+- `rs.getString("categoria")`: obtém a categoria.
+- `rs.getString("precoVenda")`: obtém o preço de venda.
+- `rs.getString("quantidade")`: obtém a quantidade.
+
+Cada informação é adicionada à tabela PDF.
+
+A variável `total` começa em zero e é incrementada em uma unidade para cada produto encontrado.
+
+**Atenção:** o total representa a quantidade de registros de produtos cadastrados, e não a soma das unidades existentes no estoque.
+
+### 4.7. Inserindo a tabela no documento
+
+```java
+document.add(tabela);
+```
+
+Adiciona a tabela preenchida ao documento PDF.
+
+Até esse momento, o documento já contém o título, a data de emissão e a tabela de produtos.
+
+### 4.8. Criando o rodapé
+
+```java
+Font fonteTotal = new Font(Font.HELVETICA, 12, Font.BOLD);
+```
+
+Define uma fonte tamanho 12 e em negrito.
+
+```java
+Paragraph rodape = new Paragraph("Total de produtos: " + total, fonteTotal);
+rodape.setAlignment(Element.ALIGN_RIGHT);
+document.add(rodape);
+```
+
+Cria um parágrafo informando a quantidade de produtos encontrados e alinha o texto à direita.
+
+Exemplo:
+
+`Total de produtos: 15`
+
+### 4.9. Fechando os recursos
+
+```java
+rs.close();
+stmt.close();
+con.close();
+```
+
+Fecha os recursos utilizados na consulta ao banco de dados:
+
+- `ResultSet`: libera o resultado da consulta.
+- `PreparedStatement`: libera o comando preparado.
+- `Connection`: encerra a conexão com o banco.
+
+Já o comando:
+
+```java
+document.close();
+```
+
+Finaliza o documento PDF e grava seu conteúdo.
+
+Ele está dentro do `finally`, que é executado mesmo quando ocorre uma exceção durante o processamento.
+
+### 4.10. Abrindo o arquivo PDF
+
+```java
+Desktop.getDesktop().open(new File("produtos.pdf"));
+```
+
+Utiliza a classe `Desktop` para abrir o arquivo no programa padrão do sistema operacional para leitura de PDFs.
+
+Por exemplo, o Windows pode abrir o arquivo no navegador ou em um leitor de PDF instalado.
+
+---
+
+## 5. Testando os botões
+
+Agora vamos testar as duas funcionalidades diretamente na aplicação.
+
+### 5.1. Teste do botão Limpar
+
+1. Execute o projeto.
+2. Abra a tela de produtos.
+3. Preencha alguns campos com informações.
+4. Clique no botão Limpar.
+5. Verifique se todos os campos foram apagados.
+6. Confira se o campo de código de barras recebeu o foco.
+7. Verifique se Adicionar ficou habilitado e Editar e Deletar ficaram desabilitados.
+
+<badge color="success">Resultado esperado</badge>
+
+A tela deve retornar ao estado inicial, pronta para cadastrar outro produto.
+
+### 5.2. Teste do botão Gerar Relatório
+
+Antes do teste, certifique-se de que existem produtos cadastrados na tabela `produtos`.
+
+1. Execute o projeto.
+2. Abra a tela de produtos.
+3. Clique no botão Gerar Relatório.
+4. Aguarde a criação do arquivo.
+5. Verifique se o leitor padrão de PDF foi aberto.
+6. Confira as informações exibidas no relatório.
+
+<badge color="success">Resultado esperado</badge>
+
+O arquivo `produtos.pdf` deve apresentar:
+
+- Título centralizado.
+- Data e horário de emissão.
+- Tabela com quatro colunas.
+- Produtos organizados em ordem alfabética.
+- Total de registros listados.
+
+### 5.3. Conferindo o PDF
+
+O relatório deverá apresentar uma estrutura semelhante a esta:
+
+| Produto | Categoria | Preço Venda | Quantidade |
+|---|---|---:|---:|
+| Arroz 5kg | Alimentos | 28.90 | 20 |
+| Café 500g | Alimentos | 18.50 | 15 |
+| Detergente | Limpeza | 3.50 | 30 |
+
+<text color="secondary" size="xs">Dados ilustrativos para demonstrar a aparência do relatório.</text>
+
+**Observação:** se o PDF não abrir, verifique primeiro se ele foi criado no diretório de trabalho da aplicação. Também confira se existe um leitor de PDF associado ao sistema.
+
+---
+
+## 6. Observações técnicas importantes
+
+O código apresentado segue a lógica da aula. Existem alguns pontos que merecem atenção para evitar problemas durante a execução.
+
+### 6.1. Nome do método
+
+Na instrução inicial da aula aparece:
+
+```java
+controllerProduto.gerarRelatorioProduto();
+```
+
+Mas o método efetivamente declarado no controller é:
+
+```java
+public void gerarRelatorioProdutos()
+```
+
+A chamada correta é a que utiliza `Produtos`, no plural:
+
+```java
+controllerProduto.gerarRelatorioProdutos();
+```
+
+Os nomes precisam ser exatamente iguais para o Java localizar o método.
+
+### 6.2. Verificação da conexão com o banco
+
+O método utiliza:
+
+```java
+Connection con = database.conectar();
+```
+
+Se a conexão falhar e retornar `null`, a próxima instrução poderá gerar uma `NullPointerException`.
+
+Em uma versão mais robusta, é importante verificar se a conexão foi estabelecida antes de executar a consulta.
+
+### 6.3. Fechamento dos recursos
+
+O código da aula fecha os recursos manualmente. Uma boa prática é utilizar `try-with-resources`, que fecha automaticamente conexões, comandos e resultados, inclusive quando ocorre uma exceção.
+
+Isso será especialmente útil quando o projeto crescer.
+
+### 6.4. Abertura do PDF mesmo quando ocorre erro
+
+No código atual, a tentativa de abrir `produtos.pdf` acontece depois do bloco de geração, mesmo que tenha ocorrido uma falha.
+
+Isso pode fazer o programa tentar abrir um PDF antigo ou inexistente.
+
+Em uma implementação mais segura, a abertura deve acontecer somente depois que a geração do arquivo for concluída com sucesso.
+
+### 6.5. Sobrescrita do arquivo
+
+O nome utilizado é sempre:
+
+```java
+produtos.pdf
+```
+
+Portanto, cada nova geração substitui o relatório anterior, caso o arquivo já exista.
+
+Se futuramente quisermos guardar o histórico dos relatórios, poderemos incluir a data e o horário no nome do arquivo.
+
+---
+
+## 7. Resumo do funcionamento
+
+| Botão | Método executado | Responsabilidade |
+|---|---|---|
+| Limpar | `limparCampos()` | Limpa os campos e redefine os botões. |
+| Gerar Relatório | `gerarRelatorioProdutos()` | Consulta os produtos, cria o PDF e abre o arquivo. |
+
+### Relação com o CRUD
+
+O módulo de produtos agora possui as operações fundamentais do CRUD:
+
+| Operação | Método | Função |
+|---|---|---|
+| Create | `adicionar()` | Cadastrar produto. |
+| Read | `buscarCodigoBarras()` / `buscarProduto()` | Consultar produto. |
+| Update | `editar()` | Atualizar produto. |
+| Delete | `deletar()` | Excluir produto. |
+
+O relatório é uma funcionalidade adicional de consulta e apresentação dos dados, enquanto o botão Limpar é uma funcionalidade de apoio à utilização do formulário.
+
+---
+
+## Resumo Relâmpago — 10 linhas
+
+1. `btnLimpar` é o botão responsável por limpar os campos do formulário.
+2. Seu evento executa o método `limparCampos()`.
+3. O método apaga os dados e redefine o estado dos botões.
+4. `btnRelatorio` é o botão responsável por gerar o relatório de produtos.
+5. Seu evento chama `controllerProduto.gerarRelatorioProdutos()`.
+6. A biblioteca OpenPDF permite criar documentos PDF pelo Java.
+7. `PdfPTable` cria tabelas e `PdfPCell` representa suas células.
+8. `ResultSet` permite percorrer os registros retornados pelo MySQL.
+9. `SimpleDateFormat` formata a data e o horário de emissão.
+10. `Desktop.getDesktop().open()` abre o PDF no programa padrão do sistema.
+
+**Próximo passo:** testar o relatório com produtos reais cadastrados e, depois, aprimorar sua apresentação com formatação monetária, cabeçalho destacado e número de páginas.
