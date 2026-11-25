@@ -313,7 +313,7 @@ O arquivo será chamado `produtos.pdf`.
 
 **Observação importante:** como o caminho não foi especificado, o arquivo será criado no diretório de trabalho atual da aplicação, que normalmente é a pasta do projeto quando executado pelo Eclipse.
 
-### 4.2. Criando o título
+**Criando o título**
 
 ```java
 Font fonteTitulo = new Font(Font.HELVETICA, 16, Font.BOLD);
@@ -333,7 +333,7 @@ document.add(titulo);
 
 Cria um parágrafo com o título, centraliza e adiciona ao documento.
 
-### 4.3. Inserindo a data e o horário
+**Inserindo a data e o horário**
 
 ```java
 SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -361,7 +361,7 @@ Exemplo:
 
 A data e o horário são inseridos em um parágrafo centralizado.
 
-### 4.4. Criando a tabela
+**Criando a tabela**
 
 ```java
 PdfPTable tabela = new PdfPTable(4);
@@ -396,7 +396,7 @@ Para adicionar essa célula à tabela.
 
 O mesmo procedimento é repetido para as outras três colunas.
 
-### 4.5. Consultando os produtos no banco de dados
+**Consultando os produtos no banco de dados**
 
 ```java
 String sql = """
@@ -435,7 +435,7 @@ Estabelece a conexão, prepara a consulta e executa o SELECT.
 
 O resultado fica armazenado no objeto `ResultSet`.
 
-### 4.6. Percorrendo os resultados
+**Percorrendo os resultados**
 
 ```java
 int total = 0;
@@ -466,7 +466,7 @@ A variável `total` começa em zero e é incrementada em uma unidade para cada p
 
 **Atenção:** o total representa a quantidade de registros de produtos cadastrados, e não a soma das unidades existentes no estoque.
 
-### 4.7. Inserindo a tabela no documento
+**Inserindo a tabela no documento**
 
 ```java
 document.add(tabela);
@@ -476,7 +476,7 @@ Adiciona a tabela preenchida ao documento PDF.
 
 Até esse momento, o documento já contém o título, a data de emissão e a tabela de produtos.
 
-### 4.8. Criando o rodapé
+**Criando o rodapé**
 
 ```java
 Font fonteTotal = new Font(Font.HELVETICA, 12, Font.BOLD);
@@ -496,7 +496,7 @@ Exemplo:
 
 `Total de produtos: 15`
 
-### 4.9. Fechando os recursos
+**Fechando os recursos**
 
 ```java
 rs.close();
@@ -520,7 +520,7 @@ Finaliza o documento PDF e grava seu conteúdo.
 
 Ele está dentro do `finally`, que é executado mesmo quando ocorre uma exceção durante o processamento.
 
-### 4.10. Abrindo o arquivo PDF
+**Abrindo o arquivo PDF**
 
 ```java
 Desktop.getDesktop().open(new File("produtos.pdf"));
@@ -532,11 +532,11 @@ Por exemplo, o Windows pode abrir o arquivo no navegador ou em um leitor de PDF 
 
 ---
 
-## 5. Testando os botões
+**Testando os botões**
 
 Agora vamos testar as duas funcionalidades diretamente na aplicação.
 
-### 5.1. Teste do botão Limpar
+**Teste do botão Limpar**
 
 1. Execute o projeto.
 2. Abra a tela de produtos.
@@ -550,7 +550,7 @@ Agora vamos testar as duas funcionalidades diretamente na aplicação.
 
 A tela deve retornar ao estado inicial, pronta para cadastrar outro produto.
 
-### 5.2. Teste do botão Gerar Relatório
+**Teste do botão Gerar Relatório**
 
 Antes do teste, certifique-se de que existem produtos cadastrados na tabela `produtos`.
 
@@ -571,7 +571,7 @@ O arquivo `produtos.pdf` deve apresentar:
 - Produtos organizados em ordem alfabética.
 - Total de registros listados.
 
-### 5.3. Conferindo o PDF
+**Conferindo o PDF**
 
 O relatório deverá apresentar uma estrutura semelhante a esta:
 
@@ -587,11 +587,11 @@ O relatório deverá apresentar uma estrutura semelhante a esta:
 
 ---
 
-## 6. Observações técnicas importantes
+## Observações técnicas importantes
 
 O código apresentado segue a lógica da aula. Existem alguns pontos que merecem atenção para evitar problemas durante a execução.
 
-### 6.1. Nome do método
+**Nome do método**
 
 Na instrução inicial da aula aparece:
 
@@ -613,7 +613,7 @@ controllerProduto.gerarRelatorioProdutos();
 
 Os nomes precisam ser exatamente iguais para o Java localizar o método.
 
-### 6.2. Verificação da conexão com o banco
+**Verificação da conexão com o banco**
 
 O método utiliza:
 
@@ -625,13 +625,13 @@ Se a conexão falhar e retornar `null`, a próxima instrução poderá gerar uma
 
 Em uma versão mais robusta, é importante verificar se a conexão foi estabelecida antes de executar a consulta.
 
-### 6.3. Fechamento dos recursos
+**Fechamento dos recursos**
 
 O código da aula fecha os recursos manualmente. Uma boa prática é utilizar `try-with-resources`, que fecha automaticamente conexões, comandos e resultados, inclusive quando ocorre uma exceção.
 
 Isso será especialmente útil quando o projeto crescer.
 
-### 6.4. Abertura do PDF mesmo quando ocorre erro
+**Abertura do PDF mesmo quando ocorre erro**
 
 No código atual, a tentativa de abrir `produtos.pdf` acontece depois do bloco de geração, mesmo que tenha ocorrido uma falha.
 
@@ -639,7 +639,7 @@ Isso pode fazer o programa tentar abrir um PDF antigo ou inexistente.
 
 Em uma implementação mais segura, a abertura deve acontecer somente depois que a geração do arquivo for concluída com sucesso.
 
-### 6.5. Sobrescrita do arquivo
+**Sobrescrita do arquivo**
 
 O nome utilizado é sempre:
 
@@ -653,14 +653,14 @@ Se futuramente quisermos guardar o histórico dos relatórios, poderemos incluir
 
 ---
 
-## 7. Resumo do funcionamento
+# Resumo do funcionamento
 
 | Botão | Método executado | Responsabilidade |
 |---|---|---|
 | Limpar | `limparCampos()` | Limpa os campos e redefine os botões. |
 | Gerar Relatório | `gerarRelatorioProdutos()` | Consulta os produtos, cria o PDF e abre o arquivo. |
 
-### Relação com o CRUD
+**Relação com o CRUD**
 
 O módulo de produtos agora possui as operações fundamentais do CRUD:
 
@@ -675,7 +675,7 @@ O relatório é uma funcionalidade adicional de consulta e apresentação dos da
 
 ---
 
-## Resumo Relâmpago — 10 linhas
+**Resumo Relâmpago**
 
 1. `btnLimpar` é o botão responsável por limpar os campos do formulário.
 2. Seu evento executa o método `limparCampos()`.
@@ -687,5 +687,4 @@ O relatório é uma funcionalidade adicional de consulta e apresentação dos da
 8. `ResultSet` permite percorrer os registros retornados pelo MySQL.
 9. `SimpleDateFormat` formata a data e o horário de emissão.
 10. `Desktop.getDesktop().open()` abre o PDF no programa padrão do sistema.
-
-**Próximo passo:** testar o relatório com produtos reais cadastrados e, depois, aprimorar sua apresentação com formatação monetária, cabeçalho destacado e número de páginas.
+
