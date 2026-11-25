@@ -1,4 +1,4 @@
-# Java — Projeto BL-PDV: Botões Limpar e Gerar Relatório de Produtos
+# Projeto BL-PDV: Botões Limpar e Gerar Relatório de Produtos
 
 Nesta aula, adicionamos duas funcionalidades à tela `frmProduto`:
 
@@ -9,11 +9,11 @@ Essas funcionalidades complementam o CRUD do módulo de produtos.
 
 ---
 
-## 1. Botão Limpar Campos
+# Botão Limpar Campos
 
 O primeiro botão será responsável por limpar todos os campos da tela de produtos.
 
-### 1.1. Criando o botão no WindowBuilder
+**Criando o botão no WindowBuilder**
 
 No Eclipse, abra `frmProduto.java` e acesse a aba **Design**.
 
@@ -30,7 +30,7 @@ O `ToolTipText` é o texto exibido quando posicionamos o cursor do mouse sobre o
 
 O ícone representa visualmente a função de limpeza.
 
-### 1.2. Adicionando o evento
+## Adicionando o evento
 
 Clique duas vezes no botão para criar seu evento `ActionListener` e adicione:
 
@@ -55,7 +55,7 @@ Ele executa as seguintes operações:
 
 **Importante:** o método também redefine o estado dos botões. Isso evita que o usuário tente editar ou excluir um produto depois de limpar os dados.
 
-### 1.3. Código do botão
+### Código do botão
 
 ```java
 // BOTÃO LIMPAR CAMPOS
@@ -76,7 +76,7 @@ getContentPane().add(btnLimpar);
 
 ---
 
-## 2. Botão Gerar Relatório
+# Botão Gerar Relatório
 
 O segundo botão será responsável por gerar um relatório dos produtos cadastrados no banco de dados.
 
@@ -92,7 +92,7 @@ O relatório será criado em formato PDF, contendo:
 
 Para gerar o PDF, utilizaremos a biblioteca **OpenPDF**, que já foi utilizada anteriormente no projeto.
 
-### 2.1. Criando o botão no WindowBuilder
+**Criando o botão no WindowBuilder**
 
 Na aba **Design** de `frmProduto.java`, adicione outro `JButton`.
 
@@ -105,7 +105,7 @@ Configure as propriedades:
 | Text | Vazio |
 | Icon | `/img/pdf.jpg` |
 
-### 2.2. Adicionando o evento
+## Adicionando o evento
 
 Clique duas vezes no botão e adicione:
 
@@ -117,7 +117,7 @@ Esse comando chama o método `gerarRelatorioProdutos()` da classe `ProdutoContro
 
 A partir daí, o controller será responsável por consultar o banco de dados, montar o documento PDF e abrir o arquivo gerado.
 
-### 2.3. Código do botão
+### Código do botão
 
 ```java
 // BOTÃO RELATÓRIO DE PRODUTOS
@@ -138,13 +138,13 @@ getContentPane().add(btnRelatorio);
 
 ---
 
-## 3. Método gerarRelatorioProdutos() — ProdutoController
+## Método gerarRelatorioProdutos() — ProdutoController
 
 Agora vamos implementar a geração do relatório na classe `ProdutoController`.
 
 O método utiliza a biblioteca OpenPDF para criar o documento e o JDBC para buscar as informações no MySQL.
 
-### 3.1. Imports necessários
+**Imports necessários**
 
 No início de `ProdutoController.java`, precisamos das seguintes importações:
 
@@ -187,7 +187,7 @@ Cada classe possui uma responsabilidade:
 | `PdfPTable` | Cria uma tabela dentro do PDF. |
 | `PdfWriter` | Escreve o documento no arquivo PDF. |
 
-### 3.2. Código completo do método
+### Código completo do método
 
 Adicione o método dentro da classe `ProdutoController`:
 
@@ -288,11 +288,11 @@ public void gerarRelatorioProdutos() {
 
 ---
 
-## 4. Entendendo o funcionamento do relatório
+**Entendendo o funcionamento do relatório**
 
 Vamos separar o método em etapas para entender como o PDF é construído.
 
-### 4.1. Criando o documento PDF
+## Criando o documento PDF
 
 ```java
 Document document = new Document();
