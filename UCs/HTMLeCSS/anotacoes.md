@@ -1,8 +1,6 @@
 # Arquitetura E-Commerce Multi-páginas (HTML5): Estrutura, Vitrines Dinâmicas e Painéis de Gestão
 
----
-
-## 1. Visão Geral
+**Visão Geral**
 
 Nesta etapa do projeto **StyleStore**, construí a arquitetura HTML5 completa de uma loja virtual multi-páginas. O sistema foi estruturado em seis documentos principais: a vitrine inicial (`index.html`), três catálogos segmentados por público (`feminina.html`, `masculina.html` e `infantil.html`) e dois ambientes restritos com autenticação (`cliente.html` e `vendedor.html`).
 
@@ -10,9 +8,9 @@ Aprendi a manter a consistência visual e funcional entre diferentes arquivos HT
 
 ---
 
-## 2. Entendendo o Conceito
+**Entendendo o Conceito**
 
-### O que é uma Aplicação Web Multi-páginas (MPA) Modularizada?
+## Aplicação Web Multi-páginas (MPA) Modularizada
 
 * **Conceito simples**: É um site dividido em vários arquivos `.html` separados (um para cada seção da loja), mas que compartilham os mesmos blocos estruturais — como o menu superior e o carrinho de compras — para que o usuário sinta que está navegando dentro de um único sistema integrado.
 * **Definição técnica**: Em uma arquitetura *Multi-Page Application* (MPA), cada navegação no menu carrega um novo documento HTML do servidor ou sistema de arquivos. Para evitar repetição de código lógico e visual, todos os documentos importam os mesmos ativos estáticos (`style.css` e `main.js`) e utilizam ganchos específicos no DOM (como `#grid-feminina` ou `#tabela-pedidos-cliente`) para que o script saiba exatamente qual conteúdo renderizar em cada tela.
@@ -39,9 +37,9 @@ Aprendi a manter a consistência visual e funcional entre diferentes arquivos HT
 
 ---
 
-## 3. Conceitos Fundamentais
+**Conceitos Fundamentais**
 
-### 3.1. Organização de Diretórios do Projeto
+## Organização de Diretórios do Projeto
 
 A separação dos arquivos por responsabilidade evita desorganização conforme o projeto cresce:
 
@@ -50,32 +48,32 @@ A separação dos arquivos por responsabilidade evita desorganização conforme 
 * `loja/js/`: Centraliza toda a programação e regras de negócio (`main.js`).
 * `loja/img/`: Guarda os banners promocionais e fotos dos produtos.
 
-### 3.2. Navegação Contextual com `class="active"`
+## Navegação Contextual com `class="active"`
 
 Em cada arquivo HTML, o link correspondente à própria página recebe a classe CSS `active` dentro da tag `<nav>`. Isso fornece retorno visual imediato ao usuário sobre sua localização atual no site.
 
-### 3.3. Ciclo de Vida `DOMContentLoaded` e Inicialização Contextual
+## Ciclo de Vida `DOMContentLoaded` e Inicialização Contextual
 
 Ao final de cada arquivo HTML, utilizamos o ouvinte `document.addEventListener('DOMContentLoaded', ...)`. Esse evento garante que o navegador termine de ler e construir toda a árvore HTML antes de executar as funções JavaScript que buscam elementos por `id` na tela. Cada página invoca apenas as funções necessárias para o seu contexto (ex: `renderizarDestaques()` na Home; `renderizarCategoria('feminina')` na página feminina).
 
-### 3.4. Eventos Declarativos Inline (`onmouseenter`, `onmouseleave`, `onclick`, `onsubmit`)
+## Eventos Declarativos Inline (`onmouseenter`, `onmouseleave`, `onclick`, `onsubmit`)
 
 Os atributos de evento diretamente nas tags HTML conectam ações do usuário às funções definidas em `js/main.js`:
 
 * `onmouseenter="pausarCarrossel()"` e `onmouseleave="iniciarCarrosselBannersAuto()"`: Pausam a troca automática de banners quando o usuário posiciona o mouse sobre a imagem e retomam ao retirar o cursor.
 * `onsubmit="realizarLoginCliente(event)"`: Intercepta o envio do formulário de login, passando o objeto `event` para impedir o recarregamento da página.
 
-### 3.5. Alternância de Telas no Mesmo Documento (Login vs. Painel)
+## Alternância de Telas no Mesmo Documento (Login vs. Painel)
 
 Nas páginas `cliente.html` e `vendedor.html`, tanto a caixa de login (`#box-login`) quanto o painel interno (`#painel-cliente` / `#painel-vendedor`) existem no mesmo HTML. O painel inicia oculto pela classe `.painel-escondido` (`display: none`) e é revelado via JavaScript após a validação da sessão.
 
 ---
 
-## 4. Código / Exemplos Práticos
+### Código / Exemplos Práticos
 
 Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados na raiz da pasta `loja/`.
 
-### Arquivo 1: `index.html` (Página Inicial)
+**Arquivo 1: `index.html` (Página Inicial)**
 
 ```html
 <!DOCTYPE html>
@@ -170,7 +168,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-### Arquivo 2: `feminina.html` (Coleção Feminina)
+**Arquivo 2: `feminina.html` (Coleção Feminina)**
 
 ```html
 <!DOCTYPE html>
@@ -244,7 +242,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-### Arquivo 3: `masculina.html` (Coleção Masculina)
+**Arquivo 3: `masculina.html` (Coleção Masculina)**
 
 ```html
 <!DOCTYPE html>
@@ -318,7 +316,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-### Arquivo 4: `infantil.html` (Coleção Infantil)
+**Arquivo 4: `infantil.html` (Coleção Infantil)**
 
 ```html
 <!DOCTYPE html>
@@ -392,7 +390,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-### Arquivo 5: `cliente.html` (Área do Cliente)
+**Arquivo 5: `cliente.html` (Área do Cliente)**
 
 ```html
 <!DOCTYPE html>
@@ -483,7 +481,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-### Arquivo 6: `vendedor.html` (Painel Administrativo)
+**Arquivo 6: `vendedor.html` (Painel Administrativo)**
 
 ```html
 <!DOCTYPE html>
@@ -589,9 +587,9 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-## 5. Desmontando o Código
+**Desmontando o Código**
 
-### Análise do Carrossel Interativo (`index.html`)
+**Análise do Carrossel Interativo (`index.html`)**
 
 * `<section class="carrossel-container" onmouseenter="pausarCarrossel()" onmouseleave="iniciarCarrosselBannersAuto()">`:
 * *O que faz*: Detecta a entrada e a saída do ponteiro do mouse sobre a área do banner.
@@ -610,7 +608,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 
 
-### Análise da Área de Impressão (`vendedor.html`)
+**Análise da Área de Impressão (`vendedor.html`)**
 
 * `<section id="area-relatorio-impressao">` e `<div class="cabecalhos-relatorio-pdf">`:
 * *O que faz*: Isola a tabela de vendas e um cabeçalho oficial (oculto na tela normal) para que, quando o vendedor clicar em **Exportar PDF**, a regra `@media print` do CSS imprima exclusivamente os dados financeiros, ignorando menus e botões.
@@ -619,7 +617,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-## 6. Passo a Passo: Montagem da Estrutura no VS Code
+**Passo a Passo: Montagem da Estrutura no VS Code**
 
 1. **Criar a árvore de diretórios**:
 * Crie a pasta principal `loja`.
@@ -646,9 +644,9 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-## 7. Tabelas Comparativas
+## Tabelas Comparativas
 
-### Tabela 1: Mapeamento das Páginas HTML e Chamadas de Inicialização
+**Tabela 1: Mapeamento das Páginas HTML e Chamadas de Inicialização**
 
 | Arquivo HTML | Contêiner Principal | Link Ativo (`class="active"`) | Funções Executadas no `DOMContentLoaded` |
 | --- | --- | --- | --- |
@@ -659,7 +657,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 | `cliente.html` | `#box-login` e `#painel-cliente` | Área do cliente | `verificarSessaoCliente()` |
 | `vendedor.html` | `#box-login-vendedor` e `#painel-vendedor` | *(Link de retorno à Home)* | `verificarSessaoVendedor()` |
 
-### Tabela 2: Componentes Globais vs. Componentes Específicos
+**Tabela 2: Componentes Globais vs. Componentes Específicos**
 
 | Escopo | Componentes | Arquivos Onde Aparecem | Finalidade |
 | --- | --- | --- | --- |
@@ -669,7 +667,7 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 
 ---
 
-## 8. Erros Comuns e Cuidados
+## Erros Comuns e Cuidados
 
 1. **Divergência entre o nome físico do arquivo e o link `href**`:
 * ❌ *Incorreto*: Salvar o arquivo no computador como `femenina.html` (com "e") enquanto o menu de navegação aponta para `<a href="feminina.html">` (com "i"). O navegador exibirá erro *404 Not Found* ao clicar no link.
@@ -683,31 +681,21 @@ Abaixo estão os seis arquivos HTML que estruturam a **StyleStore**, organizados
 3. **Incompatibilidade de nomes entre HTML e JavaScript**:
 * Os `id`s das grades (`#grid-destaques`, `#grid-feminina`) e os nomes das funções (`iniciarCarrosselBannersAuto()`, `verificarSessaoCliente()`) devem ser escritos exatamente com a mesma grafia e letras maiúsculas/minúsculas (*camelCase*) definidas no `js/main.js`.
 
-
-
 ---
 
-## 9. Validação e Ajustes Técnicos das Anotações
+## Aprofundamento e Boas Práticas (Conteúdo Complementar)
 
-* **Padronização do Nome do Arquivo `feminina.html**`: Na instrução escrita constava `femenina.html`, mas todos os links `<nav>` do projeto apontam para `feminina.html`. O título do bloco de código foi ajustado para `feminina.html` para evitar quebra de navegação.
-* **Integridade dos Ganchos e Funções**: Todos os identificadores (`#grid-destaques`, `#carrinho-qtd`, `#modal-carrinho`), eventos (`DOMContentLoaded`, `onmouseleave="iniciarCarrosselBannersAuto()"`) e chamadas de funções (`renderizarCategoria()`, `verificarSessaoCliente()`, `verificarSessaoVendedor()`) estão perfeitamente alinhados entre os seis documentos.
-* **Acessibilidade em Formulários**: Adicionados os atributos `for` nas tags `<label>` de `cliente.html` e `vendedor.html` vinculando-os aos respectivos `id`s dos campos `<input>`.
-
----
-
-## 10. Aprofundamento e Boas Práticas (Conteúdo Complementar)
-
-### Acessibilidade com ARIA (`aria-label`)
+**Acessibilidade com ARIA (`aria-label`)**
 
 Nos botões de navegação do carrossel (`&#10094;` e `&#10095;`), o uso de símbolos gráficos sem texto visível dificulta a compreensão por leitores de tela utilizados por pessoas com deficiência visual. O atributo `aria-label="Slide Anterior"` e `aria-label="Próximo Slide"` resolve esse problema fornecendo uma descrição textual invisível para tecnologias assistivas.
 
-### Manutenção de Estado em Aplicações Multi-páginas
+**Manutenção de Estado em Aplicações Multi-páginas**
 
 Como cada clique no menu recarrega um novo documento HTML, variáveis comuns em memória JavaScript são reiniciadas a cada troca de tela. Para que os itens adicionados ao carrinho na página `feminina.html` continuem aparecendo ao navegar para `masculina.html`, o arquivo `js/main.js` utiliza a API `localStorage` do navegador para gravar e recuperar os dados entre páginas.
 
 ---
 
-## 11. Guia Rápido de Memorização
+## Guia Rápido de Memorização
 
 * **Vincular CSS na subpasta**: `<link rel="stylesheet" href="css/style.css">`
 * **Vincular JS na subpasta**: `<script src="js/main.js"></script>`
@@ -719,7 +707,7 @@ Como cada clique no menu recarrega um novo documento HTML, variáveis comuns em 
 
 ---
 
-## 12. Resumo Relâmpago — 10 Linhas
+**Resumo Relâmpago**
 
 1. O projeto **StyleStore** utiliza uma arquitetura multi-páginas (*MPA*) organizada na pasta raiz `loja/` com subpastas `css/`, `img/` e `js/`.
 2. Todos os seis arquivos HTML compartilham a mesma folha de estilos (`css/style.css`) e o mesmo script lógico (`js/main.js`).
